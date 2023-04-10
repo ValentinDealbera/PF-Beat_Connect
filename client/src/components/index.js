@@ -7,3 +7,4 @@ export { default as Nav } from "./layout/nav";
 export { default as Section } from "./layout/section";
 export { default as Footer } from "./layout/footer";
 export {default as BeatCard} from "./client/beatCard"
+export { default as Hero } from "./layout/hero";

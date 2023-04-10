@@ -1,4 +1,5 @@
-import { Main, Head, Section } from "@/components";
+import { Main, Head, Hero } from "@/components";
+
 export default function About() {
   return (
     <>
