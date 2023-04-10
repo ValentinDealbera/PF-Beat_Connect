@@ -1,18 +1,20 @@
-import '@/styles/globals.scss'
-import { Header } from '@/components'
-import { Provider } from 'react-redux'
-import store,{persistor} from '@/redux/store/store'
-import { PersistGate } from 'redux-persist/integration/react'
+import "@/styles/globals.scss";
+import { Header, Footer } from "@/components";
+import { Provider } from "react-redux";
+import store, { persistor } from "@/redux/store/store";
+import { PersistGate } from "redux-persist/integration/react";
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps, router }) {
+  const mode = !router.pathname.startsWith("/client/seller") ? 'transparent' : 'light';
   return (
     <>
-     <Provider store={store}>
+      <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-    <Header/>
-    <Component {...pageProps} />
-    </PersistGate>
+          <Header />
+          <Component {...pageProps} />
+          <Footer mode={mode} />
+        </PersistGate>
       </Provider>
     </>
-    )
+  );
 }
