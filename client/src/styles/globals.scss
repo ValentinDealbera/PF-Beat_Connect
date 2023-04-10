@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -64,7 +64,7 @@ menu,
 menuitem,
 summary {
   //word-break: break-word;
-  font-family: 'Outfit', sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 
 /*********************************************************************************************/
@@ -237,7 +237,6 @@ summary {
   }
 }
 
-
 //Island Estilo 1
 @layer base {
   .padding-island-estilo1 {
@@ -307,5 +306,58 @@ summary {
 @layer base {
   .border-radius-full {
     @apply rounded-full;
+  }
+}
+
+/*********************************************************************************************/
+/* Colors */
+
+//Primary
+@layer base {
+  .color-primary-red {
+    &-700 {
+      @apply text-red-700;
+    }
+
+    &-500 {
+      @apply text-red-500;
+    }
+
+    &-100 {
+      @apply text-red-100;
+    }
+  }
+}
+
+//Neutral
+@layer base {
+  .color-neutral {
+    &-black-950 {
+      @apply text-neutral-950;
+    }
+
+    &-black-900 {
+      @apply text-neutral-900;
+    }
+
+    &-gray-700 {
+      @apply text-gray-700;
+    }
+
+    &-gray-400 {
+      @apply text-gray-400;
+    }
+
+    &-slate-200 {
+      @apply text-slate-200;
+    }
+
+    &-slate-100 {
+      @apply text-slate-100;
+    }
+
+    &-white {
+      @apply text-white;
+    }
   }
 }
