@@ -8,3 +8,5 @@
 // export { default as ProductTextBox } from './clients/product/ProductTextBox';
 // export { default as ProductTotal } from './clients/product/ProductTotal';
 // export { default as QuantityManager } from './clients/product/QuantityManager';
+export {default as Main} from "./layout/main"
+export {default as Head} from "./head"
