@@ -7,6 +7,6 @@ export const navPublic = [
   {
     name: "Nosotros",
     url: "/about",
-    colorMode: "transparent",
+    colorMode: "light",
   },
 ];
