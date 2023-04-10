@@ -246,8 +246,17 @@ summary {
 
 //Island Estilo 2
 @layer base {
+
+.padding-x-island-estilo2 {
+    @apply px-8 sm:px-10;
+  }
+
+  .padding-y-island-estilo2 {
+    @apply py-8 sm:py-10;
+  }
+
   .padding-island-estilo2 {
-    @apply p-10;
+    @extend .padding-x-island-estilo2;
   }
 }
 
