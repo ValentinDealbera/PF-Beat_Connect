@@ -1,3 +1,3 @@
 export default function Main({ children }) {
-  return <main className="flex flex-row justify-center">{children}</main>;
+  return <main className="flex flex-col justify-center">{children}</main>;
 }

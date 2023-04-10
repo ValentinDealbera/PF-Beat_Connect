@@ -9,4 +9,9 @@ export const navPublic = [
     url: "/about",
     colorMode: "light",
   },
+  {
+    name: "test",
+    url: "/test",
+    colorMode: "light",
+  },
 ];
