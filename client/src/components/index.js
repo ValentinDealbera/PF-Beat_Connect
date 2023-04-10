@@ -8,3 +8,6 @@ export { default as Section } from "./layout/section";
 export { default as Footer } from "./layout/footer";
 export {default as BeatCard} from "./client/beatCard"
 export { default as Hero } from "./layout/hero";
+export { default as HelpHeader } from "./client/help/helpHeader";
+export { default as HelpNav } from "./client/help/helpNav";
+export { default as HelpContainer } from "./client/help/helpContainer";

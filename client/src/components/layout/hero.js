@@ -3,6 +3,7 @@ import { Section } from "@/components";
 export default function Hero(props) {
   return (
     <section
+    id="hero"
       className={`relative flex w-full flex-row justify-center align-middle items-center ${props.className}`}
       style={props.style}
     >
@@ -21,8 +22,9 @@ export default function Hero(props) {
         </div>
       )}
       <div
-        className={` h-full w-full ${props.subClassName}`}
+        className={` h-full w-full flex justify-center ${props.subClassName}`}
         style={{ zIndex: 2 }}
+        id="hero-content"
       >
         {props.children}
       </div>

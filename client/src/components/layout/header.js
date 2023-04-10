@@ -6,10 +6,16 @@ export default function Header() {
   const router = useRouter();
 
   const currentSlug = router.pathname;
+  console.log(currentSlug);
 
-  const currentMode = navPublic.find(
-    (item) => item.url === currentSlug
-  ).colorMode;
+
+  const currentItem = navPublic.find(
+    (item) => currentSlug.startsWith(item.url)
+  );
+
+  const currentMode = currentItem ? currentItem.colorMode : 'dark';
+
+  console.log("header", currentMode);
 
   return (
     <header className=" flex flex-row justify-center py-8  ">
