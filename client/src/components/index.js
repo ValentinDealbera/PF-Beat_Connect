@@ -25,3 +25,8 @@ export { default as SellerDashboardTopBar } from "./layout/dashboard/sellerDashb
 export { default as IslandDashboard } from "./layout/dashboard/islandDashboard";
 export { default as SellerDashboardHeader } from "./layout/dashboard/sellerDashboardHeader";
 export { default as DashboardItem } from "./layout/dashboard/dashboardItem";
+export { default as BuyerNavGeneral } from "./client/buyerNavGeneral";
+export { default as BuyerNavSettings } from "./client/buyerNavSettings";
+export { default as BuyerProfileLayout } from "./client/buyerProfileLayout";
+export { default as Input } from "./common/input";
+
