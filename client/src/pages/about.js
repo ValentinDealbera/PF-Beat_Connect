@@ -82,6 +82,9 @@ export default function About() {
             ))}
           </div>
         </Section>
+        <div>
+        </div>
+        
       </Main>
     </>
   );
