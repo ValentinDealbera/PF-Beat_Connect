@@ -18,6 +18,8 @@ export { default as BeatsSpecialSection } from "./client/beatsSpecialSection";
 export { default as BeatCategoryCard } from "./client/beatCategoryCard";
 export { default as BeatCardGrid } from "./client/beatCardGrid";
 export { default as BeatsShopSection } from "./client/beatShopSection";
+export {default as BeatFilters} from "./client/beatFilters"
+export {default as Select} from "./common/select"
 export { default as SellerDashboardLayout } from "./layout/dashboard/sellerDashboardLayout";
 export { default as SellerDashboardNav } from "./layout/dashboard/sellerDashboardNav";
 export { default as SellerDashboardSidebar } from "./layout/dashboard/sellerDashboardSidebar";
