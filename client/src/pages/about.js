@@ -78,10 +78,10 @@ export default function About() {
                 <p className="text-base-light color-neutral-900">
                   {tecnologia.description}
                 </p>
-               </Section>
               </div>
             ))}
           </div>
+        </Section>
       </Main>
     </>
   );
