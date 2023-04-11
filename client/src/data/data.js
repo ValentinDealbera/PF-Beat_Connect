@@ -39,6 +39,12 @@ export const navAll = [
     url: "/help/copyright",
     colorMode: "light",
   },
+  {
+    name: "Login",
+    url: "/beats/author/[slug]",
+    colorMode: "transparent",
+    visible: false,
+  }
 ];
 
 export const navPublic = [
@@ -97,6 +103,12 @@ export const navPublic = [
     colorMode: "transparent",
     visible: false,
   },
+  {
+    name: "Login",
+    url: "/beats/author/[slug]",
+    colorMode: "transparent",
+    visible: false,
+  }
 ];
 
 export const navHelp = [

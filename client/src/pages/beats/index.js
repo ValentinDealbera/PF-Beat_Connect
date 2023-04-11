@@ -13,10 +13,10 @@ export default function Beats() {
       <Head title={"Beats"} description={"Head from beats"} />
       <Main>
         <Hero
-          className="background-primary-red-700"
-          style={{ minHeight: "20vh" }}
+          className="background-primary-red-700 min-h-[25vh] "
+          //  style={{ minHeight: "15vh" }}
         >
-          <div className="padding-estilo2 gap-estilo3 flex h-full w-full flex-col items-start justify-between align-middle md:flex-row md:items-center">
+          <div className="padding-estilo3 gap-estilo3 flex h-full w-full flex-col items-start justify-between align-middle md:flex-row md:items-center">
             <h1 className="text-titulo1-semibold text-white">Explore Tracks</h1>
             <Search
               colorMode="light"
