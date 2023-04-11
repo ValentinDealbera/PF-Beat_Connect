@@ -13,7 +13,7 @@ export default function SellerDashboardOverview() {
           topBarMode="message"
           topBarMessage="Hey, welcome back Sofia"
         >
-          <IslandDashboard className="gap-estilo1 flex flex-col ">
+          <IslandDashboard className="gap-5 xl:gap-8 flex flex-col ">
             <h1 className="text-subtitulo-semibold">
               Frequent answered questions
             </h1>

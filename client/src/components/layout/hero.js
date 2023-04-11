@@ -22,7 +22,7 @@ export default function Hero(props) {
         </div>
       )}
       <div
-        className={` h-full w-full flex justify-center ${props.subClassName}`}
+        className={` h-full w-full flex  justify-center ${props.subClassName}`}
         style={{ zIndex: 2 }}
         id="hero-content"
       >

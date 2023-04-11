@@ -84,6 +84,12 @@ export const navPublic = [
     colorMode: "transparent",
     visible: false,
   },
+  {
+    name: "Buyer profile",
+    url: "/client/buyer",
+    colorMode: "transparent",
+    visible: false,
+  },
 
   {
     name: "Copyright",
