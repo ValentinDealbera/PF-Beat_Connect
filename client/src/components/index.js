@@ -18,4 +18,10 @@ export { default as BeatsSpecialSection } from "./client/beatsSpecialSection";
 export { default as BeatCategoryCard } from "./client/beatCategoryCard";
 export { default as BeatCardGrid } from "./client/beatCardGrid";
 export { default as BeatsShopSection } from "./client/beatShopSection";
-
+export { default as SellerDashboardLayout } from "./layout/dashboard/sellerDashboardLayout";
+export { default as SellerDashboardNav } from "./layout/dashboard/sellerDashboardNav";
+export { default as SellerDashboardSidebar } from "./layout/dashboard/sellerDashboardSidebar";
+export { default as SellerDashboardTopBar } from "./layout/dashboard/sellerDashboardTopBar";
+export { default as IslandDashboard } from "./layout/dashboard/islandDashboard";
+export { default as SellerDashboardHeader } from "./layout/dashboard/sellerDashboardHeader";
+export { default as DashboardItem } from "./layout/dashboard/dashboardItem";
