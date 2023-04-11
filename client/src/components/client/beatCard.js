@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Foto from "../../../public/images/matthew-moloney-tKB1GDJUq9c-unsplash.jpg";
 
 export default function BeatCard({ beat, height, width }) {
   return (
@@ -7,17 +6,17 @@ export default function BeatCard({ beat, height, width }) {
       <div className="background-neutral-white gap-estilo3 flex flex-col">
         <div>
           <Image
-            className="border-radius-estilo2 aspect-square"
-            src={Foto}
-            alt={"No No No"}
+            className="border-radius-estilo2 aspect-square object-cover"
+            src={beat.image}
+            alt={beat.name}
           />
         </div>
         <div>
-          <span className="color-primary-red-700 font-semibold">{`$${"29.99"}`}</span>
-          <span className="font-light">{` | ${"100"}BPM`}</span>
-          <h1 className="font-bold">{`${"No No No - $50 UNLIM"}`}</h1>
+          <span className="color-primary-red-700 font-semibold">{`$${beat.price}`}</span>
+          <span className="font-light">{` | ${beat.BPM}BPM`}</span>
+          <h1 className="font-bold">{`${beat.name}`}</h1>
           <div className="flex flex-row items-center gap-1">
-            <span className="font-light">{`${"Example Author"}`}</span>
+            <span className="font-light">{`${beat.author?.name}`}</span>
             <Image
               className="inline"
               width={14}
