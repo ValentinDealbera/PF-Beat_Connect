@@ -131,3 +131,5 @@ const usuarios = [
     beats: [beats[4]],
   },
 ];
+
+export {genres, beats, usuarios}
