@@ -1,12 +1,13 @@
 import Image from "next/image";
 
 export default function BeatCategoryCard(props) {
+  console.log(props);
   return (
     <>
-      <div className="relative w-full">
+      <div className={`relative ${props.className} `} >
         <div
           id="image-box"
-          className={`relative h-full w-full basis-full ${props.className}`}
+          className={`relative h-full w-full basis-full `}
           style={{ aspectRatio: "3/4" }}
         >
           <div

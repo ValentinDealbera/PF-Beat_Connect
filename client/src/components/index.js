@@ -16,5 +16,6 @@ export { default as FaqsItem } from "./client/help/faqItem";
 export { default as Search } from "./layout/search";
 export { default as BeatsSpecialSection } from "./client/beatsSpecialSection";
 export { default as BeatCategoryCard } from "./client/beatCategoryCard";
-
+export { default as BeatCardGrid } from "./client/beatCardGrid";
+export { default as BeatsShopSection } from "./client/beatShopSection";
 

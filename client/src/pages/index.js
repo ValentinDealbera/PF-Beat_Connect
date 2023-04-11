@@ -47,7 +47,7 @@ export default function Home() {
                   a
                   title={category.title}
                   image={category.image}
-                  className="w-[70vw] md:w-[45vw] lg:w-[240px] "
+                  className="min-w-[70vw] md:min-w-[45vw] lg:min-w-[240px] "
                 />
               ))}
             </div>
