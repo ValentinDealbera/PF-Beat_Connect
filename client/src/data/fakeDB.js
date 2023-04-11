@@ -16,6 +16,50 @@ const genres = [
   { name: "COUNTRY", id: 7 },
 ];
 
+const usuarios = [
+  {
+    id: 1,
+    name: "Bizarrap",
+    mail: "bizarrap@Test.com",
+    profilemsg: `Beats pa' tipos como tu`,
+    type: "seller",
+    profileimg: foto1
+  },
+  {
+    id: 2,
+    name: "David Guetta",
+    mail: "davidguetta@Test.com",
+    profilemsg: `Beats for the boys`,
+    type: "seller",
+    profileimg: foto2
+  },
+  {
+    id: 3,
+    name: "Pharrel Williams",
+    mail: "pharrellwilliams@Test.com",
+    profilemsg: `Your up all night to get lucky with my beats`,
+    type: "seller",
+    profileimg: foto3
+  },
+  {
+    id: 4,
+    name: "Y2K",
+    mail: "y2k@Test.com",
+    profilemsg: `Wa wa wa, cry for the beats`,
+    type: "seller",
+    profileimg: foto4
+  },
+  {
+    id: 5,
+    name: "Skrillex",
+    mail: "skrillex@Test.com",
+    profilemsg: `Beats... skshhshhshhhh piuuu piuu`,
+    type: "seller",
+    profileimg: foto5
+  },
+];
+
+
 const beats = [
   {
     id: 1,
@@ -89,52 +133,5 @@ const beats = [
   },
 ];
 
-const usuarios = [
-  {
-    id: 1,
-    name: "Bizarrap",
-    mail: "bizarrap@Test.com",
-    profilemsg: `Beats pa' tipos como tu`,
-    type: "seller",
-    beats: [beats[0], beats[5]],
-    profileimg: foto1
-  },
-  {
-    id: 2,
-    name: "David Guetta",
-    mail: "davidguetta@Test.com",
-    profilemsg: `Beats for the boys`,
-    type: "seller",
-    beats: [beats[1], beats[6]],
-    profileimg: foto2
-  },
-  {
-    id: 3,
-    name: "Pharrel Williams",
-    mail: "pharrellwilliams@Test.com",
-    profilemsg: `Your up all night to get lucky with my beats`,
-    type: "seller",
-    beats: [beats[2]],
-    profileimg: foto3
-  },
-  {
-    id: 4,
-    name: "Y2K",
-    mail: "y2k@Test.com",
-    profilemsg: `Wa wa wa, cry for the beats`,
-    type: "seller",
-    beats: [beats[3]],
-    profileimg: foto4
-  },
-  {
-    id: 5,
-    name: "Skrillex",
-    mail: "skrillex@Test.com",
-    profilemsg: `Beats... skshhshhshhhh piuuu piuu`,
-    type: "seller",
-    beats: [beats[4]],
-    profileimg: foto5
-  },
-];
 
 export {genres, beats, usuarios}
