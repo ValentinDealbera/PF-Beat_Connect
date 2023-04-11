@@ -11,12 +11,12 @@ const buyerGeneralNav = [
   {
     title: "Contraseña",
     index: 1,
-    link: "/client/buyer/password",
+    link: "/client/buyer/profile/password",
   },
   {
     title: "Facturación",
     index: 2,
-    link: "/client/buyer/billing",
+    link: "/client/buyer/profile/billing",
   },
 ];
 
@@ -27,9 +27,9 @@ export default function BuyerNavSettings() {
   useEffect(() => {
     if (currentSlug === "/client/buyer/profile") {
       setActiveIndex(0);
-    } else if (currentSlug === "/client/buyer/password") {
+    } else if (currentSlug === "/client/buyer/profile/password") {
       setActiveIndex(1);
-    } else if (currentSlug === "/client/buyer/billing") {
+    } else if (currentSlug === "/client/buyer/profile/billing") {
       setActiveIndex(2);
     }
   }, [currentSlug]);
