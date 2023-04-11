@@ -97,6 +97,7 @@ const usuarios = [
     profilemsg: `Beats pa' tipos como tu`,
     type: "seller",
     beats: [beats[0], beats[5]],
+    profileimg: foto1
   },
   {
     id: 2,
@@ -105,6 +106,7 @@ const usuarios = [
     profilemsg: `Beats for the boys`,
     type: "seller",
     beats: [beats[1], beats[6]],
+    profileimg: foto2
   },
   {
     id: 3,
@@ -113,6 +115,7 @@ const usuarios = [
     profilemsg: `Your up all night to get lucky with my beats`,
     type: "seller",
     beats: [beats[2]],
+    profileimg: foto3
   },
   {
     id: 4,
@@ -121,6 +124,7 @@ const usuarios = [
     profilemsg: `Wa wa wa, cry for the beats`,
     type: "seller",
     beats: [beats[3]],
+    profileimg: foto4
   },
   {
     id: 5,
@@ -129,6 +133,7 @@ const usuarios = [
     profilemsg: `Beats... skshhshhshhhh piuuu piuu`,
     type: "seller",
     beats: [beats[4]],
+    profileimg: foto5
   },
 ];
 
