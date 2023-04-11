@@ -32,4 +32,10 @@ export { default as BuyerNavGeneral } from "./client/buyerNavGeneral";
 export { default as BuyerNavSettings } from "./client/buyerNavSettings";
 export { default as BuyerProfileLayout } from "./client/buyerProfileLayout";
 export { default as Input } from "./common/input";
+export { default as ProfileCard } from "./client/profileCard";
 export { default as ScrollToTop } from "./layout/scrollToTop";
+
+
+
+
+

@@ -12,7 +12,7 @@ export default function Input(props) {
           value={props.value}
           onChange={props.onChange}
           placeholder={props.placeholder}
-          className="rounded-xl border-violet-200 bg-violet-100 px-4 py-1 text-violet-800 placeholder:text-violet-800"
+          className="rounded-xl border-slate-200 bg-white px-4 py-2 text-black placeholder:text-gray-400"
           style={{ borderWidth: "1px" }}
         />
       </label>
