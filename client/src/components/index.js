@@ -11,3 +11,10 @@ export { default as Hero } from "./layout/hero";
 export { default as HelpHeader } from "./client/help/helpHeader";
 export { default as HelpNav } from "./client/help/helpNav";
 export { default as HelpContainer } from "./client/help/helpContainer";
+export { default as FaqsGrid } from "./client/help/faqsGrid";
+export { default as FaqsItem } from "./client/help/faqItem";
+export { default as Search } from "./layout/search";
+export { default as BeatsSpecialSection } from "./client/beatsSpecialSection";
+export { default as BeatCategoryCard } from "./client/beatCategoryCard";
+
+

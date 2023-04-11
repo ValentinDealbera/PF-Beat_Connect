@@ -93,6 +93,11 @@ summary {
   }
 
   //Titulo 2
+.text-titulo2-semibold {
+    @apply text-3xl font-semibold;
+    line-height: 135%;
+  }
+
   .text-titulo2-medium {
     @apply text-3xl font-medium;
     line-height: 135%;
