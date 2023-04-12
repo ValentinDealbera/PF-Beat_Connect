@@ -1,9 +1,9 @@
 const models = {
-    UserCreatorModel: require('./nosql/userCreator'),
-    UserBuyerModel: require('./nosql/userBuyer'),
-    BeatsModel: require('./nosql/beats'),
-    GenreModel: require('./nosql/genre'),
-    ReviewModel: require('./nosql/reviews'),
-    UserSuperModel: require('./nosql/usersuper')
-}
-module.exports = models
+  CreatorUserModel: require("./nosql/creatorUser"),
+  BuyerUserModel: require("./nosql/buyerUser"),
+  BeatsModel: require("./nosql/beats"),
+  GenreModel: require("./nosql/genre"),
+  ReviewModel: require("./nosql/reviews"),
+  AdminUserModel: require("./nosql/adminUser"),
+};
+module.exports = models;
