@@ -1,4 +1,4 @@
-import { BeatCardGrid, Section, BuyerNavGeneral } from "@/components";
+import { BeatCardGrid, Section, BuyerNavGeneral, BeatFilters } from "@/components";
 import { beats } from "@/data/fakeDB";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,7 +19,7 @@ export default function BeatShopSection({ mode }) {
 
   return (
     <Section subClassName="padding-x-estilo2 padding-y-estilo2 gap-estilo5 flex flex-col">
-      {mode === "shop" && <></>}
+      {mode === "shop" && <BeatFilters/>}
       {mode === "profile" && <BuyerNavGeneral activeIndex={0} />}
       <BeatCardGrid beats={beatsData} />
     </Section>

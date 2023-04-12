@@ -22,6 +22,7 @@ export default function BeatCard({ beat, height, width }) {
               width={14}
               height={14}
               src={"/icon/checked-blue.svg"}
+              alt="checked"
             />
           </div>
         </div>
