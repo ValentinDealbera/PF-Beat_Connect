@@ -37,19 +37,6 @@ export default function BeatFilters() {
     { value: "A - Z", label: "A - Z" },
     { value: "Z - A", label: "Z - A" },
   ];
-  const mobileHandler = () => {
-    if (document.body.style.overflow === "hidden") {
-      return (document.body.style.overflow = "auto");
-    } else {
-      return (document.body.style.overflow = "hidden");
-    }
-  };
-  const isBrowser = () => typeof window !== "undefined";
-
-  function scrollToTop() {
-    if (!isBrowser()) return;
-    window.scrollTo({ top: 0 });
-  }
   return (
     <>
       <div className="hidden flex-row justify-between sm:flex ">
@@ -101,21 +88,18 @@ export default function BeatFilters() {
       <div className="flex flex-row justify-start gap-4 sm:hidden">
         <button
           onClick={() => {
-            scrollToTop()
-            mobileHandler()
             setDropDownFilter(!dropDownFilter)
           }}
         >
           Filters
         </button>
         {dropDownFilter && (
-          <BeatBottomSheet>
+          <BeatBottomSheet setIsDropdownOpen={setDropDownFilter}>
             <div className="gap-estilo5 padding-x-estilo2 flex flex-col">
                 <div className="flex flex-row justify-between">
               <button
                 onClick={() => {
                   setDropDownFilter(!dropDownFilter);
-                  mobileHandler();
                 }}
                 
               >
@@ -124,7 +108,6 @@ export default function BeatFilters() {
               <button
                 onClick={() => {
                   setDropDownFilter(!dropDownFilter);
-                  mobileHandler();
                 }}
                 className="text-lg absolute left-1/2 transform -translate-x-1/2 font-bold"
               >
@@ -133,7 +116,6 @@ export default function BeatFilters() {
               <button
                 onClick={() => {
                   setDropDownFilter(!dropDownFilter);
-                  mobileHandler();
                 }}
               >
                 Reset
@@ -187,21 +169,18 @@ export default function BeatFilters() {
         )}
         <button
           onClick={() => {
-            scrollToTop()
-            mobileHandler();
             setDropDownSorting(!dropDownSorting);
           }}
         >
           Sorty by
         </button>
         {dropDownSorting && (
-          <BeatBottomSheet>
+          <BeatBottomSheet setIsDropdownOpen={setDropDownSorting}>
             <div className="gap-estilo3 padding-x-estilo2 flex flex-col">
             <div className="flex flex-row justify-between">
               <button
                 onClick={() => {
                     setDropDownSorting(!dropDownSorting);
-                  mobileHandler();
                 }}
                 
               >
@@ -210,7 +189,6 @@ export default function BeatFilters() {
               <button
                 onClick={() => {
                     setDropDownSorting(!dropDownSorting);
-                  mobileHandler();
                 }}
                 className="absolute left-1/2 transform -translate-x-1/2 font-bold"
               >
@@ -219,7 +197,6 @@ export default function BeatFilters() {
               <button
                 onClick={() => {
                     setDropDownSorting(!dropDownSorting);
-                  mobileHandler();
                 }}
               >
                 Reset
