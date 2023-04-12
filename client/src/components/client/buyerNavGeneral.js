@@ -22,13 +22,13 @@ export default function BuyerNavGeneral() {
 
   return (
     <>
-      <div className="gap-estilo2 flex flex-row">
+      <div className="gap-estilo2 flex flex-row overflow-scroll">
         {buyerGeneralNav.map((item, index) => (
           <h5
             className={`cursor-pointer ${
               index === activeIndex
-                ? "text-subtitulo-semibold"
-                : "text-subtitulo-regular"
+                ? "text-base-semibold"
+                : "text-base-medium"
             }`}
             onClick={() => dispatch(setActiveIndex(index))}
           >
