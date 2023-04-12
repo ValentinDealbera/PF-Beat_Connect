@@ -32,6 +32,10 @@ const BeatsSchema = new mongoose.Schema({
       ref: "Review",
     },
   ],
+  softDelete: {
+    type: Boolean,
+    default: false,
+  },
   userCreator: [
     {
       type: mongoose.Schema.Types.ObjectId,
