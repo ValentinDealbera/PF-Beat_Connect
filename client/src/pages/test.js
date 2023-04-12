@@ -1,11 +1,14 @@
-import { Main, Head, BeatFilters } from "@/components";
+import { Main, Head, BeatRightSheet } from "@/components";
+import { useEffect, useRef, useState } from "react";
 
 export default function Test() {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   return (
     <>
       <Head title={"Test"} description={"Head from test"} />
       <Main>
-        <BeatFilters/>
+        <button onClick={()=>setIsDropdownOpen(!isDropdownOpen)}>abrir sidebar</button>
+        {isDropdownOpen&&<BeatRightSheet setIsDropdownOpen={setIsDropdownOpen}/>}
       </Main>
     </>
   );

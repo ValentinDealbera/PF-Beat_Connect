@@ -6,7 +6,7 @@ export default function Nav({ currentMode, navItems }) {
   console.log("nav", currentMode);
   return (
     <>
-      <nav className="hidden lg:flex">
+      <nav className="z-10 hidden lg:flex">
         <ul className="gap-estilo2 flex flex-row">
           {navItems.map(
             (item, index) =>

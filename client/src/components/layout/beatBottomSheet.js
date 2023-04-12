@@ -1,8 +1,8 @@
-export default function BeatBottomSheet({ children }) {
+export default function BeatBottomSheet({ children, setIsDropdownOpen }) {
   return (
     <>
-    <div class="z-10 absolute w-full h-full top-0 left-0 bg-gray-600 opacity-50  rounded-tr-3xl rounded-tl-3xl"></div>
-      <div class="z-20 max-h-[80vh] min-h-[50vh] absolute w-full bottom-0 left-0 bg-white pb-10 pt-5 rounded-tr-3xl rounded-tl-3xl">
+    <div onClick={()=>{setIsDropdownOpen(false)}} class="z-40 fixed w-full h-full top-0 left-0 bg-gray-600 opacity-50 "></div>
+      <div class="z-50 overflow-y-scroll max-h-[80vh] min-h-[50vh] fixed w-full bottom-0 left-0 bg-white pb-10 pt-5 rounded-tr-3xl rounded-tl-3xl">
           {children}
       </div>
     </>
