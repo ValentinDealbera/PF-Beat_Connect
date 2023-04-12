@@ -1,4 +1,4 @@
-const { BuyerUserModel } = require("../Schemas");
+const BuyerUserModel = require("../Schemas/nosql/buyerUser");
 
 const getAllBuyerModel = async () => {
   try {
