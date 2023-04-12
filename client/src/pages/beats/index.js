@@ -25,7 +25,7 @@ export default function Beats() {
             />
           </div>
         </Hero>
-        <BeatsShopSection />
+        <BeatsShopSection mode="shop"/>
       </Main>
     </>
   );

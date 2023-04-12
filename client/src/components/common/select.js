@@ -39,7 +39,7 @@ function Select({ valores, setSeleccionados, seleccionados, label, type }) {
           </button>
           <>
             {isDropdownOpen && (
-              <div id="dropdown-content">
+              <div className="absolute p-1.5 background-neutral-white rounded-lg" id="dropdown-content">
                 {valores.map((valor, index) => (
                   <div key={index}>
                     <input
@@ -80,9 +80,9 @@ function Select({ valores, setSeleccionados, seleccionados, label, type }) {
           </button>
           <>
             {isDropdownOpen && (
-                <div className="flex flex-col">
+                <div className="flex flex-col absolute background-neutral-white p-1.5 rounded-lg">
                     <div className="flex flex-row gap-2">
-                        <input type='checkbox' onChange={(e)=>setSeleccionados({...seleccionados, filter: !seleccionados.filter})}/> <label> Filter by Price</label>
+                        <input type='checkbox' checked={seleccionados.filter} onChange={(e)=>setSeleccionados({...seleccionados, filter: !seleccionados.filter})}/> <label> Filter by {label}</label>
                     </div>
                     <div className="flex flex-row gap-2">
                         <input className="w-16" value={seleccionados.min} min={0} onChange={(e)=>setSeleccionados({...seleccionados, min: e.target.value})} type="number" placeholder="min."/>
@@ -100,10 +100,10 @@ function Select({ valores, setSeleccionados, seleccionados, label, type }) {
     return (
         <div>
         <select style={{ WebkitAppearance: 'none', MozAppearance: 'none', appearance: 'none' }} onChange={(e)=>setSeleccionados(e.target.value)} className="bg-white" defaultValue='none'>
-            <option disabled value='none'>{label}</option>
+            <option disabled value='none'>{label} ⌄</option>
         {valores.map(e=>{
             return (
-                <option value={e.value}>
+                <option key={e.value} value={e.value}>
                     {e.label}
                 </option>
             )
