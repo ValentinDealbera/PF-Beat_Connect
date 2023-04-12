@@ -108,6 +108,12 @@ export const navPublic = [
     url: "/beats/author/[slug]",
     colorMode: "transparent",
     visible: false,
+  },
+  {
+    name: "Landing",
+    url: "/landing",
+    colorMode: "transparent",
+    visible: false,
   }
 ];
 
