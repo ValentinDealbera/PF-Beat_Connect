@@ -35,6 +35,9 @@ export { default as Input } from "./common/input";
 export { default as ProfileCard } from "./client/profileCard";
 export { default as ScrollToTop } from "./layout/scrollToTop";
 export { default as BeatBottomSheet } from "./layout/beatBottomSheet";
+export { default as BeatRightSheet } from "./layout/beatRightSheet";
+export { default as BeatDetailSideBar } from "./client/beatDetailSideBar";
+
 
 
 

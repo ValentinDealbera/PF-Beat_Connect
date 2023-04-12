@@ -18,7 +18,7 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed z-50 flex w-full  flex-row justify-center py-8 ${
+      className={`fixed z-30 flex w-full  flex-row justify-center py-8 ${
         currentMode === "transparent" ? " " : "background-neutral-white"
       }`}
     >

@@ -129,7 +129,7 @@ export const navHelp = [
     colorMode: "light",
   },
   {
-    name: "Terminos y condiciones",
+    name: "Términos y condiciones",
     url: "/help/terms",
     colorMode: "light",
   },
