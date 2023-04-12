@@ -1,6 +1,16 @@
+import { BeatBottomSheet } from "@/components";
 import React, { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 
-function Select({ valores, setSeleccionados, seleccionados, label, type }) {
+function Select({
+  valores,
+  setSeleccionados,
+  seleccionados,
+  label,
+  type,
+  viewPort,
+  click,
+}) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -25,21 +35,94 @@ function Select({ valores, setSeleccionados, seleccionados, label, type }) {
     setIsDropdownOpen(!isDropdownOpen);
   }
   if (type === "multiSelect") {
+    if (viewPort === "mobile") {
+      return (
+        <div ref={dropdownRef} type="button" id="dropdown">
+          <div id="dropdown-content">
+            <button
+              className="text-base"
+              onClick={() => handleDropdownClick()}
+              type="button"
+            >
+              {label || "Seleccionar"}
+            </button>
+            <>
+              {isDropdownOpen && (
+                <BeatBottomSheet>
+                  <div className="gap-estilo3 padding-x-estilo2 flex flex-col">
+                  <div className="flex flex-row justify-between">
+              <button
+                onClick={() => {
+                  setIsDropdownOpen(!isDropdownOpen);
+                }}
+                
+              >
+                <Image height={15} width={15} src="/icon/arrow-down.svg"/>
+              </button>
+              <button
+                className="text-lg absolute left-1/2 transform -translate-x-1/2 font-bold"
+              >
+                {label}
+              </button>
+              <button
+                onClick={() => {
+                }}
+              >
+                Reset
+              </button>
+              </div>
+                <div
+                  className="background-neutral-white rounded-lg p-1.5 flex flex-col gap-estilo3"
+                  id="dropdown-content"
+                >
+                  {valores.map((valor, index) => (
+                    <div key={index}>
+                      <input
+                        className="text-base"
+                        type="checkbox"
+                        value={valor.value}
+                        checked={seleccionados.some(
+                          (v) => v.value === valor.value
+                        )}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            setSeleccionados([
+                              ...seleccionados,
+                              { label: valor.label, value: valor.value },
+                            ]);
+                          } else {
+                            setSeleccionados(
+                              seleccionados.filter(
+                                (v) => v.value !== valor.value
+                              )
+                            );
+                          }
+                        }}
+                      />
+                      <label className="text-lg" > {valor.label}</label>
+                    </div>
+                  ))}
+                </div>
+                </div>
+                </BeatBottomSheet>
+              )}
+            </>
+          </div>
+        </div>
+      );
+    }
     return (
       <div ref={dropdownRef} type="button" id="dropdown">
         <div id="dropdown-content">
           <button onClick={() => handleDropdownClick()} type="button">
-            {seleccionados.length > 0
-              ? seleccionados
-                  .slice(0, 2)
-                  .map((v) => v.label)
-                  .join(", ")
-                  .slice(0, 50) + (seleccionados.length > 1 ? "..." : "")
-              : label || "Seleccionar ⌄"}
+            {label || "Seleccionar"}
           </button>
           <>
             {isDropdownOpen && (
-              <div className="absolute p-1.5 background-neutral-white rounded-lg" id="dropdown-content">
+              <div
+                className="background-neutral-white absolute rounded-lg p-1.5"
+                id="dropdown-content"
+              >
                 {valores.map((valor, index) => (
                   <div key={index}>
                     <input
@@ -71,46 +154,220 @@ function Select({ valores, setSeleccionados, seleccionados, label, type }) {
       </div>
     );
   }
-  if(type === 'prices') {
-    return (
+
+  if (type === "prices") {
+    if (viewPort === "mobile") {
+      return (
         <div ref={dropdownRef} type="button" id="dropdown">
+          <div id="dropdown-content">
+            <button onClick={() => handleDropdownClick()} type="button">
+              {label}
+            </button>
+            <>
+              {isDropdownOpen && (
+                <BeatBottomSheet>
+                <div className="gap-estilo3 padding-x-estilo2 flex flex-col">
+                <div className="flex flex-row justify-between">
+            <button
+              onClick={() => {
+                setIsDropdownOpen(!isDropdownOpen);
+              }}
+              
+            >
+              <Image height={15} width={15} src="/icon/arrow-down.svg"/>
+            </button>
+            <button
+              className="text-lg absolute left-1/2 transform -translate-x-1/2 font-bold"
+            >
+              {label}
+            </button>
+            <button
+              onClick={() => {
+              }}
+            >
+              Reset
+            </button>
+            </div>
+                <div className="background-neutral-white flex flex-col rounded-lg p-1.5 gap-estilo3">
+                  <div className="flex flex-row justify-center gap-2">
+                    <input
+                      type="checkbox"
+                      checked={seleccionados.filter}
+                      onChange={(e) =>
+                        setSeleccionados({
+                          ...seleccionados,
+                          filter: !seleccionados.filter,
+                        })
+                      }
+                    />{" "}
+                    <label className="text-lg"> Filter by {label}</label>
+                  </div>
+                  <div className="flex flex-row justify-center items-center gap-2">
+                    <input
+                    style={{ "-webkit-appearance": "none", margin: 0, "-moz-appearance": "textfield" }}
+                      className="w-16 h-10 border rounded-lg border-neutral-950"
+                      value={seleccionados.min}
+                      min={0}
+                      onChange={(e) =>
+                        setSeleccionados({
+                          ...seleccionados,
+                          min: e.target.value,
+                        })
+                      }
+                      type="number"
+                      placeholder="min."
+                    />
+                    <span> - </span>
+                    <input
+                    style={{ "-webkit-appearance": "none", margin: 0, "-moz-appearance": "textfield" }}
+                      className="w-16 h-10 border rounded-lg border-neutral-950"
+                      value={seleccionados.max}
+                      min={0}
+                      onChange={(e) =>
+                        setSeleccionados({
+                          ...seleccionados,
+                          max: e.target.value,
+                        })
+                      }
+                      type="number"
+                      placeholder="max."
+                    />
+                  </div>
+                </div>
+                </div>
+                </BeatBottomSheet>
+              )}
+            </>
+          </div>
+        </div>
+      );
+    }
+    return (
+      <div ref={dropdownRef} type="button" id="dropdown">
         <div id="dropdown-content">
           <button onClick={() => handleDropdownClick()} type="button">
-            {label + " ⌄" || "Seleccionar ⌄"}
+            {label}
           </button>
           <>
             {isDropdownOpen && (
-                <div className="flex flex-col absolute background-neutral-white p-1.5 rounded-lg">
-                    <div className="flex flex-row gap-2">
-                        <input type='checkbox' checked={seleccionados.filter} onChange={(e)=>setSeleccionados({...seleccionados, filter: !seleccionados.filter})}/> <label> Filter by {label}</label>
-                    </div>
-                    <div className="flex flex-row gap-2">
-                        <input className="w-16" value={seleccionados.min} min={0} onChange={(e)=>setSeleccionados({...seleccionados, min: e.target.value})} type="number" placeholder="min."/>
-                        <span> - </span>
-                        <input className="w-16"  value={seleccionados.max} min={0} onChange={(e)=>setSeleccionados({...seleccionados, max: e.target.value})} type="number" placeholder="max."/>
-                    </div>
+              <div className="background-neutral-white absolute flex flex-col rounded-lg p-1.5">
+                <div className="flex flex-row gap-2">
+                  <input
+                    type="checkbox"
+                    checked={seleccionados.filter}
+                    onChange={(e) =>
+                      setSeleccionados({
+                        ...seleccionados,
+                        filter: !seleccionados.filter,
+                      })
+                    }
+                  />{" "}
+                  <label> Filter by {label}</label>
                 </div>
-              )}
+                <div className="flex flex-row gap-2">
+                  <input
+                    className="w-16"
+                    value={seleccionados.min}
+                    min={0}
+                    onChange={(e) =>
+                      setSeleccionados({
+                        ...seleccionados,
+                        min: e.target.value,
+                      })
+                    }
+                    type="number"
+                    placeholder="min."
+                  />
+                  <span> - </span>
+                  <input
+                    className="w-16"
+                    value={seleccionados.max}
+                    min={0}
+                    onChange={(e) =>
+                      setSeleccionados({
+                        ...seleccionados,
+                        max: e.target.value,
+                      })
+                    }
+                    type="number"
+                    placeholder="max."
+                  />
+                </div>
+              </div>
+            )}
           </>
         </div>
       </div>
-    )
+    );
   }
-  if (!type){
-    return (
-        <div>
-        <select style={{ WebkitAppearance: 'none', MozAppearance: 'none', appearance: 'none' }} onChange={(e)=>setSeleccionados(e.target.value)} className="bg-white" defaultValue='none'>
-            <option disabled value='none'>{label} ⌄</option>
-        {valores.map(e=>{
-            return (
-                <option key={e.value} value={e.value}>
-                    {e.label}
-                </option>
-            )
-        })}
-        </select>
+  
+  if (!type) {
+    if (viewPort === "mobile") {
+      return (
+        <div ref={dropdownRef} id="dropdown">
+          <div id="dropdown-content">
+            <button
+              onClick={() => handleDropdownClick()}
+              type="button"
+            ></button>
+            <>
+              {click && (
+                <div
+                  className="gap-estilo3 background-neutral-white flex flex-col rounded-lg"
+                  id="dropdown-content"
+                >
+                  {valores.map((valor, index) => (
+                    <div key={index}>
+                      <input
+                        type="radio"
+                        value={valor.value}
+                        checked={seleccionados === valor.value}
+                        onChange={(e) => {
+                          setSeleccionados(e.target.value);
+                        }}
+                      />
+                      <label className="text-lg"> {valor.label}</label>
+                      <br />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </>
+          </div>
         </div>
-    )
+      );
+    }
+    return (
+      <div ref={dropdownRef} type="button" id="dropdown">
+        <div id="dropdown-content">
+          <button onClick={() => handleDropdownClick()} type="button">
+            {seleccionados || label}
+          </button>
+          <>
+            {isDropdownOpen && (
+              <div
+                className="background-neutral-white absolute rounded-lg p-1.5"
+                id="dropdown-content"
+              >
+                {valores.map((valor, index) => (
+                  <div key={index}>
+                    <input
+                      type="radio"
+                      value={valor.value}
+                      checked={seleccionados === valor.value}
+                      onChange={(e) => {
+                        setSeleccionados(e.target.value);
+                      }}
+                    />
+                    <label>{valor.label}</label>
+                  </div>
+                ))}
+              </div>
+            )}
+          </>
+        </div>
+      </div>
+    );
   }
 }
 
