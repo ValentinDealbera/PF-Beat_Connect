@@ -15,8 +15,8 @@ export default function AuthorProfile() {
           >
             <div>
               <ProfileCard
-                profilePhoto="/images/aleksandr-surnin-uV07XhI2m7o-unsplash.jpg"
-                profileName="Jhon Doe"
+                profilePhoto="/images/zulmaury-saavedra - Keh6vLM7w0-unsplash.jpg"
+                profileName="Maria Doe"
                 profileMessage="Lorem ipsum dolor sit "
               />
             </div>

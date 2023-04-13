@@ -26,7 +26,7 @@ export default function Footer(props) {
 }
 
 function FooterNav({ items, title, mode }) {
-  console.log("items", items);
+  //console.log("items", items);
   return (
     <>
       <div className="gap-estilo4 flex flex-col">

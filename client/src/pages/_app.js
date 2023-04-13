@@ -6,7 +6,7 @@ import { PersistGate } from "redux-persist/integration/react";
 
 export default function App({ Component, pageProps, router }) {
   const mode = !router.pathname.startsWith("/client/seller") ? 'transparent' : 'light';
-  const headerVisibility = router.pathname.startsWith("/client/seller") ? false : true;
+  const headerVisibility = router.pathname.startsWith("/auth") ? false : true;
   return (
     <>
       <Provider store={store}>

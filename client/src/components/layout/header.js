@@ -1,32 +1,50 @@
-import { Logo, Nav } from "@/components";
-import { navPublic } from "@/data/data";
+import { Logo, Nav, UserBoxNav, VerticalNav } from "@/components";
 import { useRouter } from "next/router";
+import { navPublic, navClient } from "@/data/data";
+import { useEffect, useState } from "react";
 
 export default function Header() {
   const router = useRouter();
 
   const currentSlug = router.pathname;
-  console.log(currentSlug);
-
+  const [headerType, setHeaderType] = useState("default");
   const currentItem = navPublic.find((item) => currentSlug === item.url);
+  const currentMode = currentItem ? currentItem.colorMode : "transparent";
 
-  console.log(currentItem, currentSlug);
+  useEffect(() => {
+    const handleScroll = () => {
+        // console.log(headerType)
+        if (window.scrollY > 100) {
+            setHeaderType("alternative");
+            //   console.log("headerType")
+        } else {
+            setHeaderType("default");
+            // console.log(headerType)
+        }
+    };
+    window.addEventListener("scroll", handleScroll);
 
-  const currentMode = currentItem ? currentItem.colorMode : "light";
+    return () => {
+        window.removeEventListener("scroll", handleScroll);
+    };
+}, []);
 
-  console.log("header", currentMode);
 
   return (
     <header
       className={`fixed z-30 flex w-full  flex-row justify-center py-8 ${
-        currentMode === "transparent" ? " " : "background-neutral-white"
+        currentMode === "light" ? "background-neutral-white " : ""
       }`}
+      style={headerType === "alternative" ? { background: "#000000b3", backdropFilter:"blur(3px)" } : {}}
     >
       <div
         className={`padding-x-estilo2 flex items-center  justify-between align-middle `}
       >
         <Logo mode={currentMode} />
         <Nav currentMode={currentMode} navItems={navPublic} />
+        <UserBoxNav id={"userBoxNav"}>
+          <VerticalNav navItems={navClient} title={"Centro de ayuda"} />
+        </UserBoxNav>
       </div>
     </header>
   );

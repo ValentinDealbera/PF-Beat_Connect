@@ -1,18 +1,23 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = {
-  activeIndex: 0,
+  generalActiveIndex: 0,
+  settingsActiveIndex: 0,
 };
 
 const cartSlice = createSlice({
   name: "profile",
   initialState,
   reducers: {
-    setActiveIndex(state, action) {
-      state.activeIndex = action.payload;
+    setGeneralActiveIndex(state, action) {
+      state.generalActiveIndex = action.payload;
+    },
+    setSettingsActiveIndex(state, action) {
+      state.settingsActiveIndex = action.payload;
     },
   },
 });
 
-export const { setActiveIndex } = cartSlice.actions;
+export const { setGeneralActiveIndex, setSettingsActiveIndex
+} = cartSlice.actions;
 export default cartSlice.reducer;

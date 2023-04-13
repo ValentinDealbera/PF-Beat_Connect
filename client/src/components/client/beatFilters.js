@@ -29,11 +29,11 @@ export default function BeatFilters() {
   });
 
   useEffect(() => {
-    console.log("beatGenre", beatGenre);
-    console.log("beatTypes", beatTypes);
-    console.log("prices", prices);
-    console.log("BPM", BPM);
-    console.log("sort", sort);
+    // console.log("beatGenre", beatGenre);
+    // console.log("beatTypes", beatTypes);
+    // console.log("prices", prices);
+    // console.log("BPM", BPM);
+    // console.log("sort", sort);
   }, [beatGenre, beatTypes, prices, BPM, sort]);
 
   const handleDropDownSorting = () => {
