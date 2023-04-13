@@ -48,7 +48,7 @@ function Select({
             </button>
             <>
               {isDropdownOpen && (
-                <BeatBottomSheet>
+                <BeatBottomSheet setIsDropdownOpen={setIsDropdownOpen}>
                   <div className="gap-estilo3 padding-x-estilo2 flex flex-col">
                   <div className="flex flex-row justify-between">
               <button
@@ -165,7 +165,7 @@ function Select({
             </button>
             <>
               {isDropdownOpen && (
-                <BeatBottomSheet>
+                <BeatBottomSheet setIsDropdownOpen={setIsDropdownOpen}>
                 <div className="gap-estilo3 padding-x-estilo2 flex flex-col">
                 <div className="flex flex-row justify-between">
             <button
