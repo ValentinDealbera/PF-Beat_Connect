@@ -1,4 +1,4 @@
-const reviewSchema = require("../Schemas/nosql/reviews");
+const reviewSchema = require("../models/nosql/reviews");
 
 const getReviewById = async (id) => {
   try {

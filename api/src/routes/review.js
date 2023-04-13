@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express();
 const mongoose = require("mongoose");
-const reviewSchema = require("../Schemas/nosql/reviews");
+const reviewSchema = require("../models/nosql/reviews");
 const {
   OK,
   CREATED,
