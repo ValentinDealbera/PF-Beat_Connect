@@ -24,7 +24,7 @@ export default function BeatCard({ beat, variant }) {
           <span className="font-light">{` | ${beat.BPM}BPM`}</span>
           <h1 className="font-bold">{`${beat.name}`}</h1>
           <div className="flex flex-row items-center gap-1">
-            <Link href={`/beats/author/${beat.id}`}>
+          <Link href={`/beats/author/${beat.id}`} onClick={(e) => e.stopPropagation()}>
               <span className="font-light">{`${beat.author?.name}`}</span>
             </Link>
             <Image
