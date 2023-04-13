@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
+// const bcrypt = require("bcryptjs");
 
 const adminUserSchema = new mongoose.Schema({
   id: {
@@ -29,33 +29,37 @@ const adminUserSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  softDelete: {
+    type: Boolean,
+    default: false,
+  },
 });
 
-const saltRound = 10;
-adminUserSchema.pre("save", function (next) {
-  if (this.isNew || this.isModified("password")) {
-    const document = this;
-    bcrypt.hash(document.password, saltRound, (err, hashedPassword) => {
-      if (err) {
-        next(err);
-      } else {
-        document.password = hashedPassword;
-        next();
-      }
-    });
-  } else {
-    next();
-  }
-});
+// const saltRound = 10;
+// adminUserSchema.pre("save", function (next) {
+//   if (this.isNew || this.isModified("password")) {
+//     const document = this;
+//     bcrypt.hash(document.password, saltRound, (err, hashedPassword) => {
+//       if (err) {
+//         next(err);
+//       } else {
+//         document.password = hashedPassword;
+//         next();
+//       }
+//     });
+//   } else {
+//     next();
+//   }
+// });
 
-adminUserSchema.methods.isCorrectPassword = function (password, callback) {
-  bcrypt.compare(password, this.password, function (err, res) {
-    if (err) {
-      callback(err);
-    } else {
-      callback(err, res);
-    }
-  });
-};
+// adminUserSchema.methods.isCorrectPassword = function (password, callback) {
+//   bcrypt.compare(password, this.password, function (err, res) {
+//     if (err) {
+//       callback(err);
+//     } else {
+//       callback(err, res);
+//     }
+//   });
+// };
 
 module.exports = mongoose.model("AdminUser", adminUserSchema);

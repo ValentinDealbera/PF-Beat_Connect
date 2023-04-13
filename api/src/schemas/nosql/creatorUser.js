@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
 
-const creatorUserSchema = mongoose.Schema({
+const creatorUserSchema = new mongoose.Schema({
   id: {
     type: mongoose.Types.ObjectId,
   },
@@ -33,39 +32,16 @@ const creatorUserSchema = mongoose.Schema({
     default:
       "https://static.vecteezy.com/system/resources/previews/009/734/564/non_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg",
   },
+  softDelete: {
+    type: Boolean,
+    default: false,
+  },
   createdBeats: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Beat",
+      ref: "Beats",
     },
   ],
 });
-
-const saltRound = 10;
-creatorUserSchema.pre("save", function (next) {
-  if (this.isNew || this.isModified("password")) {
-    const document = this;
-    bcrypt.hash(document.password, saltRound, (err, hashedPassword) => {
-      if (err) {
-        next(err);
-      } else {
-        document.password = hashedPassword;
-        next();
-      }
-    });
-  } else {
-    next();
-  }
-});
-
-creatorUserSchema.methods.isCorrectPassword = function (password, callback) {
-  bcrypt.compare(password, this.password, function (err, res) {
-    if (err) {
-      callback(err);
-    } else {
-      callback(err, res);
-    }
-  });
-};
 
 module.exports = mongoose.model("CreatorUser", creatorUserSchema);

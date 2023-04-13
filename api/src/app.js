@@ -16,7 +16,6 @@ server.use(
     tempFileDir: "./uploads",
   })
 );
-
 server.use("/api", routes);
 
 module.exports = server;

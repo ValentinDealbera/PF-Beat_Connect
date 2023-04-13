@@ -108,6 +108,12 @@ export const navPublic = [
     url: "/beats/author/[slug]",
     colorMode: "transparent",
     visible: false,
+  },
+  {
+    name: "Landing",
+    url: "/landing",
+    colorMode: "transparent",
+    visible: false,
   }
 ];
 
@@ -123,7 +129,7 @@ export const navHelp = [
     colorMode: "light",
   },
   {
-    name: "Terminos y condiciones",
+    name: "Términos y condiciones",
     url: "/help/terms",
     colorMode: "light",
   },

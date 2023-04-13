@@ -74,22 +74,22 @@ summary {
 @layer base {
   .text-titulo1-bold {
     @apply text-4xl font-bold;
-    line-height: 135%;
+    line-height: 115%;
   }
 
   .text-titulo1-semibold {
     @apply text-4xl font-semibold;
-    line-height: 135%;
+    line-height: 115%;
   }
 
   .text-titulo1-medium {
     @apply text-4xl font-medium;
-    line-height: 135%;
+    line-height: 115%;
   }
 
   .text-titulo1-regular {
     @apply text-4xl font-normal;
-    line-height: 135%;
+    line-height: 115%;
   }
 
   //Titulo 2
