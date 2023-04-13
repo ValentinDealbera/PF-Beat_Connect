@@ -1,4 +1,4 @@
-import { Main, Head, Hero, Section } from "@/components";
+import { Main, Head, Hero, Section, ScrollToTop } from "@/components";
 import { tecnologias } from "@/data/data";
 import Image from "next/image";
 
@@ -82,6 +82,7 @@ export default function About() {
             ))}
           </div>
         </Section>
+        <ScrollToTop />
       </Main>
     </>
   );
