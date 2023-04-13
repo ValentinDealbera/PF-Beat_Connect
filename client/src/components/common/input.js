@@ -4,7 +4,7 @@ export default function Input(props) {
       <label
         htmlFor={props.name}
         className="flex min-w-0 gap-estilo4 text-sm-medium">
-      >
+      
         {props.label}
                 {props.error && (
           <p className="flex gap-estilo4 font-britanicaBold text-sm-medium color-primary-red-500 ml-2">
