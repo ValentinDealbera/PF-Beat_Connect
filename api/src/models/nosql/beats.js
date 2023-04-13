@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const BeatsSchema = new mongoose.Schema({
+  audio: {
+    data: Buffer, 
+    contentType: String 
+  },
   id: {
     type: mongoose.Types.ObjectId,
   },
