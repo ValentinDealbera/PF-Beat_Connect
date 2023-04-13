@@ -1,3 +1,8 @@
+  import { Head, Main, BeatRightSheet, Switch } from "@/components";
+import { useState } from "react";
+
+  export default function Test(props){
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   return (
     <>
       <Head title={"Test"} description={"Head from test"} />

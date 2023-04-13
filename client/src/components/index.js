@@ -47,4 +47,5 @@ export { default as MiniModalBox } from "./common/miniModalBox";
 export { default as ArrowLabel } from "./common/arrowLabel";
 export { default as CheckboxGroup } from "./common/checkboxGroup";
 export { default as MinMax } from "./common/minMax";
+export {default as Switch} from "./common/switch"
 
