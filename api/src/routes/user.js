@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express();
 const mongoose = require("mongoose");
-const BuyerUserModel = require("../Schemas/nosql/buyerUser");
+const UserModel = require("../models/nosql/user");
 const {
   OK,
   CREATED,
@@ -10,10 +10,10 @@ const {
   USER_NOT_FOUND,
   SERVER_ERROR,
 } = require("../controllers/status");
-const {
-  getAllBuyerModel,
-  getBuyerId,
-} = require("../controllers/buyerUController");
+// const {
+//   getAllBuyerModel,
+//   getBuyerId,
+// } = require("../controllers/buyerUController");
 
 router.get("/", async (req, res) => {
   try {
