@@ -9,7 +9,7 @@ export default function Footer(props) {
         className={`${
           props.mode === "light"
             ? "background-neutral-white xl:hidden"
-            : "background-neutral-gray-400"
+            : "bg-gray-950"
         } flex flex-row items-center  justify-center align-middle`}
       >
         <div className="padding-x-estilo2 padding-y-estilo1 flex flex-col items-start justify-between gap-8 align-middle md:flex-row">

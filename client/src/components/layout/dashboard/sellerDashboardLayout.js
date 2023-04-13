@@ -12,7 +12,7 @@ export default function SellerDashboardLayout({
 }) {
   return (
     <>
-      <section className="background-neutral-slate-100 flex pb-10 min-h-screen flex-col items-stretch xl:flex-row ">
+      <section className="background-neutral-slate-100 flex pb-10 xl:pb-0 min-h-screen flex-col items-stretch xl:flex-row ">
         <div id="col1" className=" hidden w-[20%] xl:flex">
           <SellerDashboardSidebar />
         </div>

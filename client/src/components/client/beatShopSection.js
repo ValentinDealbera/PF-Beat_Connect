@@ -18,7 +18,7 @@ export default function BeatShopSection({ mode }) {
   }, [activeIndex]);
 
   return (
-    <Section subClassName="padding-x-estilo2 padding-y-estilo2 gap-estilo5 flex flex-col">
+    <Section subClassName="padding-x-estilo2 padding-y-estilo2 gap-estilo2 flex flex-col">
       {mode === "shop" && <BeatFilters/>}
       {mode === "profile" && <BuyerNavGeneral activeIndex={0} />}
       <BeatCardGrid beats={beatsData} />

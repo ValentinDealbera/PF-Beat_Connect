@@ -134,5 +134,19 @@ const beats = [
   },
 ];
 
+const types = [
+  { value: "VOCAL", label: "VOCAL" },
+  { value: "BEAT", label: "BEAT" },
+  { value: "SONG", label: "SONG" },
+];
 
-export {genres, beats, usuarios}
+const sortArr = [
+  { value: "Price ↑", label: "Price ↑" },
+  { value: "Price ↓", label: "Price ↓" },
+  { value: "BPM ↑", label: "BPM ↑" },
+  { value: "BPM ↓", label: "BPM ↓" },
+  { value: "A - Z", label: "A - Z" },
+  { value: "Z - A", label: "Z - A" },
+];
+
+export {genres, beats, usuarios , types, sortArr};

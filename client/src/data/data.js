@@ -2,7 +2,7 @@ export const navAll = [
   {
     name: "Inicio",
     url: "/",
-    colorMode: "light",
+    colorMode: "transparent",
   },
   {
     name: "Nosotros",
@@ -51,7 +51,7 @@ export const navPublic = [
   {
     name: "Inicio",
     url: "/",
-    colorMode: "light",
+    colorMode: "transparent",
     visible: true,
   },
   {
@@ -69,7 +69,7 @@ export const navPublic = [
   {
     name: "Beats",
     url: "/beats",
-    colorMode: "light",
+    colorMode: "transparent",
     visible: true,
   },
   {
