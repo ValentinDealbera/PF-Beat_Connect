@@ -11,6 +11,7 @@ export default function About() {
         <Hero
           style={{ minHeight: "45vh" }}
           image="/images/test1.jpg"
+          className="align-middle items-center justify-center"
         >
           <div className="padding-estilo2 flex h-full flex-row items-center justify-center align-middle">
             <h1 className="text-titulo1-regular text-center text-white">

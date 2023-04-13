@@ -6,7 +6,7 @@ export { default as Logo } from "./common/logo";
 export { default as Nav } from "./layout/nav";
 export { default as Section } from "./layout/section";
 export { default as Footer } from "./layout/footer";
-export {default as BeatCard} from "./client/beatCard"
+export { default as BeatCard } from "./client/beatCard";
 export { default as Hero } from "./layout/hero";
 export { default as HelpHeader } from "./client/help/helpHeader";
 export { default as HelpNav } from "./client/help/helpNav";
@@ -18,8 +18,8 @@ export { default as BeatsSpecialSection } from "./client/beatsSpecialSection";
 export { default as BeatCategoryCard } from "./client/beatCategoryCard";
 export { default as BeatCardGrid } from "./client/beatCardGrid";
 export { default as BeatsShopSection } from "./client/beatShopSection";
-export {default as BeatFilters} from "./client/beatFilters"
-export {default as Select} from "./common/select"
+export { default as BeatFilters } from "./client/beatFilters";
+export { default as Select } from "./common/select";
 export { default as SellerDashboardLayout } from "./layout/dashboard/sellerDashboardLayout";
 export { default as SellerDashboardNav } from "./layout/dashboard/sellerDashboardNav";
 export { default as SellerDashboardSidebar } from "./layout/dashboard/sellerDashboardSidebar";
@@ -27,7 +27,7 @@ export { default as SellerDashboardTopBar } from "./layout/dashboard/sellerDashb
 export { default as IslandDashboard } from "./layout/dashboard/islandDashboard";
 export { default as SellerDashboardHeader } from "./layout/dashboard/sellerDashboardHeader";
 export { default as DashboardItem } from "./layout/dashboard/dashboardItem";
-export { default as ClientReview} from "./client/clientReviews"
+export { default as ClientReview } from "./client/clientReviews";
 export { default as BuyerNavGeneral } from "./client/buyerNavGeneral";
 export { default as BuyerNavSettings } from "./client/buyerNavSettings";
 export { default as BuyerProfileLayout } from "./client/buyerProfileLayout";
@@ -47,12 +47,11 @@ export { default as MiniModalBox } from "./common/miniModalBox";
 export { default as ArrowLabel } from "./common/arrowLabel";
 export { default as CheckboxGroup } from "./common/checkboxGroup";
 export { default as MinMax } from "./common/minMax";
-
 export { default as ModalOnHover } from "./layout/modalOnHover";
 export { default as NavModalItem } from "./layout/navModalItem";
 export { default as VerticalNav } from "./layout/verticalNav";
 export { default as ModalBoxForNav } from "./common/modalBoxForNav";
-
-export {default as Switch} from "./common/switch"
-
-
+export { default as Switch } from "./common/switch";
+export { default as UserBoxNav } from "./layout/userBoxNav";
+export { default as SettingsHero } from "./client/settingsHero";
+export { default as SimpleHeader } from "./layout/simpleHeader";

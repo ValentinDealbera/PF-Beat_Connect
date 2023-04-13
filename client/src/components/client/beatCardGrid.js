@@ -18,6 +18,8 @@ export default function BeatCardGrid({ beats }) {
     setIsDropdownOpen(!isDropDown);
   };
 
+  console.log(beats)
+
   BeatCardGrid.handleDropdownOpen = handleDropdownOpen;
 
   return (

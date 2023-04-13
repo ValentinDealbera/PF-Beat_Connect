@@ -7,7 +7,8 @@ export default function BuyerProfile() {
       <Main mode="transparent">
         <Hero
           style={{ height: "45vh" }}
-          image="https://images.unsplash.com/photo-1620279653041-26b259287fc2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+          image="/images/category3.jpg"
+          className="align-middle items-center justify-center"
         >
           <div
             id="contenido"

@@ -16,7 +16,7 @@ export default function Home() {
       <Main mode="transparent">
         <Hero
           image="/images/jurre-houtkamp-XAyE243LdN4-unsplash.jpg"
-          className="background-primary-red-700 min-h-[85vh] md:min-h-[65vh]  "
+          className="background-primary-red-700 min-h-[85vh] md:min-h-[65vh] align-middle items-center justify-center "
           //  style={{ minHeight: "15vh" }}
         >
           <div className="padding-estilo2  gap-estilo3 mt-6 flex h-full w-full flex-col items-start justify-between align-middle md:flex-row md:items-center">

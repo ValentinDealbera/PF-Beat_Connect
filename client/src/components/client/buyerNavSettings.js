@@ -1,54 +1,33 @@
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import Link from "next/link";
+import { setSettingsActiveIndex } from "@/redux/slices/profile";
+import { useDispatch, useSelector } from "react-redux";
 
 const buyerGeneralNav = [
   {
     title: "Perfil",
-    index: 0,
-    link: "/client/buyer/profile",
   },
   {
     title: "Contraseña",
-    index: 1,
-    link: "/client/buyer/profile/password",
-  },
-  {
-    title: "Facturación",
-    index: 2,
-    link: "/client/buyer/profile/billing",
   },
 ];
 
 export default function BuyerNavSettings() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const currentSlug = useRouter().pathname;
-
-  useEffect(() => {
-    if (currentSlug === "/client/buyer/profile") {
-      setActiveIndex(0);
-    } else if (currentSlug === "/client/buyer/profile/password") {
-      setActiveIndex(1);
-    } else if (currentSlug === "/client/buyer/profile/billing") {
-      setActiveIndex(2);
-    }
-  }, [currentSlug]);
+  
+  const activeIndex = useSelector((state) => state.profile.settingsActiveIndex);
+  const dispatch = useDispatch();
 
   return (
     <>
-      <div className="gap-estilo4 flex flex-col">
+      <div className="gap-estilo2 flex">
         {buyerGeneralNav.map((item, index) => (
-          <Link href={item.link} key={index}>
+
             <h5
               className={`cursor-pointer ${
-                index === activeIndex
-                  ? "text-base-semibold"
-                  : "text-base-regular"
+                index === activeIndex ? "text-base-semibold" : "text-base-light"
               }`}
+              onClick={() => dispatch(setSettingsActiveIndex(index))}
             >
               {item.title}
             </h5>
-          </Link>
         ))}
       </div>
     </>

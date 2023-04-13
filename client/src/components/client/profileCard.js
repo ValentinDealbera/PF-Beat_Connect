@@ -6,12 +6,12 @@ export default function ProfileCard({
   profileMessage,
 }) {
   return (
-    <div className="border-radius-estilo2 flex w-max max-w-full flex-row overflow-hidden bg-white py-4 sm:w-[300px] sm:px-1">
-      <div className="gap-estilo4 mx-auto my-auto flex flex-row px-6">
+    <div className="flex w-max max-w-full flex-row overflow-hidden rounded-full bg-white  sm:max-w-[300px] py-2 pl-2 pr-5">
+      <div className="gap-estilo4 flex flex-row ">
         <Image
           src={profilePhoto}
-          width={80}
-          height={80}
+          width={75}
+          height={75}
           alt="Profile photo"
           className="aspect-square rounded-full border object-cover"
         />

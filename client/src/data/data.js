@@ -1,120 +1,19 @@
-export const navAll = [
-  {
-    name: "Inicio",
-    url: "/",
-    colorMode: "transparent",
-  },
-  {
-    name: "Nosotros",
-    url: "/about",
-    colorMode: "light",
-  },
-  {
-    name: "test",
-    url: "/test",
-    colorMode: "light",
-  },
-  {
-    name: "Ayuda",
-    url: "/help",
-    colorMode: "light",
-  },
-  {
-    name: "Inicio",
-    url: "/help",
-    colorMode: "light",
-  },
-  {
-    name: "Política de privacidad",
-    url: "/help/privacy",
-    colorMode: "light",
-  },
-  {
-    name: "Cookies",
-    url: "/help/cookies",
-    colorMode: "light",
-  },
-  {
-    name: "Copyright",
-    url: "/help/copyright",
-    colorMode: "light",
-  },
-  {
-    name: "Login",
-    url: "/beats/author/[slug]",
-    colorMode: "transparent",
-    visible: false,
-  }
-];
-
 export const navPublic = [
   {
     name: "Inicio",
     url: "/",
-    colorMode: "transparent",
     visible: true,
   },
   {
     name: "Nosotros",
     url: "/about",
-    colorMode: "transparent",
-    visible: true,
-  },
-  {
-    name: "test",
-    url: "/test",
-    colorMode: "light",
     visible: true,
   },
   {
     name: "Beats",
     url: "/beats",
-    colorMode: "transparent",
     visible: true,
   },
-  {
-    name: "Ayuda",
-    url: "/help",
-    colorMode: "transparent",
-    visible: false,
-  },
-  {
-    name: "Política de privacidad",
-    url: "/help/privacy",
-    colorMode: "transparent",
-    visible: false,
-  },
-  {
-    name: "Terminos y condiciones",
-    url: "/help/terms",
-    colorMode: "transparent",
-    visible: false,
-  },
-  {
-    name: "Buyer profile",
-    url: "/client/buyer",
-    colorMode: "transparent",
-    visible: false,
-  },
-
-  {
-    name: "Copyright",
-    url: "/help/copyright",
-    colorMode: "transparent",
-    visible: false,
-  },
-  {
-    name: "Login",
-    url: "/beats/author/[slug]",
-    colorMode: "transparent",
-    visible: false,
-  },
-  {
-    name: "Landing",
-    url: "/landing",
-    colorMode: "transparent",
-    visible: false,
-  }
 ];
 
 export const navHelp = [
@@ -141,6 +40,38 @@ export const navHelp = [
   },
 ];
 
+export const navClient = [
+  {
+    name: "Perfil",
+    url: "/client",
+    colorMode: "light",
+  },
+  {
+    name: "Inbox",
+    url: "/client/inbox",
+    colorMode: "light",
+  },
+  {
+    name: "Vende tus beats",
+    url: "/client",
+  },
+  {
+    name: "Configuracion",
+    url: "/client/settings",
+    colorMode: "light",
+  },
+  {
+    name: "Facturacion",
+    url: "/client/billing",
+    colorMode: "light",
+  },
+  {
+    name: "Logout",
+    url: "/auth/logout",
+    colorMode: "light",
+  },
+];
+
 export const faqs = [
   {
     title: "¿Qué es el test de personalidad?",
@@ -161,21 +92,6 @@ export const faqs = [
     title: "¿Qué es el test de personalidad?",
     content:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras quis elit vitae est facilisis luctus a nec purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-];
-
-export const categories = [
-  {
-    title: "Hip Hop",
-    image: "/images/category1.jpg",
-  },
-  {
-    title: "Hip Hop1",
-    image: "/images/category2.jpg",
-  },
-  {
-    title: "Hip Hop2",
-    image: "/images/category3.jpg",
   },
 ];
 

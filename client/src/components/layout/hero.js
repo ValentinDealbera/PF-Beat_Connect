@@ -4,7 +4,7 @@ export default function Hero(props) {
   return (
     <section
       id="hero"
-      className={`relative flex w-full flex-row items-center justify-center align-middle ${props.className}`}
+      className={`relative flex w-full flex-row  ${props.className}`}
       style={props.style}
     >
       {props.image && (
