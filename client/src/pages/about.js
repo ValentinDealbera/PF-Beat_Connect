@@ -1,4 +1,4 @@
-import { Main, Head, Hero, Section } from "@/components";
+import { Main, Head, Hero, Section, ScrollToTop } from "@/components";
 import { tecnologias } from "@/data/data";
 import Image from "next/image";
 
@@ -7,6 +7,7 @@ export default function About() {
     <>
       <Head title={"About"} description={"Head from about"} />
       <Main mode="transparent">
+        <ScrollToTop />
         <Hero
           style={{ minHeight: "45vh" }}
           image="https://images.unsplash.com/photo-1670272506220-f8332b178148?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"

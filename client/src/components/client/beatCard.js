@@ -1,15 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
+import {externalManageDropdown} from "./beatCardGrid";
 
 export default function BeatCard({ beat, variant }) {
   console.log(variant);
   return (
     <>
+    <div onClick={externalManageDropdown}>
       <div
         className={`background-neutral-white gap-estilo3 flex flex-col ${
-          variant === "public"
-            ? ""
-            : "border-radius-estilo1 px-2 pt-2 pb-5 "
+          variant === "public" ? "" : "border-radius-estilo1 px-2 pb-5 pt-2 "
         }`}
       >
         <div>
@@ -19,7 +19,7 @@ export default function BeatCard({ beat, variant }) {
             alt={beat.name}
           />
         </div>
-        <div className={`${variant === "public" ? "" :"px-2"}`}>
+        <div className={`${variant === "public" ? "" : "px-2"}`}>
           <span className="color-primary-red-700 font-semibold">{`$${beat.price}`}</span>
           <span className="font-light">{` | ${beat.BPM}BPM`}</span>
           <h1 className="font-bold">{`${beat.name}`}</h1>
@@ -36,6 +36,7 @@ export default function BeatCard({ beat, variant }) {
             />
           </div>
         </div>
+      </div>
       </div>
     </>
   );

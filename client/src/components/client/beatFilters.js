@@ -1,7 +1,15 @@
-import { BeatBottomSheet, Select } from "@/components";
-import { genres } from "@/data/fakeDB";
+import {
+  Select,
+  MultiSelect,
+  ModalMinMax,
+  BeatBottomSheetFilteringWithHeader,
+  DynamicButtonsForBottomSheet,
+  CheckboxGroup,
+  MinMax,
+} from "@/components";
+import { genres, types, sortArr } from "@/data/fakeDB";
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 
 export default function BeatFilters() {
   const [beatGenre, setBeatGenre] = useState([]);
@@ -11,210 +19,152 @@ export default function BeatFilters() {
   const [sort, setSort] = useState("");
   const [dropDownFilter, setDropDownFilter] = useState(false);
   const [dropDownSorting, setDropDownSorting] = useState(false);
-  useEffect(() => {
-    console.log(beatGenre);
-    console.log(beatTypes);
-    console.log(prices);
-    console.log(BPM);
-    console.log(sort);
-  }, [BPM, prices, beatTypes, beatGenre, sort]);
+  const [childFilterIndex, setChildFilterIndex] = useState(0);
+
   const generos = genres.map((e) => {
     return {
       value: e.name,
       label: e.name,
     };
   });
-  const types = [
-    { value: "VOCAL", label: "VOCAL" },
-    { value: "BEAT", label: "BEAT" },
-    { value: "SONG", label: "SONG" },
+
+  useEffect(() => {
+    console.log("beatGenre", beatGenre);
+    console.log("beatTypes", beatTypes);
+    console.log("prices", prices);
+    console.log("BPM", BPM);
+    console.log("sort", sort);
+  }, [beatGenre, beatTypes, prices, BPM, sort]);
+
+  const handleDropDownSorting = () => {
+    setDropDownSorting(!dropDownSorting);
+  };
+
+  const handleDropDownFilter = () => {
+    setDropDownFilter(!dropDownFilter);
+  };
+
+  const dynamicFilterBtns = [
+    {
+      label: "Generos",
+      handleClick: () => setChildFilterIndex(1),
+    },
+    {
+      label: "Tipos",
+      handleClick: () => setChildFilterIndex(2),
+    },
+    {
+      label: "Precio",
+      handleClick: () => setChildFilterIndex(3),
+    },
+    {
+      label: "BPM",
+      handleClick: () => setChildFilterIndex(4),
+    },
   ];
-  const sortArr = [
-    { value: "Price ↑", label: "Price ↑" },
-    { value: "Price ↓", label: "Price ↓" },
-    { value: "BPM ↑", label: "BPM ↑" },
-    { value: "BPM ↓", label: "BPM ↓" },
-    { value: "A - Z", label: "A - Z" },
-    { value: "Z - A", label: "Z - A" },
-  ];
+
   return (
     <>
       <div className="hidden flex-row justify-between sm:flex ">
-        <div className="gap-estilo3 flex flex-row">
-          <div>
-            <Select
-              type="multiSelect"
-              label="Genre"
-              valores={generos}
-              setSeleccionados={setBeatGenre}
-              seleccionados={beatGenre}
-            />
-          </div>
-          <div>
-            <Select
-              type="multiSelect"
-              label="Types"
-              valores={types}
-              setSeleccionados={setBeatTypes}
-              seleccionados={beatTypes}
-            />
-          </div>
-          <div>
-            <Select
-              type="prices"
-              label="Price"
-              setSeleccionados={setPrices}
-              seleccionados={prices}
-            />
-          </div>
-          <div>
-            <Select
-              type="prices"
-              label="BPM"
-              setSeleccionados={setBPM}
-              seleccionados={BPM}
-            />
-          </div>
-        </div>
-        <div>
-          <Select
-            label="Sort By"
-            valores={sortArr}
-            setSeleccionados={setSort}
-            seleccionados={sort}
+        <div className="gap-estilo3 flex ">
+          <MultiSelect
+            label="Generos"
+            values={generos}
+            seleccionados={beatGenre}
+            setSeleccionados={setBeatGenre}
+          />
+          <MultiSelect
+            label="Tipos"
+            values={types}
+            seleccionados={beatTypes}
+            setSeleccionados={setBeatTypes}
+          />
+          <ModalMinMax
+            label="Precio"
+            seleccionados={prices}
+            setSeleccionados={setPrices}
+          />
+          <ModalMinMax
+            label="BPM"
+            seleccionados={BPM}
+            setSeleccionados={setBPM}
           />
         </div>
+        <Select
+          label="Sort By:"
+          valores={sortArr}
+          setSeleccionados={setSort}
+          labelClass="text-base-semibold"
+        />
       </div>
-      <div className="flex flex-row justify-start gap-4 sm:hidden">
-        <button
-          onClick={() => {
-            setDropDownFilter(!dropDownFilter)
-          }}
-        >
-          Filters
-        </button>
+      <div className="flex flex-row justify-start gap-2 sm:hidden">
+        <div className="flex flex-row items-center gap-1">
+          <Image src="/icon/filter.svg" width={20} height={20} />
+          <button onClick={handleDropDownFilter}>Filters</button>
+        </div>
         {dropDownFilter && (
-          <BeatBottomSheet setIsDropdownOpen={setDropDownFilter}>
-            <div className="gap-estilo5 padding-x-estilo2 flex flex-col">
-                <div className="flex flex-row justify-between">
-              <button
-                onClick={() => {
-                  setDropDownFilter(!dropDownFilter);
-                }}
-                
-              >
-                <Image height={15} width={15} src="/icon/arrow-down.svg"/>
-              </button>
-              <button
-                onClick={() => {
-                  setDropDownFilter(!dropDownFilter);
-                }}
-                className="text-lg absolute left-1/2 transform -translate-x-1/2 font-bold"
-              >
-                Aplly
-              </button>
-              <button
-                onClick={() => {
-                  setDropDownFilter(!dropDownFilter);
-                }}
-              >
-                Reset
-              </button>
-              </div>
-              <div className="flex flex-col gap-estilo3">
-              <div>
-                <Select
-                  viewPort="mobile"
-                  type="multiSelect"
-                  label="Genre"
-                  valores={generos}
-                  setSeleccionados={setBeatGenre}
+          <>
+            <BeatBottomSheetFilteringWithHeader
+              setIsDropdownOpen={setDropDownFilter}
+              title="Filters"
+              handleBack={() => setChildFilterIndex(0)}
+              reset={() => {
+                setBeatGenre([]);
+                setBeatTypes([]);
+                setPrices({ min: 0, max: 0, filter: false });
+                setBPM({ min: 0, max: 0, filter: false });
+              }}
+              isDropdownOpen={dropDownFilter}
+            >
+              {childFilterIndex === 0 && (
+                <DynamicButtonsForBottomSheet
+                  dynamicFilterBtns={dynamicFilterBtns}
+                />
+              )}
+              {childFilterIndex === 1 && (
+                <CheckboxGroup
+                  label="Generos"
+                  values={generos}
                   seleccionados={beatGenre}
+                  setSeleccionados={setBeatGenre}
                 />
-              </div>
-                <hr/>
-              <div>
-                <Select
-                  viewPort="mobile"
-                  type="multiSelect"
-                  label="Types"
-                  valores={types}
-                  setSeleccionados={setBeatTypes}
+              )}
+
+              {childFilterIndex === 2 && (
+                <CheckboxGroup
+                  label="Tipos"
+                  values={types}
                   seleccionados={beatTypes}
+                  setSeleccionados={setBeatTypes}
                 />
-              </div>
-              <hr/>
-              <div>
-                <Select
-                  viewPort="mobile"
-                  type="prices"
-                  label="Price"
-                  setSeleccionados={setPrices}
+              )}
+              {childFilterIndex === 3 && (
+                <MinMax
+                  label="Precio"
                   seleccionados={prices}
+                  setSeleccionados={setPrices}
                 />
-              </div>
-                <hr/>
-              <div>
-                <Select
-                  viewPort="mobile"
-                  type="prices"
+              )}
+              {childFilterIndex === 4 && (
+                <MinMax
                   label="BPM"
-                  setSeleccionados={setBPM}
                   seleccionados={BPM}
+                  setSeleccionados={setBPM}
                 />
-              </div>
-            </div>
-            </div>
-          </BeatBottomSheet>
+              )}
+            </BeatBottomSheetFilteringWithHeader>
+          </>
         )}
-        <button
-          onClick={() => {
-            setDropDownSorting(!dropDownSorting);
-          }}
-        >
-          Sorty by
-        </button>
-        {dropDownSorting && (
-          <BeatBottomSheet setIsDropdownOpen={setDropDownSorting}>
-            <div className="gap-estilo3 padding-x-estilo2 flex flex-col">
-            <div className="flex flex-row justify-between">
-              <button
-                onClick={() => {
-                    setDropDownSorting(!dropDownSorting);
-                }}
-                
-              >
-                <Image height={15} width={15} src="/icon/arrow-down.svg"/>
-              </button>
-              <button
-                onClick={() => {
-                    setDropDownSorting(!dropDownSorting);
-                }}
-                className="absolute left-1/2 transform -translate-x-1/2 font-bold"
-              >
-                Sort By
-              </button>
-              <button
-                onClick={() => {
-                    setDropDownSorting(!dropDownSorting);
-                }}
-              >
-                Reset
-              </button>
-              </div>
-              <div>
-                <Select
-                  click={true}
-                  viewPort="mobile"
-                  label="Sort By"
-                  valores={sortArr}
-                  setSeleccionados={setSort}
-                  seleccionados={sort}
-                />
-              </div>
-            </div>
-          </BeatBottomSheet>
-        )}
+        <div>
+          <div className="flex flex-row items-center gap-1">
+            <Select 
+              label=""
+              valores={sortArr}
+              setSeleccionados={setSort}
+              labelClass="text-base-semibold"
+            />
+          </div>
+        </div>
       </div>
     </>
   );
