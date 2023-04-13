@@ -1,17 +1,20 @@
 import { Section, Hero, HelpHeader } from "@/components";
 
-export default function HelpContainer({children}) {
-    return (
-      <>
-        <Hero
-          style={{ minHeight: "45vh" }}
-          image="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
-        >
-          <HelpHeader />
-        </Hero>
-        <Section className="" subClassName="padding-estilo1">
-          {children}
-        </Section>
-      </>
-    );
-  }
+export default function HelpContainer({ children, title, paragraph }) {
+  return (
+    <>
+      <Hero
+        style={{ minHeight: "45vh" }}
+        image="/images/test2.jpg"
+      >
+        <div className="padding-x-estilo3 flex flex-row items-center gap-3 align-middle">
+          <h1 className="text-titulo1-medium lg:min-w-[40%] text-white ">{title}</h1>
+          <p className="text-base-light text-white hidden xl:block">{paragraph}</p>
+        </div>
+      </Hero>
+      <Section className="" subClassName="padding-estilo1">
+        {children}
+      </Section>
+    </>
+  );
+}

@@ -1,4 +1,4 @@
-import { Main, Head, BeatRightSheet } from "@/components";
+import { Main, Head, BeatRightSheet, ModalOnHover } from "@/components";
 import { useEffect, useRef, useState } from "react";
 
 export default function Test() {
@@ -9,7 +9,8 @@ export default function Test() {
       <Main>
         <button onClick={()=>setIsDropdownOpen(!isDropdownOpen)}>abrir sidebar</button>
         {isDropdownOpen&&<BeatRightSheet setIsDropdownOpen={setIsDropdownOpen}/>}
-      </Main>
+
+       </Main>
     </>
   );
 }

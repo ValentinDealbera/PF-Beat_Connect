@@ -5,9 +5,9 @@ export default function HelpOverview() {
     <>
       <Head title={"Help Center"} description={"Head from about"} />
       <Main mode="transparent">
-        <HelpContainer>
+        <HelpContainer title="Politica de privacidad" paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tincidunt vulputate erat ut facilisis. In ultrices, metus non pellentesque tincidunt, elit sapien maximus ipsum, at vestibulum purus libero sit amet lacus.">
           <p className="text-base-light color-neutral-black-900">
-            <span className="text-titulo3-semibold color-neutral-black-950 ">
+          <span className="text-titulo3-semibold text-red-700 ">
               Personal data we collect
             </span>
             <br />
@@ -41,7 +41,7 @@ export default function HelpOverview() {
             not work for you. Learn more
             <br />
             <br />
-            <span className="text-titulo3-semibold color-neutral-black-950">
+            <span className="text-titulo3-semibold text-red-700 ">
               How we use personal data
             </span>
             <br />

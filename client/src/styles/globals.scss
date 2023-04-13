@@ -167,6 +167,11 @@ summary {
     line-height: 145%;
   }
 
+  .text-sm-regular {
+    @apply text-sm font-normal;
+    line-height: 145%;
+  }
+
   .text-sm-light {
     @apply text-sm font-light;
     line-height: 145%;

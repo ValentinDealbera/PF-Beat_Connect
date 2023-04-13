@@ -27,7 +27,7 @@ export default function ModalMinMax({
 
   return (
     <div ref={dropdownRef} type="button" id="dropdown">
-      <ArrowLabel label={label} handleDropdownClick={handleDropdownClick} />
+      <ArrowLabel label={label} handleDropdownClick={handleDropdownClick} iconStatus={true} />
       <div className="absolute">
         {isDropdownOpen && (
           <MiniModalBox>
