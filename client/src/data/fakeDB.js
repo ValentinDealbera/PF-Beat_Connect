@@ -69,7 +69,8 @@ const beats = [
     license: "",
     author: usuarios[0],
     genres: genres[0],
-    image: foto1,
+    image: foto1,    
+    // state: "active"
   },
   {
     id: 2,

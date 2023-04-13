@@ -83,6 +83,7 @@ export default function About() {
             ))}
           </div>
         </Section>
+        <ScrollToTop />
       </Main>
     </>
   );
