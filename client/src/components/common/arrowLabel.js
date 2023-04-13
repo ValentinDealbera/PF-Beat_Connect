@@ -1,12 +1,12 @@
 import Image from "next/image";
 
-export default function ArrowLabel({ label, handleDropdownClick }) {
+export default function ArrowLabel({ label, handleDropdownClick, iconStatus, labelClass }) {
   return (
     <div className="flex items-center gap-2 cursor-pointer" onClick={handleDropdownClick}>
-    <button  type="button">
+    <button className={labelClass}  type="button">
       {label || "Seleccionar"}
     </button>
-    <Image src="/icon/arrow-down.svg" width={12} height={12} />
+    {iconStatus === true &&  <Image src="/icon/arrow-down.svg" width={12} height={12} /> }
   </div>
   );
 }

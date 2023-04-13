@@ -76,7 +76,7 @@ export const navPublic = [
     name: "Ayuda",
     url: "/help",
     colorMode: "transparent",
-    visible: true,
+    visible: false,
   },
   {
     name: "Política de privacidad",

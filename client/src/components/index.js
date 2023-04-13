@@ -47,5 +47,12 @@ export { default as MiniModalBox } from "./common/miniModalBox";
 export { default as ArrowLabel } from "./common/arrowLabel";
 export { default as CheckboxGroup } from "./common/checkboxGroup";
 export { default as MinMax } from "./common/minMax";
+
+export { default as ModalOnHover } from "./layout/modalOnHover";
+export { default as NavModalItem } from "./layout/navModalItem";
+export { default as VerticalNav } from "./layout/verticalNav";
+export { default as ModalBoxForNav } from "./common/modalBoxForNav";
+
 export {default as Switch} from "./common/switch"
+
 

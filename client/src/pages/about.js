@@ -10,7 +10,7 @@ export default function About() {
         <ScrollToTop />
         <Hero
           style={{ minHeight: "45vh" }}
-          image="https://images.unsplash.com/photo-1670272506220-f8332b178148?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+          image="/images/test1.jpg"
         >
           <div className="padding-estilo2 flex h-full flex-row items-center justify-center align-middle">
             <h1 className="text-titulo1-regular text-center text-white">
