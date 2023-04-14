@@ -10,7 +10,7 @@ export default function App({ Component, pageProps, router }) {
     : "light";
   const headerVisibility =
     router.pathname.startsWith("/auth") ||
-    router.pathname.startsWith("/landing")
+    router.pathname.startsWith("/landing") || router.pathname.startsWith("/admin")
       ? false
       : true;
   return (

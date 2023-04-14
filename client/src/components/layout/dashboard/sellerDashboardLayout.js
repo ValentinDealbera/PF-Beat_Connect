@@ -9,6 +9,7 @@ export default function SellerDashboardLayout({
   topBarMode,
   topBarMessage,
   topBarButtonLabel,
+  onClick,
 }) {
   return (
     <>
@@ -24,6 +25,7 @@ export default function SellerDashboardLayout({
             mode={topBarMode}
             message={topBarMessage}
             buttonLabel={topBarButtonLabel}
+            onClick={onClick }
           />
           <div className="padding-x-dashboard-estilo1  w-full">{children}</div>
         </div>
