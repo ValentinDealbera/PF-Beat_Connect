@@ -1,4 +1,8 @@
 const mongoose = require("mongoose");
+const {
+  GridFsStorage
+} = require("multer-gridfs-storage");
+const multer = require("multer");
 
 const { DB_URI } = process.env;
 
@@ -6,7 +10,7 @@ const dbConnect = async () => {
   try {
     mongoose.set("strictQuery", false);
 
-    await mongoose.connect(DB_URI, {
+    await mongoose.connect("mongodb+srv://lucasregner:donbosco@beatconnect.8bywbcx.mongodb.net/?retryWrites=true&w=majority", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
@@ -17,5 +21,7 @@ const dbConnect = async () => {
     console.error(err);
   }
 };
-
-module.exports = dbConnect;
+process.on('unhandledRejection', error => {
+  console.log('unhandledRejection', error.message);
+});
+module.exports = {dbConnect};

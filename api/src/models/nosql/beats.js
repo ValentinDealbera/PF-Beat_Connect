@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 
 const BeatsSchema = new mongoose.Schema({
   audio: {
-    data: Buffer, 
-    contentType: String 
+    type: String,
+    require: true,
   },
   id: {
     type: mongoose.Types.ObjectId,
@@ -43,7 +43,7 @@ const BeatsSchema = new mongoose.Schema({
   userCreator: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "userCreator",
+      ref: "user",
     },
   ],
 });
