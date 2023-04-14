@@ -7,6 +7,7 @@ const fileUpload = require("express-fileupload");
 
 const server = express();
 
+
 server.use(express.json());
 server.use(cors());
 server.use(morgan("dev"));

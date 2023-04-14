@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
+const {
+  GridFsStorage
+} = require("multer-gridfs-storage");
+const multer = require("multer");
 
-const { DB_URI } = process.env;
+const { DB_URI, } = process.env;
 
 const dbConnect = async () => {
   try {
@@ -17,5 +21,7 @@ const dbConnect = async () => {
     console.error(err);
   }
 };
-
-module.exports = dbConnect;
+process.on('unhandledRejection', error => {
+  console.log('unhandledRejection', error.message);
+});
+module.exports = {dbConnect};
