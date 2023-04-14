@@ -65,7 +65,8 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   const { id } = req.params;
-  if (id) {
+  const { seller, admin, soft } = req.body;
+  if (id && seller === "VENDEDOR") {
     try {
       const userId = await getUserId(id);
       if (userId) {
@@ -78,8 +79,39 @@ router.put("/:id", async (req, res) => {
     } catch (err) {
       res.status(SERVER_ERROR).send(ALL_NOT_OK);
     }
-  } else {
-    res.status(NOT_FOUND).send(USER_NOT_FOUND);
+  }
+  if (id && admin === "ADMIN") {
+    try {
+      const userId = await getUserId(id);
+      if (userId) {
+        userId.superAdmin = true;
+        await userId.save();
+        res.status(OK).send(ALL_OK);
+      } else {
+        res.status(NOT_FOUND).send(USER_NOT_FOUND);
+      }
+    } catch (err) {
+      res.status(SERVER_ERROR).send(ALL_NOT_OK);
+    }
+  }
+
+  if (id && soft === "DELETE") {
+    try {
+      const userId = await getUserId(id);
+      if (userId) {
+        if (userId.softDelete === false) {
+          userId.softDelete = true;
+          await userId.save();
+          res.status(OK).send(ALL_OK);
+        } else {
+          userId.softDelete = false;
+          await userId.save();
+          res.status(OK).send(ALL_OK);
+        }
+      }
+    } catch (err) {
+      res.status(SERVER_ERROR).send(ALL_NOT_OK);
+    }
   }
 });
 
