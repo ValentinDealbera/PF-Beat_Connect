@@ -1,10 +1,11 @@
-import { Head, Main, Section, Hero } from "@/components";
+import { Head, Main, Section, Hero, SimpleHeader } from "@/components";
 import Link from "next/link";
 
 export default function Landing() {
   return (
     <>
       <Head title="Landing Page" />
+      <SimpleHeader mode={"transparent"} />
       <Main mode={"transparent"}>
         <Hero
           style={{ minHeight: "100vh" }}
