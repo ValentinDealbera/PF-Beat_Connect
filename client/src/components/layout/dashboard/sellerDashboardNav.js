@@ -3,27 +3,27 @@ import { Search, DashboardItem } from "@/components";
 export const dashboardNav = [
   {
     title: "Overview",
-    link: "/client/seller/",
+    link: "/admin/",
     icon: "/icon/dashboard/overview.svg",
   },
   {
     title: "Beats",
-    link: "/client/seller/beats",
+    link: "/admin/beats",
     icon: "/icon/dashboard/beats.svg",
   },
   {
-    title: "Orders",
-    link: "/client/seller/orders",
+    title: "Usuarios",
+    link: "/admin/users",
     icon: "/icon/dashboard/orders.svg",
   },
   {
     title: "Reviews",
-    link: "/client/seller/reviews",
+    link: "/admin/reviews",
     icon: "/icon/dashboard/reviews.svg",
   },
   {
     title: "Analytics",
-    link: "/client/seller/analytics",
+    link: "/admin/analytics",
     icon: "/icon/dashboard/analytics.svg",
   },
 ];
@@ -35,8 +35,8 @@ export default function SellerDashboardNav() {
         <Search colorMode={"red"} sizeMode={"small"} className={"w-full"} />
 
         <DashboardItem
-          title={"Overview"}
-          link={"/"}
+          title={"Inbox"}
+          link={"/admin/inbox"}
           icon={"/icon/dashboard/overview.svg"}
         />
         <div className="gap-estilo4 flex  flex-col">
