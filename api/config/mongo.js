@@ -4,13 +4,13 @@ const {
 } = require("multer-gridfs-storage");
 const multer = require("multer");
 
-const { DB_URI } = process.env;
+const { DB_URI, } = process.env;
 
 const dbConnect = async () => {
   try {
     mongoose.set("strictQuery", false);
 
-    await mongoose.connect("mongodb+srv://lucasregner:donbosco@beatconnect.8bywbcx.mongodb.net/?retryWrites=true&w=majority", {
+    await mongoose.connect(DB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });

@@ -95,7 +95,7 @@ router.post("/", async (req, res) => {
         audio: downloadAudioURL,
         image: downloadImageURL,
         name: req.body.name,
-        priceAmount: 29.99,
+        priceAmount: req.body.priceAmount,
       });
 
       return res.json(newBeat);
