@@ -1,6 +1,5 @@
 const server = require("./src/app");
-const port = process.env.PORT || 3001
+const dbConnect = require("./config/mongo");
 
-  server.listen(port, () => {
-    console.log('listening at ' + port);
-  });
+server.listen(3001, () => console.log("server listening port 3001"));
+dbConnect();
