@@ -1,14 +1,5 @@
 const mongoose = require("mongoose");
 
-const validGenres = [
-  "HIP-HOP",
-  "POP",
-  "R&B",
-  "ROCK",
-  "ELECTRONIC",
-  "REGGAE",
-  "COUNTRY",
-];
 
 const GenreSchema = new mongoose.Schema({
   id: {
@@ -17,7 +8,6 @@ const GenreSchema = new mongoose.Schema({
   name: {
     type: String,
     require: true,
-    enum: validGenres,
   },
 });
 
