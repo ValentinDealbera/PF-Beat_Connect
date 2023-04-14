@@ -35,11 +35,11 @@ export const helpItems = [
 
 export const accountItems = [
   {
-    name: "Vender beats",
-    url: "/auth/seller",
+    name: "Iniciar sesión",
+    url: "/auth",
   },
   {
-    name: "Comprar beats",
-    url: "/auth/buyer",
+    name: "Registrarse",
+    url: "/auth/register",
   },
 ];

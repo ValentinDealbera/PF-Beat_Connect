@@ -1,5 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
-import { MiniModalBox, ArrowLabel, CheckboxGroup, ModalBoxForNav } from "@/components";
+import {
+  MiniModalBox,
+  ArrowLabel,
+  CheckboxGroup,
+  ModalBoxForNav,
+} from "@/components";
 
 export default function ModalOnHover({
   seleccionados,
@@ -16,10 +21,11 @@ export default function ModalOnHover({
   const [hoverTimeout, setHoverTimeout] = useState(null);
 
   useEffect(() => {
+    if (dropdownRef.current === null) return;
     function handleMouseLeave() {
       setHoverTimeout(
         setTimeout(() => {
-         setIsDropdownOpen(false);
+          setIsDropdownOpen(false);
         }, 100) // Change this value to adjust the delay before closing the modal on hover leave
       );
     }
@@ -35,6 +41,7 @@ export default function ModalOnHover({
     dropdownRef.current.addEventListener("mouseenter", handleMouseEnter);
     dropdownRef.current.addEventListener("mouseleave", handleMouseLeave);
     return () => {
+      if (dropdownRef.current === null) return;
       dropdownRef.current.removeEventListener("mouseenter", handleMouseEnter);
       dropdownRef.current.removeEventListener("mouseleave", handleMouseLeave);
       if (hoverTimeout) {
@@ -46,8 +53,12 @@ export default function ModalOnHover({
   console.log(values);
 
   return (
-    <div ref={dropdownRef} type="button" id={id} className="" >
-      <ArrowLabel label={label} iconStatus={iconStatus} labelClass={labelClass} />
+    <div ref={dropdownRef} type="button" id={id} className="">
+      <ArrowLabel
+        label={label}
+        iconStatus={iconStatus}
+        labelClass={labelClass}
+      />
 
       {isDropdownOpen && <ModalBoxForNav>{children}</ModalBoxForNav>}
     </div>

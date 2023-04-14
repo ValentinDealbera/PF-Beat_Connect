@@ -8,7 +8,11 @@ export default function UserBoxNav({children, id}) {
   const [hoverTimeout, setHoverTimeout] = useState(null);
 
   useEffect(() => {
+
+    if(dropdownRef.current === null) return;
+
     function handleMouseLeave() {
+      if(dropdownRef.current === null) return;
       setHoverTimeout(
         setTimeout(() => {
          setIsDropdownOpen(false);
@@ -16,6 +20,7 @@ export default function UserBoxNav({children, id}) {
       );
     }
     function handleMouseEnter() {
+      if(dropdownRef.current === null) return;
       if (hoverTimeout) {
         clearTimeout(hoverTimeout);
         setHoverTimeout(null);
@@ -24,9 +29,11 @@ export default function UserBoxNav({children, id}) {
       if (id === dropdownRef.current.id) setIsDropdownOpen(true);
       else return;
     }
+    if(dropdownRef.current === null) return;
     dropdownRef.current.addEventListener("mouseenter", handleMouseEnter);
     dropdownRef.current.addEventListener("mouseleave", handleMouseLeave);
     return () => {
+      if(dropdownRef.current === null) return;
       dropdownRef.current.removeEventListener("mouseenter", handleMouseEnter);
       dropdownRef.current.removeEventListener("mouseleave", handleMouseLeave);
       if (hoverTimeout) {
