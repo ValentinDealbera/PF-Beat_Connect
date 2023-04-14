@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
+import { Toaster, toast } from "sonner";
 const initialState = {
   cart: [],
 };
@@ -11,37 +11,35 @@ const cartSlice = createSlice({
     addToCart(state, action) {
       console.log("action", action.payload);
 
-      const isInCart = state.cart.find((item) => item.id === action.payload.id);
-
+      const isInCart = state.cart.find((item) => item.id === action.payload);
+      console.log("isInCart", isInCart);
       if (isInCart) {
-        isInCart.quantity =
-          parseInt(isInCart.quantity) + parseInt(action.payload.quantity);
+        toast.success("Ya esta en el carrito", {
+          style: {
+            background: "#ECFDF3",
+            color: "#008A2E",
+          },
+        });
       } else {
         const newCartItem = {
-          id: action.payload.id,
-          quantity: action.payload.quantity,
+          id: action.payload,
         };
-
         state.cart = [...state.cart, newCartItem];
+
+        toast.success("Se agregó al carrito", {
+          style: {
+            background: "#ECFDF3",
+            color: "#008A2E",
+          },
+        });
       }
     },
     deleteFromCart(state, action) {
       console.log("action", action.payload);
       state.cart = state.cart.filter((item) => item.id !== action.payload.id);
     },
-
-    manageCartQuantity(state, action) {
-      console.log("action", action.payload);
-      const item = state.cart.find((item) => item.id === action.payload.id);
-      item.quantity = action.payload.quantity;
-    },
-    getCart(state, action) {
-      state.cart = action.payload;
-    },
   },
 });
 
-export const { addToCart, getCart, manageCartQuantity, deleteFromCart } =
-  cartSlice.actions;
+export const { addToCart, deleteFromCart } = cartSlice.actions;
 export default cartSlice.reducer;
-﻿

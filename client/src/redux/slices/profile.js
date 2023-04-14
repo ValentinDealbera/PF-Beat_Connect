@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = {
-  generalActiveIndex: 0,
+  
   settingsActiveIndex: 0,
 };
 

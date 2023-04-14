@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setGeneralActiveIndex } from "@/redux/slices/profile";
+import { setGeneralActiveIndex } from "@/redux/slices/beats";
 
 const buyerGeneralNav = [
   {
@@ -17,7 +17,7 @@ const buyerGeneralNav = [
 ];
 
 export default function BuyerNavGeneral() {
-  const activeIndex = useSelector((state) => state.profile.generalActiveIndex);
+  const activeIndex = useSelector((state) => state.beats.generalActiveIndex);
   const dispatch = useDispatch();
   console.log(activeIndex);
 
@@ -27,7 +27,7 @@ export default function BuyerNavGeneral() {
         {buyerGeneralNav.map((item, index) => (
           <h5
             className={`cursor-pointer whitespace-nowrap ${
-              index === activeIndex ? "text-base-semibold" : "text-base-light"
+              index === activeIndex ? "text-base-semibold lg:text-base-semibold" : "text-base-light lg:text-base-light"
             }`}
             onClick={() => dispatch(setGeneralActiveIndex(index))}
           >

@@ -1,23 +1,29 @@
 import Image from "next/image";
+import { useSelector, useDispatch } from "react-redux";
+import { Toaster, toast } from "sonner";
+import { externalManageDropdown } from "@/components/client/beatCardGrid";
+import { addToCart } from "@/redux/slices/cart";
 
-export default function BeatDetailSideBar({ beat }) {
+export default function BeatDetailSideBar() {
+  const currentBeat = useSelector((state) => state.beats.activeItemDetail);
+
   const dynamicBeatDetailBox = [
     {
       msg1: "Free License, MP3",
       msg2: "$0.00",
-      beat: beat,
+      beat: currentBeat,
     },
     {
       msg1: "Standart License, WAV",
       msg2: "$10.00",
-      beat: beat,
+      beat: currentBeat,
     },
   ];
 
   return (
     <>
       <div className="flex flex-col gap-8 px-4 pb-10 sm:px-9 sm:pt-8">
-        <BeatDataBox beat={beat} />
+        <BeatDataBox beat={currentBeat} />
         <div className="flex flex-col gap-3">
           <p className=" color-primary-red-700  text-sm font-medium">
             Precios y licencias
@@ -26,18 +32,18 @@ export default function BeatDetailSideBar({ beat }) {
             {dynamicBeatDetailBox.map((box) => {
               return (
                 <div>
-                <BeatDetailBox
-                  msg1={box.msg1}
-                  msg2={box.msg2}
-                  beat={box.beat}
-                  key={box.msg1}
-                />
-                <hr className="mt-4 border-slate-200" />
+                  <BeatDetailBox
+                    msg1={box.msg1}
+                    msg2={box.msg2}
+                    key={box.msg1}
+                    beat={currentBeat}
+                  />
+                  <hr className="mt-4 border-slate-200" />
                 </div>
               );
             })}
           </div>
-          <audio controls className="w-full bg-white mt-2  rounded-full">
+          <audio controls className="mt-2 w-full rounded-full  bg-white">
             <source src="/audio/test.mp3" type="audio/mpeg" />
           </audio>
         </div>
@@ -77,12 +83,19 @@ function BeatDataBox({ beat }) {
   );
 }
 
-function BeatDetailBox({ msg1, msg2 }) {
+function BeatDetailBox({ msg1, msg2, beat }) {
+  const dispatch = useDispatch();
   return (
     <div className="h-auto">
       <p className="pb-1 text-base font-medium text-black">{msg1}</p>
       <p className=" mb-1 text-sm font-semibold text-red-700">{msg2}</p>
-      <button className=" text-sm font-semibold text-red-700">
+      <button
+        className=" text-sm font-semibold text-red-700"
+        onClick={() => {
+          dispatch(addToCart(beat.id));
+          externalManageDropdown();
+        }}
+      >
         Añadir al carrito
       </button>
     </div>

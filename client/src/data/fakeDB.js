@@ -59,6 +59,15 @@ const usuarios = [
   },
 ];
 
+export const currentClient = {
+  id: 1,
+  name: "Jorge",
+  status: "Jorge status",
+  profilePicture: "/img/category1.png",
+  email: "jorge@test.com"
+};
+
+
 
 const beats = [
   {

@@ -1,6 +1,11 @@
 import { Main, Hero, BeatsShopSection, ProfileCard, Head } from "@/components";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function BuyerProfile() {
+  const currentUser = useSelector((state) => state.client.client);
+  console.log("currentUser", currentUser);
+
   return (
     <>
       <Head title="Buyer Profile" />
@@ -8,7 +13,7 @@ export default function BuyerProfile() {
         <Hero
           style={{ height: "45vh" }}
           image="/images/category3.jpg"
-          className="align-middle items-center justify-center"
+          className="items-center justify-center align-middle"
         >
           <div
             id="contenido"
@@ -16,9 +21,9 @@ export default function BuyerProfile() {
           >
             <div>
               <ProfileCard
-                profilePhoto="/images/aleksandr-surnin-uV07XhI2m7o-unsplash.jpg"
-                profileName="Jhon Doe"
-                profileMessage="Lorem ipsum dolor sit "
+                profilePhoto={currentUser.profilePicture}
+                profileName={currentUser.name}
+                profileMessage={currentUser.bio}
               />
             </div>
           </div>
