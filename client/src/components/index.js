@@ -59,5 +59,15 @@ export { default as GoogleButton } from "./layout/googleButton";
 export { default as AuthLayout } from "./layout/authLayout";
 export { default as TextArea } from "./common/textArea";
 export { default as ModalPopUp } from "./common/modal/modalPopUp";
+export { default as Master } from "./master";
+export { default as MiniCart } from "./client/layout/miniCart";
+export { default as MiniCartItem } from "./client/layout/miniCartItem";
+export { default as MiniCartTextBox } from "./client/layout/miniCartTextBox";
+export { default as BeatImage } from "./client/layout/beatImage";
+
+
+
+
+
 
 

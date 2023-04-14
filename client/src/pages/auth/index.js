@@ -6,8 +6,19 @@ import {
   AuthLayout,
 } from "@/components";
 import Link from "next/link";
+import { setCurrentClient } from "@/redux/slices/client";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 
 export default function Login() {
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(setCurrentClient());
+    router.push("/client");
+  };
   return (
     <>
       <Head title="Ingresar" />
@@ -31,14 +42,14 @@ export default function Login() {
             label="Contraseña"
             placeholder="Contraseña"
           />
-          <Link href="/client" className="w-full">
-            <button
-              type="submit"
-              className="text-base-semibold mt-2  w-full rounded-full bg-red-700 py-2 text-white"
-            >
-              Ingresar
-            </button>
-          </Link>
+
+          <button
+            type="submit"
+            className="text-base-semibold mt-2  w-full rounded-full bg-red-700 py-2 text-white"
+            onClick={handleSubmit}
+          >
+            Ingresar
+          </button>
         </form>
         <hr className="my-6 w-full" />
         <GoogleButton />

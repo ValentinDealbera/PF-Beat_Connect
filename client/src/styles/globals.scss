@@ -140,6 +140,11 @@ summary {
     line-height: 135%;
   }
 
+  .text-subtitulo-light {
+    @apply text-xl font-light;
+    line-height: 135%;
+  }
+
   //Body Base
   .text-base-semibold {
     @apply text-base font-semibold;
@@ -216,7 +221,7 @@ summary {
 //Padding Estilo 2
 @layer base {
   .padding-x-estilo2 {
-    @apply w-full px-4 2xl:container sm:px-10 md:px-14 lg:px-20 xl:px-24;
+    @apply w-full px-4  xs:px-8 2xl:container sm:px-10 md:px-14 lg:px-20 xl:px-24;
   }
 
   .padding-y-estilo2 {
@@ -287,7 +292,7 @@ summary {
 
 @layer base {
   .gap-estilo2 {
-    @apply gap-6;
+    @apply gap-4 lg:gap-6;
   }
 }
 

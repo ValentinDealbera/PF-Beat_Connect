@@ -18,10 +18,10 @@ export default function Beats() {
           //  style={{ minHeight: "15vh" }}
         >
           <div className="mt-6  padding-estilo2 gap-estilo3 flex h-full w-full flex-col items-start justify-between align-middle md:flex-row md:items-center">
-            <h1 className="text-titulo1-medium text-white">Explore Tracks</h1>
+            <h1 className="text-titulo1-regular text-white">Encuentra ese beat <span className="text-titulo1-semibold text-white">soñado.</span></h1>
             <Search
               colorMode="dark"
-              sizeMode="small"
+              sizeMode="long"
               className={"w-full md:w-max"}
             />
           </div>
