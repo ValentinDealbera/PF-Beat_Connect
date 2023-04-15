@@ -27,7 +27,7 @@ router.get("/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const allUserId = await getUserId(id);
-    alUserrId
+    allUserId
       ? res.status(OK).send(allUserId)
       : res.status(NOT_FOUND).send(USER_NOT_FOUND);
   } catch (err) {
