@@ -51,7 +51,7 @@ export default function UserBoxNav({ children, id }) {
 
   const currentUser = useSelector((state) => state.client.client);
   const { isLogged } = useSelector((state) => state.client);
-  console.log("currentUser", currentUser);
+  
 
   return (
     <>

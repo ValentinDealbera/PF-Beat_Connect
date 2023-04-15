@@ -11,15 +11,19 @@ export const selectFilteredBeats = (state) => {
     beatsDisplayMode,
   } = state.beats;
 
+  if (beatsDisplayMode === 0 || beatsDisplayMode === 2) {
+    return publicItems;
+  }
+
   if (
     (searchFilter === "" || searchFilter === undefined) &&
     (genresFilter.length === 0 || genresFilter === undefined) &&
     (typesFilter.length === 0 || typesFilter === undefined)
   ) {
-    console.log("no hay filtros");
+   
     return activeItems;
   } else {
-    console.log("hay filtros");
+
   }
 
   let activeBeats = activeItems;
@@ -48,14 +52,8 @@ export const selectFilteredBeats = (state) => {
 
   filteredBeats = activeBeats;
 
-  console.log(
-    "filteredBeats",
-    filteredBeats,
-    filteredBeats.length,
-    typeof filteredBeats
-  );
   if (filteredBeats.length > 0) {
-    console.log("hay beats que mostrar");
+
     return filteredBeats;
   } else {
     toast.error("No hay beats que mostrar", {

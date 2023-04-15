@@ -23,7 +23,7 @@ const usuarios = [
     mail: "bizarrap@Test.com",
     profilemsg: `Beats pa' tipos como tu`,
     type: "seller",
-    profileimg: foto1
+    profileimg: foto1,
   },
   {
     id: 2,
@@ -31,7 +31,7 @@ const usuarios = [
     mail: "davidguetta@Test.com",
     profilemsg: `Beats for the boys`,
     type: "seller",
-    profileimg: foto2
+    profileimg: foto2,
   },
   {
     id: 3,
@@ -39,7 +39,7 @@ const usuarios = [
     mail: "pharrellwilliams@Test.com",
     profilemsg: `Your up all night to get lucky with my beats`,
     type: "seller",
-    profileimg: foto3
+    profileimg: foto3,
   },
   {
     id: 4,
@@ -47,7 +47,7 @@ const usuarios = [
     mail: "y2k@Test.com",
     profilemsg: `Wa wa wa, cry for the beats`,
     type: "seller",
-    profileimg: foto4
+    profileimg: foto4,
   },
   {
     id: 5,
@@ -55,7 +55,7 @@ const usuarios = [
     mail: "skrillex@Test.com",
     profilemsg: `Beats... skshhshhshhhh piuuu piuu`,
     type: "seller",
-    profileimg: foto5
+    profileimg: foto5,
   },
 ];
 
@@ -64,10 +64,8 @@ export const currentClient = {
   name: "Jorge",
   status: "Jorge status",
   profilePicture: "/img/category1.png",
-  email: "jorge@test.com"
+  email: "jorge@test.com",
 };
-
-
 
 const beats = [
   {
@@ -78,7 +76,7 @@ const beats = [
     license: "",
     author: 2,
     genres: ["COUNTRY"],
-    image: foto1,    
+    image: foto1,
     types: ["VOCAL", "BEAT", "SONG"],
     // state: "active"
   },
@@ -90,7 +88,7 @@ const beats = [
     license: "",
     author: usuarios[1],
     genres: ["HIP-HOP"],
-types: ["VOCAL", "BEAT", "SONG"],
+    types: ["VOCAL", "BEAT", "SONG"],
     image: foto2,
   },
   {
@@ -99,7 +97,7 @@ types: ["VOCAL", "BEAT", "SONG"],
     BPM: 210,
     price: 29.99,
     license: "",
-    types: [ "BEAT", "SONG"],
+    types: ["BEAT", "SONG"],
     author: usuarios[2],
     genres: ["HIP-HOP"],
 
@@ -123,7 +121,7 @@ types: ["VOCAL", "BEAT", "SONG"],
     BPM: 140,
     price: 15.99,
     license: "",
-    types: [ "BEAT", "SONG"],
+    types: ["BEAT", "SONG"],
     author: usuarios[4],
     genres: ["HIP-HOP"],
 
@@ -171,4 +169,4 @@ const sortArr = [
   { value: "Z - A", label: "Z - A" },
 ];
 
-export {genres, beats, usuarios , types, sortArr};
+export { genres, beats, usuarios, types, sortArr };

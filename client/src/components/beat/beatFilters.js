@@ -10,7 +10,7 @@ import {
 import { genres, types, sortArr } from "@/data/fakeDB";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setGenresFilter, setTypesFilter } from "@/redux/slices/filters";
 
 export default function BeatFilters() {
@@ -23,6 +23,7 @@ export default function BeatFilters() {
   const [dropDownFilter, setDropDownFilter] = useState(false);
   const [dropDownSorting, setDropDownSorting] = useState(false);
   const [childFilterIndex, setChildFilterIndex] = useState(0);
+  const mode = useSelector((state) => state.beats.beatsDisplayMode);
 
   const generos = genres.map((e) => {
     return {
@@ -38,10 +39,6 @@ export default function BeatFilters() {
   useEffect(() => {
     dispatch(setTypesFilter(beatTypes.map((e) => e.value)));
   }, [beatTypes]);
-
-  const handleDropDownSorting = () => {
-    setDropDownSorting(!dropDownSorting);
-  };
 
   const handleDropDownFilter = () => {
     setDropDownFilter(!dropDownFilter);
@@ -66,10 +63,15 @@ export default function BeatFilters() {
     },
   ];
 
+  if (mode !== 0 && mode !== 3) {
+    console.log("no es 0 ni 3");
+    return <></>;
+  }
+
   return (
     <>
       <div className="hidden flex-row justify-between sm:flex ">
-        <div className="gap-estilo3 flex ">
+        <div className="gap-estilo3 flex items-end">
           <MultiSelect
             label="Generos"
             values={generos}

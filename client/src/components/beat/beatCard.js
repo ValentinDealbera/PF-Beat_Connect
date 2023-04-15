@@ -6,7 +6,6 @@ import { setActiveItemDetail } from "@/redux/slices/beats";
 
 export default function BeatCard({ beat, variant }) {
   const dispatch = useDispatch();
-  console.log(variant);
 
 const handleAction = () => {
   dispatch(setActiveItemDetail(beat));
