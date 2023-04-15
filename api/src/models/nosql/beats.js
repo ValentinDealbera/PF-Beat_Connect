@@ -55,6 +55,10 @@ const BeatsSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+  inCart:{
+    type: Boolean,
+    default: false,
+  }
 });
 
 module.exports = mongoose.model("Beats", BeatsSchema);
