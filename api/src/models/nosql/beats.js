@@ -48,7 +48,7 @@ const BeatsSchema = new mongoose.Schema({
   ],
   inCart:{
     type: Boolean,
-    defoult: false,
+    default: false,
   }
 });
 
