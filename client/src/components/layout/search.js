@@ -1,6 +1,7 @@
 import Image from "next/image";
 
-export default function Search({ colorMode, sizeMode, className }) {
+
+export default function Search({ colorMode, sizeMode, className , response}) {
   return (
     <>
       <div
@@ -31,6 +32,7 @@ export default function Search({ colorMode, sizeMode, className }) {
               ? "color-primary-red-700 placeholder:color-primary-red-700"
               : "color-neutral-white placeholder:color-neutral-white"
           } text-paragraph1-regular w-full`}
+          onChange={(e) => response(e.target.value)}
         />
       </div>
     </>

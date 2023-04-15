@@ -5,6 +5,7 @@ import {
   CheckboxGroup,
   ModalBoxForNav,
   MiniCart,
+  ClientImage,
 } from "@/components";
 import Image from "next/image";
 import { useSelector } from "react-redux";
@@ -49,9 +50,9 @@ export default function UserBoxNav({ children, id }) {
     };
   }, [dropdownRef, hoverTimeout]);
 
-  const currentUser = useSelector((state) => state.client.client);
+  const  client  = useSelector((state) => state.client.client);
+  console.log("box nav",client);
   const { isLogged } = useSelector((state) => state.client);
-  console.log("currentUser", currentUser);
 
   return (
     <>
@@ -59,19 +60,14 @@ export default function UserBoxNav({ children, id }) {
         <MiniCart />
         {isLogged ? (
           <div ref={dropdownRef} type="button" id={id} className="relative">
-            <div className="flex gap-2 rounded-full border bg-white pb-1 pl-1 pr-1 lg:pr-4 pt-1">
-              <Image
-                src={currentUser.profilePicture}
-                width={35}
-                height={35}
-                className="aspect-square rounded-full object-cover  "
-              />
-              <div className="hidden lg:flex" >
-              <ArrowLabel
-                label={`${currentUser.name}`}
-                iconStatus={false}
-                labelClass={"text-sm-regular text-black "}
-              />
+            <div className="flex gap-2 rounded-full border bg-white pb-1 pl-1 pr-1 pt-1 lg:pr-4">
+              <ClientImage client={client} height={35} width={35} />
+              <div className="hidden lg:flex">
+                <ArrowLabel
+                  label={`${client.firstName}`}
+                  iconStatus={false}
+                  labelClass={"text-sm-regular text-black "}
+                />
               </div>
             </div>
             {isDropdownOpen && <ModalBoxForNav>{children}</ModalBoxForNav>}

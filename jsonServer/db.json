@@ -1,0 +1,209 @@
+{
+  "user": [
+    {
+      "_id": "64384576fc0674646610cb4b",
+      "firstName": "Juan",
+      "lastName": "Masso",
+      "username": "masso1",
+      "email": "masso@gmial.com",
+      "password": "hola123",
+      "image": "https://static.vecteezy.com/system/resources/previews/009/734/564/non_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg",
+      "isSeller": true,
+      "superAdmin": false,
+      "softDelete": false,
+      "bougthBeats": [],
+      "createdBeats": [],
+      "__v": 0
+    },
+    {
+      "_id": "64384ed5243ab0df93352345",
+      "firstName": "Marcos",
+      "lastName": "Frias",
+      "username": "marquitos1",
+      "email": "marc@gmail.com",
+      "password": "hi234",
+      "image": "https://static.vecteezy.com/system/resources/previews/009/734/564/non_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg",
+      "isSeller": false,
+      "superAdmin": false,
+      "softDelete": false,
+      "bougthBeats": [],
+      "createdBeats": [],
+      "__v": 0
+    },
+    {
+      "_id": "64385292665805a48a4396b1",
+      "firstName": "Lolo",
+      "lastName": "Lolito",
+      "username": "lolo1",
+      "email": "lolo@gmial.com",
+      "password": "hola123",
+      "image": "https://static.vecteezy.com/system/resources/previews/009/734/564/non_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg",
+      "isSeller": false,
+      "superAdmin": false,
+      "softDelete": false,
+      "bougthBeats": [],
+      "createdBeats": [],
+      "__v": 0
+    }
+  ],
+  "currentUser" :    {
+    "_id": "64385292665805a48a4396b1",
+    "firstName": "Lolo",
+    "lastName": "Lolito",
+    "username": "lolo1",
+    "email": "lolo@gmial.com",
+    "password": "hola123",
+    "image": "https://static.vecteezy.com/system/resources/previews/009/734/564/non_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg",
+    "isSeller": false,
+    "superAdmin": false,
+    "softDelete": false,
+    "bougthBeats": [],
+    "createdBeats": [],
+    "__v": 0
+  },
+  "beats": [
+    {
+      "_id": "643aad76e70947fce2628889",
+      "audioMP3": "https://firebasestorage.googleapis.com/v0/b/beatconnect-62691.appspot.com/o/beats%2FLluvia%2FaudioMP3%2FLluvia%20VALEN%20refe%20piano%20y%20voz.mp3%20-%202023-4-15%2010%3A58%3A2?alt=media&token=5f4feb54-53b7-4a88-951f-f6ada8b7c640",
+      "relevance": 0,
+      "BPM": 120,
+      "name": "Lluvia",
+      "image": "https://cdn-icons-png.flaticon.com/512/65/65847.png?w=740&t=st=1681567451~exp=1681568051~hmac=2121c1d3f4322c3cf8318fa6ad1e6df0c4cef5c113158698efd46479dd8cc1e7",
+      "priceAmount": 15.99,
+      "genre": {
+        "_id": "6439b5a55a9480c798750098",
+        "name": "COUNTRY",
+        "__v": 0
+      },
+      "review": [],
+      "softDelete": false,
+      "userCreator": {
+        "_id": "64384576fc0674646610cb4b",
+        "firstName": "Juan",
+        "lastName": "Masso",
+        "username": "masso1",
+        "email": "masso@gmial.com",
+        "password": "hola123",
+        "image": "https://static.vecteezy.com/system/resources/previews/009/734/564/non_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg",
+        "isSeller": true,
+        "superAdmin": false,
+        "softDelete": false,
+        "bougthBeats": [],
+        "createdBeats": [],
+        "__v": 0
+      },
+      "__v": 0
+    },
+    {
+      "_id": "643aade5e70947fce262888e",
+      "audioMP3": "https://firebasestorage.googleapis.com/v0/b/beatconnect-62691.appspot.com/o/beats%2FRandom%20Beat%2FaudioMP3%2FROSAL%C3%83%C2%8DA%20-%20MOTOMAMI%20(Official%20Video).mp3%20-%202023-4-15%2010%3A59%3A57?alt=media&token=e3117ae1-9119-478a-b9a9-b9f9eec89b84",
+      "relevance": 0,
+      "BPM": 120,
+      "name": "Random Beat",
+      "image": "https://firebasestorage.googleapis.com/v0/b/beatconnect-62691.appspot.com/o/beats%2FRandom%20Beat%2Fimage%2Ffoto%20henry.png%20-%202023-4-15%2010%3A59%3A57?alt=media&token=9aa759d3-ebb6-4cf7-a075-71f5300db775",
+      "priceAmount": 19.99,
+      "genre": {
+        "_id": "6439b4f5ebf145d96f537996",
+        "name": "POP",
+        "__v": 0
+      },
+      "review": [],
+      "softDelete": false,
+      "userCreator": {
+        "_id": "64384e19243ab0df93352343",
+        "firstName": "Pedro",
+        "lastName": "Fagundez",
+        "username": "pedrito2",
+        "email": "fag@gmail.com",
+        "password": "hola234",
+        "image": "https://static.vecteezy.com/system/resources/previews/009/734/564/non_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg",
+        "isSeller": false,
+        "superAdmin": true,
+        "softDelete": true,
+        "bougthBeats": [],
+        "createdBeats": [],
+        "__v": 0
+      },
+      "__v": 0
+    },
+    {
+      "_id": "643aae42e70947fce2628894",
+      "audioMP3": "https://firebasestorage.googleapis.com/v0/b/beatconnect-62691.appspot.com/o/beats%2FAnother%20Beat%2FaudioMP3%2FLluvia%20VALEN%20refe%20piano%20y%20voz.mp3%20-%202023-4-15%2011%3A1%3A25?alt=media&token=26f50391-9be2-44af-b95f-e877d5320596",
+      "relevance": 0,
+      "BPM": 150,
+      "name": "Another Beat",
+      "image": "https://firebasestorage.googleapis.com/v0/b/beatconnect-62691.appspot.com/o/beats%2FAnother%20Beat%2Fimage%2Ffoto%20henry.png%20-%202023-4-15%2011%3A1%3A25?alt=media&token=424a5958-6c19-4abf-8c57-2bfc969a6381",
+      "priceAmount": 19.99,
+      "genre": {
+        "_id": "6439b53bebf145d96f537998",
+        "name": "HIP-HOP",
+        "__v": 0
+      },
+      "review": [],
+      "softDelete": false,
+      "userCreator": {
+        "_id": "64384ed5243ab0df93352345",
+        "firstName": "Marcos",
+        "lastName": "Frias",
+        "username": "marquitos1",
+        "email": "marc@gmail.com",
+        "password": "hi234",
+        "image": "https://static.vecteezy.com/system/resources/previews/009/734/564/non_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg",
+        "isSeller": false,
+        "superAdmin": false,
+        "softDelete": false,
+        "bougthBeats": [],
+        "createdBeats": [],
+        "__v": 0
+      },
+      "__v": 0
+    }
+  ],
+  "categories": [
+    {
+      "_id": "6439b4f5ebf145d96f537996",
+      "name": "POP",
+      "__v": 0
+    },
+    {
+      "_id": "6439b53bebf145d96f537998",
+      "name": "HIP-HOP",
+      "__v": 0
+    },
+    {
+      "_id": "6439b56d5a9480c79875008f",
+      "name": "R&B",
+      "__v": 0
+    },
+    {
+      "_id": "6439b5805a9480c798750094",
+      "name": "ELECTRONIC",
+      "__v": 0
+    },
+    {
+      "_id": "6439b5995a9480c798750096",
+      "name": "REGGAE",
+      "__v": 0
+    },
+    {
+      "_id": "6439b5a55a9480c798750098",
+      "name": "COUNTRY",
+      "__v": 0
+    },
+    {
+      "_id": "6439b5c45a9480c79875009a",
+      "name": "ROCK",
+      "__v": 0
+    }
+  ],
+  "review": [
+    {
+      "_id": "6439b4f7827a22e6538e1915",
+      "rating": 3,
+      "title": "titulo de prueba nuevo modificado",
+      "comment": "comentario de prueba modificado ",
+      "dateCreated": "2023-04-14T20:17:59.325Z",
+      "__v": 0
+    }
+  ]
+}

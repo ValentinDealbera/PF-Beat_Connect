@@ -23,7 +23,7 @@ const usuarios = [
     mail: "bizarrap@Test.com",
     profilemsg: `Beats pa' tipos como tu`,
     type: "seller",
-    profileimg: foto1
+    profileimg: foto1,
   },
   {
     id: 2,
@@ -31,7 +31,7 @@ const usuarios = [
     mail: "davidguetta@Test.com",
     profilemsg: `Beats for the boys`,
     type: "seller",
-    profileimg: foto2
+    profileimg: foto2,
   },
   {
     id: 3,
@@ -39,7 +39,7 @@ const usuarios = [
     mail: "pharrellwilliams@Test.com",
     profilemsg: `Your up all night to get lucky with my beats`,
     type: "seller",
-    profileimg: foto3
+    profileimg: foto3,
   },
   {
     id: 4,
@@ -47,7 +47,7 @@ const usuarios = [
     mail: "y2k@Test.com",
     profilemsg: `Wa wa wa, cry for the beats`,
     type: "seller",
-    profileimg: foto4
+    profileimg: foto4,
   },
   {
     id: 5,
@@ -55,7 +55,7 @@ const usuarios = [
     mail: "skrillex@Test.com",
     profilemsg: `Beats... skshhshhshhhh piuuu piuu`,
     type: "seller",
-    profileimg: foto5
+    profileimg: foto5,
   },
 ];
 
@@ -64,10 +64,8 @@ export const currentClient = {
   name: "Jorge",
   status: "Jorge status",
   profilePicture: "/img/category1.png",
-  email: "jorge@test.com"
+  email: "jorge@test.com",
 };
-
-
 
 const beats = [
   {
@@ -76,9 +74,10 @@ const beats = [
     BPM: 120,
     price: 29.99,
     license: "",
-    author: usuarios[0],
-    genres: genres[0],
-    image: foto1,    
+    author: 2,
+    genres: ["COUNTRY"],
+    image: foto1,
+    types: ["VOCAL", "BEAT", "SONG"],
     // state: "active"
   },
   {
@@ -88,7 +87,8 @@ const beats = [
     price: 19.99,
     license: "",
     author: usuarios[1],
-    genres: genres[1],
+    genres: ["HIP-HOP"],
+    types: ["VOCAL", "BEAT", "SONG"],
     image: foto2,
   },
   {
@@ -97,8 +97,10 @@ const beats = [
     BPM: 210,
     price: 29.99,
     license: "",
+    types: ["BEAT", "SONG"],
     author: usuarios[2],
-    genres: genres[2],
+    genres: ["HIP-HOP"],
+
     image: foto3,
   },
   {
@@ -107,8 +109,10 @@ const beats = [
     BPM: 150,
     price: 39.99,
     license: "",
+    types: ["BEAT", "SONG"],
     author: usuarios[3],
-    genres: genres[3],
+    genres: ["ROCK", "POP"],
+
     image: foto4,
   },
   {
@@ -117,8 +121,10 @@ const beats = [
     BPM: 140,
     price: 15.99,
     license: "",
+    types: ["BEAT", "SONG"],
     author: usuarios[4],
-    genres: genres[4],
+    genres: ["HIP-HOP"],
+
     image: foto5,
   },
   {
@@ -127,8 +133,10 @@ const beats = [
     BPM: 189,
     price: 29.99,
     license: "",
+    types: ["BEAT", "SONG"],
     author: usuarios[0],
-    genres: genres[5],
+    genres: ["HIP-HOP"],
+
     image: foto6,
   },
   {
@@ -137,8 +145,11 @@ const beats = [
     BPM: 120,
     price: 30.0,
     license: "",
+
+    types: ["VOCAL"],
     author: usuarios[1],
-    genres: genres[6],
+    genres: ["POP"],
+
     image: foto7,
   },
 ];
@@ -158,4 +169,4 @@ const sortArr = [
   { value: "Z - A", label: "Z - A" },
 ];
 
-export {genres, beats, usuarios , types, sortArr};
+export { genres, beats, usuarios, types, sortArr };

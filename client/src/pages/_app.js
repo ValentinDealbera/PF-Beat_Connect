@@ -1,5 +1,5 @@
 import "@/styles/globals.scss";
-import { Header, Footer, Master } from "@/components";
+import { Header, Footer, Master, HOC } from "@/components";
 import { Provider, useDispatch } from "react-redux";
 import store, { persistor } from "@/redux/store/store";
 import { PersistGate } from "redux-persist/integration/react";
@@ -23,12 +23,14 @@ export default function App({ Component, pageProps, router }) {
     <>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
+          <HOC>
           {headerVisibility && <Header />}
           <Master>
           <Toaster position="bottom-left" />
           <Component {...pageProps} />
           </Master>
           <Footer mode={mode} />
+          </HOC>
         </PersistGate>
       </Provider>
     </>

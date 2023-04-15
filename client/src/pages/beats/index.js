@@ -6,8 +6,11 @@ import {
   Search,
   BeatsShopSection,
 } from "@/components";
+import { useDispatch } from "react-redux";
+import {setSearchFilter} from "@/redux/slices/filters";
 
 export default function Beats() {
+  const dispatch = useDispatch();
   return (
     <>
       <Head title={"Beats"} description={"Head from beats"} />
@@ -23,6 +26,7 @@ export default function Beats() {
               colorMode="dark"
               sizeMode="long"
               className={"w-full md:w-max"}
+              response={(e) => dispatch(setSearchFilter(e))}
             />
           </div>
         </Hero>

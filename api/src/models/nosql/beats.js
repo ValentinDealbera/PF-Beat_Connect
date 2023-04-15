@@ -1,8 +1,21 @@
 const mongoose = require("mongoose");
 
 const BeatsSchema = new mongoose.Schema({
-  audio: {
+  audioMP3: {
     type: String,
+    require: true,
+  },
+  // audioWAV: {
+  //   type: String,
+  //   require: true,
+  // },
+  relevance: {
+    type: Number,
+    default: 0,
+    require: true,
+  },
+  BPM: {
+    type: Number,
     require: true,
   },
   id: {
@@ -17,19 +30,17 @@ const BeatsSchema = new mongoose.Schema({
     type: String,
     require: false,
     default:
-      "https://www.freepik.es/iconos-gratis/nota-musica_773968.htm#query=nota%20musical%20sola&position=43&from_view=search&track=ais",
+      "https://cdn-icons-png.flaticon.com/512/65/65847.png?w=740&t=st=1681567451~exp=1681568051~hmac=2121c1d3f4322c3cf8318fa6ad1e6df0c4cef5c113158698efd46479dd8cc1e7",
   },
   priceAmount: {
     type: Number,
     default: 0,
     require: true,
   },
-  genre: [
-    {
+  genre: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Genre",
     },
-  ],
   review: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -40,12 +51,10 @@ const BeatsSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  userCreator: [
-    {
+  userCreator:  {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "user",
+      ref: "User",
     },
-  ],
   inCart:{
     type: Boolean,
     default: false,
