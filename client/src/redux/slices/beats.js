@@ -23,7 +23,7 @@ const beatsSlice = createSlice({
       state.activeItemDetail = action.payload;
     },
     setBeatsDisplayMode(state, action) {
-      console.log("action.payload", action.payload);
+
       state.beatsDisplayMode = action.payload;
 
       if (action.payload === "shop") {
@@ -54,7 +54,7 @@ export default beatsSlice.reducer;
 
 export const fetchBeats = () => async (dispatch, getState) => {
   // if (getState().beats.items.length > 0) return;
-  console.log("beats", beats);
+
   try {
     dispatch(setBeats(beats));
   } catch (error) {

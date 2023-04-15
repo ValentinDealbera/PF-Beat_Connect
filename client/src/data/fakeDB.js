@@ -76,9 +76,10 @@ const beats = [
     BPM: 120,
     price: 29.99,
     license: "",
-    author: usuarios[0],
-    genres: genres[0],
+    author: 2,
+    genres: ["COUNTRY"],
     image: foto1,    
+    types: ["VOCAL", "BEAT", "SONG"],
     // state: "active"
   },
   {
@@ -88,7 +89,8 @@ const beats = [
     price: 19.99,
     license: "",
     author: usuarios[1],
-    genres: genres[1],
+    genres: ["HIP-HOP"],
+types: ["VOCAL", "BEAT", "SONG"],
     image: foto2,
   },
   {
@@ -97,8 +99,10 @@ const beats = [
     BPM: 210,
     price: 29.99,
     license: "",
+    types: [ "BEAT", "SONG"],
     author: usuarios[2],
-    genres: genres[2],
+    genres: ["HIP-HOP"],
+
     image: foto3,
   },
   {
@@ -107,8 +111,10 @@ const beats = [
     BPM: 150,
     price: 39.99,
     license: "",
+    types: ["BEAT", "SONG"],
     author: usuarios[3],
-    genres: genres[3],
+    genres: ["ROCK", "POP"],
+
     image: foto4,
   },
   {
@@ -117,8 +123,10 @@ const beats = [
     BPM: 140,
     price: 15.99,
     license: "",
+    types: [ "BEAT", "SONG"],
     author: usuarios[4],
-    genres: genres[4],
+    genres: ["HIP-HOP"],
+
     image: foto5,
   },
   {
@@ -127,8 +135,10 @@ const beats = [
     BPM: 189,
     price: 29.99,
     license: "",
+    types: ["BEAT", "SONG"],
     author: usuarios[0],
-    genres: genres[5],
+    genres: ["HIP-HOP"],
+
     image: foto6,
   },
   {
@@ -137,8 +147,11 @@ const beats = [
     BPM: 120,
     price: 30.0,
     license: "",
+
+    types: ["VOCAL"],
     author: usuarios[1],
-    genres: genres[6],
+    genres: ["POP"],
+
     image: foto7,
   },
 ];

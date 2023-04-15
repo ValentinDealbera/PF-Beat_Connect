@@ -2,7 +2,6 @@ import { Logo, Nav, UserBoxNav, VerticalNav } from "@/components";
 import { useRouter } from "next/router";
 import { navPublic, navClient } from "@/data/data";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 
 export default function Header() {
   const router = useRouter();
@@ -14,17 +13,13 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // console.log(headerType)
       if (window.scrollY > 100) {
         setHeaderType("alternative");
-        //   console.log("headerType")
       } else {
         setHeaderType("default");
-        // console.log(headerType)
       }
     };
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
