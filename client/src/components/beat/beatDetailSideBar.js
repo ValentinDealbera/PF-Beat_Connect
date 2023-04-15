@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
-import { Toaster, toast } from "sonner";
-import { externalManageDropdown } from "@/components/client/beatCardGrid";
+import { externalManageDropdown } from "@/components/beat/beatCardGrid";
 import { addToCart } from "@/redux/slices/cart";
 
 export default function BeatDetailSideBar() {
@@ -22,7 +21,7 @@ export default function BeatDetailSideBar() {
 
   return (
     <>
-      <div className="flex flex-col gap-8 px-4 pb-10 sm:px-9 sm:pt-8">
+      <div className="flex flex-col gap-8 px-4  sm:px-9 sm:pt-8">
         <BeatDataBox beat={currentBeat} />
         <div className="flex flex-col gap-3">
           <p className=" color-primary-red-700  text-sm font-medium">

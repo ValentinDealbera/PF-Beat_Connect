@@ -1,12 +1,9 @@
-import { Checkbox } from "@/components";
-
 export default function CheckboxGroup({
   label,
   values,
   seleccionados,
   setSeleccionados,
 }) {
-  console.log("values ckgroup", values);
   return (
     <div className="flex flex-col gap-2">
       <label className="text-base-semibold">{label}</label>
@@ -19,6 +16,26 @@ export default function CheckboxGroup({
           />
         ))}
       </div>
+    </div>
+  );
+}
+
+function Checkbox({ value, seleccionados, setSeleccionados }) {
+  return (
+    <div className="flex gap-2">
+      <input
+        type="checkbox"
+        value={value.value}
+        checked={seleccionados.some((v) => v.value === value.value)}
+        onChange={(e) =>
+          e.target.checked
+            ? setSeleccionados([...seleccionados, value])
+            : setSeleccionados(
+                seleccionados.filter((v) => v.value !== value.value)
+              )
+        }
+      />
+      <label className="text-sm-light">{value.label}</label>
     </div>
   );
 }

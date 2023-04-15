@@ -10,8 +10,11 @@ import {
 import { genres, types, sortArr } from "@/data/fakeDB";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { useDispatch } from "react-redux";
+import { setGenresFilter, setTypesFilter } from "@/redux/slices/filters";
 
 export default function BeatFilters() {
+  const dispatch = useDispatch();
   const [beatGenre, setBeatGenre] = useState([]);
   const [beatTypes, setBeatTypes] = useState([]);
   const [prices, setPrices] = useState({ min: 0, max: 0, filter: false });
@@ -29,12 +32,12 @@ export default function BeatFilters() {
   });
 
   useEffect(() => {
-    // console.log("beatGenre", beatGenre);
-    // console.log("beatTypes", beatTypes);
-    // console.log("prices", prices);
-    // console.log("BPM", BPM);
-    // console.log("sort", sort);
-  }, [beatGenre, beatTypes, prices, BPM, sort]);
+    dispatch(setGenresFilter(beatGenre.map((e) => e.value)));
+  }, [beatGenre]);
+
+  useEffect(() => {
+    dispatch(setTypesFilter(beatTypes.map((e) => e.value)));
+  }, [beatTypes]);
 
   const handleDropDownSorting = () => {
     setDropDownSorting(!dropDownSorting);
@@ -157,7 +160,7 @@ export default function BeatFilters() {
         )}
         <div>
           <div className="flex flex-row items-center gap-1">
-            <Select 
+            <Select
               label=""
               valores={sortArr}
               setSeleccionados={setSort}

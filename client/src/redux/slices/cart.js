@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
 const initialState = {
   cart: [],
 };
@@ -10,22 +10,21 @@ const cartSlice = createSlice({
   reducers: {
     addToCart(state, action) {
       console.log("action", action.payload);
+      const isInCart = state.cart.some((item) => item === action.payload);
 
-      const isInCart = state.cart.find((item) => item.id === action.payload);
+      console.log("state.cart", state.cart, action.payload);
       console.log("isInCart", isInCart);
       if (isInCart) {
+        console.log("Ya esta en el carrito");
         toast.success("Ya esta en el carrito", {
           style: {
-            background: "#ECFDF3",
-            color: "#008A2E",
+            background: "#ffedd5",
+            color: "#c2410c",
           },
         });
       } else {
-        const newCartItem = {
-          id: action.payload,
-        };
-        state.cart = [...state.cart, newCartItem];
-
+        console.log("Se agregó al carrito");
+        state.cart = [...state.cart, action.payload];
         toast.success("Se agregó al carrito", {
           style: {
             background: "#ECFDF3",
@@ -36,7 +35,13 @@ const cartSlice = createSlice({
     },
     deleteFromCart(state, action) {
       console.log("action", action.payload);
-      state.cart = state.cart.filter((item) => item.id !== action.payload.id);
+      state.cart = state.cart.filter((item) => item !== action.payload.id);
+      toast.success("Se eliminó del carrito", {
+        style: {
+          background: "#ECFDF3",
+          color: "#008A2E",
+        },
+      });
     },
   },
 });

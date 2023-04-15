@@ -1,9 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import {
-  MiniModalBox,
-  ArrowLabel,
-  CheckboxGroup,
-} from "@/components";
+import { MiniModalBox, ArrowLabel, CheckboxGroup } from "@/components";
 
 export default function MultiSelect({
   seleccionados,
@@ -30,12 +26,13 @@ export default function MultiSelect({
     setIsDropdownOpen(!isDropdownOpen);
   }
 
-  console.log(values);
-
   return (
     <div ref={dropdownRef} type="button" id="dropdown">
-      <ArrowLabel label={label} handleDropdownClick={handleDropdownClick} iconStatus={true} />
-
+      <ArrowLabel
+        label={label}
+        handleDropdownClick={handleDropdownClick}
+        iconStatus={true}
+      />
       {isDropdownOpen && (
         <MiniModalBox>
           <CheckboxGroup
