@@ -64,7 +64,7 @@ export default function BeatFilters() {
   ];
 
   if (mode !== 0 && mode !== 3) {
-    console.log("no es 0 ni 3");
+   
     return <></>;
   }
 

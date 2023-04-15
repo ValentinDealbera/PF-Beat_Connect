@@ -6,8 +6,8 @@ import Link from "next/link";
 
 export default function MiniCart() {
   const cartIds = useSelector((state) => state.cart.cart) || [];
-  const cartItems = useSelector((state) => state.beats.activeItems).filter(
-    (item) => cartIds.includes(item.id)
+  const cartItems = useSelector((state) => state.beats.publicItems).filter(
+    (item) => cartIds.includes(item._id)
   );
 
   const [visible, setVisible] = useState(false);

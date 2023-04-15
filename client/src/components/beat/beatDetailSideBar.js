@@ -2,6 +2,14 @@ import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
 import { externalManageDropdown } from "@/components/beat/beatCardGrid";
 import { addToCart } from "@/redux/slices/cart";
+import {
+  BeatImage,
+  AuthorName,
+  BeatPrice,
+  BeatBPM,
+  BeatTitle,
+  BeatAudio,
+} from "@/components";
 
 export default function BeatDetailSideBar() {
   const currentBeat = useSelector((state) => state.beats.activeItemDetail);
@@ -42,9 +50,7 @@ export default function BeatDetailSideBar() {
               );
             })}
           </div>
-          <audio controls className="mt-2 w-full rounded-full  bg-white">
-            <source src="/audio/test.mp3" type="audio/mpeg" />
-          </audio>
+          <BeatAudio beat={currentBeat} />
         </div>
       </div>
     </>
@@ -54,28 +60,13 @@ export default function BeatDetailSideBar() {
 function BeatDataBox({ beat }) {
   return (
     <div className="gap-estilo3 flex w-[286px] flex-row bg-white">
-      <Image
-        height={80}
-        width={80}
-        className="border-radius-estilo2 aspect-square object-cover"
-        src={beat.image}
-        alt={beat.name}
-      />
+      <BeatImage beat={beat} height={80} width={80} />
       <div className="flex flex-col justify-center">
-        <h1 className="text-base font-bold">{`${beat.name}`}</h1>
-        <div className="flex flex-row items-center gap-1">
-          <span className="text-sm font-light">{`${beat.author?.name}`}</span>
-          <Image
-            className="inline object-cover"
-            width={14}
-            height={14}
-            src={"/icon/checked-blue.svg"}
-            alt="checked"
-          />
-        </div>
+        <BeatTitle beat={beat} />
+        <AuthorName beat={beat} />
         <div className="pt-0">
-          <span className="color-primary-red-700 text-sm font-semibold">{`$${beat.price}`}</span>
-          <span className="text-sm font-light">{` | ${beat.BPM}BPM`}</span>
+          <BeatPrice beat={beat} />
+          <BeatBPM beat={beat} />
         </div>
       </div>
     </div>
@@ -91,7 +82,7 @@ function BeatDetailBox({ msg1, msg2, beat }) {
       <button
         className=" text-sm font-semibold text-red-700"
         onClick={() => {
-          dispatch(addToCart(beat.id));
+          dispatch(addToCart(beat._id));
           externalManageDropdown();
         }}
       >

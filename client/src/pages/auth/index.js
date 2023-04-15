@@ -6,7 +6,7 @@ import {
   AuthLayout,
 } from "@/components";
 import Link from "next/link";
-import { setCurrentClient } from "@/redux/slices/client";
+import { setCurrentClient, loginSystem } from "@/redux/slices/client";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 
@@ -16,8 +16,8 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(setCurrentClient());
-    router.push("/client");
+    dispatch(loginSystem());
+   // router.push("/client");
   };
   return (
     <>
