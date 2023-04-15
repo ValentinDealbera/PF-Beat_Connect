@@ -14,16 +14,23 @@ export function externalManageDropdown() {
 
 export default function BeatCardGrid() {
   const [isDropDown, setIsDropdownOpen] = useState(false);
-  const currentMode = useSelector((state) => state?.beats?.beatsDisplayMode) || [];
-  const beats = useSelector(selectFilteredBeats) 
+  const { beatsDisplayMode } = useSelector((state) => state?.beats);
+  const state = useSelector((state) => state?.beats) || [];
+  const filteredBeats = useSelector(selectFilteredBeats);
+  const { activeItems } = useSelector((state) => state?.beats) || [];
+
+  const beats = beatsDisplayMode === 0 ? filteredBeats : activeItems;
+
   const handleDropdownOpen = () => {
     setIsDropdownOpen(!isDropDown);
   };
 
+  //<BeatCard key={beat.id} beat={beat} variant="public" />
+
   BeatCardGrid.handleDropdownOpen = handleDropdownOpen;
-useEffect(() => {
-  console.log("beats", currentMode);
-}, [currentMode]);
+  useEffect(() => {
+  }, [beatsDisplayMode]);
+
 
   return (
     <>
@@ -38,7 +45,7 @@ useEffect(() => {
         {beats && beats.length > 0 && (
           <>
             {beats?.map((beat) => (
-              <BeatCard key={beat.id} beat={beat} variant="public" />
+              <><BeatCard key={beat.id} beat={beat} variant="public" /></>
             ))}
           </>
         )}

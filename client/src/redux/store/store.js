@@ -22,7 +22,7 @@ const store = configureStore({
   middleware: persistMiddleware,
 });
 
-export const RootState = store.getState;
+export const RootState = store.getState();
 export const AppDispatch = store.dispatch;
 export const useAppDispatch = () => useDispatch();
 

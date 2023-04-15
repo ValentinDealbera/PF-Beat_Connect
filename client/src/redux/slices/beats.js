@@ -1,10 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { beats } from "../../data/fakeDB";
+import axios from "axios";
 
 const initialState = {
+  publicBeatsFetchStatus: false,
   beatsDisplayMode: null,
   currentAuthorLastId: null,
-  currentAuthor : {},
+  currentAuthor: {},
   publicItems: [],
   userFavoriteBeats: [],
   userPurchasedBeats: [],
@@ -19,52 +21,55 @@ const beatsSlice = createSlice({
   name: "profile",
   initialState,
   reducers: {
+    //Establecemos los beats en el estado global
     setBeats(state, action) {
+      console.log("setBeats", action.payload);
+      state.publicBeatsFetchStatus = true;
       state.publicItems = action.payload;
-    },
-    setCurrentAuthor(state, action) {
-      console.log("action.payload2", action.payload);
-      state.currentAuthor = action.payload;
     },
     setUserOwnedBeats(state, action) {
       state.userOwnedBeats = action.payload;
     },
     setUserPurchasedBeats(state, action) {
+      console.log("setUserPurchasedBeats", action.payload);
       state.userPurchasedBeats = action.payload;
     },
     setUserFavoriteBeats(state, action) {
       state.userFavoriteBeats = action.payload;
     },
     setCurrentAuthorBeats(state, action) {
-      if (state.currentAuthorLastId !== action.payload.id) {
-        state.currentAuthorLastId = action.payload.id;
-        state.currentAuthorBeats = action.payload.beats;
-      }
+      state.currentAuthorBeats = action.payload;
     },
     setActiveItemDetail(state, action) {
       state.activeItemDetail = action.payload;
     },
+    //Establecemos los beats activos en el estado global
+    setActiveItemsForProfile(state, action) {
+      if (action.payload === undefined || action.payload === null) {
+        action.payload = state.generalActiveIndex;
+      }
+      action.payload === 0
+        ? (state.activeItems = state.userPurchasedBeats)
+        : action.payload === 1
+        ? (state.activeItems = state.userOwnedBeats)
+        : (state.activeItems = state.userFavoriteBeats);
+    },
+    //Establecemos el modo de visualización de los beats
     setBeatsDisplayMode(state, action) {
       //beatsDisplayMode = shop 0, demo 1, profile 2, currentAuthorBeats 3
-      console.log("action.payload", action.payload);
       state.beatsDisplayMode = action.payload;
-
       if (action.payload === 0 || action.payload === 1) {
+        console.log("Establecemos active", action.payload);
         state.activeItems = state.publicItems;
-      } else if (action.payload === 2) {
-        if (state.generalActiveIndex === 0) {
-          state.activeItems = state.userPurchasedBeats;
-        } else if (state.generalActiveIndex === 1) {
-          state.activeItems = state.userOwnedBeats;
-        } else if (state.generalActiveIndex === 2) {
-          state.activeItems = state.userFavoriteBeats;
-        }
-      } else if (action.payload === 3) {
-        state.activeItems = state.currentAuthorBeats;
       }
     },
+    //Establecemos el indice de la pestaña activa en el perfil
     setGeneralActiveIndex(state, action) {
       state.generalActiveIndex = action.payload;
+    },
+    //Establecemos el autor actual
+    setCurrentAuthor(state, action) {
+      state.currentAuthor = action.payload;
     },
   },
 });
@@ -78,46 +83,30 @@ export const {
   setUserPurchasedBeats,
   setUserFavoriteBeats,
   setCurrentAuthorBeats,
+  setActiveItemsForProfile,
 } = beatsSlice.actions;
 export default beatsSlice.reducer;
 
 export const fetchBeats = () => async (dispatch, getState) => {
+
   try {
-    dispatch(setBeats(beats));
+    //solicitamos get con axios
+    const data = await axios.get("http://localhost:3001/beats");
+    const beatsResponse = data.data;
+    dispatch(setBeats(beatsResponse));
+    console.log("data", beatsResponse);
   } catch (error) {
     console.error(error);
   }
 };
 
-export const fetchUserOwnedBeats = () => async (dispatch, getState) => {
+export const fetchUserBeats = () => async (dispatch, getState) => {
   try {
+    console.log("fetchUserBeats, beats");
     dispatch(setUserOwnedBeats(beats));
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-export const fetchUserPurchasedBeats = () => async (dispatch, getState) => {
-  try {
     dispatch(setUserPurchasedBeats(beats));
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-export const fetchUserFavoriteBeats = () => async (dispatch, getState) => {
-  try {
     dispatch(setUserFavoriteBeats(beats));
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-export const fetchCurrentAuthorBeats = (id) => async (dispatch, getState) => {
-  try {
-    console.log("id", id);
-    dispatch(setCurrentAuthorBeats({ id, beats }));
-    dispatch(setBeatsDisplayMode(3));
+    dispatch(setActiveItemsForProfile());
   } catch (error) {
     console.error(error);
   }
@@ -127,6 +116,8 @@ export const fetchCurrentAuthor = (id) => async (dispatch, getState) => {
   try {
     console.log("id", id);
     dispatch(setCurrentAuthor(id));
+    dispatch(setCurrentAuthorBeats(beats));
+    dispatch(setBeatsDisplayMode(3));
   } catch (error) {
     console.error(error);
   }

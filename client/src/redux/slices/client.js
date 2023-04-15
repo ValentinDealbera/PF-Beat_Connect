@@ -1,8 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { currentClient } from "../../data/fakeDB";
+import axios from "axios";
 
 const initialState = {
   isLogged: false,
+  authSettings: {
+    isSeller: false,
+    superAdmin: false,
+    token: "",
+  },
   client: {
     name: "Placeholder",
     bio: "Status",
@@ -16,25 +22,61 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     setCurrentClient(state, action) {
+      console.log("setCurrentClient", action.payload);
       state.client = {
-        name: "Thomas Barenghi",
-        bio: "you are loged in",
-        profilePicture: "/images/profile-picture.png",
-        email: "Email",
-      };
+        bio: action.payload.bio,
+        profilePicture: action.payload.profilePicture,
+        _id: action.payload._id,
+        email: action.payload.email,
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
+        userName: action.payload.userName,
+      }
+    },
+    setAuthSettings(state, action) {
+      state.authSettings = action.payload;
       state.isLogged = true;
     },
     resetReducer(state, action) {
-      state.client = {
-        name: "",
-        bio: "",
-        profilePicture: "",
-        email: "",
-      };
+      state.client = {};
       state.isLogged = false;
     },
   },
 });
 
-export const { setCurrentClient, resetReducer } = cartSlice.actions;
+export const { setCurrentClient, resetReducer, setAuthSettings } =
+  cartSlice.actions;
 export default cartSlice.reducer;
+
+//Creamos sistema asincrono para el login, recibimos la respuesta del servidor y la guardamos en el estado, usamos axios
+export const loginSystem = (email, password) => async (dispatch) => {
+  try {
+    // const { data } = await axios.post("/api/login", { email, password });
+    //hacemos un get a la base de datos
+    const { data } = await axios.get("http://localhost:3001/currentUser");
+    //quizas en un futuro sea data.data
+    const userResponse = data
+
+    console.log("userResponse", userResponse);
+    const newClient = {
+      bio: "a la espera de backend",
+      profilePicture: userResponse.image,
+      _id: userResponse._id,
+      email: userResponse.email,
+      firstName: userResponse.firstName,
+      lastName: userResponse.lastName,
+      userName: userResponse.username,
+    };
+
+    const authSettings = {
+      isSeller: userResponse.isSeller,
+      superAdmin: userResponse.superAdmin,
+      token: "a la espera de backend",
+    };
+
+    dispatch(setCurrentClient(newClient));
+    dispatch(setAuthSettings(authSettings));
+  } catch (error) {
+    console.log(error);
+  }
+};

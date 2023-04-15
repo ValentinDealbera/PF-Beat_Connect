@@ -11,9 +11,7 @@ export const selectFilteredBeats = (state) => {
     beatsDisplayMode,
   } = state.beats;
 
-  if (beatsDisplayMode === 0 || beatsDisplayMode === 2) {
-    return publicItems;
-  }
+
 
   if (
     (searchFilter === "" || searchFilter === undefined) &&

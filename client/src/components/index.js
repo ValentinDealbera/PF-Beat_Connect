@@ -37,6 +37,7 @@ export { default as ModalPopUp } from "./modal/modalPopup";
 //Auth
 export { default as GoogleButton } from "./auth/googleButton";
 export { default as AuthLayout } from "./auth/authLayout";
+export { default as HOC } from "./auth/hoc";
 
 //Help
 export { default as HelpContainer } from "./help/helpContainer";
@@ -52,6 +53,14 @@ export { default as BeatCardGrid } from "./beat/beatCardGrid";
 export { default as BeatsShopSection } from "./beat/beatShopSection";
 export { default as BeatFilters } from "./beat/beatFilters";
 export { default as BeatCard } from "./beat/beatCard";
+//beatDataComponents
+export { default as AuthorName } from "./beat/beatDataComponents/authorName";
+export { default as BeatPrice } from "./beat/beatDataComponents/beatPrice";
+export { default as BeatTitle } from "./beat/beatDataComponents/beatTitle";
+export { default as BeatImage } from "./beat/beatDataComponents/beatImage";
+export { default as BeatBPM } from "./beat/beatDataComponents/beatBPM";
+export { default as BeatAudio } from "./beat/beatDataComponents/beatAudio";
+
 
 //Client
 export { default as UserBoxNav } from "./layout/userBoxNav";
@@ -60,6 +69,8 @@ export { default as BuyerNavGeneral } from "./client/buyerNavGeneral";
 export { default as BuyerNavSettings } from "./client/buyerNavSettings";
 export { default as BuyerProfileLayout } from "./client/buyerProfileLayout";
 export { default as ProfileCard } from "./client/profileCard";
+//clientDataComponents
+export { default as ClientImage } from "./client/clientDataComponents/clientImage";
 
 //Dashboard
 export { default as SellerDashboardLayout } from "./dashboard/sellerDashboardLayout";

@@ -4,6 +4,7 @@ import profile from "./slices/profile";
 import beats from "./slices/beats";
 import client from "./slices/client";
 import filters from "./slices/filters";
+
 const rootReducer = combineReducers({
   cart: cartReducer,
   profile: profile,
