@@ -1,6 +1,6 @@
 const UserModel = require("../models/nosql/user");
 
-const getAllUser = async () => {
+const getActiveUser = async () => {
   try {
     const db = await UserModel.find({ softDelete: false });
     return db;
@@ -21,6 +21,6 @@ const getUserId = async (id) => {
 };
 
 module.exports = {
-  getAllUser,
+  getActiveUser,
   getUserId,
 };
