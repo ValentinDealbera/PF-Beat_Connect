@@ -3,5 +3,6 @@ const models = {
   genreModel: require("./nosql/genre"),
   reviewsModel: require("./nosql/reviews"),
   userModel: require("./nosql/user"),
+  cartModel: require("./nosql/cart")
 };
 module.exports = models;

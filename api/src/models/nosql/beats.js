@@ -46,6 +46,10 @@ const BeatsSchema = new mongoose.Schema({
       ref: "user",
     },
   ],
+  inCart:{
+    type: Boolean,
+    defoult: false,
+  }
 });
 
 module.exports = mongoose.model("Beats", BeatsSchema);
