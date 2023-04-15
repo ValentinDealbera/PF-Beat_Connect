@@ -114,6 +114,8 @@ router.post("/", async (req, res) => {
       }
       console.log("successfully uploaded");
 
+
+
       const newBeat = await beatModel.create({
         audioMP3: downloadAudioURL,
         // audioWAV: downloadaudioWAVURL,
@@ -124,6 +126,9 @@ router.post("/", async (req, res) => {
         userCreator: creator._id,
         genre: genre._id,
       });
+
+      creator.createdBeats = [...creator.createdBeats, newBeat._id]
+      creator.save()
 
       return res.json(newBeat);
     }
@@ -157,6 +162,10 @@ router.delete("/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const deletedBeat = await beatModel.findByIdAndDelete(id);
+    const user = await userModel.findById(deletedBeat.userCreator)
+    const beatIndex = user.createdBeats.findIndex(beat => beat._id === deletedBeat._id);
+    const deletedBeatInUser = user.createdBeats.splice(beatIndex, 1)
+    await user.save()
     res.json(deletedBeat);
   } catch (error) {
     res.status(500).json({ error: error.message });

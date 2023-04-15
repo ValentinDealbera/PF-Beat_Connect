@@ -20,11 +20,11 @@ const reviewSchema = mongoose.Schema({
   },
   dateCreated: {
     type: Date,
-    default: Date.now,
+    default: Date(),
   },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "UserBuyer",
+    ref: "User",
   },
   beat: {
     type: mongoose.Schema.Types.ObjectId,

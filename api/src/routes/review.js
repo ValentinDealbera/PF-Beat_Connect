@@ -1,5 +1,7 @@
 const express = require("express");
 const reviewSchema = require("../models/nosql/reviews");
+const userModel = require('../models/nosql/user')
+const beatModel = require('../models/nosql/beats')
 const {
   OK,
   ALL_OK,
@@ -18,15 +20,21 @@ const router = express();
 
 router.post("/", async (req, res) => {
   const { rating, title, comment, createdBy, beat } = req.body;
-
+  const creator = await userModel.findById(createdBy)
+  const reviewedBeat = await beatModel.findById(beat)
+  if(!reviewedBeat) return res.status(400).json({error: 'this beat does not exist'})
+  if(!creator) return res.status(400).json({error: 'this user does not exist'})
   try {
     const newReview = await reviewSchema.create({
       rating: rating,
       title: title,
       comment: comment,
-      createdBy: createdBy,
-      beat: beat,
+      createdBy: creator._id,
+      beat: reviewedBeat._id,
     });
+
+    reviewedBeat.review = [...reviewedBeat.review, newReview._id]
+    reviewedBeat.save()
 
     res.json(newReview).status(CREATED);
   } catch (error) {
@@ -93,9 +101,12 @@ router.delete("/:id", async (req, res) => {
   console.log(id);
   if (id) {
     try {
-      await deleteReview(id);
-
-      res.send("La review se elimino correctamente").status(OK);
+      const deletedReview = await reviewSchema.findByIdAndDelete(id);
+    const beat = await beatModel.findById(deletedReview.beat)
+    const beatIndex = beat.review.findIndex(beat => beat._id === deletedReview._id);
+    const deletedReviewInBeat = beat.review.splice(beatIndex, 1)
+    await beat.save()
+    res.json(deletedReview);
     } catch (error) {
       res.json({ error: error.message }).status(SERVER_ERROR);
     }
