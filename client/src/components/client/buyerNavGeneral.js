@@ -18,8 +18,12 @@ const buyerGeneralNav = [
 
 export default function BuyerNavGeneral() {
   const activeIndex = useSelector((state) => state.beats.generalActiveIndex);
+  const mode = useSelector((state) => state.beats.beatsDisplayMode);
   const dispatch = useDispatch();
-  console.log(activeIndex);
+
+  if (mode !== 2) {
+    return <></>;
+  }
 
   return (
     <>
@@ -27,7 +31,9 @@ export default function BuyerNavGeneral() {
         {buyerGeneralNav.map((item, index) => (
           <h5
             className={`cursor-pointer whitespace-nowrap ${
-              index === activeIndex ? "text-base-semibold lg:text-base-semibold" : "text-base-light lg:text-base-light"
+              index === activeIndex
+                ? "text-base-semibold lg:text-base-semibold"
+                : "text-base-light lg:text-base-light"
             }`}
             onClick={() => dispatch(setGeneralActiveIndex(index))}
           >

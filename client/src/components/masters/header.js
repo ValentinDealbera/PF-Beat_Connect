@@ -37,10 +37,12 @@ export default function Header() {
       }
     >
       <div
-        className={`padding-x-estilo2 flex items-center  justify-between align-middle `}
+        className={`padding-x-estilo2 relative flex items-center justify-between align-middle `}
       >
         <Logo mode={currentMode} />
-        <Nav currentMode={currentMode} navItems={navPublic} />
+        <div className="absolute left-[50%] w-max translate-x-[-50%]">
+          <Nav currentMode={currentMode} navItems={navPublic} />
+        </div>
         <UserBoxNav id={"userBoxNav"}>
           <VerticalNav navItems={navClient} title={"Centro de ayuda"} />
         </UserBoxNav>

@@ -4,7 +4,7 @@ import { currentClient } from "../../data/fakeDB";
 const initialState = {
   isLogged: false,
   client: {
-    name: "Thomas Barenghi",
+    name: "Placeholder",
     bio: "Status",
     profilePicture: "/images/profile-picture.png",
     email: "Email",

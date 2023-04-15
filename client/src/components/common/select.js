@@ -9,7 +9,7 @@ export default function Select({
       <label className={labelClass}>{label}</label>
       <select
         onChange={(e) => setSeleccionados(e.target.value)}
-        className="rounded-xl border-slate-200 bg-white px-4 py-2 text-black placeholder:text-gray-400"
+        className="rounded-xl border-slate-200 bg-white px-4 py-0 text-black placeholder:text-gray-400"
       >
         {valores.map((valor) => (
           <option value={valor.value}>{valor.label}</option>

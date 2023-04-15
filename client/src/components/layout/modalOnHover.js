@@ -50,7 +50,7 @@ export default function ModalOnHover({
     };
   }, [dropdownRef, hoverTimeout]);
 
-  console.log(values);
+
 
   return (
     <div ref={dropdownRef} type="button" id={id} className="">

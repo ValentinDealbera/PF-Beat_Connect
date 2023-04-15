@@ -4,10 +4,11 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage/session';
 import rootReducer from '../rootReducer';
 
+//Si esta dentro de whitelist, se persiste
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['auth', 'cart', 'filters'],
+  whitelist: ['client', 'cart', 'filters'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
