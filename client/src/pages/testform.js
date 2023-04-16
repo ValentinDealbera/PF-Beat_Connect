@@ -1,42 +1,29 @@
 import { Main, Head, Search, Switch, Input } from "@/components";
-
+import { usuariosDos } from "../data/fakeDB";
 import { beats } from "../data/fakeDB";
+import TableBody from "./admin/tableTest";
+import FormCreateBeat from "@/components/client/formCreateBeat";
 
 export default function TestForm() {
-    const props = beats[0];
-    const error = {};
-    const errorDos= {message:"Corrige los elementos cargados"};
+
+  const usuariosDosJson = JSON.stringify(usuariosDos);
+  console.log(usuariosDosJson)
+ 
+
   return (
     <>
       <Head title={"Test"} description={"Head from test"} />
       <Main>
-      <div className="flex">
-      <Search colorMode="dark" sizeMode="small" />
+
+        <div className="bg-slate-500"> 
+      <TableBody data={usuariosDosJson} /> 
       </div>
-      <div className="flex bg-blue-500">
-      <Search colorMode="light" sizeMode="long" />
-      </div>
-      <div className="flex gap-4 w-screen">
-      <Input name={"name"} label={"Name"} placeholder={"Bizarrap Session 55"} value={""} type={"name"} error={error.message}  />
-      <Input name={"name"} label={"Name"} placeholder={"Bizarrap Session 55"} value={""} type={"name"} error={errorDos.message}  />
-      </div>
-      <Switch state={props.state} />
+      <br />
+
+      <FormCreateBeat />
                   
-      </Main>           
+      </Main>    
+            
     </>
   );
 }
-
-
-// {
-//     id: 1,
-//     name: "BZR Session 55",
-//     BPM: 120,
-//     price: 29.99,
-//     license: "",
-//     author: usuarios[0],
-//     genres: genres[0],
-//     image: foto1,
-//     label:"BZR Session 55",
-//     state: "active"
-//   },

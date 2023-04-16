@@ -169,4 +169,47 @@ const sortArr = [
   { value: "Z - A", label: "Z - A" },
 ];
 
-export { genres, beats, usuarios, types, sortArr };
+const usuariosDos = [
+  {
+    id: 1,
+    name: "Bizarrap",
+    mail: "bizarrap@Test.com",
+    profilemsg: `Beats pa' tipos como tu`,
+    type: "seller",
+    image: "https://i.pinimg.com/564x/f3/2f/cb/f32fcb4b8f4db634faff108bd73dcbe0.jpg"
+  },
+  {
+    id: 2,
+    name: "David Guetta",
+    mail: "davidguetta@Test.com",
+    profilemsg: `Beats for the boys`,
+    type: "seller",
+    image: "https://i.pinimg.com/564x/f5/d5/c0/f5d5c0e834c4f53bb06b1b743c42ca8e.jpg"
+  },
+  {
+    id: 3,
+    name: "Pharrel Williams",
+    mail: "pharrellwilliams@Test.com",
+    profilemsg: `Your up all night to get lucky with my beats`,
+    type: "seller",
+    image: "https://i.pinimg.com/564x/f5/d5/c0/f5d5c0e834c4f53bb06b1b743c42ca8e.jpg"
+  },
+  {
+    id: 4,
+    name: "Y2K",
+    mail: "y2k@Test.com",
+    profilemsg: `Wa wa wa, cry for the beats`,
+    type: "seller",
+    image: "https://i.pinimg.com/564x/f5/d5/c0/f5d5c0e834c4f53bb06b1b743c42ca8e.jpg"
+  },
+  {
+    id: 5,
+    name: "Skrillex",
+    mail: "skrillex@Test.com",
+    profilemsg: `Beats... skshhshhshhhh piuuu piuu`,
+    type: "seller",
+    image: "https://i.pinimg.com/564x/b0/75/54/b07554ac7a7d3c2a578557d930a151c8.jpg"
+  },
+];
+
+export { genres, beats, usuarios, usuariosDos, types, sortArr };
