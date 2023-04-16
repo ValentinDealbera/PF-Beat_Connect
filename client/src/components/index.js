@@ -69,6 +69,7 @@ export { default as BuyerNavGeneral } from "./client/buyerNavGeneral";
 export { default as BuyerNavSettings } from "./client/buyerNavSettings";
 export { default as BuyerProfileLayout } from "./client/buyerProfileLayout";
 export { default as ProfileCard } from "./client/profileCard";
+export { default as FormCreateBeat } from "./client/formCreateBeat"
 //clientDataComponents
 export { default as ClientImage } from "./client/clientDataComponents/clientImage";
 

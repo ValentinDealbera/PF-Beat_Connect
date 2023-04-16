@@ -1,5 +1,7 @@
 import { Input, Button } from "@/components"
+import { postClientBeat } from "@/redux/slices/client";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import ValidationCreateBeat from "./validationCreateBeat";
 
 export default function FormCreateBeat(){
@@ -13,14 +15,24 @@ export default function FormCreateBeat(){
         genre: "",
         userCreator: "",
         bpm: "",
-        image: "",
-        audioMP3: "",
+        image: {},
+        audioMP3: {},
     }); 
 
   // HandleInput que setea los estados de error y de Datos adquiridos - Los tipo "number" los parsea a number,
   // porque llegan como string. 
+  const dispatch = useDispatch()
 
     const handleInputChange = (event) => {
+
+        if (event.target.type === 'file') {
+    //       setFile(e.target.files[0]);
+    // setFileName(e.target.files[0].name);
+    setCreateData({
+      ...createData,
+      [event.target.name]: event.target.files[0]
+    })
+        }
         if (event.target.type === 'number') {
             setCreateData({
               ...createData,
@@ -54,10 +66,11 @@ export default function FormCreateBeat(){
     
     const handleSubmit = async(event) => {
         event.preventDefault();
+        const formData = new FormData(event.target)
         if (Object.values(error).some(error => error)) {         
             alert("Debe llenar todos los campos correctamente");
           } else {            
-            // await postBeat(createDataJson);                      
+            await dispatch(postClientBeat(formData));
           };
         }
 

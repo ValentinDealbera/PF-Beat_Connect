@@ -1,6 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { serverUrl } from "@/data/config";
+import { fetchBeats, fetchUserBeats } from "@/redux/slices/beats";
 
 const initialState = {
   isLogged: false,
@@ -16,6 +17,16 @@ const initialState = {
     email: "Email",
   },
 };
+
+export const postClientBeat = createAsyncThunk("client/postClientBeat", async (data) => {
+  const response = await axios.post(`${serverUrl}beats`, data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  console.log(data);
+  return response.data;
+});
 
 const cartSlice = createSlice({
   name: "profile",
@@ -42,6 +53,22 @@ const cartSlice = createSlice({
       state.isLogged = false;
     },
   },
+  extraReducers: (builder) => {
+    builder
+
+      //--------------------
+      //Extra reducers para los beats publicos 0 1
+      .addCase(postClientBeat.pending, (state, action) => {
+        console.log('posting...');
+      })
+      .addCase(postClientBeat.fulfilled, (state, action) => {
+        console.log('post finished!');
+       // state.beatsDisplayMode = 1;
+      })
+      .addCase(postClientBeat.rejected, (state, action) => {
+        console.error(action.error);
+      })
+    }
 });
 
 export const { setCurrentClient, resetReducer, setAuthSettings } =
