@@ -9,15 +9,13 @@ const buyerGeneralNav = [
     title: "Mis Beats",
   },
   {
-    title: "Favoritos",
-  },
-  {
     title: "Reviews",
   },
 ];
 
 export default function BuyerNavGeneral() {
   const activeIndex = useSelector((state) => state.beats.generalActiveIndex);
+  console.log("nav",activeIndex);
   const mode = useSelector((state) => state.beats.beatsDisplayMode);
   const dispatch = useDispatch();
 

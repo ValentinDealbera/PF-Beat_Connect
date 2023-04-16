@@ -16,69 +16,63 @@ export default function Master(props) {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const { generalActiveIndex, beatsDisplayMode, publicBeatsFetchStatus } =
-    useSelector((state) => state.beats);
+  const {
+    generalActiveIndex,
+    beatsDisplayMode,
+    publicBeatsFetchStatus,
+    authorFetchStatus,
+    setGeneralActiveIndex
+  } = useSelector((state) => state.beats);
 
   useEffect(() => {
     dispatch(fetchBeats());
   }, [dispatch]);
 
   useEffect(() => {
-    switch (router.pathname) {
-      case "/beats":
-        dispatch(setBeatsDisplayMode(0));
-        break;
-      case "/client":
-        dispatch(fetchUserBeats());
-        dispatch(setBeatsDisplayMode(2));
-        break;
-      case (router.pathname.match(/\/beats\/author\/(.+)/) || {}).input:
-        const { slug } = router.query;
-        dispatch(fetchCurrentAuthor(slug));
-        break;
-      default:
-        console.log("Esperando a que se carguen los beats públicos");
-        const waitForPublicBeats = async () => {
-          while (publicBeatsFetchStatus === false) {
-            await new Promise((resolve) => setTimeout(resolve, 100));
-          }
-          console.log(
-            "Los beats públicos se han cargado, mostrando la vista 1"
-          );
-          dispatch(setBeatsDisplayMode(1));
-        };
-        waitForPublicBeats();
+    if (router.pathname.startsWith("/client")) {
+      dispatch(fetchUserBeats());
+      
     }
-  }, [dispatch, router.pathname, router.query, publicBeatsFetchStatus]);
+    else if (router.pathname.startsWith("/beats/author")) return;
+    else if (router.pathname === "/beats") {
+    //  dispatch(setBeatsDisplayMode(0));
+    return;
+    }
+   else  {
+    dispatch(setBeatsDisplayMode(1));
+    console.log("solicitamos beats");
+   // dispatch(fetchBeats());
+  }
+  }, [dispatch, router]);
 
-  useEffect(() => {
-    switch (generalActiveIndex) {
-      case 0:
-        dispatch(setActiveItemsForProfile(0));
-        break;
-      case 1:
-        dispatch(setActiveItemsForProfile(1));
-        break;
-      case 2:
-        dispatch(setActiveItemsForProfile(2));
-        break;
-      default:
-        break;
-    }
-  }, [dispatch, generalActiveIndex]);
+  // useEffect(() => {
+  //   switch (generalActiveIndex) {
+  //     case 0:
+  //       dispatch(setActiveItemsForProfile(0));
+  //       break;
+  //     case 1:
+  //       dispatch(setActiveItemsForProfile(1));
+  //       break;
+  //     case 2:
+  //       dispatch(setActiveItemsForProfile(2));
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // }, [dispatch, generalActiveIndex]);
 
-  useEffect(() => {
-    switch (beatsDisplayMode) {
-      case 2:
-        console.log("solicitamos items activos para perfil");
-        break;
-      case 3:
-        console.log("solicitamos items activos para carrito");
-        break;
-      default:
-        break;
-    }
-  }, [beatsDisplayMode]);
+  // useEffect(() => {
+  //   switch (beatsDisplayMode) {
+  //     case 2:
+  //       console.log("solicitamos items activos para perfil");
+  //       break;
+  //     case 3:
+  //       console.log("solicitamos items activos para carrito");
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // }, [beatsDisplayMode]);
 
   return <>{props.children}</>;
 }

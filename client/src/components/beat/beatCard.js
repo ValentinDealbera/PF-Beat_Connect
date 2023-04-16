@@ -19,8 +19,6 @@ export default function BeatCard({ beat, variant }) {
     externalManageDropdown();
   };
 
-
-
   return (
     <>
       <div onClick={handleAction}>

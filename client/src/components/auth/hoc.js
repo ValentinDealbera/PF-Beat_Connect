@@ -7,12 +7,10 @@ export default function HOC(props) {
 
   const { authSettings, isLogged } = useSelector((state) => state.client);
 
-  const hocIsWorking = false;
+  const hocIsWorking = true;
   const experimentalIsClient = isLogged;
   const experimentalIsAdmin = authSettings.superAdmin;
 
-  console.log(authSettings, isLogged)
-  console.log(experimentalIsAdmin, experimentalIsClient);
 
 
   if (hocIsWorking === false) {
@@ -40,7 +38,7 @@ export default function HOC(props) {
     if (isLogged === true) {
       router.push("/");
     } else {
-      console.log("no se logeo");
+     
       return <>{props.children}</>;
     }
   }

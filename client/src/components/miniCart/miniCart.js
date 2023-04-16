@@ -4,11 +4,16 @@ import Image from "next/image";
 import { BeatRightSheet, MiniCartItem } from "@/components";
 import Link from "next/link";
 
+
 export default function MiniCart() {
-  const cartIds = useSelector((state) => state.cart.cart) || [];
+  const cartIds = useSelector((state) => state.cart.cart).map(
+    (item) => item.id
+  ) || [];
   const cartItems = useSelector((state) => state.beats.publicItems).filter(
     (item) => cartIds.includes(item._id)
-  );
+  ) || [];
+
+  //console.log("cartItems", cartItems, cartIds);
 
   const [visible, setVisible] = useState(false);
   return (

@@ -161,12 +161,13 @@ const types = [
 ];
 
 const sortArr = [
-  { value: "Price ↑", label: "Price ↑" },
-  { value: "Price ↓", label: "Price ↓" },
-  { value: "BPM ↑", label: "BPM ↑" },
-  { value: "BPM ↓", label: "BPM ↓" },
-  { value: "A - Z", label: "A - Z" },
-  { value: "Z - A", label: "Z - A" },
+  { value: "default", label: "Default"},
+  { value: "Price-AS", label: "Price ↑" },
+  { value: "Price-DES", label: "Price ↓" },
+  { value: "BPM-AS", label: "BPM ↑" },
+  { value: "BPM-DES", label: "BPM ↓" },
+  { value: "A-Z", label: "A-Z" },
+  { value: "Z-A", label: "Z-A" },
 ];
 
 export { genres, beats, usuarios, types, sortArr };

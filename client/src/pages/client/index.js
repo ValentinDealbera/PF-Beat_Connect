@@ -22,7 +22,7 @@ export default function BuyerProfile() {
             <div>
               <ProfileCard
                 profilePhoto={currentUser.profilePicture}
-                profileName={currentUser.name}
+                profileName={ `${currentUser.firstName}${" "}${currentUser.lastName}` }
                 profileMessage={currentUser.bio}
               />
             </div>
