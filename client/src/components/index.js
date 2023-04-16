@@ -58,7 +58,7 @@ export { default as AuthorName } from "./beat/beatDataComponents/authorName";
 export { default as BeatPrice } from "./beat/beatDataComponents/beatPrice";
 export { default as BeatTitle } from "./beat/beatDataComponents/beatTitle";
 export { default as BeatImage } from "./beat/beatDataComponents/beatImage";
-export { default as BeatBPM } from "./beat/beatDataComponents/BeatBPM";
+export { default as BeatBPM } from "./beat/beatDataComponents/beatBPM";
 export { default as BeatAudio } from "./beat/beatDataComponents/beatAudio";
 export { default as AddToCart } from "./beat/beatDataComponents/addToCart";
 
