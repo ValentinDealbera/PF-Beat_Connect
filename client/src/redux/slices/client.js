@@ -4,6 +4,7 @@ import { serverUrl } from "@/data/config";
 import { fetchBeats, fetchUserBeats } from "@/redux/slices/beats";
 
 const initialState = {
+  tokenValid: false,
   isLogged: false,
   authSettings: {
     isSeller: false,
@@ -17,6 +18,28 @@ const initialState = {
     email: "Email",
   },
 };
+
+export const loginSystem = createAsyncThunk("client/loginSystem", async (data) => {
+  const response = await axios.post(`${serverUrl}auth`, data);
+  const userResponse = response.data
+  console.log(userResponse);
+  const newClient = {
+      bio: "a la espera de backend",
+      profilePicture: userResponse.user.image,
+      _id: userResponse.user._id,
+      email: userResponse.user.email,
+      firstName: userResponse.user.firstName,
+      lastName: userResponse.user.lastName,
+      userName: userResponse.user.username,
+    };
+
+    const authSettings = {
+      isSeller: userResponse.user.isSeller,
+      superAdmin: userResponse.user.superAdmin,
+      token: userResponse.token,
+    };
+    return {authSettings, newClient}
+});
 
 export const postClientBeat = createAsyncThunk("client/postClientBeat", async (data) => {
   const response = await axios.post(`${serverUrl}beats`, data, {
@@ -44,6 +67,9 @@ const cartSlice = createSlice({
         userName: action.payload.userName,
       };
     },
+    setTokenValid(state, action){
+      state.tokenValid = action.payload
+    },
     setAuthSettings(state, action) {
       state.authSettings = action.payload;
       state.isLogged = true;
@@ -56,54 +82,42 @@ const cartSlice = createSlice({
   extraReducers: (builder) => {
     builder
 
-      //--------------------
-      //Extra reducers para los beats publicos 0 1
+      //--------------------  Beat
       .addCase(postClientBeat.pending, (state, action) => {
         console.log('posting...');
       })
       .addCase(postClientBeat.fulfilled, (state, action) => {
         console.log('post finished!');
-       // state.beatsDisplayMode = 1;
       })
       .addCase(postClientBeat.rejected, (state, action) => {
+        console.error(action.error);
+      })
+
+      //--------------------  Log-in
+      .addCase(loginSystem.pending, (state, action) => {
+        console.log('loging...');
+      })
+      .addCase(loginSystem.fulfilled, (state, action) => {
+        state.tokenValid = true
+        state.client = {
+          bio: action.payload.newClient.bio,
+          profilePicture: action.payload.newClient.profilePicture,
+          _id: action.payload.newClient._id,
+          email: action.payload.newClient.email,
+          firstName: action.payload.newClient.firstName,
+          lastName: action.payload.newClient.lastName,
+          userName: action.payload.newClient.userName,
+        };
+        state.authSettings = action.payload.authSettings;
+      state.isLogged = true;
+      console.log(state.client);
+      })
+      .addCase(loginSystem.rejected, (state, action) => {
         console.error(action.error);
       })
     }
 });
 
-export const { setCurrentClient, resetReducer, setAuthSettings } =
+export const {setTokenValid, setCurrentClient, resetReducer, setAuthSettings } =
   cartSlice.actions;
 export default cartSlice.reducer;
-
-//Creamos sistema asincrono para el login, recibimos la respuesta del servidor y la guardamos en el estado, usamos axios
-export const loginSystem = (email, password) => async (dispatch) => {
-  try {
-    // const { data } = await axios.post("/api/login", { email, password });
-    //hacemos un get a la base de datos
-    const { data } = await axios.get(`${serverUrl}currentUser`);
-    //quizas en un futuro sea data.data
-    const userResponse = data;
-
-    console.log("userResponse", userResponse);
-    const newClient = {
-      bio: "a la espera de backend",
-      profilePicture: userResponse.image,
-      _id: userResponse._id,
-      email: userResponse.email,
-      firstName: userResponse.firstName,
-      lastName: userResponse.lastName,
-      userName: userResponse.username,
-    };
-
-    const authSettings = {
-      isSeller: userResponse.isSeller,
-      superAdmin: userResponse.superAdmin,
-      token: "a la espera de backend",
-    };
-
-    dispatch(setCurrentClient(newClient));
-    dispatch(setAuthSettings(authSettings));
-  } catch (error) {
-    console.log(error);
-  }
-};

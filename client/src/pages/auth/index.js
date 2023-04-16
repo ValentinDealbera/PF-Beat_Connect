@@ -14,9 +14,17 @@ export default function Login() {
   const dispatch = useDispatch();
   const router = useRouter();
 
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const data = {
+      email: e.target.email.value,
+      password: e.target.password.value,
+    };
+    dispatch(loginSystem(data));
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(loginSystem());
    // router.push("/client");
   };
   return (
@@ -28,7 +36,7 @@ export default function Login() {
           Hey, bienvenido{" "}
           <span className="text-titulo3-semibold">de nuevo</span>
         </h1>
-        <form className="flex w-full flex-col gap-4">
+        <form onSubmit={handleLogin} className="flex w-full flex-col gap-4">
           <Input
             type="email"
             name="email"
@@ -46,7 +54,6 @@ export default function Login() {
           <button
             type="submit"
             className="text-base-semibold mt-2  w-full rounded-full bg-red-700 py-2 text-white"
-            onClick={handleSubmit}
           >
             Ingresar
           </button>
