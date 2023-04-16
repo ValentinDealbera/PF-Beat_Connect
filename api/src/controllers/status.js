@@ -5,7 +5,8 @@ const NOT_FOUND = 404;
 const SERVER_ERROR = 500;
 const USER_NOT_FOUND = "Usuario no encontrado...";
 const ALL_OK = "La peticion se realizo correctamente";
-const ALL_NOT_OK = "La peticion no se realizar correctamente";
+const ALL_NOT_OK = "La peticion no se pudo realizar correctamente";
+const GENRE_NOT_FOUND = "Genero no encontrado";
 
 module.exports = {
   OK,
@@ -16,4 +17,5 @@ module.exports = {
   SERVER_ERROR,
   ALL_OK,
   ALL_NOT_OK,
+  GENRE_NOT_FOUND,
 };

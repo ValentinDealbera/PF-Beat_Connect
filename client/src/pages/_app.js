@@ -1,8 +1,10 @@
 import "@/styles/globals.scss";
-import { Header, Footer } from "@/components";
-import { Provider } from "react-redux";
+import { Header, Footer, Master, HOC } from "@/components";
+import { Provider, useDispatch } from "react-redux";
 import store, { persistor } from "@/redux/store/store";
 import { PersistGate } from "redux-persist/integration/react";
+import { Toaster, toast } from 'sonner'
+
 
 export default function App({ Component, pageProps, router }) {
   const mode = !router.pathname.startsWith("/client/seller")
@@ -10,16 +12,25 @@ export default function App({ Component, pageProps, router }) {
     : "light";
   const headerVisibility =
     router.pathname.startsWith("/auth") ||
-    router.pathname.startsWith("/landing")
+    router.pathname.startsWith("/landing") ||
+    router.pathname.startsWith("/admin")
       ? false
       : true;
+
+
+
   return (
     <>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
+          <HOC>
           {headerVisibility && <Header />}
+          <Master>
+          <Toaster position="bottom-left" />
           <Component {...pageProps} />
+          </Master>
           <Footer mode={mode} />
+          </HOC>
         </PersistGate>
       </Provider>
     </>

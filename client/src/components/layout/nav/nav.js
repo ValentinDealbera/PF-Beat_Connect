@@ -5,7 +5,7 @@ import {navHelp, navPublic} from "@/data/data"
 
 export default function Nav({ currentMode}) {
   const router = useRouter();
-  console.log("nav", currentMode);
+
   return (
     <>
       <nav className="z-10 hidden lg:flex">

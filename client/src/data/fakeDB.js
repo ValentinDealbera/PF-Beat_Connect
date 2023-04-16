@@ -23,7 +23,7 @@ const usuarios = [
     mail: "bizarrap@Test.com",
     profilemsg: `Beats pa' tipos como tu`,
     type: "seller",
-    profileimg: foto1
+    profileimg: foto1,
   },
   {
     id: 2,
@@ -31,7 +31,7 @@ const usuarios = [
     mail: "davidguetta@Test.com",
     profilemsg: `Beats for the boys`,
     type: "seller",
-    profileimg: foto2
+    profileimg: foto2,
   },
   {
     id: 3,
@@ -39,7 +39,7 @@ const usuarios = [
     mail: "pharrellwilliams@Test.com",
     profilemsg: `Your up all night to get lucky with my beats`,
     type: "seller",
-    profileimg: foto3
+    profileimg: foto3,
   },
   {
     id: 4,
@@ -47,7 +47,7 @@ const usuarios = [
     mail: "y2k@Test.com",
     profilemsg: `Wa wa wa, cry for the beats`,
     type: "seller",
-    profileimg: foto4
+    profileimg: foto4,
   },
   {
     id: 5,
@@ -55,10 +55,17 @@ const usuarios = [
     mail: "skrillex@Test.com",
     profilemsg: `Beats... skshhshhshhhh piuuu piuu`,
     type: "seller",
-    profileimg: foto5
+    profileimg: foto5,
   },
 ];
 
+export const currentClient = {
+  id: 1,
+  name: "Jorge",
+  status: "Jorge status",
+  profilePicture: "/img/category1.png",
+  email: "jorge@test.com",
+};
 
 const beats = [
   {
@@ -67,9 +74,10 @@ const beats = [
     BPM: 120,
     price: 29.99,
     license: "",
-    author: usuarios[0],
-    genres: genres[0],
-    image: foto1,    
+    author: 2,
+    genres: ["COUNTRY"],
+    image: foto1,
+    types: ["VOCAL", "BEAT", "SONG"],
     // state: "active"
   },
   {
@@ -79,7 +87,8 @@ const beats = [
     price: 19.99,
     license: "",
     author: usuarios[1],
-    genres: genres[1],
+    genres: ["HIP-HOP"],
+    types: ["VOCAL", "BEAT", "SONG"],
     image: foto2,
   },
   {
@@ -88,8 +97,10 @@ const beats = [
     BPM: 210,
     price: 29.99,
     license: "",
+    types: ["BEAT", "SONG"],
     author: usuarios[2],
-    genres: genres[2],
+    genres: ["HIP-HOP"],
+
     image: foto3,
   },
   {
@@ -98,8 +109,10 @@ const beats = [
     BPM: 150,
     price: 39.99,
     license: "",
+    types: ["BEAT", "SONG"],
     author: usuarios[3],
-    genres: genres[3],
+    genres: ["ROCK", "POP"],
+
     image: foto4,
   },
   {
@@ -108,8 +121,10 @@ const beats = [
     BPM: 140,
     price: 15.99,
     license: "",
+    types: ["BEAT", "SONG"],
     author: usuarios[4],
-    genres: genres[4],
+    genres: ["HIP-HOP"],
+
     image: foto5,
   },
   {
@@ -118,8 +133,10 @@ const beats = [
     BPM: 189,
     price: 29.99,
     license: "",
+    types: ["BEAT", "SONG"],
     author: usuarios[0],
-    genres: genres[5],
+    genres: ["HIP-HOP"],
+
     image: foto6,
   },
   {
@@ -128,8 +145,11 @@ const beats = [
     BPM: 120,
     price: 30.0,
     license: "",
+
+    types: ["VOCAL"],
     author: usuarios[1],
-    genres: genres[6],
+    genres: ["POP"],
+
     image: foto7,
   },
 ];
@@ -141,12 +161,56 @@ const types = [
 ];
 
 const sortArr = [
-  { value: "Price ↑", label: "Price ↑" },
-  { value: "Price ↓", label: "Price ↓" },
-  { value: "BPM ↑", label: "BPM ↑" },
-  { value: "BPM ↓", label: "BPM ↓" },
-  { value: "A - Z", label: "A - Z" },
-  { value: "Z - A", label: "Z - A" },
+  { value: "default", label: "Default"},
+  { value: "Price-AS", label: "Price ↑" },
+  { value: "Price-DES", label: "Price ↓" },
+  { value: "BPM-AS", label: "BPM ↑" },
+  { value: "BPM-DES", label: "BPM ↓" },
+  { value: "A-Z", label: "A-Z" },
+  { value: "Z-A", label: "Z-A" },
 ];
 
-export {genres, beats, usuarios , types, sortArr};
+const usuariosDos = [
+  {
+    id: 1,
+    name: "Bizarrap",
+    mail: "bizarrap@Test.com",
+    profilemsg: `Beats pa' tipos como tu`,
+    type: "seller",
+    image: "https://i.pinimg.com/564x/f3/2f/cb/f32fcb4b8f4db634faff108bd73dcbe0.jpg"
+  },
+  {
+    id: 2,
+    name: "David Guetta",
+    mail: "davidguetta@Test.com",
+    profilemsg: `Beats for the boys`,
+    type: "seller",
+    image: "https://i.pinimg.com/564x/f5/d5/c0/f5d5c0e834c4f53bb06b1b743c42ca8e.jpg"
+  },
+  {
+    id: 3,
+    name: "Pharrel Williams",
+    mail: "pharrellwilliams@Test.com",
+    profilemsg: `Your up all night to get lucky with my beats`,
+    type: "seller",
+    image: "https://i.pinimg.com/564x/f5/d5/c0/f5d5c0e834c4f53bb06b1b743c42ca8e.jpg"
+  },
+  {
+    id: 4,
+    name: "Y2K",
+    mail: "y2k@Test.com",
+    profilemsg: `Wa wa wa, cry for the beats`,
+    type: "seller",
+    image: "https://i.pinimg.com/564x/f5/d5/c0/f5d5c0e834c4f53bb06b1b743c42ca8e.jpg"
+  },
+  {
+    id: 5,
+    name: "Skrillex",
+    mail: "skrillex@Test.com",
+    profilemsg: `Beats... skshhshhshhhh piuuu piuu`,
+    type: "seller",
+    image: "https://i.pinimg.com/564x/b0/75/54/b07554ac7a7d3c2a578557d930a151c8.jpg"
+  },
+];
+
+export { genres, beats, usuarios, usuariosDos, types, sortArr };

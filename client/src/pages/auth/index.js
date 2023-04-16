@@ -6,8 +6,36 @@ import {
   AuthLayout,
 } from "@/components";
 import Link from "next/link";
+import { setCurrentClient, loginSystem } from "@/redux/slices/client";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 
 export default function Login() {
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    try {      
+      const data = {
+        email: e.target.email.value,
+        password: e.target.password.value,
+      };
+      dispatch(loginSystem(data));
+    } catch (error) {
+      toast.error("Ocurrio un error, recarga la pagina", {
+        style: {
+          background: "#FFF0F0",
+          color: "#E60000",
+        },
+      });
+    }
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+   // router.push("/client");
+  };
   return (
     <>
       <Head title="Ingresar" />
@@ -17,7 +45,7 @@ export default function Login() {
           Hey, bienvenido{" "}
           <span className="text-titulo3-semibold">de nuevo</span>
         </h1>
-        <form className="flex w-full flex-col gap-4">
+        <form onSubmit={handleLogin} className="flex w-full flex-col gap-4">
           <Input
             type="email"
             name="email"
@@ -31,14 +59,13 @@ export default function Login() {
             label="Contraseña"
             placeholder="Contraseña"
           />
-          <Link href="/client" className="w-full">
-            <button
-              type="submit"
-              className="text-base-semibold mt-2  w-full rounded-full bg-red-700 py-2 text-white"
-            >
-              Ingresar
-            </button>
-          </Link>
+
+          <button
+            type="submit"
+            className="text-base-semibold mt-2  w-full rounded-full bg-red-700 py-2 text-white"
+          >
+            Ingresar
+          </button>
         </form>
         <hr className="my-6 w-full" />
         <GoogleButton />

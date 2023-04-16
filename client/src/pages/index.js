@@ -34,7 +34,7 @@ export default function Home() {
                   malesuada orci. Mauris in tortor nec justo luctus lacinia.
                 </p>
               </div>
-              <Search colorMode="dark" sizeMode="small" className={"w-full sm:w-2/3 lg:w-[45%] xl:w-[35%] "} />
+              <Search colorMode="dark" sizeMode="long" className={"w-full sm:w-2/3 lg:w-[45%] xl:w-[35%] "} />
             </div>
           </div>
         </Hero>

@@ -1,6 +1,12 @@
 import Image from "next/image";
 
-export default function Search({ colorMode, sizeMode, className }) {
+export default function Search({
+  colorMode,
+  sizeMode,
+  className,
+  response,
+  value,
+}) {
   return (
     <>
       <div
@@ -19,18 +25,26 @@ export default function Search({ colorMode, sizeMode, className }) {
               : "/icon/search-white.svg"
           }
           alt="Search"
-          width={sizeMode === "small" ? 13 : 24}
-          height={sizeMode === "small" ? 13 : 24}
+          width={sizeMode === "small" ? 13 : 20}
+          height={sizeMode === "small" ? 13 : 20}
           className="aspect-square"
         />
         <input
           type="text"
-          placeholder="Search"
+          placeholder="¿Que estas buscando?"
+          value={value}
           className={`border-none bg-transparent outline-none ${
             colorMode === "light"
               ? "color-primary-red-700 placeholder:color-primary-red-700"
               : "color-neutral-white placeholder:color-neutral-white"
           } text-paragraph1-regular w-full`}
+          onChange={(e) => {
+            try {
+              response(e.target.value);
+            } catch (error) {
+              console.log(error);
+            }
+          }}
         />
       </div>
     </>
