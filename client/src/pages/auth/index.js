@@ -16,11 +16,20 @@ export default function Login() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    const data = {
-      email: e.target.email.value,
-      password: e.target.password.value,
-    };
-    dispatch(loginSystem(data));
+    try {      
+      const data = {
+        email: e.target.email.value,
+        password: e.target.password.value,
+      };
+      dispatch(loginSystem(data));
+    } catch (error) {
+      toast.error("Ocurrio un error, recarga la pagina", {
+        style: {
+          background: "#FFF0F0",
+          color: "#E60000",
+        },
+      });
+    }
   }
 
   const handleSubmit = (e) => {

@@ -4,7 +4,7 @@ import axios from "axios";
 import { sortArr } from "@/data/fakeDB";
 
 export const fetchGenres = createAsyncThunk("genres/fetchGenres", async () => {
-  const { data } = await axios.get(`${serverUrl}genres`);
+  const { data } = await axios.get(`${serverUrl}genre`);
   const genresResponse = data;
   return genresResponse;
 });

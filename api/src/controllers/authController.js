@@ -6,7 +6,7 @@ const login = async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return res.status(400).json({ error: 'Faltan credenciales' });
+    return res.status(400).json({ message: 'Faltan credenciales' });
   }
 
   try {
@@ -15,7 +15,7 @@ const login = async (req, res) => {
 
     // Si el usuario no existe, devolver un error
     if (!user) {
-      return res.status(401).json({ error: 'Email inválido' });
+      return res.status(401).json({ message: 'Email inválido' });
     }
 
     // Comparar la contraseña ingresada con la almacenada en la base de datos
@@ -23,7 +23,7 @@ const login = async (req, res) => {
 
     // Si la contraseña no coincide, devolver un error
     if (!passwordIsValid) {
-      return res.status(401).json({ error: 'Contraseña inválida' });
+      return res.status(401).json({ message: 'Contraseña inválida' });
     }
 
     // Generar un token JWT y enviarlo como respuesta
@@ -31,7 +31,7 @@ const login = async (req, res) => {
     res.json({ token: token, user: user });
 
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -39,7 +39,7 @@ const register = async (req, res) => {
   const { email, password, firstName, lastName, username } = req.body;
 
   if (!email || !password || !firstName || !lastName || !username) {
-    return res.status(400).json({ error: 'Faltan credenciales' });
+    return res.status(400).json({ message: 'Faltan credenciales' });
   }
 
   try {
@@ -47,7 +47,7 @@ const register = async (req, res) => {
     const existingUser = await userModel.findOne({ email: email });
     if (existingUser) {
         console.log(existingUser);
-      return res.status(409).json({ error: 'El email ya está en uso' });
+      return res.status(400).json({message:'El email ya está en uso'});
     }
 
     // Cifrar la contraseña
@@ -62,7 +62,7 @@ const register = async (req, res) => {
     res.json({ token, userOK });
 
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
