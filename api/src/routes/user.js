@@ -26,7 +26,35 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const allUserId = await UserModel.findById(id).populate('createdBeats').populate('bougthBeats');
+    const allUserId = await UserModel.findById(id).populate({
+    path: 'createdBeats',
+    populate: [
+      {
+        path: 'genre',
+        model: 'Genre',
+      },
+      {
+        path: 'review',
+        model: 'Review',
+      },
+      {
+        path: 'userCreator',
+        model: 'User',
+      },
+    ],
+  }).populate({
+    path: 'bougthBeats',
+    populate: [
+      {
+        path: 'genre',
+        model: 'Genre',
+      },
+      {
+        path: 'review',
+        model: 'Review',
+      },
+    ],
+  });
     allUserId
       ? res.status(OK).send(allUserId)
       : res.status(NOT_FOUND).send(USER_NOT_FOUND);
