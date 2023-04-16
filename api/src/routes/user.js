@@ -16,7 +16,7 @@ const { getActiveUser, getUserId } = require("../controllers/userController");
 
 router.get("/", async (req, res) => {
   try {
-    const users = await getActiveUser();
+    const users = await UserModel.find().populate('createdBeats').populate('bougthBeats');
     res.json(users);
   } catch (err) {
     res.status(SERVER_ERROR).send(USER_NOT_FOUND);
@@ -26,7 +26,7 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const allUserId = await getUserId(id);
+    const allUserId = await UserModel.findById(id).populate('createdBeats').populate('bougthBeats');
     allUserId
       ? res.status(OK).send(allUserId)
       : res.status(NOT_FOUND).send(USER_NOT_FOUND);

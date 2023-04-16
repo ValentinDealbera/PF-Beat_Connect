@@ -44,12 +44,12 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const reviews = await getAllReviews();
+    const reviews = await reviewSchema.find().populate('createdBy').populate('beat');
 
     if (reviews.length === 0) {
       return res.send("No hay reviews disponibles").status(OK);
     }
-
+  
     return res.json(reviews).status(OK);
   } catch (error) {
     res.json({ error: error.message }).status(NOT_FOUND);
@@ -63,7 +63,7 @@ router.get("/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
-    const reviews = await getReviewsPerBeat(id);
+    const reviews = await reviewSchema.find({beat: id}).populate('createdBy').populate('beat');
 
     if (reviews.length === 0) {
       return res.send("No hay reviews para este beat");
