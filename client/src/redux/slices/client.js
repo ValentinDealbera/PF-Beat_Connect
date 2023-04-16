@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { currentClient } from "../../data/fakeDB";
 import axios from "axios";
+import { serverUrl } from "@/data/config";
 
 const initialState = {
   isLogged: false,
@@ -31,7 +31,7 @@ const cartSlice = createSlice({
         firstName: action.payload.firstName,
         lastName: action.payload.lastName,
         userName: action.payload.userName,
-      }
+      };
     },
     setAuthSettings(state, action) {
       state.authSettings = action.payload;
@@ -53,9 +53,9 @@ export const loginSystem = (email, password) => async (dispatch) => {
   try {
     // const { data } = await axios.post("/api/login", { email, password });
     //hacemos un get a la base de datos
-    const { data } = await axios.get("http://localhost:3001/currentUser");
+    const { data } = await axios.get(`${serverUrl}currentUser`);
     //quizas en un futuro sea data.data
-    const userResponse = data
+    const userResponse = data;
 
     console.log("userResponse", userResponse);
     const newClient = {

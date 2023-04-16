@@ -60,7 +60,7 @@ export { default as BeatTitle } from "./beat/beatDataComponents/beatTitle";
 export { default as BeatImage } from "./beat/beatDataComponents/beatImage";
 export { default as BeatBPM } from "./beat/beatDataComponents/BeatBPM";
 export { default as BeatAudio } from "./beat/beatDataComponents/beatAudio";
-
+export { default as AddToCart } from "./beat/beatDataComponents/addToCart";
 
 //Client
 export { default as UserBoxNav } from "./layout/userBoxNav";

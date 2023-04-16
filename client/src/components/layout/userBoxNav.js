@@ -51,7 +51,7 @@ export default function UserBoxNav({ children, id }) {
   }, [dropdownRef, hoverTimeout]);
 
   const  client  = useSelector((state) => state.client.client);
-  console.log("box nav",client);
+
   const { isLogged } = useSelector((state) => state.client);
 
   return (

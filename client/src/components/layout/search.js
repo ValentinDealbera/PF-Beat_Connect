@@ -1,7 +1,12 @@
 import Image from "next/image";
 
-
-export default function Search({ colorMode, sizeMode, className , response}) {
+export default function Search({
+  colorMode,
+  sizeMode,
+  className,
+  response,
+  value,
+}) {
   return (
     <>
       <div
@@ -27,12 +32,19 @@ export default function Search({ colorMode, sizeMode, className , response}) {
         <input
           type="text"
           placeholder="¿Que estas buscando?"
+          value={value}
           className={`border-none bg-transparent outline-none ${
             colorMode === "light"
               ? "color-primary-red-700 placeholder:color-primary-red-700"
               : "color-neutral-white placeholder:color-neutral-white"
           } text-paragraph1-regular w-full`}
-          onChange={(e) => response(e.target.value)}
+          onChange={(e) => {
+            try {
+              response(e.target.value);
+            } catch (error) {
+              console.log(error);
+            }
+          }}
         />
       </div>
     </>

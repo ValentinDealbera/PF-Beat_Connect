@@ -1,8 +1,28 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { serverUrl } from "@/data/config";
+import axios from "axios";
+import { sortArr } from "@/data/fakeDB";
+
+export const fetchGenres = createAsyncThunk("genres/fetchGenres", async () => {
+  const { data } = await axios.get(`${serverUrl}genres`);
+  const genresResponse = data;
+  return genresResponse;
+});
 
 const initialState = {
   searchFilter: "",
+  genres: [],
   genresFilter: [],
+  priceFilter: {
+    min: 0,
+    max: 0,
+  },
+  BpmFilter : {
+    min: 0,
+    max: 0,
+  },
+  sorter: "default",
+  sorterValues: sortArr,
   typesFilter: [],
 };
 
@@ -35,11 +55,40 @@ const filtersSlice = createSlice({
         state.typesFilter = action.payload;
       }
     },
+    setPriceFilter(state, action) {
+      state.priceFilter = action.payload;
+    },
+
+    setBpmFilter(state, action) {
+      state.BpmFilter = action.payload;
+    },
+    setSorter(state, action) {
+      state.sorter = action.payload;
+    },
+
     restoreFilters(state, action) {
       state.searchFilter = "";
       state.genresFilter = [];
       state.typesFilter = [];
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchGenres.fulfilled, (state, action) => {
+        //puede cambiar a _id
+        const formatedGenres = action.payload.map((genre) => ({
+          label: genre.name,
+          value: genre._id,
+        }));
+
+        state.genres = formatedGenres;
+      })
+      .addCase(fetchGenres.rejected, (state, action) => {
+        state.genres = [];
+      })
+      .addCase(fetchGenres.pending, (state, action) => {
+        state.genres = [];
+      });
   },
 });
 
@@ -48,6 +97,9 @@ export const {
   setGenresFilter,
   setTypesFilter,
   restoreFilters,
+  setPriceFilter,
+  setBpmFilter,
+  setSorter,
 } = filtersSlice.actions;
 
 export default filtersSlice.reducer;

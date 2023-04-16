@@ -1,8 +1,6 @@
 import Image from "next/image"
 
 export default function ClientImage({client, height, width}) {
-    console.log("current",client)
-
 
     return(
         <Image

@@ -9,6 +9,7 @@ import {
   BeatBPM,
   BeatTitle,
   BeatAudio,
+  AddToCart,
 } from "@/components";
 
 export default function BeatDetailSideBar() {
@@ -79,15 +80,7 @@ function BeatDetailBox({ msg1, msg2, beat }) {
     <div className="h-auto">
       <p className="pb-1 text-base font-medium text-black">{msg1}</p>
       <p className=" mb-1 text-sm font-semibold text-red-700">{msg2}</p>
-      <button
-        className=" text-sm font-semibold text-red-700"
-        onClick={() => {
-          dispatch(addToCart(beat._id));
-          externalManageDropdown();
-        }}
-      >
-        Añadir al carrito
-      </button>
+<AddToCart beat={beat} posAction={() => externalManageDropdown()} />
     </div>
   );
 }
