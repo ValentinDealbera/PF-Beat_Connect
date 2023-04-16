@@ -44,7 +44,6 @@ router.post("/", async (req, res) => {
   if(comprobacion){
     if (comprobacion.name.toLocaleLowerCase() === req.body.name.toLowerCase()) return res.status(400).json({ error: "Ese Beat ya Existe" }).end();
   }
-  console.log(req.body);
   const creator = await userModel.findById(req.body.userCreator)
   const genre = await genreModel.findById(req.body.genre)
   const audioMP3Data = fs.readFileSync(req.files.audioMP3.tempFilePath);

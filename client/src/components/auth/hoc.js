@@ -7,7 +7,7 @@ export default function HOC(props) {
 
   const { authSettings, isLogged } = useSelector((state) => state.client);
 
-  const hocIsWorking = true;
+  const hocIsWorking = false;
   const experimentalIsClient = isLogged;
   const experimentalIsAdmin = authSettings.superAdmin;
 
