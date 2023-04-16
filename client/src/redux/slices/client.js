@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { serverUrl } from "@/data/config";
+import { toast } from "sonner";
 import { fetchBeats, fetchUserBeats } from "@/redux/slices/beats";
 
 const initialState = {
@@ -19,26 +20,30 @@ const initialState = {
   },
 };
 
-export const loginSystem = createAsyncThunk("client/loginSystem", async (data) => {
-  const response = await axios.post(`${serverUrl}auth`, data);
-  const userResponse = response.data
-  console.log(userResponse);
-  const newClient = {
-      bio: "a la espera de backend",
-      profilePicture: userResponse.user.image,
-      _id: userResponse.user._id,
-      email: userResponse.user.email,
-      firstName: userResponse.user.firstName,
-      lastName: userResponse.user.lastName,
-      userName: userResponse.user.username,
-    };
-
-    const authSettings = {
-      isSeller: userResponse.user.isSeller,
-      superAdmin: userResponse.user.superAdmin,
-      token: userResponse.token,
-    };
-    return {authSettings, newClient}
+export const loginSystem = createAsyncThunk("client/loginSystem", async (data, {rejectWithValue}) => {
+  try {
+    const response = await axios.post(`${serverUrl}auth`, data);
+    const userResponse = response.data
+    console.log(userResponse);
+    const newClient = {
+        bio: "a la espera de backend",
+        profilePicture: userResponse.user.image,
+        _id: userResponse.user._id,
+        email: userResponse.user.email,
+        firstName: userResponse.user.firstName,
+        lastName: userResponse.user.lastName,
+        userName: userResponse.user.username,
+      };
+  
+      const authSettings = {
+        isSeller: userResponse.user.isSeller,
+        superAdmin: userResponse.user.superAdmin,
+        token: userResponse.token,
+      };
+      return {authSettings, newClient}
+  } catch (error) {
+    return rejectWithValue(error.response.data.message)
+  }
 });
 
 export const postClientBeat = createAsyncThunk("client/postClientBeat", async (data) => {
@@ -49,6 +54,16 @@ export const postClientBeat = createAsyncThunk("client/postClientBeat", async (d
   });
   console.log(data);
   return response.data;
+});
+
+export const registerClientUser = createAsyncThunk("client/registerClientUser", async (data, {rejectWithValue}) => {
+  try {
+    const response = await axios.post(`${serverUrl}auth/register`, data);
+    console.log('error' ,response);
+    return response.data;
+  } catch (error) {
+    return rejectWithValue(error.response.data.message)
+  }
 });
 
 const cartSlice = createSlice({
@@ -114,7 +129,37 @@ const cartSlice = createSlice({
       })
       .addCase(loginSystem.rejected, (state, action) => {
         console.error(action.error);
+        toast.error(action.payload, {
+          style: {
+            background: "#FFF0F0",
+            color: "#E60000",
+          },
+        });
       })
+
+      //--------------------  Register
+      .addCase(registerClientUser.pending, (state, action) => {
+        console.log('sing-in up...');
+      })
+      .addCase(registerClientUser.fulfilled, (state, action) => {
+        console.log('succesfully registered!');
+        toast.success("Se registró correctamente", {
+          style: {
+            background: "#ECFDF3",
+            color: "#008A2E",
+          },
+        });
+      })
+      .addCase(registerClientUser.rejected, (state, action) => {
+        console.log(action.payload);
+        toast.error(action.payload, {
+          style: {
+            background: "#FFF0F0",
+            color: "#E60000",
+          },
+        });
+      })
+      
     }
 });
 
