@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 
-export default function TableAdminUsers({ data }) {
+export default function TableAdminBeats({ data }) {
   const router = useRouter();
   const [userToDelete, setUserToDelete] = React.useState(null);
 
@@ -23,48 +23,77 @@ export default function TableAdminUsers({ data }) {
           </div>
         ),
       },
+    //   {
+    //     Header: "BEAT",
+    //     accessor: "audioMP3",
+    //     Cell: ({ cell: { value } }) => (
+    //       <div className="flex justify-start w-[100px]">
+    //         <audio controls>
+    //           <source src={value} type="audio/mpeg" />
+    //         </audio>
+    //       </div>
+    //     ),
+    //   },
       {
         Header: "ID",
         accessor: "id",
         Cell: ({ cell: { value } }) => (
-          <div className="truncate w-min-[70px]" >
+          <div className="truncate w-[50px]" >
             {value}
           </div>
         ),
       },   
       {
-        Header: "USERNAME",
-        accessor: "username",
+        Header: "BEAT NAME",
+        accessor: "name",
         Cell: ({ cell: { value } }) => (
-          <div className="truncate w-min-[200px]">
+          <div className="truncate w-[70px]">
             {value}
           </div>
         ),
       },
       {
-        Header: "MAIL",
-        accessor: "email",
+        Header: "CREATOR",
+        accessor: "userCreator",
         Cell: ({ cell: { value } }) => (
-          <div className="truncate w-min-[200px]" >
+          <div className="truncate w-[50px] mx-auto" >
             {value}
           </div>
         ),
       },
       {
-        Header: "SELLER",
-        accessor: "isSeller",
+        Header: "BPM",
+        accessor: "BPM",
         Cell: ({ cell: { value } }) => (
-          <div className="truncate w-min-[200px]">
-            {value ? "TRUE" : "FALSE"} 
+          <div className="truncate w-[50px]" >
+            {value}
           </div>
         ),
       },
       {
-        Header: "SOFT DELETE",
+        Header: "PRICE",
+        accessor: "priceAmount",
+        Cell: ({ cell: { value } }) => (
+          <div className="truncate w-[50px]" >
+            {value}
+          </div>
+        ),
+      },
+      {
+        Header: "GENRE",
+        accessor: "genre",
+        Cell: ({ cell: { value } }) => (
+          <div className="truncate w-[70px]" >
+            {value}
+          </div>
+        ),
+      },
+      {
+        Header: "STATE",
         accessor: "softDelete",
         Cell: ({ cell: { value } }) => (
-          <div className="truncate w-min-[200px]" >
-            {value ? "TRUE": "FALSE"}
+          <div className="truncate w-[70px]" >
+            {value? "TRUE": "FALSE"}
           </div>
         ),
       },
@@ -73,7 +102,7 @@ export default function TableAdminUsers({ data }) {
         accessor: "edit",
         Cell: ({ row: { original } }) => (
           <button
-            onClick={() => router.push(`/admin/users/${original.id}`)}
+            onClick={() => router.push(`/admin/beats/${original.id}`)}
             className="background-neutral-gray-400 hover:background-neutral-gray-700 color-neutral-white 
             text-sm-semibold py-2 px-4 border-radius-estilo2"
           >
@@ -104,7 +133,7 @@ export default function TableAdminUsers({ data }) {
     useTable({ columns, data: parsedData });
 
   return (
-    <div className="flex w-full w-min-[800px] border border-radius-estilo2 overflow-x-auto overflow-y-auto font-britanicaBold 
+    <div className="flex w-full border border-radius-estilo2 overflow-x-auto overflow-y-auto font-britanicaBold 
     text-subtitulo-semibold gap-estilo4 background-neutral-white">
       <table {...getTableProps()} className="table-fixed" >
         <thead>
@@ -153,7 +182,7 @@ export default function TableAdminUsers({ data }) {
     <div className="background-neutral-white w-96 p-8 border-radius-estilo2">
       <h2 className="text-xl font-bold mb-4">Delete User</h2>
       <p className="text-sm mb-4">
-        Are you sure you want to delete user {userToDelete.id} -{" "}
+        Are you sure you want to delete Beat {userToDelete.id} -{" "}
         {userToDelete.name}?
       </p>
       <div className="flex justify-end gap-4">
@@ -165,7 +194,7 @@ export default function TableAdminUsers({ data }) {
           Cancel
         </button>
         <button
-          onClick={() => console.log(`Eliminando usuario con id ${userToDelete.id}`)}
+          onClick={() => console.log(`Eliminando Beat con id ${userToDelete.id}`)}
           className="background-primary-red-500 hover:background-primary-red-700 color-neutral-white 
                   text-sm-semibold py-2 px-4 border-radius-estilo2"
         >

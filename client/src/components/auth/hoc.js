@@ -14,8 +14,8 @@ export default function HOC(props) {
 
 
   if (hocIsWorking === false) {
-    return <>{props.children}</>;
-  }
+     return <>{props.children}</>;
+  }  
 
   if (router.pathname.startsWith("/client")) {
     if (experimentalIsClient === false) {
