@@ -3,6 +3,8 @@ import { usuariosDos } from "../data/fakeDB";
 import { beats } from "../data/fakeDB";
 import TableBody from "./admin/tableTest";
 import FormCreateBeat from "@/components/client/formCreateBeat";
+import TableAdminUsers from "@/components/tables/tableAdminUsers";
+import TableAdminBeats from "@/components/tables/tableAdminBeats";
 
 export default function TestForm() {
 
@@ -20,6 +22,10 @@ export default function TestForm() {
       </div>
       <br />
 
+      <TableAdminUsers data={usuariosDosJson} />
+      <br />
+      <TableAdminBeats data={usuariosDosJson} />
+      <br />
       <FormCreateBeat />
                   
       </Main>    

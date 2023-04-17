@@ -1,5 +1,3 @@
-
-
 export default function ValidationCreateBeat(beatData){
 
     const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
