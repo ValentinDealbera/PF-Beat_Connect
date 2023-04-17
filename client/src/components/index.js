@@ -53,6 +53,7 @@ export { default as BeatCardGrid } from "./beat/beatCardGrid";
 export { default as BeatsShopSection } from "./beat/beatShopSection";
 export { default as BeatFilters } from "./beat/beatFilters";
 export { default as BeatCard } from "./beat/beatCard";
+export { default as NewBeatCardGrid } from "./beat/newBeatCardGrid";
 //beatDataComponents
 export { default as AuthorName } from "./beat/beatDataComponents/authorName";
 export { default as BeatPrice } from "./beat/beatDataComponents/beatPrice";
@@ -88,6 +89,9 @@ export { default as Search } from "./layout/search";
 export { default as ModalOnHover } from "./layout/modalOnHover";
 export { default as NavModalItem } from "./layout/nav/navModalItem";
 export { default as VerticalNav } from "./layout/nav/verticalNav";
+
+//Tables
+export { default as DynamicTable } from "./dynamicTable";
 
 //export { default as BeatImage } from "./beat/beatImage";
 //export { default as Checkbox } from "./common/checkbox";

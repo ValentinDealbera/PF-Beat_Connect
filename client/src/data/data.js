@@ -14,6 +14,12 @@ export const navPublic = [
     url: "/beats",
     visible: true,
   },
+  {
+    name: "Carrito",
+    url: "/beats/cart",
+    visible: false,
+    colorMode: "light",
+  },
 ];
 
 export const navHelp = [
