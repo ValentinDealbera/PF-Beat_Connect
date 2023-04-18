@@ -6,7 +6,7 @@ export default function SellerDashboardOverview() {
       <main>
         <SellerDashboardLayout
           topBarMode="action"
-          topBarMessage="Editar beat"
+          topBarMessage="Crear beat"
           topBarButtonLabel="Guardar cambios"
           onClick={() => {
             console.log("Click");

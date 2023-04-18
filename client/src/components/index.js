@@ -32,7 +32,6 @@ export { default as ArrowLabel } from "./common/arrowLabel";
 export { default as MinMax } from "./common/minMax";
 export {default as SoftDeleteSwitch } from "./common/softDeleteSwitch" 
 export { default as SwitchForm } from "./common/switchForm"
-export { default as FormColumn } from "./common/formColum"
 export { default as FormAdmin } from "./common/adminForm" //creado pero sin colocar (SoftDelete, SwitchForm)
 export { default as ValidationEditUsers } from "./common/validationEditUsers"
 
@@ -109,5 +108,8 @@ export { default as DynamicTable } from "./dynamicTable";
 
 export { manageBecomeSeller } from "./masters/becomeSeller";
 
+//Forms
+export { default as FormColumn } from "./form/formColumn";
+export { default as FormContainer } from "./form/formContainer";
 //export { default as BeatImage } from "./beat/beatImage";
 //export { default as Checkbox } from "./common/checkbox";
