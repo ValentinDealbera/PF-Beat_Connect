@@ -1,36 +1,79 @@
-export default function ValidationEditUsers(changes, userData){
-    const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
-    let error ={};
-    console.log("soy validacion", userData)
+export default function ValidationEditUsers(form, fieldsToValidate) {
+  const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
+  let error = {};
 
-    const regexName = /^.{1,50}$/;
-    const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
-    const regexImage = /.jpg$|.png$/i;
-    const regexUsername = /^.{1,50}$/;
+  const regexImage = /\.jpg$|\.png$/i;
+  const regexAudioMP3 = /\.mp3$|\.wav$/i;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    
-    
+  if (fieldsToValidate === "*") {
+    //pasamos de object a array
+    fieldsToValidate = Object.keys(form);
+  }
 
-    //validar nombre de usuario
-    if ( changes.username && !regexUsername.test(userData.username)) {
-        error.username = "Name must have between 1 and 50 characters";
-      }
+  fieldsToValidate.forEach((field) => {
+    switch (field) {
+      case "username":
+        if (form.username.length < 2)
+          error.username = "You must enter a username minimo 2";
+        else if (form.username.length > 30)
+          error.username = "The username must have a maximum of 30 characters";
+        break;
 
-    //Validar  mail 
-    if( changes.email && !regexEmail.test(userData.email)) error.email = "You email must have a @"
+      case "email":
+        if (form.email.length < 1) error.email = "You must enter an email";
+        else if (!emailRegex.test(form.email))
+          error.email = "You must enter a valid email";
+        break;
 
-    //Validar tamaño de imagen
-    
-     if(changes.image && !regexImage.test(userData.image)) error.image = "You must upload a jpg or png file";
+      case "firstName":
+        if (form.firstName.length < 1)
+          error.firstName = "You must enter a first name";
+        else if (form.firstName.length > 50)
+          error.firstName =
+            "The first name must have a maximum of 50 characters";
+        break;
 
-    //Validar nombre personal 
-    if( changes.firstName && !userData.firstName) error.firstName ="You must have a firstName"
+      case "lastName":
+        if (form.lastName.length < 1)
+          error.lastName = "You must enter a last name";
+        else if (form.lastName.length > 50)
+          error.lastName = "The last name must have a maximum of 50 characters";
+        break;
 
-    //Validar apellido personal
-    if( changes.lastName && !regexName.test(userData.lastName)) error.lastName ="You must have a lastName"
+      case "password":
+        if (form.password.length < 1)
+          error.password = "You must enter a password";
+        else if (form.password.length < 8)
+          error.password = "The password must have a minimum of 8 characters";
+        break;
 
-    return error;
+      case "image":
+        if (form.image.size > MAX_FILE_SIZE)
+          error.image =
+            "The size of the image is too large. Maximum allowed size is 10 MB.";
+        if (!regexImage.test(form.image.name))
+          error.image = "You must upload a jpg or png file";
+        break;
 
-   
-    
+      case "isSeller":
+        if (
+          form.isSeller === undefined ||
+          form.isSeller === null ||
+          form.isSeller === ""
+        )
+          error.isSeller = "You must select if you are a seller or not";
+
+      case "softDelete":
+        //debe ser true o false
+        if (form.softDelete !== true || form.softDelete !== false)
+          error.softDelete =
+            "You must select if you want to delete the user or not";
+
+      default:
+        break;
+    }
+  });
+
+  return error;
 }
