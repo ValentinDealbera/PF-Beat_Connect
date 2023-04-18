@@ -1,4 +1,5 @@
 const { Router } = require("express");
+require('dotenv').config();
 const router = Router();
 const nodemailer = require('nodemailer')
 const transporter = nodemailer.createTransport({
@@ -6,8 +7,8 @@ const transporter = nodemailer.createTransport({
     port: 465,
     secure: true,
     auth: {
-        user:'beatconnectteam@gmail.com',
-        pass:'pvhjvkoufkvxzyfb',
+        user:process.env.EMAIL,
+        pass:process.env.EMAIL_PASSWORD,
     }
 })
 transporter.verify().then(()=>{
@@ -30,6 +31,7 @@ router.post('/register', async (req,res)=>{
             <p>El equipo de Beat-Connect</p>`
         })
         res.status(200).json({message: 'Email enviado con exito!'})
+        transporter.close()
     } catch (error) {
         res.status(500).json({message: error.message})
     }
@@ -51,6 +53,7 @@ router.post('/payment', async (req,res)=>{
       <p>El equipo de Beat-Connect</p>`
         })
         res.status(200).json({message: 'Email enviado con exito!'})
+        transporter.close()
     } catch (error) {
         res.status(500).json({message: error.message})
     }

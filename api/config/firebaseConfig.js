@@ -1,11 +1,15 @@
+require('dotenv').config();
+const {API_KEY, AUTH_DOMAIN, PROJECT_ID, STORAGE_BUCKET, MESSAGING_SENDER_ID, APP_ID, MEASUREMENT_ID} = process.env
+
+
 module.exports= {
     firebaseConfig : {
-        apiKey: 'AIzaSyAzbHqA5uO2MqgMthBtThNyN6S1X-1iGCc',
-        authDomain: 'beatconnect-62691.firebaseapp.com',
-        projectId: 'beatconnect-62691',
-        storageBucket: 'beatconnect-62691.appspot.com',
-        messagingSenderId: '699261386130',
-        appId: '1:699261386130:web:9a713574f04406cea3554b',
-        measurementId: 'G-5Q9YGM3BXK',
+        apiKey: API_KEY,
+        authDomain: AUTH_DOMAIN,
+        projectId: PROJECT_ID,
+        storageBucket: STORAGE_BUCKET,
+        messagingSenderId: MESSAGING_SENDER_ID,
+        appId: APP_ID,
+        measurementId: MEASUREMENT_ID,
       }
 } 
