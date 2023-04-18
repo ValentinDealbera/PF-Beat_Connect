@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { fetchBeats, fetchUserBeats } from "@/redux/slices/beats";
 
 const initialState = {
+  activeEditingItem: null,
   tokenValid: false,
   isLogged: false,
   authSettings: {
@@ -20,12 +21,14 @@ const initialState = {
   },
 };
 
-export const loginSystem = createAsyncThunk("client/loginSystem", async (data, {rejectWithValue}) => {
-  try {
-    const response = await axios.post(`${serverUrl}auth`, data);
-    const userResponse = response.data
-    console.log(userResponse);
-    const newClient = {
+export const loginSystem = createAsyncThunk(
+  "client/loginSystem",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(`${serverUrl}auth`, data);
+      const userResponse = response.data;
+      console.log(userResponse);
+      const newClient = {
         bio: "a la espera de backend",
         profilePicture: userResponse.user.image,
         _id: userResponse.user._id,
@@ -34,37 +37,96 @@ export const loginSystem = createAsyncThunk("client/loginSystem", async (data, {
         lastName: userResponse.user.lastName,
         userName: userResponse.user.username,
       };
-  
+
       const authSettings = {
         isSeller: userResponse.user.isSeller,
         superAdmin: userResponse.user.superAdmin,
         token: userResponse.token,
       };
-      return {authSettings, newClient}
-  } catch (error) {
-    return rejectWithValue(error.response.data.message)
+      return { authSettings, newClient };
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
   }
-});
+);
 
-export const postClientBeat = createAsyncThunk("client/postClientBeat", async (data) => {
-  const response = await axios.post(`${serverUrl}beats`, data, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
-  console.log(data);
-  return response.data;
-});
-
-export const registerClientUser = createAsyncThunk("client/registerClientUser", async (data, {rejectWithValue}) => {
-  try {
-    const response = await axios.post(`${serverUrl}auth/register`, data);
-    console.log('error' ,response);
-    return response.data;
-  } catch (error) {
-    return rejectWithValue(error.response.data.message)
+export const postClientBeat = createAsyncThunk(
+  "client/postClientBeat",
+  async (data, { rejectWithValue }) => {
+    console.log("data", data);
+    try {
+      const response = await axios.post(`${serverUrl}beats`, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log(data);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
   }
-});
+);
+
+export const registerClientUser = createAsyncThunk(
+  "client/registerClientUser",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(`${serverUrl}auth/register`, data);
+      console.log("error", response);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+export const convertInSeller = createAsyncThunk(
+  "client/convertInSeller",
+  async (data, { rejectWithValue, getState }) => {
+    const clientId = getState().client.client._id;
+    console.log("clientId", clientId);
+
+    const send = { seller: "VENDEDOR" };
+
+    try {
+      const response = await axios.put(`${serverUrl}user/${clientId}`, send);
+      console.log("error", response);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+export const fetchCurrentBeat = createAsyncThunk(
+  "beats/fetchCurrentAuthor",
+  async (id, { rejectWithValue, getState }) => {
+    try {
+    console.log("id", id);
+
+    const res = await axios.get(`${serverUrl}beats/${id}`);
+    //solo obtenemos el nombre y el id del objeto original
+    const response = res.data;
+    console.log("response", response);
+    const currentBeat = {
+      name: response.name,
+      _id: response._id,
+      BPM: response.BPM,
+      priceAmount: response.priceAmount,
+      softDelete: response.softDelete,
+      image: response.image,
+      genre: {
+        name: response.genre.name,
+        _id: response.genre._id,
+      },
+    };
+    return { currentBeat };
+  } catch (error) {
+    return rejectWithValue(error.response.data.message);
+  }
+  }
+);
 
 const cartSlice = createSlice({
   name: "profile",
@@ -82,8 +144,8 @@ const cartSlice = createSlice({
         userName: action.payload.userName,
       };
     },
-    setTokenValid(state, action){
-      state.tokenValid = action.payload
+    setTokenValid(state, action) {
+      state.tokenValid = action.payload;
     },
     setAuthSettings(state, action) {
       state.authSettings = action.payload;
@@ -99,21 +161,34 @@ const cartSlice = createSlice({
 
       //--------------------  Beat
       .addCase(postClientBeat.pending, (state, action) => {
-        console.log('posting...');
+        console.log("posting...");
+        toast("Subiendo beat...");
       })
       .addCase(postClientBeat.fulfilled, (state, action) => {
-        console.log('post finished!');
+        console.log("post finished!");
+        toast.success("Se subió correctamente", {
+          style: {
+            background: "#ECFDF3",
+            color: "#1F9D55",
+          },
+        });
       })
       .addCase(postClientBeat.rejected, (state, action) => {
         console.error(action.error);
+        toast.error(action.payload, {
+          style: {
+            background: "#FFF0F0",
+            color: "#E60000",
+          },
+        });
       })
 
       //--------------------  Log-in
       .addCase(loginSystem.pending, (state, action) => {
-        console.log('loging...');
+        console.log("loging...");
       })
       .addCase(loginSystem.fulfilled, (state, action) => {
-        state.tokenValid = true
+        state.tokenValid = true;
         state.client = {
           bio: action.payload.newClient.bio,
           profilePicture: action.payload.newClient.profilePicture,
@@ -124,8 +199,8 @@ const cartSlice = createSlice({
           userName: action.payload.newClient.userName,
         };
         state.authSettings = action.payload.authSettings;
-      state.isLogged = true;
-      console.log(state.client);
+        state.isLogged = true;
+        console.log(state.client);
       })
       .addCase(loginSystem.rejected, (state, action) => {
         console.error(action.error);
@@ -139,10 +214,10 @@ const cartSlice = createSlice({
 
       //--------------------  Register
       .addCase(registerClientUser.pending, (state, action) => {
-        console.log('sing-in up...');
+        console.log("sing-in up...");
       })
       .addCase(registerClientUser.fulfilled, (state, action) => {
-        console.log('succesfully registered!');
+        console.log("succesfully registered!");
         toast.success("Se registró correctamente", {
           style: {
             background: "#ECFDF3",
@@ -159,10 +234,63 @@ const cartSlice = createSlice({
           },
         });
       })
-      
-    }
+
+      //--------------------  Convert in seller
+      .addCase(convertInSeller.pending, (state, action) => {
+        console.log("converting...");
+      })
+      .addCase(convertInSeller.fulfilled, (state, action) => {
+        console.log("succesfully converted!");
+        state.authSettings.isSeller = true;
+        toast.success("Se convirtió correctamente", {
+          style: {
+            background: "#ECFDF3",
+            color: "#008A2E",
+          },
+        });
+      })
+      .addCase(convertInSeller.rejected, (state, action) => {
+        console.log(action.payload);
+        toast.error(action.payload, {
+          style: {
+            background: "#FFF0F0",
+            color: "#E60000",
+          },
+        });
+      })
+
+      //--------------------
+      //Extra reducer para el beat que esta en el detalle
+      .addCase(fetchCurrentBeat.pending, (state, action) => {
+        console.log("fetching current beat");
+        toast("Cargando beat...");
+      })
+      .addCase(fetchCurrentBeat.fulfilled, (state, action) => {
+      //  state.activeEditingItem = action.payload.currentBeat;
+        //console.log("current beat", state.activeEditingItem);
+        toast.success("Se cargó correctamente", {
+          style: {
+            background: "#ECFDF3",
+            color: "#1F9D55",
+          },
+        });
+      })
+      .addCase(fetchCurrentBeat.rejected, (state, action) => {
+        console.error(action.error);
+        toast.error(action.payload, {
+          style: {
+            background: "#FFF0F0",
+            color: "#E60000",
+          },
+        });
+      });
+  },
 });
 
-export const {setTokenValid, setCurrentClient, resetReducer, setAuthSettings } =
-  cartSlice.actions;
+export const {
+  setTokenValid,
+  setCurrentClient,
+  resetReducer,
+  setAuthSettings,
+} = cartSlice.actions;
 export default cartSlice.reducer;

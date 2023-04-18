@@ -22,7 +22,7 @@ export default function CheckboxGroup({
 
 function Checkbox({ value, seleccionados, setSeleccionados }) {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 items-center">
       <input
         type="checkbox"
         value={value.value}

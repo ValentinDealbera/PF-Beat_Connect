@@ -40,7 +40,7 @@ useEffect (() => {
             />
           </div>
         </Hero>
-        <BeatsShopSection mode="shop"/>
+        <BeatsShopSection/>
       </Main>
     </>
   );

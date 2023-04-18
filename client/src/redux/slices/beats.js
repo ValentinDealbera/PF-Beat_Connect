@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import {serverUrl} from "@/data/config"
+import { serverUrl } from "@/data/config";
 import axios from "axios";
 
 const initialState = {
@@ -105,7 +105,7 @@ const beatsSlice = createSlice({
         state.publicBeatsFetchStatus = true;
         state.publicItems = action.payload;
         state.activeItems = action.payload;
-       // state.beatsDisplayMode = 1;
+        // state.beatsDisplayMode = 1;
       })
       .addCase(fetchBeats.rejected, (state, action) => {
         console.error(action.error);
@@ -136,7 +136,7 @@ const beatsSlice = createSlice({
       })
       .addCase(fetchCurrentAuthor.fulfilled, (state, action) => {
         state.currentAuthor = action.payload.currentAuthor;
-        state.activeItems = action.payload.beats;
+        state.currentAuthorBeats = action.payload.beats;
         state.beatsDisplayMode = 3;
       })
       .addCase(fetchCurrentAuthor.rejected, (state, action) => {

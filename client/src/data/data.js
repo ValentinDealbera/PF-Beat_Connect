@@ -1,3 +1,5 @@
+import { manageBecomeSeller } from "../components/masters/becomeSeller";
+
 export const navPublic = [
   {
     name: "Inicio",
@@ -27,22 +29,26 @@ export const navHelp = [
     name: "Inicio",
     url: "/help",
     colorMode: "light",
+    visibility: true,
   },
   {
     name: "Política de privacidad",
     url: "/help/privacy",
     colorMode: "light",
+    visibility: true,
   },
   {
     name: "Términos y condiciones",
     url: "/help/terms",
     colorMode: "light",
+    visibility: true,
   },
 
   {
     name: "Copyright",
     url: "/help/copyright",
     colorMode: "light",
+    visibility: true,
   },
 ];
 
@@ -59,7 +65,8 @@ export const navClient = [
   },
   {
     name: "Vende tus beats",
-    url: "/client",
+    url: "",
+    onClick: () => manageBecomeSeller()
   },
   {
     name: "Configuracion",
