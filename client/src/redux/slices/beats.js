@@ -20,7 +20,7 @@ const initialState = {
 
 export const fetchBeats = createAsyncThunk("beats/fetchBeats", async () => {
   const response = await axios.get(`${serverUrl}beats`);
-  return response.data;
+  return response.data.docs
 });
 
 export const fetchUserBeats = createAsyncThunk(
@@ -109,8 +109,8 @@ const beatsSlice = createSlice({
           return;
         }
         state.publicBeatsFetchStatus = true;
-        state.publicItems = action.payload.docs || [];
-        state.activeItems = action.payload.docs || [];
+        state.publicItems = action.payload || [];
+        state.activeItems = action.payload || [];
         // state.beatsDisplayMode = 1;
       })
       .addCase(fetchBeats.rejected, (state, action) => {

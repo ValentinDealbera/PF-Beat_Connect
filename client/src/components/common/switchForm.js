@@ -24,6 +24,7 @@ function SwitchButton({ handleAction, active, text }) {
   return (
     <button
       onClick={handleAction}
+      type="button"
       className={` text-sm-semibold  px-4 py-2 ${
         active
           ? "background-primary-red-700 color-neutral-white"

@@ -2,6 +2,7 @@ export function ValidationCreateBeat(form, fieldsToValidate) {
   const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
   let error = {};
 
+console.log(fieldsToValidate)
 
   const regexName = /^.{1,50}$/;
   const regexImage = /\.jpg$|\.png$/i;
