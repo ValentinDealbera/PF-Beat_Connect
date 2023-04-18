@@ -8,9 +8,9 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectFilteredBeats } from "@/redux/selectors/filters";
 
-export function externalManageDropdown() {
-  BeatCardGrid.handleDropdownOpen();
-}
+// export function externalManageDropdown() {
+//   BeatCardGrid.handleDropdownOpen();
+// }
 
 export default function BeatCardGrid() {
   const [isDropDown, setIsDropdownOpen] = useState(false);

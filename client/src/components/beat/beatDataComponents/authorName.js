@@ -6,38 +6,40 @@ import { useRouter } from "next/router";
 
 export default function AuthorName({ beat }) {
   const router = useRouter();
-  const { firstName, lastName } = useSelector(
-    (state) => state.beats.currentAuthor
-  );
+  // const { firstName, lastName } = useSelector(
+  //   (state) => state.beats.currentAuthor
+  // );
 
 
-  const currentUser = useSelector((state) => state.client.client);
-  const [userFullName, setUserFullName] = useState("");
+  // const currentUser = useSelector((state) => state.client.client);
+  // const [userFullName, setUserFullName] = useState("");
 
-  useEffect(() => {
-    if (router.pathname === "/beats/author/[slug]") {
-      if (!beat.userCreator.firstName && !beat.userCreator.lastName) {
+  // useEffect(() => {
+  //   if (router.pathname === "/beats/author/[slug]") {
+  //     if (!beat.userCreator.firstName && !beat.userCreator.lastName) {
        
-        setUserFullName(`${firstName} ${lastName}`);
-      } else {
-        setUserFullName(
-          `${beat.userCreator.firstName} ${beat.userCreator.lastName}`
-        );
-      }
-    } else if (router.pathname === "/client") {
-      if (!beat.userCreator.firstName && !beat.userCreator.lastName) {
-        setUserFullName(`${currentUser.firstName} ${currentUser.lastName}`);
-      } else {
-        setUserFullName(
-          `${beat.userCreator.firstName} ${beat.userCreator.lastName}`
-        );
-      }
-    } else {
-      setUserFullName(
-        `${beat.userCreator.firstName} ${beat.userCreator.lastName}`
-      );
-    }
-  }, [beat, currentUser, firstName, lastName, router.query.slug]);
+  //       setUserFullName(`${firstName} ${lastName}`);
+  //     } else {
+  //       setUserFullName(
+  //         `${beat.userCreator.firstName} ${beat.userCreator.lastName}`
+  //       );
+  //     }
+  //   } else if (router.pathname === "/client") {
+  //     if (!beat.userCreator.firstName && !beat.userCreator.lastName) {
+  //       setUserFullName(`${currentUser.firstName} ${currentUser.lastName}`);
+  //     } else {
+  //       setUserFullName(
+  //         `${beat.userCreator.firstName} ${beat.userCreator.lastName}`
+  //       );
+  //     }
+  //   } else {
+  //     setUserFullName(
+  //       `${beat.userCreator.firstName} ${beat.userCreator.lastName}`
+  //     );
+  //   }
+  // }, [beat, currentUser, firstName, lastName, router.query.slug]);
+
+  const userFullName = `${beat.userCreator.firstName} ${beat.userCreator.lastName}`
 
   return (
     <div className="flex flex-row items-center gap-1">

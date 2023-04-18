@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
-import { externalManageDropdown } from "@/components/beat/beatCardGrid";
+import { externalManageDropdown } from "@/components/beat/newBeatCardGrid";
 import { addToCart } from "@/redux/slices/cart";
 import {
   BeatImage,

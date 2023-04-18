@@ -9,6 +9,11 @@ export { default as Hero } from "./masters/hero";
 export { default as SettingsHero } from "./masters/settingsHero";
 export { default as SimpleHeader } from "./masters/simpleHeader";
 export { default as ScrollToTop } from "./masters/scrollToTop";
+export { default as BecomeSeller } from "./masters/becomeSeller";
+export { default as PostBeat } from "./client/postBeat";
+export { managePostBeat } from "./client/postBeat";
+export { default as EditBeat } from "./masters/editBeat";
+export { manageEditBeat } from "./masters/editBeat";
 
 //MiniCart
 export { default as MiniCart } from "./miniCart/miniCart";
@@ -54,6 +59,8 @@ export { default as BeatsShopSection } from "./beat/beatShopSection";
 export { default as BeatFilters } from "./beat/beatFilters";
 export { default as BeatCard } from "./beat/beatCard";
 export { default as NewBeatCardGrid } from "./beat/newBeatCardGrid";
+export { default as BeatShopSectionForClient } from "./beat/beatShopSectionForClient";
+
 //beatDataComponents
 export { default as AuthorName } from "./beat/beatDataComponents/authorName";
 export { default as BeatPrice } from "./beat/beatDataComponents/beatPrice";
@@ -70,7 +77,7 @@ export { default as BuyerNavGeneral } from "./client/buyerNavGeneral";
 export { default as BuyerNavSettings } from "./client/buyerNavSettings";
 export { default as BuyerProfileLayout } from "./client/buyerProfileLayout";
 export { default as ProfileCard } from "./client/profileCard";
-export { default as FormCreateBeat } from "./client/formCreateBeat"
+export { default as FormCreateBeat } from "./client/formCreateBeat";
 //clientDataComponents
 export { default as ClientImage } from "./client/clientDataComponents/clientImage";
 
@@ -92,6 +99,10 @@ export { default as VerticalNav } from "./layout/nav/verticalNav";
 
 //Tables
 export { default as DynamicTable } from "./dynamicTable";
+
+//Funciones de los componentes
+
+export { manageBecomeSeller } from "./masters/becomeSeller";
 
 //export { default as BeatImage } from "./beat/beatImage";
 //export { default as Checkbox } from "./common/checkbox";
