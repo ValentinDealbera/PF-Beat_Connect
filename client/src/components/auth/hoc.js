@@ -9,7 +9,7 @@ export default function HOC(props) {
   const dispatch = useDispatch()
   const { authSettings, isLogged, tokenValid } = useSelector((state) => state.client);
 
-  const hocIsWorking = true;
+  const hocIsWorking = false;
   const experimentalIsClient = isLogged;
   const experimentalIsAdmin = authSettings.superAdmin;
 

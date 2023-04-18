@@ -26,6 +26,7 @@ export default function Master(props) {
 
   useEffect(() => {
     if (router.pathname.startsWith("/client")) return
+    console.log("solicitamos beats");
     dispatch(fetchBeats());
   }, [dispatch, router]);
 

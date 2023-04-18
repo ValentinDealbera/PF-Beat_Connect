@@ -102,13 +102,19 @@ const beatsSlice = createSlice({
         state.publicBeatsFetchStatus = false;
       })
       .addCase(fetchBeats.fulfilled, (state, action) => {
+        console.log("fetch beats fullfiled", action.payload);
+        if (action.payload.length === 0 || action.payload === null || action.payload === undefined || !Array.isArray(action.payload)) {
+          state.publicItems = [];
+          state.activeItems = [];
+          return;
+        }
         state.publicBeatsFetchStatus = true;
-        state.publicItems = action.payload;
-        state.activeItems = action.payload;
+        state.publicItems = action.payload.docs || [];
+        state.activeItems = action.payload.docs || [];
         // state.beatsDisplayMode = 1;
       })
       .addCase(fetchBeats.rejected, (state, action) => {
-        console.error(action.error);
+        console.error(" fetch error");
       })
 
       //--------------------
