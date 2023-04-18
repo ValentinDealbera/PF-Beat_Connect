@@ -47,9 +47,29 @@ router.get("/", async (req, res) => {
 
   let translatedGenre = genreDictionary[genre];
 
+  const minMaxFiltersFunction = ({ minPrice, maxPrice, minBPM, maxBPM }) => {
+    let filters = {};
+    minPrice &&
+      (filters.priceAmount = { ...filters.priceAmount, $gt: minPrice - 0.01 });
+    maxPrice &&
+      (filters.priceAmount = {
+        ...filters.priceAmount,
+        $lt: maxPrice * 1 + 0.01,
+      });
+    minBPM && (filters.BPM = { ...filters.BPM, $gt: minBPM - 0.01 });
+    maxBPM && (filters.BPM = { ...filters.BPM, $lt: maxBPM * 1 + 0.01 });
+    return filters;
+  };
+
+  const minMaxFilters = minMaxFiltersFunction(req.query);
+
+  console.log(minMaxFilters);
   try {
     const beats = await beatModel.paginate(
-      { genre: translatedGenre },
+      {
+        ...(translatedGenre && { genre: translatedGenre }),
+        ...(minMaxFilters && { ...minMaxFilters }),
+      },
       {
         limit,
         page,
