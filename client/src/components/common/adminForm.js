@@ -1,49 +1,64 @@
-import {
-  Button,
-  FormColumn,
-  SwitchForm,
-  Input,
-  SoftDeleteSwitch,
-  ValidationEditUsers,
-} from "@/components";
+import { Button, SwitchForm, Input, ValidationEditUsers } from "@/components";
 import { useState } from "react";
 import { useEffect } from "react";
 export default function AdminForm(props) {
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (Object.values(error).some((error) => error)) {
-      alert("Debe llenar todos los campos correctamente");
-    } else {
-      // await postBeat(createDataJson);
-    }
-  };
+  const [error, setErrors] = useState({});
 
-  const [error, setError] = useState({});
-  const [createData, setCreateData] = useState({
+  const [changes, setChanges] = useState({});
+
+  const [form, setForm] = useState({
     username: "",
     email: "",
     image: "",
     firstName: "",
     lastName: "",
-    isSeller: "",
-  });
-  const [changes, setChanges] = useState({
-    username: false,
-    email: false,
-    image: false,
-    firstName: false,
-    lastName: false,
     isSeller: false,
+    softDelete: false,
   });
+  const [fieldsToValidate, setFieldsToValidate] = useState([]);
+  const [prevBeatData, setPrevBeatData] = useState(form);
 
-  const [prevBeatData, setPrevBeatData] = useState(createData);
+  useEffect(() => {
+    console.log("useEffect");
+    setErrors(ValidationEditUsers(form, fieldsToValidate));
+  }, [form, fieldsToValidate]);
+
+  const handleInputChange = (e) => {
+    console.log("change", e.target.name);
+
+    if (e.target.type === "file") {
+      setForm({
+        ...form,
+        [e.target.name]: e.target.files[0],
+      });
+    } else {
+      setForm((prevForm) => ({ ...prevForm, [e.target.name]: e.target.value }));
+    }
+
+    const { name } = e.target;
+    if (!fieldsToValidate.includes(name)) {
+      setFieldsToValidate([...fieldsToValidate, name]);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formErrors = ValidationCreateBeat(form, "*");
+    if (Object.keys(formErrors).length === 0) {
+      //await dispatch(postClientBeat(form));
+      console.log("form ok", form);
+    } else {
+      setErrors(formErrors);
+    }
+    e.target.reset();
+  };
 
   useEffect(() => {
     const newChanges = {};
     let hasChanged = false;
 
-    for (const key in createData) {
-      if (createData[key] !== prevBeatData[key]) {
+    for (const key in form) {
+      if (form[key] !== prevBeatData[key]) {
         newChanges[key] = true;
         hasChanged = true;
       } else {
@@ -53,34 +68,70 @@ export default function AdminForm(props) {
 
     if (hasChanged) {
       setChanges(newChanges);
-      setPrevBeatData(createData);
+      setPrevBeatData(form);
     }
-  }, [createData]);
+  }, [form]);
 
-  const handleInputChange = (event) => {
-    if (event.target.type === "number") {
-      setCreateData({
-        ...createData,
-        [event.target.name]: parseInt(event.target.value),
-      });
-    } else {
-      setCreateData({
-        ...createData,
-        [event.target.name]: event.target.value,
-      });
-    }
-    setError(
-      ValidationEditUsers(changes, {
-        ...createData,
-        [event.target.name]: event.target.value,
-      })
-    );
+  const arrayIsSeller = {
+    name: "isSeller",
+    label: "Is Seller",
+    defaultValue: props.defaultValue,
+    onChange: handleInputChange,
+    arrayButtons: [
+      {
+        text: "Yes",
+        //segun is seller, dinamicamente se pone el active
+        active: form.isSeller,
+        handleAction: () => {
+          setForm({
+            ...form,
+            isSeller: true,
+          });
+        },
+      },
+      {
+        text: "No",
+        active: !form.isSeller,
+        handleAction: () => {
+          setForm({
+            ...form,
+            isSeller: false,
+          });
+        },
+      },
+    ],
   };
 
-  console.log("Soy el form", createData);
-  console.log("Soy el error", error);
-  const createDataJson = JSON.stringify(createData);
-  console.log(createDataJson);
+  const arraySoftDelete = {
+    name: "softDelete",
+    label: "Soft Delete",
+    defaultValue: props.defaultValue,
+    onChange: handleInputChange,
+    arrayButtons: [
+      {
+        text: "Yes",
+        //segun is seller, dinamicamente se pone el active
+        active: form.softDelete,
+        handleAction: () => {
+          setForm({
+            ...form,
+            softDelete: true,
+          });
+        },
+      },
+      {
+        text: "No",
+        active: !form.softDelete,
+        handleAction: () => {
+          setForm({
+            ...form,
+            softDelete: false,
+          });
+        },
+      },
+    ],
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -97,7 +148,7 @@ export default function AdminForm(props) {
             />
             <Input
               name={"email"}
-              label={"Mail"}
+              label={"Email"}
               placeholder={"UserMail:"}
               defaultValue={props.defaultValue}
               type={"text"}
@@ -118,7 +169,7 @@ export default function AdminForm(props) {
           <div className="flex flex-col px-1">
             <Input
               name={"firstName"}
-              label={"Name"}
+              label={"Firstname"}
               placeholder={"Name:"}
               defaultValue={props.defaultValue}
               type={"text"}
@@ -127,7 +178,7 @@ export default function AdminForm(props) {
             />
             <Input
               name={"lastName"}
-              label={"lastName"}
+              label={"LastName"}
               placeholder={"lastName:"}
               defaultValue={props.defaultValue}
               type={"text"}
@@ -136,11 +187,15 @@ export default function AdminForm(props) {
             />
 
             <SwitchForm
-              name={props.name}
-              label={props.label}
-              state={props.state}
+              nameInput={"isSeller"}
+              label={"Is Seller"}
+              arrayButtons={arrayIsSeller.arrayButtons}
             />
-            <SoftDeleteSwitch />
+            <SwitchForm
+              nameInput={"softDelete"}
+              label={"Soft Delete"}
+              arrayButtons={arraySoftDelete.arrayButtons}
+            />
           </div>
         </div>
         <Button

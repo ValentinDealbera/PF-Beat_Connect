@@ -25,6 +25,7 @@ export default function Carrito() {
 
   //Creamos un array de objetos que reuna el autor del beat y el precio total de sus beats
   const precio_por_autor = [];
+  
   cartItems.forEach((item) => {
     const { userCreator, priceAmount } = item;
     const index = precio_por_autor.findIndex(

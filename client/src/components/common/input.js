@@ -3,7 +3,7 @@ export default function Input(props) {
   return (
     <label
       htmlFor={props.name}
-      className={`gap-estilo4 text-sm-medium flex min-w-0 flex-col ${props.labelClass}`}
+      className={`gap-1 text-sm-medium flex min-w-0 flex-col ${props.labelClass}`}
     >
       {props.label}
       <input
