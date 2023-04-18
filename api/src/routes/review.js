@@ -15,11 +15,13 @@ const {
   getReviewsPerBeat,
   deleteReview,
 } = require("../controllers/reviewController");
+const adminMiddleware = require("../middleware/adminVerify");
 
 const router = express();
 
-router.post("/", async (req, res) => {
-  const { rating, title, comment, createdBy, beat } = req.body;
+router.post("/admin", adminMiddleware, async (req, res) => {
+  try {
+    const { rating, title, comment, createdBy, beat } = req.body;
   const creator = await userModel.findById(createdBy);
   const reviewedBeat = await beatModel.findById(beat);
   if (!reviewedBeat)
@@ -41,6 +43,43 @@ router.post("/", async (req, res) => {
     res.json(newReview).status(CREATED);
   } catch (error) {
     res.json({ error: error.message }).status(SERVER_ERROR);
+  }
+  } catch (error) {
+    res.status(SERVER_ERROR).json({ message: error.message });
+  }
+});
+
+router.post("/", async (req, res) => {
+  try {
+    const { rating, title, comment, createdBy, beat } = req.body;
+  const {userid} = req.headers
+  const user = await userModel.findById(userid)
+  const creator = await userModel.findById(createdBy);
+  const reviewedBeat = await beatModel.findById(beat).populate('userCreator');
+  if(user.email !== creator.email) return res.status(400).json({message: 'No puedes hacer una review a nombre de otro usuario'})
+  if(user.email === reviewedBeat.userCreator.email) return res.status(400).json({message: 'No puedes hacer una review a tu propio beat'})
+  if (!reviewedBeat)
+    return res.status(400).json({ error: "this beat does not exist" });
+  if (!creator)
+    return res.status(400).json({ error: "this user does not exist" });
+  try {
+    const newReview = await reviewSchema.create({
+      rating: rating,
+      title: title,
+      comment: comment,
+      createdBy: creator._id,
+      beat: reviewedBeat._id,
+    });
+
+    reviewedBeat.review = [...reviewedBeat.review, newReview._id];
+    reviewedBeat.save();
+
+    res.json(newReview).status(CREATED);
+  } catch (error) {
+    res.json({ error: error.message }).status(SERVER_ERROR);
+  }
+  } catch (error) {
+    res.status(SERVER_ERROR).json({ message: error.message });    
   }
 });
 
@@ -84,29 +123,92 @@ router.get("/:id", async (req, res) => {
 });
 
 router.put("/:id", async (req, res) => {
-  const { id } = req.params;
-  const { rating, title, comment } = req.body;
+  try {
+    const { id } = req.params;
+    const {userid} = req.headers
+    const { rating, title, comment } = req.body;
+  
+    if (id) {
+      try {
+        const reviewToModify = await reviewSchema.findById(id).populate('createdBy');
+        if (!reviewToModify) return res.status(400).json({message: 'La review ingresada no es una review existente'})
+        const comprobacion = userModel.findById(userid)
+        if (!comprobacion.email !== reviewToModify.createdBy.email) return res.status(400).json({message: 'No puedes modificar una review ajena!'})
+        rating && (reviewToModify.rating = rating);
+        title && (reviewToModify.title = title);
+        comment && (reviewToModify.comment = comment);
+  
+        await reviewToModify.save();
+  
+        return res.json(reviewToModify).status(ALL_OK);
+      } catch (error) {
+        res.json({ error: error.message }).status(NOT_FOUND);
+      }
+    } else return res.send("Debes ingresar una ID").status(NOT_FOUND);
+  } catch (error) {
+    res.json({ error: error.message }).status(NOT_FOUND);
+  }
+});
 
-  if (id) {
-    try {
-      const reviewToModify = await getReviewById(id);
-
-      rating && (reviewToModify.rating = rating);
-      title && (reviewToModify.title = title);
-      comment && (reviewToModify.comment = comment);
-
-      await reviewToModify.save();
-
-      return res.json(reviewToModify).status(ALL_OK);
-    } catch (error) {
-      res.json({ error: error.message }).status(NOT_FOUND);
-    }
-  } else return res.send("No hay ninguna review con ese ID").status(NOT_FOUND);
+router.put("/admin/:id", adminMiddleware, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const {userid} = req.headers
+    const { rating, title, comment } = req.body;
+  
+    if (id) {
+      try {
+        const reviewToModify = await getReviewById(id);
+        if (!reviewToModify) return res.status(400).json({message: 'La review ingresada no es una review existente'})
+        
+        rating && (reviewToModify.rating = rating);
+        title && (reviewToModify.title = title);
+        comment && (reviewToModify.comment = comment);
+  
+        await reviewToModify.save();
+  
+        return res.json(reviewToModify).status(ALL_OK);
+      } catch (error) {
+        res.json({ error: error.message }).status(NOT_FOUND);
+      }
+    } else return res.send("Debes ingresar una ID").status(NOT_FOUND);
+  } catch (error) {
+    res.json({ message: error.message }).status(NOT_FOUND);
+  }
 });
 
 router.delete("/:id", async (req, res) => {
-  const { id } = req.params;
-  console.log(id);
+  try {
+    const { id } = req.params;
+    const {userid} = req.headers
+    console.log(id);
+    if (id) {
+      try {
+        const comprobacionReview = await reviewSchema.findById(id).populate('createdBy')
+        const comprobacionUser = await userModel.findById(userid)
+        if (!comprobacionReview) return res.status(400).json({message: 'Esa review no existe'})
+        if (comprobacionReview.createdBy.email !== comprobacionUser.email) return res.status(400).json({message: 'No puedes eliminar una review de otro/a usuario/a'})
+        const deletedReview = await reviewSchema.findByIdAndDelete(id);
+        const beat = await beatModel.findById(deletedReview.beat);
+        const beatIndex = beat.review.findIndex(
+          (beat) => beat._id === deletedReview._id
+        );
+        const deletedReviewInBeat = beat.review.splice(beatIndex, 1);
+        await beat.save();
+        res.json(deletedReview);
+      } catch (error) {
+        res.json({ error: error.message }).status(SERVER_ERROR);
+      }
+    }
+    else return res.status(400).json({message: 'ingresa una ID'})
+  } catch (error) {
+    res.json({ message: error.message }).status(SERVER_ERROR);
+  }
+});
+
+router.delete("/admin/:id", adminMiddleware, async (req, res) => {
+  try {
+    const { id } = req.params;
   if (id) {
     try {
       const deletedReview = await reviewSchema.findByIdAndDelete(id);
@@ -120,6 +222,10 @@ router.delete("/:id", async (req, res) => {
     } catch (error) {
       res.json({ error: error.message }).status(SERVER_ERROR);
     }
+  }
+  else return res.status(400).json({message: 'ingresa una ID'})
+  } catch (error) {
+  res.status(500).json({message: error.message})
   }
 });
 

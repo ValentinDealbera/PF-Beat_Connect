@@ -1,7 +1,8 @@
 const express = require("express");
 const userModel = require('../models/nosql/user')
 const OrderModel = require('../models/nosql/orders')
-const beatModel = require('../models/nosql/beats')
+const beatModel = require('../models/nosql/beats');
+const adminMiddleware = require("../middleware/adminVerify");
 const router = express()
 
 router.get('/', async (req, res) => {
@@ -40,6 +41,22 @@ router.get('/buyer/:userBuyerId', async (req,res)=>{
 
 router.delete('/:id', async (req,res)=>{
     try {
+        const {userid} = req.headers
+        const {id} = req.params
+        const comprobante = await OrderModel.findById(id).populate('buyer')
+        const comprobanteUser = await userModel.findById(userid)
+        if(!comprobanteUser) return res.status(400).json({message: 'Ese usuario no existe'})
+        if(!comprobante) return res.status(400).json({message: 'Esa orden no existe'})
+        if(comprobante.buyer.email !== comprobanteUser.email) return res.status(400).json({message: 'No pueden eliminar una orden que no sea tuya'})
+        const order = OrderModel.findByIdAndDelete(id)
+        res.status(200).json(order)
+    } catch (error) {   
+        res.status(500).json({message: error.message})
+    }
+})
+
+router.delete('/:id', adminMiddleware ,async (req,res)=>{
+    try {
         const {id} = req.params
         const order = OrderModel.findByIdAndDelete(id)
         res.status(200).json(order)
@@ -47,6 +64,7 @@ router.delete('/:id', async (req,res)=>{
         res.status(500).json({message: error.message})
     }
 })
+
 
 router.post('/', async (req, res) => {
     try {
