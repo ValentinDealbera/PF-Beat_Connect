@@ -7,22 +7,57 @@ const {
   ref,
   getDownloadURL,
   uploadBytesResumable,
-  deleteObject
+  deleteObject,
 } = require("firebase/storage");
-const multer = require("multer");
 const config = require("../../config/firebaseConfig");
-const axios = require("axios");
 const beatModel = require("../models/nosql/beats");
-const userModel = require('../models/nosql/user')
-const genreModel = require('../models/nosql/genre')
+const userModel = require("../models/nosql/user");
+const genreModel = require("../models/nosql/genre");
+const reviewModel = require("../models/nosql/reviews");
 
 initializeApp(config.firebaseConfig);
 
 const storage = getStorage();
 
 router.get("/", async (req, res) => {
+  const page = req.query.page || 1;
+  const limit = req.query.limit || 20;
+  const { name, priceAmount, BPM, genre } = req.query;
+
+  let sortBy;
+  if (name) {
+    sortBy = { name };
+  }
+  if (BPM) {
+    sortBy = { BPM };
+  }
+  if (priceAmount) {
+    sortBy = { priceAmount };
+  }
+
+  const genreDictionary = {
+    POP: "6439b4f5ebf145d96f537996",
+    "HIP-HOP": "6439b53bebf145d96f537998",
+    "R&B": "6439b56d5a9480c79875008f",
+    ELECTRONIC: "6439b5805a9480c798750094",
+    REGGAE: "6439b5995a9480c798750096",
+    COUNTRY: "6439b5a55a9480c798750098",
+    ROCK: "6439b5c45a9480c79875009a",
+  };
+
+  let translatedGenre = genreDictionary[genre];
+
   try {
-    const beats = await beatModel.find().populate("userCreator").populate("genre");
+    const beats = await beatModel.paginate(
+      { genre: translatedGenre },
+      {
+        limit,
+        page,
+        sort: sortBy,
+        populate: ["userCreator", "genre"],
+      }
+    );
+
     res.status(200).json(beats);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -32,7 +67,10 @@ router.get("/", async (req, res) => {
 router.get("/:beatId", async (req, res) => {
   try {
     const { beatId } = req.params;
-    const beat = await beatModel.findById(beatId).populate("userCreator").populate("genre");
+    const beat = await beatModel
+      .findById(beatId)
+      .populate("userCreator")
+      .populate("genre");
     res.status(200).json(beat);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -41,11 +79,12 @@ router.get("/:beatId", async (req, res) => {
 
 router.post("/", async (req, res) => {
   const comprobacion = await beatModel.findOne({ name: req.body.name });
-  if(comprobacion){
-    if (comprobacion.name.toLocaleLowerCase() === req.body.name.toLowerCase()) return res.status(400).json({ error: "Ese Beat ya Existe" }).end();
+  if (comprobacion) {
+    if (comprobacion.name.toLocaleLowerCase() === req.body.name.toLowerCase())
+      return res.status(400).json({ error: "Ese Beat ya Existe" }).end();
   }
-  const creator = await userModel.findById(req.body.userCreator)
-  const genre = await genreModel.findById(req.body.genre)
+  const creator = await userModel.findById(req.body.userCreator);
+  const genre = await genreModel.findById(req.body.genre);
   const audioMP3Data = fs.readFileSync(req.files.audioMP3.tempFilePath);
   // const audioWAVData = fs.readFileSync(req.files.audioWAV.tempFilePath);
   try {
@@ -90,30 +129,28 @@ router.post("/", async (req, res) => {
 
       const downloadAudioURL = await getDownloadURL(audioSnapshot.ref);
       //------------------------------------------image
-      let downloadImageURL
-      if(req.files.image){
+      let downloadImageURL;
+      if (req.files.image) {
         const imageData = fs.readFileSync(req.files.image.tempFilePath);
-      const imageStorageRef = ref(
-        storage,
-        `beats/${req.body.name}/image/${
-          req.files.image.name + " - " + dateTime
-        }`
-      );
+        const imageStorageRef = ref(
+          storage,
+          `beats/${req.body.name}/image/${
+            req.files.image.name + " - " + dateTime
+          }`
+        );
 
-      const imageMetadata = {
-        contentType: req.files.image.mimetype,
-      };
+        const imageMetadata = {
+          contentType: req.files.image.mimetype,
+        };
 
-      const imageSnapshot = await uploadBytesResumable(
-        imageStorageRef,
-        imageData,
-        imageMetadata
-      );
-      downloadImageURL = await getDownloadURL(imageSnapshot.ref);
+        const imageSnapshot = await uploadBytesResumable(
+          imageStorageRef,
+          imageData,
+          imageMetadata
+        );
+        downloadImageURL = await getDownloadURL(imageSnapshot.ref);
       }
       console.log("successfully uploaded");
-
-
 
       const newBeat = await beatModel.create({
         audioMP3: downloadAudioURL,
@@ -126,8 +163,8 @@ router.post("/", async (req, res) => {
         genre: genre._id,
       });
 
-      creator.createdBeats = [...creator.createdBeats, newBeat._id]
-      creator.save()
+      creator.createdBeats = [...creator.createdBeats, newBeat._id];
+      creator.save();
 
       return res.json(newBeat);
     }
@@ -139,15 +176,18 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, priceAmount, review, softDelete, genre, relevance } = req.body;
+    const { name, priceAmount, review, softDelete, genre, relevance } =
+      req.body;
     const updatedBeat = await beatModel.findById(id);
     if (!updatedBeat) return res.status(400).json({ error: "Beat not Found" });
     if (name) updatedBeat.name = name;
     if (priceAmount) updatedBeat.priceAmount = Number(priceAmount);
     if (review) updatedBeat.review = [...updatedBeat.review, review];
-    if (softDelete) updatedBeat.softDelete = softDelete === 'true' ? true : false;
+    if (softDelete)
+      updatedBeat.softDelete = softDelete === "true" ? true : false;
     if (genre) updatedBeat.genre = genre;
-    if (relevance) updatedBeat.relevance = relevance === '+' && updatedBeat.relevance + 1
+    if (relevance)
+      updatedBeat.relevance = relevance === "+" && updatedBeat.relevance + 1;
     updatedBeat.save();
     return res.status(200).json(updatedBeat);
   } catch (error) {
@@ -155,16 +195,22 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-
-
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const deletedBeat = await beatModel.findByIdAndDelete(id);
-    const user = await userModel.findById(deletedBeat.userCreator)
-    const beatIndex = user.createdBeats.findIndex(beat => beat._id === deletedBeat._id);
-    const deletedBeatInUser = user.createdBeats.splice(beatIndex, 1)
-    await user.save()
+
+    const user = await userModel.findById(deletedBeat.userCreator);
+    const beatIndex = user.createdBeats.findIndex(
+      (beat) => beat._id === deletedBeat._id
+    );
+    const deletedBeatInUser = user.createdBeats.splice(beatIndex, 1);
+    await user.save();
+
+    const reviewsDeletedInConsequence = await reviewModel.deleteMany({
+      beat: deletedBeat._id,
+    });
+
     res.json(deletedBeat);
   } catch (error) {
     res.status(500).json({ error: error.message });
