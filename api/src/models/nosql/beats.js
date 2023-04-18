@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const mongoosePaginate = require("mongoose-paginate-v2");
 
 const BeatsSchema = new mongoose.Schema({
   audioMP3: {
@@ -38,9 +39,9 @@ const BeatsSchema = new mongoose.Schema({
     require: true,
   },
   genre: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Genre",
-    },
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Genre",
+  },
   review: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -51,14 +52,16 @@ const BeatsSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  userCreator:  {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
-  inCart:{
+  userCreator: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
+  inCart: {
     type: Boolean,
     default: false,
-  }
+  },
 });
+
+BeatsSchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model("Beats", BeatsSchema);

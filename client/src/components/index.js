@@ -30,6 +30,11 @@ export { default as Input } from "./common/input";
 export { default as CheckboxGroup } from "./common/checkboxGroup";
 export { default as ArrowLabel } from "./common/arrowLabel";
 export { default as MinMax } from "./common/minMax";
+export {default as SoftDeleteSwitch } from "./common/softDeleteSwitch" 
+export { default as SwitchForm } from "./common/switchForm"
+export { default as FormColumn } from "./common/formColum"
+export { default as FormAdmin } from "./common/adminForm" //creado pero sin colocar (SoftDelete, SwitchForm)
+export { default as ValidationEditUsers } from "./common/validationEditUsers"
 
 //Modal
 export { default as ModalMinMax } from "./modal/modalMinMax";

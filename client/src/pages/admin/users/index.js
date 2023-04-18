@@ -3,8 +3,14 @@ import {
     IslandDashboard,
     FaqsGrid,
   } from "@/components";
+  import TableAdminUsers from "@/components/tables/tableAdminUsers";
+  import { usuariosDos } from "../../../data/fakeDB";
   
   export default function SellerDashboardOverview() {
+
+  const usuariosDosJson = JSON.stringify(usuariosDos);
+  
+ 
     return (
       <>
         <main>
@@ -17,6 +23,9 @@ import {
           }}
         >
             <IslandDashboard className="flex flex-col gap-5 xl:gap-8 ">
+              <div className="flex">
+              <TableAdminUsers data={usuariosDosJson} />
+              </div>
             </IslandDashboard>
           </SellerDashboardLayout>
         </main>

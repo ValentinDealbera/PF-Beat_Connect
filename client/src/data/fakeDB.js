@@ -173,44 +173,129 @@ const sortArr = [
 const usuariosDos = [
   {
     id: 1,
-    name: "Bizarrap",
-    mail: "bizarrap@Test.com",
+    username: "Bizarrap",
+    email: "bizarrap@Test.com",
+    isSeller: true,
     profilemsg: `Beats pa' tipos como tu`,
     type: "seller",
     image: "https://i.pinimg.com/564x/f3/2f/cb/f32fcb4b8f4db634faff108bd73dcbe0.jpg"
   },
   {
     id: 2,
-    name: "David Guetta",
-    mail: "davidguetta@Test.com",
+    username: "David Guetta",
+    email: "davidguetta@Test.com",
+    isSeller: true,
     profilemsg: `Beats for the boys`,
     type: "seller",
     image: "https://i.pinimg.com/564x/f5/d5/c0/f5d5c0e834c4f53bb06b1b743c42ca8e.jpg"
   },
   {
     id: 3,
-    name: "Pharrel Williams",
-    mail: "pharrellwilliams@Test.com",
+    username: "Pharrel Williams",
+    email: "pharrellwilliams@Test.com",
+    isSeller: false,
     profilemsg: `Your up all night to get lucky with my beats`,
     type: "seller",
     image: "https://i.pinimg.com/564x/f5/d5/c0/f5d5c0e834c4f53bb06b1b743c42ca8e.jpg"
   },
   {
     id: 4,
-    name: "Y2K",
-    mail: "y2k@Test.com",
+    username: "Y2K",
+    email: "y2k@Test.com",
+    isSeller: true,
     profilemsg: `Wa wa wa, cry for the beats`,
     type: "seller",
     image: "https://i.pinimg.com/564x/f5/d5/c0/f5d5c0e834c4f53bb06b1b743c42ca8e.jpg"
   },
   {
     id: 5,
-    name: "Skrillex",
-    mail: "skrillex@Test.com",
+    username: "Skrillex",
+    email: "skrillex@Test.com",
+    isSeller: false,
     profilemsg: `Beats... skshhshhshhhh piuuu piuu`,
     type: "seller",
     image: "https://i.pinimg.com/564x/b0/75/54/b07554ac7a7d3c2a578557d930a151c8.jpg"
   },
 ];
 
-export { genres, beats, usuarios, usuariosDos, types, sortArr };
+const beatsDos = [
+  {
+    id: 1,
+    name: "BZR Session 55",
+    BPM: 120,
+    priceAmount: 29.99,
+    userCreator: 4,  
+    genre: "COUNTRY",
+    image: "https://i.pinimg.com/564x/b0/75/54/b07554ac7a7d3c2a578557d930a151c8.jpg",
+    audioMP3: "algún audio",
+    softDelete: false    
+  },
+  {
+    id: 2,
+    name: "BZR Session 55",
+    BPM: 20,
+    priceAmount: 9.99,
+    userCreator: 3,  
+    genre: "COUNTRY",
+    image: "https://i.pinimg.com/564x/b0/75/54/b07554ac7a7d3c2a578557d930a151c8.jpg",
+    audioMP3: "algún audio",
+    softDelete: false    
+  },
+  {
+    id: 1,
+    name: "BZR Session 55",
+    BPM: 120,
+    priceAmount: 29.99,
+    userCreator: 4,  
+    genre: "COUNTRY",
+    image: "https://i.pinimg.com/564x/b0/75/54/b07554ac7a7d3c2a578557d930a151c8.jpg",
+    audioMP3: "algún audio",
+    softDelete: false    
+  },
+  {
+    id: 1,
+    name: "BZR Session 55",
+    BPM: 120,
+    priceAmount: 29.99,
+    userCreator: 4,  
+    genre: "COUNTRY",
+    image: "https://i.pinimg.com/564x/b0/75/54/b07554ac7a7d3c2a578557d930a151c8.jpg",
+    audioMP3: "algún audio",
+    softDelete: false    
+  },
+  {
+    id: 1,
+    name: "BZR Session 55",
+    BPM: 120,
+    priceAmount: 29.99,
+    userCreator: 4,  
+    genre: "COUNTRY",
+    image: "https://i.pinimg.com/564x/b0/75/54/b07554ac7a7d3c2a578557d930a151c8.jpg",
+    audioMP3: "algún audio",
+    softDelete: false    
+  },
+  {
+    id: 1,
+    name: "BZR Session 55",
+    BPM: 120,
+    priceAmount: 29.99,
+    userCreator: 4,  
+    genre: "COUNTRY",
+    image: "https://i.pinimg.com/564x/b0/75/54/b07554ac7a7d3c2a578557d930a151c8.jpg",
+    audioMP3: "algún audio",
+    softDelete: false    
+  },
+  {
+    id: 1,
+    name: "BZR Session 55",
+    BPM: 120,
+    priceAmount: 29.99,
+    userCreator: 4,  
+    genre: "COUNTRY",
+    image: "https://i.pinimg.com/564x/b0/75/54/b07554ac7a7d3c2a578557d930a151c8.jpg",
+    audioMP3: "algún audio",
+    softDelete: false    
+  },
+];
+
+export { genres, beats, usuarios, usuariosDos, types, sortArr, beatsDos };

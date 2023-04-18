@@ -1,5 +1,6 @@
 
-import { Main, Head, BeatRightSheet,Switch, ModalOnHover } from "@/components";
+import { Main, Head, BeatRightSheet, Switch , ModalOnHover} from "@/components";
+
 import { useEffect, useRef, useState } from "react";
 
 
@@ -12,9 +13,12 @@ import { useEffect, useRef, useState } from "react";
         <button onClick={()=>setIsDropdownOpen(!isDropdownOpen)}>abrir sidebar</button>
         {isDropdownOpen&&<BeatRightSheet setIsDropdownOpen={setIsDropdownOpen}/>}
       </Main>
+     
+
       <br />
       <Switch name={props.name} label={props.label} state={props.state} />
       <br />
+     
     </>
   );
 }
