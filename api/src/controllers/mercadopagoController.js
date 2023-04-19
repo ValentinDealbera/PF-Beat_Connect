@@ -2,6 +2,7 @@ require("dotenv").config();
 const { PROD_ACCESS_TOKEN, TEST_ACCESS_TOKEN } = process.env;
 const mercadopago = require("mercadopago");
 const Beats = require("../models/nosql/beats");
+const userModel = require("../models/nosql/user");
 const {
   OK,
   CREATED,
@@ -13,29 +14,50 @@ const {
   ALL_NOT_OK,
 } = require("../controllers/status");
 
-mercadopago.configure({
-  access_token:
-    "TEST-6311174056037890-041912-353e6d3cf9f12b63e5f8c5e9785a00d6-1356139611",
-});
 
 module.exports = async (req, res) => {
-  const { cart } = req.body;
+  console.log(req.body);
+  const { cart, buyer } = req.body;
+  mercadopago.configure({
+    access_token:
+      req.body.access_token,
+  });
+
+  const beatPercentage = (beatArr, n) => {
+    let aux = 0
+    beatArr.forEach(e=>{
+      aux = aux + ((e.priceAmount * n) / 100)
+    })
+    console.log(aux);
+    return aux
+  }
 
   try {
+    const userBuyer = await userModel.findOne({id:buyer})
     const beatsToCheckout = await Beats.find({ _id: { $in: cart } });
     let preference = {
-      items: beatsToCheckout.map((beat) => ({
+      items: beatsToCheckout.map((beat) => {
+        return {
         title: beat.name,
         unit_price: beat.priceAmount,
         quantity: 1,
-      })),
-      marketplace_fee: 5,
+      }}),
+      // items: [{
+      //   title: 'asd',
+      //   unit_price: 5,
+      //   quantity: 1,
+      // }],
+      marketplace_fee: beatPercentage(beatsToCheckout, 15),
       back_urls: {
         success: "http://localhost:3001/api/feedback",
         failure: "http://localhost:3001/api/feedback",
         pending: "http://localhost:3001/api/feedback", // 3001 es el backend
       },
-      auto_return: "approved",
+      payer: {
+        name: userBuyer.firstName,
+        surname: userBuyer.lastName,
+        email: userBuyer.email,
+        },
     };
 
     const response = await mercadopago.preferences.create(preference);
