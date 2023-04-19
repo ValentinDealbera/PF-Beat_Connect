@@ -10,6 +10,9 @@ import {
 import { categories } from "@/data/data";
 
 export default function Home() {
+//hacemos console.log del env
+  console.log(process.env.NEXT_PUBLIC_TOKEN_ADMIN)
+
   return (
     <>
       <Head title={"Home"} description={"Head from home"} />

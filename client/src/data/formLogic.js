@@ -45,9 +45,7 @@ export const validateForm = (form, fieldsToValidate, validateMode) => {
   return errors;
 };
 
-export const handleSubmit = async (
-props
-) => {
+export const handleSubmit = async (props) => {
   console.log("handleSubmit", props);
   //e.preventDefault();
   const formErrors =
@@ -61,11 +59,13 @@ props
 
   console.log("formErrors", props.validateMode);
   if (Object.keys(formErrors).length === 0) {
-    // await dispatch(actionToDispatch(form));
+    console.log("form ok", props.form);
+    await props.dispatch(props.actionToDispatch(props.form));
     console.log("form ok", props.form);
     props.formRef.reset();
   } else {
     props.setErrors(formErrors);
     console.log("form Error", formErrors, props.validateMode);
+    throw new Error("Form Error");
   }
 };
