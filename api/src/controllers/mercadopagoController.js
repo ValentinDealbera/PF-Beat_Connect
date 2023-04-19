@@ -1,6 +1,3 @@
-// const express = require("express");
-// const router = express();
-// const mongoose = require("mongoose");
 require("dotenv").config();
 const { PROD_ACCESS_TOKEN, TEST_ACCESS_TOKEN } = process.env;
 const mercadopago = require("mercadopago");
@@ -17,7 +14,8 @@ const {
 } = require("../controllers/status");
 
 mercadopago.configure({
-  access_token: "TEST-05f893b5-e601-4913-8ea8-18bd7747da28",
+  access_token:
+    "TEST-6311174056037890-041912-353e6d3cf9f12b63e5f8c5e9785a00d6-1356139611",
 });
 
 module.exports = async (req, res) => {
@@ -31,6 +29,7 @@ module.exports = async (req, res) => {
         unit_price: beat.priceAmount,
         quantity: 1,
       })),
+      marketplace_fee: 5,
       back_urls: {
         success: "http://localhost:3001/api/feedback",
         failure: "http://localhost:3001/api/feedback",
@@ -40,7 +39,7 @@ module.exports = async (req, res) => {
     };
 
     const response = await mercadopago.preferences.create(preference);
-    const mpLink = response.body.sandbox_init_point;
+    const mpLink = response.body.init_point;
 
     res.status(OK).json(mpLink);
   } catch (error) {
