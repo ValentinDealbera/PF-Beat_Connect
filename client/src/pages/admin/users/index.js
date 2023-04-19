@@ -5,10 +5,12 @@ import {
   } from "@/components";
   import TableAdminUsers from "@/components/tables/tableAdminUsers";
   import { usuariosDos } from "../../../data/fakeDB";
+  import { useRouter } from "next/router";
   
   export default function SellerDashboardOverview() {
 
   const usuariosDosJson = JSON.stringify(usuariosDos);
+    const router = useRouter();
   
  
     return (
@@ -19,7 +21,7 @@ import {
           topBarMessage="Usuarios de la pagina"
           topBarButtonLabel="Crear usuario"
           onClick={() => {
-            console.log("Click");
+            router.push("/admin/users/create");
           }}
         >
             <IslandDashboard className="flex flex-col gap-5 xl:gap-8 ">

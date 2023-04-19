@@ -7,6 +7,7 @@ import {
   Input,
   Select,
   SwitchForm,
+  TextArea,
 } from "@/components";
 
 import {
@@ -15,30 +16,24 @@ import {
   handleSubmit,
   validateForm,
 } from "@/data/formLogic";
-import { ValidationCreateBeat } from "@/components/client/validationCreateBeat";
+
 import { useState, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { fetchGenres } from "@/redux/slices/filters";
 
 export default function SellerDashboardOverview() {
   const dispatch = useDispatch();
   const formRef = useRef(null);
-
+  const validateMode = "review";
   const [fieldsToValidate, setFieldsToValidate] = useState([]);
-  const [selected, setSelected] = useState("");
   const [error, setErrors] = useState({});
-  const genres = useSelector((state) => state.filters.genres);
-  const validateMode = "beat";
-  console.log("genres", genres);
+
   const [form, setForm] = useState({
-    name: "",
-    priceAmount: "",
-    genre: selected,
-    userCreator: "",
-    bpm: "",
-    image: {},
-    audioMP3: {},
-    _id: "",
+    createdBy: "",
+    beat: "",
+    comment: "",
+    title: "",
+    rating: "",
     softDelete: false,
   });
 
@@ -51,10 +46,6 @@ export default function SellerDashboardOverview() {
       setForm,
       validateMode
     );
-  };
-
-  const handleSelect = (e) => {
-    handleSelectChange(e, setSelected, setForm, form);
   };
 
   useEffect(() => {
@@ -110,7 +101,7 @@ export default function SellerDashboardOverview() {
       <main>
         <SellerDashboardLayout
           topBarMode="action"
-          topBarMessage="Crear beat"
+          topBarMessage="Crear review"
           topBarButtonLabel="Guardar cambios"
           onClick={onSubmit}
         >
@@ -120,33 +111,32 @@ export default function SellerDashboardOverview() {
                 <FormRow>
                   <FormColumn className="w-full">
                     <Input
-                      id="name"
+                      id="createdBy"
                       type="text"
-                      name="name"
-                      placeholder="Nombre del beat"
-                      label="Nombre"
-                      error={error.name}
+                      name="createdBy"
+                      placeholder="Id del autor"
+                      label="Id del autor"
+                      error={error.createdBy}
                       onChange={handleInput}
-                    />
-                    <Select
-                      label={"Elige un genero"}
-                      valores={genres}
-                      setSeleccionados={handleSelect}
-                      value={selected}
-                      name="genre"
-                      seleccionados={selected}
-                      error={error.genre}
-                      className="flex w-full flex-col gap-2"
-                      labelClass="w-full text-sm-regular text-sm-medium"
                     />
                     <Input
-                      id="audioMP3"
-                      type="file"
-                      name="audioMP3"
-                      placeholder="Sube tu beat"
-                      label="Beat"
+                      id="title"
+                      type="text"
+                      name="title"
+                      placeholder="Titulo"
+                      label="Titulo del review"
                       onChange={handleInput}
-                      error={error.audioMP3}
+                      error={error.title}
+                    />
+                    <Input
+                      id="rating"
+                      type="number"
+                      name="rating"
+                      step="0.1"
+                      placeholder="Rating"
+                      label="Rating del review"
+                      onChange={handleInput}
+                      error={error.rating}
                     />
                     <SwitchForm
                       label="SoftDelete"
@@ -159,30 +149,20 @@ export default function SellerDashboardOverview() {
                   </FormColumn>
                   <FormColumn className="w-full">
                     <Input
-                      id="priceAmount"
-                      name="priceAmount"
-                      type="number"
-                      placeholder="Precio del beat"
-                      label="Precio"
-                      error={error.priceAmount}
+                      id="beat"
+                      name="beat"
+                      type="text"
+                      placeholder="Id del beat"
+                      label="Id del beat"
+                      error={error.beat}
                       onChange={handleInput}
                     />
-                    <Input
-                      id="bpm"
-                      type="number"
-                      name="bpm"
-                      placeholder="BPMs"
-                      label="BPMs"
-                      error={error.bpm}
-                      onChange={handleInput}
-                    />
-                    <Input
-                      id="image"
-                      name="image"
-                      error={error.image}
-                      type="file"
-                      placeholder="Sube una portada"
-                      label="Portada"
+                    <TextArea
+                      id="comment"
+                      name="comment"
+                      placeholder="Comentario"
+                      label="Comentario"
+                      error={error.comment}
                       onChange={handleInput}
                     />
                   </FormColumn>

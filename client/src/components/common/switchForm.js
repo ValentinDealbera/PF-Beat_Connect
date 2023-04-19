@@ -2,7 +2,7 @@ export default function SwitchForm({ nameInput, label, arrayButtons }) {
   return (
     <label
       htmlFor={nameInput}
-      className="font-britanicaBold text-sm-medium flex min-w-0 flex-grow flex-col"
+      className="font-britanicaBold text-sm-medium flex min-w-0 flex-grow flex-col gap-1"
     >
       {label}
       <div className="border-radius-estilo2 flex flex-row items-start justify-start gap-0 overflow-hidden">
