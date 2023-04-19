@@ -2,7 +2,8 @@ import {
     SellerDashboardLayout,
     IslandDashboard,
     FaqsGrid,
-    DynamicTable
+    DynamicTable,
+    ModalTables
   } from "@/components";
   import * as React from "react";
   import Image from "next/image";
@@ -15,7 +16,7 @@ import {
     const usersData = usuariosDos;
 
     const router = useRouter();
-    const [userToDelete, setUserToDelete] = React.useState(null);
+    const [elementToDelete, setElementToDelete] = React.useState(null);
     const headers = ["User", "Id", "Email", "IsSeller", "SoftDelete", "Edit", "Delete" ];
 
     const rows = usersData.map((item) => {
@@ -41,7 +42,7 @@ import {
             text-sm-semibold py-2 px-4 border-radius-estilo2"
             >Edit</button>),          
           delete:( <button
-            onClick={() => setUserToDelete(item)}
+            onClick={() => setElementToDelete(item)}
             className="background-primary-red-500 hover:background-primary-red-700 color-neutral-white 
             text-sm-semibold py-2 px-4 border-radius-estilo2"
             >Eliminar</button>)
@@ -59,43 +60,18 @@ import {
             console.log("Click");
           }}
         >
-            <IslandDashboard className="flex flex-col gap-5 xl:gap-8 ">
-              <div className="flex">
-              <DynamicTable headers={headers} rows={rows} />
-              </div>
+            <IslandDashboard className="flex flex-col gap-5 xl:gap-8 ">              
+              <DynamicTable headers={headers} rows={rows} />              
             </IslandDashboard>
-          </SellerDashboardLayout>
+          </SellerDashboardLayout>          
         </main>
-        {userToDelete && (
-  <div
-    className="fixed inset-0 z-50 flex justify-center items-center"
-    style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
-  >
-    <div className="background-neutral-white w-96 p-8 border-radius-estilo2">
-      <h2 className="text-xl font-bold mb-4">Delete User</h2>
-      <p className="text-sm mb-4">
-        Are you sure you want to delete Beat {userToDelete.id} -{" "}
-        {userToDelete.name}?
-      </p>
-      <div className="flex justify-end gap-4">
-        <button
-          onClick={() => setUserToDelete(null)}
-          className="background-neutral-gray-400 hover:background-neutral-gray-700 color-neutral-white 
-                  text-sm-semibold py-2 px-4 border-radius-estilo2"
-        >
-          Cancel
-        </button>
-        <button
-          onClick={() => console.log(`Eliminando Beat con id ${userToDelete.id}`)}
-          className="background-primary-red-500 hover:background-primary-red-700 color-neutral-white 
-                  text-sm-semibold py-2 px-4 border-radius-estilo2"
-        >
-          Yes, I'm sure
-        </button>
-      </div>
-    </div>
-  </div>
-)}
+        {elementToDelete && 
+        (<ModalTables 
+          label="User" 
+          name ={"username"} 
+          element={elementToDelete} 
+          onClose={() => setElementToDelete(null)} 
+          onConfirm={() => console.log(`Eliminando User con id ${elementToDelete.id}`)} />)}
       </>
     );
   }

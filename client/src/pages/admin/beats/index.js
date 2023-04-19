@@ -2,7 +2,8 @@ import {
   SellerDashboardLayout,
   IslandDashboard,
   FaqsGrid,
-  DynamicTable
+  DynamicTable,
+  ModalTables
 } from "@/components";
 import * as React from "react";
 import Image from "next/image";
@@ -69,36 +70,12 @@ export default function SellerDashboardOverview() {
           </IslandDashboard>
         </SellerDashboardLayout>
       </main>
-      {beatToDelete && (
-  <div
-    className="fixed inset-0 z-50 flex justify-center items-center"
-    style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
-  >
-    <div className="background-neutral-white w-96 p-8 border-radius-estilo2">
-      <h2 className="text-xl font-bold mb-4">Delete User</h2>
-      <p className="text-sm mb-4">
-        Are you sure you want to delete Beat {beatToDelete.id} -{" "}
-        {beatToDelete.name}?
-      </p>
-      <div className="flex justify-end gap-4">
-        <button
-          onClick={() => setBeatToDelete(null)}
-          className="background-neutral-gray-400 hover:background-neutral-gray-700 color-neutral-white 
-                  text-sm-semibold py-2 px-4 border-radius-estilo2"
-        >
-          Cancel
-        </button>
-        <button
-          onClick={() => console.log(`Eliminando Beat con id ${beatToDelete.id}`)}
-          className="background-primary-red-500 hover:background-primary-red-700 color-neutral-white 
-                  text-sm-semibold py-2 px-4 border-radius-estilo2"
-        >
-          Yes, I'm sure
-        </button>
-      </div>
-    </div>
-  </div>
-)}
+      {beatToDelete && (<ModalTables 
+      label="Beat" 
+      name ={"name"} 
+      element={beatToDelete} 
+      onClose={() => setBeatToDelete(null)} 
+      onConfirm={() => console.log(`Eliminando Beat con id ${beatToDelete.id}`)} />)}
       </>
     );
   }
