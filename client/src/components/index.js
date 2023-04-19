@@ -114,5 +114,7 @@ export { default as FormColumn } from "./form/formColumn";
 export { default as FormContainer } from "./form/formContainer";
 export { default as FormRow } from "./form/formRow";
 export { default as AdminCreateUserForm } from "./forms/adminCreateUser";
+export { default as AdminCreateReviewForm } from "./forms/adminCreateReview";
+
 //export { default as BeatImage } from "./beat/beatImage";
 //export { default as Checkbox } from "./common/checkbox";
