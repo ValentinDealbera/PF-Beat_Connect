@@ -55,6 +55,11 @@ console.log(fieldsToValidate)
           error.bpm = "Your beat must have between 20 and 350 bpm.";
         break;
 
+        case "genre":
+          console.log("soy genre", form.genre);
+          if (!form.genre || form.genre === "") error.genre = "You must select a genre";
+          break;
+
       default:
         break;
     }

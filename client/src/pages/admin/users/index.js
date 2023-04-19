@@ -10,6 +10,7 @@ import {
   import { useRouter } from "next/router";
   
   import { usuariosDos } from "../../../data/fakeDB";
+  import { useRouter } from "next/router";
   
   export default function SellerDashboardOverview() { 
 
@@ -57,7 +58,7 @@ import {
           topBarMessage="Usuarios de la pagina"
           topBarButtonLabel="Crear usuario"
           onClick={() => {
-            console.log("Click");
+            router.push("/admin/users/create");
           }}
         >
             <IslandDashboard className="flex flex-col gap-5 xl:gap-8 ">              

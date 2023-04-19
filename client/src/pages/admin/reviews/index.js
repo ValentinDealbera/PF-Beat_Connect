@@ -53,10 +53,14 @@ import {
     return (
       <>
         <main>
-          <SellerDashboardLayout
-            topBarMode="message"
-            topBarMessage="Hey, welcome back Sofia"
-          >
+        <SellerDashboardLayout
+          topBarMode="action"
+          topBarMessage="Reviews de la pagina"
+          topBarButtonLabel="Crear review"
+          onClick={() => {
+            router.push("/admin/reviews/create");
+          }}
+        >
             <IslandDashboard className="flex flex-col gap-5 xl:gap-8 ">
               <DynamicTable headers={headers} rows={rows} />
             </IslandDashboard>
