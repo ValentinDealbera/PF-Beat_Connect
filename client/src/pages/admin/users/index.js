@@ -2,18 +2,55 @@ import {
     SellerDashboardLayout,
     IslandDashboard,
     FaqsGrid,
+    DynamicTable,
+    ModalTables
   } from "@/components";
-  import TableAdminUsers from "@/components/tables/tableAdminUsers";
+  import * as React from "react";
+  import Image from "next/image";
+  import { useRouter } from "next/router";
+  
   import { usuariosDos } from "../../../data/fakeDB";
   import { useRouter } from "next/router";
   
-  export default function SellerDashboardOverview() {
+  export default function SellerDashboardOverview() { 
 
-  const usuariosDosJson = JSON.stringify(usuariosDos);
+    const usersData = usuariosDos;
+
     const router = useRouter();
+    const [elementToDelete, setElementToDelete] = React.useState(null);
+    const headers = ["User", "Id", "Email", "IsSeller", "SoftDelete", "Edit", "Delete" ];
+
+    const rows = usersData.map((item) => {
+      return {
+          id: item.id,
+          user: (
+              <div className="flex items-center gap-4">
+                  <Image
+                      src={item.image}
+                      width={50}
+                      height={50}
+                      className="rounded-full aspect-square object-cover"
+                  />
+                  <h3 className="text-base-medium">{item.username}</h3>
+              </div>
+          ),           
+          email: item.email,
+          isseller : item.isSeller?"Yes":"No",
+          softdelete: item.softDelete? "Banned":"Ok",
+          edit: (<button
+            onClick={() => router.push(`/admin/users/${item.id}`)}
+            className="background-neutral-gray-400 hover:background-neutral-gray-700 color-neutral-white 
+            text-sm-semibold py-2 px-4 border-radius-estilo2"
+            >Edit</button>),          
+          delete:( <button
+            onClick={() => setElementToDelete(item)}
+            className="background-primary-red-500 hover:background-primary-red-700 color-neutral-white 
+            text-sm-semibold py-2 px-4 border-radius-estilo2"
+            >Eliminar</button>)
+      } 
+  })   
   
- 
-    return (
+     return (
       <>
         <main>
         <SellerDashboardLayout
@@ -24,14 +61,18 @@ import {
             router.push("/admin/users/create");
           }}
         >
-            <IslandDashboard className="flex flex-col gap-5 xl:gap-8 ">
-              <div className="flex">
-              <TableAdminUsers data={usuariosDosJson} />
-              </div>
+            <IslandDashboard className="flex flex-col gap-5 xl:gap-8 ">              
+              <DynamicTable headers={headers} rows={rows} />              
             </IslandDashboard>
-          </SellerDashboardLayout>
+          </SellerDashboardLayout>          
         </main>
+        {elementToDelete && 
+        (<ModalTables 
+          label="User" 
+          name ={"username"} 
+          element={elementToDelete} 
+          onClose={() => setElementToDelete(null)} 
+          onConfirm={() => console.log(`Eliminando User con id ${elementToDelete.id}`)} />)}
       </>
     );
   }
-  

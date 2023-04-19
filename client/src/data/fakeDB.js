@@ -6,6 +6,7 @@ import foto5 from "../../public/images/noah-windler-Qh4hWBKq1xA-unsplash.jpg";
 import foto6 from "../../public/images/robert-stump-FAJbNf2J6cY-unsplash.jpg";
 import foto7 from "../../public/images/zulmaury-saavedra - Keh6vLM7w0-unsplash.jpg";
 
+
 const genres = [
   { name: "HIP-HOP", id: 1 },
   { name: "POP", id: 2 },
@@ -178,7 +179,7 @@ const usuariosDos = [
     isSeller: true,
     profilemsg: `Beats pa' tipos como tu`,
     type: "seller",
-    image: "https://i.pinimg.com/564x/f3/2f/cb/f32fcb4b8f4db634faff108bd73dcbe0.jpg"
+    image: foto7
   },
   {
     id: 2,
@@ -187,7 +188,7 @@ const usuariosDos = [
     isSeller: true,
     profilemsg: `Beats for the boys`,
     type: "seller",
-    image: "https://i.pinimg.com/564x/f5/d5/c0/f5d5c0e834c4f53bb06b1b743c42ca8e.jpg"
+    image: foto7
   },
   {
     id: 3,
@@ -196,7 +197,7 @@ const usuariosDos = [
     isSeller: false,
     profilemsg: `Your up all night to get lucky with my beats`,
     type: "seller",
-    image: "https://i.pinimg.com/564x/f5/d5/c0/f5d5c0e834c4f53bb06b1b743c42ca8e.jpg"
+    image: foto7
   },
   {
     id: 4,
@@ -205,7 +206,7 @@ const usuariosDos = [
     isSeller: true,
     profilemsg: `Wa wa wa, cry for the beats`,
     type: "seller",
-    image: "https://i.pinimg.com/564x/f5/d5/c0/f5d5c0e834c4f53bb06b1b743c42ca8e.jpg"
+    image: foto7
   },
   {
     id: 5,
@@ -214,7 +215,7 @@ const usuariosDos = [
     isSeller: false,
     profilemsg: `Beats... skshhshhshhhh piuuu piuu`,
     type: "seller",
-    image: "https://i.pinimg.com/564x/b0/75/54/b07554ac7a7d3c2a578557d930a151c8.jpg"
+    image: foto7
   },
 ];
 
@@ -226,8 +227,8 @@ const beatsDos = [
     priceAmount: 29.99,
     userCreator: 4,  
     genre: "COUNTRY",
-    image: "https://i.pinimg.com/564x/b0/75/54/b07554ac7a7d3c2a578557d930a151c8.jpg",
-    audioMP3: "algún audio",
+    image: foto7,
+    audioMP3: "https://firebasestorage.googleapis.com/v0/b/beatconnect-62691.appspot.com/o/beats%2FFashion%20%2FaudioMP3%2Ffashion-upbeat-electronica-117535.mp3%20-%202023-4-15%2021%3A7%3A50?alt=media&token=fcd12de7-5933-4bf0-ab4e-14677ee3ff25",
     softDelete: false    
   },
   {
@@ -237,8 +238,8 @@ const beatsDos = [
     priceAmount: 9.99,
     userCreator: 3,  
     genre: "COUNTRY",
-    image: "https://i.pinimg.com/564x/b0/75/54/b07554ac7a7d3c2a578557d930a151c8.jpg",
-    audioMP3: "algún audio",
+    image: foto7,
+    audioMP3: "https://firebasestorage.googleapis.com/v0/b/beatconnect-62691.appspot.com/o/beats%2FFashion%20%2FaudioMP3%2Ffashion-upbeat-electronica-117535.mp3%20-%202023-4-15%2021%3A7%3A50?alt=media&token=fcd12de7-5933-4bf0-ab4e-14677ee3ff25",
     softDelete: false    
   },
   {
@@ -248,8 +249,8 @@ const beatsDos = [
     priceAmount: 29.99,
     userCreator: 4,  
     genre: "COUNTRY",
-    image: "https://i.pinimg.com/564x/b0/75/54/b07554ac7a7d3c2a578557d930a151c8.jpg",
-    audioMP3: "algún audio",
+    image: foto7,
+    audioMP3: "https://firebasestorage.googleapis.com/v0/b/beatconnect-62691.appspot.com/o/beats%2FFashion%20%2FaudioMP3%2Ffashion-upbeat-electronica-117535.mp3%20-%202023-4-15%2021%3A7%3A50?alt=media&token=fcd12de7-5933-4bf0-ab4e-14677ee3ff25",
     softDelete: false    
   },
   {
@@ -259,8 +260,8 @@ const beatsDos = [
     priceAmount: 29.99,
     userCreator: 4,  
     genre: "COUNTRY",
-    image: "https://i.pinimg.com/564x/b0/75/54/b07554ac7a7d3c2a578557d930a151c8.jpg",
-    audioMP3: "algún audio",
+    image: foto7,
+    audioMP3: "https://firebasestorage.googleapis.com/v0/b/beatconnect-62691.appspot.com/o/beats%2FFashion%20%2FaudioMP3%2Ffashion-upbeat-electronica-117535.mp3%20-%202023-4-15%2021%3A7%3A50?alt=media&token=fcd12de7-5933-4bf0-ab4e-14677ee3ff25",
     softDelete: false    
   },
   {
@@ -270,8 +271,8 @@ const beatsDos = [
     priceAmount: 29.99,
     userCreator: 4,  
     genre: "COUNTRY",
-    image: "https://i.pinimg.com/564x/b0/75/54/b07554ac7a7d3c2a578557d930a151c8.jpg",
-    audioMP3: "algún audio",
+    image: foto7,
+    audioMP3: "https://firebasestorage.googleapis.com/v0/b/beatconnect-62691.appspot.com/o/beats%2FFashion%20%2FaudioMP3%2Ffashion-upbeat-electronica-117535.mp3%20-%202023-4-15%2021%3A7%3A50?alt=media&token=fcd12de7-5933-4bf0-ab4e-14677ee3ff25",
     softDelete: false    
   },
   {
@@ -281,9 +282,9 @@ const beatsDos = [
     priceAmount: 29.99,
     userCreator: 4,  
     genre: "COUNTRY",
-    image: "https://i.pinimg.com/564x/b0/75/54/b07554ac7a7d3c2a578557d930a151c8.jpg",
-    audioMP3: "algún audio",
-    softDelete: false    
+    image: foto7,
+    audioMP3: "https://firebasestorage.googleapis.com/v0/b/beatconnect-62691.appspot.com/o/beats%2FFashion%20%2FaudioMP3%2Ffashion-upbeat-electronica-117535.mp3%20-%202023-4-15%2021%3A7%3A50?alt=media&token=fcd12de7-5933-4bf0-ab4e-14677ee3ff25",
+    softDelete: true    
   },
   {
     id: 1,
@@ -292,10 +293,94 @@ const beatsDos = [
     priceAmount: 29.99,
     userCreator: 4,  
     genre: "COUNTRY",
-    image: "https://i.pinimg.com/564x/b0/75/54/b07554ac7a7d3c2a578557d930a151c8.jpg",
-    audioMP3: "algún audio",
+    image: foto7,
+    audioMP3: "https://firebasestorage.googleapis.com/v0/b/beatconnect-62691.appspot.com/o/beats%2FFashion%20%2FaudioMP3%2Ffashion-upbeat-electronica-117535.mp3%20-%202023-4-15%2021%3A7%3A50?alt=media&token=fcd12de7-5933-4bf0-ab4e-14677ee3ff25",
     softDelete: false    
   },
 ];
 
-export { genres, beats, usuarios, usuariosDos, types, sortArr, beatsDos };
+const reviews = [
+  {
+    id:1,
+    rating: 4,
+    title: "BeatConnect",
+    comment: "El mejor PF que puede haber",
+    dateCreated: "18/4/2023",
+    createdBy:{
+      id: 1,
+      username: "Bizarrap",
+      email: "bizarrap@Test.com",
+      isSeller: true,
+      profilemsg: `Beats pa' tipos como tu`,
+      type: "seller",
+      image: foto7
+    },
+    beat:{
+      id: 1,
+      name: "BZR Session 55",
+      BPM: 120,
+      priceAmount: 29.99,
+      userCreator: 4,  
+      genre: "COUNTRY",
+      image: foto7,
+      audioMP3: "https://firebasestorage.googleapis.com/v0/b/beatconnect-62691.appspot.com/o/beats%2FFashion%20%2FaudioMP3%2Ffashion-upbeat-electronica-117535.mp3%20-%202023-4-15%2021%3A7%3A50?alt=media&token=fcd12de7-5933-4bf0-ab4e-14677ee3ff25",
+      softDelete: false    
+    }
+  },
+  {
+    id:1,
+    rating: 4,
+    title: "BeatConnect",
+    comment: "El mejor PF que puede haber",
+    dateCreated: "18/4/2023",
+    createdBy:{
+      id: 1,
+      username: "Bizarrap",
+      email: "bizarrap@Test.com",
+      isSeller: true,
+      profilemsg: `Beats pa' tipos como tu`,
+      type: "seller",
+      image: foto7
+    },
+    beat:{
+      id: 1,
+      name: "BZR Session 55",
+      BPM: 120,
+      priceAmount: 29.99,
+      userCreator: 4,  
+      genre: "COUNTRY",
+      image: foto7,
+      audioMP3: "https://firebasestorage.googleapis.com/v0/b/beatconnect-62691.appspot.com/o/beats%2FFashion%20%2FaudioMP3%2Ffashion-upbeat-electronica-117535.mp3%20-%202023-4-15%2021%3A7%3A50?alt=media&token=fcd12de7-5933-4bf0-ab4e-14677ee3ff25",
+      softDelete: false    
+    }
+  },
+  {
+    id:1,
+    rating: 4,
+    title: "BeatConnect",
+    comment: "El mejor PF que puede haber",
+    dateCreated: "18/4/2023",
+    createdBy:{
+      id: 1,
+      username: "Bizarrap",
+      email: "bizarrap@Test.com",
+      isSeller: true,
+      profilemsg: `Beats pa' tipos como tu`,
+      type: "seller",
+      image: foto7
+    },
+    beat:{
+      id: 1,
+      name: "BZR Session 55",
+      BPM: 120,
+      priceAmount: 29.99,
+      userCreator: 4,  
+      genre: "COUNTRY",
+      image: foto7,
+      audioMP3: "https://firebasestorage.googleapis.com/v0/b/beatconnect-62691.appspot.com/o/beats%2FFashion%20%2FaudioMP3%2Ffashion-upbeat-electronica-117535.mp3%20-%202023-4-15%2021%3A7%3A50?alt=media&token=fcd12de7-5933-4bf0-ab4e-14677ee3ff25",
+      softDelete: false    
+    }
+  }
+]
+
+export { genres, beats, usuarios, usuariosDos, types, sortArr, beatsDos, reviews };

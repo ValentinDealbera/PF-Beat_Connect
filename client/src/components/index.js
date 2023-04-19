@@ -42,6 +42,7 @@ export { default as DynamicButtonsForBottomSheet } from "./client/dynamicButtons
 export { default as MiniModalBox } from "./modal/miniModalBox";
 export { default as ModalBoxForNav } from "./modal/modalBoxForNav";
 export { default as ModalPopUp } from "./modal/modalPopup";
+export { default as ModalTables } from "./modal/modalTables";
 
 //Auth
 export { default as GoogleButton } from "./auth/googleButton";
