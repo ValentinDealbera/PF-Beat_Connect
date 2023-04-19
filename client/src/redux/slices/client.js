@@ -103,28 +103,28 @@ export const fetchCurrentBeat = createAsyncThunk(
   "beats/fetchCurrentAuthor",
   async (id, { rejectWithValue, getState }) => {
     try {
-    console.log("id", id);
+      console.log("id", id);
 
-    const res = await axios.get(`${serverUrl}beats/${id}`);
-    //solo obtenemos el nombre y el id del objeto original
-    const response = res.data;
-    console.log("response", response);
-    const currentBeat = {
-      name: response.name,
-      _id: response._id,
-      BPM: response.BPM,
-      priceAmount: response.priceAmount,
-      softDelete: response.softDelete,
-      image: response.image,
-      genre: {
-        name: response.genre.name,
-        _id: response.genre._id,
-      },
-    };
-    return { currentBeat };
-  } catch (error) {
-    return rejectWithValue(error.response.data.message);
-  }
+      const res = await axios.get(`${serverUrl}beats/${id}`);
+      //solo obtenemos el nombre y el id del objeto original
+      const response = res.data;
+      console.log("response", response);
+      const currentBeat = {
+        name: response.name,
+        _id: response._id,
+        BPM: response.BPM,
+        priceAmount: response.priceAmount,
+        softDelete: response.softDelete,
+        image: response.image,
+        genre: {
+          name: response.genre.name,
+          _id: response.genre._id,
+        },
+      };
+      return { currentBeat };
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
   }
 );
 
@@ -266,7 +266,7 @@ const cartSlice = createSlice({
         toast("Cargando beat...");
       })
       .addCase(fetchCurrentBeat.fulfilled, (state, action) => {
-      //  state.activeEditingItem = action.payload.currentBeat;
+        //  state.activeEditingItem = action.payload.currentBeat;
         //console.log("current beat", state.activeEditingItem);
         toast.success("Se cargó correctamente", {
           style: {
