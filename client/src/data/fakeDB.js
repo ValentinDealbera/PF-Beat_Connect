@@ -303,7 +303,7 @@ const reviews = [
   {
     id:1,
     rating: 4,
-    tittle: "BeatConnect",
+    title: "BeatConnect",
     comment: "El mejor PF que puede haber",
     dateCreated: "18/4/2023",
     createdBy:{
@@ -330,7 +330,7 @@ const reviews = [
   {
     id:1,
     rating: 4,
-    tittle: "BeatConnect",
+    title: "BeatConnect",
     comment: "El mejor PF que puede haber",
     dateCreated: "18/4/2023",
     createdBy:{
@@ -357,7 +357,7 @@ const reviews = [
   {
     id:1,
     rating: 4,
-    tittle: "BeatConnect",
+    title: "BeatConnect",
     comment: "El mejor PF que puede haber",
     dateCreated: "18/4/2023",
     createdBy:{
