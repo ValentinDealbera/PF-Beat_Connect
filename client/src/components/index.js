@@ -14,6 +14,7 @@ export { default as PostBeat } from "./client/postBeat";
 export { managePostBeat } from "./client/postBeat";
 export { default as EditBeat } from "./masters/editBeat";
 export { manageEditBeat } from "./masters/editBeat";
+export { default as Loader } from "./masters/loader";
 
 //MiniCart
 export { default as MiniCart } from "./miniCart/miniCart";
@@ -66,6 +67,7 @@ export { default as BeatFilters } from "./beat/beatFilters";
 export { default as BeatCard } from "./beat/beatCard";
 export { default as NewBeatCardGrid } from "./beat/newBeatCardGrid";
 export { default as BeatShopSectionForClient } from "./beat/beatShopSectionForClient";
+export { default as BeatsRelatedSection } from "./beat/beatRelatedSection";
 
 //beatDataComponents
 export { default as AuthorName } from "./beat/beatDataComponents/authorName";

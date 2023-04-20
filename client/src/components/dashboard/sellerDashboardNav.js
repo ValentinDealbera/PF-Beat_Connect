@@ -32,7 +32,7 @@ export default function SellerDashboardNav() {
   return (
     <>
       <div className="gap-estilo2 flex flex-col">
-        <Search colorMode={"red"} sizeMode={"small"} className={"w-full"} />
+        {/* <Search colorMode={"red"} sizeMode={"small"} className={"w-full"} /> */}
 
         <DashboardItem
           title={"Inbox"}

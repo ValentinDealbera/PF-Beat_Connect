@@ -16,12 +16,14 @@ const {
 
 
 module.exports = async (req, res) => {
-  console.log(req.body);
-  const { cart, buyer } = req.body;
+  const { cart, buyer, seller } = req.body;
+  const sellerUser = await userModel.findById(seller)
   mercadopago.configure({
     access_token:
-      req.body.seller.access_token,
+      sellerUser.accessToken,
   });
+
+  if(!cart || !buyer || !seller) return res.status(BAD_REQUEST).json({message: "Faltan datos"})
 
   const beatPercentage = (beatArr, n) => {
     let aux = 0
@@ -33,7 +35,9 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const userBuyer = await userModel.findOne({id:buyer})
+    console.log("id buyer:", buyer);
+    const userBuyer = await userModel.findById(buyer)
+    console.log(userBuyer);
     const beatsToCheckout = await Beats.find({ _id: { $in: cart } });
     let preference = {
       items: beatsToCheckout.map((beat) => {
@@ -65,6 +69,7 @@ module.exports = async (req, res) => {
 
     res.status(OK).json(mpLink);
   } catch (error) {
-    res.status(SERVER_ERROR).json({ error: error.message });
+    console.log(error);
+    res.status(SERVER_ERROR).json({ error: error });
   }
 };

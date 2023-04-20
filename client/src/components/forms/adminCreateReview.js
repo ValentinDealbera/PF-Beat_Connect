@@ -36,7 +36,7 @@ console.log("defaultValues", defaultValues);
 
   console.log("defaultValues", defaultValues);
 
-try {
+
 
   const [form, setForm] = useState({
     createdBy: `${mode === "edit" ? defaultValues.createdBy._id : ""}`,
@@ -123,14 +123,12 @@ try {
     ],
   };
 
-}
-
-catch (error) {
-  console.error(error);
-}
 
 
-try {
+
+
+
+
   return (
     <form ref={formRef} onSubmit={onSubmit}>
       <FormContainer>
@@ -201,11 +199,9 @@ try {
         </FormRow>
       </FormContainer>
     </form>
-  );
-} catch (error) {
-  console.error(error);
-
-}
+  )
 });
+
+
 
 export default AdminCreateReviewForm;

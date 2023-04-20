@@ -53,19 +53,28 @@ export default function BeatShopSectionForClient(props) {
         <div>
           <div className="gap-estilo1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
             <>
-              {activeReviewDetail?.map((review) => (
-                <>
-                  <ClientReview
-                    currentMode={props.currentMode}
-                    title={review.title}
-                    comment={review.comment}
-                    username={review.username}
-                  />
-                </>
-              ))}
+              {activeReviewDetail.length > 0 &&
+                activeReviewDetail?.map((review) => (
+                  <>
+                    <ClientReview
+                      currentMode={props.currentMode}
+                      title={review.title}
+                      comment={review.comment}
+                      username={review.username}
+                    />
+                  </>
+                ))}
             </>
           </div>
+          {activeReviewDetail.length === 0 && (
+            <div className="flex w-full items-end justify-center">
+              <h1 className="mt-5 text-center text-2xl font-medium mb-8">
+                Hey, parece que no hay nada por aqui 🤯
+              </h1>
+            </div>
+          )}
         </div>
+        
       )}
     </Section>
   );

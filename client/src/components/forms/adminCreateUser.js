@@ -31,7 +31,7 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
 
   console.log("defaultValues", defaultValues);
 
-  try {
+
     const [form, setForm] = useState({
       username: `${mode === "edit" ? defaultValues.username : ""}`,
       firstName: `${mode === "edit" ? defaultValues.firstName : ""}`,
@@ -109,11 +109,9 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
         },
       ],
     };
-  } catch (error) {
-    console.error(error);
-  }
 
-  try {
+
+
     return (
       <form ref={formRef} onSubmit={onSubmit}>
         <FormContainer>
@@ -181,10 +179,7 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
           </FormRow>
         </FormContainer>
       </form>
-    );
-  } catch (error) {
-    console.error(error);
+    )
   }
-});
-
+);
 export default AdminCreateUserForm;
