@@ -16,6 +16,10 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "static.vecteezy.com",
+      },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
       }
     ],
   },
