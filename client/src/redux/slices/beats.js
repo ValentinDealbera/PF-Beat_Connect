@@ -5,6 +5,7 @@ import axios from "axios";
 const initialState = {
   publicBeatsFetchStatus: false, //deprecated
   authorFetchStatus: false, //deprecated
+  reviewFetchStatus: false,
   beatsDisplayMode: null, //deprecated
   currentAuthorLastId: null, //deprecated
   currentAuthor: {},
@@ -16,11 +17,12 @@ const initialState = {
   activeItems: [],
   activeItemDetail: null,
   generalActiveIndex: 0,
+  activeReviewDetail: [],
 };
 
 export const fetchBeats = createAsyncThunk("beats/fetchBeats", async () => {
   const response = await axios.get(`${serverUrl}beats`);
-  return response.data.docs
+  return response.data.docs;
 });
 
 export const fetchUserBeats = createAsyncThunk(
@@ -49,6 +51,26 @@ export const fetchCurrentAuthor = createAsyncThunk(
       username: response.data.username,
     };
     return { beats: currentAuthorBeats, currentAuthor };
+  }
+);
+
+export const fetchUserReviews = createAsyncThunk(
+  "beats/fetchUserReview",
+  async (id) => {
+    const response = await axios.get(`${serverUrl}review/user/${id}`);
+    const userReviews = response.data;
+
+    //Obtenemos la data necesaria (Titulo, username, comentario, rating e id )
+    const reviews = userReviews.map((review) => ({
+      rating: review.rating,
+      title: review.title,
+      comment: review.comment,
+      _id: review._id,
+      username: review.createdBy.username,
+      beat: id,
+    }));
+
+    return reviews;
   }
 );
 
@@ -103,7 +125,12 @@ const beatsSlice = createSlice({
       })
       .addCase(fetchBeats.fulfilled, (state, action) => {
         console.log("fetch beats fullfiled", action.payload);
-        if (action.payload.length === 0 || action.payload === null || action.payload === undefined || !Array.isArray(action.payload)) {
+        if (
+          action.payload.length === 0 ||
+          action.payload === null ||
+          action.payload === undefined ||
+          !Array.isArray(action.payload)
+        ) {
           state.publicItems = [];
           state.activeItems = [];
           return;
@@ -147,6 +174,22 @@ const beatsSlice = createSlice({
       })
       .addCase(fetchCurrentAuthor.rejected, (state, action) => {
         console.error(action.error);
+      })
+
+      //--------------------
+      //extra reducers para review
+      .addCase(fetchUserReviews.pending, (state, action) => {
+        {
+          state.reviewFetchStatus = false;
+        }
+      })
+      .addCase(fetchUserReviews.fulfilled, (state, action) => {
+        state.activeReviewDetail = action.payload;
+
+        console.log(action.payload);
+      })
+      .addCase(fetchUserReviews.rejected, (state, action) => {
+        console.error("fetch error");
       });
   },
 });
