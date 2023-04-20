@@ -76,6 +76,8 @@ router.get("/:id", async (req, res) => {
 router.post("/admin", adminMiddleware, async (req, res) => {
   const { body } = req;
 
+  
+
   try {
     const user = await UserModel.create(body);
     res.send(user);
