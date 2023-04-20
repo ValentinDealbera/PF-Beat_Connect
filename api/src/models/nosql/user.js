@@ -44,6 +44,10 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  accessToken: {
+    type: String,
+    default: ''
+  },
   bougthBeats: [
     {
       type: mongoose.Schema.Types.ObjectId,

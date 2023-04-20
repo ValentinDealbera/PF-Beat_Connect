@@ -30,10 +30,11 @@ export { default as Input } from "./common/input";
 export { default as CheckboxGroup } from "./common/checkboxGroup";
 export { default as ArrowLabel } from "./common/arrowLabel";
 export { default as MinMax } from "./common/minMax";
-export {default as SoftDeleteSwitch } from "./common/softDeleteSwitch" 
-export { default as SwitchForm } from "./common/switchForm"
-export { default as FormAdmin } from "./common/adminForm" //creado pero sin colocar (SoftDelete, SwitchForm)
-export { default as ValidationEditUsers } from "./common/validationEditUsers"
+export { default as SoftDeleteSwitch } from "./common/softDeleteSwitch";
+export { default as SwitchForm } from "./common/switchForm";
+export { default as FormAdmin } from "./common/adminForm"; //creado pero sin colocar (SoftDelete, SwitchForm)
+export { default as ValidationEditUsers } from "./common/validationEditUsers";
+export { default as ReviewForm } from "./common/reviewForm";
 
 //Modal
 export { default as ModalMinMax } from "./modal/modalMinMax";
@@ -110,10 +111,13 @@ export { default as DynamicTable } from "./dynamicTable";
 export { manageBecomeSeller } from "./masters/becomeSeller";
 
 //Forms
+
 export { default as FormColumn } from "./form/formColumn";
 export { default as FormContainer } from "./form/formContainer";
 export { default as FormRow } from "./form/formRow";
 export { default as AdminCreateUserForm } from "./forms/adminCreateUser";
+export { default as AdminCreateReviewForm } from "./forms/adminCreateReview";
 export { default as AdminCreateBeatForm } from "./forms/adminCreateBeat";
+
 //export { default as BeatImage } from "./beat/beatImage";
 //export { default as Checkbox } from "./common/checkbox";

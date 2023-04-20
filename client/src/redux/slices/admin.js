@@ -8,8 +8,10 @@ const tokenAdmin = process.env.NEXT_PUBLIC_TOKEN_ADMIN;
 
 const initialState = {
   users: [],
-  currentEditUser: null,
+  reviews: [],
   beats: [],
+  currentEditUser: null,
+  currentEditReview: null,
   currentEditBeat: null,
 };
 
@@ -93,23 +95,44 @@ export const adminEditUser = createAsyncThunk(
   }
 );
 
-export const adminGetBeats = createAsyncThunk(
-  "beats/adminGetBeats",
+//Reviews
+
+export const adminGetReviews = createAsyncThunk(
+  "client/adminGetReviews",
   async (data, { rejectWithValue }) => {
     try {
       console.log("data", data);
-      const response = await axios.get(`${serverUrl}beats`);
-      const beatResponse = response.data.docs;
+      const response = await axios.get(`${serverUrl}review`);
+      const reviewResponse = response.data;
 
-      return  { beatResponse };
+      return { reviewResponse };
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
   }
 );
 
-export const adminPostBeat = createAsyncThunk(
-  "beats/adminPostBeat",
+export const adminDeleteReview = createAsyncThunk(
+  "client/adminDeleteReview",
+  async (data, { rejectWithValue }) => {
+    try {
+      console.log("data", data);
+      const response = await axios.delete(`${serverUrl}review/admin/${data}`, {
+        headers: {
+          admintoken: tokenAdmin,
+        },
+      });
+      const reviewResponse = response.data;
+
+      return { reviewResponse };
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const adminPostReview = createAsyncThunk(
+  "client/adminPostReview",
   async (data, { rejectWithValue }) => {
     try {
       console.log("data", data);
@@ -117,28 +140,26 @@ export const adminPostBeat = createAsyncThunk(
       //quitamos id del objeto data para que no de error
       delete data.id;
 
-      const response = await axios.post(`${serverUrl}beats/admin`, data, {
+const response = await axios.post(`${serverUrl}review/admin`, data, {
         headers: {
           admintoken: tokenAdmin,
-          "Content-Type": "multipart/form-data",
         },
       });
-      const beatResponse = response.data;
-
-      return { beatResponse };
+      const reviewResponse = response.data;
+      return { reviewResponse };
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
   }
 );
 
-export const adminEditBeat = createAsyncThunk(
-  "beats/adminEditBeat",
+export const adminEditReview = createAsyncThunk(
+  "client/adminEditReview",
   async (data, { rejectWithValue }) => {
     try {
       console.log("data", data);
       const response = await axios.put(
-        `${serverUrl}beats/admin/${data._id}`,
+        `${serverUrl}review/admin/${data.id}`,
         data,
         {
           headers: {
@@ -146,34 +167,16 @@ export const adminEditBeat = createAsyncThunk(
           },
         }
       );
-      const userResponse = response.data;
+      const reviewResponse = response.data;
 
-      return { userResponse };
+      return { reviewResponse };
+
+      // return { reviewResponse };
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
   }
 );
-
-export const adminDeleteBeat = createAsyncThunk(
-  "beats/adminDeleteBeat",
-  async (data, { rejectWithValue }) => {
-    try {
-      console.log("data", data);
-      const response = await axios.delete(`${serverUrl}beats/admin/${data._id}`, {
-        headers: {
-          admintoken: tokenAdmin,
-        },
-      });
-      const userResponse = response.data;
-
-      return { userResponse };
-    } catch (error) {
-      return rejectWithValue(error);
-    }
-  }
-);
-
 
 const beatsSlice = createSlice({
   name: "admin",
@@ -182,8 +185,8 @@ const beatsSlice = createSlice({
     setCurrentEditUser(state, action) {
       state.currentEditUser = action.payload;
     },
-    setCurrentEditBeat(state, action) {
-      state.currentEditBeat = action.payload;
+    setCurrentEditReview(state, action) {
+      state.currentEditReview = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -293,18 +296,70 @@ const beatsSlice = createSlice({
         toast("Editando usuario...");
       })
 
-      ///////////// Exra reducers para adminpostBeat /////////
-      .addCase(adminPostBeat.fulfilled, (state, action) => {
+      //--------------------
+      //Extra reducers para adminGetReviews
+      .addCase(adminGetReviews.fulfilled, (state, action) => {
         console.log("action.payload ok", action.payload);
-        toast.success("Beat subido correctamente", {
+        state.reviews = action.payload.reviewResponse;
+        toast.success("Reviews cargadas correctamente", {
           style: {
             background: "#F0FFF0",
             color: "#00B300",
           },
         });
-        state.beats.push(action.payload.beatResponse);
       })
-      .addCase(adminPostBeat.rejected, (state, action) => {
+      .addCase(adminGetReviews.rejected, (state, action) => {
+        console.log("action.payload error", action.payload);
+        toast.error(action.payload, {
+          style: {
+            background: "#FFF0F0",
+            color: "#E60000",
+          },
+        });
+      })
+      .addCase(adminGetReviews.pending, (state, action) => {
+        console.log("action.payload pending");
+        toast("Cargando reviews...");
+      })
+
+      //--------------------
+      //Extra reducers para adminDeleteReview
+      .addCase(adminDeleteReview.fulfilled, (state, action) => {
+        console.log("action.payload ok", action.payload);
+        toast.success("Review borrada correctamente", {
+          style: {
+            background: "#F0FFF0",
+            color: "#00B300",
+          },
+        });
+      })
+      .addCase(adminDeleteReview.rejected, (state, action) => {
+        console.log("action.payload error", action.payload);
+        toast.error(action.payload, {
+          style: {
+            background: "#FFF0F0",
+            color: "#E60000",
+          },
+        });
+      })
+      .addCase(adminDeleteReview.pending, (state, action) => {
+        console.log("action.payload pending");
+        toast("Borrando review...");
+      })
+
+      //--------------------
+      //Extra reducers para adminEditReview
+      .addCase(adminEditReview.fulfilled, (state, action) => {
+        console.log("action.payload ok", action.payload);
+        toast.success("Review editada correctamente", {
+          style: {
+            background: "#F0FFF0",
+            color: "#00B300",
+          },
+        });
+      })
+
+      .addCase(adminEditReview.rejected, (state, action) => {
         console.log("action.payload error", action.payload);
         toast.error(action.payload, {
           style: {
@@ -314,73 +369,25 @@ const beatsSlice = createSlice({
         });
         throw new Error(action.payload);
       })
-      .addCase(adminPostBeat.pending, (state, action) => {
+      .addCase(adminEditReview.pending, (state, action) => {
         console.log("action.payload pending");
-        toast("Subiendo beat...");
-      })
-
-      //Extra reducers para adminGetBeats
-      .addCase(adminGetBeats.fulfilled, (state, action) => {
-        console.log("action.payload ok", action.payload);
-        state.beats = action.payload.beatResponse;
-        toast.success("Beats cargados correctamente", {
-            style: {
-                background: "#F0FFF0",
-                color: "#00B300",
-            },
-        });
-    })
-      .addCase(adminGetBeats.rejected, (state, action) => {
-        console.log("action.payload error", action.payload);
-        toast.error(action.payload, {
-          style: {
-            background: "#FFF0F0",
-            color: "#E60000",
-          },
-        });
-      })
-      .addCase(adminGetBeats.pending, (state, action) => {
-        console.log("action.payload pending");
-        toast("Cargando beats...");
+        toast("Editando review...");
       })
 
       //--------------------
-      //Extra reducers para adminDeleteUser
-      .addCase(adminDeleteBeat.fulfilled, (state, action) => {
+      //Extra reducers para adminPostReview
+
+      .addCase(adminPostReview.fulfilled, (state, action) => {
         console.log("action.payload ok", action.payload);
-        toast.success("Beat borrado correctamente", {
+        toast.success("Review creada correctamente", {
           style: {
             background: "#F0FFF0",
             color: "#00B300",
           },
         });
       })
-      .addCase(adminDeleteBeat.rejected, (state, action) => {
-        console.log("action.payload error", action.payload);
-        toast.error(action.payload, {
-          style: {
-            background: "#FFF0F0",
-            color: "#E60000",
-          },
-        });
-      })
-      .addCase(adminDeleteBeat.pending, (state, action) => {
-        console.log("action.payload pending");
-        toast("Borrando beat...");
-      })
+      .addCase(adminPostReview.rejected, (state, action) => {
 
-      //--------------------
-      //Extra reducers para adminEditBeat
-      .addCase(adminEditBeat.fulfilled, (state, action) => {
-        console.log("action.payload ok", action.payload);
-        toast.success("Beat editado correctamente", {
-          style: {
-            background: "#F0FFF0",
-            color: "#00B300",
-          },
-        });
-      })
-      .addCase(adminEditBeat.rejected, (state, action) => {
         console.log("action.payload error", action.payload);
         toast.error(action.payload, {
           style: {
@@ -390,14 +397,14 @@ const beatsSlice = createSlice({
         });
         throw new Error(action.payload);
       })
-      .addCase(adminEditBeat.pending, (state, action) => {
+      .addCase(adminPostReview.pending, (state, action) => {
         console.log("action.payload pending");
-        toast("Editando Beat...");
-      })
-
+        toast("Creando review...");
+      });
   },
 });
 
-export const { setCurrentEditUser, setCurrentEditBeat } = beatsSlice.actions;
+export const { setCurrentEditUser, setCurrentEditReview } = beatsSlice.actions;
+
 
 export default beatsSlice.reducer;
