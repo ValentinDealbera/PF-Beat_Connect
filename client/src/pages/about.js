@@ -11,9 +11,9 @@ export default function About() {
         <Hero
           style={{ minHeight: "45vh" }}
           image="/images/test1.jpg"
-          className="align-middle items-center justify-center"
+          className="items-center justify-center align-middle"
         >
-          <div className="padding-estilo2 flex h-full flex-row items-center justify-center align-middle">
+          <div className="padding-estilo2 mt-6 flex h-full flex-row items-center justify-center align-middle">
             <h1 className="text-titulo1-regular text-center text-white">
               About <span className="text-titulo1-semibold">authors </span>
               and <span className="text-titulo1-semibold">BeatConnect</span>
@@ -26,36 +26,38 @@ export default function About() {
             <span className="text-titulo1-semibold">un poco más ❤️ </span>
           </h1>
           <p className="text-base-light color-neutral-900">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-            elementum neque vitae tempus gravida. Mauris at dui varius, aliquet
-            lectus et, consequat velit. Vestibulum hendrerit laoreet dapibus.
-            Duis interdum venenatis vehicula. Nulla facilisis placerat
-            imperdiet. Quisque imperdiet tortor non accumsan dignissim. Duis ac
-            lectus eros. Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit. Quisque elementum neque vitae tempus gravida. Mauris at dui
-            varius, aliquet lectus et, consequat velit. Vestibulum hendrerit
-            laoreet dapibus. Duis interdum venenatis vehicula. Nulla facilisis
-            placerat imperdiet. Quisque imperdiet tortor non accumsan dignissim.
-            Duis ac lectus eros.
+            Somos un equipo de 8 alumnos del bootcamp Soy Henry, y estamos
+            emocionados de poder compartir un poco más sobre nosotros. Estamos
+            aprendiendo programación full stack utilizando las tecnologías
+            MERN/PERN, y trabajando duro para desarrollar habilidades blandas y
+            trabajar en equipo de manera efectiva. Nos apasiona el mundo de la
+            tecnología y estamos comprometidos en aprender y crecer juntos en
+            esta industria. Nos encanta descubrir nuevas soluciones creativas y
+            atractivas para los usuarios, y estamos emocionados de aplicar
+            nuestras habilidades técnicas para lograrlo.
           </p>
         </Section>
-        <Section subClassName="padding-x-estilo2 padding-y-estilo1 background-primary-red-100 color-primary-red-700">
-          <h1 className="text-titulo1-regular color-neutral-950">
+        <Section
+          subClassName="padding-x-estilo2 padding-y-estilo1 bg-neutral-100 color-white"
+          className="bg-neutral-100"
+        >
+          <h1 className="text-titulo1-regular color-white">
             Sobre la{" "}
             <span className="text-titulo1-semibold">aplicación 🤯😎 </span>
           </h1>
           <p className="text-base-light color-neutral-900">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-            elementum neque vitae tempus gravida. Mauris at dui varius, aliquet
-            lectus et, consequat velit. Vestibulum hendrerit laoreet dapibus.
-            Duis interdum venenatis vehicula. Nulla facilisis placerat
-            imperdiet. Quisque imperdiet tortor non accumsan dignissim. Duis ac
-            lectus eros. Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit. Quisque elementum neque vitae tempus gravida. Mauris at dui
-            varius, aliquet lectus et, consequat velit. Vestibulum hendrerit
-            laoreet dapibus. Duis interdum venenatis vehicula. Nulla facilisis
-            placerat imperdiet. Quisque imperdiet tortor non accumsan dignissim.
-            Duis ac lectus eros.
+            Nuestra plataforma cuenta con una lista de productores de música
+            registrados, quienes han creado y publicado sus catálogos de
+            instrumentales. Los usuarios pueden explorar los catálogos de los
+            productores y escuchar muestras de audio de cada beat para decidir
+            cuál es el más adecuado para sus necesidades. También
+            contamos con un proceso de pago seguro y eficiente que permite a los
+            usuarios comprar y descargar el beat en su correo electrónico. Si
+            eres un productor de música, ¡también puedes registrarte en nuestra
+            plataforma y crear y publicar tu catálogo de instrumentales! Mostrar
+            tus muestras de audio y descripciones detalladas de cada beat,
+            recibir solicitudes de beats personalizados, y comunicarte con los
+            usuarios para discutir detalles adicionales.
           </p>
         </Section>
         <Section subClassName="padding-x-estilo2 padding-y-estilo1 flex flex-col gap-12">

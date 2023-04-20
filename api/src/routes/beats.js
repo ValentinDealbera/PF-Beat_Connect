@@ -99,7 +99,13 @@ router.get("/:beatId", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const {userid} = req.headers
+  const { userid } = req.headers;
+
+  console.log("procesando beat");
+
+
+
+
   const comprobacion = await beatModel.findOne({ name: req.body.name });
   if (comprobacion) {
     if (comprobacion.name.toLocaleLowerCase() === req.body.name.toLowerCase())
@@ -108,10 +114,17 @@ router.post("/", async (req, res) => {
   const creator = await userModel.findById(req.body.userCreator);
   const creatorAux = await userModel.findById(userid);
   const genre = await genreModel.findById(req.body.genre);
-  if(creator.email !== creatorAux.email) return res.status(400).json({message: 'No puedes publicar un beat a nombre de otro/a'})
-  if(!genre) return res.status(400).json({message: 'Este genero no existe'})
-  if(!creator) return res.status(400).json({message: 'Este usuario no existe'})
-  if(!creator.isSeller) return res.status(400).json({message: 'Este usuario no esta registrado como vendedor'})
+  if (creator.email !== creatorAux.email)
+    return res
+      .status(400)
+      .json({ message: "No puedes publicar un beat a nombre de otro/a" });
+  if (!genre) return res.status(400).json({ message: "Este genero no existe" });
+  if (!creator)
+    return res.status(400).json({ message: "Este usuario no existe" });
+  if (!creator.isSeller)
+    return res
+      .status(400)
+      .json({ message: "Este usuario no esta registrado como vendedor" });
   const audioMP3Data = fs.readFileSync(req.files.audioMP3.tempFilePath);
   // const audioWAVData = fs.readFileSync(req.files.audioWAV.tempFilePath);
   try {
@@ -208,8 +221,9 @@ router.post("/admin", adminMiddleware, async (req, res) => {
   }
   const creator = await userModel.findById(req.body.userCreator);
   const genre = await genreModel.findById(req.body.genre);
-  if(!genre) return res.status(400).json({message: 'Este genero no existe'})
-  if(!creator) return res.status(400).json({message: 'Este usuario no existe'})
+  if (!genre) return res.status(400).json({ message: "Este genero no existe" });
+  if (!creator)
+    return res.status(400).json({ message: "Este usuario no existe" });
   const audioMP3Data = fs.readFileSync(req.files.audioMP3.tempFilePath);
   // const audioWAVData = fs.readFileSync(req.files.audioWAV.tempFilePath);
   try {
@@ -301,19 +315,18 @@ router.post("/admin", adminMiddleware, async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-  const {userid} = req.headers
+    const { userid } = req.headers;
 
     const { name, priceAmount, review, softDelete, genre, relevance } =
       req.body;
-      const updatedBeat = await beatModel.findById(id).populate("userCreator");
+    const updatedBeat = await beatModel.findById(id).populate("userCreator");
     const userAux = await userModel.findById(userid);
-    if (!updatedBeat) return res.status(400).json({ message: "Este beat no existe" });
+    if (!updatedBeat)
+      return res.status(400).json({ message: "Este beat no existe" });
     if (updatedBeat.userCreator.email !== userAux.email)
-      return res
-        .status(400)
-        .json({
-          message: "No puedes modificar un beat que no sea de tu autoria",
-        });
+      return res.status(400).json({
+        message: "No puedes modificar un beat que no sea de tu autoria",
+      });
     if (name) updatedBeat.name = name;
     if (priceAmount) updatedBeat.priceAmount = Number(priceAmount);
     if (review) updatedBeat.review = [...updatedBeat.review, review];
@@ -342,8 +355,7 @@ router.put("/admin/:id", adminMiddleware, async (req, res) => {
     if (softDelete)
       updatedBeat.softDelete = softDelete === "true" ? true : false;
     if (genre) updatedBeat.genre = genre;
-    if (relevance)
-      updatedBeat.relevance = Number(relevance)
+    if (relevance) updatedBeat.relevance = Number(relevance);
     updatedBeat.save();
     return res.status(200).json(updatedBeat);
   } catch (error) {
@@ -378,8 +390,8 @@ router.delete("/admin/:id", adminMiddleware, async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
-  const {userid} = req.headers
-  console.log(req.headers)
+  const { userid } = req.headers;
+  console.log(req.headers);
   console.log(id, userid);
 
   try {
@@ -388,11 +400,9 @@ router.delete("/:id", async (req, res) => {
     console.log(beat.userCreator._id, userAux._id);
     if (!beat) return res.status(400).json({ message: "Este beat no existe" });
     if (beat.userCreator.email !== userAux.email)
-      return res
-        .status(400)
-        .json({
-          message: "No puedes eliminar un beat que no sea de tu autoria",
-        });
+      return res.status(400).json({
+        message: "No puedes eliminar un beat que no sea de tu autoria",
+      });
     const deletedBeat = await beatModel.findByIdAndDelete(id);
 
     const user = await userModel.findById(deletedBeat.userCreator);

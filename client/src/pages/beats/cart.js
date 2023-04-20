@@ -5,13 +5,19 @@ import {
   IslandDashboard,
   AuthorName,
   DynamicTable,
+  BeatsRelatedSection,
 } from "@/components";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Image from "next/image";
 import { deleteFromCart } from "@/redux/slices/cart";
+import axios from "axios";
+//traemos url del servidor
+import { serverUrl } from "@/data/config";
+import { useRouter } from "next/router";
 
 export default function Carrito() {
+  const router = useRouter();
   const dispatch = useDispatch();
   //Obtenemos los items del carrito
   const cartIds =
@@ -23,9 +29,11 @@ export default function Carrito() {
     ) || [];
   console.log(cartItems, publicItems);
 
+  const user = useSelector((state) => state.client.client._id);
+
   //Creamos un array de objetos que reuna el autor del beat y el precio total de sus beats
   const precio_por_autor = [];
-  
+
   cartItems.forEach((item) => {
     const { userCreator, priceAmount } = item;
     const index = precio_por_autor.findIndex(
@@ -41,27 +49,63 @@ export default function Carrito() {
   console.log(precio_por_autor);
   const headers = ["Item", "Price", "Author", "Action"];
 
-//Generamps dinamicamente las filas de la tabla con los items del carrito
-//En items mandmaos nombre e imagen en un div
-    const rows = cartItems.map((item) => {
-        return {
-            id: item._id,
-            item: (
-                <div className="flex items-center gap-4">
-                    <Image
-                        src={item.image}
-                        width={50}
-                        height={50}
-                        className="rounded-full aspect-square"
-                    />
-                    <h3 className="text-base-medium">{item.name}</h3>
-                </div>
-            ),
-            price: item.priceAmount,
-            author : `${item.userCreator.firstName} ${item.userCreator.lastName}`,
-            action:( <button onClick={() => dispatch(deleteFromCart({id: item._id}))}>Eliminar</button>)
-        }
-    })
+  //Generamps dinamicamente las filas de la tabla con los items del carrito
+  //En items mandmaos nombre e imagen en un div
+  const rows = cartItems.map((item) => {
+    return {
+      id: item._id,
+      item: (
+        <div className="flex items-center gap-4">
+          <Image
+            src={item.image}
+            width={50}
+            height={50}
+            className="aspect-square rounded-full"
+          />
+          <h3 className="text-base-medium">{item.name}</h3>
+        </div>
+      ),
+      price: item.priceAmount,
+      author: `${item.userCreator.firstName} ${item.userCreator.lastName}`,
+      action: (
+        <button onClick={() => dispatch(deleteFromCart({ id: item._id }))}>
+          Eliminar
+        </button>
+      ),
+    };
+  });
+
+  //mandar un array cart, que tiene los ids de los beats que queremos comprar
+  //mandar buyer, que es el id del usuario que esta comprando, obtener dinamicaente
+  //mandar seller que es el id del usuario que esta vendiendo, obtener dinamicamente con precio_por_autor
+
+  const idsOfSellers = precio_por_autor.map((item) => item.userCreator._id);
+  const idsOfBuyer = user;
+
+  const toPay = {
+    cart: cartIds,
+    seller: idsOfSellers[0],
+    buyer: idsOfBuyer,
+  };
+
+  const handlePayment = () => {
+    console.log("pagar");
+    axios
+      .post(`${serverUrl}cart/pay`, toPay, {
+        headers: {
+          "Content-Type": "application/json",
+          "userid" : user
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        router.push(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
       <Main mode="">
@@ -70,7 +114,7 @@ export default function Carrito() {
           className="bg-slate-200"
         >
           <div className="flex flex-row gap-4">
-            <IslandDashboard className="w-full flex-col flex gap-4">
+            <IslandDashboard className="flex w-full flex-col gap-4">
               <h1 className="text-titulo2-medium">Carrito</h1>
               <DynamicTable headers={headers} rows={rows} />
             </IslandDashboard>
@@ -123,12 +167,18 @@ export default function Carrito() {
                   </span>
                 </div>
               </div>
+              <button
+                className="text-base-semibold rounded-md bg-red-700 py-2 text-white"
+                onClick={handlePayment}
+              >
+                Comprar
+              </button>
             </IslandDashboard>
           </div>
         </Section>
-        <BeatsSpecialSection title="Beats ">
+        <BeatsRelatedSection title="Beats ">
           <span className="text-titulo2-semibold">relacionados</span>
-        </BeatsSpecialSection>
+        </BeatsRelatedSection>
       </Main>
     </>
   );

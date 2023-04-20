@@ -43,13 +43,6 @@ export const navHelp = [
     colorMode: "light",
     visibility: true,
   },
-
-  {
-    name: "Copyright",
-    url: "/help/copyright",
-    colorMode: "light",
-    visibility: true,
-  },
 ];
 
 export const navClient = [
@@ -87,52 +80,37 @@ export const navClient = [
 
 export const faqs = [
   {
-    title: "¿Qué es el test de personalidad?",
+    title: "¿Cómo puedo encontrar el beat adecuado para mi proyecto musical?",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras quis elit vitae est facilisis luctus a nec purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "En nuestra plataforma, puedes explorar los catálogos de los productores de música registrados y escuchar muestras de audio de cada beat. Si no encuentras lo que buscas.",
   },
   {
-    title: "¿Qué es el test de personalidad?",
+    title: "¿Cómo puedo realizar el pago de manera segura?",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras quis elit vitae est facilisis luctus a nec purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "Ofrecemos un proceso de pago seguro y eficiente a través de Mercado Pago. Una vez que hayas elegido el beat que deseas comprar, podrás realizar el pago de manera segura con diferentes métodos de pago.",
   },
   {
-    title: "¿Qué es el test de personalidad?",
+    title: "¿Cómo recibiré el archivo del beat después de realizar el pago?",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras quis elit vitae est facilisis luctus a nec purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "Una vez que hayas realizado el pago, recibirás el archivo del beat en tu correo electrónico. Asegúrate de proporcionar una dirección de correo electrónico válida durante el proceso de pago.",
   },
   {
-    title: "¿Qué es el test de personalidad?",
+    title: "¿Cómo puedo registrarme como proveedor en la plataforma?",
     content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras quis elit vitae est facilisis luctus a nec purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "Para registrarte como proveedor, debes completar el formulario de registro. Una vez registrado, podrás crear y publicar tu catálogo de instrumentales.",
   },
 ];
 
 export const tecnologias = [
   {
     id: 1,
-    title: "React",
-    image: "/icon/tecnologias/react.svg",
-    description:
-      "React es una biblioteca de JavaScript para construir interfaces de usuario interactivas y escalables. Permite crear componentes reutilizables y manejar el estado de la aplicación de manera sencilla. Utiliza el DOM virtual para minimizar el tiempo de carga y mejorar el rendimiento de la aplicación.",
-  },
-  {
-    id: 2,
-    title: "Javascript",
-    image: "/icon/tecnologias/javascript.svg",
-    description:
-      "JavaScript es un lenguaje de programación dinámico, orientado a objetos e interpretado que se utiliza principalmente en el desarrollo web para crear aplicaciones interactivas y dinámicas en el lado del cliente. Es uno de los lenguajes más populares del mundo y se ejecuta en todos los navegadores web modernos.",
-  },
-  {
-    id: 3,
-    title: "Css 3",
-    image: "/icon/tecnologias/css.svg",
-    description:
-      "CSS3 es una tecnología utilizada para dar estilo y presentación a las páginas web. Con CSS3, los desarrolladores web pueden controlar la apariencia de los elementos HTML, incluyendo el tamaño, color, fuente, espacio entre líneas, margen, bordes, efectos de sombra, animaciones y transiciones, entre otros.",
+    title: "NextJS",
+    image: "/icon/tecnologias/next-js.svg",
+    description: "Next.js es un framework de React para la construcción de aplicaciones web de alto rendimiento y de alto rendimiento. Next.js te ayuda a crear aplicaciones web de una sola página con React fácilmente.",
   },
   {
     id: 4,
-    title: "Redux",
+    title: "Redux Toolkit",
     image: "/icon/tecnologias/redux.svg",
     description:
       "Redux es una librería de gestión de estado para aplicaciones JavaScript de una sola página (SPA). Se utiliza principalmente con React, pero también se puede utilizar con otras bibliotecas o marcos de trabajo de JavaScript. Redux se basa en la arquitectura Flux y se centra en la idea de que el estado de la aplicación debe ser centralizado y predecible.",
@@ -161,9 +139,8 @@ export const tecnologias = [
   {
     id: 8,
     title: "TailwindCSS",
-    image: "/icon/tecnologias/bootstrap.svg",
-    description:
-      "Bootstrap es un framework de diseño web que proporciona una serie de herramientas y componentes predefinidos basados en HTML, CSS y JavaScript. Con Bootstrap, puedes crear fácilmente páginas web responsivas y adaptables a diferentes dispositivos y resoluciones. Bootstrap te permite aprovechar al máximo los recursos de CSS, con una variedad de clases y estilos predefinidos que facilitan la creación de diseños atractivos y funcionales en poco tiempo.",
+    image: "/icon/tecnologias/tailwindCSS.svg",
+    description: "Tailwind CSS es un framework de CSS de bajo nivel que te ayuda a crear diseños de interfaz de usuario (UI) de manera rápida y sencilla. Con Tailwind CSS, puedes crear diseños de interfaz de usuario (UI) personalizados sin tener que escribir CSS.",
   },
   {
     id: 10,
@@ -179,4 +156,60 @@ export const tecnologias = [
     description:
       "JSON Web Token (JWT) es un estándar abierto que define un formato compacto y autónomo para transmitir información de forma segura entre dos partes como un objeto JSON. Los tokens JWT se pueden firmar usando un secreto (con el algoritmo HMAC) o una clave pública / privada usando RSA o ECDSA.",
   },
+  {
+    id: 12,
+    title: "MongoDB",
+    image: "/icon/tecnologias/mongo.svg",
+    description:
+      "MongoDB es un sistema de base de datos NoSQL orientado a documentos que utiliza documentos JSON con esquemas. MongoDB es un sistema de base de datos NoSQL orientado a documentos que utiliza documentos JSON con esquemas. MongoDB es un sistema de base de datos NoSQL orientado a documentos que utiliza documentos JSON con esquemas.",
+  },
+  {
+    id: 13,
+    title: "Mongoose",
+    image: "/icon/tecnologias/mongoose.png",
+    description:
+      "Mongoose es una biblioteca de modelado de objetos de MongoDB diseñada para trabajar en un entorno asíncrono. Mongoose soporta tanto promesas como devoluciones de llamada. Mongoose simplifica la creación de modelos de esquema, validación, creación, consulta, actualización y eliminación de registros.",
+  },
+  {
+    id: 14,
+    title: "Mercado Pago",
+    image: "/icon/tecnologias/mercadopago.png",
+    description: "Mercado Pago es una plataforma de pagos online que permite a los usuarios realizar pagos a través de tarjetas de crédito, débito, efectivo y transferencias bancarias. Mercado Pago es una plataforma de pagos online que permite a los usuarios realizar pagos a través de tarjetas de crédito, débito, efectivo y transferencias bancarias.",
+  },
+  {
+    id: 15,
+    title: "Auth0",
+    image: "/icon/tecnologias/auth0.svg",
+    description: "Auth0 es una plataforma de autenticación y autorización que permite a los desarrolladores agregar autenticación y autorización a sus aplicaciones web, móviles y de escritorio. Auth0 es una plataforma de autenticación y autorización que permite a los desarrolladores agregar autenticación y autorización a sus aplicaciones web, móviles y de escritorio.",
+  },
+  {
+    id: 16,
+    title: "Firebase",
+    image: "/icon/tecnologias/firebase.svg",
+    description: "Firebase es una plataforma de desarrollo de aplicaciones móviles y web que ofrece servicios de base de datos, almacenamiento, autenticación, análisis, mensajería y más. Firebase es una plataforma de desarrollo de aplicaciones móviles y web que ofrece servicios de base de datos, almacenamiento, autenticación, análisis, mensajería y más.",
+  },
+  {
+    id: 17,
+    title: "Render",
+    image: "/icon/tecnologias/render.svg",
+    description: "Render es una plataforma de alojamiento de aplicaciones web que permite a los desarrolladores desplegar aplicaciones web y API REST en la nube. Render es una plataforma de alojamiento de aplicaciones web que permite a los desarrolladores desplegar aplicaciones web y API REST en la nube.",
+  },
+  {
+    id: 18,
+    title: "Vercel",
+    image: "/icon/tecnologias/vercel.svg",
+    description: "Vercel es una plataforma de alojamiento de aplicaciones web que permite a los desarrolladores desplegar aplicaciones web y API REST en la nube. Vercel es una plataforma de alojamiento de aplicaciones web que permite a los desarrolladores desplegar aplicaciones web y API REST en la nube.",
+  },
+  {
+    id: 19,
+    title: "Trello",
+    image: "/icon/tecnologias/trello.svg",
+    description: "Trello es una herramienta de gestión de proyectos que permite a los equipos de trabajo organizar sus proyectos en tableros. Trello es una herramienta de gestión de proyectos que permite a los equipos de trabajo organizar sus proyectos en tableros.",
+    },
+  {
+    id: 20,
+    title: "Git + GitHub",
+    image: "/icon/tecnologias/github.svg",
+    description: "Git es un sistema de control de versiones distribuido de código abierto que permite a los desarrolladores colaborar en proyectos de software. GitHub es una plataforma de alojamiento de código fuente y control de versiones que utiliza Git.",
+  }
 ];

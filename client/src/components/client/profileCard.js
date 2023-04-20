@@ -18,12 +18,12 @@ export default function ProfileCard({
         <div className="mx-auto my-auto px-2">
           <div className="gap-estilo4 flex flex-row items-center justify-start">
             <h1 className="text-base-medium ">{profileName}</h1>
-            <Image
+            {/* <Image
               src="/icon/checked-blue.svg"
               alt="checked profile"
               width={20}
               height={20}
-            />
+            /> */}
           </div>
           <h3 className="text-sm-light ">{profileMessage}</h3>
         </div>

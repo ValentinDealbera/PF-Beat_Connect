@@ -1,4 +1,4 @@
-import { Main, Hero, NewBeatCardGrid, ProfileCard, Head, Section } from "@/components";
+import { Main, Hero, NewBeatCardGrid, ProfileCard, Head, Section, Loader } from "@/components";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { fetchCurrentAuthor } from "@/redux/slices/beats";
@@ -13,7 +13,7 @@ export default function AuthorProfile() {
     dispatch(fetchCurrentAuthor(slug));
   }, [slug]);
 
-  const { currentAuthor, currentAuthorBeats } = useSelector((state) => state.beats);
+  const { currentAuthor, currentAuthorBeats, loadingcurrentAuthor } = useSelector((state) => state.beats);
   console.log("currentAuthor", currentAuthor);
 
   return (
@@ -35,7 +35,10 @@ export default function AuthorProfile() {
           </div>
         </Hero>
         <Section subClassName="padding-x-estilo2 padding-y-estilo2 gap-8 flex flex-col">
-        <NewBeatCardGrid beats={currentAuthorBeats} />
+          {
+            loadingcurrentAuthor ? <Loader/> : <NewBeatCardGrid beats={currentAuthorBeats} />
+          }
+        
         </Section>
       </Main>
     </>

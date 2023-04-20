@@ -2,6 +2,8 @@ import { BeatRightSheet, Input } from "@/components";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { convertInSeller } from "@/redux/slices/client";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 export const manageBecomeSeller = () => {
   console.log("manageBecomeSeller");
@@ -16,16 +18,28 @@ export default function BecomeSeller() {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+const router = useRouter();
+
   BecomeSeller.handleOpenDropdown = handleOpenDropdown;
 
   const dispatch = useDispatch();
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   await dispatch(convertInSeller());
+  //   e.target.reset();
+  //   setIsDropdownOpen(false);
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await dispatch(convertInSeller());
-    e.target.reset();
-    setIsDropdownOpen(false);
-  };
+    try {
+    const data = await axios.get('http://localhost:3001/api/cart/toseller')
+    router.push(data.data.link)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <>
@@ -49,7 +63,7 @@ export default function BecomeSeller() {
             </div>
             <form onSubmit={handleSubmit} className="w-full flex-col flex gap-4" >
               <div className="flex w-full flex-col items-center justify-start gap-4 ">
-                <Input
+                {/* <Input
                   label="Id de Mercado Pago"
                   placeholder="Ingresa tu id de mercado pago"
                   type="text"
@@ -57,7 +71,7 @@ export default function BecomeSeller() {
                   id="idMercadoPago"
                   className="w-full"
                   labelClass="w-full"
-                />
+                /> */}
                 <div className="flex w-full flex-row items-center justify-start gap-2">
                   <input type="checkbox" id="terms" name="terms" value="ok" />
                   <label for="terms" className="text-base-light">

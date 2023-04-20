@@ -62,6 +62,7 @@ export const postClientBeat = createAsyncThunk(
       const response = await axios.post(`${serverUrl}beats`, data, {
         headers: {
           "Content-Type": "multipart/form-data",
+          "userid": data.userCreator,
         },
       });
       console.log(data);
@@ -284,26 +285,26 @@ const cartSlice = createSlice({
       //Extra reducer para el beat que esta en el detalle
       .addCase(fetchCurrentBeat.pending, (state, action) => {
         console.log("fetching current beat");
-        toast("Cargando beat...");
+       // toast("Cargando beat...");
       })
       .addCase(fetchCurrentBeat.fulfilled, (state, action) => {
-        //  state.activeEditingItem = action.payload.currentBeat;
+         state.activeEditingItem = action.payload.currentBeat;
         //console.log("current beat", state.activeEditingItem);
-        toast.success("Se cargó correctamente", {
-          style: {
-            background: "#ECFDF3",
-            color: "#1F9D55",
-          },
-        });
+        // toast.success("Se cargó correctamente", {
+        //   style: {
+        //     background: "#ECFDF3",
+        //     color: "#1F9D55",
+        //   },
+        // });
       })
       .addCase(fetchCurrentBeat.rejected, (state, action) => {
         console.error(action.error);
-        toast.error(action.payload, {
-          style: {
-            background: "#FFF0F0",
-            color: "#E60000",
-          },
-        });
+        // toast.error(action.payload, {
+        //   style: {
+        //     background: "#FFF0F0",
+        //     color: "#E60000",
+        //   },
+        // });
       })
 
       //--------------------

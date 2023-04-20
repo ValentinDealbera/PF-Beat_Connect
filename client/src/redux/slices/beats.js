@@ -18,6 +18,7 @@ const initialState = {
   activeItemDetail: null,
   generalActiveIndex: 0,
   activeReviewDetail: [],
+  loadingcurrentAuthor: false,
 };
 
 export const fetchBeats = createAsyncThunk("beats/fetchBeats", async () => {
@@ -166,11 +167,13 @@ const beatsSlice = createSlice({
       //Extra reducers para el perfil del autor 3
       .addCase(fetchCurrentAuthor.pending, (state, action) => {
         state.authorFetchStatus = false;
+        state.loadingcurrentAuthor = true;
       })
       .addCase(fetchCurrentAuthor.fulfilled, (state, action) => {
         state.currentAuthor = action.payload.currentAuthor;
         state.currentAuthorBeats = action.payload.beats;
         state.beatsDisplayMode = 3;
+        state.loadingcurrentAuthor = false;
       })
       .addCase(fetchCurrentAuthor.rejected, (state, action) => {
         console.error(action.error);

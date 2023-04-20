@@ -59,13 +59,15 @@ export default function Header() {
       name: "Vende tus beats",
       url: "",
       onClick: () => manageBecomeSeller(),
-      visibility: !isSeller,
+     // visibility: !isSeller,
+     visibility: true,
     },
     {
       name: "Publicar un beat",
       url: "",
       onClick: () => managePostBeat(),
-      visibility: isSeller,
+    //  visibility: isSeller,
+    visibility: true,
     },
     {
       name: "Configuracion",
