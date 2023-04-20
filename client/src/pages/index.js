@@ -11,21 +11,22 @@ import { categories } from "@/data/data";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Home() {
   const router = useRouter()
+  const id = useSelector(state => state.client.client._id)
+  console.log(id);
   if (router.query.code){
-    async function data(){
+    async function data(id){
       try {
-        const dato = await axios.put('http://localhost:3001/api/user/644072fec1606a312106db1c', {seller: 'VENDEDOR',mpcode: router.query.code}, {headers:{userid:'644072fec1606a312106db1c'}})
+        const dato = await axios.put('http://localhost:3001/api/user/' + id, {seller: 'VENDEDOR',mpcode: router.query.code}, {headers:{userid:id}})
         return dato
       } catch (error) {
         console.log(error.message);
       }
     }
-    useEffect(()=>{
-      data()
-    },[])
+      data(id)
   }
   return (
     <>

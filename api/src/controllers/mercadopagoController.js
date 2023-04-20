@@ -20,7 +20,7 @@ module.exports = async (req, res) => {
   const { cart, buyer } = req.body;
   mercadopago.configure({
     access_token:
-      req.body.access_token,
+      req.body.seller.access_token,
   });
 
   const beatPercentage = (beatArr, n) => {
