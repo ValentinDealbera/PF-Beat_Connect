@@ -106,9 +106,9 @@ export default function Test(props) {
   });
 
   //hacer botones con estrellas
-  export default function Test(props){
-    const router = useRouter()
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+ // export default function Test(props){
+ //   const router = useRouter()
+ //   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
     const mpHandler = async (e) => {
       const data = await axios.get('http://localhost:3001/api/cart/toseller')
       router.push(data.data.link)
