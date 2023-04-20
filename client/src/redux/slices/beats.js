@@ -19,10 +19,15 @@ const initialState = {
   generalActiveIndex: 0,
   activeReviewDetail: [],
   loadingcurrentAuthor: false,
+  pages: {
+    next: null,
+    prev: null,
+  }
 };
 
-export const fetchBeats = createAsyncThunk("beats/fetchBeats", async () => {
-  const response = await axios.get(`${serverUrl}beats`);
+export const fetchBeats = createAsyncThunk("beats/fetchBeats", async (page = 0) => {
+  const response = await axios.get(`${serverUrl}beats?page=${page}`);
+
   return response.data.docs;
 });
 
