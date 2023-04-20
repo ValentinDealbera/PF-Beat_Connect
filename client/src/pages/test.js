@@ -131,9 +131,8 @@ export default function Test(props) {
               hey soy el sidebar
             </BeatBottomSheet>
           </div>
-         </Main>
-        </>
       )}
+      </Main>
     </>
   );
 }
