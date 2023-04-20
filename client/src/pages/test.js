@@ -114,7 +114,6 @@ export default function Test(props) {
       router.push(data.data.link)
     }
   return (
-    <>
     <Main>
 {/* <FormAdmin /> */}
 <button onClick={mpHandler}>MERCADOPAGOOOOOOOOOOOO VENDEEEEEE</button>
@@ -124,15 +123,16 @@ export default function Test(props) {
           <div className="hidden sm:flex">
             <BeatRightSheet setIsDropdownOpen={setIsDropdownOpen}>
               <ReviewForm beatId={beatId} />
-            </BeatRightSheet>
+         </BeatRightSheet>
           </div>
           <div className="flex sm:hidden">
             <BeatBottomSheet setIsDropdownOpen={setIsDropdownOpen}>
               hey soy el sidebar
             </BeatBottomSheet>
           </div>
+        </>
       )}
-      </Main>
-    </>
+    </Main>
   );
 }
+
