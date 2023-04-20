@@ -9,8 +9,10 @@ const tokenAdmin = process.env.NEXT_PUBLIC_TOKEN_ADMIN;
 const initialState = {
   users: [],
   reviews: [],
+  beats: [],
   currentEditUser: null,
   currentEditReview: null,
+  currentEditBeat: null,
 };
 
 export const adminGetUsers = createAsyncThunk(
@@ -138,7 +140,7 @@ export const adminPostReview = createAsyncThunk(
       //quitamos id del objeto data para que no de error
       delete data.id;
 
-      const response = await axios.post(`${serverUrl}review/admin`, data, {
+const response = await axios.post(`${serverUrl}review/admin`, data, {
         headers: {
           admintoken: tokenAdmin,
         },
@@ -356,6 +358,7 @@ const beatsSlice = createSlice({
           },
         });
       })
+
       .addCase(adminEditReview.rejected, (state, action) => {
         console.log("action.payload error", action.payload);
         toast.error(action.payload, {
@@ -383,8 +386,8 @@ const beatsSlice = createSlice({
           },
         });
       })
-
       .addCase(adminPostReview.rejected, (state, action) => {
+
         console.log("action.payload error", action.payload);
         toast.error(action.payload, {
           style: {
@@ -394,7 +397,6 @@ const beatsSlice = createSlice({
         });
         throw new Error(action.payload);
       })
-
       .addCase(adminPostReview.pending, (state, action) => {
         console.log("action.payload pending");
         toast("Creando review...");
@@ -403,5 +405,6 @@ const beatsSlice = createSlice({
 });
 
 export const { setCurrentEditUser, setCurrentEditReview } = beatsSlice.actions;
+
 
 export default beatsSlice.reducer;

@@ -5,22 +5,50 @@ import {
   DynamicTable,
   ModalTables
 } from "@/components";
-import * as React from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-
-import { beatsDos } from "@/data/fakeDB";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { adminGetBeats, setCurrentEditBeat, adminDeleteBeat } from "@/redux/slices/admin";
 
 export default function SellerDashboardOverview() {
-  const beatData = beatsDos;
-    
+  
+    const dispatch = useDispatch();
+    const beatData = useSelector((state) => state.admin.beats);    
     const router = useRouter();
-    const [beatToDelete, setBeatToDelete] = React.useState(null);
-    const headers = ["Item", "AudioMP3", "Id", "Creator", "State", "Price", "Edit", "Delete" ];
+    const [beatToDelete, setBeatToDelete] = useState(null);
+        
+    useEffect(()=>{
+      dispatch(adminGetBeats());
+      console.log("beats truchos", beatData);     
+    },[]);
+
+    const handleCloseModal = async() => {
+      dispatch(adminGetBeats());
+      setBeatToDelete(null);
+   };
+
+    const handleEdit = async(data) => {
+    console.log("handleEdit", data);
+    await dispatch(setCurrentEditBeat(data));
+    router.push(`/admin/beats/${data._id}`);
+    };
+  
+
+    const headers = [
+      "Item", 
+      "AudioMP3", 
+      "Id", 
+      "Creator", 
+      "State", 
+      "Price", 
+      "Edit", 
+      "Delete" 
+    ];
 
     const rows = beatData.map((item) => {
       return {
-          id: item.id,
+          id: item._id,
           item: (
               <div className="flex items-center gap-4">
                   <Image
@@ -40,10 +68,10 @@ export default function SellerDashboardOverview() {
              </div>
            ),
           price: item.priceAmount,
-          creator : `${item.userCreator}`,
+          creator : `${item.userCreator.username}`,
           state: item.softDelete? "Paused":"Ok",
           edit: (<button
-            onClick={() => router.push(`/admin/beats/${item.id}`)}
+            onClick={() => handleEdit(item)}
             className="background-neutral-gray-400 hover:background-neutral-gray-700 color-neutral-white 
             text-sm-semibold py-2 px-4 border-radius-estilo2"
             >Edit</button>),          
@@ -54,6 +82,7 @@ export default function SellerDashboardOverview() {
             >Eliminar</button>)
       }      
   })
+
   return (
     <>
       <main>
@@ -74,8 +103,9 @@ export default function SellerDashboardOverview() {
       label="Beat" 
       name ={"name"} 
       element={beatToDelete} 
-      onClose={() => setBeatToDelete(null)} 
-      onConfirm={() => console.log(`Eliminando Beat con id ${beatToDelete.id}`)} />)}
+      onClose={handleCloseModal} 
+      onConfirm={() => 
+      dispatch(adminDeleteBeat(beatToDelete))} />)}
       </>
     );
   }

@@ -27,9 +27,9 @@ export default function HOC(props) {
         dispatch(setTokenValid(false))
         console.log("Error:", error);
       });
-    // if (Cookies.get("token") !== "true") {
-    //   navigate("/auth/login");
-    // }
+  if (Cookies.get("token") !== "true") {
+        navigate("/auth/login");
+      }
   }, [authSettings.token, headers]);
 
   if (hocIsWorking === false) {

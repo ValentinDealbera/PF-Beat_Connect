@@ -79,7 +79,7 @@ router.push(`/admin/users/${data._id}`);
       ),
       delete: (
         <button
-          onClick={() => setElementToDelete(item._id)}
+          onClick={() => setElementToDelete(item)}
           className="background-primary-red-500 hover:background-primary-red-700 color-neutral-white 
             text-sm-semibold border-radius-estilo2 px-4 py-2"
         >
