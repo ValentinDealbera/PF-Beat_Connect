@@ -9,6 +9,8 @@ const tokenAdmin = process.env.NEXT_PUBLIC_TOKEN_ADMIN;
 const initialState = {
   users: [],
   currentEditUser: null,
+  beats: [],
+  currentEditBeat: null,
 };
 
 export const adminGetUsers = createAsyncThunk(
@@ -91,12 +93,97 @@ export const adminEditUser = createAsyncThunk(
   }
 );
 
+export const adminGetBeats = createAsyncThunk(
+  "beats/adminGetBeats",
+  async (data, { rejectWithValue }) => {
+    try {
+      console.log("data", data);
+      const response = await axios.get(`${serverUrl}beats`);
+      const beatResponse = response.data.docs;
+
+      return  { beatResponse };
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+export const adminPostBeat = createAsyncThunk(
+  "beats/adminPostBeat",
+  async (data, { rejectWithValue }) => {
+    try {
+      console.log("data", data);
+
+      //quitamos id del objeto data para que no de error
+      delete data.id;
+
+      const response = await axios.post(`${serverUrl}beats/admin`, data, {
+        headers: {
+          admintoken: tokenAdmin,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      const beatResponse = response.data;
+
+      return { beatResponse };
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+export const adminEditBeat = createAsyncThunk(
+  "beats/adminEditBeat",
+  async (data, { rejectWithValue }) => {
+    try {
+      console.log("data", data);
+      const response = await axios.put(
+        `${serverUrl}beats/admin/${data._id}`,
+        data,
+        {
+          headers: {
+            admintoken: tokenAdmin,
+          },
+        }
+      );
+      const userResponse = response.data;
+
+      return { userResponse };
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+export const adminDeleteBeat = createAsyncThunk(
+  "beats/adminDeleteBeat",
+  async (data, { rejectWithValue }) => {
+    try {
+      console.log("data", data);
+      const response = await axios.delete(`${serverUrl}beats/admin/${data._id}`, {
+        headers: {
+          admintoken: tokenAdmin,
+        },
+      });
+      const userResponse = response.data;
+
+      return { userResponse };
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+
 const beatsSlice = createSlice({
   name: "admin",
   initialState,
   reducers: {
     setCurrentEditUser(state, action) {
       state.currentEditUser = action.payload;
+    },
+    setCurrentEditBeat(state, action) {
+      state.currentEditBeat = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -204,10 +291,113 @@ const beatsSlice = createSlice({
       .addCase(adminEditUser.pending, (state, action) => {
         console.log("action.payload pending");
         toast("Editando usuario...");
-      });
+      })
+
+      ///////////// Exra reducers para adminpostBeat /////////
+      .addCase(adminPostBeat.fulfilled, (state, action) => {
+        console.log("action.payload ok", action.payload);
+        toast.success("Beat subido correctamente", {
+          style: {
+            background: "#F0FFF0",
+            color: "#00B300",
+          },
+        });
+        state.beats.push(action.payload.beatResponse);
+      })
+      .addCase(adminPostBeat.rejected, (state, action) => {
+        console.log("action.payload error", action.payload);
+        toast.error(action.payload, {
+          style: {
+            background: "#FFF0F0",
+            color: "#E60000",
+          },
+        });
+        throw new Error(action.payload);
+      })
+      .addCase(adminPostBeat.pending, (state, action) => {
+        console.log("action.payload pending");
+        toast("Subiendo beat...");
+      })
+
+      //Extra reducers para adminGetBeats
+      .addCase(adminGetBeats.fulfilled, (state, action) => {
+        console.log("action.payload ok", action.payload);
+        state.beats = action.payload.beatResponse;
+        toast.success("Beats cargados correctamente", {
+            style: {
+                background: "#F0FFF0",
+                color: "#00B300",
+            },
+        });
+    })
+      .addCase(adminGetBeats.rejected, (state, action) => {
+        console.log("action.payload error", action.payload);
+        toast.error(action.payload, {
+          style: {
+            background: "#FFF0F0",
+            color: "#E60000",
+          },
+        });
+      })
+      .addCase(adminGetBeats.pending, (state, action) => {
+        console.log("action.payload pending");
+        toast("Cargando beats...");
+      })
+
+      //--------------------
+      //Extra reducers para adminDeleteUser
+      .addCase(adminDeleteBeat.fulfilled, (state, action) => {
+        console.log("action.payload ok", action.payload);
+        toast.success("Beat borrado correctamente", {
+          style: {
+            background: "#F0FFF0",
+            color: "#00B300",
+          },
+        });
+      })
+      .addCase(adminDeleteBeat.rejected, (state, action) => {
+        console.log("action.payload error", action.payload);
+        toast.error(action.payload, {
+          style: {
+            background: "#FFF0F0",
+            color: "#E60000",
+          },
+        });
+      })
+      .addCase(adminDeleteBeat.pending, (state, action) => {
+        console.log("action.payload pending");
+        toast("Borrando beat...");
+      })
+
+      //--------------------
+      //Extra reducers para adminEditBeat
+      .addCase(adminEditBeat.fulfilled, (state, action) => {
+        console.log("action.payload ok", action.payload);
+        toast.success("Beat editado correctamente", {
+          style: {
+            background: "#F0FFF0",
+            color: "#00B300",
+          },
+        });
+      })
+      .addCase(adminEditBeat.rejected, (state, action) => {
+        console.log("action.payload error", action.payload);
+        toast.error(action.payload, {
+          style: {
+            background: "#FFF0F0",
+            color: "#E60000",
+          },
+        });
+        throw new Error(action.payload);
+      })
+      .addCase(adminEditBeat.pending, (state, action) => {
+        console.log("action.payload pending");
+        toast("Editando Beat...");
+      })
+
   },
 });
 
-export const { setCurrentEditUser } = beatsSlice.actions;
+export const { setCurrentEditUser, setCurrentEditBeat } = beatsSlice.actions;
 
 export default beatsSlice.reducer;

@@ -4,7 +4,7 @@ export default function ModalTables(props) {
   const { label, element, onClose, onConfirm, name } = props;
 
 const handleClick = async() => {
-    await onConfirm(element.id);
+    await onConfirm(element._id);
     onClose();
   };
 
@@ -13,7 +13,7 @@ const handleClick = async() => {
       <div className="background-neutral-white border-radius-estilo2 w-96 p-8">
         <h2 className="mb-4 text-xl font-bold">Delete {label}</h2>
         <p className="mb-4 text-sm">
-          Are you sure you want to delete {label} {element.id} - {element[name]}
+          Are you sure you want to delete {label} {element._id} - {element[name]}
           ?
         </p>
         <div className="flex justify-end gap-4">
