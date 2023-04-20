@@ -5,6 +5,7 @@ const Cart = require("../models/nosql/cart");
 const Beats = require("../models/nosql/beats");
 const User = require("../models/nosql/user");
 const mercadopago = require("mercadopago");
+const {v4} = require('uuid')
 const mpController = require("../controllers/mercadopagoController");
 const { PROD_ACCESS_TOKEN } = process.env;
 
@@ -19,10 +20,10 @@ const {
   ALL_NOT_OK,
 } = require("../controllers/status");
 
-mercadopago.configure({
-  access_token:
-    "APP_USR-1699631977193078-041813-f4098f3c98b9569762d5d6ff0f84f1cf-630209617",
-});
+// mercadopago.configure({
+//   access_token:
+//     "APP_USR-1699631977193078-041813-f4098f3c98b9569762d5d6ff0f84f1cf-630209617",
+// });
 
 router.get("/", async (req, res) => {
   const productCart = await Cart.find();
@@ -135,5 +136,14 @@ router.delete("/:cartId/beat/:beatId", async (req, res) => {
 /******************     INTEGRACION CON MERCADO PAGO   ********************** */
 
 router.post("/pay", mpController);
+router.get("/toseller", (req, res)=>{
+  try {
+    const uuid4 = v4()
+    const url = `https://auth.mercadopago.com/authorization?client_id=8125390419773749&response_type=code&platform_id=mp&state=${uuid4}&redirect_uri=https://pf-beat-connect.vercel.app/`
+    res.status(200).json({link:url})
+  } catch (error) {
+    res.status(200).json({message:error.message})
+  }
+});
 
 module.exports = router;

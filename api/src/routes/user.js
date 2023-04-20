@@ -4,8 +4,9 @@ const mongoose = require("mongoose");
 const UserModel = require("../models/nosql/user");
 const beatModel = require("../models/nosql/beats");
 const ReviewModel = require("../models/nosql/reviews")
-
-
+const axios = require('axios')
+const {v4} = require('uuid')
+const uuid4 = v4()
 const {
   OK,
   CREATED,
@@ -18,13 +19,14 @@ const {
 } = require("../controllers/status");
 const { getActiveUser, getUserId } = require("../controllers/userController");
 const adminMiddleware = require("../middleware/adminVerify");
+const { UUID } = require("bson");
 
 router.get("/", async (req, res) => {
   try {
     const users = await UserModel.find().populate('createdBeats').populate('bougthBeats');
     res.json(users);
   } catch (err) {
-    res.status(SERVER_ERROR).send(USER_NOT_FOUND);
+    return res.status(SERVER_ERROR).send(USER_NOT_FOUND);
   }
 });
 
@@ -69,7 +71,7 @@ router.get("/:id", async (req, res) => {
       ? res.status(OK).send(allUserId)
       : res.status(NOT_FOUND).send(USER_NOT_FOUND);
   } catch (err) {
-    res.status(NOT_FOUND).send(USER_NOT_FOUND);
+    return res.status(NOT_FOUND).send(USER_NOT_FOUND);
   }
 });
 
@@ -103,18 +105,29 @@ router.put("/:id", async (req, res) => {
     return res.status(BAD_REQUEST).send(ALL_NOT_OK);
   }
 
-  if (id && seller === "VENDEDOR") {
+  if (id && seller === "VENDEDOR" && req.body.mpcode) {
     try {
+      const code = req.body.mpcode
       const userId = await getUserId(id);
+      const body = {
+        client_id: 8125390419773749,
+        client_secret: 'QkAwOW6BAQthSH0pOzOmoc9aPumLLKRi',
+        code: code,
+        grant_type: 'authorization_code',
+        redirect_uri: 'https://pf-beat-connect.vercel.app/'
+      }
+      const access_token = await axios.post(`https://api.mercadopago.com/oauth/token`, body)
+      console.log(access_token)
       if (userId) {
+        userId.accessToken = access_token.data.access_token
         userId.isSeller = true;
         await userId.save();
-        res.status(OK).send(ALL_OK);
+       return res.status(OK).send(ALL_OK);
       } else {
-        res.status(NOT_FOUND).send(USER_NOT_FOUND);
+        return res.status(NOT_FOUND).send(USER_NOT_FOUND);
       }
     } catch (err) {
-      res.status(SERVER_ERROR).send(ALL_NOT_OK);
+      res.status(SERVER_ERROR).send(err.message);
     }
   }
   if (id && admin === "ADMIN") {
@@ -123,15 +136,14 @@ router.put("/:id", async (req, res) => {
       if (userId) {
         userId.superAdmin = true;
         await userId.save();
-        res.status(OK).send(ALL_OK);
+        return res.status(OK).send(ALL_OK);
       } else {
-        res.status(NOT_FOUND).send(USER_NOT_FOUND);
+        return res.status(NOT_FOUND).send(USER_NOT_FOUND);
       }
     } catch (err) {
-      res.status(SERVER_ERROR).send(ALL_NOT_OK);
+      return res.status(SERVER_ERROR).send(ALL_NOT_OK);
     }
   }
-
   if (id && soft === "DELETE") {
     try {
       const userId = await getUserId(id);
@@ -139,21 +151,22 @@ router.put("/:id", async (req, res) => {
         if (userId.softDelete === false) {
           userId.softDelete = true;
           await userId.save();
-          res.status(OK).send(ALL_OK);
+          return res.status(OK).send(ALL_OK);
         } else {
           userId.softDelete = false;
           await userId.save();
-          res.status(OK).send(ALL_OK);
+          return res.status(OK).send(ALL_OK);
         }
       }
+    
     } catch (err) {
-      res.status(SERVER_ERROR).send(ALL_NOT_OK);
+      return res.status(SERVER_ERROR).send(ALL_NOT_OK);
     }
   }
-   else res.status(500).json({message: 'el usuario no se ha modificado'})
+   else return res.status(500).json({message: 'el usuario no se ha modificado'})
 
   } catch (error) {
-    res.status(SERVER_ERROR).json({message: error.message});
+    return res.status(SERVER_ERROR).json({message: error.message});
     
   }
   
@@ -177,12 +190,12 @@ router.put("/admin/:id", adminMiddleware, async (req, res) => {
       if (userId) {
         userId.isSeller = true;
         await userId.save();
-        res.status(OK).send(ALL_OK);
+        return res.status(OK).send(ALL_OK);
       } else {
-        res.status(NOT_FOUND).send(USER_NOT_FOUND);
+        return res.status(NOT_FOUND).send(USER_NOT_FOUND);
       }
     } catch (err) {
-      res.status(SERVER_ERROR).send(ALL_NOT_OK);
+      return res.status(SERVER_ERROR).send(ALL_NOT_OK);
     }
   }
   if (id && admin === "ADMIN") {
@@ -191,12 +204,12 @@ router.put("/admin/:id", adminMiddleware, async (req, res) => {
       if (userId) {
         userId.superAdmin = true;
         await userId.save();
-        res.status(OK).send(ALL_OK);
+        return res.status(OK).send(ALL_OK);
       } else {
-        res.status(NOT_FOUND).send(USER_NOT_FOUND);
+        return res.status(NOT_FOUND).send(USER_NOT_FOUND);
       }
     } catch (err) {
-      res.status(SERVER_ERROR).send(ALL_NOT_OK);
+      return res.status(SERVER_ERROR).send(ALL_NOT_OK);
     }
   }
 
@@ -207,20 +220,20 @@ router.put("/admin/:id", adminMiddleware, async (req, res) => {
         if (userId.softDelete === false) {
           userId.softDelete = true;
           await userId.save();
-          res.status(OK).send(ALL_OK);
+          return res.status(OK).send(ALL_OK);
         } else {
           userId.softDelete = false;
           await userId.save();
-          res.status(OK).send(ALL_OK);
+          return res.status(OK).send(ALL_OK);
         }
       }
     } catch (err) {
-      res.status(SERVER_ERROR).send(ALL_NOT_OK);
+      return res.status(SERVER_ERROR).send(ALL_NOT_OK);
     }
   }
-  else res.status(500).json({message: 'el usuario no se ha modificado'})
+  else return res.status(500).json({message: 'el usuario no se ha modificado'})
   } catch (error) {
-    res.status(SERVER_ERROR).json({message: error.message});
+    return res.status(SERVER_ERROR).json({message: error.message});
     
   }
   
@@ -280,7 +293,7 @@ router.delete("/:id", async (req, res) => {
       res.json({ error: error.message }).status(SERVER_ERROR);
     }
   } catch (error) {
-    res.status(500).json({message: error.message})
+    return res.status(500).json({message: error.message})
   }
 });
 

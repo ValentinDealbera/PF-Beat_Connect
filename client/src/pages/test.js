@@ -11,7 +11,9 @@ import {
   ReviewForm,
 } from "@/components";
 
-import { useEffect, useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUserReviews, fetchUserBeats } from "@/redux/slices/beats";
 import Image from "next/image";
@@ -103,18 +105,24 @@ export default function Test(props) {
   });
 
   //hacer botones con estrellas
-
+ // export default function Test(props){
+ //   const router = useRouter()
+ //   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+    const mpHandler = async (e) => {
+      const data = await axios.get('http://localhost:3001/api/cart/toseller')
+      router.push(data.data.link)
+    }
   return (
-    <>
-      <Main>
+    <Main>
+{/* <FormAdmin /> */}
+<button onClick={mpHandler}>MERCADOPAGOOOOOOOOOOOO VENDEEEEEE</button>
         <DynamicTable headers={tableHeaders} rows={rows} />
-      </Main>
       {isDropDown && (
         <>
           <div className="hidden sm:flex">
             <BeatRightSheet setIsDropdownOpen={setIsDropdownOpen}>
               <ReviewForm beatId={beatId} />
-            </BeatRightSheet>
+         </BeatRightSheet>
           </div>
           <div className="flex sm:hidden">
             <BeatBottomSheet setIsDropdownOpen={setIsDropdownOpen}>
@@ -123,6 +131,7 @@ export default function Test(props) {
           </div>
         </>
       )}
-    </>
+    </Main>
   );
 }
+

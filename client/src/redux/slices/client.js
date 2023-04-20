@@ -14,6 +14,7 @@ const initialState = {
     isSeller: false,
     superAdmin: false,
     token: "",
+    accessToken: "",
   },
   client: {
     name: "Placeholder",
@@ -44,6 +45,7 @@ export const loginSystem = createAsyncThunk(
         isSeller: userResponse.user.isSeller,
         superAdmin: userResponse.user.superAdmin,
         token: userResponse.token,
+        accessToken: userResponse.user?.accessToken
       };
       return { authSettings, newClient };
     } catch (error) {
