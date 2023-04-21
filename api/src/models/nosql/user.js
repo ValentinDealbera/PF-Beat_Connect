@@ -26,6 +26,14 @@ const UserSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  bio: {
+    type: String,
+    default: ''
+  },
+  backImage: {
+    type: String,
+    default: ''
+  },
   image: {
     type: String,
     require: false,
