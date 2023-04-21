@@ -22,14 +22,77 @@ const initialState = {
   pages: {
     next: null,
     prev: null,
-  }
+    current: 1,
+    limit: null,
+  },
 };
 
-export const fetchBeats = createAsyncThunk("beats/fetchBeats", async (page = 0) => {
-  const response = await axios.get(`${serverUrl}beats?page=${page}`);
+export const fetchBeats = createAsyncThunk(
+  "beats/fetchBeats",
+  async ({ page = 1, minPrice = 100, maxPrice }) => {
 
-  return response.data.docs;
-});
+    const queryParameters = {
+      page: page,
+      minPrice: minPrice,
+      maxPrice: maxPrice,
+      // Agrega aquí otros parámetros de consulta que quieras incluir
+    };
+
+    let queryString = "";
+    Object.entries(queryParameters).forEach(([key, value]) => {
+      if (value !== null && value !== undefined) {
+        queryString += `?&${key}=${encodeURIComponent(value)}`;
+      }
+    });
+
+    console.log("fetchBeats", `${serverUrl}beats?${queryString.substr(1)}`);
+
+    const response = await axios.get(
+      `${serverUrl}beats?${queryString.substr(1)}`
+    );
+
+    return {
+      docs: response.data.docs,
+      next: response.data.nextPage,
+      prev: response.data.prevPage,
+      current: response.data.page,
+      limit: response.data.totalPages,
+    };
+  }
+);
+
+//IGNORAR ESTE CODIGO
+// export const fetchBeats = createAsyncThunk(
+//   "beats/fetchBeats",
+//   async ({ page = 1, minPrice = 40 }) => {
+//     console.log("fetchBeats", page, minPrice);
+
+//     const queryParameters = {
+//       page: page,
+//       minPrice: minPrice,
+//       // Agrega aquí otros parámetros de consulta que quieras incluir
+//     };
+
+//     let queryString = "";
+//     Object.entries(queryParameters).forEach(([key, value]) => {
+//       if (value !== null && value !== undefined) {
+//         queryString += `&${key}=${encodeURIComponent(value)}`;
+//       }
+//     });
+
+//     console.log("fetchBeats", `${serverUrl}beats?${queryString.substr(1)}`);
+
+//     const response = await axios.get(`${serverUrl}beats?${queryString.substr(1)}`);
+
+//     return {
+//       docs: response.data.docs,
+//       next: response.data.nextPage,
+//       prev: response.data.prevPage,
+//       current: response.data.page,
+//       limit: response.data.totalPages,
+//     };
+//   }
+// );
 
 export const fetchUserBeats = createAsyncThunk(
   "beats/fetchUserBeats",
@@ -132,18 +195,23 @@ const beatsSlice = createSlice({
       .addCase(fetchBeats.fulfilled, (state, action) => {
         console.log("fetch beats fullfiled", action.payload);
         if (
-          action.payload.length === 0 ||
-          action.payload === null ||
-          action.payload === undefined ||
-          !Array.isArray(action.payload)
+          !Array.isArray(action.payload.docs) ||
+          action.payload.docs.length === 0 ||
+          action.payload.docs === null ||
+          action.payload.docs === undefined
         ) {
           state.publicItems = [];
           state.activeItems = [];
           return;
         }
         state.publicBeatsFetchStatus = true;
-        state.publicItems = action.payload || [];
-        state.activeItems = action.payload || [];
+        state.publicItems = action.payload.docs || [];
+        state.activeItems = action.payload.docs || [];
+        state.pages.next = action.payload.next;
+        state.pages.prev = action.payload.prev;
+        state.pages.current = action.payload.current;
+        state.pages.limit = action.payload.limit;
+
         // state.beatsDisplayMode = 1;
       })
       .addCase(fetchBeats.rejected, (state, action) => {
