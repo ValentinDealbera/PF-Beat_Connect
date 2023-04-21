@@ -1,13 +1,22 @@
 import { Section, BeatFilters, NewBeatCardGrid } from "@/components";
 import { selectFilteredBeats } from "@/redux/selectors/filters";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchBeats } from "@/redux/slices/beats";
+import { useEffect } from "react";
 
 export default function BeatShopSection() {
-  const filteredBeats = useSelector(selectFilteredBeats);
+  const beatFilters = useSelector(selectFilteredBeats);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchBeats(beatFilters));
+    console.log("fucking query >", beatFilters);
+  }, []);
+
   return (
     <Section subClassName="padding-x-estilo2 padding-y-estilo2 gap-8 flex flex-col">
       <BeatFilters />
-      <NewBeatCardGrid beats={filteredBeats} />
+      <NewBeatCardGrid beats={beatFilters} />
     </Section>
   );
 }

@@ -10,7 +10,7 @@ import {
   PostBeat,
   managePostBeat,
   manageBecomeSeller,
-  EditBeat
+  EditBeat,
 } from "@/components";
 import { useRouter } from "next/router";
 import { navPublic } from "@/data/data";
@@ -59,15 +59,17 @@ export default function Header() {
       name: "Vende tus beats",
       url: "",
       onClick: () => manageBecomeSeller(),
-     // visibility: !isSeller,
-     visibility: true,
+      // // visibility: !isSeller,
+      visibility: true,
+      visibility: true,
     },
     {
       name: "Publicar un beat",
       url: "",
       onClick: () => managePostBeat(),
-    //  visibility: isSeller,
-    visibility: true,
+      //  //  visibility: isSeller,
+      visibility: true,
+      visibility: true,
     },
     {
       name: "Configuracion",

@@ -29,19 +29,36 @@ const initialState = {
 
 export const fetchBeats = createAsyncThunk(
   "beats/fetchBeats",
-  async ({ page = 1, minPrice = 0, maxPrice }) => {
 
+  async ({
+    page,
+    minPrice,
+    maxPrice,
+    minBPM,
+    maxBPM,
+    name,
+    BPM,
+    priceAmount,
+    rating,
+  }) => {
     const queryParameters = {
-      page: page,
-      minPrice: minPrice,
-      maxPrice: maxPrice,
+      page,
+      minPrice,
+      maxPrice,
+      minBPM,
+      maxBPM,
+      ...(name && { name }),
+      ...(BPM && { BPM }),
+      ...(priceAmount && { priceAmount }),
+      ...(rating && { rating }),
+
       // Agrega aquí otros parámetros de consulta que quieras incluir
     };
 
-    let queryString = "";
+    let queryString = "?";
     Object.entries(queryParameters).forEach(([key, value]) => {
       if (value !== null && value !== undefined) {
-        queryString += `?&${key}=${encodeURIComponent(value)}`;
+        queryString += `&${key}=${encodeURIComponent(value)}`;
       }
     });
 
@@ -50,7 +67,7 @@ export const fetchBeats = createAsyncThunk(
     const response = await axios.get(
       `${serverUrl}beats?${queryString.substr(1)}`
     );
-      console.log('DATA DATA DATA', response.data);
+    console.log("DATA DATA DATA", response.data);
     return {
       docs: response.data.docs,
       next: response.data.nextPage,

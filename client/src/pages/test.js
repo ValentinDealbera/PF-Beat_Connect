@@ -105,24 +105,27 @@ export default function Test(props) {
   });
 
   //hacer botones con estrellas
- // export default function Test(props){
- //   const router = useRouter()
- //   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-    const mpHandler = async (e) => {
-      const data = await axios.get('http://localhost:3001/api/cart/toseller')
-      router.push(data.data.link)
-    }
+  // export default function Test(props){
+  //   const router = useRouter()
+  //   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const mpHandler = async (e) => {
+    const data = await axios.get("http://localhost:3001/api/cart/toseller");
+    router.push(data.data.link);
+  };
   return (
     <Main>
-{/* <FormAdmin /> */}
-<button onClick={mpHandler}>MERCADOPAGOOOOOOOOOOOO VENDEEEEEE</button>
-        <DynamicTable headers={tableHeaders} rows={rows} />
+      {/* <FormAdmin /> */}
+      <button onClick={mpHandler}>MERCADOPAGOOOOOOOOOOOO VENDEEEEEE</button>
+      <DynamicTable headers={tableHeaders} rows={rows} />
       {isDropDown && (
         <>
           <div className="hidden sm:flex">
-            <BeatRightSheet setIsDropdownOpen={setIsDropdownOpen}>
+            <BeatRightSheet
+              width="w-[40vw]"
+              setIsDropdownOpen={setIsDropdownOpen}
+            >
               <ReviewForm beatId={beatId} />
-         </BeatRightSheet>
+            </BeatRightSheet>
           </div>
           <div className="flex sm:hidden">
             <BeatBottomSheet setIsDropdownOpen={setIsDropdownOpen}>
@@ -134,4 +137,3 @@ export default function Test(props) {
     </Main>
   );
 }
-

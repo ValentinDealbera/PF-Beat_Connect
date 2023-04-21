@@ -19,8 +19,11 @@ import {
   setBpmFilter,
   setSorter,
 } from "@/redux/slices/filters";
+import { selectFilteredBeats } from "@/redux/selectors/filters";
+import { fetchBeats } from "@/redux/slices/beats";
 
 export default function BeatFilters() {
+  const beatFilters = useSelector(selectFilteredBeats);
   const dispatch = useDispatch();
   const [beatGenre, setBeatGenre] = useState([]);
   const [prices, setPrices] = useState({ min: 0, max: 0 });
@@ -72,7 +75,6 @@ export default function BeatFilters() {
   }, [prices, dispatch]);
 
   useEffect(() => {
-    console.log("cambio bpm", BPM);
     dispatch(setBpmFilter(BPM));
   }, [BPM, dispatch]);
 

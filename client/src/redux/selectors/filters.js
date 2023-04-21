@@ -25,117 +25,63 @@ export const selectFilteredBeats = (state) => {
     (priceFilter.max === 0 || priceFilter.max === undefined) &&
     (BpmFilter.min === 0 || BpmFilter.min === undefined) &&
     (BpmFilter.max === 0 || BpmFilter.max === undefined) &&
-    (sorter === "default" || sorter === undefined || sorter === "" || sorter === null) 
+    (sorter === "default" ||
+      sorter === undefined ||
+      sorter === "" ||
+      sorter === null)
   ) {
-   
-    return activeItems;
+    //   return activeItems;
+    // } else {
+    // }
+    // if(beatsDisplayMode !== 0 ) {
+    //   return activeItems;
+    // }
+    // let activeBeats = activeItems
+    // if (activeBeats.length <= 0) {
+    //   return activeBeats;
+    // }
+    // console.log("no hay filtros", sorter);
+    // return activeItems;
   } else {
-    
+    console.log(
+      "hay filtros",
+      sorter,
+      priceFilter,
+      BpmFilter,
+      genresFilter,
+      typesFilter,
+      searchFilter,
+      beatsDisplayMode
+    );
   }
-
-  if(beatsDisplayMode !== 0 ) {
-    return activeItems;
-  }
-  let activeBeats = activeItems 
-
-  if (activeBeats.length <= 0) {
-    return activeBeats;
-  }
- 
-
-  let filteredBeats = [];
 
   try {
-    if (searchFilter) {
-      activeBeats = activeBeats.filter((beat) => {
-        return beat.name.toLowerCase().includes(searchFilter.toLowerCase());
-      });
-    }
+    const beatFilters = {
+      minBPM: BpmFilter.min,
+      maxBPM: BpmFilter.max,
+      minprice: priceFilter.min,
+      maxPrice: priceFilter.max,
+    };
 
-
-
-    // Filtrar por géneros
-    if (genresFilter.length > 0) {
-      activeBeats = activeBeats.filter((obj) => {
-        return genresFilter.some((term) => {
-          return obj.genre._id.includes(term);
-        });
-      });
-    }
-
-
-
-    //Cramos un filtro para precio maximo y minimo
-    if (priceFilter) {
-      if(priceFilter.max === 0) return;
-      activeBeats = activeBeats.filter((beat) => {
-        return (
-          parseInt(beat.priceAmount) >= parseInt(priceFilter.min) &&
-          parseInt(beat.priceAmount) <= parseInt(priceFilter.max)
-        );
-      });
-    }
-
-
-
-    //Cramos un filtro para BPM maximo y minimo
-    if (BpmFilter) {
-      if(BpmFilter.max === 0) return;
-      activeBeats = activeBeats.filter((beat) => {
-        return (
-          parseInt(beat.BPM) >= parseInt(BpmFilter.min) &&
-          parseInt(beat.BPM) <= parseInt(BpmFilter.max)
-        );
-      });
-    }
-
-
-    //Hacemos sort segun lo que el usuario elija, dejamos el default para lo ultimo en el if
     if (sorter) {
       if (sorter === "default") {
-        return activeBeats;
+        beatFilters;
       } else if (sorter === "Price-AS") {
-        activeBeats.sort((a, b) => {
-          return a.priceAmount - b.priceAmount;
-        });
+        beatFilters.priceAmount = "asc";
       } else if (sorter === "Price-DES") {
-        activeBeats.sort((a, b) => {
-          return b.priceAmount - a.priceAmount;
-        });
+        beatFilters.priceAmount = "desc";
       } else if (sorter === "BPM-AS") {
-        activeBeats.sort((a, b) => {
-          return a.BPM - b.BPM;
-        });
+        beatFilters.BPM = "asc";
       } else if (sorter === "BPM-DES") {
-        activeBeats.sort((a, b) => {
-          return b.BPM - a.BPM;
-        });
+        beatFilters.BPM = "desc";
       } else if (sorter === "A-Z") {
-        activeBeats.sort((a, b) => {
-          return a.name.localeCompare(b.name);
-        });
+        beatFilters.name = "asc";
       } else if (sorter === "Z-A") {
-        activeBeats.sort((a, b) => {
-          return b.name.localeCompare(a.name);
-        });
+        beatFilters.name = "desc";
       }
     }
 
-    filteredBeats = activeBeats;
-
-    if (filteredBeats.length > 0) {
-
-      return filteredBeats;
-    } else {
- 
-      toast.error("No hay beats que mostrar", {
-        style: {
-          background: "#FFF0F0",
-          color: "#E60000",
-        },
-      });
-      return activeItems;
-    }
+    return beatFilters;
   } catch (error) {
     console.log(error);
     toast.error("Ocurrio un error, recarga la pagina", {

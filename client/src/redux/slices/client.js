@@ -4,8 +4,6 @@ import { serverUrl } from "@/data/config";
 import { toast } from "sonner";
 import { fetchBeats, fetchUserBeats } from "@/redux/slices/beats";
 
-const tokenAdmin = process.env.NEXT_PUBLIC_TOKEN_ADMIN;
-
 const initialState = {
   activeEditingItem: null,
   tokenValid: false,
@@ -45,7 +43,7 @@ export const loginSystem = createAsyncThunk(
         isSeller: userResponse.user.isSeller,
         superAdmin: userResponse.user.superAdmin,
         token: userResponse.token,
-        accessToken: userResponse.user?.accessToken
+        accessToken: userResponse.user?.accessToken,
       };
       return { authSettings, newClient };
     } catch (error) {
@@ -77,10 +75,10 @@ export const postBeatReview = createAsyncThunk(
   "client/postBeatReview",
   async (data, { rejectWithValue }) => {
     try {
-      console.log("token: ", tokenAdmin);
-      const response = await axios.post(`${serverUrl}review/admin`, data, {
+      console.log("data: ", data);
+      const response = await axios.post(`${serverUrl}review`, data, {
         headers: {
-          admintoken: tokenAdmin,
+          userid: data.createdBy,
         },
       });
 
