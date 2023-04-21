@@ -18,7 +18,7 @@ export default function SellerDashboardOverview() {
 
   const router = useRouter();
   const [elementToDelete, setElementToDelete] = useState(null);
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const { users } = useSelector((state) => state.admin);
   const usersData = users;
 
@@ -100,8 +100,10 @@ router.push(`/admin/users/${data._id}`);
             router.push("/admin/users/create");
           }}
         >
-          <IslandDashboard className="flex flex-col gap-5 xl:gap-8 ">
-            <DynamicTable headers={headers} rows={rows} />
+          <IslandDashboard className="flex flex-col gap-5 xl:gap-8 w-5/6 overflow-x-scroll">
+            <DynamicTable 
+            headers={headers} 
+            rows={rows}  />
           </IslandDashboard>
         </SellerDashboardLayout>
       </main>
@@ -113,7 +115,7 @@ router.push(`/admin/users/${data._id}`);
           onClose={handleCloseModal}
           onConfirm={() =>
             dispatch(adminDeleteUser(elementToDelete))
-          }
+          }          
         />
       )}
     </>
