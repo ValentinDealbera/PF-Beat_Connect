@@ -44,6 +44,7 @@ console.log("defaultValues", defaultValues);
     beat: `${mode === "edit" ? defaultValues.beat._id : ""}`,
     comment: `${mode === "edit" ? defaultValues.comment : ""}`,
     title: `${mode === "edit" ? defaultValues.title : ""}`,
+    id: `${mode === "edit" ? defaultValues._id : ""}`,
   });
 
   // {

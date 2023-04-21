@@ -1,7 +1,8 @@
-export function ValidationCreateBeat(form, fieldsToValidate) {
+export function ValidationCreateBeat(form, fieldsToValidate, mode) {
   const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
   let error = {};
-
+  const modeOf = mode
+  console.log('SOY EL MODO DE EL FORMULARIO', modeOf)
 console.log(fieldsToValidate)
 
   const regexName = /^.{1,50}$/;
@@ -30,6 +31,7 @@ console.log(fieldsToValidate)
 
       // Validar tamaño de imagen
       case "image":
+        if (mode === "edit") break;
         console.log("soy image", form.image.name);
         if (form.image.size > MAX_FILE_SIZE)
           error.image =
@@ -39,6 +41,7 @@ console.log(fieldsToValidate)
         break;
 
       case "audioMP3":
+        if (mode === "edit") break;
         console.log("soy audioMP3", form.audioMP3);
         if (form.audioMP3.size > MAX_FILE_SIZE)
           error.audioMP3 =

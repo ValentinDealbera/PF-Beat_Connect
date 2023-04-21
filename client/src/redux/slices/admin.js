@@ -225,7 +225,7 @@ export const adminEditBeat = createAsyncThunk(
     try {
       console.log("data", data);
       const response = await axios.put(
-        `${serverUrl}beats/admin/${data._id}`,
+        `${serverUrl}beats/admin/${data.id}`,
         data,
         {
           headers: {
