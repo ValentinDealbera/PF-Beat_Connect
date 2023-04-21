@@ -8,8 +8,6 @@ export default function TableAdminUsers({ data }) {
   const router = useRouter();
   const [userToDelete, setUserToDelete] = React.useState(null);
 
-  // id, firstName, lastName, username, email, password, image, isSeller, superAdmin, softDelete, bougthBeats, createdBeats
-
   const columns = React.useMemo(
     () => [
       {
@@ -29,44 +27,44 @@ export default function TableAdminUsers({ data }) {
         Header: "ID",
         accessor: "id",
         Cell: ({ cell: { value } }) => (
-          <div className="truncate max-w-60" >
+          <div className="truncate w-min-[70px]" >
             {value}
           </div>
         ),
-      },
+      },   
       {
-        Header: "NAME",
-        accessor: "name",
+        Header: "USERNAME",
+        accessor: "username",
         Cell: ({ cell: { value } }) => (
-          <div className="truncate max-w-120">
+          <div className="truncate w-min-[200px]">
             {value}
           </div>
         ),
       },
       {
         Header: "MAIL",
-        accessor: "mail",
+        accessor: "email",
         Cell: ({ cell: { value } }) => (
-          <div className="truncate max-w-180" >
+          <div className="truncate w-min-[200px]" >
             {value}
           </div>
         ),
       },
       {
-        Header: "PROFILE-MSG",
-        accessor: "profilemsg",
+        Header: "SELLER",
+        accessor: "isSeller",
         Cell: ({ cell: { value } }) => (
-          <div className="truncate max-w-180" >
-            {value}
+          <div className="truncate w-min-[200px]">
+            {value ? "TRUE" : "FALSE"} 
           </div>
         ),
       },
       {
-        Header: "TYPE",
-        accessor: "type",
+        Header: "SOFT DELETE",
+        accessor: "softDelete",
         Cell: ({ cell: { value } }) => (
-          <div className="truncate max-w-60" >
-            {value}
+          <div className="truncate w-min-[200px]" >
+            {value ? "TRUE": "FALSE"}
           </div>
         ),
       },
@@ -75,7 +73,7 @@ export default function TableAdminUsers({ data }) {
         accessor: "edit",
         Cell: ({ row: { original } }) => (
           <button
-            onClick={() => router.push(`/form/${original.id}`)}
+            onClick={() => router.push(`/admin/users/${original.id}`)}
             className="background-neutral-gray-400 hover:background-neutral-gray-700 color-neutral-white 
             text-sm-semibold py-2 px-4 border-radius-estilo2"
           >
@@ -106,16 +104,16 @@ export default function TableAdminUsers({ data }) {
     useTable({ columns, data: parsedData });
 
   return (
-    <div className="w-90 m-3 border-radius-estilo2 overflow-x-auto overflow-y-auto font-britanicaBold 
+    <div className="flex w-full w-min-[800px] border border-radius-estilo2 overflow-x-auto overflow-y-auto font-britanicaBold 
     text-subtitulo-semibold gap-estilo4 background-neutral-white">
-      <table {...getTableProps()} className="table-fixed w-full min-w-[650px] overflow-hidden" >
+      <table {...getTableProps()} className="table-fixed" >
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
                 <th
                   {...column.getHeaderProps({
-                    className: "px-4 py-2 text-left border-b border-gray-300 text-base-medium",
+                    className: "px-4 py-2 text-left border-b border-gray-300 text-base-medium overflow-ellipsis",
                   })}
                 >
                   {column.render("Header")}

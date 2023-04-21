@@ -1,4 +1,11 @@
-import { Main, Hero, BeatsShopSection, ProfileCard, Head } from "@/components";
+import {
+  Main,
+  Hero,
+  BeatsShopSection,
+  ProfileCard,
+  Head,
+  BeatShopSectionForClient,
+} from "@/components";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -22,13 +29,15 @@ export default function BuyerProfile() {
             <div>
               <ProfileCard
                 profilePhoto={currentUser.profilePicture}
-                profileName={ `${currentUser.firstName}${" "}${currentUser.lastName}` }
+                profileName={`${currentUser.firstName}${" "}${
+                  currentUser.lastName
+                }`}
                 profileMessage={currentUser.bio}
               />
             </div>
           </div>
         </Hero>
-        <BeatsShopSection mode="profile" />
+        <BeatShopSectionForClient />
       </Main>
     </>
   );

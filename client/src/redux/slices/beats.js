@@ -1,10 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import {serverUrl} from "@/data/config"
+import { serverUrl } from "@/data/config";
 import axios from "axios";
 
 const initialState = {
   publicBeatsFetchStatus: false, //deprecated
   authorFetchStatus: false, //deprecated
+  reviewFetchStatus: false,
   beatsDisplayMode: null, //deprecated
   currentAuthorLastId: null, //deprecated
   currentAuthor: {},
@@ -16,12 +17,82 @@ const initialState = {
   activeItems: [],
   activeItemDetail: null,
   generalActiveIndex: 0,
+  activeReviewDetail: [],
+  loadingcurrentAuthor: false,
+  pages: {
+    next: null,
+    prev: null,
+    current: 1,
+    limit: null,
+  },
 };
 
-export const fetchBeats = createAsyncThunk("beats/fetchBeats", async () => {
-  const response = await axios.get(`${serverUrl}beats`);
-  return response.data;
-});
+export const fetchBeats = createAsyncThunk(
+  "beats/fetchBeats",
+  async ({ page = 1, minPrice = 0, maxPrice }) => {
+
+    const queryParameters = {
+      page: page,
+      minPrice: minPrice,
+      maxPrice: maxPrice,
+      // Agrega aquí otros parámetros de consulta que quieras incluir
+    };
+
+    let queryString = "";
+    Object.entries(queryParameters).forEach(([key, value]) => {
+      if (value !== null && value !== undefined) {
+        queryString += `?&${key}=${encodeURIComponent(value)}`;
+      }
+    });
+
+    console.log("fetchBeats", `${serverUrl}beats?${queryString.substr(1)}`);
+
+    const response = await axios.get(
+      `${serverUrl}beats?${queryString.substr(1)}`
+    );
+      console.log('DATA DATA DATA', response.data);
+    return {
+      docs: response.data.docs,
+      next: response.data.nextPage,
+      prev: response.data.prevPage,
+      current: response.data.page,
+      limit: response.data.totalPages,
+    };
+  }
+);
+
+//IGNORAR ESTE CODIGO
+// export const fetchBeats = createAsyncThunk(
+//   "beats/fetchBeats",
+//   async ({ page = 1, minPrice = 40 }) => {
+//     console.log("fetchBeats", page, minPrice);
+
+//     const queryParameters = {
+//       page: page,
+//       minPrice: minPrice,
+//       // Agrega aquí otros parámetros de consulta que quieras incluir
+//     };
+
+//     let queryString = "";
+//     Object.entries(queryParameters).forEach(([key, value]) => {
+//       if (value !== null && value !== undefined) {
+//         queryString += `&${key}=${encodeURIComponent(value)}`;
+//       }
+//     });
+
+//     console.log("fetchBeats", `${serverUrl}beats?${queryString.substr(1)}`);
+
+//     const response = await axios.get(`${serverUrl}beats?${queryString.substr(1)}`);
+
+//     return {
+//       docs: response.data.docs,
+//       next: response.data.nextPage,
+//       prev: response.data.prevPage,
+//       current: response.data.page,
+//       limit: response.data.totalPages,
+//     };
+//   }
+// );
 
 export const fetchUserBeats = createAsyncThunk(
   "beats/fetchUserBeats",
@@ -49,6 +120,26 @@ export const fetchCurrentAuthor = createAsyncThunk(
       username: response.data.username,
     };
     return { beats: currentAuthorBeats, currentAuthor };
+  }
+);
+
+export const fetchUserReviews = createAsyncThunk(
+  "beats/fetchUserReview",
+  async (id) => {
+    const response = await axios.get(`${serverUrl}review/user/${id}`);
+    const userReviews = response.data;
+
+    //Obtenemos la data necesaria (Titulo, username, comentario, rating e id )
+    const reviews = userReviews.map((review) => ({
+      rating: review.rating,
+      title: review.title,
+      comment: review.comment,
+      _id: review._id,
+      username: review.createdBy.username,
+      beat: id,
+    }));
+
+    return reviews;
   }
 );
 
@@ -102,13 +193,29 @@ const beatsSlice = createSlice({
         state.publicBeatsFetchStatus = false;
       })
       .addCase(fetchBeats.fulfilled, (state, action) => {
+        console.log("fetch beats fullfiled", action.payload);
+        if (
+          !Array.isArray(action.payload.docs) ||
+          action.payload.docs.length === 0 ||
+          action.payload.docs === null ||
+          action.payload.docs === undefined
+        ) {
+          state.publicItems = [];
+          state.activeItems = [];
+          return;
+        }
         state.publicBeatsFetchStatus = true;
-        state.publicItems = action.payload;
-        state.activeItems = action.payload;
-       // state.beatsDisplayMode = 1;
+        state.publicItems = action.payload.docs || [];
+        state.activeItems = action.payload.docs || [];
+        state.pages.next = action.payload.next;
+        state.pages.prev = action.payload.prev;
+        state.pages.current = action.payload.current;
+        state.pages.limit = action.payload.limit;
+
+        // state.beatsDisplayMode = 1;
       })
       .addCase(fetchBeats.rejected, (state, action) => {
-        console.error(action.error);
+        console.error(" fetch error");
       })
 
       //--------------------
@@ -133,14 +240,32 @@ const beatsSlice = createSlice({
       //Extra reducers para el perfil del autor 3
       .addCase(fetchCurrentAuthor.pending, (state, action) => {
         state.authorFetchStatus = false;
+        state.loadingcurrentAuthor = true;
       })
       .addCase(fetchCurrentAuthor.fulfilled, (state, action) => {
         state.currentAuthor = action.payload.currentAuthor;
-        state.activeItems = action.payload.beats;
+        state.currentAuthorBeats = action.payload.beats;
         state.beatsDisplayMode = 3;
+        state.loadingcurrentAuthor = false;
       })
       .addCase(fetchCurrentAuthor.rejected, (state, action) => {
         console.error(action.error);
+      })
+
+      //--------------------
+      //extra reducers para review
+      .addCase(fetchUserReviews.pending, (state, action) => {
+        {
+          state.reviewFetchStatus = false;
+        }
+      })
+      .addCase(fetchUserReviews.fulfilled, (state, action) => {
+        state.activeReviewDetail = action.payload;
+
+        console.log(action.payload);
+      })
+      .addCase(fetchUserReviews.rejected, (state, action) => {
+        console.error("fetch error");
       });
   },
 });

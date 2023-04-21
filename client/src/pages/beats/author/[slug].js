@@ -1,9 +1,7 @@
-import { Main, Hero, BeatsShopSection, ProfileCard, Head } from "@/components";
+import { Main, Hero, NewBeatCardGrid, ProfileCard, Head, Section, Loader } from "@/components";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import {
-  fetchCurrentAuthor
-} from "@/redux/slices/beats";
+import { fetchCurrentAuthor } from "@/redux/slices/beats";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function AuthorProfile() {
@@ -12,17 +10,11 @@ export default function AuthorProfile() {
   const { slug } = router.query;
 
   useEffect(() => {
-  dispatch(fetchCurrentAuthor(slug));
-} , [slug]);
+    dispatch(fetchCurrentAuthor(slug));
+  }, [slug]);
 
-const {currentAuthor } = useSelector((state) => state.beats);
-console.log("currentAuthor", currentAuthor);
-
-  // const currentAuthorBeats = useSelector(
-  //   (state) => state?.beats?.currentAuthorBeats
-  // );
-
-  //console.log("current", currentAuthorBeats);
+  const { currentAuthor, currentAuthorBeats, loadingcurrentAuthor } = useSelector((state) => state.beats);
+  console.log("currentAuthor", currentAuthor);
 
   return (
     <>
@@ -42,7 +34,12 @@ console.log("currentAuthor", currentAuthor);
             </div>
           </div>
         </Hero>
-         <BeatsShopSection />
+        <Section subClassName="padding-x-estilo2 padding-y-estilo2 gap-8 flex flex-col">
+          {
+            loadingcurrentAuthor ? <Loader/> : <NewBeatCardGrid beats={currentAuthorBeats} />
+          }
+        
+        </Section>
       </Main>
     </>
   );

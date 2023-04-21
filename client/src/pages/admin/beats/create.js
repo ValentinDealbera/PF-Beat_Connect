@@ -1,20 +1,47 @@
-import { SellerDashboardLayout, IslandDashboard, FaqsGrid } from "@/components";
+import {
+  SellerDashboardLayout,
+  IslandDashboard,
+  FormColumn,
+  FormContainer,
+  FormRow,
+  Input,
+  SwitchForm,
+  AdminCreateBeatForm,
+} from "@/components";
 
-export default function SellerDashboardOverview() {
+import {
+  handleInputChange,
+  handleSubmit,
+  validateForm,
+} from "@/data/formLogic";
+
+import { useState, useRef, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { adminPostUser } from "@/redux/slices/admin";
+import { useRouter } from "next/router";
+
+export default function AdminUserCreate() {
+  const childRef = useRef(null);
+
+  const handleExternalSubmit = () => {
+    childRef.current.submit();
+  };
+
   return (
     <>
       <main>
         <SellerDashboardLayout
           topBarMode="action"
-          topBarMessage="Editar beat"
+          topBarMessage="Crear Beat"
           topBarButtonLabel="Guardar cambios"
-          onClick={() => {
-            console.log("Click");
-          }}
+          onClick={handleExternalSubmit}
         >
-          <IslandDashboard className="flex flex-col gap-5 xl:gap-8 "></IslandDashboard>
+          <IslandDashboard className="flex flex-col gap-5 xl:gap-8 ">
+            <AdminCreateBeatForm mode="create" ref={childRef} />
+          </IslandDashboard>
         </SellerDashboardLayout>
       </main>
     </>
   );
 }
+

@@ -6,25 +6,28 @@ import axios from "axios";
 
 export default function HOC(props) {
   const router = useRouter();
-  const dispatch = useDispatch()
-  const { authSettings, isLogged, tokenValid } = useSelector((state) => state.client);
+  const dispatch = useDispatch();
+  const { authSettings, isLogged, tokenValid } = useSelector(
+    (state) => state.client
+  );
 
-  const hocIsWorking = true;
+  const hocIsWorking = false;
   const experimentalIsClient = isLogged;
   const experimentalIsAdmin = authSettings.superAdmin;
 
   const headers = {
-    "Authorization": `Bearer ${authSettings.token}`,
+    Authorization: `Bearer ${authSettings.token}`,
   };
 
   useEffect(() => {
-    axios.get('http://localhost:3001/api/auth/me', { headers })
+    axios
+      .get("http://localhost:3001/api/auth/me", { headers })
       .then((response) => {
         console.log(response.data);
-        dispatch(setTokenValid(true))
+        dispatch(setTokenValid(true));
       })
       .catch((error) => {
-        dispatch(setTokenValid(false))
+        dispatch(setTokenValid(false));
         console.log("Error:", error);
       });
     // if (Cookies.get("token") !== "true") {
@@ -46,22 +49,19 @@ export default function HOC(props) {
   } else if (router.pathname.startsWith("/admin")) {
     if (experimentalIsAdmin === false || tokenValid === false) {
       router.push("/");
-    } 
-    else {
+    } else {
       return <>{props.children}</>;
     }
   } else if (router.pathname.startsWith("/auth")) {
-    if(router.pathname === "/auth/logout"){
+    if (router.pathname === "/auth/logout") {
       return <>{props.children}</>;
     }
     if (isLogged === true) {
       router.push("/");
     } else {
-     
       return <>{props.children}</>;
     }
-  }
-  else {
+  } else {
     return <>{props.children}</>;
   }
 }

@@ -6,12 +6,19 @@ import Link from "next/link";
 
 
 export default function MiniCart() {
+
+
   const cartIds = useSelector((state) => state.cart.cart).map(
     (item) => item.id
   ) || [];
-  const cartItems = useSelector((state) => state.beats.publicItems).filter(
+  const cartItems = useSelector((state) => state?.beats?.publicItems).filter(
     (item) => cartIds.includes(item._id)
   ) || [];
+
+
+  const state = useSelector((state) => state);
+
+  console.log("state", state);
 
   //console.log("cartItems", cartItems, cartIds);
 

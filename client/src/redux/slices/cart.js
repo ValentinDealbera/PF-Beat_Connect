@@ -18,6 +18,9 @@ const cartSlice = createSlice({
     },
     deleteFromCart(state, action) {
       console.log("action", action.payload);
+      //verificamos que el item a eliminar este en el carrito
+      const isInCart = state.cart.some((item) => item.id === action.payload.id);
+      console.log(isInCart, action.payload.id, state.cart);
       state.cart = state.cart.filter((item) => item.id !== action.payload.id);
       toast.success("Se eliminó del carrito", {
         style: {

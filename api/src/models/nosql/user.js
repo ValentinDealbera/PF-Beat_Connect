@@ -26,6 +26,14 @@ const UserSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  bio: {
+    type: String,
+    default: ''
+  },
+  backImage: {
+    type: String,
+    default: ''
+  },
   image: {
     type: String,
     require: false,
@@ -44,6 +52,10 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  accessToken: {
+    type: String,
+    default: ''
+  },
   bougthBeats: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -57,5 +69,6 @@ const UserSchema = new mongoose.Schema({
     },
   ],
 });
+
 
 module.exports = mongoose.model("User", UserSchema);

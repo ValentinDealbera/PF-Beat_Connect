@@ -19,12 +19,12 @@ export default function HelpOverview() {
       <Head title={"Help Center"} description={"Head from about"} />
       <Main mode="transparent">
         <HelpContainer
-          title="Help Center"
-          paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tincidunt vulputate erat ut facilisis. In ultrices, metus non pellentesque tincidunt, elit sapien maximus ipsum, at vestibulum purus libero sit amet lacus."
+          title="Centro de ayuda"
+          paragraph="En nuestro centro de ayuda, nos esforzamos por proporcionar una experiencia de usuario excepcional a todos nuestros clientes. Estamos aquí para responder cualquier pregunta que puedas tener y ayudarte a solucionar cualquier problema que puedas encontrar al utilizar nuestra plataforma. "
         >
           <div className="gap-estilo1 flex flex-col ">
             <h1 className="text-titulo3-semibold text-red-700 ">
-              Frequent answered questions
+              Preguntas frecuentes
             </h1>
             <FaqsGrid />
             <div
@@ -42,7 +42,7 @@ export default function HelpOverview() {
         </HelpContainer>
         {modal && (
           <ModalPopUp>
-            <div className="relative flex max-h-full w-[70%] justify-center gap-4 overflow-hidden rounded-3xl bg-white p-10">
+            <div className="relative flex max-h-full w-full xl:w-[70%] justify-center gap-4 overflow-hidden rounded-3xl bg-white p-10">
               <Image
                 src="/icon/cross.svg"
                 width={15}
