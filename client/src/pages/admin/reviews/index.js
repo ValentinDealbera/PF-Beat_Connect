@@ -5,12 +5,12 @@ import {
   DynamicTable,
   ModalTables,
 } from "@/components";
-import * as React from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { adminGetReviews, adminDeleteReview, setCurrentEditReview } from "@/redux/slices/admin";
 import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
 
 export default function SellerDashboardOverview() {
   const { reviews } = useSelector((state) => state.admin);
@@ -18,10 +18,10 @@ export default function SellerDashboardOverview() {
   const dispatch = useDispatch();
 
   const router = useRouter();
-  const [reviewToDelete, setReviewToDelete] = React.useState(null);
+  const [reviewToDelete, setReviewToDelete] = useState(null);
   const headers = [
     "Beat",
-    "Id",
+    // "Id",
     "Title",
     "Rating",
     "Comment",
@@ -31,7 +31,7 @@ export default function SellerDashboardOverview() {
     "Delete",
   ];
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(adminGetReviews());
   }, []);
 
@@ -49,7 +49,7 @@ export default function SellerDashboardOverview() {
   const rows = reviewsData.map((item) => {
     return {
       title: item.title,
-      id: item.id,
+      // id: item._id,
       rating: item.rating,
       comment: item.comment,
       datecreated: item.dateCreated,
@@ -76,7 +76,7 @@ export default function SellerDashboardOverview() {
       ),
       delete: (
         <button
-          onClick={() => setReviewToDelete(item._id)}
+          onClick={() => setReviewToDelete(item)}
           className="background-primary-red-500 hover:background-primary-red-700 color-neutral-white 
             text-sm-semibold border-radius-estilo2 px-4 py-2"
         >
@@ -107,9 +107,11 @@ export default function SellerDashboardOverview() {
           name={"title"}
           element={reviewToDelete}
           onClose={handleCloseModal}
-          onConfirm={() => dispatch(adminDeleteReview(reviewToDelete))}
+          onConfirm={() => dispatch(adminDeleteReview(reviewToDelete._id))}
         />
       )}
     </>
   );
 }
+
+
