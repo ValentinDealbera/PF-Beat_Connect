@@ -32,11 +32,11 @@ export const handleSelectChange = (e, setSelected, setForm, prevForm) => {
   setForm({ ...prevForm, genre: e });
 };
 
-export const validateForm = (form, fieldsToValidate, validateMode) => {
-  console.log("validateForm", validateMode);
+export const validateForm = (form, fieldsToValidate, validateMode, mode) => {
+  console.log("validateForm", validateMode, mode);
   const errors =
     validateMode === "beat"
-      ? ValidationCreateBeat(form, fieldsToValidate)
+      ? ValidationCreateBeat(form, fieldsToValidate, mode)
       : validateMode === "review"
       ? ValidationCreateReview(form, fieldsToValidate)
       : validateMode === "user"
@@ -50,7 +50,7 @@ export const handleSubmit = async (props) => {
   //e.preventDefault();
   const formErrors =
     props.validateMode === "beat"
-      ? ValidationCreateBeat(props.form, "*")
+      ? ValidationCreateBeat(props.form, "*", props.mode)
       : props.validateMode === "review"
       ? ValidationCreateReview(props.form, "*")
       : props.validateMode === "user"

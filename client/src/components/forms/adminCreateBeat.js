@@ -69,10 +69,11 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
             setErrors: setErrors,
             validateMode: validateMode,
             formRef: formRef.current,
+            mode: mode
           });
           router.push("/admin/beats");
         } catch (error) {
-          console.error(error);
+          console.error(error.message);
         }
       };
 
@@ -82,7 +83,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
       },[]);
 
       useEffect(() => {
-        setErrors(validateForm(form, fieldsToValidate, validateMode));
+        setErrors(validateForm(form, fieldsToValidate, validateMode, mode));
       }, [form, fieldsToValidate]);
     
       useImperativeHandle(ref, () => ({
