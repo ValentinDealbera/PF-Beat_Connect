@@ -153,7 +153,7 @@ router.post("/", async (req, res) => {
       const audioStorageRef = ref(
         storage,
         `beats/${req.body.name}/audioMP3/${
-          req.files.audioMP3.name + " - " + dateTime
+          req.body.name
         }`
       );
 
@@ -175,7 +175,7 @@ router.post("/", async (req, res) => {
         const imageStorageRef = ref(
           storage,
           `beats/${req.body.name}/image/${
-            req.files.image.name + " - " + dateTime
+            req.body.name
           }`
         );
 
@@ -316,7 +316,7 @@ router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { userid } = req.headers;
-
+    const {image} = req.files
     const { name, priceAmount, review, softDelete, genre, relevance } =
       req.body;
     const updatedBeat = await beatModel.findById(id).populate("userCreator");
@@ -333,6 +333,27 @@ router.put("/:id", async (req, res) => {
     if (softDelete)
       updatedBeat.softDelete = softDelete === "true" ? true : false;
     if (genre) updatedBeat.genre = genre;
+    if (image) {
+      const imageData = fs.readFileSync(image.tempFilePath);
+      const imageStorageRef = ref(
+        storage,
+        `beats/${updatedBeat.name}/image/${
+          updatedBeat.name
+        }`
+      );
+
+      const imageMetadata = {
+        contentType: req.files.image.mimetype,
+      };
+
+      const imageSnapshot = await uploadBytesResumable(
+        imageStorageRef,
+        imageData,
+        imageMetadata
+      );
+      const downloadImageURL = await getDownloadURL(imageSnapshot.ref);
+      updatedBeat.image = downloadImageURL
+    }
     if (relevance)
       updatedBeat.relevance = relevance === "+" && updatedBeat.relevance + 1;
     updatedBeat.save();
@@ -345,6 +366,7 @@ router.put("/:id", async (req, res) => {
 router.put("/admin/:id", adminMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
+    const {image} = req.files
     const { name, priceAmount, review, softDelete, genre, relevance } =
       req.body;
     const updatedBeat = await beatModel.findById(id);
@@ -355,6 +377,27 @@ router.put("/admin/:id", adminMiddleware, async (req, res) => {
     if (softDelete)
       updatedBeat.softDelete = softDelete === "true" ? true : false;
     if (genre) updatedBeat.genre = genre;
+    if (image) {
+      const imageData = fs.readFileSync(image.tempFilePath);
+      const imageStorageRef = ref(
+        storage,
+        `beats/${updatedBeat.name}/image/${
+          updatedBeat.name
+        }`
+      );
+
+      const imageMetadata = {
+        contentType: req.files.image.mimetype,
+      };
+
+      const imageSnapshot = await uploadBytesResumable(
+        imageStorageRef,
+        imageData,
+        imageMetadata
+      );
+      const downloadImageURL = await getDownloadURL(imageSnapshot.ref);
+      updatedBeat.image = downloadImageURL
+    }
     if (relevance) updatedBeat.relevance = Number(relevance);
     updatedBeat.save();
     return res.status(200).json(updatedBeat);
