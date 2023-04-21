@@ -35,7 +35,7 @@ export const adminDeleteUser = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       console.log("data", data);
-      const response = await axios.delete(`${serverUrl}user/admin/${data}`, {
+      const response = await axios.delete(`${serverUrl}user/admin/${data._id}`, {
         headers: {
           admintoken: tokenAdmin,
         },
@@ -230,6 +230,7 @@ export const adminEditBeat = createAsyncThunk(
         {
           headers: {
             admintoken: tokenAdmin,
+            "Content-Type": "multipart/form-data",
           },
         }
       );
@@ -386,7 +387,7 @@ const beatsSlice = createSlice({
       //Extra reducers para adminGetReviews
       .addCase(adminGetReviews.fulfilled, (state, action) => {
         console.log("action.payload ok", action.payload);
-        state.reviews = action.payload.reviewResponse;
+        state.reviews = Array.isArray(action.payload.userResponse) ? action.payload.userResponse : [];
         toast.success("Reviews cargadas correctamente", {
           style: {
             background: "#F0FFF0",
