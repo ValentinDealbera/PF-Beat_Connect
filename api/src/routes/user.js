@@ -106,7 +106,8 @@ router.put("/:id", async (req, res) => {
   const { userid } = req.headers;
   try {
     const { id } = req.params;
-    const { image, backImage } = req.files;
+    const image = req.files ? req.files.image : null
+    const backImage = req.files ? req.files.backImage : null
     const {
       mpcode,
       seller,
@@ -241,7 +242,8 @@ router.put("/:id", async (req, res) => {
 router.put("/admin/:id", adminMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
-    const { image, backImage } = req.files;
+      const image = req.files ? req.files.image : null
+      const backImage = req.files ? req.files.backImage : null
     const {
       seller,
       admin,
