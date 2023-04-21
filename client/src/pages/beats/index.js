@@ -24,6 +24,7 @@ export default function Beats() {
   let visiblePages = [];
   for (let i = pages.current - 2; i <= pages.current + 2; i++) {
     if (i > 0 && i <= pages.limit) {
+      console.log(pages);
       visiblePages.push(i);
     }
   }
@@ -53,8 +54,9 @@ export default function Beats() {
         </Hero>
         <BeatsShopSection />
         <button
-          onClick={() => dispatch(fetchBeats(pages.current + 1))}
-          disabled={pages.current === pages.limit}
+          onClick={() => {dispatch(fetchBeats({page: pages.current + 1}))
+          console.log('AAAAAAAAAAAAAAA',pages)}}
+          disabled={false}
         >
           Next
         </button>
@@ -62,7 +64,7 @@ export default function Beats() {
           {visiblePages.map((page) => (
             <button
               key={page}
-              onClick={() => dispatch(fetchBeats(page))}
+              onClick={() => dispatch(fetchBeats({page: page}))}
               disabled={pages.current === page}
               className={pages.current === page ? "text-red-800" : "text-black"}
             >
@@ -71,7 +73,7 @@ export default function Beats() {
           ))}
         </div>
         <button
-          onClick={() => dispatch(fetchBeats(pages.current - 1))}
+          onClick={() => dispatch(fetchBeats({page: pages.current - 1}))}
           disabled={pages.current === 1}
         >
           Prev

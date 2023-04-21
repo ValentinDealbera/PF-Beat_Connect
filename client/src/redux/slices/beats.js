@@ -29,7 +29,7 @@ const initialState = {
 
 export const fetchBeats = createAsyncThunk(
   "beats/fetchBeats",
-  async ({ page = 1, minPrice = 100, maxPrice }) => {
+  async ({ page = 1, minPrice = 0, maxPrice }) => {
 
     const queryParameters = {
       page: page,
@@ -50,7 +50,7 @@ export const fetchBeats = createAsyncThunk(
     const response = await axios.get(
       `${serverUrl}beats?${queryString.substr(1)}`
     );
-
+      console.log('DATA DATA DATA', response.data);
     return {
       docs: response.data.docs,
       next: response.data.nextPage,
