@@ -386,8 +386,8 @@ const beatsSlice = createSlice({
       //--------------------
       //Extra reducers para adminGetReviews
       .addCase(adminGetReviews.fulfilled, (state, action) => {
-        console.log("action.payload ok", action.payload);
-        state.reviews = Array.isArray(action.payload.userResponse) ? action.payload.userResponse : [];
+        console.log("action.payload ok review", action.payload);
+        state.reviews = Array.isArray(action.payload.reviewResponse) ? action.payload.reviewResponse : [];
         toast.success("Reviews cargadas correctamente", {
           style: {
             background: "#F0FFF0",
@@ -499,7 +499,8 @@ const beatsSlice = createSlice({
             color: "#00B300",
           },
         });
-        state.beats.push(action.payload.beatResponse);
+        state.beats = action.payload.beatResponse;
+        console.log("state.beats", state.beats);
       })
       .addCase(adminPostBeat.rejected, (state, action) => {
         console.log("action.payload error", action.payload);

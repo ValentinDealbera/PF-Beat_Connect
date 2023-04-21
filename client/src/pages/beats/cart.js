@@ -20,29 +20,29 @@ export default function Carrito() {
   const router = useRouter();
   const dispatch = useDispatch();
   //Obtenemos los items del carrito
-  const cartIds =
-    useSelector((state) => state.cart.cart).map((item) => item.id) || [];
   const { publicItems } = useSelector((state) => state?.beats) || [];
-  const cartItems =
-    useSelector((state) => state.beats.publicItems).filter((item) =>
-      cartIds.includes(item._id)
-    ) || [];
+  const cartItems = useSelector((state) => state?.cart.cart) || [];
   console.log(cartItems, publicItems);
 
   const user = useSelector((state) => state.client.client._id);
 
-  //Creamos un array de objetos que reuna el autor del beat y el precio total de sus beats
+  //Creamos un array de objetos que reuna el autor del beat y el precio total de sus beats, tambien su foto
   const precio_por_autor = [];
 
   cartItems.forEach((item) => {
-    const { userCreator, priceAmount } = item;
-    const index = precio_por_autor.findIndex(
-      (item) => item.userCreator._id === userCreator._id
-    );
+    const authorId = item.beat.userCreator._id
+      ? item.beat.userCreator._id
+      : item.beat.userCreator;
+    const author = item.beat.userCreator.firstName
+      ? `${item.beat.userCreator.firstName} ${item.beat.userCreator.lastName}`
+      : item.beat.userCreator;
+    const price = item.beat.priceAmount;
+    const image = item.beat.userCreator.image;
+    const index = precio_por_autor.findIndex((obj) => obj.authorId === authorId);
     if (index === -1) {
-      precio_por_autor.push({ userCreator, priceAmount });
+      precio_por_autor.push({ authorId, author, price, image });
     } else {
-      precio_por_autor[index].priceAmount += priceAmount;
+      precio_por_autor[index].price += price;
     }
   });
 
@@ -53,22 +53,22 @@ export default function Carrito() {
   //En items mandmaos nombre e imagen en un div
   const rows = cartItems.map((item) => {
     return {
-      id: item._id,
+      id: item.beat._id,
       item: (
         <div className="flex items-center gap-4">
           <Image
-            src={item.image}
+            src={item.beat.image}
             width={50}
             height={50}
             className="aspect-square rounded-full"
           />
-          <h3 className="text-base-medium">{item.name}</h3>
+          <h3 className="text-base-medium">{item.beat.name}</h3>
         </div>
       ),
-      price: item.priceAmount,
-      author: `${item.userCreator.firstName} ${item.userCreator.lastName}`,
+      price: item.beat.priceAmount,
+      author: `${item.beat.userCreator.firstName} ${item.beat.userCreator.lastName}`,
       action: (
-        <button onClick={() => dispatch(deleteFromCart({ id: item._id }))}>
+        <button onClick={() => dispatch(deleteFromCart({ id: item.beat._id }))}>
           Eliminar
         </button>
       ),
@@ -79,8 +79,12 @@ export default function Carrito() {
   //mandar buyer, que es el id del usuario que esta comprando, obtener dinamicaente
   //mandar seller que es el id del usuario que esta vendiendo, obtener dinamicamente con precio_por_autor
 
-  const idsOfSellers = precio_por_autor.map((item) => item.userCreator._id);
+  const idsOfSellers = precio_por_autor.map((item) => item.authorId);
   const idsOfBuyer = user;
+
+//creamos array de ids de los beats que queremos comprar
+  const cartIds = cartItems.map((item) => item.beat._id);
+
 
   const toPay = {
     cart: cartIds,
@@ -90,6 +94,12 @@ export default function Carrito() {
 
   const handlePayment = () => {
     console.log("pagar");
+    console.log(toPay);
+if(toPay.buyer === undefined){
+  return alert("Debes iniciar sesion para poder comprar")
+
+}
+
     axios
       .post(`${serverUrl}cart/pay`, toPay, {
         headers: {
@@ -105,6 +115,8 @@ export default function Carrito() {
         console.log(err);
       });
   };
+
+console.log("ppppp",precio_por_autor)
 
   return (
     <>
@@ -125,22 +137,22 @@ export default function Carrito() {
                   <div>
                     <div
                       className="flex items-center justify-between gap-4"
-                      key={item._id}
+                     
                     >
                       <div className="flex items-center gap-1">
                         <Image
-                          src={item.userCreator.image}
+                          src={item.image}
                           width={50}
                           height={50}
                           className="rounded-full"
                         />
                         <h3 className="text-base-medium">
-                          {item.userCreator.firstName}{" "}
-                          {item.userCreator.lastName}
+                          {item.author}
+                    
                         </h3>
                       </div>
                       <span className="text-base-semibold text-red-700">
-                        ${item.priceAmount}
+                        ${item.price}
                       </span>
                     </div>
                     <hr className="mt-4 border-slate-200" />
@@ -152,7 +164,7 @@ export default function Carrito() {
                   <h3 className="text-base-light">Subtotal</h3>
                   <span className="text-base-semibold text-red-700">
                     $
-                    {cartItems.reduce((acc, item) => acc + item.priceAmount, 0)}
+                    {cartItems.reduce((acc, item) => acc + item.beat.priceAmount, 0)}
                   </span>
                 </div>
                 <div className="flex w-full items-center justify-between">
@@ -163,7 +175,7 @@ export default function Carrito() {
                   <h3 className="text-base-semibold">Total</h3>
                   <span className="text-base-semibold text-red-700">
                     $
-                    {cartItems.reduce((acc, item) => acc + item.priceAmount, 0)}
+                    {cartItems.reduce((acc, item) => acc + item.beat.priceAmount, 0)}
                   </span>
                 </div>
               </div>
