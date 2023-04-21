@@ -27,17 +27,17 @@ export const selectFilteredBeats = (state) => {
     (BpmFilter.max === 0 || BpmFilter.max === undefined) &&
     (sorter === "default" || sorter === undefined || sorter === "" || sorter === null) 
   ) {
-    console.log("no hay filtros", sorter);
+   
     return activeItems;
   } else {
-    console.log("hay filtros", sorter, priceFilter, BpmFilter, genresFilter, typesFilter, searchFilter, beatsDisplayMode );
+    
   }
 
   if(beatsDisplayMode !== 0 ) {
     return activeItems;
   }
   let activeBeats = activeItems 
-console.log("activeBeats", activeBeats);
+
   if (activeBeats.length <= 0) {
     return activeBeats;
   }
@@ -52,7 +52,7 @@ console.log("activeBeats", activeBeats);
       });
     }
 
-console.log("activeBeats paso 1", activeBeats);
+
 
     // Filtrar por géneros
     if (genresFilter.length > 0) {
@@ -63,7 +63,7 @@ console.log("activeBeats paso 1", activeBeats);
       });
     }
 
-    console.log("activeBeats paso 2", activeBeats);
+
 
     //Cramos un filtro para precio maximo y minimo
     if (priceFilter) {
@@ -76,7 +76,7 @@ console.log("activeBeats paso 1", activeBeats);
       });
     }
 
-    console.log("activeBeats paso 3", activeBeats);
+
 
     //Cramos un filtro para BPM maximo y minimo
     if (BpmFilter) {
@@ -89,7 +89,6 @@ console.log("activeBeats paso 1", activeBeats);
       });
     }
 
-    console.log("activeBeats paso 4", activeBeats);
 
     //Hacemos sort segun lo que el usuario elija, dejamos el default para lo ultimo en el if
     if (sorter) {
@@ -125,10 +124,10 @@ console.log("activeBeats paso 1", activeBeats);
     filteredBeats = activeBeats;
 
     if (filteredBeats.length > 0) {
-      console.log("Hay beats que mostrar", filteredBeats);
+
       return filteredBeats;
     } else {
-      console.log("No hay beats que mostrar", filteredBeats);
+ 
       toast.error("No hay beats que mostrar", {
         style: {
           background: "#FFF0F0",
