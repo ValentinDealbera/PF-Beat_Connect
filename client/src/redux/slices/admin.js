@@ -185,7 +185,7 @@ export const adminGetBeats = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       console.log("data", data);
-      const response = await axios.get(`${serverUrl}beats`);
+      const response = await axios.get(`${serverUrl}beats?limit=100`);
       const beatResponse = response.data.docs;
 
       return  { beatResponse };

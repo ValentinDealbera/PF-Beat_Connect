@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 export default function SellerDashboardOverview() {
- // const usersData = usuariosDos;
+ // const usersData = usuariosDos
 
   const router = useRouter();
   const [elementToDelete, setElementToDelete] = useState(null);
