@@ -31,10 +31,12 @@ export default function BeatFilters() {
   const [sort, setSort] = useState("");
   const [dropDownFilter, setDropDownFilter] = useState(false);
   const [childFilterIndex, setChildFilterIndex] = useState(0);
+
   //const mode = useSelector((state) => state?.beats?.beatsDisplayMode);
   const beats = useSelector((state) => state.beats.activeItems);
 
   const genres = useSelector((state) => state.filters.genres);
+  const filterObj = useSelector((state) => state.filters);
   const { sorter, sorterValues } = useSelector((state) => state?.filters);
 
   const router = useRouter();
@@ -49,34 +51,51 @@ export default function BeatFilters() {
 
   const sortArr = sorterValues;
 
+  //Primer pedido
   useEffect(() => {
     dispatch(fetchGenres());
   }, []);
 
+  //Sorter
   useEffect(() => {
     dispatch(setSorter(sort));
   }, [sort]);
 
-  useEffect(() => {
-    const maxPrice = beats.reduce((acc, beat) => {
-      return beat.priceAmount > acc ? beat.priceAmount : acc;
-    }, 0);
-    setPrices({ min: 0, max: maxPrice });
-
-    const maxBPM = beats.reduce((acc, beat) => {
-      return beat.BPM > acc ? beat.BPM : acc;
-    }, 0);
-
-    setBPM({ min: 0, max: maxBPM });
-  }, [beats]);
-
+  //Filtro Precio
   useEffect(() => {
     dispatch(setPriceFilter(prices));
   }, [prices, dispatch]);
 
+  //Filtro BPM
   useEffect(() => {
     dispatch(setBpmFilter(BPM));
-  }, [BPM, dispatch]);
+  }, [BPM.min, dispatch]);
+
+  //despachador
+  useEffect(() => {
+    dispatch(fetchBeats({
+      minPrice: prices.min,
+      maxPrice: prices.max,
+      minBPM: BPM.min,
+      maxBPM: BPM.max,
+    }));
+  }, [filterObj, dispatch, prices.min, prices.max, BPM.min, BPM.max]);
+
+
+
+
+  // useEffect(() => {
+  //   const maxPrice = beats.reduce((acc, beat) => {
+  //     return beat.priceAmount > acc ? beat.priceAmount : acc;
+  //   }, 0);
+  //   setPrices({ min: 0, max: maxPrice });
+
+  //   const maxBPM = beats.reduce((acc, beat) => {
+  //     return beat.BPM > acc ? beat.BPM : acc;
+  //   }, 0);
+
+  //   setBPM({ min: 0, max: maxBPM });
+  // }, [beats]);
 
   const generos = genres;
 

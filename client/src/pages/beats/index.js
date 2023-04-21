@@ -24,7 +24,7 @@ export default function Beats() {
   let visiblePages = [];
   for (let i = pages.current - 2; i <= pages.current + 2; i++) {
     if (i > 0 && i <= pages.limit) {
-      console.log(pages);
+
       visiblePages.push(i);
     }
   }
@@ -55,7 +55,7 @@ export default function Beats() {
         <BeatsShopSection />
         <button
           onClick={() => {dispatch(fetchBeats({page: pages.current + 1}))
-          console.log('AAAAAAAAAAAAAAA',pages)}}
+       }}
           disabled={pages.current === visiblePages[visiblePages.length -1]}
           className={pages.current === visiblePages[visiblePages.length -1] ? "text-red-800" : "text-black"}
         >

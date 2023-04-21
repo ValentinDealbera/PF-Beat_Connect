@@ -43,16 +43,7 @@ export const selectFilteredBeats = (state) => {
     // console.log("no hay filtros", sorter);
     // return activeItems;
   } else {
-    console.log(
-      "hay filtros",
-      sorter,
-      priceFilter,
-      BpmFilter,
-      genresFilter,
-      typesFilter,
-      searchFilter,
-      beatsDisplayMode
-    );
+
   }
 
   try {

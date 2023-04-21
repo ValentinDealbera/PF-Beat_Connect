@@ -77,6 +77,7 @@ const filtersSlice = createSlice({
 
     setBpmFilter(state, action) {
       state.BpmFilter = action.payload;
+      console.log("BPM FILTER", state.BpmFilter);
     },
     setSorter(state, action) {
       state.sorter = action.payload;

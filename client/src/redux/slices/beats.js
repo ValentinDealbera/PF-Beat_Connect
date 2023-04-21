@@ -55,19 +55,19 @@ export const fetchBeats = createAsyncThunk(
       // Agrega aquí otros parámetros de consulta que quieras incluir
     };
 
-    let queryString = "?";
+    let queryString = "";
     Object.entries(queryParameters).forEach(([key, value]) => {
       if (value !== null && value !== undefined) {
-        queryString += `&${key}=${encodeURIComponent(value)}`;
+        queryString += `?&${key}=${encodeURIComponent(value)}`;
       }
     });
 
-    console.log("fetchBeats", `${serverUrl}beats?${queryString.substr(1)}`);
+    console.log("fetchBeats xxxx", `${serverUrl}beats?${queryString.substr(1)}`);
 
     const response = await axios.get(
       `${serverUrl}beats?${queryString.substr(1)}`
     );
-    console.log("DATA DATA DATA", response.data);
+
     return {
       docs: response.data.docs,
       next: response.data.nextPage,
@@ -210,7 +210,7 @@ const beatsSlice = createSlice({
         state.publicBeatsFetchStatus = false;
       })
       .addCase(fetchBeats.fulfilled, (state, action) => {
-        console.log("fetch beats fullfiled", action.payload);
+
         if (
           !Array.isArray(action.payload.docs) ||
           action.payload.docs.length === 0 ||
@@ -279,7 +279,6 @@ const beatsSlice = createSlice({
       .addCase(fetchUserReviews.fulfilled, (state, action) => {
         state.activeReviewDetail = action.payload;
 
-        console.log(action.payload);
       })
       .addCase(fetchUserReviews.rejected, (state, action) => {
         console.error("fetch error");

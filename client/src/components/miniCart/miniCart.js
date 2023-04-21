@@ -18,7 +18,7 @@ export default function MiniCart() {
 
   const state = useSelector((state) => state);
 
-  console.log("state", state);
+
 
   //console.log("cartItems", cartItems, cartIds);
 
