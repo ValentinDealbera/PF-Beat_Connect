@@ -56,7 +56,8 @@ export default function Beats() {
         <button
           onClick={() => {dispatch(fetchBeats({page: pages.current + 1}))
           console.log('AAAAAAAAAAAAAAA',pages)}}
-          disabled={false}
+          disabled={pages.current === visiblePages[visiblePages.length -1]}
+          className={pages.current === visiblePages[visiblePages.length -1] ? "text-red-800" : "text-black"}
         >
           Next
         </button>
@@ -75,6 +76,7 @@ export default function Beats() {
         <button
           onClick={() => dispatch(fetchBeats({page: pages.current - 1}))}
           disabled={pages.current === 1}
+          className={pages.current === 1 ? "text-red-800" : "text-black"}
         >
           Prev
         </button>
