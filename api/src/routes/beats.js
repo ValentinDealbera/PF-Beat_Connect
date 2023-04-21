@@ -22,7 +22,7 @@ const storage = getStorage();
 
 router.get("/", async (req, res) => {
   const page = req.query.page || 1;
-  const limit = req.query.limit || 2;
+  const limit = req.query.limit || 5;
   const { name, priceAmount, BPM, genre } = req.query;
 
   let sortBy;
