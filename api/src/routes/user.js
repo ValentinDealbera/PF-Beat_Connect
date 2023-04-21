@@ -7,6 +7,7 @@ const ReviewModel = require("../models/nosql/reviews")
 const axios = require('axios')
 const {v4} = require('uuid')
 const uuid4 = v4()
+const bcrypt = require('bcrypt')
 const {
   OK,
   CREATED,
@@ -92,11 +93,11 @@ router.put("/:id", async (req, res) => {
   const {userid} = req.headers
   try {
     const { id } = req.params;
-  const { seller, admin, soft } = req.body;
-  const user = await UserModel.findById(id)
+    const {mpcode ,seller, admin, soft, username, firstName, lastName, email, bio, password, bougthBeats } = req.body;
+  const userin = await UserModel.findById(id)
   const userAux = await UserModel.findById(userid)
-  if (!user) return res.status(400).json({message: 'El usuario que quieres actualizar no existe'}) 
-  if (user.email !== userAux.email) return res.status(400).json({message: 'No puedes actualizar otro usuario!'})
+  if (!userin) return res.status(400).json({message: 'El usuario que quieres actualizar no existe'}) 
+  if (userin.email !== userAux.email) return res.status(400).json({message: 'No puedes actualizar otro usuario!'})
   if (
     (seller && seller !== "VENDEDOR") ||
     (admin && admin !== "ADMIN") ||
@@ -104,70 +105,48 @@ router.put("/:id", async (req, res) => {
   ) {
     return res.status(BAD_REQUEST).send(ALL_NOT_OK);
   }
-
-  if (id && seller === "VENDEDOR" && req.body.mpcode) {
-    try {
-      const code = req.body.mpcode
-      const userId = await getUserId(id);
-      const body = {
-        client_id: 8125390419773749,
-        client_secret: 'QkAwOW6BAQthSH0pOzOmoc9aPumLLKRi',
-        code: code,
-        grant_type: 'authorization_code',
-        redirect_uri: 'https://pf-beat-connect.vercel.app/'
-      }
-      const access_token = await axios.post(`https://api.mercadopago.com/oauth/token`, body)
-      console.log(access_token)
-      if (userId) {
-        userId.accessToken = access_token.data.access_token
-        userId.isSeller = true;
-        await userId.save();
-       return res.status(OK).send(ALL_OK);
-      } else {
-        return res.status(NOT_FOUND).send(USER_NOT_FOUND);
-      }
-    } catch (err) {
-      res.status(SERVER_ERROR).send(err.message);
+  if (soft || admin || seller || username || firstName || lastName || email || bio || password || bougthBeats){
+    const user = await UserModel.findById(id)
+    if (username) user.username = username
+    if (firstName) user.firstName = firstName
+    if (lastName) user.lastName = lastName
+    if (email) user.email = email
+    if (bio) user.bio = bio
+    if (password) {
+    const saltRounds = 10;
+    const hashedPassword = bcrypt.hashSync(password, saltRounds);
+    user.password = hashedPassword
     }
-  }
-  if (id && admin === "ADMIN") {
-    try {
-      const userId = await getUserId(id);
-      if (userId) {
-        userId.superAdmin = true;
-        await userId.save();
-        return res.status(OK).send(ALL_OK);
-      } else {
-        return res.status(NOT_FOUND).send(USER_NOT_FOUND);
-      }
-    } catch (err) {
-      return res.status(SERVER_ERROR).send(ALL_NOT_OK);
-    }
-  }
-  if (id && soft === "DELETE") {
-    try {
-      const userId = await getUserId(id);
-      if (userId) {
-        if (userId.softDelete === false) {
-          userId.softDelete = true;
-          await userId.save();
-          return res.status(OK).send(ALL_OK);
-        } else {
-          userId.softDelete = false;
-          await userId.save();
-          return res.status(OK).send(ALL_OK);
+    if (seller && mpcode) {
+      try {
+        const code = req.body.mpcode
+        const userId = await getUserId(id);
+        const body = {
+          client_id: 8125390419773749,
+          client_secret: 'QkAwOW6BAQthSH0pOzOmoc9aPumLLKRi',
+          code: code,
+          grant_type: 'authorization_code',
+          redirect_uri: 'https://pf-beat-connect.vercel.app/'
         }
+        const access_token = await axios.post(`https://api.mercadopago.com/oauth/token`, body)
+        if (userId) {
+          userId.accessToken = access_token.data.access_token
+          userId.isSeller = true;
+          await userId.save();
+         return res.status(OK).send(ALL_OK);
+        } else {
+          return res.status(NOT_FOUND).send(USER_NOT_FOUND);
+        }
+      } catch (err) {
+        res.status(SERVER_ERROR).send(err.message);
       }
-    
-    } catch (err) {
-      return res.status(SERVER_ERROR).send(ALL_NOT_OK);
     }
-  }
-   else return res.status(500).json({message: 'el usuario no se ha modificado'})
-
+    user.save()
+    res.status(200).json(user)
+}
+  else return res.status(500).json({message: 'el usuario no se ha modificado'})
   } catch (error) {
     return res.status(SERVER_ERROR).json({message: error.message});
-    
   }
   
 });
@@ -175,64 +154,36 @@ router.put("/:id", async (req, res) => {
 router.put("/admin/:id", adminMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
-  const { seller, admin, soft } = req.body;
+  const { seller, admin, soft, username, firstName, lastName, email, bio, password, bougthBeats } = req.body;
   if (
     (seller && seller !== "VENDEDOR") ||
     (admin && admin !== "ADMIN") ||
     (soft && soft !== "DELETE")
   ) {
-    return res.status(BAD_REQUEST).send(ALL_NOT_OK);
+    return res.status(BAD_REQUEST).send('seller debe ser "VENDEDOR", admin debe ser "ADMIN" o soft debe ser "DELETE');
   }
 
-  if (id && seller === "VENDEDOR") {
-    try {
-      const userId = await getUserId(id);
-      if (userId) {
-        userId.isSeller = true;
-        await userId.save();
-        return res.status(OK).send(ALL_OK);
-      } else {
-        return res.status(NOT_FOUND).send(USER_NOT_FOUND);
-      }
-    } catch (err) {
-      return res.status(SERVER_ERROR).send(ALL_NOT_OK);
+  if (soft || admin || seller || username || firstName || lastName || email || bio || password || bougthBeats){
+    const user = await UserModel.findById(id)
+    if (username) user.username = username
+    if (firstName) user.firstName = firstName
+    if (lastName) user.lastName = lastName
+    if (email) user.email = email
+    if (bio) user.bio = bio
+    if (password) {
+    const saltRounds = 10;
+    const hashedPassword = bcrypt.hashSync(password, saltRounds);
+    user.password = hashedPassword
     }
-  }
-  if (id && admin === "ADMIN") {
-    try {
-      const userId = await getUserId(id);
-      if (userId) {
-        userId.superAdmin = true;
-        await userId.save();
-        return res.status(OK).send(ALL_OK);
-      } else {
-        return res.status(NOT_FOUND).send(USER_NOT_FOUND);
-      }
-    } catch (err) {
-      return res.status(SERVER_ERROR).send(ALL_NOT_OK);
-    }
-  }
-
-  if (id && soft === "DELETE") {
-    try {
-      const userId = await getUserId(id);
-      if (userId) {
-        if (userId.softDelete === false) {
-          userId.softDelete = true;
-          await userId.save();
-          return res.status(OK).send(ALL_OK);
-        } else {
-          userId.softDelete = false;
-          await userId.save();
-          return res.status(OK).send(ALL_OK);
-        }
-      }
-    } catch (err) {
-      return res.status(SERVER_ERROR).send(ALL_NOT_OK);
-    }
+    if (seller) user.isSeller = !user.isSeller;
+    if (admin) user.superAdmin = !user.superAdmin
+    if (soft) user.softDelete = !user.softDelete
+    console.log(user);
+    user.save()
+    res.status(200).json(user)
   }
   else return res.status(500).json({message: 'el usuario no se ha modificado'})
-  } catch (error) {
+} catch (error) {
     return res.status(SERVER_ERROR).json({message: error.message});
     
   }
