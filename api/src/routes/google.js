@@ -39,7 +39,8 @@ function isLoggedIn(req, res, next) {
 }
 
 router.get('/', (req, res) => {
-  res.send('<a href="/api/google/auth/google">Authenticate with Google</a>');
+  //res.send('<a href="/api/google/auth/google">Authenticate with Google</a>');
+  res.redirect('/api/google/auth/google');
 });
 
 router.get('/auth/google',
@@ -48,7 +49,7 @@ router.get('/auth/google',
 
 router.get( '/auth/google/callback',
   passport.authenticate( 'google', {
-    successRedirect: '/api/google/protected',
+    successRedirect: 'http://localhost:3000/',
     failureRedirect: '/api/google/auth/google/failure'
   })
 );
