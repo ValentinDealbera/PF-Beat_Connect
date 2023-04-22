@@ -2,8 +2,6 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { toast } from "sonner";
 import { useSelector } from "react-redux"; // importa el hook useSelector
 
-
-
 const initialState = {
   cart: [],
 };
@@ -19,9 +17,9 @@ const cartSlice = createSlice({
     deleteFromCart(state, action) {
       console.log("action", action.payload);
       //verificamos que el item a eliminar este en el carrito
-      const isInCart = state.cart.some((item) => item.id === action.payload.id);
+      const isInCart = state.cart.some((item) => item.beat._id === action.payload.id);
       console.log(isInCart, action.payload.id, state.cart);
-      state.cart = state.cart.filter((item) => item.id !== action.payload.id);
+      state.cart = state.cart.filter((item) => item.beat._id !== action.payload.id);
       toast.success("Se eliminó del carrito", {
         style: {
           background: "#ECFDF3",
@@ -36,11 +34,11 @@ export const { setCart, deleteFromCart } = cartSlice.actions;
 export default cartSlice.reducer;
 
 export const addToCart = (obj) => async (dispatch, getState) => {
-const state = getState().cart;
-  const isInCart = state.cart.some((item) => item.id === obj.id);
-console.log(obj, isInCart)
+  const state = getState().cart;
+  const isInCart = state.cart.some((item) => item.beat._id === obj.beat._id);
+  console.log(obj, isInCart);
   if (isInCart === true) {
-    console.log(state)
+    console.log(state);
     console.log("Ya esta en el carrito");
     toast.success("Ya esta en el carrito", {
       style: {
@@ -49,8 +47,7 @@ console.log(obj, isInCart)
       },
     });
   } else {
-
-    const {client} = getState();
+    const { client } = getState();
 
     console.log("client", client.client._id, obj.authorId);
     if (client.client._id == obj.authorId) {
