@@ -6,21 +6,29 @@ import { fetchBeats, fetchUserBeats } from "@/redux/slices/beats";
 
 const initialState = {
   activeEditingItem: null,
-  tokenValid: false,
+
   isLogged: false,
+
   authSettings: {
     isSeller: false,
     superAdmin: false,
     token: "",
     accessToken: "",
+    loginMethod: "",
+    tokenValid: false,
   },
   client: {
-    name: "Placeholder",
-    bio: "Status",
+    name: "",
+    bio: "",
     profilePicture: "/images/profile-picture.png",
-    email: "Email",
+    email: "",
+    _id: "",
+    firstName: "",
+    lastName: "",
+    userName: "",
   },
 };
+
 
 export const loginSystem = createAsyncThunk(
   "client/loginSystem",
@@ -165,15 +173,40 @@ const cartSlice = createSlice({
         userName: action.payload.userName,
       };
     },
+    //Establecemos el estado de la sesión de google
+    setGoogleSuccessful(state, action) {
+      console.log("setGoogleSuccessful", action.payload);
+      state.isLogged = true;
+      state.authSettings.tokenValid = true;
+      state.client._id = action.payload.clientId;
+      state.authSettings.googleSessionID = action.payload.googleSessionID;
+    },
+    //Establecemos los datos del cliente
+    setClientData(state, action) {
+      console.log("setClientData", action.payload);
+      state.client = action.payload;
+    },  
     setTokenValid(state, action) {
-      state.tokenValid = action.payload;
+      state.authSettings.tokenValid = action.payload;
     },
     setAuthSettings(state, action) {
-      state.authSettings = sLogged = true;
+      state.authSettings = isLogged = true;
     },
     resetReducer(state, action) {
       state.client = {};
       state.isLogged = false;
+      state.authSettings = {
+        isSeller: false,
+        superAdmin: false,
+        token: "",
+        tokenValid: false,
+        googleSessionID: "",
+        accessToken: "",
+        loginMethod: "",
+      };
+    },
+    setLoginMethod(state, action) {
+      state.authSettings.loginMethod = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -208,7 +241,7 @@ const cartSlice = createSlice({
         console.log("loging...");
       })
       .addCase(loginSystem.fulfilled, (state, action) => {
-        state.tokenValid = true;
+        state.authSettings.tokenValid = true;
         state.client = {
           bio: action.payload.newClient.bio,
           profilePicture: action.payload.newClient.profilePicture,
@@ -283,10 +316,10 @@ const cartSlice = createSlice({
       //Extra reducer para el beat que esta en el detalle
       .addCase(fetchCurrentBeat.pending, (state, action) => {
         console.log("fetching current beat");
-       // toast("Cargando beat...");
+        // toast("Cargando beat...");
       })
       .addCase(fetchCurrentBeat.fulfilled, (state, action) => {
-         state.activeEditingItem = action.payload.currentBeat;
+        state.activeEditingItem = action.payload.currentBeat;
         //console.log("current beat", state.activeEditingItem);
         // toast.success("Se cargó correctamente", {
         //   style: {
@@ -339,5 +372,8 @@ export const {
   resetReducer,
   setAuthSettings,
   setReviewPostStatus,
+  setLoginMethod,
+  setGoogleSuccessful,
+  setClientData,
 } = cartSlice.actions;
 export default cartSlice.reducer;

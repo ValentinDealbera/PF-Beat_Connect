@@ -15,10 +15,19 @@ async function(accessToken, refreshToken, profile, done) {
         if(user){
             return done(null, user)
         }else{
+          //separar el nombre y el apellido en dos campos
+          const name = profile.displayName.split(" ");
+          const firstName = name[0];
+          const lastName = name[1];
+          //nombre + id
+          const username = firstName + profile.id;
             const newUser=
             {
                 googleId: profile.id, 
-                name: profile.displayName,
+              //  name: profile.displayName,
+                firstName: firstName,
+                lastName: lastName,
+                username: username,
                 image: profile.photos[0].value,
                 email: profile.emails[0].value
             }
@@ -39,6 +48,7 @@ passport.serializeUser(async function (user, done) {
       // Guardar el googleId del usuario en la sesión del usuario
       // Puedes utilizar cualquier campo único del usuario para identificar la sesión en la base de datos
       // En este caso, se utiliza el googleId del usuario
+     
       done(null, user.googleId);
     } catch (err) {
       done(err);

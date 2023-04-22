@@ -54,6 +54,10 @@ export default function UserBoxNav({ children, id }) {
 
   const { isLogged } = useSelector((state) => state.client);
 
+  useEffect(() => {
+    console.log("isLogged", isLogged);
+  }, [isLogged]);
+
   return (
     <>
       <div className=" flex flex-row items-center justify-center gap-4 align-middle">

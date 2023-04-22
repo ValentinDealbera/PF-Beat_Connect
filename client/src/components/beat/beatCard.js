@@ -15,6 +15,7 @@ import {
 
 export default function BeatCard({ beat, variant }) {
   const dispatch = useDispatch();
+  try{
 const { _id } = useSelector((state) => state.client.client);
 
 
@@ -61,4 +62,9 @@ if(fromClient) console.log("fromClient", _id, beat.userCreator._id);
 
     </>
   );
+} catch (error) {
+  console.log("error", error);
+
 }
+}
+
