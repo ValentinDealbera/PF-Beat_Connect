@@ -17,7 +17,7 @@ export default function Home() {
   // si hay un code valido en las querys, registra al usuario actual como vendedor
   const router = useRouter();
   const id = useSelector((state) => state.client.client._id);
-  console.log(id);
+
   if (router.query.code) {
     async function data(id) {
       try {
@@ -34,7 +34,6 @@ export default function Home() {
     data(id);
   }
   //hacemos console.log del env
-  console.log(process.env.NEXT_PUBLIC_TOKEN_ADMIN);
   return (
     <>
       <Head title={"Home"} description={"Head from home"} />
