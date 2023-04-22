@@ -8,7 +8,11 @@ import {
 } from "@/components";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearchFilter } from "@/redux/slices/filters";
-import { setBeatsDisplayMode, fetchBeats } from "@/redux/slices/beats";
+import {
+  setBeatsDisplayMode,
+  fetchBeats,
+  setCurrentPage,
+} from "@/redux/slices/beats";
 import { useEffect } from "react";
 
 export default function Beats() {
@@ -24,7 +28,6 @@ export default function Beats() {
   let visiblePages = [];
   for (let i = pages.current - 2; i <= pages.current + 2; i++) {
     if (i > 0 && i <= pages.limit) {
-
       visiblePages.push(i);
     }
   }
@@ -54,10 +57,15 @@ export default function Beats() {
         </Hero>
         <BeatsShopSection />
         <button
-          onClick={() => {dispatch(fetchBeats({page: pages.current + 1}))
-       }}
-          disabled={pages.current === visiblePages[visiblePages.length -1]}
-          className={pages.current === visiblePages[visiblePages.length -1] ? "text-red-800" : "text-black"}
+          onClick={() => {
+            dispatch(setCurrentPage({ page: pages.current + 1 }));
+          }}
+          disabled={pages.current === visiblePages[visiblePages.length - 1]}
+          className={
+            pages.current === visiblePages[visiblePages.length - 1]
+              ? "text-red-800"
+              : "text-black"
+          }
         >
           Next
         </button>
@@ -65,7 +73,7 @@ export default function Beats() {
           {visiblePages.map((page) => (
             <button
               key={page}
-              onClick={() => dispatch(fetchBeats({page: page}))}
+              onClick={() => dispatch(setCurrentPage({ page: page }))}
               disabled={pages.current === page}
               className={pages.current === page ? "text-red-800" : "text-black"}
             >
@@ -74,7 +82,7 @@ export default function Beats() {
           ))}
         </div>
         <button
-          onClick={() => dispatch(fetchBeats({page: pages.current - 1}))}
+          onClick={() => dispatch(setCurrentPage({ page: pages.current - 1 }))}
           disabled={pages.current === 1}
           className={pages.current === 1 ? "text-red-800" : "text-black"}
         >

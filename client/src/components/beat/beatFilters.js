@@ -19,11 +19,9 @@ import {
   setBpmFilter,
   setSorter,
 } from "@/redux/slices/filters";
-import { selectFilteredBeats } from "@/redux/selectors/filters";
 import { fetchBeats } from "@/redux/slices/beats";
 
 export default function BeatFilters() {
-  const beatFilters = useSelector(selectFilteredBeats);
   const dispatch = useDispatch();
   const [beatGenre, setBeatGenre] = useState([]);
   const [prices, setPrices] = useState({ min: 0, max: 0 });
@@ -31,9 +29,10 @@ export default function BeatFilters() {
   const [sort, setSort] = useState("");
   const [dropDownFilter, setDropDownFilter] = useState(false);
   const [childFilterIndex, setChildFilterIndex] = useState(0);
+  const currentPage = useSelector((state) => state.beats.pageIndex);
+  const genre = useSelector((state) => state.filters.genresFilter);
 
   //const mode = useSelector((state) => state?.beats?.beatsDisplayMode);
-  const beats = useSelector((state) => state.beats.activeItems);
 
   const genres = useSelector((state) => state.filters.genres);
   const filterObj = useSelector((state) => state.filters);
@@ -63,6 +62,7 @@ export default function BeatFilters() {
 
   //Filtro Precio
   useEffect(() => {
+    console.log("pagina>", currentPage);
     dispatch(setPriceFilter(prices));
   }, [prices, dispatch]);
 
@@ -71,18 +71,48 @@ export default function BeatFilters() {
     dispatch(setBpmFilter(BPM));
   }, [BPM.min, dispatch]);
 
+  let sortValue = {};
+
+  if (sort === "default") {
+    sortValue;
+  } else if (sort === "Price-AS") {
+    sortValue.priceAmount = "asc";
+  } else if (sort === "Price-DES") {
+    sortValue.priceAmount = "desc";
+  } else if (sort === "BPM-AS") {
+    sortValue.BPM = "asc";
+  } else if (sort === "BPM-DES") {
+    sortValue.BPM = "desc";
+  } else if (sort === "A-Z") {
+    sortValue.name = "asc";
+  } else if (sort === "Z-A") {
+    sortValue.name = "desc";
+  }
+
   //despachador
   useEffect(() => {
-    dispatch(fetchBeats({
-      minPrice: prices.min,
-      maxPrice: prices.max,
-      minBPM: BPM.min,
-      maxBPM: BPM.max,
-    }));
-  }, [filterObj, dispatch, prices.min, prices.max, BPM.min, BPM.max]);
-
-
-
+    dispatch(
+      fetchBeats({
+        minPrice: prices.min,
+        maxPrice: prices.max,
+        minBPM: BPM.min,
+        maxBPM: BPM.max,
+        page: currentPage.page,
+        genre,
+        ...sortValue,
+      })
+    );
+  }, [
+    filterObj,
+    dispatch,
+    prices.min,
+    prices.max,
+    BPM.min,
+    BPM.max,
+    sort,
+    currentPage.page,
+    genre,
+  ]);
 
   // useEffect(() => {
   //   const maxPrice = beats.reduce((acc, beat) => {
