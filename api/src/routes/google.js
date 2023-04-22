@@ -39,7 +39,7 @@ function isLoggedIn(req, res, next) {
 }
 
 router.get('/', (req, res) => {
-  res.send('<a href="auth/google">Authenticate with Google</a>');
+  res.send('<a href="/api/google/auth/google">Authenticate with Google</a>');
 });
 
 router.get('/auth/google',
