@@ -44,7 +44,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
         userCreator: `${mode === "edit" ? defaultValues.userCreator._id : ""}`,
         bpm: `${mode === "edit" ? defaultValues.BPM : ""}`,
         id: `${mode === "edit" ? defaultValues._id : ""}`,
-        softDelete: `${mode === "edit" ? defaultValues.softDelete : ""}`, 
+        softDelete: `${mode === "edit" ? defaultValues.softDelete : ""}`,         
       });
 
       const handleInput = (e) => {
