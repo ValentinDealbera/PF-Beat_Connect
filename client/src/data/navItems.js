@@ -15,7 +15,7 @@ export const generalItems = [
 
 export const helpItems = [
   {
-    name: "Overview",
+    name: "Inicio",
     url: "/help",
   },
   {
@@ -25,11 +25,6 @@ export const helpItems = [
   {
     name: "Terminos y condiciones",
     url: "/help/terms",
-  },
-
-  {
-    name: "Copyright",
-    url: "/help/copyright",
   },
 ];
 

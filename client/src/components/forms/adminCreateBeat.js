@@ -39,7 +39,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
         name: `${mode === "edit" ? defaultValues.name : ""}`,
         priceAmount: `${mode === "edit" ? defaultValues.priceAmount : ""}`,
         genre: `${mode === "edit" ? defaultValues.genre._id : ""}`,
-        image: "",
+        image: `${mode === "edit" ? defaultValues.image : ""}`,
         audioMP3: "",
         userCreator: `${mode === "edit" ? defaultValues.userCreator._id : ""}`,
         bpm: `${mode === "edit" ? defaultValues.BPM : ""}`,
@@ -177,15 +177,14 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
                   onChange={handleInput}
                   error={error.bpm}
                 />
-                { mode === "create" && <Input
+                <Input
                   name="image"
                   label="Image"
-                  placeholder="Image:"
-                  defaultValue={mode === "edit" ? defaultValues.image : ""}
+                  placeholder="Image:"                  
                   type="file"
                   onChange={handleInput}
                   error={error.image}
-                />}
+                />
                 { mode == "create" && <Input
                   name="audioMP3"
                   label="Audio MP3"

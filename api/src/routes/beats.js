@@ -350,7 +350,7 @@ router.put("/:id", async (req, res) => {
 router.put("/admin/:id", adminMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
-    const { image } = req.files;
+      const image = req.files ? req.files.image : null
     const { name, priceAmount, review, softDelete, genre, relevance } =
       req.body;
     const updatedBeat = await beatModel.findById(id);
@@ -384,6 +384,7 @@ router.put("/admin/:id", adminMiddleware, async (req, res) => {
     updatedBeat.save();
     return res.status(200).json(updatedBeat);
   } catch (error) {
+    console.log(error.message);
     res.status(500).json({ error: error.message });
   }
 });

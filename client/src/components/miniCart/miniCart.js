@@ -4,25 +4,28 @@ import Image from "next/image";
 import { BeatRightSheet, MiniCartItem } from "@/components";
 import Link from "next/link";
 
-
 export default function MiniCart() {
 
+ // const cartIds = useSelector((state) => state.cart.cart).map(
+    //(item) => item.id
+  //) || [];
+ // const cartItems = useSelector((state) => state?.beats?.publicItems).filter(
+    //(item) => cartIds.includes(item._id)
+  //) || [];
 
-  const cartIds = useSelector((state) => state.cart.cart).map(
-    (item) => item.id
-  ) || [];
-  const cartItems = useSelector((state) => state?.beats?.publicItems).filter(
-    (item) => cartIds.includes(item._id)
-  ) || [];
 
-
-  const state = useSelector((state) => state);
+  //const state = useSelector((state) => state);
 
 
 
   //console.log("cartItems", cartItems, cartIds);
 
+
+  
+  const cartItems = useSelector((state) => state?.cart.cart) || [];
+
   const [visible, setVisible] = useState(false);
+
   return (
     <>
       <div
@@ -49,7 +52,7 @@ export default function MiniCart() {
               <div className="flex flex-col gap-4">
                 {Array.isArray(cartItems) &&
                   cartItems.map((producto) => (
-                    <MiniCartItem producto={producto} />
+                    <MiniCartItem producto={producto.beat} />
                   ))}
               </div>
               <div id="total">
