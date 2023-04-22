@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function GoogleButton(){
     return(
-        <Link href="/client" className="w-full" >
+        <Link href="http://localhost:3001/api/google" className="w-full" >
         <button
           className="text-base-medium flex w-full  justify-center items-center gap-2 rounded-full border px-8 py-2 text-black"
           style={{ background: "#fff" }}
