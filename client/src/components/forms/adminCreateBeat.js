@@ -46,6 +46,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
         id: `${mode === "edit" ? defaultValues._id : ""}`,
         softDelete: `${mode === "edit" ? defaultValues.softDelete : ""}`, 
         relevance: `${mode === "edit" ? defaultValues.relevance : ""}`,
+
       });
 
       console.log("Data para el form", form);
