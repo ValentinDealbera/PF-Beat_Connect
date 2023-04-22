@@ -32,11 +32,11 @@ export const handleSelectChange = (e, setSelected, setForm, prevForm) => {
   setForm({ ...prevForm, genre: e });
 };
 
-export const validateForm = (form, fieldsToValidate, validateMode) => {
-  console.log("validateForm", validateMode);
+export const validateForm = (form, fieldsToValidate, validateMode, mode) => {
+  console.log("validateForm", validateMode, mode);
   const errors =
     validateMode === "beat"
-      ? ValidationCreateBeat(form, fieldsToValidate)
+      ? ValidationCreateBeat(form, fieldsToValidate, mode)
       : validateMode === "review"
       ? ValidationCreateReview(form, fieldsToValidate)
       : validateMode === "user"
@@ -45,14 +45,12 @@ export const validateForm = (form, fieldsToValidate, validateMode) => {
   return errors;
 };
 
-export const handleSubmit = async (
-props
-) => {
+export const handleSubmit = async (props) => {
   console.log("handleSubmit", props);
   //e.preventDefault();
   const formErrors =
     props.validateMode === "beat"
-      ? ValidationCreateBeat(props.form, "*")
+      ? ValidationCreateBeat(props.form, "*", props.mode)
       : props.validateMode === "review"
       ? ValidationCreateReview(props.form, "*")
       : props.validateMode === "user"
@@ -61,11 +59,13 @@ props
 
   console.log("formErrors", props.validateMode);
   if (Object.keys(formErrors).length === 0) {
-    // await dispatch(actionToDispatch(form));
+    console.log("form ok", props.form);
+    await props.dispatch(props.actionToDispatch(props.form));
     console.log("form ok", props.form);
     props.formRef.reset();
   } else {
     props.setErrors(formErrors);
     console.log("form Error", formErrors, props.validateMode);
+    throw new Error("Form Error");
   }
 };

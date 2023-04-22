@@ -3,10 +3,10 @@ import {
   BeatRightSheet,
   BeatDetailSideBar,
   BeatBottomSheet,
+  BeatDeteailSideBar,
 } from "@/components";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { selectFilteredBeats } from "@/redux/selectors/filters";
 
 export function externalManageDropdown() {
   NewBeatCardGrid.handleDropdownOpen();
@@ -17,10 +17,7 @@ export default function NewBeatCardGrid(props) {
   const { beatsDisplayMode, generalActiveIndex } =
     useSelector((state) => state?.beats) || 0;
   const state = useSelector((state) => state?.beats) || [];
-  const filteredBeats = useSelector(selectFilteredBeats);
   const { activeItems } = useSelector((state) => state?.beats) || [];
-
-
 
   const handleDropdownOpen = () => {
     setIsDropdownOpen(!isDropDown);

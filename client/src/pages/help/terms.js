@@ -5,78 +5,55 @@ export default function HelpOverview() {
     <>
       <Head title={"Help Center"} description={"Head from about"} />
       <Main mode="transparent">
-        <HelpContainer title="Terminos de BeatConnect" paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tincidunt vulputate erat ut facilisis. In ultrices, metus non pellentesque tincidunt, elit sapien maximus ipsum, at vestibulum purus libero sit amet lacus.">
+        <HelpContainer
+          title="Terminos de BeatConnect"
+          paragraph="Los siguientes términos y condiciones establecen el acuerdo legal entre BeatConnect y los usuarios del sitio web. Al acceder y utilizar el sitio web, usted acepta estos términos y condiciones en su totalidad. Si no está de acuerdo con estos términos y condiciones, por favor no utilice este sitio web. "
+        >
           <p className="text-base-light color-neutral-black-900">
-          <span className="text-titulo3-semibold text-red-700 ">
-              Personal data we collect
-            </span>
-            <br />
-            <br />
-            Microsoft collects data from you, through our interactions with you
-            and through our products. You provide some of this data directly,
-            and we get some of it by collecting data about your interactions,
-            use, and experiences with our products. The data we collect depends
-            on the context of your interactions with Microsoft and the choices
-            you make, including your privacy settings and the products and
-            features you use. We also obtain data about you from third parties.
-            If you represent an organization, such as a business or school, that
-            utilizes Enterprise and Developer Products from Microsoft, please
-            see the Enterprise and developer products section of this privacy
-            statement to learn how we process your data. If you are an end user
-            of a Microsoft product or a Microsoft account provided by your
-            organization, please see the Products provided by your organization
-            and the Microsoft account sections for more information. You have
-            choices when it comes to the technology you use and the data you
-            share. When we ask you to provide personal data, you can decline.
-            Many of our products require some personal data to provide you with
-            a service. If you choose not to provide data required to provide you
-            with a product or feature, you cannot use that product or feature.
-            Likewise, where we need to collect personal data by law or to enter
-            into or carry out a contract with you, and you do not provide the
-            data, we will not be able to enter into the contract; or if this
-            relates to an existing product you’re using, we may have to suspend
-            or cancel it. We will notify you if this is the case at the time.
-            Where providing the data is optional, and you choose not to share
-            personal data, features like personalization that use such data will
-            not work for you. Learn more
-            <br />
-            <br />
             <span className="text-titulo3-semibold text-red-700 ">
-              How we use personal data
+              Términos y condiciones
             </span>
             <br />
             <br />
-            Microsoft uses the data we collect to provide you with rich,
-            interactive experiences. In particular, we use data to: Provide our
-            products, which includes updating, securing, and troubleshooting, as
-            well as providing support. It also includes sharing data, when it is
-            required to provide the service or carry out the transactions you
-            request. Improve and develop our products. Personalize our products
-            and make recommendations. Advertise and market to you, which
-            includes sending promotional communications, targeting advertising,
-            and presenting you with relevant offers. We also use the data to
-            operate our business, which includes analyzing our performance,
-            meeting our legal obligations, developing our workforce, and doing
-            research. In carrying out these purposes, we combine data we collect
-            from different contexts (for example, from your use of two Microsoft
-            products) or obtain from third parties to give you a more seamless,
-            consistent, and personalized experience, to make informed business
-            decisions, and for other legitimate purposes. Our processing of
-            personal data for these purposes includes both automated and manual
-            (human) methods of processing. Our automated methods often are
-            related to and supported by our manual methods. For example, our
-            automated methods include artificial intelligence (AI), which we
-            think of as a set of technologies that enable computers to perceive,
-            learn, reason, and assist in decision-making to solve problems in
-            ways that are similar to what people do. To build, train, and
-            improve the accuracy of our automated methods of processing
-            (including AI), we manually review some of the predictions and
-            inferences produced by the automated methods against the underlying
-            data from which the predictions and inferences were made. For
-            example, we manually review short snippets of voice data that we
-            have taken steps to de-identify to improve our speech recognition
-            technologies. This manual review may be conducted by Microsoft
-            employees or vendors who are working on Microsoft’s behalf.
+            Bienvenido a nuestro sitio web. Si continúa navegando y utilizando
+            este sitio web, acepta cumplir y estar sujeto a los siguientes
+            términos y condiciones de uso, que junto con nuestra política de
+            privacidad rigen la relación de BeatConnect con usted en
+            relación con este sitio web.<br /><br />El término 'BeatConnect' o
+            'nosotros' se refiere al propietario del sitio web. El término
+            'usted' se refiere al usuario o visitante de nuestro sitio web. <br />El
+            uso de este sitio web está sujeto a los siguientes términos de uso:<br /><br />
+            El contenido de las páginas de este sitio web es solo para su
+            información general y uso. Está sujeto a cambios sin previo aviso.
+            Ni nosotros ni terceros proporcionamos ninguna garantía o garantía
+            en cuanto a la precisión, puntualidad, rendimiento, integridad o
+            idoneidad de la información y los materiales encontrados u ofrecidos
+            en este sitio web para cualquier propósito en particular. <br /><br />Usted
+            reconoce que dicha información y materiales pueden contener
+            inexactitudes o errores y excluimos expresamente la responsabilidad
+            por cualquier inexactitud o error en la máxima medida permitida por
+            la ley. <br /><br />El uso de cualquier información o material en este sitio web
+            es bajo su propio riesgo, por lo que no seremos responsables. Es su
+            propia responsabilidad asegurarse de que cualquier producto,
+            servicio o información disponible a través de este sitio web cumpla
+            con sus requisitos específicos. <br /><br />Este sitio web contiene material que
+            es propiedad nuestra o que tenemos licencia. Este material incluye,
+            pero no se limita a, el diseño, la disposición, la apariencia, los
+            gráficos y las fotografías. <br /><br />Queda prohibida la reproducción,
+            distribución, exhibición, transmisión o uso no autorizado de este
+            material. Todas las marcas registradas reproducidas en este sitio
+            web, que no son propiedad del operador o están autorizadas, son
+            reconocidas en el sitio web. <br /><br />El uso no autorizado de este sitio web
+            puede dar lugar a una reclamación por daños y perjuicios y/o
+            constituir un delito. <br /><br />Este sitio web también puede incluir enlaces a
+            otros sitios web. Estos enlaces se proporcionan para su conveniencia
+            para proporcionar más información. No significa que respaldemos el
+            sitio web(s). <br /><br />No tenemos responsabilidad por el contenido del sitio
+            web(s) vinculado(s). Su uso de este sitio web y cualquier disputa
+            que surja del uso de este sitio web está sujeto a las leyes de Argentina. <br /><br />Al utilizar este sitio web, usted acepta estos términos y
+            condiciones en su totalidad. Si no está de acuerdo con estos
+            términos y condiciones o con cualquier parte de estos términos y
+            condiciones, no use nuestro sitio web.
           </p>
         </HelpContainer>
       </Main>

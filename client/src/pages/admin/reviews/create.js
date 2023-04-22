@@ -8,6 +8,8 @@ import {
   Select,
   SwitchForm,
   TextArea,
+  AdminCreateUserForm,
+  AdminCreateReviewForm
 } from "@/components";
 
 import {
@@ -95,6 +97,13 @@ export default function SellerDashboardOverview() {
       },
     ],
   };
+//----------------------------
+  const childRef = useRef(null);
+
+  const handleExternalSubmit = () => {
+    childRef.current.submit();
+  };
+
 
   return (
     <>
@@ -103,72 +112,10 @@ export default function SellerDashboardOverview() {
           topBarMode="action"
           topBarMessage="Crear review"
           topBarButtonLabel="Guardar cambios"
-          onClick={onSubmit}
+          onClick={handleExternalSubmit}
         >
           <IslandDashboard className="flex flex-col gap-5 xl:gap-8 ">
-            <form ref={formRef}>
-              <FormContainer>
-                <FormRow>
-                  <FormColumn className="w-full">
-                    <Input
-                      id="createdBy"
-                      type="text"
-                      name="createdBy"
-                      placeholder="Id del autor"
-                      label="Id del autor"
-                      error={error.createdBy}
-                      onChange={handleInput}
-                    />
-                    <Input
-                      id="title"
-                      type="text"
-                      name="title"
-                      placeholder="Titulo"
-                      label="Titulo del review"
-                      onChange={handleInput}
-                      error={error.title}
-                    />
-                    <Input
-                      id="rating"
-                      type="number"
-                      name="rating"
-                      step="0.1"
-                      placeholder="Rating"
-                      label="Rating del review"
-                      onChange={handleInput}
-                      error={error.rating}
-                    />
-                    <SwitchForm
-                      label="SoftDelete"
-                      name="softDelete"
-                      nameInput="softDelete"
-                      defaultValue={false}
-                      onChange={handleInput}
-                      arrayButtons={arraySoftDelete.arrayButtons}
-                    />
-                  </FormColumn>
-                  <FormColumn className="w-full">
-                    <Input
-                      id="beat"
-                      name="beat"
-                      type="text"
-                      placeholder="Id del beat"
-                      label="Id del beat"
-                      error={error.beat}
-                      onChange={handleInput}
-                    />
-                    <TextArea
-                      id="comment"
-                      name="comment"
-                      placeholder="Comentario"
-                      label="Comentario"
-                      error={error.comment}
-                      onChange={handleInput}
-                    />
-                  </FormColumn>
-                </FormRow>
-              </FormContainer>
-            </form>
+          <AdminCreateReviewForm mode="create" ref={childRef} />
           </IslandDashboard>
         </SellerDashboardLayout>
       </main>

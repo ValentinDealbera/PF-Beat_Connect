@@ -1,4 +1,4 @@
-import { Section, NewBeatCardGrid } from "@/components";
+import { Section, BeatCardFlex } from "@/components";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -10,7 +10,7 @@ export default function BeatsSpecialSection(props) {
 
 //Limit the number of items to 10
 
-const limit = 8;
+const limit = 10;
 const limitedItems = activeItems.slice(0, limit);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const limitedItems = activeItems.slice(0, limit);
         {props.title}
         {props.children}{" "}
       </h1>
-      <NewBeatCardGrid beats={limitedItems} />
+      <BeatCardFlex beats={limitedItems} />
     </Section>
   );
 }

@@ -12,6 +12,7 @@ const initialState = {
     isSeller: false,
     superAdmin: false,
     token: "",
+    accessToken: "",
   },
   client: {
     name: "Placeholder",
@@ -42,6 +43,7 @@ export const loginSystem = createAsyncThunk(
         isSeller: userResponse.user.isSeller,
         superAdmin: userResponse.user.superAdmin,
         token: userResponse.token,
+        accessToken: userResponse.user?.accessToken,
       };
       return { authSettings, newClient };
     } catch (error) {
@@ -58,9 +60,28 @@ export const postClientBeat = createAsyncThunk(
       const response = await axios.post(`${serverUrl}beats`, data, {
         headers: {
           "Content-Type": "multipart/form-data",
+          "userid": data.userCreator,
         },
       });
       console.log(data);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+export const postBeatReview = createAsyncThunk(
+  "client/postBeatReview",
+  async (data, { rejectWithValue }) => {
+    try {
+      console.log("data: ", data);
+      const response = await axios.post(`${serverUrl}review`, data, {
+        headers: {
+          userid: data.createdBy,
+        },
+      });
+
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -103,28 +124,28 @@ export const fetchCurrentBeat = createAsyncThunk(
   "beats/fetchCurrentAuthor",
   async (id, { rejectWithValue, getState }) => {
     try {
-    console.log("id", id);
+      console.log("id", id);
 
-    const res = await axios.get(`${serverUrl}beats/${id}`);
-    //solo obtenemos el nombre y el id del objeto original
-    const response = res.data;
-    console.log("response", response);
-    const currentBeat = {
-      name: response.name,
-      _id: response._id,
-      BPM: response.BPM,
-      priceAmount: response.priceAmount,
-      softDelete: response.softDelete,
-      image: response.image,
-      genre: {
-        name: response.genre.name,
-        _id: response.genre._id,
-      },
-    };
-    return { currentBeat };
-  } catch (error) {
-    return rejectWithValue(error.response.data.message);
-  }
+      const res = await axios.get(`${serverUrl}beats/${id}`);
+      //solo obtenemos el nombre y el id del objeto original
+      const response = res.data;
+      console.log("response", response);
+      const currentBeat = {
+        name: response.name,
+        _id: response._id,
+        BPM: response.BPM,
+        priceAmount: response.priceAmount,
+        softDelete: response.softDelete,
+        image: response.image,
+        genre: {
+          name: response.genre.name,
+          _id: response.genre._id,
+        },
+      };
+      return { currentBeat };
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
   }
 );
 
@@ -148,8 +169,7 @@ const cartSlice = createSlice({
       state.tokenValid = action.payload;
     },
     setAuthSettings(state, action) {
-      state.authSettings = action.payload;
-      state.isLogged = true;
+      state.authSettings = sLogged = true;
     },
     resetReducer(state, action) {
       state.client = {};
@@ -263,19 +283,45 @@ const cartSlice = createSlice({
       //Extra reducer para el beat que esta en el detalle
       .addCase(fetchCurrentBeat.pending, (state, action) => {
         console.log("fetching current beat");
-        toast("Cargando beat...");
+       // toast("Cargando beat...");
       })
       .addCase(fetchCurrentBeat.fulfilled, (state, action) => {
-      //  state.activeEditingItem = action.payload.currentBeat;
+         state.activeEditingItem = action.payload.currentBeat;
         //console.log("current beat", state.activeEditingItem);
-        toast.success("Se cargó correctamente", {
+        // toast.success("Se cargó correctamente", {
+        //   style: {
+        //     background: "#ECFDF3",
+        //     color: "#1F9D55",
+        //   },
+        // });
+      })
+      .addCase(fetchCurrentBeat.rejected, (state, action) => {
+        console.error(action.error);
+        // toast.error(action.payload, {
+        //   style: {
+        //     background: "#FFF0F0",
+        //     color: "#E60000",
+        //   },
+        // });
+      })
+
+      //--------------------
+      //Extra reducer para postBeatReview
+
+      .addCase(postBeatReview.pending, (state, action) => {
+        console.log("posting review...");
+        toast("Subiendo review...");
+      })
+      .addCase(postBeatReview.fulfilled, (state, action) => {
+        console.log("post finished!");
+        toast.success("Se subió correctamente", {
           style: {
             background: "#ECFDF3",
             color: "#1F9D55",
           },
         });
       })
-      .addCase(fetchCurrentBeat.rejected, (state, action) => {
+      .addCase(postBeatReview.rejected, (state, action) => {
         console.error(action.error);
         toast.error(action.payload, {
           style: {
@@ -292,5 +338,6 @@ export const {
   setCurrentClient,
   resetReducer,
   setAuthSettings,
+  setReviewPostStatus,
 } = cartSlice.actions;
 export default cartSlice.reducer;

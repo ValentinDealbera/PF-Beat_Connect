@@ -1,5 +1,4 @@
 export default function Input(props) {
-  console.log(props.error);
   return (
     <label
       htmlFor={props.name}

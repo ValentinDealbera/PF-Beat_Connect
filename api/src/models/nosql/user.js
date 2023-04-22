@@ -32,6 +32,14 @@ const UserSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  bio: {
+    type: String,
+    default: ''
+  },
+  backImage: {
+    type: String,
+    default: ''
+  },
   image: {
     type: String,
     require: false,
@@ -49,6 +57,10 @@ const UserSchema = new mongoose.Schema({
   softDelete: {
     type: Boolean,
     default: false,
+  },
+  accessToken: {
+    type: String,
+    default: ''
   },
   bougthBeats: [
     {
