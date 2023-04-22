@@ -188,7 +188,7 @@ export const adminGetBeats = createAsyncThunk(
       const response = await axios.get(`${serverUrl}beats?limit=100`);
       const beatResponse = response.data.docs;
 
-      return  { beatResponse };
+      return beatResponse;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
@@ -234,9 +234,9 @@ export const adminEditBeat = createAsyncThunk(
           },
         }
       );
-      const userResponse = response.data;
+      const beatResponse = response.data;
 
-      return { userResponse };
+      return { beatResponse };
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
@@ -521,7 +521,7 @@ const beatsSlice = createSlice({
       //Extra reducers para adminGetBeats
       .addCase(adminGetBeats.fulfilled, (state, action) => {
         console.log("action.payload ok", action.payload);
-        state.beats = action.payload.beatResponse;
+        state.beats = action.payload;
         toast.success("Beats cargados correctamente", {
             style: {
                 background: "#F0FFF0",

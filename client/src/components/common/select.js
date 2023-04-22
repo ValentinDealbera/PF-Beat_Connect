@@ -17,6 +17,7 @@ export default function Select({
         onChange={(e) => setSeleccionados(e.target.value)}
         value={value}        
         className="rounded-xl border border-slate-200 bg-white px-4 py-2  text-black placeholder:text-gray-400"
+        type="text"
       >
         {/* Valor default */}
         <option value="" disabled selected>

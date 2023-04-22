@@ -36,7 +36,7 @@ console.log(fieldsToValidate)
         if (form.image.size > MAX_FILE_SIZE)
           error.image =
             "The size of the image is too large. Maximum allowed size is 10 MB.";
-        if (!regexImage.test(form.image.name))
+        if (form.image && !regexImage.test(form.image.name))
           error.image = "You must upload a jpg or png file";
         break;
 
