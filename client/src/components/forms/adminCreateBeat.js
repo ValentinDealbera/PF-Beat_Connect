@@ -30,22 +30,26 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
     const [error, setErrors] = useState({});
     const defaultValues = useSelector((state) => state.admin.currentEditBeat);
     const mode = props.mode;
-    const genres = useSelector((state) => state.filters.genres);
-    
-  
+    const genres = useSelector((state) => state.filters.genres);   
+      
     console.log("defaultValues", defaultValues);
+    
 
     const [form, setForm] = useState({
         name: `${mode === "edit" ? defaultValues.name : ""}`,
         priceAmount: `${mode === "edit" ? defaultValues.priceAmount : ""}`,
-        genre: `${mode === "edit" ? defaultValues.genre._id : ""}`,
+        genre: `${mode === "edit" ? defaultValues.genre : ""}`,
         image: `${mode === "edit" ? defaultValues.image : ""}`,
-        audioMP3: "",
-        userCreator: `${mode === "edit" ? defaultValues.userCreator._id : ""}`,
+        audioMP3: `${mode === "edit" ? defaultValues.audioMP3 : ""}`,
+        userCreator: `${mode === "edit" ? defaultValues.userCreator: ""}`,
         bpm: `${mode === "edit" ? defaultValues.BPM : ""}`,
         id: `${mode === "edit" ? defaultValues._id : ""}`,
-        softDelete: `${mode === "edit" ? defaultValues.softDelete : ""}`,         
+        softDelete: `${mode === "edit" ? defaultValues.softDelete : ""}`, 
+        relevance: `${mode === "edit" ? defaultValues.relevance : ""}`,
+
       });
+
+      console.log("Data para el form", form);
 
       const handleInput = (e) => {
         handleInputChange(
@@ -91,7 +95,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
           // formRef.current.submit();
           onSubmit();
         },
-      }));
+      }));      
 
       const arraySoftDelete = {
         name: "softDelete",
@@ -146,22 +150,21 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
                   onChange={handleInput}
                   error={error.priceAmount}
                 />
-                {/* <Select
-                  label={"Chose a gender"}
-                  valores={genres}
-                  setSeleccionados={handleInput}
-                  // value={selected}
-                  name="genre"
-                  // seleccionados={selected}
-                  error={error.genre}
-                  className="flex w-full flex-col gap-2"
-                  labelClass="w-full text-sm-regular text-sm-medium"
-                />  */}
+                <Input
+                  name="image"
+                  label="Image"
+                  placeholder="Image:"                  
+                  type="file"
+                  onChange={handleInput}
+                  error={error.image}
+                />             
+                
                 <Input
                   name="userCreator"
                   label="User Creator"
                   placeholder="User Creator:"
-                  defaultValue={mode === "edit" ? defaultValues.userCreator._id : ""}
+                  value = {mode === "edit"? defaultValues.userCreator:null}
+                  defaultValue={mode === "edit" ? defaultValues.userCreator: ""}
                   type="text"
                   onChange={handleInput}
                   error={error.userCreator}
@@ -177,14 +180,28 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
                   onChange={handleInput}
                   error={error.bpm}
                 />
-                <Input
-                  name="image"
-                  label="Image"
-                  placeholder="Image:"                  
-                  type="file"
+                <label 
+                className="text-sm-medium flex min-w-0 flex-col gap-estilo4" >
+                 Chose a Genre
+                </label>
+                <select
+                  name="genre"
+                  id="genre"
+                  type="text"
+                  defaultValue={mode === "edit" ? defaultValues.genre : ""}
+                  className="text-sm-regular border-radius-estilo2 color-neutral-black-950 border
+                  placeholder:text-sm-light placeholder:color-neutral-gray-400 border-slate-200 bg-white px-4 py-2"
                   onChange={handleInput}
-                  error={error.image}
-                />
+                  error={error.genre}
+                  >
+                    <option value="" disabled selected>
+                    Seleccionar género
+                    </option>
+                    {genres.map((genre) => (
+                    <option value={genre.value}>{genre.label}</option>
+                     ))}
+                </select>
+
                 { mode == "create" && <Input
                   name="audioMP3"
                   label="Audio MP3"
@@ -202,18 +219,9 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
                   onChange={handleInput}
                   arrayButtons={arraySoftDelete.arrayButtons}
                   error={error.softDelete}
-                />}
-                <Input
-                  name="genre"
-                  label="Genre"
-                  placeholder="Genres"
-                  defaultValue={mode === "edit" ? defaultValues.genre.name : ""}
-                  type="text"
-                  onChange={handleInput}
-                  error={error.genre}
-                /> 
+                />}                
               </FormColumn>
-            </FormRow>
+            </FormRow>           
           </FormContainer>
         </form>
       );

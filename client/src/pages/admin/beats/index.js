@@ -9,14 +9,14 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { adminGetBeats, setCurrentEditBeat, adminDeleteBeat } from "@/redux/slices/admin";
+import { adminGetBeats, setCurrentEditBeat, adminDeleteBeat, setCurrentPage } from "@/redux/slices/admin";
 
-export default function SellerDashboardOverview() {
-  
+export default function SellerDashboardOverview() {  
     const dispatch = useDispatch();
     const beatData = useSelector((state) => state.admin.beats);    
     const router = useRouter();
     const [beatToDelete, setBeatToDelete] = useState(null);
+   
         
     useEffect(()=>{
       dispatch(adminGetBeats());
@@ -68,7 +68,7 @@ export default function SellerDashboardOverview() {
              </div>
            ),
           price: item.priceAmount,
-          creator : `${item.userCreator.username}`,
+          creator : `${item.userCreator}`,
           state: item.softDelete? "Paused":"Ok",
           edit: (<button
             onClick={() => handleEdit(item)}
