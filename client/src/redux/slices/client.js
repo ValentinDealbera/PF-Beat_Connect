@@ -3,6 +3,7 @@ import axios from "axios";
 import { serverUrl } from "@/data/config";
 import { toast } from "sonner";
 import { fetchBeats, fetchUserBeats } from "@/redux/slices/beats";
+import { headers } from "next/dist/client/components/headers";
 
 const tokenAdmin = process.env.NEXT_PUBLIC_TOKEN_ADMIN;
 
@@ -22,6 +23,7 @@ const initialState = {
     profilePicture: "/images/profile-picture.png",
     email: "Email",
   },
+  clientEdit: null,
 };
 
 export const loginSystem = createAsyncThunk(
@@ -45,7 +47,7 @@ export const loginSystem = createAsyncThunk(
         isSeller: userResponse.user.isSeller,
         superAdmin: userResponse.user.superAdmin,
         token: userResponse.token,
-        accessToken: userResponse.user?.accessToken
+        accessToken: userResponse.user?.accessToken,
       };
       return { authSettings, newClient };
     } catch (error) {
@@ -62,7 +64,7 @@ export const postClientBeat = createAsyncThunk(
       const response = await axios.post(`${serverUrl}beats`, data, {
         headers: {
           "Content-Type": "multipart/form-data",
-          "userid": data.userCreator,
+          userid: data.userCreator,
         },
       });
       console.log(data);
@@ -150,6 +152,24 @@ export const fetchCurrentBeat = createAsyncThunk(
     }
   }
 );
+export const editClient = createAsyncThunk(
+  "client/editClient",
+  async (data, { rejectWithValue }) => {
+    try {
+      console.log(data);
+      const response = await axios.put(`${serverUrl}user/${data.id}`, data, {
+        headers: {
+          userid: data.id,
+        },
+      });
+      const userResponse = response.data;
+
+      return { userResponse };
+    } catch (error) {
+      return rejectWithValue(error.data);
+    }
+  }
+);
 
 const cartSlice = createSlice({
   name: "profile",
@@ -176,6 +196,9 @@ const cartSlice = createSlice({
     resetReducer(state, action) {
       state.client = {};
       state.isLogged = false;
+    },
+    setClientEdit(state, action) {
+      state.clientEdit = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -285,10 +308,10 @@ const cartSlice = createSlice({
       //Extra reducer para el beat que esta en el detalle
       .addCase(fetchCurrentBeat.pending, (state, action) => {
         console.log("fetching current beat");
-       // toast("Cargando beat...");
+        // toast("Cargando beat...");
       })
       .addCase(fetchCurrentBeat.fulfilled, (state, action) => {
-         state.activeEditingItem = action.payload.currentBeat;
+        state.activeEditingItem = action.payload.currentBeat;
         //console.log("current beat", state.activeEditingItem);
         // toast.success("Se cargó correctamente", {
         //   style: {
@@ -331,6 +354,31 @@ const cartSlice = createSlice({
             color: "#E60000",
           },
         });
+      })
+      //--------------------
+      //Extra reducer para editClient
+      .addCase(editClient.fulfilled, (state, action) => {
+        console.log("action.payload ok", action.payload);
+        toast.success("Usuario editado correctamente", {
+          style: {
+            background: "#F0FFF0",
+            color: "#00B300",
+          },
+        });
+      })
+      .addCase(editClient.rejected, (state, action) => {
+        console.log("action.payload error", action.payload);
+        toast.error(action.payload, {
+          style: {
+            background: "#FFF0F0",
+            color: "#E60000",
+          },
+        });
+        throw new Error(action.payload);
+      })
+      .addCase(editClient.pending, (state, action) => {
+        console.log("action.payload pending");
+        toast("Editando usuario...");
       });
   },
 });
@@ -341,5 +389,6 @@ export const {
   resetReducer,
   setAuthSettings,
   setReviewPostStatus,
+  setClientEdit,
 } = cartSlice.actions;
 export default cartSlice.reducer;
