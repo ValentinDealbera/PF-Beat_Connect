@@ -6,8 +6,6 @@ import { ValidationCreateBeat } from "../client/validationCreateBeat";
 import { fetchGenres } from "@/redux/slices/filters";
 
 export const manageEditBeat = () => {
-  console.log("managePostBeat");
-  console.log(EditBeat);
   EditBeat.handleOpenDropdown();
 };
 
@@ -41,7 +39,6 @@ export default function EditBeat() {
   EditBeat.handleOpenDropdown = handleOpenDropdown;
 
   const handleInputChange = (e) => {
-    console.log("change");
 
     if (e.target.type === "file") {
         setForm({
@@ -59,7 +56,7 @@ export default function EditBeat() {
   };
 
   const handleSelectChange = (e) => {
-    console.log("handleSelectChange", e);
+   
     setSelected(e);
     setForm((prevForm) => ({ ...prevForm, genre: e }));
   };
@@ -69,7 +66,7 @@ export default function EditBeat() {
   }, []);
 
   useEffect(() => {
-    console.log("useEffect");
+
     setErrors(ValidationCreateBeat(form, fieldsToValidate));
   }, [form, fieldsToValidate]);
 

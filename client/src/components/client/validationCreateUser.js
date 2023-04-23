@@ -2,8 +2,8 @@ export function ValidationCreateUser(form, fieldsToValidate) {
   let error = {};
   const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
   const regexImage = /\.jpg$|\.png$/i;
-  const regexPassword =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  const regexPassword =  
+     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
   const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   if (fieldsToValidate === "*") {
@@ -11,7 +11,6 @@ export function ValidationCreateUser(form, fieldsToValidate) {
     fieldsToValidate = Object.keys(form);
   }
 
-  console.log("fieldsToValidate", fieldsToValidate, form);
 
   fieldsToValidate.forEach((field) => {
     switch (field) {
@@ -25,6 +24,13 @@ export function ValidationCreateUser(form, fieldsToValidate) {
       case "firstName":
         if (form.firstName.length < 1 || form.firstName.length > 50 || !form.firstName)
           error.firstName =
+            "The name of your beat must have between one and 50 characters.";
+
+        break;
+
+        case "bio":
+        if (form.bio.length < 1 || form.bio.length > 50 || !form.bio)
+          error.bio =
             "The name of your beat must have between one and 50 characters.";
 
         break;

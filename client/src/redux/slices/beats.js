@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { serverUrl } from "@/data/config";
 import axios from "axios";
+import { data } from "autoprefixer";
 
 const initialState = {
   publicBeatsFetchStatus: false, //deprecated
@@ -19,6 +20,7 @@ const initialState = {
   generalActiveIndex: 0,
   activeReviewDetail: [],
   loadingcurrentAuthor: false,
+  pageIndex: 1,
   pages: {
     next: null,
     prev: null,
@@ -29,28 +31,53 @@ const initialState = {
 
 export const fetchBeats = createAsyncThunk(
   "beats/fetchBeats",
-  async ({ page = 1, minPrice = 0, maxPrice }) => {
 
+  async ({
+    page = 1,
+    minPrice,
+    maxPrice,
+    minBPM,
+    maxBPM,
+    name,
+    BPM,
+    priceAmount,
+    rating,
+    genre,
+  }) => {
+    console.log("fetch slice 1");
     const queryParameters = {
-      page: page,
-      minPrice: minPrice,
-      maxPrice: maxPrice,
+      ...(minPrice !== 0 && !isNaN(minPrice) && { minPrice }),
+      ...(maxPrice !== 0 && !isNaN(maxPrice) && { maxPrice }),
+      ...(minBPM !== 0 && !isNaN(minBPM) && { minBPM }),
+      ...(maxBPM !== 0 && !isNaN(maxBPM) && { maxBPM }),
+      ...(name && { name }),
+      ...(BPM && { BPM }),
+      ...(priceAmount && { priceAmount }),
+      ...(rating && { rating }),
+      ...(genre && { genre }),
+      
+
       // Agrega aquí otros parámetros de consulta que quieras incluir
     };
 
-    let queryString = "";
+    let queryString = "?";
     Object.entries(queryParameters).forEach(([key, value]) => {
       if (value !== null && value !== undefined) {
-        queryString += `?&${key}=${encodeURIComponent(value)}`;
+        queryString += `&${key}=${encodeURIComponent(value)}`;
       }
     });
 
-    console.log("fetchBeats", `${serverUrl}beats?${queryString.substr(1)}`);
+    
 
     const response = await axios.get(
-      `${serverUrl}beats?${queryString.substr(1)}`
+      `${serverUrl}beats?page=${page}${queryString.substr(1)}`,
+      {
+        headers: {
+          genre,
+        },
+      }
     );
-      console.log('DATA DATA DATA', response.data);
+
     return {
       docs: response.data.docs,
       next: response.data.nextPage,
@@ -183,6 +210,9 @@ const beatsSlice = createSlice({
     setUserFavoriteBeats(state, action) {
       state.userFavoriteBeats = action.payload;
     },
+    setCurrentPage(state, action) {
+      state.pageIndex = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -193,7 +223,6 @@ const beatsSlice = createSlice({
         state.publicBeatsFetchStatus = false;
       })
       .addCase(fetchBeats.fulfilled, (state, action) => {
-        console.log("fetch beats fullfiled", action.payload);
         if (
           !Array.isArray(action.payload.docs) ||
           action.payload.docs.length === 0 ||
@@ -215,7 +244,7 @@ const beatsSlice = createSlice({
         // state.beatsDisplayMode = 1;
       })
       .addCase(fetchBeats.rejected, (state, action) => {
-        console.error(" fetch error");
+        console.error(" fetch error", action.error);
       })
 
       //--------------------
@@ -261,8 +290,6 @@ const beatsSlice = createSlice({
       })
       .addCase(fetchUserReviews.fulfilled, (state, action) => {
         state.activeReviewDetail = action.payload;
-
-        console.log(action.payload);
       })
       .addCase(fetchUserReviews.rejected, (state, action) => {
         console.error("fetch error");
@@ -280,6 +307,7 @@ export const {
   setUserFavoriteBeats,
   setCurrentAuthorBeats,
   setActiveItemsForProfile,
+  setCurrentPage,
 } = beatsSlice.actions;
 
 export default beatsSlice.reducer;

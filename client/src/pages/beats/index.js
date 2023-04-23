@@ -1,30 +1,29 @@
 import {
   Head,
   Main,
-  Section,
   Hero,
   Search,
   BeatsShopSection,
 } from "@/components";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearchFilter } from "@/redux/slices/filters";
-import { setBeatsDisplayMode, fetchBeats } from "@/redux/slices/beats";
-import { useEffect } from "react";
+import {
+  setCurrentPage,
+} from "@/redux/slices/beats";
 
 export default function Beats() {
   const dispatch = useDispatch();
   const { searchFilter } = useSelector((state) => state.filters);
   const { pages } = useSelector((state) => state.beats);
 
-  useEffect(() => {
-    dispatch(setBeatsDisplayMode(0));
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(setBeatsDisplayMode(0));
+  // }, [dispatch]);
 
   //visibles solo 5 paginas, teninedo en cuenta la pagina actual y la ultima pagina. usamos push
   let visiblePages = [];
   for (let i = pages.current - 2; i <= pages.current + 2; i++) {
     if (i > 0 && i <= pages.limit) {
-      console.log(pages);
       visiblePages.push(i);
     }
   }
@@ -53,18 +52,19 @@ export default function Beats() {
           </div>
         </Hero>
         <BeatsShopSection />
+        <div className="flex gap-4 justify-center" >
         <button
-          onClick={() => {dispatch(fetchBeats({page: pages.current + 1}))
-          console.log('AAAAAAAAAAAAAAA',pages)}}
-          disabled={false}
+          onClick={() => dispatch(setCurrentPage({ page: pages.current - 1 }))}
+          disabled={pages.current === 1}
+          className={pages.current === 1 ? "text-red-800" : "text-black"}
         >
-          Next
+          Prev
         </button>
         <div className="flex justify-center gap-4">
           {visiblePages.map((page) => (
             <button
               key={page}
-              onClick={() => dispatch(fetchBeats({page: page}))}
+              onClick={() => dispatch(setCurrentPage({ page: page }))}
               disabled={pages.current === page}
               className={pages.current === page ? "text-red-800" : "text-black"}
             >
@@ -73,11 +73,20 @@ export default function Beats() {
           ))}
         </div>
         <button
-          onClick={() => dispatch(fetchBeats({page: pages.current - 1}))}
-          disabled={pages.current === 1}
+          onClick={() => {
+            dispatch(setCurrentPage({ page: pages.current + 1 }));
+          }}
+          disabled={pages.current === visiblePages[visiblePages.length - 1]}
+          className={
+            pages.current === visiblePages[visiblePages.length - 1]
+              ? "text-red-800"
+              : "text-black"
+          }
         >
-          Prev
+          Next
         </button>
+       
+        </div>
       </Main>
     </>
   );

@@ -68,6 +68,8 @@ export { default as BeatCard } from "./beat/beatCard";
 export { default as NewBeatCardGrid } from "./beat/newBeatCardGrid";
 export { default as BeatShopSectionForClient } from "./beat/beatShopSectionForClient";
 export { default as BeatsRelatedSection } from "./beat/beatRelatedSection";
+export { default as BeatCardFlex } from "./beat/beatCardFlex";
+
 
 //beatDataComponents
 export { default as AuthorName } from "./beat/beatDataComponents/authorName";
