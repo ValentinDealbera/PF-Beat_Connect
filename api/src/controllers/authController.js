@@ -2,6 +2,9 @@ const axios = require("axios");
 const bcrypt = require("bcryptjs");
 const userModel = require("../models/nosql/user");
 const jwt = require("../utils/jwt");
+//TRAEMOS ENV
+require("dotenv").config();
+const { BACKEND_URL } = process.env;
 
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -69,7 +72,7 @@ const register = async (req, res) => {
     // Generar un token JWT y enviarlo como respuesta
     const token = jwt.generateToken({ id: userOK.id, email: userOK.email });
     res.json({ token, userOK });
-    axios.post("http://localhost:3001/api/mail/register", { email, username });
+    axios.post(`${BACKEND_URL}api/mail/register`, { email, username });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

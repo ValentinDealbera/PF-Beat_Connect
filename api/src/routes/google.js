@@ -6,7 +6,7 @@ const passport = require("passport")
 require("../middleware/passport")
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
-const { DB_URI, } = process.env
+const { DB_URI, FRONTEND_URL} = process.env
 
 const store = new MongoDBStore({
   uri: DB_URI,
@@ -49,7 +49,6 @@ router.get('/auth/google',
 
 router.get('/auth/google/callback',
   passport.authenticate('google', {
-    //successRedirect: `http://localhost:3000/?id=${session}`,
     successRedirect: '/api/google/protected',
     failureRedirect: '/api/google/auth/google/failure'
   })
@@ -62,7 +61,7 @@ router.get('/protected', isLoggedIn, (req, res) => {
   console.log("session:", req.sessionID)
   //res.send('You are logged in');
   //return res.json({message: 'You are logged in', id: id});
- return res.redirect(`http://localhost:3000/?id=${id}&session=${req.sessionID}`);
+ return res.redirect(`${FRONTEND_URL}?id=${id}&session=${req.sessionID}`);
 })
 
 router.get('/logout', (req, res) => {
@@ -74,7 +73,7 @@ router.get('/logout', (req, res) => {
     req.session.destroy();
     res.clearCookie('connect.sid');
    // res.send('¡Goodbye!');
-  return res.redirect('http://localhost:3000/');
+  return res.redirect(`${FRONTEND_URL}`);
   });
 
 });
