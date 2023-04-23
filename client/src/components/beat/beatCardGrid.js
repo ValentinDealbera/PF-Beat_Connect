@@ -29,7 +29,7 @@ export default function BeatCardGrid() {
 
   BeatCardGrid.handleDropdownOpen = handleDropdownOpen;
   useEffect(() => {
-    console.log(beatsDisplayMode);
+   
   }, [beatsDisplayMode]);
 
 

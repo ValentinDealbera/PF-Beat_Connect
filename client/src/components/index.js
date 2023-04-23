@@ -99,6 +99,7 @@ export { default as SellerDashboardTopBar } from "./dashboard/sellerDashboardTop
 export { default as IslandDashboard } from "./dashboard/islandDashboard";
 export { default as SellerDashboardHeader } from "./dashboard/sellerDashboardHeader";
 export { default as DashboardItem } from "./dashboard/dashboardItem";
+export { default as ClientDashboardEdit } from "./dashboard/clientDashboardEdit";
 
 //Layout
 export { default as Nav } from "./layout/nav/nav";
@@ -122,6 +123,7 @@ export { default as FormRow } from "./form/formRow";
 export { default as AdminCreateUserForm } from "./forms/adminCreateUser";
 export { default as AdminCreateReviewForm } from "./forms/adminCreateReview";
 export { default as AdminCreateBeatForm } from "./forms/adminCreateBeat";
+export { default as EditClientForm } from "./forms/editClientForm";
 
 //export { default as BeatImage } from "./beat/beatImage";
 //export { default as Checkbox } from "./common/checkbox";

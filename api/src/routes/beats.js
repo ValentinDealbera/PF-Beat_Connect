@@ -20,10 +20,13 @@ initializeApp(config.firebaseConfig);
 const storage = getStorage();
 
 router.get("/", async (req, res) => {
+
+
   const page = req.query.page || 1;
   const limit = req.query.limit || 5;
   const { name, priceAmount, BPM } = req.query;
-  const genres = req.headers.genre? req.headers.genre.split(","):null;
+  const genres = req.headers.genre ? req.headers.genre.split(",") : [""];
+
 
   console.log(genres);
 
@@ -38,6 +41,8 @@ router.get("/", async (req, res) => {
     sortBy = { priceAmount };
   }
 
+
+
   const minMaxFiltersFunction = ({ minPrice, maxPrice, minBPM, maxBPM }) => {
     let filters = {};
     minPrice &&
@@ -51,6 +56,8 @@ router.get("/", async (req, res) => {
     maxBPM && (filters.BPM = { ...filters.BPM, $lt: maxBPM * 1 + 0.01 });
     return filters;
   };
+
+
 
   const minMaxFilters = minMaxFiltersFunction(req.query);
 
