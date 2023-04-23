@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { setTokenValid, setGoogleSuccessful, resetReducer, setClientData } from "@/redux/slices/client";
 import axios from "axios";
-
+import { serverUrl } from "@/data/config";
 
 export default function HOC(props) {
   const router = useRouter();
@@ -29,7 +29,7 @@ export default function HOC(props) {
   const getUserData = async ({ clientId }) => {
     console.log("Obteniendo datos del usuario", clientId);
     try {
-      const response = await axios.get(`http://localhost:3001/api/user/${clientId}`, { timeout: 5000 });
+      const response = await axios.get(`${serverUrl}user/${clientId}`, { timeout: 5000 });
       console.log(response.data);
 
       const newClient = {
@@ -54,7 +54,7 @@ export default function HOC(props) {
   const googleAuth = async (headers) => {
     console.log("googleAuth", headers);
     try {
-      const response = await axios.get("http://localhost:3001/api/google/verify", { headers });
+      const response = await axios.get(`${serverUrl}google/verify`, { headers });
 
       console.log(response.data);
 
@@ -106,7 +106,7 @@ export default function HOC(props) {
     async function fetchDataJson() {
       console.log("fetching useEffect json;", loginMethod);
       try {
-        const response = await axios.get("http://localhost:3001/api/auth/me", { headers: headersJson }, { timeout: 5000 });
+        const response = await axios.get(`${serverUrl}auth/me`, { headers: headersJson }, { timeout: 5000 });
         console.log(response.data);
 
         dispatch(setTokenValid(true));
@@ -121,79 +121,6 @@ export default function HOC(props) {
     if (loginMethod === "json" && headersJson !== undefined) fetchDataJson();
 
   }, [headersJson]);
-
-
-
-
-
-  //axios
-  //       .get("http://localhost:3001/api/auth/me", { headers })
-  //       .then((response) => {
-  //         console.log(response.data);
-  //         dispatch(setTokenValid(true));
-  //       })
-  //       .catch((error) => {
-  //         dispatch(setTokenValid(false));
-  //         console.log("Error:", error);
-  //       });
-  //   }
-
-
-
-
-
-  // useEffect(() => {
-
-  //   if (loginMethod === "google") {
-
-  //      async function googleAuth(headers)  {
-
-  //       try {
-
-  //         const response = await axios.get("http://localhost:3001/api/google/verify", { headers })
-  //         console.log(response.data);
-
-  //         dispatch(setGoogleSuccessful({
-  //           isLogged: true,
-  //           tokenValid: true,
-  //           googleSessionID: googleSessionID,
-  //         }));
-
-  //         console.log("Se inicio correctamente con google");
-
-  //       } catch (error) {
-  //         console.log("Error al iniciar con google");
-  //       }
-
-  //     }
-
-  //     const headers = {
-  //       session: googleSessionID,
-  //     };
-
-  //     if (googleSessionID) return googleAuth(headers)
-
-  //   } else {
-
-  //     const headers = {
-  //       Authorization: `Bearer ${authSettings.token}`,
-  //     };
-
-  //     axios
-  //       .get("http://localhost:3001/api/auth/me", { headers })
-  //       .then((response) => {
-  //         console.log(response.data);
-  //         dispatch(setTokenValid(true));
-  //       })
-  //       .catch((error) => {
-  //         dispatch(setTokenValid(false));
-  //         console.log("Error:", error);
-  //       });
-  //   }
-  // }, [googleSessionID]);
-
-
-
 
 
   if (hocIsWorking === false) {

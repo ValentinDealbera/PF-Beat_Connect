@@ -12,6 +12,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { serverUrl } from "@/data/config";
 
 export default function Home() {
   // si hay un code valido en las querys, registra al usuario actual como vendedor
@@ -22,7 +23,8 @@ export default function Home() {
     async function data(id) {
       try {
         const dato = await axios.put(
-          "http://localhost:3001/api/user/" + id,
+          `${serverUrl}user/${id}`,
+
           { seller: "VENDEDOR", mpcode: router.query.code },
           { headers: { userid: id } }
         );
@@ -44,7 +46,7 @@ export default function Home() {
           //  style={{ minHeight: "15vh" }}
         >
           <div className="padding-estilo2  gap-estilo3 mt-6 flex h-full w-full flex-col items-start justify-between align-middle md:flex-row md:items-center">
-            <div className="gap-2 flex w-full flex-col justify-center">
+            <div className="flex w-full flex-col justify-center gap-2">
               <div id="text-box">
                 <h1 className="text-titulo1-regular text-white">
                   Comienza tu carrera musical,{" "}
