@@ -26,8 +26,11 @@ export default function Master(props) {
 
   useEffect(() => {
   console.log("fetch master");
+  if (router.pathname.startsWith("/client")) return;
+  else if (router.pathname.startsWith("/beats/author")) return;
+  else if (router.pathname === "/beats") return;
     dispatch(fetchBeats({}));
-  }, [dispatch]);
+  }, [dispatch, router.pathname]);
 
   useEffect(() => {
     if (router.pathname.startsWith("/client")) {

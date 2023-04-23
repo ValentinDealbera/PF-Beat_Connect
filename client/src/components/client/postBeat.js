@@ -63,9 +63,9 @@ export default function PostBeat() {
     setForm((prevForm) => ({ ...prevForm, genre: e }));
   };
 
-  useEffect(() => {
-    dispatch(fetchGenres());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchGenres());
+  // }, []);
 
   useEffect(() => {
 

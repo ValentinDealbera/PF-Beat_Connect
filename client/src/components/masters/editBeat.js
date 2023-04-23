@@ -61,9 +61,9 @@ export default function EditBeat() {
     setForm((prevForm) => ({ ...prevForm, genre: e }));
   };
 
-  useEffect(() => {
-    dispatch(fetchGenres());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchGenres());
+  // }, []);
 
   useEffect(() => {
 

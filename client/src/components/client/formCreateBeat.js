@@ -2,7 +2,7 @@ import { Input, Button } from "@/components";
 import { postClientBeat } from "@/redux/slices/client";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import ValidationCreateBeat from "./validationCreateBeat";
+import {ValidationCreateBeat} from "./validationCreateBeat";
 
 export default function FormCreateBeat() {
   // Estados de error y de adquisición de la información.
