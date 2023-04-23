@@ -41,7 +41,7 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
       lastName: `${mode === "edit" ? defaultValues.lastName : ""}`,
       image: "",
       email: `${mode === "edit" ? defaultValues.email : ""}`,
-      // password: `${mode === "edit" ? defaultValues.password : ""}`,
+      password: `${mode === "edit" ? defaultValues.password : ""}`,
       id: `${mode === "edit" ? defaultValues._id : ""}`,
       bio: `${mode === "edit" ? defaultValues.bio : ""}`,
       backImage:"",

@@ -11,7 +11,8 @@ export default function HOC(props) {
   const { authSettings, isLogged, client } = useSelector((state) => state?.client);
   const { loginMethod, tokenValid, googleSessionID } = useSelector((state) => state?.client?.authSettings);
 
-  const hocIsWorking = true;
+  // const hocIsWorking = true;
+  const hocIsWorking = false;
   const experimentalIsClient = isLogged;
   const experimentalIsAdmin = authSettings.superAdmin;
 

@@ -38,10 +38,10 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
     const [form, setForm] = useState({
         name: `${mode === "edit" ? defaultValues.name : ""}`,
         priceAmount: `${mode === "edit" ? defaultValues.priceAmount : ""}`,
-        genre: `${mode === "edit" ? defaultValues.genre : ""}`,
+        genre: `${mode === "edit" ? defaultValues.genre._id : ""}`,
         image: `${mode === "edit" ? defaultValues.image : ""}`,
         audioMP3: `${mode === "edit" ? defaultValues.audioMP3 : ""}`,
-        userCreator: `${mode === "edit" ? defaultValues.userCreator: ""}`,
+        userCreator: `${mode === "edit" ? defaultValues.userCreator._id: ""}`,
         bpm: `${mode === "edit" ? defaultValues.BPM : ""}`,
         id: `${mode === "edit" ? defaultValues._id : ""}`,
         softDelete: `${mode === "edit" ? defaultValues.softDelete : ""}`, 
@@ -50,6 +50,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
       });
 
       console.log("Data para el form", form);
+      console.log("USERCREATOR", defaultValues.userCreator)
 
       const handleInput = (e) => {
         handleInputChange(
@@ -83,7 +84,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
 
       useEffect(()=>{
         dispatch(fetchGenres());
-        console.log("generes", genres)
+        console.log("genres", genres)
       },[]);
 
       useEffect(() => {
@@ -163,8 +164,8 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
                   name="userCreator"
                   label="User Creator"
                   placeholder="User Creator:"
-                  value = {mode === "edit"? defaultValues.userCreator:null}
-                  defaultValue={mode === "edit" ? defaultValues.userCreator: ""}
+                  value = {mode === "edit"? defaultValues.userCreator._id:null}
+                  defaultValue={mode === "edit" ? defaultValues.userCreator._id: ""}
                   type="text"
                   onChange={handleInput}
                   error={error.userCreator}
