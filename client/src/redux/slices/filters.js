@@ -40,19 +40,15 @@ export const fetchFilteredBeats = createAsyncThunk(
 
 export const fetchGenres = createAsyncThunk(
   "genres/fetchGenres",
- async (_, { signal }) => {
-    const { signal: cancelSignal, abort } = createAbortController();
-    signal.addEventListener("abort", () => {
-      abort();
-    });
+  async (_, { signal }) => {
     const { data } = await axios.get(`${serverUrl}genre`, {
-      signal: cancelSignal,
+      signal,
     });
-    const genresResponse = data;
-    return genresResponse;
+      const genresResponse = data;
+      return genresResponse;
   }
-
 );
+
 
 
 // export const fetchGenres = createAsyncThunk("genres/fetchGenres",

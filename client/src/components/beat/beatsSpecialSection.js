@@ -1,4 +1,4 @@
-import { Section, BeatCardFlex } from "@/components";
+import { Section, BeatCardFlex, BeatCardGrid, NewBeatCardGrid } from "@/components";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -23,7 +23,7 @@ const limitedItems = activeItems.slice(0, limit);
         {props.title}
         {props.children}{" "}
       </h1>
-      <BeatCardFlex beats={limitedItems} />
+      <NewBeatCardGrid beats={limitedItems} />
     </Section>
   );
 }
