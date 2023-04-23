@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { resetReducer } from "@/redux/slices/client";
 import { resetPersist } from '@/redux/store/store';
+import { serverUrl } from "@/data/config";
 
 export default function Logout() {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ export default function Logout() {
       console.log("seguimos")
 
       if (loginMethod === "google") {
-        router.push("http://localhost:3001/api/google/logout");
+        router.push(`${serverUrl}google/logout`);
       } else {
         router.push("/");
       }
