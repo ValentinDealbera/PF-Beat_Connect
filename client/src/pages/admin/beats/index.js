@@ -68,7 +68,7 @@ export default function SellerDashboardOverview() {
              </div>
            ),
           price: item.priceAmount,
-          creator : `${item.userCreator}`,
+          creator: item.userCreator ? item.userCreator.username : "",
           state: item.softDelete? "Paused":"Ok",
           edit: (<button
             onClick={() => handleEdit(item)}
