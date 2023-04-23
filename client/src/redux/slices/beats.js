@@ -2,6 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { serverUrl } from "@/data/config";
 import axios from "axios";
 import { data } from "autoprefixer";
+import { throttle } from 'lodash';
+import createAbortController from "@/utils/abortController";
 
 const initialState = {
   publicBeatsFetchStatus: false, //deprecated
@@ -32,60 +34,74 @@ const initialState = {
 export const fetchBeats = createAsyncThunk(
   "beats/fetchBeats",
 
-  async ({
-    page = 1,
-    minPrice,
-    maxPrice,
-    minBPM,
-    maxBPM,
-    name,
-    BPM,
-    priceAmount,
-    rating,
-    genre,
-  }) => {
-    console.log("fetch slice 1");
-    const queryParameters = {
-      ...(minPrice !== 0 && !isNaN(minPrice) && { minPrice }),
-      ...(maxPrice !== 0 && !isNaN(maxPrice) && { maxPrice }),
-      ...(minBPM !== 0 && !isNaN(minBPM) && { minBPM }),
-      ...(maxBPM !== 0 && !isNaN(maxBPM) && { maxBPM }),
-      ...(name && { name }),
-      ...(BPM && { BPM }),
-      ...(priceAmount && { priceAmount }),
-      ...(rating && { rating }),
-      ...(genre && { genre }),
-      
 
-      // Agrega aquí otros parámetros de consulta que quieras incluir
-    };
+    async ({
+      page = 1,
+      minPrice,
+      maxPrice,
+      minBPM,
+      maxBPM,
+      name,
+      BPM,
+      priceAmount,
+      rating,
+      genre,
+    }, {signal}) => {
+      console.log("fetch slice 1");
+      const queryParameters = {
+        ...(minPrice !== 0 && !isNaN(minPrice) && { minPrice }),
+        ...(maxPrice !== 0 && !isNaN(maxPrice) && { maxPrice }),
+        ...(minBPM !== 0 && !isNaN(minBPM) && { minBPM }),
+        ...(maxBPM !== 0 && !isNaN(maxBPM) && { maxBPM }),
+        ...(name && { name }),
+        ...(BPM && { BPM }),
+        ...(priceAmount && { priceAmount }),
+        ...(rating && { rating }),
+        ...(genre && { genre }),
 
-    let queryString = "?";
-    Object.entries(queryParameters).forEach(([key, value]) => {
-      if (value !== null && value !== undefined) {
-        queryString += `&${key}=${encodeURIComponent(value)}`;
-      }
-    });
 
-    
+        // Agrega aquí otros parámetros de consulta que quieras incluir
+      };
 
-    const response = await axios.get(
-      `${serverUrl}beats?page=${page}${queryString.substr(1)}`,
-      {
-        headers: {
-          genre,
-        },
-      }
-    );
+      let queryString = "?";
+      Object.entries(queryParameters).forEach(([key, value]) => {
+        if (value !== null && value !== undefined) {
+          queryString += `&${key}=${encodeURIComponent(value)}`;
+        }
+      });
 
-    return {
-      docs: response.data.docs,
-      next: response.data.nextPage,
-      prev: response.data.prevPage,
-      current: response.data.page,
-      limit: response.data.totalPages,
-    };
-  }
+      const { signal: cancelSignal, abort } = createAbortController();
+      signal.addEventListener("abort", () => {
+        abort();
+      });
+
+      const response = await axios.get(
+        `${serverUrl}beats?page=${page}${queryString.substr(1)}`,
+        {
+          headers: {
+            genre,
+          },
+          signal: cancelSignal,
+        }
+      );
+
+      // const response = await axios.get(
+      //   `${serverUrl}beats?page=${page}${queryString.substr(1)}`,
+      //   {
+      //     headers: {
+      //       genre,
+      //     },
+      //   }
+      // );
+
+      return {
+        docs: response.data.docs,
+        next: response.data.nextPage,
+        prev: response.data.prevPage,
+        current: response.data.page,
+        limit: response.data.totalPages,
+      };
+    },
 );
 
 //IGNORAR ESTE CODIGO

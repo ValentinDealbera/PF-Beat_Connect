@@ -2,6 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { serverUrl } from "@/data/config";
 import axios from "axios";
 import { sortArr } from "@/data/fakeDB";
+import { throttle } from "lodash";
+import createAbortController from "@/utils/abortController";
 
 const initialState = {
   searchFilter: "",
@@ -36,11 +38,31 @@ export const fetchFilteredBeats = createAsyncThunk(
   }
 );
 
-export const fetchGenres = createAsyncThunk("genres/fetchGenres", async () => {
-  const { data } = await axios.get(`${serverUrl}genre`);
-  const genresResponse = data;
-  return genresResponse;
-});
+export const fetchGenres = createAsyncThunk(
+  "genres/fetchGenres",
+ async (_, { signal }) => {
+    const { signal: cancelSignal, abort } = createAbortController();
+    signal.addEventListener("abort", () => {
+      abort();
+    });
+    const { data } = await axios.get(`${serverUrl}genre`, {
+      signal: cancelSignal,
+    });
+    const genresResponse = data;
+    return genresResponse;
+  }
+
+);
+
+
+// export const fetchGenres = createAsyncThunk("genres/fetchGenres",
+//   throttle(
+//     async () => {
+//       const { data } = await axios.get(`${serverUrl}genre`);
+//       const genresResponse = data;
+//       return genresResponse;
+//     }
+//     , 3000));
 
 const filtersSlice = createSlice({
   name: "cart",

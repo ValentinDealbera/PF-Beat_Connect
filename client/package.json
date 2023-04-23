@@ -19,6 +19,7 @@
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
     "json-server": "^0.17.3",
+    "lodash": "^4.17.21",
     "next": "13.3.0",
     "postcss": "8.4.21",
     "prettier": "^2.8.7",
