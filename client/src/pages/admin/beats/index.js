@@ -13,7 +13,8 @@ import { adminGetBeats, setCurrentEditBeat, adminDeleteBeat, setCurrentPage } fr
 
 export default function SellerDashboardOverview() {  
     const dispatch = useDispatch();
-    const beatData = useSelector((state) => state.admin.beats);    
+    const beatData = useSelector((state) => state.admin.beats);
+    console.log(beatData);  
     const router = useRouter();
     const [beatToDelete, setBeatToDelete] = useState(null);
    

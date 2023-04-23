@@ -93,7 +93,7 @@ router.get("/:id", async (req, res) => {
 
 router.post("/admin", adminMiddleware, async (req, res) => {
   const { body } = req;
-
+  if (body.image === '') delete body.image
   try {
     const user = await UserModel.create(body);
     res.send(user);
@@ -153,12 +153,12 @@ router.put("/:id", async (req, res) => {
       bougthBeats
     ) {
       const user = await UserModel.findById(id);
-      if (username) user.username = username;
-      if (firstName) user.firstName = firstName;
-      if (lastName) user.lastName = lastName;
-      if (email) user.email = email;
-      if (bio) user.bio = bio;
-      if (password) {
+      if (username && username !== "") user.username = username;
+      if (firstName && firstName !== "") user.firstName = firstName;
+      if (lastName && lastName !== "") user.lastName = lastName;
+      if (email && email !== "") user.email = email;
+      if (bio && bio !== "") user.bio = bio;
+      if (password && password !== "") {
         const saltRounds = 10;
         const hashedPassword = bcrypt.hashSync(password, saltRounds);
         user.password = hashedPassword;
@@ -241,8 +241,10 @@ router.put("/:id", async (req, res) => {
 
 router.put("/admin/:id", adminMiddleware, async (req, res) => {
   try {
+    console.log('-------------', req)
     const { id } = req.params;
       const image = req.files ? req.files.image : null
+      console.log('ESTA ES LA IMAGEN Y COMO LLEGA', image)
       const backImage = req.files ? req.files.backImage : null
     const {
       seller,
@@ -283,12 +285,12 @@ router.put("/admin/:id", adminMiddleware, async (req, res) => {
       bougthBeats
     ) {
       const user = await UserModel.findById(id);
-      if (username) user.username = username;
-      if (firstName) user.firstName = firstName;
-      if (lastName) user.lastName = lastName;
-      if (email) user.email = email;
-      if (bio) user.bio = bio;
-      if (password) {
+      if (username && username !== "") user.username = username;
+      if (firstName && firstName !== "") user.firstName = firstName;
+      if (lastName && lastName !== "") user.lastName = lastName;
+      if (email && email !== "") user.email = email;
+      if (bio && bio !== "") user.bio = bio;
+      if (password && password !== "") {
         const saltRounds = 10;
         const hashedPassword = bcrypt.hashSync(password, saltRounds);
         user.password = hashedPassword;
@@ -298,6 +300,7 @@ router.put("/admin/:id", adminMiddleware, async (req, res) => {
       if (soft) user.softDelete = !user.softDelete;
       if (image) {
         const imageData = fs.readFileSync(image.tempFilePath);
+        console.log('Procesando imagen');
         const imageStorageRef = ref(
           storage,
           `users/${user.username}/image/${user.username}`
@@ -313,7 +316,8 @@ router.put("/admin/:id", adminMiddleware, async (req, res) => {
           imageMetadata
         );
         const downloadImageURL = await getDownloadURL(imageSnapshot.ref);
-        user.image = downloadImageURL;
+        user.image = downloadImageURL ? downloadImageURL : user.image;
+        console.log('Imagen subida');
       }
       if (backImage) {
         const imageData = fs.readFileSync(backImage.tempFilePath);
@@ -334,7 +338,6 @@ router.put("/admin/:id", adminMiddleware, async (req, res) => {
         const downloadBackImageURL = await getDownloadURL(imageSnapshot.ref);
         user.backImage = downloadBackImageURL;
       }
-      console.log(user);
       user.save();
       res.status(200).json(user);
     } else

@@ -61,6 +61,7 @@ export const adminPostUser = createAsyncThunk(
       const response = await axios.post(`${serverUrl}user/admin`, data, {
         headers: {
           admintoken: tokenAdmin,
+          "Content-Type": "multipart/form-data",
         },
       });
       const userResponse = response.data;
@@ -83,6 +84,7 @@ export const adminEditUser = createAsyncThunk(
         {
           headers: {
             admintoken: tokenAdmin,
+            "Content-Type": "multipart/form-data",
             // id:data.id,
           },
         }
@@ -186,10 +188,10 @@ export const adminGetBeats = createAsyncThunk(
   "beats/adminGetBeats",
   async (data, { rejectWithValue }) => {
     try {
-      console.log("data", data);
+      console.log("AdlminData", data);
       const response = await axios.get(`${serverUrl}beats?limit=100`);
       const beatResponse = response.data.docs;
-
+      console.log('++++++++++++++',beatResponse)
       return beatResponse;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -232,7 +234,7 @@ export const adminEditBeat = createAsyncThunk(
         {
           headers: {
             admintoken: tokenAdmin,
-            "Content-Type": "multipart/form-data",
+            "Content-Type":"multipart/form-data",
           },
         }
       );
@@ -501,7 +503,7 @@ const beatsSlice = createSlice({
             color: "#00B300",
           },
         });
-        state.beats = action.payload.beatResponse;
+        state.beats = [...state.beats,action.payload.beatResponse];
         console.log("state.beats", state.beats);
       })
       .addCase(adminPostBeat.rejected, (state, action) => {
