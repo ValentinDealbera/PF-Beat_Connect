@@ -61,7 +61,10 @@ export default function EditBeat() {
     setForm((prevForm) => ({ ...prevForm, genre: e }));
   };
 
-s
+  useEffect(() => {
+    dispatch(fetchGenres());
+  }, []);
+
   useEffect(() => {
 
     setErrors(ValidationCreateBeat(form, fieldsToValidate));
