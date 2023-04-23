@@ -19,14 +19,29 @@ export default function BeatDetailSideBar() {
     {
       msg1: "Free License, MP3",
       msg2: "$0.00",
-      beat: currentBeat,
+      beat: currentBeat.audioMP3,
+      type: "free",
     },
     {
       msg1: "Standart License, WAV",
-      msg2: "$10.00",
-      beat: currentBeat,
+      msg2: `$${currentBeat.priceAmount}`,
+      beat: currentBeat.audioWAV,
+      type: "paid",
     },
   ];
+
+  // const dynamicBeatDetailBox = [
+  //   {
+  //     msg1: "Free License, MP3",
+  //     msg2: "$0.00",
+  //     beat: currentBeat,
+  //   },
+  //   {
+  //     msg1: "Standart License, WAV",
+  //     msg2: "$10.00",
+  //     beat: currentBeat,
+  //   },
+  // ];
 
   return (
     <>
@@ -45,6 +60,7 @@ export default function BeatDetailSideBar() {
                     msg2={box.msg2}
                     key={box.msg1}
                     beat={currentBeat}
+                    type={box.type}
                   />
                   <hr className="mt-4 border-slate-200" />
                 </div>
@@ -74,13 +90,21 @@ function BeatDataBox({ beat }) {
   );
 }
 
-function BeatDetailBox({ msg1, msg2, beat }) {
+function BeatDetailBox({ msg1, msg2, beat, type }) {
   const dispatch = useDispatch();
+
+  //que el boton pueda descargar el beat
   return (
     <div className="h-auto">
       <p className="pb-1 text-base font-medium text-black">{msg1}</p>
       <p className=" mb-1 text-sm font-semibold text-red-700">{msg2}</p>
-<AddToCart beat={beat} posAction={() => externalManageDropdown()} />
+      {type === "free" ? (
+        <a className=" text-sm font-semibold text-red-700" download href={beat.audioMP3}>  
+          Descargar
+        </a>
+      ) : (
+        <AddToCart beat={beat} posAction={() => externalManageDropdown()} />
+      )}
     </div>
   );
 }

@@ -2,7 +2,7 @@ import { Input, Button } from "@/components";
 import { postClientBeat } from "@/redux/slices/client";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import ValidationCreateBeat from "./validationCreateBeat";
+import {ValidationCreateBeat} from "./validationCreateBeat";
 
 export default function FormCreateBeat() {
   // Estados de error y de adquisición de la información.
@@ -50,14 +50,13 @@ export default function FormCreateBeat() {
     );
   };
 
-  console.log("Soy el form", createData);
-  console.log("Soy el error", error);
+
 
   // Transformamos la data a JSON
 
   const createDataJson = JSON.stringify(createData);
 
-  console.log(createDataJson);
+
 
   // Función de submit del botón del formulario, no deja enviar la info si existe un error.
   // Por el momento le falta la función de Posteo, así que al darle click con la info correcta no hace nada.

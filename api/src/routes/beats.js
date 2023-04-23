@@ -7,7 +7,6 @@ const {
   ref,
   getDownloadURL,
   uploadBytesResumable,
-  deleteObject,
 } = require("firebase/storage");
 const config = require("../../config/firebaseConfig");
 const beatModel = require("../models/nosql/beats");
@@ -21,9 +20,15 @@ initializeApp(config.firebaseConfig);
 const storage = getStorage();
 
 router.get("/", async (req, res) => {
+
+
   const page = req.query.page || 1;
   const limit = req.query.limit || 5;
-  const { name, priceAmount, BPM, genre } = req.query;
+  const { name, priceAmount, BPM } = req.query;
+  const genres = req.headers.genre ? req.headers.genre.split(",") : [""];
+
+
+  console.log(genres);
 
   let sortBy;
   if (name) {
@@ -36,17 +41,7 @@ router.get("/", async (req, res) => {
     sortBy = { priceAmount };
   }
 
-  const genreDictionary = {
-    POP: "6439b4f5ebf145d96f537996",
-    "HIP-HOP": "6439b53bebf145d96f537998",
-    "R&B": "6439b56d5a9480c79875008f",
-    ELECTRONIC: "6439b5805a9480c798750094",
-    REGGAE: "6439b5995a9480c798750096",
-    COUNTRY: "6439b5a55a9480c798750098",
-    ROCK: "6439b5c45a9480c79875009a",
-  };
 
-  let translatedGenre = genreDictionary[genre];
 
   const minMaxFiltersFunction = ({ minPrice, maxPrice, minBPM, maxBPM }) => {
     let filters = {};
@@ -62,25 +57,30 @@ router.get("/", async (req, res) => {
     return filters;
   };
 
+
+
   const minMaxFilters = minMaxFiltersFunction(req.query);
 
-  console.log(minMaxFilters);
   try {
     const beats = await beatModel.paginate(
       {
-        ...(translatedGenre && { genre: translatedGenre }),
+        ...(genres && genres[0] !== "" && { genre: { $in: genres } }),
         ...(minMaxFilters && { ...minMaxFilters }),
       },
       {
         limit,
         page,
         sort: sortBy,
+        collation: {
+          locale: "en",
+        },
         populate: ["userCreator", "genre"],
       }
     );
 
     res.status(200).json(beats);
   } catch (error) {
+    console.log(error.message);
     res.status(500).json({ error: error.message });
   }
 });
@@ -102,9 +102,6 @@ router.post("/", async (req, res) => {
   const { userid } = req.headers;
 
   console.log("procesando beat");
-
-
-
 
   const comprobacion = await beatModel.findOne({ name: req.body.name });
   if (comprobacion) {
@@ -152,9 +149,7 @@ router.post("/", async (req, res) => {
       //-------------------------------------audio MP3
       const audioStorageRef = ref(
         storage,
-        `beats/${req.body.name}/audioMP3/${
-          req.body.name
-        }`
+        `beats/${req.body.name}/audioMP3/${req.body.name}`
       );
 
       const audioMetadata = {
@@ -174,9 +169,7 @@ router.post("/", async (req, res) => {
         const imageData = fs.readFileSync(req.files.image.tempFilePath);
         const imageStorageRef = ref(
           storage,
-          `beats/${req.body.name}/image/${
-            req.body.name
-          }`
+          `beats/${req.body.name}/image/${req.body.name}`
         );
 
         const imageMetadata = {
@@ -316,7 +309,7 @@ router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { userid } = req.headers;
-    const {image} = req.files
+    const { image } = req.files;
     const { name, priceAmount, review, softDelete, genre, relevance } =
       req.body;
     const updatedBeat = await beatModel.findById(id).populate("userCreator");
@@ -337,9 +330,7 @@ router.put("/:id", async (req, res) => {
       const imageData = fs.readFileSync(image.tempFilePath);
       const imageStorageRef = ref(
         storage,
-        `beats/${updatedBeat.name}/image/${
-          updatedBeat.name
-        }`
+        `beats/${updatedBeat.name}/image/${updatedBeat.name}`
       );
 
       const imageMetadata = {
@@ -352,7 +343,7 @@ router.put("/:id", async (req, res) => {
         imageMetadata
       );
       const downloadImageURL = await getDownloadURL(imageSnapshot.ref);
-      updatedBeat.image = downloadImageURL
+      updatedBeat.image = downloadImageURL;
     }
     if (relevance)
       updatedBeat.relevance = relevance === "+" && updatedBeat.relevance + 1;
@@ -366,7 +357,7 @@ router.put("/:id", async (req, res) => {
 router.put("/admin/:id", adminMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
-    const {image} = req.files
+      const image = req.files ? req.files.image : null
     const { name, priceAmount, review, softDelete, genre, relevance } =
       req.body;
     const updatedBeat = await beatModel.findById(id);
@@ -381,9 +372,7 @@ router.put("/admin/:id", adminMiddleware, async (req, res) => {
       const imageData = fs.readFileSync(image.tempFilePath);
       const imageStorageRef = ref(
         storage,
-        `beats/${updatedBeat.name}/image/${
-          updatedBeat.name
-        }`
+        `beats/${updatedBeat.name}/image/${updatedBeat.name}`
       );
 
       const imageMetadata = {
@@ -396,12 +385,13 @@ router.put("/admin/:id", adminMiddleware, async (req, res) => {
         imageMetadata
       );
       const downloadImageURL = await getDownloadURL(imageSnapshot.ref);
-      updatedBeat.image = downloadImageURL
+      updatedBeat.image = downloadImageURL;
     }
     if (relevance) updatedBeat.relevance = Number(relevance);
     updatedBeat.save();
     return res.status(200).json(updatedBeat);
   } catch (error) {
+    console.log(error.message);
     res.status(500).json({ error: error.message });
   }
 });

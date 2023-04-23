@@ -2,12 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { serverUrl } from "@/data/config";
 import axios from "axios";
 import { sortArr } from "@/data/fakeDB";
-
-export const fetchGenres = createAsyncThunk("genres/fetchGenres", async () => {
-  const { data } = await axios.get(`${serverUrl}genre`);
-  const genresResponse = data;
-  return genresResponse;
-});
+import { throttle } from "lodash";
+import createAbortController from "@/utils/abortController";
 
 const initialState = {
   searchFilter: "",
@@ -17,14 +13,52 @@ const initialState = {
     min: 0,
     max: 0,
   },
-  BpmFilter : {
+  BpmFilter: {
     min: 0,
     max: 0,
   },
   sorter: "default",
   sorterValues: sortArr,
   typesFilter: [],
+  filteredBeats: [],
 };
+
+export const fetchFilteredBeats = createAsyncThunk(
+  "filters/fetchFilteredBeats",
+  async (data, { rejectWithValue }) => {
+    try {
+      console.log("fabi console.log", data);
+      const response = await axios.get(`${serverUrl}beats${data}`);
+      const filteredBeats = response.data.docs;
+
+      return filteredBeats;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+export const fetchGenres = createAsyncThunk(
+  "genres/fetchGenres",
+  async (_, { signal }) => {
+    const { data } = await axios.get(`${serverUrl}genre`, {
+      signal,
+    });
+      const genresResponse = data;
+      return genresResponse;
+  }
+);
+
+
+
+// export const fetchGenres = createAsyncThunk("genres/fetchGenres",
+//   throttle(
+//     async () => {
+//       const { data } = await axios.get(`${serverUrl}genre`);
+//       const genresResponse = data;
+//       return genresResponse;
+//     }
+//     , 3000));
 
 const filtersSlice = createSlice({
   name: "cart",
@@ -61,6 +95,7 @@ const filtersSlice = createSlice({
 
     setBpmFilter(state, action) {
       state.BpmFilter = action.payload;
+      console.log("BPM FILTER", state.BpmFilter);
     },
     setSorter(state, action) {
       state.sorter = action.payload;
@@ -88,6 +123,20 @@ const filtersSlice = createSlice({
       })
       .addCase(fetchGenres.pending, (state, action) => {
         state.genres = [];
+      })
+
+      //fetchFilteredBeats
+
+      .addCase(fetchFilteredBeats.fulfilled, (state, action) => {
+        console.log("Filtered beats fetched successfully");
+
+        state.filteredBeats = action.payload;
+      })
+      .addCase(fetchFilteredBeats.rejected, (state, action) => {
+        console.error("fetch error");
+      })
+      .addCase(fetchFilteredBeats.pending, (state, action) => {
+        console.log("Trayendo los beats...");
       });
   },
 });

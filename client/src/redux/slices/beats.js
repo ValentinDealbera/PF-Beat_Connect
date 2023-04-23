@@ -1,6 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { serverUrl } from "@/data/config";
 import axios from "axios";
+import { data } from "autoprefixer";
+import { throttle } from 'lodash';
+import createAbortController from "@/utils/abortController";
 
 const initialState = {
   publicBeatsFetchStatus: false, //deprecated
@@ -19,6 +22,7 @@ const initialState = {
   generalActiveIndex: 0,
   activeReviewDetail: [],
   loadingcurrentAuthor: false,
+  pageIndex: 1,
   pages: {
     next: null,
     prev: null,
@@ -29,36 +33,75 @@ const initialState = {
 
 export const fetchBeats = createAsyncThunk(
   "beats/fetchBeats",
-  async ({ page = 1, minPrice = 0, maxPrice }) => {
 
-    const queryParameters = {
-      page: page,
-      minPrice: minPrice,
-      maxPrice: maxPrice,
-      // Agrega aquí otros parámetros de consulta que quieras incluir
-    };
 
-    let queryString = "";
-    Object.entries(queryParameters).forEach(([key, value]) => {
-      if (value !== null && value !== undefined) {
-        queryString += `?&${key}=${encodeURIComponent(value)}`;
-      }
-    });
+    async ({
+      page = 1,
+      minPrice,
+      maxPrice,
+      minBPM,
+      maxBPM,
+      name,
+      BPM,
+      priceAmount,
+      rating,
+      genre,
+    }, {signal}) => {
+      console.log("fetch slice 1");
+      const queryParameters = {
+        ...(minPrice !== 0 && !isNaN(minPrice) && { minPrice }),
+        ...(maxPrice !== 0 && !isNaN(maxPrice) && { maxPrice }),
+        ...(minBPM !== 0 && !isNaN(minBPM) && { minBPM }),
+        ...(maxBPM !== 0 && !isNaN(maxBPM) && { maxBPM }),
+        ...(name && { name }),
+        ...(BPM && { BPM }),
+        ...(priceAmount && { priceAmount }),
+        ...(rating && { rating }),
+        ...(genre && { genre }),
 
-    console.log("fetchBeats", `${serverUrl}beats?${queryString.substr(1)}`);
 
-    const response = await axios.get(
-      `${serverUrl}beats?${queryString.substr(1)}`
-    );
-      console.log('DATA DATA DATA', response.data);
-    return {
-      docs: response.data.docs,
-      next: response.data.nextPage,
-      prev: response.data.prevPage,
-      current: response.data.page,
-      limit: response.data.totalPages,
-    };
-  }
+        // Agrega aquí otros parámetros de consulta que quieras incluir
+      };
+
+      let queryString = "?";
+      Object.entries(queryParameters).forEach(([key, value]) => {
+        if (value !== null && value !== undefined) {
+          queryString += `&${key}=${encodeURIComponent(value)}`;
+        }
+      });
+
+      const { signal: cancelSignal, abort } = createAbortController();
+      signal.addEventListener("abort", () => {
+        abort();
+      });
+
+      const response = await axios.get(
+        `${serverUrl}beats?page=${page}${queryString.substr(1)}`,
+        {
+          headers: {
+            genre,
+          },
+          signal: cancelSignal,
+        }
+      );
+
+      // const response = await axios.get(
+      //   `${serverUrl}beats?page=${page}${queryString.substr(1)}`,
+      //   {
+      //     headers: {
+      //       genre,
+      //     },
+      //   }
+      // );
+
+      return {
+        docs: response.data.docs,
+        next: response.data.nextPage,
+        prev: response.data.prevPage,
+        current: response.data.page,
+        limit: response.data.totalPages,
+      };
+    },
 );
 
 //IGNORAR ESTE CODIGO
@@ -183,6 +226,9 @@ const beatsSlice = createSlice({
     setUserFavoriteBeats(state, action) {
       state.userFavoriteBeats = action.payload;
     },
+    setCurrentPage(state, action) {
+      state.pageIndex = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -193,7 +239,6 @@ const beatsSlice = createSlice({
         state.publicBeatsFetchStatus = false;
       })
       .addCase(fetchBeats.fulfilled, (state, action) => {
-        console.log("fetch beats fullfiled", action.payload);
         if (
           !Array.isArray(action.payload.docs) ||
           action.payload.docs.length === 0 ||
@@ -215,7 +260,7 @@ const beatsSlice = createSlice({
         // state.beatsDisplayMode = 1;
       })
       .addCase(fetchBeats.rejected, (state, action) => {
-        console.error(" fetch error");
+        console.error(" fetch error", action.error);
       })
 
       //--------------------
@@ -261,8 +306,6 @@ const beatsSlice = createSlice({
       })
       .addCase(fetchUserReviews.fulfilled, (state, action) => {
         state.activeReviewDetail = action.payload;
-
-        console.log(action.payload);
       })
       .addCase(fetchUserReviews.rejected, (state, action) => {
         console.error("fetch error");
@@ -280,146 +323,8 @@ export const {
   setUserFavoriteBeats,
   setCurrentAuthorBeats,
   setActiveItemsForProfile,
+  setCurrentPage,
 } = beatsSlice.actions;
 
 export default beatsSlice.reducer;
 
-//Version 1.0.0
-
-// import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-// import { beats } from "../../data/fakeDB";
-// import axios from "axios";
-
-// const initialState = {
-//   publicBeatsFetchStatus: false,
-//   authorFetchStatus: false,
-//   beatsDisplayMode: null,
-//   currentAuthorLastId: null,
-//   currentAuthor: {},
-//   publicItems: [],
-//   userFavoriteBeats: [],
-//   userPurchasedBeats: [],
-//   userOwnedBeats: [],
-//   currentAuthorBeats: [],
-//   activeItems: [],
-//   activeItemDetail: null,
-//   generalActiveIndex: 0,
-// };
-
-// const beatsSlice = createSlice({
-//   name: "profile",
-//   initialState,
-//   reducers: {
-//     //Establecemos los beats en el estado global
-//     setBeats(state, action) {
-//       console.log("setBeats", action.payload);
-//       state.publicBeatsFetchStatus = true;
-//       state.publicItems = action.payload;
-//     },
-//     setUserOwnedBeats(state, action) {
-//       state.userOwnedBeats = action.payload;
-//     },
-//     setUserPurchasedBeats(state, action) {
-//       console.log("setUserPurchasedBeats", action.payload);
-//       state.userPurchasedBeats = action.payload;
-//     },
-//     setUserFavoriteBeats(state, action) {
-//       state.userFavoriteBeats = action.payload;
-//     },
-//     setCurrentAuthorBeats(state, action) {
-
-//       state.currentAuthorBeats = action.payload.beats;
-//       state.currentAuthor = action.payload.authorId
-//       state.beatsDisplayMode = 3;
-//       state.authorFetchStatus = true;
-//       console.log("setCurrentAuthorBeats", action.payload, state.beatsDisplayMode );
-//     },
-//     setActiveItemDetail(state, action) {
-//       state.activeItemDetail = action.payload;
-//     },
-//     //Establecemos los beats activos en el estado global
-//     setActiveItemsForProfile(state, action) {
-//       if (action.payload === undefined || action.payload === null) {
-//         action.payload = state.generalActiveIndex;
-//       }
-//       action.payload === 0
-//         ? (state.activeItems = state.userPurchasedBeats)
-//         : action.payload === 1
-//         ? (state.activeItems = state.userOwnedBeats)
-//         : (state.activeItems = state.userFavoriteBeats);
-//     },
-//     //Establecemos el modo de visualización de los beats
-//     setBeatsDisplayMode(state, action) {
-//       //beatsDisplayMode = shop 0, demo 1, profile 2, currentAuthorBeats 3
-//       console.log("setBeatsDisplayMode", action.payload);
-//       state.beatsDisplayMode = action.payload;
-//       if (action.payload === 0 || action.payload === 1) {
-//         console.log("Establecemos active", action.payload);
-//         state.activeItems = state.publicItems;
-//       }
-//     },
-//     //Establecemos el indice de la pestaña activa en el perfil
-//     setGeneralActiveIndex(state, action) {
-//       state.generalActiveIndex = action.payload;
-//     },
-//   },
-// });
-
-// export const {
-//   setBeats,
-//   setActiveItemDetail,
-//   setBeatsDisplayMode,
-//   setGeneralActiveIndex,
-//   setUserOwnedBeats,
-//   setUserPurchasedBeats,
-//   setUserFavoriteBeats,
-//   setCurrentAuthorBeats,
-//   setActiveItemsForProfile,
-// } = beatsSlice.actions;
-// export default beatsSlice.reducer;
-
-// export const fetchBeats = () => async (dispatch, getState) => {
-//   try {
-//     //solicitamos get con axios
-//     const data = await axios.get("http://localhost:3001/beats");
-//     const beatsResponse = data.data;
-//     dispatch(setBeats(beatsResponse));
-//     console.log("data", beatsResponse);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
-
-// export const fetchUserBeats = () => async (dispatch, getState) => {
-//   try {
-//     console.log("fetchUserBeats, beats");
-//     // dispatch(setUserOwnedBeats(userOwnedBeats));
-
-//     const id = getState().client.client._id;
-//     const data = await axios.get(`http://localhost:3001/user/${id}`);
-//     const userPurchasedBeats = data.data.bougthBeats;
-//     const userOwnedBeats = data.data.createdBeats;
-//     console.log("userPurchasedBeats", userPurchasedBeats);
-//     dispatch(setUserPurchasedBeats(userPurchasedBeats));
-//     dispatch(setUserOwnedBeats(userOwnedBeats));
-//     dispatch(setUserFavoriteBeats([]));
-//     dispatch(setActiveItemsForProfile());
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
-
-// export const fetchCurrentAuthor = (id) => async (dispatch, getState) => {
-//   try {
-//     console.log("id", id);
-//    //
-//     const data = await axios.get(`http://localhost:3001/user/${id}`);
-//     const currentAuthorBeats = data.data.createdBeats;
-//     console.log("beats del autor actual", currentAuthorBeats);
-//     dispatch(setCurrentAuthorBeats({beats: currentAuthorBeats, authorId: id}));
-//    // dispatch(setCurrentAuthor(id));
-//     //dispatch(setBeatsDisplayMode(3));
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };

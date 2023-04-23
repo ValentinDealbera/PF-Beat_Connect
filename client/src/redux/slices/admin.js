@@ -35,7 +35,7 @@ export const adminDeleteUser = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       console.log("data", data);
-      const response = await axios.delete(`${serverUrl}user/admin/${data}`, {
+      const response = await axios.delete(`${serverUrl}user/admin/${data._id}`, {
         headers: {
           admintoken: tokenAdmin,
         },
@@ -61,6 +61,7 @@ export const adminPostUser = createAsyncThunk(
       const response = await axios.post(`${serverUrl}user/admin`, data, {
         headers: {
           admintoken: tokenAdmin,
+          "Content-Type": "multipart/form-data",
         },
       });
       const userResponse = response.data;
@@ -83,6 +84,8 @@ export const adminEditUser = createAsyncThunk(
         {
           headers: {
             admintoken: tokenAdmin,
+            "Content-Type": "multipart/form-data",
+            // id:data.id,
           },
         }
       );
@@ -184,11 +187,11 @@ export const adminGetBeats = createAsyncThunk(
   "beats/adminGetBeats",
   async (data, { rejectWithValue }) => {
     try {
-      console.log("data", data);
+      console.log("AdlminData", data);
       const response = await axios.get(`${serverUrl}beats?limit=100`);
       const beatResponse = response.data.docs;
-
-      return  { beatResponse };
+      console.log('++++++++++++++',beatResponse)
+      return beatResponse;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
@@ -230,12 +233,13 @@ export const adminEditBeat = createAsyncThunk(
         {
           headers: {
             admintoken: tokenAdmin,
+            "Content-Type":"multipart/form-data",
           },
         }
       );
-      const userResponse = response.data;
+      const beatResponse = response.data;
 
-      return { userResponse };
+      return { beatResponse };
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
@@ -385,8 +389,8 @@ const beatsSlice = createSlice({
       //--------------------
       //Extra reducers para adminGetReviews
       .addCase(adminGetReviews.fulfilled, (state, action) => {
-        console.log("action.payload ok", action.payload);
-        state.reviews = action.payload.reviewResponse;
+        console.log("action.payload ok review", action.payload);
+        state.reviews = Array.isArray(action.payload.reviewResponse) ? action.payload.reviewResponse : [];
         toast.success("Reviews cargadas correctamente", {
           style: {
             background: "#F0FFF0",
@@ -498,7 +502,8 @@ const beatsSlice = createSlice({
             color: "#00B300",
           },
         });
-        state.beats.push(action.payload.beatResponse);
+        state.beats = [...state.beats,action.payload.beatResponse];
+        console.log("state.beats", state.beats);
       })
       .addCase(adminPostBeat.rejected, (state, action) => {
         console.log("action.payload error", action.payload);
@@ -519,7 +524,7 @@ const beatsSlice = createSlice({
       //Extra reducers para adminGetBeats
       .addCase(adminGetBeats.fulfilled, (state, action) => {
         console.log("action.payload ok", action.payload);
-        state.beats = action.payload.beatResponse;
+        state.beats = action.payload;
         toast.success("Beats cargados correctamente", {
             style: {
                 background: "#F0FFF0",

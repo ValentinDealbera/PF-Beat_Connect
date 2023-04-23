@@ -1,7 +1,7 @@
 import { BeatRightSheet, Input } from "@/components";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { convertInSeller } from "@/redux/slices/client";
+import { serverUrl } from "@/data/config";
 import axios from "axios";
 import { useRouter } from "next/router";
 
@@ -34,7 +34,7 @@ const router = useRouter();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-    const data = await axios.get('http://localhost:3001/api/cart/toseller')
+    const data = await axios.get(`${serverUrl}cart/toseller`)
     router.push(data.data.link)
     } catch (error) {
       console.log(error)

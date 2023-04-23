@@ -6,7 +6,7 @@ export function ValidationCreateReview(form, fieldsToValidate) {
     fieldsToValidate = Object.keys(form);
   }
 
-  console.log("fieldsToValidate", fieldsToValidate, form);
+
 
   fieldsToValidate.forEach((field) => {
     switch (field) {

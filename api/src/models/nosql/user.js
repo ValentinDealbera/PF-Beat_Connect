@@ -1,6 +1,13 @@
 const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
+  googleId:{
+    type: String,
+    default: ''
+  },
+  name:{
+    type: String
+  },
   id: {
     type: mongoose.Types.ObjectId,
   },

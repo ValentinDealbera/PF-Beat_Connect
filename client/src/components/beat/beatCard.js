@@ -15,50 +15,54 @@ import {
 
 export default function BeatCard({ beat, variant }) {
   const dispatch = useDispatch();
-const { _id } = useSelector((state) => state.client.client);
+  try {
+    const { _id } = useSelector((state) => state.client.client);
 
 
-const fromClient = _id === beat.userCreator._id;
-
-if(fromClient) console.log("fromClient", _id, beat.userCreator._id);
+    const fromClient = _id === beat.userCreator._id;
 
 
 
-  const handleAction = () => {
-    dispatch(setActiveItemDetail(beat));
-    externalManageDropdown();
-  };
 
-  const handleEdit = () => {
-    dispatch(fetchCurrentBeat(beat._id));
-   manageEditBeat();
-  };
+    const handleAction = () => {
+      dispatch(setActiveItemDetail(beat));
+      externalManageDropdown();
+    };
 
-  return (
-    <>
-      <div onClick={handleAction}>
-        <div
-          className={`background-neutral-white gap-estilo3 flex flex-col ${
-            variant === "public" ? "" : "border-radius-estilo1 px-2 pb-5 pt-2 "
-          }`}
-        >
-          <BeatImage beat={beat} height={"auto"} width={"auto"} />
-          <div className={`${variant === "public" ? "" : "px-2"}`}>
-            <BeatPrice beat={beat} />
-            <BeatBPM beat={beat} />
-            <BeatTitle beat={beat} />
-            <AuthorName beat={beat} />
+    const handleEdit = () => {
+      dispatch(fetchCurrentBeat(beat._id));
+      manageEditBeat();
+    };
+
+    return (
+      <>
+        <div onClick={handleAction}>
+          <div
+            className={`background-neutral-white gap-estilo3 flex flex-col ${variant === "public" ? "" : "border-radius-estilo1 px-2 pb-5 pt-2 "
+              }`}
+          >
+            <BeatImage beat={beat} height={"auto"} width={"auto"} />
+            <div className={`${variant === "public" ? "" : "px-2"}`}>
+              <BeatPrice beat={beat} />
+              <BeatBPM beat={beat} />
+              <BeatTitle beat={beat} />
+              <AuthorName beat={beat} />
+            </div>
           </div>
+          {
+            fromClient && (
+              <button className="px-8 py-8 bg-black text-white" onClick={(e) => { e.stopPropagation(), handleEdit() }}>
+                Editar {beat.name}
+              </button>
+            )
+          }
         </div>
-        {
-        fromClient && (
-          <button  className="px-8 py-8 bg-black text-white" onClick={(e) => {e.stopPropagation(), handleEdit()}}>
-            Editar {beat.name}
-          </button>
-        )
-      }
-      </div>
 
-    </>
-  );
+      </>
+    );
+  } catch (error) {
+    console.log("error", error);
+
+  }
 }
+
