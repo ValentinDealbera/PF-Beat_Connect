@@ -25,10 +25,9 @@ export default function Master(props) {
   } = useSelector((state) => state.beats);
 
   useEffect(() => {
-    if (router.pathname.startsWith("/client")) return
-
-    dispatch(fetchBeats(0));
-  }, [dispatch, router]);
+  console.log("fetch master");
+    dispatch(fetchBeats());
+  }, []);
 
   useEffect(() => {
     if (router.pathname.startsWith("/client")) {

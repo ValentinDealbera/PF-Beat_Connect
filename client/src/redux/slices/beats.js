@@ -44,6 +44,7 @@ export const fetchBeats = createAsyncThunk(
     rating,
     genre,
   }) => {
+    console.log("fetch slice 1");
     const queryParameters = {
       ...(minPrice !== 0 && !isNaN(minPrice) && { minPrice }),
       ...(maxPrice !== 0 && !isNaN(maxPrice) && { maxPrice }),
@@ -65,7 +66,7 @@ export const fetchBeats = createAsyncThunk(
       }
     });
 
-    console.log(genre);
+    console.log("fetch slice");
 
     const response = await axios.get(
       `${serverUrl}beats?page=${page}${queryString.substr(1)}`,
@@ -73,8 +74,7 @@ export const fetchBeats = createAsyncThunk(
         headers: {
           genre,
         },
-      },
-      { timeout: 5000 }
+      }
     );
 
     return {

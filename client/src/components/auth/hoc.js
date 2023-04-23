@@ -9,13 +9,14 @@ export default function HOC(props) {
   const router = useRouter();
   const dispatch = useDispatch();
   const { authSettings, isLogged, client } = useSelector((state) => state?.client);
-  const { loginMethod, tokenValid } = useSelector((state) => state?.client?.authSettings);
+  const { loginMethod, tokenValid, googleSessionID } = useSelector((state) => state?.client?.authSettings);
 
   const hocIsWorking = true;
   const experimentalIsClient = isLogged;
   const experimentalIsAdmin = authSettings.superAdmin;
 
-  const googleSessionID = router.query.session;
+  const GoogleSessionID = googleSessionID ? googleSessionID : router.query.session;
+  console.log("GoogleSessionID", GoogleSessionID);
   const clientId = router.query.id;
 
   const headersJson = {
@@ -59,7 +60,7 @@ export default function HOC(props) {
       dispatch(setGoogleSuccessful({
         isLogged: true,
         tokenValid: true,
-        googleSessionID: googleSessionID,
+        googleSessionID: GoogleSessionID,
       }));
 
       console.log("Se inicio correctamente con google");
@@ -78,9 +79,9 @@ export default function HOC(props) {
   useEffect(() => {
     async function fetchData() {
       console.log("fetching useEffect google;", loginMethod);
-      if (router.query.session && router.query.session !== undefined) {
-        const headers = { session: router.query.session };
-        console.log("googleSessionID llamando", router.query.session);
+      if (GoogleSessionID && GoogleSessionID !== undefined) {
+        const headers = { session: GoogleSessionID };
+        console.log("googleSessionID llamando", GoogleSessionID);
         await googleAuth(headers);
         if (router.query.id && router.query.id !== undefined) {
           getUserData({ clientId: router.query.id });
@@ -95,7 +96,7 @@ export default function HOC(props) {
     else {
       console.log("No es google", loginMethod);
     }
-  }, [router.query.session, router.query.id,]);
+  }, [GoogleSessionID, router.query.id,]);
 
 
 

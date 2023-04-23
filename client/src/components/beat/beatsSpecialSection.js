@@ -6,7 +6,8 @@ import { setBeatsDisplayMode } from "@/redux/slices/beats";
 
 export default function BeatsSpecialSection(props) {
   const { activeItems } = useSelector((state) => state?.beats) || [];
-  console.log("activeItems xx", activeItems);
+  const state = useSelector((state) => state.beats);
+
 
 //Limit the number of items to 10
 

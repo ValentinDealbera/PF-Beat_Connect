@@ -1,7 +1,6 @@
 import {
   Head,
   Main,
-  Section,
   Hero,
   Search,
   BeatsShopSection,
@@ -9,20 +8,17 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { setSearchFilter } from "@/redux/slices/filters";
 import {
-  setBeatsDisplayMode,
-  fetchBeats,
   setCurrentPage,
 } from "@/redux/slices/beats";
-import { useEffect } from "react";
 
 export default function Beats() {
   const dispatch = useDispatch();
   const { searchFilter } = useSelector((state) => state.filters);
   const { pages } = useSelector((state) => state.beats);
 
-  useEffect(() => {
-    dispatch(setBeatsDisplayMode(0));
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(setBeatsDisplayMode(0));
+  // }, [dispatch]);
 
   //visibles solo 5 paginas, teninedo en cuenta la pagina actual y la ultima pagina. usamos push
   let visiblePages = [];
