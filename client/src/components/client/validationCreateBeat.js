@@ -2,8 +2,7 @@ export function ValidationCreateBeat(form, fieldsToValidate, mode) {
   const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
   let error = {};
   const modeOf = mode
-  console.log('SOY EL MODO DE EL FORMULARIO', modeOf)
-console.log(fieldsToValidate)
+
 
   const regexName = /^.{1,50}$/;
   const regexImage = /\.jpg$|\.png$/i;
@@ -14,7 +13,7 @@ console.log(fieldsToValidate)
     fieldsToValidate = Object.keys(form);
   }
 
-  console.log("soy validacion", fieldsToValidate);
+
   
   fieldsToValidate.forEach((field) => {
     switch (field) {
@@ -32,7 +31,7 @@ console.log(fieldsToValidate)
       // Validar tamaño de imagen
       case "image":
         if (mode === "edit") break;
-        console.log("soy image", form.image.name);
+    
         if (form.image.size > MAX_FILE_SIZE)
           error.image =
             "The size of the image is too large. Maximum allowed size is 10 MB.";
@@ -42,7 +41,7 @@ console.log(fieldsToValidate)
 
       case "audioMP3":
         if (mode === "edit") break;
-        console.log("soy audioMP3", form.audioMP3);
+
         if (form.audioMP3.size > MAX_FILE_SIZE)
           error.audioMP3 =
             "The size of the audio is too large. Maximum allowed size is 10 MB.";
@@ -52,14 +51,14 @@ console.log(fieldsToValidate)
         break;
 
       case "bpm":
-        console.log("soy bpm", form.bpm);
+     
         if (form.bpm > 350 || form.bpm < 20)
         
           error.bpm = "Your beat must have between 20 and 350 bpm.";
         break;
 
         case "genre":
-          console.log("soy genre", form.genre);
+       
           if (!form.genre || form.genre === "") error.genre = "You must select a genre";
           break;
 

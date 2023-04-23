@@ -27,7 +27,7 @@ export default function NewBeatCardGrid(props) {
 
   NewBeatCardGrid.handleDropdownOpen = handleDropdownOpen;
   useEffect(() => {
-    console.log(beatsDisplayMode);
+
   }, [beatsDisplayMode]);
 
   return (

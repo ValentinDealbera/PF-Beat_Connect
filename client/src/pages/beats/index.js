@@ -52,18 +52,13 @@ export default function Beats() {
           </div>
         </Hero>
         <BeatsShopSection />
+        <div className="flex gap-4 justify-center" >
         <button
-          onClick={() => {
-            dispatch(setCurrentPage({ page: pages.current + 1 }));
-          }}
-          disabled={pages.current === visiblePages[visiblePages.length - 1]}
-          className={
-            pages.current === visiblePages[visiblePages.length - 1]
-              ? "text-red-800"
-              : "text-black"
-          }
+          onClick={() => dispatch(setCurrentPage({ page: pages.current - 1 }))}
+          disabled={pages.current === 1}
+          className={pages.current === 1 ? "text-red-800" : "text-black"}
         >
-          Next
+          Prev
         </button>
         <div className="flex justify-center gap-4">
           {visiblePages.map((page) => (
@@ -78,12 +73,20 @@ export default function Beats() {
           ))}
         </div>
         <button
-          onClick={() => dispatch(setCurrentPage({ page: pages.current - 1 }))}
-          disabled={pages.current === 1}
-          className={pages.current === 1 ? "text-red-800" : "text-black"}
+          onClick={() => {
+            dispatch(setCurrentPage({ page: pages.current + 1 }));
+          }}
+          disabled={pages.current === visiblePages[visiblePages.length - 1]}
+          className={
+            pages.current === visiblePages[visiblePages.length - 1]
+              ? "text-red-800"
+              : "text-black"
+          }
         >
-          Prev
+          Next
         </button>
+       
+        </div>
       </Main>
     </>
   );

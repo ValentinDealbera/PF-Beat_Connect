@@ -55,18 +55,19 @@ export const fetchBeats = createAsyncThunk(
       ...(priceAmount && { priceAmount }),
       ...(rating && { rating }),
       ...(genre && { genre }),
+      
 
       // Agrega aquí otros parámetros de consulta que quieras incluir
     };
 
-    let queryString = "";
+    let queryString = "?";
     Object.entries(queryParameters).forEach(([key, value]) => {
       if (value !== null && value !== undefined) {
         queryString += `&${key}=${encodeURIComponent(value)}`;
       }
     });
 
-    console.log("fetch slice");
+    
 
     const response = await axios.get(
       `${serverUrl}beats?page=${page}${queryString.substr(1)}`,
@@ -243,7 +244,7 @@ const beatsSlice = createSlice({
         // state.beatsDisplayMode = 1;
       })
       .addCase(fetchBeats.rejected, (state, action) => {
-        console.error(" fetch error");
+        console.error(" fetch error", action.error);
       })
 
       //--------------------
