@@ -32,7 +32,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
     const mode = props.mode;
     const genres = useSelector((state) => state.filters.genres);   
       
-    console.log("defaultValues", defaultValues);
+    //console.log("defaultValues", defaultValues);
     
 
     const [form, setForm] = useState({
@@ -50,7 +50,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
       });
 
       console.log("Data para el form", form);
-      console.log("USERCREATOR", defaultValues.userCreator)
+      //console.log("USERCREATOR", defaultValues.userCreator)
 
       const handleInput = (e) => {
         handleInputChange(
