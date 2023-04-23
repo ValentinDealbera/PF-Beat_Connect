@@ -93,7 +93,6 @@ export const adminEditUser = createAsyncThunk(
 
       return { userResponse };
     } catch (error) {
-      console.log("El error", error.response.data)
       return rejectWithValue(error.response.data.message);
     }
   }

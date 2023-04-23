@@ -9,6 +9,7 @@ const persistConfig = {
   key: 'root',
   storage,
   whitelist: ['client', 'cart', 'filters', 'filter', 'admin'],
+  debug: true,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -27,5 +28,24 @@ export const AppDispatch = store.dispatch;
 export const useAppDispatch = () => useDispatch();
 
 export const persistor = persistStore(store);
+//export const getPersistor = () => persistor;
+
+export const resetPersist = async () => {
+  await clearState();
+};
+
+export const clearState = async () => {
+  await persistor.pause();
+  await persistor.purge();
+  await persistor.flush();
+  await localStorage.removeItem('persist:root');
+  await window.localStorage.clear();
+  await window.sessionStorage.clear();
+  //recarga la pagina
+  await window.location.reload();
+  await persistor.persist();
+};
+
+
 
 export default store;
