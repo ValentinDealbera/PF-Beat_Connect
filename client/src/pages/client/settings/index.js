@@ -4,6 +4,7 @@ import {
   BuyerProfileLayout,
   Head,
   SettingsHero,
+  EditClientForm,
 } from "@/components";
 import { useSelector } from "react-redux";
 
@@ -16,7 +17,10 @@ export default function BuyerProfile() {
       <Main mode="transparent">
         <SettingsHero title="Configura tu cuenta" />
         <BuyerProfileLayout>
-          {activeIndex === 0 && <></>}
+          {activeIndex === 0 && <>
+          <EditClientForm
+          mode="edit"
+          /></>}
           {activeIndex === 1 && <></>}
         </BuyerProfileLayout>
       </Main>
