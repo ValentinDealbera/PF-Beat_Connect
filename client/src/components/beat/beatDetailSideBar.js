@@ -92,7 +92,7 @@ function BeatDataBox({ beat }) {
 
 function BeatDetailBox({ msg1, msg2, beat, type }) {
   const dispatch = useDispatch();
-  console.log("type: ", type);
+
   //que el boton pueda descargar el beat
   return (
     <div className="h-auto">

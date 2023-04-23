@@ -62,7 +62,7 @@ export default function BeatFilters() {
 
   //Filtro Precio
   useEffect(() => {
-    console.log("pagina>", currentPage);
+   
     dispatch(setPriceFilter(prices));
   }, [prices, dispatch]);
 
