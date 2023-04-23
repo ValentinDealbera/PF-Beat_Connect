@@ -33,7 +33,7 @@ export const fetchBeats = createAsyncThunk(
   "beats/fetchBeats",
 
   async ({
-    page,
+    page = 1,
     minPrice,
     maxPrice,
     minBPM,
@@ -53,6 +53,7 @@ export const fetchBeats = createAsyncThunk(
       ...(BPM && { BPM }),
       ...(priceAmount && { priceAmount }),
       ...(rating && { rating }),
+      ...(genre && { genre }),
 
       // Agrega aquí otros parámetros de consulta que quieras incluir
     };
@@ -67,12 +68,13 @@ export const fetchBeats = createAsyncThunk(
     console.log(genre);
 
     const response = await axios.get(
-      `${serverUrl}beats?page=${page}&${queryString.substr(1)}`,
+      `${serverUrl}beats?page=${page}${queryString.substr(1)}`,
       {
         headers: {
           genre,
         },
-      }
+      },
+      { timeout: 5000 }
     );
 
     return {

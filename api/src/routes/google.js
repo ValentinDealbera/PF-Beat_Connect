@@ -34,13 +34,13 @@ function isLoggedIn(req, res, next) {
     console.log("expires:", expires);
     next();
   } else {
-    res.status(401).json({ error: 'Unauthorized', session: req.session });
+   return res.status(401).json({ error: 'Unauthorized', session: req.session });
   }
 }
 
 router.get('/', (req, res) => {
   //res.send('<a href="/api/google/auth/google">Authenticate with Google</a>');
-  res.redirect('/api/google/auth/google');
+  return res.redirect('/api/google/auth/google');
 });
 
 router.get('/auth/google',
@@ -62,7 +62,7 @@ router.get('/protected', isLoggedIn, (req, res) => {
   console.log("session:", req.sessionID)
   //res.send('You are logged in');
   //return res.json({message: 'You are logged in', id: id});
-  res.redirect(`http://localhost:3000/?id=${id}&session=${req.sessionID}`);
+ return res.redirect(`http://localhost:3000/?id=${id}&session=${req.sessionID}`);
 })
 
 router.get('/logout', (req, res) => {
@@ -73,7 +73,8 @@ router.get('/logout', (req, res) => {
     }
     req.session.destroy();
     res.clearCookie('connect.sid');
-    res.send('¡Goodbye!');
+   // res.send('¡Goodbye!');
+  return res.redirect('http://localhost:3000/');
   });
 
 });
@@ -87,9 +88,9 @@ router.get("/verify", async (req, res) => {
   console.log("mongoSession:", mongoSession);
   //console.log("store", store.all);
   if (mongoSession) {
-    res.status(200).json({ message: "Sesión válida", session: mongoSession });
+    return res.status(200).json({ message: "Sesión válida", session: mongoSession });
   } else {
-    res.status(401).json({ message: "Sesión inválida" });
+    return res.status(401).json({ message: "Sesión inválida" });
   }
 
 });

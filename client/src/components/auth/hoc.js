@@ -8,8 +8,8 @@ import axios from "axios";
 export default function HOC(props) {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { authSettings, isLogged, client } = useSelector((state) => state.client);
-  const { loginMethod, tokenValid } = useSelector((state) => state.client.authSettings);
+  const { authSettings, isLogged, client } = useSelector((state) => state?.client);
+  const { loginMethod, tokenValid } = useSelector((state) => state?.client?.authSettings);
 
   const hocIsWorking = true;
   const experimentalIsClient = isLogged;
@@ -18,12 +18,16 @@ export default function HOC(props) {
   const googleSessionID = router.query.session;
   const clientId = router.query.id;
 
+  const headersJson = {
+    Authorization: `Bearer ${authSettings.token}`,
+  };
+
 
 
   const getUserData = async ({ clientId }) => {
     console.log("Obteniendo datos del usuario", clientId);
     try {
-      const response = await axios.get(`http://localhost:3001/api/user/${clientId}`);
+      const response = await axios.get(`http://localhost:3001/api/user/${clientId}`, { timeout: 5000 });
       console.log(response.data);
 
       const newClient = {
@@ -37,9 +41,10 @@ export default function HOC(props) {
       };
 
       dispatch(setClientData(newClient));
-
+      return;
     } catch (error) {
       console.log("Error al obtener los datos del usuario", error.message);
+      return;
     }
   }
 
@@ -59,15 +64,20 @@ export default function HOC(props) {
 
       console.log("Se inicio correctamente con google");
 
+      return;
+
     } catch (error) {
       console.log("Error al iniciar con google", error.message);
-      // dispatch(resetReducer());
+      router.push("/");
+      dispatch(resetReducer());
+      return;
+
     }
   }
 
   useEffect(() => {
     async function fetchData() {
-      console.log("fetching useEffect");
+      console.log("fetching useEffect google;", loginMethod);
       if (router.query.session && router.query.session !== undefined) {
         const headers = { session: router.query.session };
         console.log("googleSessionID llamando", router.query.session);
@@ -76,13 +86,56 @@ export default function HOC(props) {
           getUserData({ clientId: router.query.id });
         }
       }
+      else {
+        console.log("No hay session");
+        return;
+      }
     }
-    fetchData();
-  }, [router.query.session, router.query.id]);
+    if (loginMethod === "google") fetchData();
+    else {
+      console.log("No es google", loginMethod);
+    }
+  }, [router.query.session, router.query.id,]);
+
+
+
 
   useEffect(() => {
-    console.log("useEffect googleSessionID", googleSessionID, router);
-  }, [googleSessionID, router]);
+    async function fetchDataJson() {
+      console.log("fetching useEffect json;", loginMethod);
+      try {
+        const response = await axios.get("http://localhost:3001/api/auth/me", { headers: headersJson }, { timeout: 5000 });
+        console.log(response.data);
+
+        dispatch(setTokenValid(true));
+      } catch (error) {
+        console.log("Error:", error);
+        await dispatch(resetReducer());
+        router.push("/");
+        return
+      }
+    }
+
+    if (loginMethod === "json" && headersJson !== undefined) fetchDataJson();
+
+  }, [headersJson]);
+
+
+
+
+
+  //axios
+  //       .get("http://localhost:3001/api/auth/me", { headers })
+  //       .then((response) => {
+  //         console.log(response.data);
+  //         dispatch(setTokenValid(true));
+  //       })
+  //       .catch((error) => {
+  //         dispatch(setTokenValid(false));
+  //         console.log("Error:", error);
+  //       });
+  //   }
+
 
 
 
@@ -163,6 +216,7 @@ export default function HOC(props) {
       return <>{props.children}</>;
     }
     if (isLogged === true) {
+      console.log("isLogged", isLogged);
       router.push("/");
     } else {
       return <>{props.children}</>;

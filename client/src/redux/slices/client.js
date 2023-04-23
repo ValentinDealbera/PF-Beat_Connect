@@ -2,7 +2,6 @@ import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { serverUrl } from "@/data/config";
 import { toast } from "sonner";
-import { fetchBeats, fetchUserBeats } from "@/redux/slices/beats";
 
 const initialState = {
   activeEditingItem: null,
@@ -34,7 +33,8 @@ export const loginSystem = createAsyncThunk(
   "client/loginSystem",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.post(`${serverUrl}auth`, data);
+      console.log("data", data);
+      const response = await axios.post(`${serverUrl}auth`, data, { timeout: 5000 });
       const userResponse = response.data;
       console.log(userResponse);
       const newClient = {
@@ -52,6 +52,7 @@ export const loginSystem = createAsyncThunk(
         superAdmin: userResponse.user.superAdmin,
         token: userResponse.token,
         accessToken: userResponse.user?.accessToken,
+        loginMethod: "json",
       };
       return { authSettings, newClient };
     } catch (error) {

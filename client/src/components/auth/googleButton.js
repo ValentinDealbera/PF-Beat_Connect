@@ -10,8 +10,8 @@ export default function GoogleButton(){
   const dispatch = useDispatch();
   const router = useRouter();
 
-const handleLogin = async() => {
-   await dispatch(setLoginMethod("google"));
+const handleLogin = () => {
+    dispatch(setLoginMethod("google"));
     router.push("http://localhost:3001/api/google");
   };
 

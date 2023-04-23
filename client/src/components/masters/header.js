@@ -113,7 +113,7 @@ export default function Header() {
           <div className="absolute left-[50%] w-max translate-x-[-50%]">
             <Nav currentMode={currentMode} navItems={navPublic} />
           </div>
-          <UserBoxNav id={"userBoxNav"}>
+          <UserBoxNav id={"userBoxNavUnique"}>
             <VerticalNav navItems={navClient} title={"Centro de ayuda"} />
           </UserBoxNav>
         </div>
