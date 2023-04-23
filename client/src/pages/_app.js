@@ -29,7 +29,8 @@ export default function App({ Component, pageProps, router }) {
           <Toaster position="bottom-left" />
           <Component {...pageProps} />
           </Master>
-          <Footer mode={mode} />
+          {headerVisibility && <Footer mode={mode} />}
+          
           </HOC>
         </PersistGate>
       </Provider>
