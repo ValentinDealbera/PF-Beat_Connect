@@ -27,6 +27,7 @@ router.get("/", async (req, res) => {
   const { name, priceAmount, BPM } = req.query;
   const genres = req.headers.genre ? req.headers.genre.split(",") : [""];
 
+
   console.log(genres);
 
   let sortBy;
@@ -63,7 +64,7 @@ router.get("/", async (req, res) => {
   try {
     const beats = await beatModel.paginate(
       {
-        ...(genres[0] !== "" && { genre: { $in: genres } }),
+        ...(genres && genres[0] !== "" && { genre: { $in: genres } }),
         ...(minMaxFilters && { ...minMaxFilters }),
       },
       {
