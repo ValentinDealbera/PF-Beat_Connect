@@ -19,7 +19,8 @@ export default function EditClientForm(props) {
   const validateMode = "user";
   const [fieldsToValidate, setFieldsToValidate] = useState([]);
   const [error, setErrors] = useState({});
-  const defaultValues = useSelector((state) => state.client.editClient) || {};
+  // const defaultValues = useSelector((state) => state.client.editClient) || {};
+  const defaultValues = useSelector((state) => state.client.client) || {};
   const id = useSelector((state) => state.client.client._id);
   console.log("----------------", id);
   const mode = props.mode;
