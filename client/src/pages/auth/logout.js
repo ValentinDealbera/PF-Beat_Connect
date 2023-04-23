@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { resetReducer } from "@/redux/slices/client";
+import { resetPersist } from '@/redux/store/store';
 
 export default function Logout() {
   const dispatch = useDispatch();
@@ -9,20 +10,26 @@ export default function Logout() {
 
   const loginMethod = useSelector((state) => state.client.authSettings.loginMethod);
 
-const logOutJson = async () => {
-
-  await dispatch(resetReducer());
-
-  if (loginMethod === "google") {
-    router.push("http://localhost:3001/api/google/logout");
-    return;
+  const logOutJson = async () => {
+    //dispatch(resetReducer());
+    // resetPersist()
+    console.log("borrando...")
+    await resetPersist();
+    console.log("borrado")
   }
-  router.push("/");
-}
 
   useEffect(() => {
-    logOutJson();
-  }, []);
+    const logOut = async () => {
+      await logOutJson();
+      console.log("seguimos")
 
-  return <div></div>;
+      if (loginMethod === "google") {
+        router.push("http://localhost:3001/api/google/logout");
+      } else {
+        router.push("/");
+      }
+    };
+
+    logOut();
+  }, []);
 }
