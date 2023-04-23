@@ -11,7 +11,7 @@ export default function GoogleButton() {
 
   const handleLogin = () => {
     dispatch(setLoginMethod("google"));
-    router.push(`${serverUrl}api/google`);
+    router.push(`${serverUrl}google`);
   };
 
   return (
