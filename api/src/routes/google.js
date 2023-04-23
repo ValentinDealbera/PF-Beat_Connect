@@ -9,20 +9,20 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 const { DB_URI, } = process.env
 
 const store = new MongoDBStore({
-  uri: DB_URI, 
-  collection: 'sessions' 
+  uri: DB_URI,
+  collection: 'sessions'
 });
+
 
 router.use(session({
   secret: 'mySecretKey',
   resave: false,
   saveUninitialized: false,
   cookie: {
-    maxAge: 24 * 60 * 60 * 1000 
+    maxAge: 24 * 60 * 60 * 1000,
   },
-  store: store 
+  store: store
 }));
-
 
 router.use(passport.initialize());
 router.use(passport.session());
@@ -30,33 +30,39 @@ router.use(passport.session());
 function isLoggedIn(req, res, next) {
   console.log("user:", req.user);
   if (req.user) {
-    const expires = new Date(Date.now() + req.session.cookie.maxAge); 
-    console.log("expires:", expires); 
+    const expires = new Date(Date.now() + req.session.cookie.maxAge);
+    console.log("expires:", expires);
     next();
   } else {
-    res.sendStatus(401);
+   return res.status(401).json({ error: 'Unauthorized', session: req.session });
   }
 }
 
 router.get('/', (req, res) => {
   //res.send('<a href="/api/google/auth/google">Authenticate with Google</a>');
-  res.redirect('/api/google/auth/google');
+  return res.redirect('/api/google/auth/google');
 });
 
 router.get('/auth/google',
-  passport.authenticate('google', { scope: [ 'email', 'profile' ] }
-));
+  passport.authenticate('google', { scope: ['email', 'profile'] }
+  ));
 
-router.get( '/auth/google/callback',
-  passport.authenticate( 'google', {
-    successRedirect: 'http://localhost:3000/',
+router.get('/auth/google/callback',
+  passport.authenticate('google', {
+    //successRedirect: `http://localhost:3000/?id=${session}`,
+    successRedirect: '/api/google/protected',
     failureRedirect: '/api/google/auth/google/failure'
   })
 );
 
 router.get('/protected', isLoggedIn, (req, res) => {
-  console.log(session);
-  res.send(`Hello`);
+
+  const id = req.user._id.toString();
+  console.log(id);
+  console.log("session:", req.sessionID)
+  //res.send('You are logged in');
+  //return res.json({message: 'You are logged in', id: id});
+ return res.redirect(`http://localhost:3000/?id=${id}&session=${req.sessionID}`);
 })
 
 router.get('/logout', (req, res) => {
@@ -67,9 +73,26 @@ router.get('/logout', (req, res) => {
     }
     req.session.destroy();
     res.clearCookie('connect.sid');
-    res.send('¡Goodbye!');
+   // res.send('¡Goodbye!');
+  return res.redirect('http://localhost:3000/');
   });
-  
+
+});
+
+router.get("/verify", async (req, res) => {
+  //devolvemos la cookie de sesión
+  const { session } = req.headers;
+  console.log("sessionID:", session);
+  const mongoSession = await store.db.collection("sessions").findOne({ _id: session });
+
+  console.log("mongoSession:", mongoSession);
+  //console.log("store", store.all);
+  if (mongoSession) {
+    return res.status(200).json({ message: "Sesión válida", session: mongoSession });
+  } else {
+    return res.status(401).json({ message: "Sesión inválida" });
+  }
+
 });
 
 
