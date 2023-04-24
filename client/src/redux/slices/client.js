@@ -205,7 +205,7 @@ const cartSlice = createSlice({
       console.log("setGoogleSuccessful", action.payload);
       state.isLogged = true;
       state.authSettings.tokenValid = true;
-      state.client._id = action.payload.clientId;
+      // state.client._id = action.payload.clientId;
       state.authSettings.googleSessionID = action.payload.googleSessionID;
     },
     //Establecemos los datos del cliente
