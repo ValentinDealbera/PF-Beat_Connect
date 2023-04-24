@@ -40,7 +40,8 @@ router.get("/", async (req, res) => {
   try {
     const users = await UserModel.find()
       .populate("createdBeats")
-      .populate("bougthBeats");
+      .populate("bougthBeats")
+      .populate("userReviews")
     res.json(users);
   } catch (err) {
     return res.status(SERVER_ERROR).send(USER_NOT_FOUND);
@@ -82,7 +83,20 @@ router.get("/:id", async (req, res) => {
             model: "Review",
           },
         ],
-      });
+      })
+      .populate({
+        path: "userReviews",
+        populate: [
+          {
+            path: "beat",
+            model: "Beats",
+          },
+          {
+            path: "createdBy",
+            model: "User",
+          },
+        ],
+      })
     allUserId
       ? res.status(OK).send(allUserId)
       : res.status(NOT_FOUND).send(USER_NOT_FOUND);

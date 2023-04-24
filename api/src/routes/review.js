@@ -25,9 +25,9 @@ router.post("/admin", adminMiddleware, async (req, res) => {
   const creator = await userModel.findById(createdBy);
   const reviewedBeat = await beatModel.findById(beat);
   if (!reviewedBeat)
-    return res.status(400).json({ error: "this beat does not exist" });
+    return res.status(400).json({ error: "El beat no existe!" });
   if (!creator)
-    return res.status(400).json({ error: "this user does not exist" });
+    return res.status(400).json({ error: "El usuario no existe!" });
   try {
     const newReview = await reviewSchema.create({
       rating: rating,
@@ -38,6 +38,7 @@ router.post("/admin", adminMiddleware, async (req, res) => {
     });
 
     reviewedBeat.review = [...reviewedBeat.review, newReview._id];
+    reviewedBeat.relevance = reviewedBeat.relevance + rating
     reviewedBeat.save();
 
     res.json(newReview).status(CREATED);
@@ -71,6 +72,10 @@ router.post("/", async (req, res) => {
       beat: reviewedBeat._id,
     });
 
+    creator.userReviews = [...creator.userReviews, newReview._id]
+    creator.save();
+
+    reviewedBeat.relevance = reviewedBeat.relevance + rating
     reviewedBeat.review = [...reviewedBeat.review, newReview._id];
     reviewedBeat.save();
 
@@ -99,9 +104,6 @@ router.get("/", async (req, res) => {
     res.json({ error: error.message }).status(NOT_FOUND);
   }
 });
-
-//  IMPORTANTE el param "id" de esta ruta es el id del beat
-//  cuyas reviews se quieren enviar al front
 
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
