@@ -93,7 +93,7 @@ router.get("/:id", async (req, res) => {
 
 router.post("/admin", adminMiddleware, async (req, res) => {
   const { body } = req;
-  if (body.image === '') delete body.image
+  if (body.image === "") delete body.image;
   try {
     const user = await UserModel.create(body);
     res.send(user);
@@ -106,8 +106,8 @@ router.put("/:id", async (req, res) => {
   const { userid } = req.headers;
   try {
     const { id } = req.params;
-    const image = req.files ? req.files.image : null
-    const backImage = req.files ? req.files.backImage : null
+    const image = req.files ? req.files.image : null;
+    const backImage = req.files ? req.files.backImage : null;
     const {
       mpcode,
       seller,
@@ -241,11 +241,11 @@ router.put("/:id", async (req, res) => {
 
 router.put("/admin/:id", adminMiddleware, async (req, res) => {
   try {
-    console.log('-------------', req)
+    console.log("-------------", req);
     const { id } = req.params;
-      const image = req.files ? req.files.image : null
-      console.log('ESTA ES LA IMAGEN Y COMO LLEGA', image)
-      const backImage = req.files ? req.files.backImage : null
+    const image = req.files ? req.files.image : null;
+    console.log("ESTA ES LA IMAGEN Y COMO LLEGA", image);
+    const backImage = req.files ? req.files.backImage : null;
     const {
       seller,
       admin,
@@ -300,7 +300,7 @@ router.put("/admin/:id", adminMiddleware, async (req, res) => {
       if (soft) user.softDelete = !user.softDelete;
       if (image) {
         const imageData = fs.readFileSync(image.tempFilePath);
-        console.log('Procesando imagen');
+        console.log("Procesando imagen");
         const imageStorageRef = ref(
           storage,
           `users/${user.username}/image/${user.username}`
@@ -317,7 +317,7 @@ router.put("/admin/:id", adminMiddleware, async (req, res) => {
         );
         const downloadImageURL = await getDownloadURL(imageSnapshot.ref);
         user.image = downloadImageURL ? downloadImageURL : user.image;
-        console.log('Imagen subida');
+        console.log("Imagen subida");
       }
       if (backImage) {
         const imageData = fs.readFileSync(backImage.tempFilePath);
@@ -414,6 +414,22 @@ router.delete("/:id", async (req, res) => {
     }
   } catch (error) {
     return res.status(500).json({ message: error.message });
+  }
+});
+
+/******************************************** RECUPERACION DE CONTRASENA *******************************************/
+
+router.post("/recuperar-contraseña", async (req, res) => {
+  const { email } = req.body;
+  const user = await UserModel.findOne({ email });
+
+  try {
+    if (!user) {
+      return res.status(NOT_FOUND).send(USER_NOT_FOUND);
+    }
+    axios.post(BACKEND_URL + "api/mail/password", { email: email });
+  } catch (err) {
+    res.status(SERVER_ERROR).send(ALL_NOT_OK);
   }
 });
 
