@@ -20,15 +20,10 @@ initializeApp(config.firebaseConfig);
 const storage = getStorage();
 
 router.get("/", async (req, res) => {
-
-
   const page = req.query.page || 1;
   const limit = req.query.limit || 5;
-  const { name, priceAmount, BPM } = req.query;
+  const { name, priceAmount, BPM, relevance } = req.query;
   const genres = req.headers.genre ? req.headers.genre.split(",") : [""];
-
-
-  console.log(genres);
 
   let sortBy;
   if (name) {
@@ -40,8 +35,9 @@ router.get("/", async (req, res) => {
   if (priceAmount) {
     sortBy = { priceAmount };
   }
-
-
+  if (relevance) {
+    sortBy = { relevance };
+  }
 
   const minMaxFiltersFunction = ({ minPrice, maxPrice, minBPM, maxBPM }) => {
     let filters = {};
@@ -57,7 +53,7 @@ router.get("/", async (req, res) => {
     return filters;
   };
 
-
+  console.log(req.query);
 
   const minMaxFilters = minMaxFiltersFunction(req.query);
 
@@ -357,7 +353,7 @@ router.put("/:id", async (req, res) => {
 router.put("/admin/:id", adminMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
-      const image = req.files ? req.files.image : null
+    const image = req.files ? req.files.image : null;
     const { name, priceAmount, review, softDelete, genre, relevance } =
       req.body;
     const updatedBeat = await beatModel.findById(id);
