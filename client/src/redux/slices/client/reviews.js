@@ -7,6 +7,8 @@ import { serverUrl } from "@/data/config";
 import { toast } from "sonner";
 import axios from "axios";
 import { toastError, toastSuccess } from "@/utils/toastStyles";
+import { getUserData } from "./authSession";
+import { fetchBeats } from "./beats";
 
 const initialState = {
   activeEditingReview: null,
@@ -20,7 +22,7 @@ export const postClientReview = createAsyncThunk(
   async (data, { rejectWithValue, dispatch, getState }) => {
     const id = getState().client.authSession.session.current._id;
     try {
-      const response = await axios.post(`${serverUrl}reviews`, data, {
+      const response = await axios.post(`${serverUrl}review`, data, {
         headers: {
           userid: id,
         },
@@ -50,9 +52,10 @@ export const postClientReview = createAsyncThunk(
 export const deleteClientReview = createAsyncThunk(
   "client/deleteClientReview",
   async (data, { rejectWithValue, dispatch, getState }) => {
+    console.log("DATA", data);
     const id = getState().client.authSession.session.current._id;
     try {
-      const response = await axios.delete(`${serverUrl}reviews/${data}`, {
+      const response = await axios.delete(`${serverUrl}review/${data}`, {
         headers: {
           userid: id,
         },
@@ -77,7 +80,7 @@ export const editClientReview = createAsyncThunk(
     const id = getState().client.authSession.session.current._id;
     try {
       const response = await axios.put(
-        `${serverUrl}reviews/${data._id}`,
+        `${serverUrl}review/${data._id}`,
         data,
         {
           headers: {

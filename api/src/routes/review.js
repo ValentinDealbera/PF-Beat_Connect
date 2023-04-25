@@ -186,6 +186,9 @@ router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const {userid} = req.headers
+
+    if(!userid) return res.status(400).json({message: 'Debes estar logueado para eliminar una review'})
+
     console.log(id);
     if (id) {
       try {

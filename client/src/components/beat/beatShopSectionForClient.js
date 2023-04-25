@@ -4,6 +4,7 @@ import {
   NewBeatCardGrid,
   ClientReview,
   ReviewCardGrid,
+
 } from "@/components";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -44,18 +45,18 @@ export default function BeatShopSectionForClient(props) {
         <NewBeatCardGrid beats={ownedBeats} />
       ) : (
         <div>
-          <div className="gap-estilo1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
+         
             <>
               <ReviewCardGrid />
             </>
-          </div>
-          {activeReviewDetail.length === 0 && (
+          
+          {/* {activeReviewDetail.length === 0 && (
             <div className="flex w-full items-end justify-center">
               <h1 className="mb-8 mt-5 text-center text-2xl font-medium">
                 Hey, parece que no hay nada por aqui 🤯
               </h1>
             </div>
-          )}
+          )} */}
         </div>
       )}
     </Section>
