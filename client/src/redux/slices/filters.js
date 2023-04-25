@@ -1,9 +1,16 @@
+/*FUNCION DE FILTERS:*/
+/* 1) SET SEARCH FILTER: */
+/* 2) SET GENRES FILTER: */
+/* 3) SET PRICE FILTER: */
+/* 4) SET BPM FILTER: */
+/* 5) SET SORTER: */
+
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { serverUrl } from "@/data/config";
 import axios from "axios";
 import { sortArr } from "@/data/fakeDB";
-import { throttle } from "lodash";
-import createAbortController from "@/utils/abortController";
+import { toastError } from "@/utils/toastStyles";
+import { toast } from "sonner";
 
 const initialState = {
   searchFilter: "",
@@ -19,124 +26,90 @@ const initialState = {
   },
   sorter: "default",
   sorterValues: sortArr,
-  typesFilter: [],
-  filteredBeats: [],
 };
 
-export const fetchFilteredBeats = createAsyncThunk(
-  "filters/fetchFilteredBeats",
-  async (data, { rejectWithValue }) => {
+//------------------ ASYNC THUNKS ------------------//
+//GENRES
+export const fetchGenres = createAsyncThunk(
+  "genres/fetchGenres",
+  async (_, { rejectWithValue }) => {
     try {
-      console.log("fabi console.log", data);
-      const response = await axios.get(`${serverUrl}beats${data}`);
-      const filteredBeats = response.data.docs;
-
-      return filteredBeats;
+      const { data: genresResponse } = await axios.get(`${serverUrl}genre`);
+      return genresResponse;
     } catch (error) {
+      console.log("ERROR", error);
       return rejectWithValue(error.response.data.message);
     }
   }
 );
 
-export const fetchGenres = createAsyncThunk(
-  "genres/fetchGenres",
-  async (_, { signal }) => {
-    const { data } = await axios.get(`${serverUrl}genre`, {
-      signal,
-    });
-      const genresResponse = data;
-      return genresResponse;
-  }
-);
-
-
-
-// export const fetchGenres = createAsyncThunk("genres/fetchGenres",
-//   throttle(
-//     async () => {
-//       const { data } = await axios.get(`${serverUrl}genre`);
-//       const genresResponse = data;
-//       return genresResponse;
-//     }
-//     , 3000));
+//------------------ SLICE ------------------//
 
 const filtersSlice = createSlice({
-  name: "cart",
+  name: "filters",
   initialState,
   reducers: {
+    //--------------------
+    //SET SEARCH FILTER
     setSearchFilter(state, action) {
       state.searchFilter = action.payload;
     },
+
+    //--------------------
+    //SET GENRES FILTER
     setGenresFilter(state, action) {
       const isSelected = state.genresFilter.includes(action.payload);
-
       if (isSelected) {
         state.genresFilter = state.genresFilter.filter(
           (genre) => genre !== action.payload
         );
-      } else {
-        state.genresFilter = action.payload;
+        return;
       }
+      state.genresFilter = action.payload;
     },
-    setTypesFilter(state, action) {
-      const isSelected = state.typesFilter.includes(action.payload);
 
-      if (isSelected) {
-        state.typesFilter = state.typesFilter.filter(
-          (genre) => genre !== action.payload
-        );
-      } else {
-        state.typesFilter = action.payload;
-      }
-    },
+    //--------------------
+    //SET PRICE FILTER
     setPriceFilter(state, action) {
       state.priceFilter = action.payload;
     },
 
+    //--------------------
+    //SET BPM FILTER
     setBpmFilter(state, action) {
       state.BpmFilter = action.payload;
       console.log("BPM FILTER", state.BpmFilter);
     },
+
+    //--------------------
+    //SET SORTER
     setSorter(state, action) {
       state.sorter = action.payload;
     },
 
+    //--------------------
+    //RESTORE FILTERS
     restoreFilters(state, action) {
-      state.searchFilter = "";
-      state.genresFilter = [];
-      state.typesFilter = [];
+      state = initialState;
     },
   },
   extraReducers: (builder) => {
     builder
+      //--------------------
+      //FETCH GENRES
       .addCase(fetchGenres.fulfilled, (state, action) => {
-        //puede cambiar a _id
         const formatedGenres = action.payload.map((genre) => ({
           label: genre.name,
           value: genre._id,
         }));
-
         state.genres = formatedGenres;
       })
       .addCase(fetchGenres.rejected, (state, action) => {
         state.genres = [];
+        toast.error("Error al cargar los géneros", toastError);
       })
       .addCase(fetchGenres.pending, (state, action) => {
         state.genres = [];
-      })
-
-      //fetchFilteredBeats
-
-      .addCase(fetchFilteredBeats.fulfilled, (state, action) => {
-        console.log("Filtered beats fetched successfully");
-
-        state.filteredBeats = action.payload;
-      })
-      .addCase(fetchFilteredBeats.rejected, (state, action) => {
-        console.error("fetch error");
-      })
-      .addCase(fetchFilteredBeats.pending, (state, action) => {
-        console.log("Trayendo los beats...");
       });
   },
 });
@@ -144,7 +117,6 @@ const filtersSlice = createSlice({
 export const {
   setSearchFilter,
   setGenresFilter,
-  setTypesFilter,
   restoreFilters,
   setPriceFilter,
   setBpmFilter,

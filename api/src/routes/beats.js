@@ -306,7 +306,10 @@ router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { userid } = req.headers;
-    const { image } = req.files;
+ 
+    const image = req?.files?.image ?? null;
+
+  
     const { name, priceAmount, review, softDelete, genre, relevance } =
       req.body;
     const updatedBeat = await beatModel.findById(id).populate("userCreator");

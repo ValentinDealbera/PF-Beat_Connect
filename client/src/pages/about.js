@@ -20,7 +20,7 @@ export default function About() {
             </h1>
           </div>
         </Hero>
-        <Section subClassName="padding-x-estilo2 padding-y-estilo1">
+        <Section subClassName="padding-x-estilo2 padding-y-estilo1 gap-2 flex-col flex">
           <h1 className="text-titulo1-regular color-neutral-950">
             Conozcámonos{" "}
             <span className="text-titulo1-semibold">un poco más ❤️ </span>
@@ -38,7 +38,7 @@ export default function About() {
           </p>
         </Section>
         <Section
-          subClassName="padding-x-estilo2 padding-y-estilo1 bg-neutral-100 color-white"
+          subClassName="padding-x-estilo2 padding-y-estilo1 bg-neutral-100 color-white gap-2 flex-col flex"
           className="bg-neutral-100"
         >
           <h1 className="text-titulo1-regular color-white">

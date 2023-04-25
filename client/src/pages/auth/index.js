@@ -6,7 +6,7 @@ import {
   AuthLayout,
 } from "@/components";
 import Link from "next/link";
-import { setCurrentClient, loginSystem } from "@/redux/slices/client";
+import { setCurrentClient, jsonLogin } from "@/redux/slices/client/authSession";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 
@@ -24,7 +24,7 @@ export default function Login() {
 
   
 
-      dispatch(loginSystem(data));
+      dispatch(jsonLogin(data));
       
     } catch (error) {
       toast.error("Ocurrio un error, recarga la pagina", {

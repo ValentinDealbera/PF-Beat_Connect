@@ -12,37 +12,31 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { serverUrl } from "@/data/config";
+
+import {convertInSeller} from "@/redux/slices/client/authSession"
 import { fetchBeats } from "@/redux/slices/beats";
+
 
 export default function Home() {
   // si hay un code valido en las querys, registra al usuario actual como vendedor
   const router = useRouter();
-  const id = useSelector((state) => state.client.client._id);
-  const dispatch = useDispatch();
-  const featuredBeats = useSelector((state) => state.beats?.activeItems);
-  const state = useSelector((state) => state.beats);
+
+  const id = useSelector((state) => state.client.authSession.session.current._id);
+const dispatch = useDispatch()
 
   useEffect(() => {
-    console.log(state);
     dispatch(fetchBeats({ relevance: "desc" }));
   }, []);
 
-  if (router.query.code) {
-    async function data(id) {
-      try {
-        const dato = await axios.put(
-          `${serverUrl}user/${id}`,
 
-          { seller: "VENDEDOR", mpcode: router.query.code },
-          { headers: { userid: id } }
-        );
-        return dato;
-      } catch (error) {
-        console.log(error.message);
-      }
-    }
-    data(id);
+
+  useEffect(() => {
+  if (router.query.code) {
+    dispatch(convertInSeller())
   }
+  }, [router.query.code]);
+
+
   //hacemos console.log del env
   return (
     <>
@@ -78,7 +72,7 @@ export default function Home() {
             </div>
           </div>
         </Hero>
-        <BeatsSpecialSection title={`Beats `} featuredBeats={featuredBeats}>
+        <BeatsSpecialSection title={`Beats `} >
           <span className="text-titulo2-semibold">destacados</span>
         </BeatsSpecialSection>
       </Main>

@@ -1,127 +1,100 @@
+import axios from "axios";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
-import { setTokenValid, setGoogleSuccessful, resetReducer, setClientData } from "@/redux/slices/client";
-import axios from "axios";
+import {
+  setGoogleSuccessful,
+  resetReducer,
+} from "@/redux/slices/client/authSession";
 import { serverUrl } from "@/data/config";
+import { getUserData } from "@/redux/slices/client/authSession";
 
 export default function HOC(props) {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { authSettings, isLogged, client } = useSelector((state) => state?.client);
-  const { loginMethod, tokenValid, googleSessionID } = useSelector((state) => state?.client?.authSettings);
+  const {
+    loginMethod,
+    isAdmin,
+    isLogged,
+    tokenValid,
+    google: { googleSessionID },
+    json: { token },
+  } = useSelector((state) => state?.client.authSession.auth);
 
-  // const hocIsWorking = true;
+  const { _id } = useSelector(
+    (state) => state?.client.authSession.session.current
+  );
+
+  const state = useSelector((state) => state.client);
+
+  console.log("state", state);
+
   const hocIsWorking = false;
   const experimentalIsClient = isLogged;
-  const experimentalIsAdmin = authSettings.superAdmin;
+  const experimentalIsAdmin = isAdmin;
 
-  const GoogleSessionID = googleSessionID ? googleSessionID : router.query.session;
-  console.log("GoogleSessionID", GoogleSessionID);
-  const clientId = router.query.id;
+  const GoogleSessionID = googleSessionID
+    ? googleSessionID
+    : router.query.session;
 
-  const headersJson = {
-    Authorization: `Bearer ${authSettings.token}`,
-  };
+  const clientId = _id && _id !== "" ? _id : router.query.id;
 
-
-
-  const getUserData = async ({ clientId }) => {
-    console.log("Obteniendo datos del usuario", clientId);
-    try {
-      const response = await axios.get(`${serverUrl}user/${clientId}`, { timeout: 5000 });
-      console.log(response.data);
-
-      const newClient = {
-        bio: response.data.bio,
-        profilePicture: response.data.image,
-        _id: response.data._id,
-        email: response.data.email,
-        firstName: response.data.firstName,
-        lastName: response.data.lastName,
-        userName: response.data.username,
-      };
-
-      dispatch(setClientData(newClient));
-      return;
-    } catch (error) {
-      console.log("Error al obtener los datos del usuario", error.message);
-      return;
-    }
-  }
-
-
+  //--------------------
+  //HOC GOOGLE AUTH
   const googleAuth = async (headers) => {
-    console.log("googleAuth", headers);
     try {
-      const response = await axios.get(`${serverUrl}google/verify`, { headers });
+      await axios.get(`${serverUrl}google/verify`, {
+        headers,
+      });
 
-      console.log(response.data);
-
-      dispatch(setGoogleSuccessful({
-        isLogged: true,
-        tokenValid: true,
-        googleSessionID: GoogleSessionID,
-      }));
-
-      console.log("Se inicio correctamente con google");
-
-      return;
-
+      if (clientId && clientId !== undefined) {
+        // const userData = await getUserData({ clientId: clientId });
+        //console.log("fase 2 ok", userData);
+        await dispatch(getUserData(clientId));
+        dispatch(
+          setGoogleSuccessful({
+            isLogged: true,
+            tokenValid: true,
+            googleSessionID: headers.session,
+            //   session: userData,
+          })
+        );
+      }
     } catch (error) {
       console.log("Error al iniciar con google", error.message);
-      router.push("/");
       dispatch(resetReducer());
+      router.push("/");
+    }
+  };
+
+  useEffect(() => {
+    if (loginMethod === "google" && GoogleSessionID) {
+      const headers = { session: GoogleSessionID };
+      googleAuth(headers);
+    }
+  }, [GoogleSessionID, loginMethod, clientId]);
+
+  //--------------------
+  //HOC JSON AUTH
+  const jsonAuth = async (headers) => {
+    try {
+      await axios.get(`${serverUrl}auth/me`, {
+        headers,
+      });
+    } catch (error) {
+      console.log("Error:", error);
+      dispatch(resetReducer());
+      router.push("/");
       return;
-
     }
-  }
+  };
 
   useEffect(() => {
-    async function fetchData() {
-      console.log("fetching useEffect google;", loginMethod);
-      if (GoogleSessionID && GoogleSessionID !== undefined) {
-        const headers = { session: GoogleSessionID };
-        console.log("googleSessionID llamando", GoogleSessionID);
-        await googleAuth(headers);
-        if (router.query.id && router.query.id !== undefined) {
-          getUserData({ clientId: router.query.id });
-        }
-      }
-      else {
-        console.log("No hay session");
-        return;
-      }
+    if (loginMethod === "json" && token) {
+      const headers = { Authorization: `Bearer ${token}` };
+      jsonAuth(headers);
     }
-    if (loginMethod === "google") fetchData();
-    else {
-      console.log("No es google", loginMethod);
-    }
-  }, [GoogleSessionID, router.query.id,]);
-
-
-
-
-  useEffect(() => {
-    async function fetchDataJson() {
-      console.log("fetching useEffect json;", loginMethod);
-      try {
-        const response = await axios.get(`${serverUrl}auth/me`, { headers: headersJson }, { timeout: 5000 });
-        console.log(response.data);
-
-        dispatch(setTokenValid(true));
-      } catch (error) {
-        console.log("Error:", error);
-        await dispatch(resetReducer());
-        router.push("/");
-        return
-      }
-    }
-
-    if (loginMethod === "json" && headersJson !== undefined) fetchDataJson();
-
-  }, [headersJson]);
-
+  }, []);
 
   if (hocIsWorking === false) {
     return <>{props.children}</>;
@@ -145,7 +118,6 @@ export default function HOC(props) {
       return <>{props.children}</>;
     }
     if (isLogged === true) {
-      console.log("isLogged", isLogged);
       router.push("/");
     } else {
       return <>{props.children}</>;

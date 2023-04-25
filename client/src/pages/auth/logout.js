@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import { resetReducer } from "@/redux/slices/client";
+import { resetReducer } from "@/redux/slices/client/authSession";
 import { resetPersist } from '@/redux/store/store';
 import { serverUrl } from "@/data/config";
 
@@ -9,10 +9,10 @@ export default function Logout() {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const loginMethod = useSelector((state) => state.client.authSettings.loginMethod);
+  const loginMethod = useSelector((state) => state.client.authSession.auth.loginMethod);
 
   const logOutJson = async () => {
-    //dispatch(resetReducer());
+    dispatch(resetReducer());
     // resetPersist()
     console.log("borrando...")
     await resetPersist();

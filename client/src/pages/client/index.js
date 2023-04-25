@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function BuyerProfile() {
-  const currentUser = useSelector((state) => state.client.client);
+  const currentUser = useSelector((state) => state.client.authSession.session.current);
   console.log("currentUser", currentUser);
 
   return (
@@ -19,7 +19,8 @@ export default function BuyerProfile() {
       <Main mode="transparent">
         <Hero
           style={{ height: "45vh" }}
-          image="/images/category3.jpg"
+          image={currentUser.backImage}
+          alt="hero"
           className="items-center justify-center align-middle"
         >
           <div

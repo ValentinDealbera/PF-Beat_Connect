@@ -1,6 +1,8 @@
 import { ValidationCreateBeat } from "@/components/client/validationCreateBeat";
 import { ValidationCreateReview } from "@/components/client/validationCreateReview";
 import { ValidationCreateUser } from "@/components/client/validationCreateUser";
+import { useMemo } from "react";
+import { debounce } from "lodash";
 
 export const handleInputChange = (
   e,
@@ -59,9 +61,9 @@ export const handleSubmit = async (props) => {
 
   console.log("formErrors", props.validateMode);
   if (Object.keys(formErrors).length === 0) {
-    console.log("form ok", props.form);
+    console.log("DESPACHADO");
     await props.dispatch(props.actionToDispatch(props.form));
-    console.log("form ok", props.form);
+    
     props.formRef.reset();
   } else {
     props.setErrors(formErrors);

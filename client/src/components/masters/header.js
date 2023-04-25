@@ -25,8 +25,8 @@ export default function Header() {
   const currentItem = navPublic.find((item) => currentSlug === item.url);
   const currentMode = currentItem ? currentItem.colorMode : "transparent";
   //obtenemos isSeller
-  const { authSettings } = useSelector((state) => state.client);
-  const { isSeller } = authSettings;
+  const { isSeller } = useSelector((state) => state.client.authSession.auth);
+
 
   useEffect(() => {
     const handleScroll = () => {
