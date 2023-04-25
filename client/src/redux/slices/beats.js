@@ -13,7 +13,6 @@ import { data } from "autoprefixer";
 import { throttle } from "lodash";
 import createAbortController from "@/utils/abortController";
 
-
 const initialState = {
   //LOADING
   loadingBeats: false,
@@ -56,8 +55,7 @@ export const fetchBeats = createAsyncThunk(
       priceAmount,
       rating,
       genre,
-         relevance,
-
+      relevance,
       searchFilter,
     },
     { rejectWithValue }
@@ -77,12 +75,12 @@ export const fetchBeats = createAsyncThunk(
         ...(relevance && { relevance }),
       };
 
-    let queryString = "?";
-    Object.entries(queryParameters).forEach(([key, value]) => {
-      if (value !== null && value !== undefined) {
-        queryString += `&${key}=${encodeURIComponent(value)}`;
-      }
-    });
+      let queryString = "?";
+      Object.entries(queryParameters).forEach(([key, value]) => {
+        if (value !== null && value !== undefined) {
+          queryString += `&${key}=${encodeURIComponent(value)}`;
+        }
+      });
 
       const response = await axios.get(
         `${serverUrl}beats?page=${page}${queryString.substr(1)}`,

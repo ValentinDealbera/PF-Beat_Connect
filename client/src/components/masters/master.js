@@ -20,32 +20,29 @@ export default function Master(props) {
     beatsDisplayMode,
     publicBeatsFetchStatus,
     authorFetchStatus,
-    setGeneralActiveIndex
+    setGeneralActiveIndex,
   } = useSelector((state) => state.beats);
 
   useEffect(() => {
-  console.log("fetch master");
-  if (router.pathname.startsWith("/client")) return;
-  else if (router.pathname.startsWith("/beats/author")) return;
-  else if (router.pathname === "/beats") return;
-    dispatch(fetchBeats({}));
+    console.log("fetch master");
+    if (router.pathname.startsWith("/client")) return;
+    else if (router.pathname.startsWith("/beats/author")) return;
+    else if (router.pathname === "/beats") return;
+    // dispatch(fetchBeats({}));
   }, [dispatch, router.pathname]);
 
   useEffect(() => {
     if (router.pathname.startsWith("/client")) {
-     // dispatch(fetchUserBeats());
-      
-    }
-    else if (router.pathname.startsWith("/beats/author")) return;
+      // dispatch(fetchUserBeats());
+    } else if (router.pathname.startsWith("/beats/author")) return;
     else if (router.pathname === "/beats") {
-    //  dispatch(setBeatsDisplayMode(0));
-    return;
-    }
-   else  {
-    dispatch(setBeatsDisplayMode(1));
+      //  dispatch(setBeatsDisplayMode(0));
+      return;
+    } else {
+      dispatch(setBeatsDisplayMode(1));
 
-   // dispatch(fetchBeats());
-  }
+      // dispatch(fetchBeats());
+    }
   }, [dispatch, router]);
 
   // useEffect(() => {
