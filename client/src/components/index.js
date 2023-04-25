@@ -36,6 +36,7 @@ export { default as SwitchForm } from "./common/switchForm";
 export { default as FormAdmin } from "./common/adminForm"; //creado pero sin colocar (SoftDelete, SwitchForm)
 export { default as ValidationEditUsers } from "./common/validationEditUsers";
 export { default as ReviewForm } from "./common/reviewForm";
+export { default as SetUser } from "./common/setUser";
 
 //Modal
 export { default as ModalMinMax } from "./modal/modalMinMax";

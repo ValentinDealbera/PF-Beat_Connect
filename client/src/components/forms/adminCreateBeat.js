@@ -4,7 +4,7 @@ import {
     FormRow,
     Input,
     SwitchForm,
-    Select
+    SetUser
   } from "@/components";
 
 import {
@@ -14,11 +14,11 @@ import {
   } from "@/data/formLogic";
 
 import { fetchGenres } from "@/redux/slices/filters";
-
+import { Autocomplete, TextField } from "@mui/material";
 import { forwardRef, useImperativeHandle } from "react";
 import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { adminPostBeat, adminEditBeat } from "@/redux/slices/admin";
+import { adminPostBeat, adminEditBeat, adminGetUsersForms } from "@/redux/slices/admin";
 import { useRouter } from "next/router";
 
 const AdminCreateBeatForm = forwardRef((props, ref) => {
@@ -30,10 +30,9 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
     const [error, setErrors] = useState({});
     const defaultValues = useSelector((state) => state.admin.currentEditBeat);
     const mode = props.mode;
-    const genres = useSelector((state) => state.filters.genres);   
+    const genres = useSelector((state) => state.filters.genres);       
       
-    // console.log("defaultValues", defaultValues);
-    
+     console.log("defaultValues", defaultValues);    
 
     const [form, setForm] = useState({
         name: `${mode === "edit" ? defaultValues.name : ""}`,
@@ -48,6 +47,12 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
         relevance: `${mode === "edit" ? defaultValues.relevance : ""}`,
 
       });
+    
+    const defaultUsers = useSelector((state) => state.admin.usersForms); 
+    const options = defaultUsers.map(user => ({
+          label: user.username,
+          value: user._id
+        }));
 
       console.log("Data para el form", form);
       // console.log("USERCREATOR", defaultValues.userCreator)
@@ -96,7 +101,11 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
           // formRef.current.submit();
           onSubmit();
         },
-      }));      
+      }));
+      
+      useEffect(() => {
+        dispatch(adminGetUsersForms());        
+      }, []);  
 
       const arraySoftDelete = {
         name: "softDelete",
@@ -105,7 +114,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
            {
              text: "Yes",
              //segun is seller, dinamicamente se pone el active
-             active: form.softDelete,
+             active: !form.softDelete,
              handleAction: () => {
                setForm({
                  ...form,
@@ -115,7 +124,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
            },
            {
              text: "No",
-             active: !form.softDelete,
+             active: form.softDelete,
              handleAction: () => {
                setForm({
                  ...form,
@@ -160,16 +169,36 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
                   error={error.image}
                 />             
                 
-                <Input
+                { mode==="edit" && <Input
                   name="userCreator"
                   label="User Creator"
                   placeholder="User Creator:"
-                  value = {mode === "edit"? defaultValues.userCreator._id:null}
+                  value = {mode === "edit"? defaultValues.userCreator.username:null}
                   defaultValue={mode === "edit" ? defaultValues.userCreator._id: ""}
                   type="text"
                   onChange={handleInput}
                   error={error.userCreator}
-                /> 
+                /> }
+                { mode==="create" &&
+                <Autocomplete
+                id="userCreator"
+                name="userCreator"
+                options={options}
+                getOptionLabel={(option) => option.label}
+                onChange={(event, newValue) => {
+                  handleInput({
+                    target: {
+                      name: "userCreator",
+                      value: newValue ? newValue.value : "",
+                    },
+                  });
+                }}
+                renderInput={(params) => (
+                  <TextField {...params} label="Seleccionar opción" variant="outlined" />
+                )}
+                isOptionEqualToValue={(option, value) => option.value === value.value}
+              />}
+
               </FormColumn>
               <FormColumn className="w-full">
                 <Input
@@ -189,7 +218,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
                   name="genre"
                   id="genre"
                   type="text"
-                  defaultValue={mode === "edit" ? defaultValues.genre : ""}
+                  defaultValue=""
                   className="text-sm-regular border-radius-estilo2 color-neutral-black-950 border
                   placeholder:text-sm-light placeholder:color-neutral-gray-400 border-slate-200 bg-white px-4 py-2"
                   onChange={handleInput}
@@ -199,7 +228,9 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
                     Seleccionar género
                     </option>
                     {genres.map((genre) => (
-                    <option value={genre.value}>{genre.label}</option>
+                    <option value={genre.value}
+                    selected={mode === "edit" && genre.value === defaultValues.genre._id}
+                    >{genre.label}</option>
                      ))}
                 </select>
 

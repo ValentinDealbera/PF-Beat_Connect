@@ -9,7 +9,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { adminGetBeats, setCurrentEditBeat, adminDeleteBeat, setCurrentPage } from "@/redux/slices/admin";
+import { adminGetBeats, setCurrentEditBeat, adminDeleteBeat, setCurrentBeatPage } from "@/redux/slices/admin";
 
 export default function SellerDashboardOverview() {  
     const dispatch = useDispatch();
@@ -17,12 +17,13 @@ export default function SellerDashboardOverview() {
     console.log(beatData);  
     const router = useRouter();
     const [beatToDelete, setBeatToDelete] = useState(null);
+    const page = useSelector((state)=> state.admin.currentBeatPage);
    
         
     useEffect(()=>{
-      dispatch(adminGetBeats());
+      dispatch(adminGetBeats(page));
       console.log("beats truchos", beatData);     
-    },[]);
+    },[page]);
 
     const handleCloseModal = async() => {
       dispatch(adminGetBeats());
@@ -38,8 +39,7 @@ export default function SellerDashboardOverview() {
 
     const headers = [
       "Item", 
-      "AudioMP3", 
-      "Id", 
+      "AudioMP3",      
       "Creator", 
       "State", 
       "Price", 
@@ -49,7 +49,6 @@ export default function SellerDashboardOverview() {
 
     const rows = beatData.map((item) => {
       return {
-          id: item._id,
           item: (
               <div className="flex items-center gap-4">
                   <Image
@@ -107,6 +106,27 @@ export default function SellerDashboardOverview() {
       onClose={handleCloseModal} 
       onConfirm={() => 
       dispatch(adminDeleteBeat(beatToDelete))} />)}
+
+      <button
+          onClick={() => dispatch(setCurrentBeatPage(page-1))}
+          disabled={page === 1}
+          className={page === 1 ? "text-red-800" : "text-black"}
+        >
+          Prev
+        </button>        
+        <button
+          onClick={() => {
+            dispatch(setCurrentBeatPage(page + 1));
+          }}
+          disabled={beatData.length<5}
+          className={
+            page === beatData.length<5
+              ? "text-red-800"
+              : "text-black"
+          }
+        >
+          Next
+        </button>
       </>
     );
   }
