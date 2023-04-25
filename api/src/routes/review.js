@@ -37,6 +37,9 @@ router.post("/admin", adminMiddleware, async (req, res) => {
       beat: reviewedBeat._id,
     });
 
+    creator.userReviews = [...creator.userReviews, newReview._id]
+    creator.save();
+
     reviewedBeat.review = [...reviewedBeat.review, newReview._id];
     reviewedBeat.relevance = reviewedBeat.relevance + rating
     reviewedBeat.save();
