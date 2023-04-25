@@ -9,6 +9,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { serverUrl } from "@/data/config";
 import axios from "axios";
 
+import { data } from "autoprefixer";
+import { throttle } from "lodash";
+import createAbortController from "@/utils/abortController";
+
+
 const initialState = {
   //LOADING
   loadingBeats: false,
@@ -38,6 +43,7 @@ const initialState = {
 //FETCH BEATS
 export const fetchBeats = createAsyncThunk(
   "beats/fetchBeats",
+
   async (
     {
       page = 1,
@@ -50,6 +56,8 @@ export const fetchBeats = createAsyncThunk(
       priceAmount,
       rating,
       genre,
+         relevance,
+
       searchFilter,
     },
     { rejectWithValue }
@@ -66,14 +74,15 @@ export const fetchBeats = createAsyncThunk(
         ...(rating && { rating }),
         ...(genre && { genre }),
         ...(searchFilter && { searchFilter }),
+        ...(relevance && { relevance }),
       };
 
-      let queryString = "?";
-      Object.entries(queryParameters).forEach(([key, value]) => {
-        if (value !== null && value !== undefined) {
-          queryString += `&${key}=${encodeURIComponent(value)}`;
-        }
-      });
+    let queryString = "?";
+    Object.entries(queryParameters).forEach(([key, value]) => {
+      if (value !== null && value !== undefined) {
+        queryString += `&${key}=${encodeURIComponent(value)}`;
+      }
+    });
 
       const response = await axios.get(
         `${serverUrl}beats?page=${page}${queryString.substr(1)}`,

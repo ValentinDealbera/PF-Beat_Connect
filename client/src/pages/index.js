@@ -7,19 +7,27 @@ import {
   BeatCategoryCard,
   Hero,
 } from "@/components";
-import { categories } from "@/data/data";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { serverUrl } from "@/data/config";
+
 import {convertInSeller} from "@/redux/slices/client/authSession"
+import { fetchBeats } from "@/redux/slices/beats";
+
 
 export default function Home() {
   // si hay un code valido en las querys, registra al usuario actual como vendedor
   const router = useRouter();
+
   const id = useSelector((state) => state.client.authSession.session.current._id);
 const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchBeats({ relevance: "desc" }));
+  }, []);
+
 
 
   useEffect(() => {
@@ -64,7 +72,7 @@ const dispatch = useDispatch()
             </div>
           </div>
         </Hero>
-        <BeatsSpecialSection title={`Beats `}>
+        <BeatsSpecialSection title={`Beats `} featuredBeats={featuredBeats}>
           <span className="text-titulo2-semibold">destacados</span>
         </BeatsSpecialSection>
       </Main>

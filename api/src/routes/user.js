@@ -40,7 +40,8 @@ router.get("/", async (req, res) => {
   try {
     const users = await UserModel.find()
       .populate("createdBeats")
-      .populate("bougthBeats");
+      .populate("bougthBeats")
+      .populate("userReviews")
     res.json(users);
   } catch (err) {
     return res.status(SERVER_ERROR).send(USER_NOT_FOUND);
@@ -82,7 +83,20 @@ router.get("/:id", async (req, res) => {
             model: "Review",
           },
         ],
-      });
+      })
+      .populate({
+        path: "userReviews",
+        populate: [
+          {
+            path: "beat",
+            model: "Beats",
+          },
+          {
+            path: "createdBy",
+            model: "User",
+          },
+        ],
+      })
     allUserId
       ? res.status(OK).send(allUserId)
       : res.status(NOT_FOUND).send(USER_NOT_FOUND);
@@ -132,6 +146,23 @@ router.put("/:id", async (req, res) => {
   console.log(req.body);
  
   try {
+    const { id } = req.params;
+    const image = req.files ? req.files.image : null;
+    const backImage = req.files ? req.files.backImage : null;
+    const {
+      mpcode,
+      seller,
+      admin,
+      soft,
+      username,
+      firstName,
+      lastName,
+      email,
+      bio,
+      password,
+      bougthBeats,
+    } = req.body;
+
     const userin = await UserModel.findById(id);
     const userAux = await UserModel.findById(userid);
 
@@ -426,6 +457,22 @@ router.delete("/:id", async (req, res) => {
     }
   } catch (error) {
     return res.status(500).json({ message: error.message });
+  }
+});
+
+/******************************************** RECUPERACION DE CONTRASENA *******************************************/
+
+router.post("/recuperar-contraseña", async (req, res) => {
+  const { email } = req.body;
+  const user = await UserModel.findOne({ email });
+
+  try {
+    if (!user) {
+      return res.status(NOT_FOUND).send(USER_NOT_FOUND);
+    }
+    axios.post(BACKEND_URL + "api/mail/password", { email: email });
+  } catch (err) {
+    res.status(SERVER_ERROR).send(ALL_NOT_OK);
   }
 });
 
