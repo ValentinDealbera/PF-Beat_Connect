@@ -13,28 +13,22 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { serverUrl } from "@/data/config";
+import {convertInSeller} from "@/redux/slices/client/authSession"
 
 export default function Home() {
   // si hay un code valido en las querys, registra al usuario actual como vendedor
   const router = useRouter();
-  const id = useSelector((state) => state.client.client._id);
+  const id = useSelector((state) => state.client.authSession.session.current._id);
+const dispatch = useDispatch()
 
+
+  useEffect(() => {
   if (router.query.code) {
-    async function data(id) {
-      try {
-        const dato = await axios.put(
-          `${serverUrl}user/${id}`,
-
-          { seller: "VENDEDOR", mpcode: router.query.code },
-          { headers: { userid: id } }
-        );
-        return dato;
-      } catch (error) {
-        console.log(error.message);
-      }
-    }
-    data(id);
+    dispatch(convertInSeller())
   }
+  }, [router.query.code]);
+
+
   //hacemos console.log del env
   return (
     <>

@@ -9,7 +9,7 @@ import {
 import { forwardRef, useImperativeHandle } from "react";
 import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editClient } from "@/redux/slices/client";
+import { editClient } from "@/redux/slices/client/authSession";
 import { useRouter } from "next/router";
 
 export default function EditClientForm(props) {
@@ -19,9 +19,12 @@ export default function EditClientForm(props) {
   const validateMode = "user";
   const [fieldsToValidate, setFieldsToValidate] = useState([]);
   const [error, setErrors] = useState({});
-  // const defaultValues = useSelector((state) => state.client.editClient) || {};
-  const defaultValues = useSelector((state) => state.client.client) || {};
-  const id = useSelector((state) => state.client.client._id);
+
+  const defaultValues =
+    useSelector((state) => state.client.authSession.session.current) || {};
+  const id = useSelector(
+    (state) => state.client.authSession.session.current._id
+  );
   console.log("----------------", id);
   const mode = props.mode;
 

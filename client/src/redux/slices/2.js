@@ -8,8 +8,6 @@ import { headers } from "next/dist/client/components/headers";
 
 const tokenAdmin = process.env.NEXT_PUBLIC_TOKEN_ADMIN;
 
-
-
 const initialState = {
   activeEditingItem: null,
 
@@ -36,13 +34,14 @@ const initialState = {
   clientEdit: null,
 };
 
-
 export const loginSystem = createAsyncThunk(
   "client/loginSystem",
   async (data, { rejectWithValue }) => {
     try {
       console.log("data", data);
-      const response = await axios.post(`${serverUrl}auth`, data, { timeout: 5000 });
+      const response = await axios.post(`${serverUrl}auth`, data, {
+        timeout: 5000,
+      });
       const userResponse = response.data;
       console.log(userResponse);
       const newClient = {
@@ -212,7 +211,7 @@ const cartSlice = createSlice({
     setClientData(state, action) {
       console.log("setClientData", action.payload);
       state.client = action.payload;
-    },  
+    },
     setTokenValid(state, action) {
       state.authSettings.tokenValid = action.payload;
     },

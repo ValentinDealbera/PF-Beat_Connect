@@ -1,5 +1,5 @@
 import { Input, Button } from "@/components";
-import { postClientBeat } from "@/redux/slices/client";
+//import { postClientBeat } from "@/redux/slices/client";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import {ValidationCreateBeat} from "./validationCreateBeat";
@@ -67,7 +67,7 @@ export default function FormCreateBeat() {
     if (Object.values(error).some((error) => error)) {
       alert("Debe llenar todos los campos correctamente");
     } else {
-      await dispatch(postClientBeat(formData));
+     // await dispatch(postClientBeat(formData));
     }
   };
 

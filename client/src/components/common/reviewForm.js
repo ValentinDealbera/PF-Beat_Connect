@@ -1,7 +1,7 @@
 import { Main, Input, FormContainer } from "@/components";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postBeatReview } from "@/redux/slices/client";
+//import { postBeatReview } from "@/redux/slices/client";
 
 export default function ReviewForm(props) {
   const [formFields, setFormFields] = useState({
@@ -25,14 +25,14 @@ export default function ReviewForm(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(
-      postBeatReview({
-        ...formFields,
-        createdBy: createdBy,
-        beat: props.beatId,
-        rating: ratingValue,
-      })
-    );
+    // dispatch(
+    //   postBeatReview({
+    //     ...formFields,
+    //     createdBy: createdBy,
+    //     beat: props.beatId,
+    //     rating: ratingValue,
+    //   })
+    // );
   };
 
   return (

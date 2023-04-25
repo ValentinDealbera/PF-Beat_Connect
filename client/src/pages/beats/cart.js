@@ -1,32 +1,29 @@
 import {
-  BeatsSpecialSection,
   Main,
   Section,
   IslandDashboard,
-  AuthorName,
   DynamicTable,
   BeatsRelatedSection,
 } from "@/components";
-import { useEffect } from "react";
+
 import { useSelector, useDispatch } from "react-redux";
-import Image from "next/image";
 import { deleteFromCart } from "@/redux/slices/cart";
-import axios from "axios";
-//traemos url del servidor
 import { serverUrl } from "@/data/config";
 import { useRouter } from "next/router";
+import axios from "axios";
+import Image from "next/image";
 
 export default function Carrito() {
   const router = useRouter();
   const dispatch = useDispatch();
-  //Obtenemos los items del carrito
-  const { publicItems } = useSelector((state) => state?.beats) || [];
   const cartItems = useSelector((state) => state?.cart.cart) || [];
-  console.log(cartItems, publicItems);
+  const user = useSelector(
+    (state) => state.client.authSession.session.current._id
+  );
 
-  const user = useSelector((state) => state.client.client._id);
+  const { isLogged } =
+    useSelector((state) => state.client.authSession.auth) || false;
 
-  //Creamos un array de objetos que reuna el autor del beat y el precio total de sus beats, tambien su foto
   const precio_por_autor = [];
 
   cartItems.forEach((item) => {
@@ -38,7 +35,9 @@ export default function Carrito() {
       : item.beat.userCreator;
     const price = item.beat.priceAmount;
     const image = item.beat.userCreator.image;
-    const index = precio_por_autor.findIndex((obj) => obj.authorId === authorId);
+    const index = precio_por_autor.findIndex(
+      (obj) => obj.authorId === authorId
+    );
     if (index === -1) {
       precio_por_autor.push({ authorId, author, price, image });
     } else {
@@ -46,11 +45,8 @@ export default function Carrito() {
     }
   });
 
-  console.log(precio_por_autor);
   const headers = ["Item", "Price", "Author", "Action"];
 
-  //Generamps dinamicamente las filas de la tabla con los items del carrito
-  //En items mandmaos nombre e imagen en un div
   const rows = cartItems.map((item) => {
     return {
       id: item.beat._id,
@@ -75,16 +71,10 @@ export default function Carrito() {
     };
   });
 
-  //mandar un array cart, que tiene los ids de los beats que queremos comprar
-  //mandar buyer, que es el id del usuario que esta comprando, obtener dinamicaente
-  //mandar seller que es el id del usuario que esta vendiendo, obtener dinamicamente con precio_por_autor
-
   const idsOfSellers = precio_por_autor.map((item) => item.authorId);
   const idsOfBuyer = user;
 
-//creamos array de ids de los beats que queremos comprar
   const cartIds = cartItems.map((item) => item.beat._id);
-
 
   const toPay = {
     cart: cartIds,
@@ -95,16 +85,15 @@ export default function Carrito() {
   const handlePayment = () => {
     console.log("pagar");
     console.log(toPay);
-if(toPay.buyer === undefined){
-  return alert("Debes iniciar sesion para poder comprar")
-
-}
+    if (!isLogged) {
+      return alert("Debes iniciar sesion para poder comprar");
+    }
 
     axios
       .post(`${serverUrl}cart/pay`, toPay, {
         headers: {
           "Content-Type": "application/json",
-          "userid" : user
+          userid: user,
         },
       })
       .then((res) => {
@@ -115,8 +104,6 @@ if(toPay.buyer === undefined){
         console.log(err);
       });
   };
-
-console.log("ppppp",precio_por_autor)
 
   return (
     <>
@@ -135,10 +122,7 @@ console.log("ppppp",precio_por_autor)
               <div id="precio_por_autor" className="flex flex-col gap-4">
                 {precio_por_autor.map((item) => (
                   <div>
-                    <div
-                      className="flex items-center justify-between gap-4"
-                     
-                    >
+                    <div className="flex items-center justify-between gap-4">
                       <div className="flex items-center gap-1">
                         <Image
                           src={item.image}
@@ -146,10 +130,7 @@ console.log("ppppp",precio_por_autor)
                           height={50}
                           className="rounded-full"
                         />
-                        <h3 className="text-base-medium">
-                          {item.author}
-                    
-                        </h3>
+                        <h3 className="text-base-medium">{item.author}</h3>
                       </div>
                       <span className="text-base-semibold text-red-700">
                         ${item.price}
@@ -164,7 +145,10 @@ console.log("ppppp",precio_por_autor)
                   <h3 className="text-base-light">Subtotal</h3>
                   <span className="text-base-semibold text-red-700">
                     $
-                    {cartItems.reduce((acc, item) => acc + item.beat.priceAmount, 0)}
+                    {cartItems.reduce(
+                      (acc, item) => acc + item.beat.priceAmount,
+                      0
+                    )}
                   </span>
                 </div>
                 <div className="flex w-full items-center justify-between">
@@ -175,7 +159,10 @@ console.log("ppppp",precio_por_autor)
                   <h3 className="text-base-semibold">Total</h3>
                   <span className="text-base-semibold text-red-700">
                     $
-                    {cartItems.reduce((acc, item) => acc + item.beat.priceAmount, 0)}
+                    {cartItems.reduce(
+                      (acc, item) => acc + item.beat.priceAmount,
+                      0
+                    )}
                   </span>
                 </div>
               </div>

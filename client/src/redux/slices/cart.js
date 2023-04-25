@@ -1,73 +1,56 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+/*FUNCION DE CART:*/
+/* 1) ADD TO CART: Se agrega un beat al carrito. */
+/* 2) DELETE FROM CART: Se elimina un beat del carrito. */
+
+import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "sonner";
-import { useSelector } from "react-redux"; // importa el hook useSelector
+import { toastError, toastSuccess, toastWarning } from "@/utils/toastStyles";
 
 const initialState = {
   cart: [],
 };
 
+//------------------ SLICE ------------------//
+
 const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    //--------------------
+    //SET CART
     setCart(state, action) {
-      console.log("action", action.payload);
       state.cart = [...state.cart, action.payload];
     },
+    //--------------------
+    //DELETE FROM CART
     deleteFromCart(state, action) {
-      console.log("action", action.payload);
-      //verificamos que el item a eliminar este en el carrito
-      const isInCart = state.cart.some((item) => item.beat._id === action.payload.id);
-      console.log(isInCart, action.payload.id, state.cart);
-      state.cart = state.cart.filter((item) => item.beat._id !== action.payload.id);
-      toast.success("Se eliminó del carrito", {
-        style: {
-          background: "#ECFDF3",
-          color: "#008A2E",
-        },
-      });
+      state.cart = state.cart.filter(
+        (item) => item.beat._id !== action.payload.id
+      );
+      toast.success("Se eliminó del carrito", toastSuccess);
     },
   },
 });
 
-export const { setCart, deleteFromCart } = cartSlice.actions;
-export default cartSlice.reducer;
+//------------------ ACTIONS ------------------//
 
 export const addToCart = (obj) => async (dispatch, getState) => {
   const state = getState().cart;
   const isInCart = state.cart.some((item) => item.beat._id === obj.beat._id);
-  console.log(obj, isInCart);
-  if (isInCart === true) {
-    console.log(state);
-    console.log("Ya esta en el carrito");
-    toast.success("Ya esta en el carrito", {
-      style: {
-        background: "#ffedd5",
-        color: "#c2410c",
-      },
-    });
-  } else {
-    const { client } = getState();
 
-    console.log("client", client.client._id, obj.authorId);
-    if (client.client._id == obj.authorId) {
-      console.log("No puedes comprar tus propios beats");
-      toast.success("No puedes comprar tus propios beats", {
-        style: {
-          background: "#ffedd5",
-          color: "#c2410c",
-        },
-      });
+  if (isInCart === true) {
+    toast.error("Ya esta en el carrito", toastWarning);
+  } else {
+    const id = getState().client.authSession.session.current._id;
+
+    if (id == obj.authorId) {
+      toast.error("No puedes comprar tus propios beats", toastError);
       return;
     }
-
-    //state.cart = [...state.cart, action.payload];
-    toast.success("Se agregó al carrito", {
-      style: {
-        background: "#ECFDF3",
-        color: "#008A2E",
-      },
-    });
+    toast.success("Se agregó al carrito", toastSuccess);
     dispatch(setCart(obj));
   }
 };
+
+export const { setCart, deleteFromCart } = cartSlice.actions;
+export default cartSlice.reducer;

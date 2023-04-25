@@ -93,7 +93,7 @@ router.get("/:id", async (req, res) => {
 
 router.post("/admin", adminMiddleware, async (req, res) => {
   const { body } = req;
-  if (body.image === '') delete body.image
+  if (body.image === "") delete body.image;
   try {
     const user = await UserModel.create(body);
     res.send(user);
@@ -104,25 +104,33 @@ router.post("/admin", adminMiddleware, async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   const { userid } = req.headers;
+
+  if (!userid) {
+    return res.status(BAD_REQUEST).json({ message: "Debes enviar un id" });
+  }
+
+  const { id } = req.params;
+  const image = req.files.image?req.files.image : null
+  //const image = req.files ? req.files.image : null;
+  const backImage = req.files ? req.files.backImage : null;
+  const {
+    mpcode,
+    seller,
+    admin,
+    soft,
+    username,
+    firstName,
+    lastName,
+    email,
+    bio,
+    password,
+    bougthBeats,
+  } = req.body;
+
   try {
-    const { id } = req.params;
-    const image = req.files ? req.files.image : null
-    const backImage = req.files ? req.files.backImage : null
-    const {
-      mpcode,
-      seller,
-      admin,
-      soft,
-      username,
-      firstName,
-      lastName,
-      email,
-      bio,
-      password,
-      bougthBeats,
-    } = req.body;
     const userin = await UserModel.findById(id);
     const userAux = await UserModel.findById(userid);
+
     if (!userin)
       return res
         .status(400)
@@ -241,11 +249,11 @@ router.put("/:id", async (req, res) => {
 
 router.put("/admin/:id", adminMiddleware, async (req, res) => {
   try {
-    console.log('-------------', req)
+    console.log("-------------", req);
     const { id } = req.params;
-      const image = req.files ? req.files.image : null
-      console.log('ESTA ES LA IMAGEN Y COMO LLEGA', image)
-      const backImage = req.files ? req.files.backImage : null
+    const image = req.files ? req.files.image : null;
+    console.log("ESTA ES LA IMAGEN Y COMO LLEGA", image);
+    const backImage = req.files ? req.files.backImage : null;
     const {
       seller,
       admin,
@@ -300,7 +308,7 @@ router.put("/admin/:id", adminMiddleware, async (req, res) => {
       if (soft) user.softDelete = !user.softDelete;
       if (image) {
         const imageData = fs.readFileSync(image.tempFilePath);
-        console.log('Procesando imagen');
+        console.log("Procesando imagen");
         const imageStorageRef = ref(
           storage,
           `users/${user.username}/image/${user.username}`
@@ -317,7 +325,7 @@ router.put("/admin/:id", adminMiddleware, async (req, res) => {
         );
         const downloadImageURL = await getDownloadURL(imageSnapshot.ref);
         user.image = downloadImageURL ? downloadImageURL : user.image;
-        console.log('Imagen subida');
+        console.log("Imagen subida");
       }
       if (backImage) {
         const imageData = fs.readFileSync(backImage.tempFilePath);
