@@ -15,6 +15,7 @@ import { serverUrl } from "@/data/config";
 
 import {convertInSeller} from "@/redux/slices/client/authSession"
 import { fetchBeats } from "@/redux/slices/beats";
+import { resetCart } from "@/redux/slices/cart";
 
 
 export default function Home() {
@@ -28,7 +29,18 @@ const dispatch = useDispatch()
     dispatch(fetchBeats({ relevance: "desc" }));
   }, []);
 
-
+  useEffect(()=>{
+    if (router.query.cart && router.query.status === 'approved') {
+      for (let i = 0; i < router.query.cart.split(',').length; i++) {
+        try {
+          axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}orders`, {beat: router.query.cart.split(',')[i], buyer: id})
+        } catch (error) {
+          console.log(error.message);
+        }
+      }
+      dispatch(resetCart())
+    }
+  },[router.query.status])
 
   useEffect(() => {
   if (router.query.code) {
