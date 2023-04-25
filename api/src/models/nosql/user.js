@@ -69,6 +69,12 @@ const UserSchema = new mongoose.Schema({
       ref: "Beats",
     },
   ],
+  userReviews: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Review",
+    },
+  ],
   createdBeats: [
     {
       type: mongoose.Schema.Types.ObjectId,
