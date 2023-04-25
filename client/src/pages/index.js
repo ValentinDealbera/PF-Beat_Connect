@@ -14,7 +14,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { serverUrl } from "@/data/config";
 
 
-import {convertInSeller} from "@/redux/slices/client/authSession"
 import { fetchBeats } from "@/redux/slices/beats";
 import { resetCart } from "@/redux/slices/cart";
 import { convertInSeller } from "@/redux/slices/client/authSession";
