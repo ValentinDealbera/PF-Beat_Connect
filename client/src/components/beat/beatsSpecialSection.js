@@ -15,8 +15,8 @@ export default function BeatsSpecialSection(props) {
 
   //Limit the number of items to 10
 
-  // const limit = 10;
-  // const limitedItems = activeItems.slice(0, limit);
+  const limit = 10;
+  const limitedItems = activeItems.slice(0, limit);
 
   useEffect(() => {
     // dispatch(setBeatsDisplayMode("shop"));
@@ -34,7 +34,6 @@ export default function BeatsSpecialSection(props) {
       </h1>
 
       <BeatCardFlex beats={limitedItems} />
-
     </Section>
   );
 }

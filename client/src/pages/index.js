@@ -72,7 +72,7 @@ const dispatch = useDispatch()
             </div>
           </div>
         </Hero>
-        <BeatsSpecialSection title={`Beats `} featuredBeats={featuredBeats}>
+        <BeatsSpecialSection title={`Beats `} >
           <span className="text-titulo2-semibold">destacados</span>
         </BeatsSpecialSection>
       </Main>
