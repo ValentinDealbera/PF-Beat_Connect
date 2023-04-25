@@ -12,6 +12,7 @@ import axios from "axios";
 import { createUserSession } from "@/utils/userSession";
 import { toastError, toastSuccess } from "@/utils/toastStyles";
 import { setBougthBeats, setOwnedBeats } from "./beats";
+import {setOwnedReviews} from "./reviews"
 
 const initialState = {
   auth: {
@@ -45,7 +46,7 @@ const initialState = {
 //JSON LOGIN
 export const jsonLogin = createAsyncThunk(
   "authSession/jsonLogin",
-  async (data, { rejectWithValue }) => {
+  async (data, { rejectWithValue, dispatch }) => {
     try {
       const { data: userResponse } = await axios.post(`${serverUrl}auth`, data);
       const session = createUserSession(userResponse.user);
@@ -61,6 +62,7 @@ export const jsonLogin = createAsyncThunk(
         },
       };
       dispatch(getUserData(userResponse.user._id));
+      return { auth, session };
     } catch (error) {
       console.log("ERROR", error);
       return rejectWithValue(error.response.data.message);
@@ -172,7 +174,7 @@ export const getUserData = createAsyncThunk(
 
       const bougthBeats = response.bougthBeats;
       const ownedBeats = response.createdBeats;
-      //const ownedReviews = response.createdReviews;
+      const ownedReviews = response.userReviews;
 
       console.log(
         "bougthBeats",
@@ -184,7 +186,7 @@ export const getUserData = createAsyncThunk(
       );
       await dispatch(setBougthBeats(bougthBeats));
       await dispatch(setOwnedBeats(ownedBeats));
-      //await dispatch(setOwnedReviews(ownedBeats));
+      await dispatch(setOwnedReviews(ownedReviews));
 
       const auth = {
         isSeller: response.isSeller,

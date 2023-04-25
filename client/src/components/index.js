@@ -126,7 +126,7 @@ export { default as AdminCreateReviewForm } from "./forms/adminCreateReview";
 export { default as AdminCreateBeatForm } from "./forms/adminCreateBeat";
 export { default as EditClientForm } from "./forms/editClientForm";
 export { default as EditPasswordForm } from "./forms/editPasswordForm";
-
+export { default as ReviewCardGrid } from "./client/reviewCardGrid";
 
 //export { default as BeatImage } from "./beat/beatImage";
 //export { default as Checkbox } from "./common/checkbox";

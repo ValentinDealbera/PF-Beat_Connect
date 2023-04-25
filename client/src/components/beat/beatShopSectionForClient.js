@@ -3,6 +3,7 @@ import {
   BuyerNavGeneral,
   NewBeatCardGrid,
   ClientReview,
+  ReviewCardGrid,
 } from "@/components";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -28,7 +29,9 @@ export default function BeatShopSectionForClient(props) {
   }, []);
 
   const { activeItems } = useSelector((state) => state?.beats) || [];
-  const {bougthBeats, ownedBeats} = useSelector((state) => state.client.beats);
+  const { bougthBeats, ownedBeats } = useSelector(
+    (state) => state.client.beats
+  );
 
   return (
     <Section subClassName="padding-x-estilo2 padding-y-estilo2 gap-8 flex flex-col">
@@ -43,17 +46,7 @@ export default function BeatShopSectionForClient(props) {
         <div>
           <div className="gap-estilo1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
             <>
-              {activeReviewDetail.length > 0 &&
-                activeReviewDetail?.map((review) => (
-                  <>
-                    <ClientReview
-                      currentMode={props.currentMode}
-                      title={review.title}
-                      comment={review.comment}
-                      username={review.username}
-                    />
-                  </>
-                ))}
+              <ReviewCardGrid />
             </>
           </div>
           {activeReviewDetail.length === 0 && (
