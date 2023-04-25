@@ -97,7 +97,13 @@ router.get("/:beatId", async (req, res) => {
 
 router.post("/", async (req, res) => {
   const { userid } = req.headers;
+const { name, priceAmount, bpm, genre, userCreator } = req.body;
+console.log(req.body)
+if(!name || !priceAmount || !bpm || !genre || !userCreator) return res.status(400).json({message: "Faltan datos"})
 
+  console.log("procesando beat", req.headers);
+
+  if(!userid) return res.status(400).json({message: "No llego un id"})
   console.log("procesando beat");
 
   const comprobacion = await beatModel.findOne({ name: req.body.name });
@@ -105,9 +111,14 @@ router.post("/", async (req, res) => {
     if (comprobacion.name.toLocaleLowerCase() === req.body.name.toLowerCase())
       return res.status(400).json({ error: "Ese Beat ya Existe" }).end();
   }
+
+
+
+  try {
   const creator = await userModel.findById(req.body.userCreator);
   const creatorAux = await userModel.findById(userid);
   const genre = await genreModel.findById(req.body.genre);
+
   if (creator.email !== creatorAux.email)
     return res
       .status(400)
@@ -115,13 +126,15 @@ router.post("/", async (req, res) => {
   if (!genre) return res.status(400).json({ message: "Este genero no existe" });
   if (!creator)
     return res.status(400).json({ message: "Este usuario no existe" });
+    
   if (!creator.isSeller)
     return res
       .status(400)
       .json({ message: "Este usuario no esta registrado como vendedor" });
   const audioMP3Data = fs.readFileSync(req.files.audioMP3.tempFilePath);
   // const audioWAVData = fs.readFileSync(req.files.audioWAV.tempFilePath);
-  try {
+  
+
     const dateTime = giveCurrentDateTime();
     if (!comprobacion && audioMP3Data && genre && creator && req.body.bpm) {
       //-------------------------------------audio WAV

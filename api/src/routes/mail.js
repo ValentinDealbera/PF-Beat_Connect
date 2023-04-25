@@ -1,5 +1,7 @@
 const { Router } = require("express");
+const userModel = require("../models/nosql/user");
 require("dotenv").config();
+const FRONTEND_URL = process.env.FRONTEND_URL;
 const router = Router();
 const nodemailer = require("nodemailer");
 const transporter = nodemailer.createTransport({

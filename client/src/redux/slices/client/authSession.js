@@ -86,6 +86,23 @@ export const jsonRegister = createAsyncThunk(
 );
 
 //--------------------
+//RECOVER PASSWORD
+export const recoverPassword = createAsyncThunk(
+  "authSession/recoverPassword",
+  async (data, { rejectWithValue }) => {
+    try {
+      const { data: response } = await axios.post(
+        `${serverUrl}mail/password`,
+        data
+      );
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+//--------------------
 //CONVERT IN SELLER
 export const convertInSeller = createAsyncThunk(
   "authSession/convertInSeller",
@@ -291,7 +308,19 @@ const authSession = createSlice({
       })
       .addCase(getUserData.rejected, (state, action) => {
         toast.error(action.payload, toastError);
-      });
+      })
+
+      //--------------------
+      //RECOVER PASSWORD
+      .addCase(recoverPassword.pending, (state, action) => {
+        toast("Te estamos enviando un email con la solicitud de recuperación...");
+      })
+      .addCase(recoverPassword.fulfilled, (state, action) => {
+        toast.success("Se envió el email", toastSuccess);
+      })
+      .addCase(recoverPassword.rejected, (state, action) => {
+        toast.error(action.payload, toastError);
+      })
   },
 });
 

@@ -13,17 +13,19 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { serverUrl } from "@/data/config";
 
+
 import {convertInSeller} from "@/redux/slices/client/authSession"
 import { fetchBeats } from "@/redux/slices/beats";
 import { resetCart } from "@/redux/slices/cart";
+import { convertInSeller } from "@/redux/slices/client/authSession";
 
 
 export default function Home() {
   // si hay un code valido en las querys, registra al usuario actual como vendedor
   const router = useRouter();
-
+  const dispatch = useDispatch();
   const id = useSelector((state) => state.client.authSession.session.current._id);
-const dispatch = useDispatch()
+
 
   useEffect(() => {
     dispatch(fetchBeats({ relevance: "desc" }));
@@ -46,12 +48,12 @@ const dispatch = useDispatch()
     }
   },[router.query.status])
 
-  useEffect(() => {
-  if (router.query.code) {
-    dispatch(convertInSeller())
-  }
-  }, [router.query.code]);
 
+  useEffect(() => {
+    if (router.query.code) {
+      dispatch(convertInSeller());
+    }
+  }, [router.query.code]);
 
   //hacemos console.log del env
   return (
@@ -88,7 +90,7 @@ const dispatch = useDispatch()
             </div>
           </div>
         </Hero>
-        <BeatsSpecialSection title={`Beats `} >
+        <BeatsSpecialSection title={`Beats `}>
           <span className="text-titulo2-semibold">destacados</span>
         </BeatsSpecialSection>
       </Main>
