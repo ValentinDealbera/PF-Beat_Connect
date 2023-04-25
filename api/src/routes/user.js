@@ -118,33 +118,6 @@ router.post("/admin", adminMiddleware, async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   const { userid } = req.headers;
-
-  if (!userid) {
-    return res.status(BAD_REQUEST).json({ message: "Debes enviar un id" });
-  }
-
-  const { id } = req.params;
-
-  const image = req?.files?.image ?? null;
-  //const image = req.files ? req.files.image : null;
-  const backImage =  req?.files?.backImage ?? null;
-  
-  const {
-    mpcode,
-    seller,
-    admin,
-    soft,
-    username,
-    firstName,
-    lastName,
-    email,
-    bio,
-    password,
-    bougthBeats,
-  } = req.body;
-
-  console.log(req.body);
- 
   try {
     const { id } = req.params;
     const image = req.files ? req.files.image : null;
@@ -162,10 +135,8 @@ router.put("/:id", async (req, res) => {
       password,
       bougthBeats,
     } = req.body;
-
     const userin = await UserModel.findById(id);
     const userAux = await UserModel.findById(userid);
-
     if (!userin)
       return res
         .status(400)

@@ -305,12 +305,21 @@ router.post("/admin", adminMiddleware, async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-      const image = req.files ? req.files.image : null
+    const { userid } = req.headers;
+ 
+    const image = req?.files?.image ?? null;
+
+  
     const { name, priceAmount, review, softDelete, genre, relevance } =
       req.body;
-      console.log(req.body)
-    const updatedBeat = await beatModel.findById(id);
-    if (!updatedBeat) return res.status(400).json({ error: "Beat not Found" });
+    const updatedBeat = await beatModel.findById(id).populate("userCreator");
+    const userAux = await userModel.findById(userid);
+    if (!updatedBeat)
+      return res.status(400).json({ message: "Este beat no existe" });
+    if (updatedBeat.userCreator.email !== userAux.email)
+      return res.status(400).json({
+        message: "No puedes modificar un beat que no sea de tu autoria",
+      });
     if (name) updatedBeat.name = name;
     if (priceAmount) updatedBeat.priceAmount = Number(priceAmount);
     if (review) updatedBeat.review = [...updatedBeat.review, review];
@@ -336,11 +345,11 @@ router.put("/:id", async (req, res) => {
       const downloadImageURL = await getDownloadURL(imageSnapshot.ref);
       updatedBeat.image = downloadImageURL;
     }
-    if (relevance) updatedBeat.relevance = Number(relevance);
+    if (relevance)
+      updatedBeat.relevance = relevance === "+" && updatedBeat.relevance + 1;
     updatedBeat.save();
     return res.status(200).json(updatedBeat);
   } catch (error) {
-    console.log(error.message);
     res.status(500).json({ error: error.message });
   }
 });
