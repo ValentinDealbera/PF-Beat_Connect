@@ -82,6 +82,7 @@ router.post('/', async (req, res) => {
         })
         const buyerUser = await userModel.findById(buyer)
         buyerUser.bougthBeats = [...buyerUser.bougthBeats, beat]
+        buyerUser.userOrders = [...buyerUser.userOrders, order._id]
         await buyerUser.save()
 
         res.status(200).json(order)

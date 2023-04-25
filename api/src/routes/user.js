@@ -42,6 +42,7 @@ router.get("/", async (req, res) => {
       .populate("createdBeats")
       .populate("bougthBeats")
       .populate("userReviews")
+      .populate("userOrders")
     res.json(users);
   } catch (err) {
     return res.status(SERVER_ERROR).send(USER_NOT_FOUND);
@@ -93,6 +94,23 @@ router.get("/:id", async (req, res) => {
           },
           {
             path: "createdBy",
+            model: "User",
+          },
+        ],
+      })
+      .populate({
+        path: "userOrders",
+        populate: [
+          {
+            path: "beat",
+            model: "Beats",
+          },
+          {
+            path: "seller",
+            model: "User",
+          },
+          {
+            path: "buyer",
             model: "User",
           },
         ],

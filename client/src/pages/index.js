@@ -29,16 +29,20 @@ const dispatch = useDispatch()
     dispatch(fetchBeats({ relevance: "desc" }));
   }, []);
 
+  const sendOrder = async () => {
+    for (let i = 0; i < router.query.cart.split(',').length; i++) {
+       await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}orders`, {beat: router.query.cart.split(',')[i], buyer: id})
+    }
+    dispatch(resetCart())
+  }
+
   useEffect(()=>{
     if (router.query.cart && router.query.status === 'approved') {
-      for (let i = 0; i < router.query.cart.split(',').length; i++) {
-        try {
-          axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}orders`, {beat: router.query.cart.split(',')[i], buyer: id})
-        } catch (error) {
-          console.log(error.message);
-        }
+      try {
+        sendOrder()
+      } catch (error) {
+        console.log(error.message);
       }
-      dispatch(resetCart())
     }
   },[router.query.status])
 
