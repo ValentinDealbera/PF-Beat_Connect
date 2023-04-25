@@ -5,18 +5,12 @@ import {
   NewBeatCardGrid,
 } from "@/components";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { setBeatsDisplayMode, fetchBeats } from "@/redux/slices/beats";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchBeats, setBeatsDisplayMode } from "@/redux/slices/beats";
 
 export default function BeatsSpecialSection(props) {
-  const { activeItems } = useSelector((state) => state?.beats) || [];
+  const featuredBeats = useSelector((state) => state.beats.activeItems);
   const dispatch = useDispatch();
-
-  //Limit the number of items to 10
-
-  const limit = 10;
-  const limitedItems = activeItems.slice(0, limit);
 
   useEffect(() => {
     // dispatch(setBeatsDisplayMode("shop"));
@@ -33,7 +27,7 @@ export default function BeatsSpecialSection(props) {
         {props.children}{" "}
       </h1>
 
-      <BeatCardFlex beats={limitedItems} />
+      <BeatCardFlex beats={featuredBeats} />
     </Section>
   );
 }
