@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 
 export function externalManageDropdown() {
-  NewBeatCardGrid.handleDropdownOpen();
+  // NewBeatCardGrid.handleDropdownOpen();
 }
 
 export default function NewBeatCardGrid(props) {

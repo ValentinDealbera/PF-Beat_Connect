@@ -16,6 +16,9 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    resetCart(state, action){
+      state.cart = []
+    },
     //--------------------
     //SET CART
     setCart(state, action) {
@@ -52,5 +55,5 @@ export const addToCart = (obj) => async (dispatch, getState) => {
   }
 };
 
-export const { setCart, deleteFromCart } = cartSlice.actions;
+export const { setCart, deleteFromCart,resetCart } = cartSlice.actions;
 export default cartSlice.reducer;
