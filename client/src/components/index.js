@@ -71,7 +71,6 @@ export { default as BeatShopSectionForClient } from "./beat/beatShopSectionForCl
 export { default as BeatsRelatedSection } from "./beat/beatRelatedSection";
 export { default as BeatCardFlex } from "./beat/beatCardFlex";
 
-
 //beatDataComponents
 export { default as AuthorName } from "./beat/beatDataComponents/authorName";
 export { default as BeatPrice } from "./beat/beatDataComponents/beatPrice";
@@ -127,6 +126,6 @@ export { default as AdminCreateBeatForm } from "./forms/adminCreateBeat";
 export { default as EditClientForm } from "./forms/editClientForm";
 export { default as EditPasswordForm } from "./forms/editPasswordForm";
 export { default as ReviewCardGrid } from "./client/reviewCardGrid";
-
+export { default as RecoveryPasswordForm } from "./forms/recoveryPasswordForm";
 //export { default as BeatImage } from "./beat/beatImage";
 //export { default as Checkbox } from "./common/checkbox";
