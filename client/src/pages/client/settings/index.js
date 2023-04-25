@@ -5,6 +5,7 @@ import {
   Head,
   SettingsHero,
   EditClientForm,
+  EditPasswordForm,
 } from "@/components";
 import { useSelector } from "react-redux";
 
@@ -21,7 +22,9 @@ export default function BuyerProfile() {
           <EditClientForm
           mode="edit"
           /></>}
-          {activeIndex === 1 && <></>}
+          {activeIndex === 1 && <>
+          <EditPasswordForm mode="edit" />
+          </>}
         </BuyerProfileLayout>
       </Main>
     </>

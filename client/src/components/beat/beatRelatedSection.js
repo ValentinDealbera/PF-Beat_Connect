@@ -1,4 +1,4 @@
-import { Section, NewBeatCardGrid } from "@/components";
+import { Section, NewBeatCardGrid, BeatCardFlex } from "@/components";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -22,7 +22,7 @@ export default function BeatsRelatedSection(props) {
         {props.title}
         {props.children}{" "}
       </h1>
-      <NewBeatCardGrid beats={limitedItems} />
+      <BeatCardFlex beats={limitedItems} />
     </Section>
   );
 }

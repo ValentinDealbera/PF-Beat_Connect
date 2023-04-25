@@ -26,7 +26,7 @@ export default function EditClientForm(props) {
   const mode = props.mode;
 
   const [form, setForm] = useState({
-    username: `${mode === "edit" ? defaultValues.username : ""}`,
+    username: `${mode === "edit" ? defaultValues.userName : ""}`,
     firstName: `${mode === "edit" ? defaultValues.firstName : ""}`,
     lastName: `${mode === "edit" ? defaultValues.lastName : ""}`,
     image: "",
@@ -97,9 +97,9 @@ export default function EditClientForm(props) {
             />
             <Input
               name={"username"}
-              label={"Username"}
-              placeholder={"UserName:"}
-              defaultValue={mode === "edit" ? defaultValues.username : ""}
+              label={"Nombre de usuario"}
+              placeholder={"Nombre de usuario"}
+              defaultValue={mode === "edit" ? defaultValues.userName : ""}
               type={"text"}
               onChange={handleInput}
               error={error.username}

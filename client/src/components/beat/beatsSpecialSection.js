@@ -23,7 +23,7 @@ const limitedItems = activeItems.slice(0, limit);
         {props.title}
         {props.children}{" "}
       </h1>
-      <NewBeatCardGrid beats={limitedItems} />
+      <BeatCardFlex beats={limitedItems} />
     </Section>
   );
 }

@@ -4,7 +4,10 @@ import { externalManageDropdown } from "./newBeatCardGrid";
 import { useSelector, useDispatch } from "react-redux";
 import { setActiveItemDetail } from "@/redux/slices/beats";
 //import { fetchCurrentBeat } from "@/redux/slices/client";
-import { deleteClientBeat, setActiveEditingBeat } from "@/redux/slices/client/beats";
+import {
+  deleteClientBeat,
+  setActiveEditingBeat,
+} from "@/redux/slices/client/beats";
 import {
   BeatImage,
   AuthorName,
@@ -14,7 +17,7 @@ import {
   manageEditBeat,
 } from "@/components";
 
-export default function BeatCard({ beat, variant }) {
+export default function BeatCard({ beat, variant, manageView, mode, width }) {
   const dispatch = useDispatch();
   try {
     const { _id } = useSelector(
@@ -25,10 +28,11 @@ export default function BeatCard({ beat, variant }) {
 
     const handleAction = () => {
       dispatch(setActiveItemDetail(beat));
-      externalManageDropdown();
+      //externalManageDropdown();
+      manageView();
     };
 
-    const handleEdit = async() => {
+    const handleEdit = async () => {
       await dispatch(setActiveEditingBeat(beat));
       manageEditBeat();
     };
@@ -39,7 +43,7 @@ export default function BeatCard({ beat, variant }) {
 
     return (
       <>
-        <div onClick={handleAction}>
+        <div onClick={handleAction} className={mode === "grid" ? "w-full" : `${width}`}>
           <div
             className={`background-neutral-white gap-estilo3 flex flex-col ${
               variant === "public"

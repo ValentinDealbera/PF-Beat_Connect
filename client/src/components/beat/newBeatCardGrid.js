@@ -5,7 +5,7 @@ import {
   BeatBottomSheet,
   Loader,
 } from "@/components";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 
 export function externalManageDropdown() {
@@ -16,19 +16,12 @@ export default function NewBeatCardGrid(props) {
   const [isDropDown, setIsDropdownOpen] = useState(false);
   const { beatsDisplayMode, generalActiveIndex } =
     useSelector((state) => state?.beats) || 0;
-  const state = useSelector((state) => state?.beats) || [];
-  const { activeItems } = useSelector((state) => state?.beats) || [];
   const isLoading = useSelector((state) => state.beats.loadingBeats);
   const handleDropdownOpen = () => {
     setIsDropdownOpen(!isDropDown);
   };
 
-  //<BeatCard key={beat.id} beat={beat} variant="public" />
-
   NewBeatCardGrid.handleDropdownOpen = handleDropdownOpen;
-  useEffect(() => {}, [beatsDisplayMode]);
-
-  console.log("ISLOADING ", isLoading);
 
   return (
     <>
@@ -45,7 +38,12 @@ export default function NewBeatCardGrid(props) {
           <>
             {props.beats?.map((beat) => (
               <>
-                <BeatCard key={beat.id} beat={beat} variant="public" />
+                <BeatCard
+                  key={beat.id}
+                  beat={beat}
+                  variant="public"
+                  manageView={handleDropdownOpen}
+                />
               </>
             ))}
           </>
