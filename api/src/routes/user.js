@@ -47,6 +47,22 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/admin", async (req, res) => {
+  const page = req.query.page || 1;
+  const limit = 5;
+  try {
+    const users = await UserModel.find()
+      .populate("createdBeats")
+      .populate("bougthBeats");
+    let initialUser = page*limit - 5;
+    let limitUser = page*limit;
+    let sliceUsers = users.slice(initialUser, limitUser);
+    res.json(sliceUsers);
+  } catch (err) {
+    return res.status(SERVER_ERROR).send(USER_NOT_FOUND);
+  }
+});
+
 router.get("/:id", async (req, res) => {
   try {
   } catch (error) {}
