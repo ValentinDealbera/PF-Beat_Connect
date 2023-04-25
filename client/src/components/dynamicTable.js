@@ -3,11 +3,11 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 export default function DynamicTable({ headers, rows }) {
     return (
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table sx={{ minWidth: 650, tableLayout: "fixed" }} aria-label="simple table">
           <TableHead>
             <TableRow>
               {headers.map((header) => (
-                <TableCell key={header}>{header}</TableCell>
+                <TableCell key={header} sx={{ maxWidth: '500px' }}>{header}</TableCell>
               ))}
             </TableRow>
           </TableHead>
@@ -18,7 +18,7 @@ export default function DynamicTable({ headers, rows }) {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               {headers.map((header) => (
-                <TableCell key={`${row.id}-${header}`}>{row[header.toLowerCase()]}</TableCell>
+                <TableCell key={`${row.id}-${header}`} sx={{ wordWrap: "break-word", maxWidth: '500px' }}>{row[header.toLowerCase()]}</TableCell>
               ))}
             </TableRow>
           ))}

@@ -9,9 +9,10 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 
 import { usuariosDos } from "../../../data/fakeDB";
-import { adminGetUsers, adminDeleteUser, setCurrentEditUser } from "@/redux/slices/admin";
+import { adminGetUsers, adminDeleteUser, setCurrentEditUser, setCurrentPage } from "@/redux/slices/admin";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { pageExtensions } from "../../../../next.config";
 
 export default function SellerDashboardOverview() {
  // const usersData = usuariosDos
@@ -21,15 +22,16 @@ export default function SellerDashboardOverview() {
   const dispatch = useDispatch();
   const { users } = useSelector((state) => state.admin);
   const usersData = users;
+  const page = useSelector((state)=> state.admin.currentPage);
 
   console.log("usersData", usersData);
 
   useEffect(() => {
-    dispatch(adminGetUsers());
-  }, []);
+    dispatch(adminGetUsers(page));
+  }, [page]);
 
   const handleCloseModal = async() => {
-     dispatch(adminGetUsers());
+     dispatch(adminGetUsers(page));
      setElementToDelete(null);
   };
 
@@ -39,11 +41,10 @@ export default function SellerDashboardOverview() {
 router.push(`/admin/users/${data._id}`);
   };
 
-
+console.log("la pagina", page)
 
   const headers = [
-    "User",
-    "Id",
+    "User",    
     "Email",
     "IsSeller",
     "SoftDelete",
@@ -52,17 +53,16 @@ router.push(`/admin/users/${data._id}`);
   ];
 
   const rows = usersData.map((item) => {
-    return {
-      id: item._id,
+    return {      
       user: (
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 max-w-[50px]">
           <Image
             src={item.image}
             width={50}
             height={50}
             className="aspect-square rounded-full object-cover"
           />
-          <h3 className="text-base-medium">{item.username}</h3>
+          <h3 className="text-base-medium max-w-[50px] overflow-ellipsis">{item.username}</h3>
         </div>
       ),
       email: item.email,
@@ -100,7 +100,7 @@ router.push(`/admin/users/${data._id}`);
             router.push("/admin/users/create");
           }}
         >
-          <IslandDashboard className="flex flex-col gap-5 xl:gap-8 w-5/6 overflow-x-scroll">
+          <IslandDashboard className="flex flex-col gap-5 xl:gap-8 w-full overflow-x-scroll">
             <DynamicTable 
             headers={headers} 
             rows={rows}  />
@@ -118,6 +118,26 @@ router.push(`/admin/users/${data._id}`);
           }          
         />
       )}
+      <button
+          onClick={() => dispatch(setCurrentPage(page-1))}
+          disabled={page === 1}
+          className={page === 1 ? "text-red-800" : "text-black"}
+        >
+          Prev
+        </button>        
+        <button
+          onClick={() => {
+            dispatch(setCurrentPage(page + 1));
+          }}
+          disabled={usersData.length<5}
+          className={
+            page === usersData.length<5
+              ? "text-red-800"
+              : "text-black"
+          }
+        >
+          Next
+        </button>
     </>
   );
 }

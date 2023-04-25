@@ -39,6 +39,9 @@ export default function SellerDashboardOverview() {
     softDelete: false,
   });
 
+  console.log("data para el form", form);
+
+
   const handleInput = (e) => {
     handleInputChange(
       e,

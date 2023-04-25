@@ -16,8 +16,9 @@ import {
 import { forwardRef, useImperativeHandle } from "react";
 import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { adminEditReview, adminPostReview } from "@/redux/slices/admin";
+import { adminEditReview, adminPostReview, adminGetFormBeats, adminGetUsersForms } from "@/redux/slices/admin";
 import { useRouter } from "next/router";
+import { Autocomplete, TextField } from "@mui/material";
 
 const AdminCreateReviewForm = forwardRef((props, ref) => {
   const router = useRouter();
@@ -29,14 +30,11 @@ const AdminCreateReviewForm = forwardRef((props, ref) => {
   const defaultValues =
     useSelector((state) => state.admin.currentEditReview) || {};
   const mode = props.mode;
+  const defaultUsers = useSelector((state) => state.admin.usersForms);
+  const defaultBeats = useSelector((state) => state.admin.beatsForms);  
 
 console.log("defaultValues", defaultValues);
-
-  console.log("router", router);
-
-  console.log("defaultValues", defaultValues);
-
-
+console.log("DEFAULT BEATS", defaultBeats);
 
   const [form, setForm] = useState({
     createdBy: `${mode === "edit" ? defaultValues.createdBy._id : ""}`,
@@ -46,14 +44,16 @@ console.log("defaultValues", defaultValues);
     title: `${mode === "edit" ? defaultValues.title : ""}`,
     id: `${mode === "edit" ? defaultValues._id : ""}`,
   });
-
-  // {
-  //   "rating": "4",
-  //   "title": "Buena calidad",
-  //   "comment": "sin comentarios”
-  //  "createdBy": "64384ed5243ab0df93352345", (id del usuario)
-  //    "beat": "643aade5e70947fce262888e", (id del beat)
-  //  }
+  
+  const options = defaultUsers.map(user => ({
+          label: user.username,
+          value: user._id
+        }));
+        
+  const optionsBeats = defaultBeats.map(beat => ({
+          label: beat.name,
+          value: beat._id
+        }));
 
   const handleInput = (e) => {
     handleInputChange(
@@ -96,6 +96,14 @@ console.log("defaultValues", defaultValues);
     },
   }));
 
+  useEffect(() => {
+    dispatch(adminGetUsersForms());        
+  }, []); 
+
+  useEffect(() => {
+    dispatch(adminGetFormBeats());        
+  }, []); 
+
   const arraySoftDelete = {
     name: "softDelete",
     label: "Soft Delete",
@@ -124,18 +132,12 @@ console.log("defaultValues", defaultValues);
     ],
   };
 
-
-
-
-
-
-
   return (
     <form ref={formRef} onSubmit={onSubmit}>
       <FormContainer>
         <FormRow>
           <FormColumn className="w-full">
-            <Input
+            {/* <Input
               id="createdBy"
               type="text"
               name="createdBy"
@@ -145,7 +147,25 @@ console.log("defaultValues", defaultValues);
               onChange={handleInput}
               //defaultValue={mode === "edit" ? defaultValues.firstName : ""}
               defaultValue={mode === "edit" ? defaultValues.createdBy._id : ""}
-            />
+            /> */}
+            { mode === "create" && <Autocomplete
+                id="createdBy"
+                name="createdBy"
+                options={options}
+                getOptionLabel={(option) => option.label}
+                onChange={(event, newValue) => {
+                  handleInput({
+                    target: {
+                      name: "createdBy",
+                      value: newValue ? newValue.value : "",
+                    },
+                  });
+                }}
+                renderInput={(params) => (
+                  <TextField {...params} label="Seleccionar opción" variant="outlined" />
+                )}
+                isOptionEqualToValue={(option, value) => option.value === value.value}
+              />}
             <Input
               id="title"
               type="text"
@@ -177,7 +197,7 @@ console.log("defaultValues", defaultValues);
             />
           </FormColumn>
           <FormColumn className="w-full">
-            <Input
+            {/* <Input
               id="beat"
               name="beat"
               type="text"
@@ -186,7 +206,25 @@ console.log("defaultValues", defaultValues);
               error={error.beat}
               onChange={handleInput}
               defaultValue={mode === "edit" ? defaultValues.beat._id : ""}
-            />
+            /> */}
+            { mode==="create" && <Autocomplete
+                id="beat"
+                name="beat"
+                options={optionsBeats}
+                getOptionLabel={(option) => option.label}
+                onChange={(event, newValue) => {
+                  handleInput({
+                    target: {
+                      name: "beat",
+                      value: newValue ? newValue.value : "",
+                    },
+                  });
+                }}
+                renderInput={(params) => (
+                  <TextField {...params} label="Seleccionar opción" variant="outlined" />
+                )}
+                isOptionEqualToValue={(option, value) => option.value === value.value}
+              />}
             <TextArea
               id="comment"
               name="comment"
