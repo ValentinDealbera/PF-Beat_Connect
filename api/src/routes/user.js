@@ -99,6 +99,10 @@ router.get("/:id", async (req, res) => {
             path: "review",
             model: "Review",
           },
+          {
+            path: "userCreator",
+            model: "User",
+          },
         ],
       })
       .populate({

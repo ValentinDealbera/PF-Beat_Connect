@@ -60,7 +60,7 @@ export const jsonLogin = createAsyncThunk(
           token: userResponse.token,
         },
       };
-      return { auth, session };
+      dispatch(getUserData(userResponse.user._id));
     } catch (error) {
       console.log("ERROR", error);
       return rejectWithValue(error.response.data.message);
