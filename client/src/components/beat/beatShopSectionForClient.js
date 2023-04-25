@@ -7,7 +7,7 @@ import {
 
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { fetchUserReviews } from "@/redux/slices/beats";
+//import { fetchUserReviews } from "@/redux/slices/beats";
 
 export default function BeatShopSectionForClient(props) {
   const {
@@ -24,7 +24,7 @@ export default function BeatShopSectionForClient(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchUserReviews(_id));
+    //dispatch(fetchUserReviews(_id));
   }, []);
 
   const { activeItems } = useSelector((state) => state?.beats) || [];

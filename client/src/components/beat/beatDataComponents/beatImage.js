@@ -8,7 +8,7 @@ export default function BeatImage({ beat, height, width }) {
     >
       <Image
         src={beat.image}
-        alt={beat.name}
+        alt="Beat image"
         layout="fill"
         className="rounded-xl object-cover"
       />

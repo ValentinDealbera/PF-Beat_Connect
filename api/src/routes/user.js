@@ -110,9 +110,11 @@ router.put("/:id", async (req, res) => {
   }
 
   const { id } = req.params;
-  const image = req.files.image?req.files.image : null
+
+  const image = req?.files?.image ?? null;
   //const image = req.files ? req.files.image : null;
-  const backImage = req.files ? req.files.backImage : null;
+  const backImage =  req?.files?.backImage ?? null;
+  
   const {
     mpcode,
     seller,
@@ -127,6 +129,8 @@ router.put("/:id", async (req, res) => {
     bougthBeats,
   } = req.body;
 
+  console.log(req.body);
+ 
   try {
     const userin = await UserModel.findById(id);
     const userAux = await UserModel.findById(userid);

@@ -1,5 +1,12 @@
-import { Head, Main, Hero, Search, BeatsShopSection } from "@/components";
-import { useDispatch, useSelector } from "react-redux";
+import {
+  Head,
+  Main,
+  Hero,
+  Search,
+  BeatsShopSection,
+  Loader,
+} from "@/components";
+import { useDispatch, useSelector, getState } from "react-redux";
 import { setSearchFilter } from "@/redux/slices/filters";
 import { setCurrentPage } from "@/redux/slices/beats";
 

@@ -19,7 +19,8 @@ export default function BuyerProfile() {
       <Main mode="transparent">
         <Hero
           style={{ height: "45vh" }}
-          image="/images/category3.jpg"
+          image={currentUser.backImage}
+          alt="hero"
           className="items-center justify-center align-middle"
         >
           <div

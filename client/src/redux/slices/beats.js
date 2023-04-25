@@ -10,6 +10,9 @@ import { serverUrl } from "@/data/config";
 import axios from "axios";
 
 const initialState = {
+  //LOADING
+  loadingBeats: false,
+  //BEATS
   publicItems: [],
   activeItems: [],
   activeItemDetail: null,
@@ -108,6 +111,8 @@ export const fetchCurrentAuthor = createAsyncThunk(
         _id: response.data._id,
         profilePicture: response.data.image,
         username: response.data.username,
+        bio: response.data.bio,
+        backImage: response.data.backImage,
       };
       return { beats: currentAuthorBeats, currentAuthor };
     } catch (err) {
@@ -142,13 +147,19 @@ const beatsSlice = createSlice({
     setCurrentPage(state, action) {
       state.pageIndex = action.payload;
     },
+
+    //--------------------
+    //SET GENERAL ACTIVE INDEX
+    setGeneralActiveIndex(state, action) {
+      state.generalActiveIndex = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
       //--------------------
       //Extra reducers para los beats publicos 0 1
       .addCase(fetchBeats.pending, (state, action) => {
-        state.publicBeatsFetchStatus = false;
+        state.loadingBeats = true;
       })
       .addCase(fetchBeats.fulfilled, (state, action) => {
         if (
@@ -168,6 +179,7 @@ const beatsSlice = createSlice({
         state.pages.prev = action.payload.prev;
         state.pages.current = action.payload.current;
         state.pages.limit = action.payload.limit;
+        state.loadingBeats = false;
       })
       .addCase(fetchBeats.rejected, (state, action) => {
         console.error(" fetch error", action.error);

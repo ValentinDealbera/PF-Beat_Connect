@@ -36,6 +36,7 @@ const initialState = {
       _id: "",
       email: "",
       userName: "",
+      backImage: "",
     },
   },
 };
@@ -111,15 +112,28 @@ export const editClient = createAsyncThunk(
   "authSession/editClient",
   async (data, { rejectWithValue, getState }) => {
     const clientId = getState().client.authSession.session.current._id;
+    const formData = new FormData();
+    Object.keys(data).forEach((key) => {
+      formData.append(key, data[key]);
+    });
+
     try {
-      const response = await axios.put(`${serverUrl}user/${clientId}`, data, {
-        headers: {
-          userid: clientId,
-        },
-      });
-      return { userResponse: response.data };
+      console.log("prev", data, clientId);
+      const response = await axios.put(
+        `${serverUrl}user/${clientId}`,
+        formData,
+        {
+          headers: {
+            userid: clientId,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      const userResponse = createUserSession(response.data);
+      return { userResponse };
     } catch (error) {
-      return rejectWithValue(error.data);
+      return rejectWithValue(error.response.data.message);
     }
   }
 );
@@ -129,6 +143,7 @@ export const editClient = createAsyncThunk(
 export const getUserData = createAsyncThunk(
   "authSession/getUserData",
   async (data, { rejectWithValue, getState, dispatch }) => {
+    console.log("GET USER DATA");
     const clientId = data
       ? data
       : getState().client.authSession.session.current._id;
@@ -234,7 +249,7 @@ const authSession = createSlice({
       //--------------------
       //CONVERT IN SELLER
       .addCase(convertInSeller.pending, (state, action) => {
-        return;
+        toast("Se está convirtiendo en vendedor...");
       })
       .addCase(convertInSeller.fulfilled, (state, action) => {
         state.auth.isSeller = true;
@@ -247,16 +262,17 @@ const authSession = createSlice({
       //--------------------
       //EDIT CLIENT
       .addCase(editClient.pending, (state, action) => {
-        return;
+        toast("Se está editando...");
       })
       .addCase(editClient.fulfilled, (state, action) => {
-        toast.success("Se editó correctamente", toastSuccess);
         state.session.current = {
           ...state.session.current,
           ...action.payload.userResponse,
         };
+        toast.success("Se editó correctamente", toastSuccess);
       })
       .addCase(editClient.rejected, (state, action) => {
+        console.log("editClient.rejected", action.error);
         toast.error(action.payload, toastError);
       })
 

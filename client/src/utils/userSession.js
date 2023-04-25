@@ -2,7 +2,8 @@ import { serverUrl } from "@/data/config";
 import axios from "axios";
 
 export function createUserSession(user) {
-  const { firstName, lastName, bio, _id, email, username, image } = user;
+  const { firstName, lastName, bio, _id, email, username, image, backImage } =
+    user;
 
   return {
     firstName,
@@ -12,6 +13,7 @@ export function createUserSession(user) {
     _id,
     email,
     userName: username,
+    backImage,
   };
 }
 
