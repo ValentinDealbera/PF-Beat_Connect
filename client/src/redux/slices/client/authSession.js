@@ -12,7 +12,7 @@ import axios from "axios";
 import { createUserSession } from "@/utils/userSession";
 import { toastError, toastSuccess } from "@/utils/toastStyles";
 import { setBougthBeats, setOwnedBeats } from "./beats";
-import {setOwnedReviews} from "./reviews"
+import { setOwnedReviews } from "./reviews";
 
 const initialState = {
   auth: {
@@ -158,6 +158,24 @@ export const editClient = createAsyncThunk(
 );
 
 //--------------------
+//PASSWORD RECOVERY
+// export const passwordRecovery = createAsyncThunk(
+//   "authSession/passwordRecovery",
+//   async (data, { rejectWithValue }) => {
+//     const clientId = "64459913669bbb0d6e7838d9"; //Id de fabi durante testeo (hecho por fabi)
+
+//     try {
+//       const newPassword = { password: data.newPassword };
+
+//       await axios.put(`${serverUrl}user/${clientId}`, newPassword);
+//     } catch (error) {
+//       console.log("ERROR passwordRecovery", error);
+//       return rejectWithValue(error.response.data.message);
+//     }
+//   }
+// );
+
+//--------------------
 //GET USER DATA
 export const getUserData = createAsyncThunk(
   "authSession/getUserData",
@@ -297,6 +315,17 @@ const authSession = createSlice({
         toast.error(action.payload, toastError);
       })
 
+      /***************** PASSWORD RECOVERY ******************/
+      // .addCase(passwordRecovery.pending, (state, action) => {
+      //   return;
+      // })
+      // .addCase(passwordRecovery.fulfilled, (state, action) => {
+      //   toast.success("Tu contraseña se cambio correctamente", toastSuccess);
+      // })
+      // .addCase(passwordRecovery.rejected, (state, action) => {
+      //   toast.error("Hubo un problema, intente mas tarde", toastError);
+      // })
+
       //--------------------
       //GET USER DATA
       .addCase(getUserData.pending, (state, action) => {
@@ -317,14 +346,16 @@ const authSession = createSlice({
       //--------------------
       //RECOVER PASSWORD
       .addCase(recoverPassword.pending, (state, action) => {
-        toast("Te estamos enviando un email con la solicitud de recuperación...");
+        toast(
+          "Te estamos enviando un email con la solicitud de recuperación..."
+        );
       })
       .addCase(recoverPassword.fulfilled, (state, action) => {
         toast.success("Se envió el email", toastSuccess);
       })
       .addCase(recoverPassword.rejected, (state, action) => {
         toast.error(action.payload, toastError);
-      })
+      });
   },
 });
 

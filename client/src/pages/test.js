@@ -15,26 +15,20 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchUserReviews, fetchUserBeats } from "@/redux/slices/beats";
 import Image from "next/image";
 
 export default function Test(props) {
   const [isDropDown, setIsDropdownOpen] = useState(false);
   const [beatId, setBeatId] = useState("");
 
-  const reviewedItems = useSelector((state) => state.beats.activeReviewDetail);
   const tableHeaders = ["Item", "audiomp3", "price", "creator", "review"];
   const dispatch = useDispatch();
-  const _id = useSelector((state) => state.client.authSession.session._id);
+  const userId = useSelector((state) => state.client.authSession.current?._id);
+  const comprados = useSelector((state) => state.client.beats?.bougthBeats);
 
-  const comprados = useSelector((state) => state.beats.userPurchasedBeats);
+  useEffect(() => {}, []);
 
-  useEffect(() => {
-    dispatch(fetchUserReviews(_id));
-    dispatch(fetchUserBeats());
-  }, []);
-
-  //verificamos si tienen los beats reseña y agregamos un campo true o false, usamos map
+  // verificamos si tienen los beats reseña y agregamos un campo true o false, usamos map
   const beatData = comprados.map((item) => {
     const hasReview = reviewedItems.find(
       (review) => review.beat._id === item._id
