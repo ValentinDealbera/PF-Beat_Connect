@@ -46,26 +46,30 @@ export default function Carrito() {
     }
   });
 
-  const headers = ["Item", "Price", "Author", "Action"];
+  const headers = ["Beat", "Precio", "Acciones"];
 
   const rows = cartItems.map((item) => {
     return {
       id: item.beat._id,
-      item: (
-        <div className="flex items-center gap-4">
+      beat: (
+        <div className="flex items-center gap-4 ">
           <Image
             src={item.beat.image}
-            width={50}
-            height={50}
-            className="aspect-square rounded-full"
+            width={70}
+            height={70}
+            className="aspect-square rounded-xl"
           />
-          <h3 className="text-base-medium">{item.beat.name}</h3>
+          <div className="flex flex-col">
+            <h3 className="text-base-medium">{item.beat.name}</h3>
+            <p className="text-sm-light">
+              {item.beat.userCreator.firstName} {item.beat.userCreator.lastName}
+            </p>
+          </div>
         </div>
       ),
-      price: item.beat.priceAmount,
-      author: `${item.beat.userCreator.firstName} ${item.beat.userCreator.lastName}`,
-      action: (
-        <button onClick={() => dispatch(deleteFromCart({ id: item.beat._id }))}>
+      precio: <p className="text-sm-medium">${item.beat.priceAmount}</p>,
+      acciones: (
+        <button className="text-sm-medium" onClick={() => dispatch(deleteFromCart({ id: item.beat._id }))}>
           Eliminar
         </button>
       ),
@@ -114,20 +118,28 @@ export default function Carrito() {
           subClassName="padding-x-estilo2 pt-[108px]  pb-[10px] relative "
           className=""
         >
-          <div 
-           style={{backgroundImage: "url(/images/cartbg.png)", backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center", zIndex: "-1"}}
-           className="absolute min-h-[80%] w-full top-0 left-0 ">
-          </div>
+          <div
+            style={{
+              backgroundImage: "url(/images/cartbg.png)",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              zIndex: "-1",
+            }}
+            className="absolute left-0 top-0 h-[80%] max-h-[65vh] w-full "
+          ></div>
 
-          <div className="flex flex-row gap-4 pt-10">
-            <IslandDashboard className="flex w-full flex-col gap-4 h-max"
-            style={{boxShadow: "0px 0px 15px 2px rgba(0, 0, 0, 0.08)"}}
+          <div className="flex flex-row gap-5 xl:gap-10 pt-10">
+            <IslandDashboard
+              className="flex h-max w-full flex-col gap-4"
+              style={{ boxShadow: "0px 0px 15px 2px rgba(0, 0, 0, 0.08)" }}
             >
               <h1 className="text-titulo2-medium">Carrito</h1>
               <DynamicTable headers={headers} rows={rows} />
             </IslandDashboard>
-            <IslandDashboard className="flex w-[40%] flex-col gap-4"
-            style={{boxShadow: "0px 0px 15px 2px rgba(0, 0, 0, 0.08)"}}
+            <IslandDashboard
+              className="flex h-max w-[40%] flex-col gap-6"
+              style={{ boxShadow: "0px 0px 15px 2px rgba(0, 0, 0, 0.08)" }}
             >
               <h2 className="text-subtitulo-medium">Tu orden</h2>
               <div id="precio_por_autor" className="flex flex-col gap-4">
@@ -151,8 +163,8 @@ export default function Carrito() {
                   </div>
                 ))}
               </div>
-              <div id="total" className="flex flex-col items-center gap-1">
-                <div className="flex w-full items-center justify-between">
+              <div id="total" className="flex flex-col items-center gap-2">
+                <div className="flex w-full items-center justify-between gap-4">
                   <h3 className="text-base-light">Subtotal</h3>
                   <span className="text-base-semibold text-red-700">
                     $

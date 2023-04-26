@@ -5,6 +5,8 @@ import { useState } from "react";
 import {
   deleteClientBeat,
   setActiveEditingBeat,
+  postFavoriteBeat,
+  deleteFavoriteBeat,
 } from "@/redux/slices/client/beats";
 
 import {
@@ -34,7 +36,14 @@ export default function BeatCard({
   const dispatch = useDispatch();
   const [visibilityReviewsModal, setVisibilityReviewsModal] = useState(false);
   const [visibilityOwnedModal, setVisibilityOwnedModal] = useState(false);
-  const { bougthBeats } = useSelector((state) => state.client.beats);
+  const [visibilityFavoriteModal, setVisibilityFavoriteModal] = useState(false);
+  const { bougthBeats, favoriteBeats } = useSelector(
+    (state) => state.client.beats
+  );
+
+  const isFavorite = Boolean(
+    favoriteBeats.find((favoriteBeat) => favoriteBeat._id === beat._id)
+  );
 
   const userReviews = useSelector((state) => state.client.reviews.reviews);
   const { _id } = useSelector(
@@ -78,6 +87,15 @@ export default function BeatCard({
       handleEditReview: async () => {
         await dispatch(setActiveEditingReview(currentReview));
         manageEditReview();
+      },
+    };
+
+    const favoriteActions = {
+      handleAddFavorite: () => {
+        dispatch(postFavoriteBeat(beat._id));
+      },
+      handleDeleteFavorite: () => {
+        dispatch(deleteFavoriteBeat(beat._id));
       },
     };
 
@@ -135,6 +153,10 @@ export default function BeatCard({
             handleDelete={ownedActions.handleDelete}
             handleCreateReview={reviewActions.handleCreateReview}
             handleEditReview={reviewActions.handleEditReview}
+            visibilityFavoriteModal={visibilityFavoriteModal}
+            isFavorite={isFavorite}
+            handleAddFavorite={favoriteActions.handleAddFavorite}
+            handleDeleteFavorite={favoriteActions.handleDeleteFavorite}
           />
         </div>
       </>
@@ -154,6 +176,9 @@ function Modals({
   handleDelete,
   handleCreateReview,
   handleEditReview,
+  isFavorite,
+  handleAddFavorite,
+  handleDeleteFavorite,
 }) {
   const fromClientBtns = [
     {
@@ -194,11 +219,31 @@ function Modals({
           </MiniModalBox>
         </div>
       )}
+      {!fromClient && visibilityReviewsModal && (
+        <MiniModalBox className="left-1 top-1">
+          {!isFavorite && !fromClient && (
+            <Button
+              icon="/icon/corazon.svg"
+              alt="heart"
+              text={""}
+              action={handleAddFavorite}
+            />
+          )}
+          {isFavorite && !fromClient && (
+            <Button
+              icon="/icon/corazon-lleno.svg"
+              alt="heart"
+              text={""}
+              action={handleDeleteFavorite}
+            />
+          )}
+        </MiniModalBox>
+      )}
     </>
   );
 }
 
-function Button({ text, action }) {
+function Button({ text, action, icon, alt }) {
   return (
     <button
       className=" whitespace-nowrap text-sm font-medium text-black"
@@ -206,6 +251,7 @@ function Button({ text, action }) {
         e.stopPropagation(), action();
       }}
     >
+      {icon && <img src={icon} alt={alt} className="aspect-square h-5 w-5" />}
       {text}
     </button>
   );

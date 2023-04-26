@@ -42,20 +42,12 @@ export default function BeatShopSectionForClient(props) {
         <ForSellerOnly />
       ) : generalActiveIndex === 1 && isSeller === true ? (
         <NewBeatCardGrid beats={ownedBeats} />
-      ) : (
+      ) : generalActiveIndex === 2 ? (
         <div>
-          <>
-            <ReviewCardGrid />
-          </>
-
-          {/* {activeReviewDetail.length === 0 && (
-            <div className="flex w-full items-end justify-center">
-              <h1 className="mb-8 mt-5 text-center text-2xl font-medium">
-                Hey, parece que no hay nada por aqui 🤯
-              </h1>
-            </div>
-          )} */}
+          <NewBeatCardGrid beats={bougthBeats} />
         </div>
+      ) : (
+        <ReviewCardGrid />
       )}
     </Section>
   );

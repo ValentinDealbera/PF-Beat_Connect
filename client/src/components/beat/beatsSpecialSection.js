@@ -7,10 +7,10 @@ import {
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { setBeatsDisplayMode, fetchBeats } from "@/redux/slices/beats";
+import { setBeatsDisplayMode, fetchBeats, fetchFeaturedBeats } from "@/redux/slices/beats";
 
 export default function BeatsSpecialSection(props) {
-  const featuredBeats = useSelector((state) => state?.beats.activeItems) || [];
+  const featuredBeats = useSelector((state) => state?.beats.featuredItems) || [];
   const dispatch = useDispatch();
 
   //Limit the number of items to 10
@@ -23,7 +23,7 @@ export default function BeatsSpecialSection(props) {
   }, []);
 
   useEffect(() => {
-    dispatch(fetchBeats({ relevance: "desc" }));
+    dispatch(fetchFeaturedBeats());
   }, []);
 
   return (
