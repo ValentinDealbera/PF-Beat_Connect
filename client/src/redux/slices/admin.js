@@ -250,6 +250,7 @@ export const adminPostBeat = createAsyncThunk(
 
       return { beatResponse };
     } catch (error) {
+      console.log("Error de post", error)
       return rejectWithValue(error.response.data.message);
     }
   }

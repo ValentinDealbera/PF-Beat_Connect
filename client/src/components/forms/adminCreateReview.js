@@ -43,6 +43,7 @@ console.log("DEFAULT BEATS", defaultBeats);
     comment: `${mode === "edit" ? defaultValues.comment : ""}`,
     title: `${mode === "edit" ? defaultValues.title : ""}`,
     id: `${mode === "edit" ? defaultValues._id : ""}`,
+    softDelete: `${mode === "edit" ? defaultValues.softDelete : ""}`,
   });
   
   const options = defaultUsers.map(user => ({
@@ -108,29 +109,29 @@ console.log("DEFAULT BEATS", defaultBeats);
     name: "softDelete",
     label: "Soft Delete",
     arrayButtons: [
-      {
-        text: "Yes",
-        //segun is seller, dinamicamente se pone el active
-        active: form.softDelete,
-        handleAction: () => {
-          setForm({
-            ...form,
-            softDelete: true,
-          });
-        },
-      },
-      {
-        text: "No",
-        active: !form.softDelete,
-        handleAction: () => {
-          setForm({
-            ...form,
-            softDelete: false,
-          });
-        },
-      },
-    ],
-  };
+       {
+         text: "Yes",
+         //segun is seller, dinamicamente se pone el active
+         active: !form.softDelete,
+         handleAction: () => {
+           setForm({
+             ...form,
+             softDelete: true,
+           });
+         },
+       },
+       {
+         text: "No",
+         active: form.softDelete,
+         handleAction: () => {
+           setForm({
+             ...form,
+             softDelete: false,
+           });
+         },
+       },
+     ],
+   };
 
   return (
     <form ref={formRef} onSubmit={onSubmit}>
@@ -148,7 +149,12 @@ console.log("DEFAULT BEATS", defaultBeats);
               //defaultValue={mode === "edit" ? defaultValues.firstName : ""}
               defaultValue={mode === "edit" ? defaultValues.createdBy._id : ""}
             /> */}
-            { mode === "create" && <Autocomplete
+            { mode === "create" &&
+            <label
+            htmlFor="createdBy"
+            className= "text-sm-medium flex min-w-0 flex-col gap-1"
+          > Creada por:
+            <Autocomplete
                 id="createdBy"
                 name="createdBy"
                 options={options}
@@ -165,7 +171,8 @@ console.log("DEFAULT BEATS", defaultBeats);
                   <TextField {...params} label="Seleccionar opción" variant="outlined" />
                 )}
                 isOptionEqualToValue={(option, value) => option.value === value.value}
-              />}
+              />
+              </label>}
             <Input
               id="title"
               type="text"
@@ -187,14 +194,15 @@ console.log("DEFAULT BEATS", defaultBeats);
               error={error.rating}
               defaultValue={mode === "edit" ? defaultValues.rating : ""}
             />
-            <SwitchForm
-              label="SoftDelete"
-              name="softDelete"
-              nameInput="softDelete"
-              defaultValue={false}
-              onChange={handleInput}
-              arrayButtons={arraySoftDelete.arrayButtons}
-            />
+            {/* <SwitchForm
+                  label="SoftDelete"
+                  name="softDelete"
+                  nameInput="softDelete"
+                  defaultValue={mode === "edit" ? defaultValues.softDelete : ""}
+                  onChange={handleInput}
+                  arrayButtons={arraySoftDelete.arrayButtons}
+                  error={error.softDelete}
+                /> */}
           </FormColumn>
           <FormColumn className="w-full">
             {/* <Input
@@ -207,7 +215,12 @@ console.log("DEFAULT BEATS", defaultBeats);
               onChange={handleInput}
               defaultValue={mode === "edit" ? defaultValues.beat._id : ""}
             /> */}
-            { mode==="create" && <Autocomplete
+            { mode==="create" &&
+            <label
+            htmlFor="beat"
+            className= "text-sm-medium flex min-w-0 flex-col gap-1"
+          > Beat
+           <Autocomplete
                 id="beat"
                 name="beat"
                 options={optionsBeats}
@@ -224,7 +237,8 @@ console.log("DEFAULT BEATS", defaultBeats);
                   <TextField {...params} label="Seleccionar opción" variant="outlined" />
                 )}
                 isOptionEqualToValue={(option, value) => option.value === value.value}
-              />}
+              />
+              </label>}
             <TextArea
               id="comment"
               name="comment"
