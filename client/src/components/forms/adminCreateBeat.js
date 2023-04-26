@@ -30,7 +30,8 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
     const [error, setErrors] = useState({});
     const defaultValues = useSelector((state) => state.admin.currentEditBeat);
     const mode = props.mode;
-    const genres = useSelector((state) => state.filters.genres);       
+    const genres = useSelector((state) => state.filters.genres);
+    const [softD, setSoftD] = useState(defaultValues.softDelete);       
       
      console.log("defaultValues", defaultValues);    
 
@@ -43,7 +44,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
         userCreator: `${mode === "edit" ? defaultValues.userCreator._id: ""}`,
         bpm: `${mode === "edit" ? defaultValues.BPM : ""}`,
         id: `${mode === "edit" ? defaultValues._id : ""}`,
-        softDelete: `${mode === "edit" ? defaultValues.softDelete : ""}`, 
+        // softDelete: `${mode === "edit" ? defaultValues.softDelete : ""}`, 
         relevance: `${mode === "edit" ? defaultValues.relevance : ""}`,
 
       });
@@ -107,28 +108,36 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
         dispatch(adminGetUsersForms());        
       }, []);  
 
+      useEffect(()=>{
+        if(softD){
+          setSoftD(false)
+        } else{
+          setSoftD(true)
+        }
+      },[form.softDelete]);
+
       const arraySoftDelete = {
         name: "softDelete",
-        label: "Soft Delete",
+        label: "Pausar",
         arrayButtons: [
            {
              text: "Yes",
              //segun is seller, dinamicamente se pone el active
-             active: !form.softDelete,
+             active: !softD,
              handleAction: () => {
                setForm({
                  ...form,
-                 softDelete: true,
+                 softDelete: "true",
                });
              },
            },
            {
              text: "No",
-             active: form.softDelete,
+             active: softD,
              handleAction: () => {
                setForm({
                  ...form,
-                 softDelete: false,
+                 softDelete: "false",
                });
              },
            },
@@ -144,7 +153,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
                   id="name"
                   name="name"
                   label="Nombre"
-                  placeholder="Beat Name:"
+                  placeholder="Nombre del Beat:"
                   defaultValue={mode === "edit" ? defaultValues.name : ""}
                   type="text"
                   onChange={handleInput}
@@ -154,7 +163,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
                   name="priceAmount"
                   id="priceAmount"
                   label="Precio"
-                  placeholder="Price Amount:"
+                  placeholder="Precio:"
                   defaultValue={mode === "edit" ? defaultValues.priceAmount : ""}
                   type="number"
                   onChange={handleInput}
@@ -249,10 +258,10 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
                   error={error.audioMP3}
                 /> }
                 {mode === "edit" && <SwitchForm
-                  label="SoftDelete"
+                  label="Pausar"
                   name="softDelete"
                   nameInput="softDelete"
-                  defaultValue={mode === "edit" ? defaultValues.softDelete : ""}
+                  // defaultValue={mode === "edit" ? form.softDelete : ""}
                   onChange={handleInput}
                   arrayButtons={arraySoftDelete.arrayButtons}
                   error={error.softDelete}
