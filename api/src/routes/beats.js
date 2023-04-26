@@ -22,7 +22,7 @@ const storage = getStorage();
 router.get("/", async (req, res) => {
   const page = req.query.page || 1;
   const limit = req.query.limit || 5;
-  const { name, priceAmount, BPM, relevance } = req.query;
+  const { name, priceAmount, BPM, relevance, searchFilter } = req.query;
   const genres = req.headers.genre ? req.headers.genre.split(",") : [""];
 
   let sortBy;
@@ -53,14 +53,17 @@ router.get("/", async (req, res) => {
     return filters;
   };
 
-  console.log(req.query);
-
   const minMaxFilters = minMaxFiltersFunction(req.query);
 
   try {
     const beats = await beatModel.paginate(
       {
         ...(genres && genres[0] !== "" && { genre: { $in: genres } }),
+        ...(searchFilter && {
+          name: {
+            $regex: new RegExp("^" + searchFilter.toLowerCase(), "i"),
+          },
+        }),
         ...(minMaxFilters && { ...minMaxFilters }),
       },
       {
@@ -88,7 +91,7 @@ router.get("/:beatId", async (req, res) => {
       .findById(beatId)
       .populate("userCreator")
       .populate("genre")
-      .populate("review")
+      .populate("review");
     res.status(200).json(beat);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -97,13 +100,14 @@ router.get("/:beatId", async (req, res) => {
 
 router.post("/", async (req, res) => {
   const { userid } = req.headers;
-const { name, priceAmount, bpm, genre, userCreator } = req.body;
-console.log(req.body)
-if(!name || !priceAmount || !bpm || !genre || !userCreator) return res.status(400).json({message: "Faltan datos"})
+  const { name, priceAmount, bpm, genre, userCreator } = req.body;
+  console.log(req.body);
+  if (!name || !priceAmount || !bpm || !genre || !userCreator)
+    return res.status(400).json({ message: "Faltan datos" });
 
   console.log("procesando beat", req.headers);
 
-  if(!userid) return res.status(400).json({message: "No llego un id"})
+  if (!userid) return res.status(400).json({ message: "No llego un id" });
   console.log("procesando beat");
 
   const comprobacion = await beatModel.findOne({ name: req.body.name });
@@ -112,28 +116,26 @@ if(!name || !priceAmount || !bpm || !genre || !userCreator) return res.status(40
       return res.status(400).json({ error: "Ese Beat ya Existe" }).end();
   }
 
-
-
   try {
-  const creator = await userModel.findById(req.body.userCreator);
-  const creatorAux = await userModel.findById(userid);
-  const genre = await genreModel.findById(req.body.genre);
+    const creator = await userModel.findById(req.body.userCreator);
+    const creatorAux = await userModel.findById(userid);
+    const genre = await genreModel.findById(req.body.genre);
 
-  if (creator.email !== creatorAux.email)
-    return res
-      .status(400)
-      .json({ message: "No puedes publicar un beat a nombre de otro/a" });
-  if (!genre) return res.status(400).json({ message: "Este genero no existe" });
-  if (!creator)
-    return res.status(400).json({ message: "Este usuario no existe" });
-    
-  if (!creator.isSeller)
-    return res
-      .status(400)
-      .json({ message: "Este usuario no esta registrado como vendedor" });
-  const audioMP3Data = fs.readFileSync(req.files.audioMP3.tempFilePath);
-  // const audioWAVData = fs.readFileSync(req.files.audioWAV.tempFilePath);
-  
+    if (creator.email !== creatorAux.email)
+      return res
+        .status(400)
+        .json({ message: "No puedes publicar un beat a nombre de otro/a" });
+    if (!genre)
+      return res.status(400).json({ message: "Este genero no existe" });
+    if (!creator)
+      return res.status(400).json({ message: "Este usuario no existe" });
+
+    if (!creator.isSeller)
+      return res
+        .status(400)
+        .json({ message: "Este usuario no esta registrado como vendedor" });
+    const audioMP3Data = fs.readFileSync(req.files.audioMP3.tempFilePath);
+    // const audioWAVData = fs.readFileSync(req.files.audioWAV.tempFilePath);
 
     const dateTime = giveCurrentDateTime();
     if (!comprobacion && audioMP3Data && genre && creator && req.body.bpm) {
@@ -319,10 +321,9 @@ router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { userid } = req.headers;
- 
+
     const image = req?.files?.image ?? null;
 
-  
     const { name, priceAmount, review, softDelete, genre, relevance } =
       req.body;
     const updatedBeat = await beatModel.findById(id).populate("userCreator");

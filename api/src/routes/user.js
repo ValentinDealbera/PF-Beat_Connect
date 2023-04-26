@@ -42,7 +42,7 @@ router.get("/", async (req, res) => {
       .populate("createdBeats")
       .populate("bougthBeats")
       .populate("userReviews")
-      .populate("userOrders")
+      .populate("userOrders");
     res.json(users);
   } catch (err) {
     return res.status(SERVER_ERROR).send(USER_NOT_FOUND);
@@ -56,8 +56,8 @@ router.get("/admin", async (req, res) => {
     const users = await UserModel.find()
       .populate("createdBeats")
       .populate("bougthBeats");
-    let initialUser = page*limit - 5;
-    let limitUser = page*limit;
+    let initialUser = page * limit - 5;
+    let limitUser = page * limit;
     let sliceUsers = users.slice(initialUser, limitUser);
     res.json(sliceUsers);
   } catch (err) {
@@ -134,7 +134,7 @@ router.get("/:id", async (req, res) => {
             model: "User",
           },
         ],
-      })
+      });
     allUserId
       ? res.status(OK).send(allUserId)
       : res.status(NOT_FOUND).send(USER_NOT_FOUND);
@@ -277,7 +277,7 @@ router.put("/:id", async (req, res) => {
             return res.status(NOT_FOUND).send(USER_NOT_FOUND);
           }
         } catch (err) {
-          res.status(SERVER_ERROR).send(err.message);
+          res.status(SERVER_ERROR).json({ message: error.message });
         }
       }
       user.save();
@@ -474,7 +474,7 @@ router.delete("/:id", async (req, res) => {
 router.post("/recuperar-contraseña", async (req, res) => {
   const { email } = req.body;
 
-  if(!email) return res.status(BAD_REQUEST).send(ALL_NOT_OK);
+  if (!email) return res.status(BAD_REQUEST).send(ALL_NOT_OK);
 
   try {
     const user = await UserModel.findOne({ email });
