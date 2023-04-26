@@ -8,8 +8,8 @@ export default function HelpOverview() {
       <Head title={"Help Center"} description={"Head from about"} />
       <Main mode="transparent">
         <HelpContainer
-          helpTitle={"helpTitle"}
-          helpParagraph={"helpParagraph"}
+          helpTitle={"helpTermsTitle"}
+          helpParagraph={"helpTermsParagraph"}
         >
           <p className="text-base-light color-neutral-black-900">
             <span className="text-titulo3-semibold text-red-700 ">
