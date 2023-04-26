@@ -2,7 +2,7 @@ import Foto from "../../../public/images/matthew-moloney-tKB1GDJUq9c-unsplash.jp
 import Image from "next/image";
 import { navPublic } from "@/data/data";
 import { useRouter } from "next/router";
-import {deleteClientReview} from "@/redux/slices/client/reviews";
+import {deleteClientReview, setActiveEditingReview} from "@/redux/slices/client/reviews";
 import { useDispatch } from "react-redux";
 
 export default function ClientReview(props) {
@@ -13,8 +13,9 @@ export default function ClientReview(props) {
   console.log(currentSlug);
 
   const handleEdit = async () => {
-    //await dispatch(setActiveEditingBeat(beat));
+    await dispatch(setActiveEditingReview(props.review));
     //manageEditBeat();
+    props.manageEditReview()
   };
 
   const handleDelete = () => {
@@ -41,6 +42,7 @@ export default function ClientReview(props) {
         />
         <h1 className="text-base-medium flex text-sm">{props.username}</h1>
       </div>
+      <p className="text-base-light text-sm">{props.title}</p>
       <p className="text-base-light text-sm">{props.comment}</p>
       <>
         <button

@@ -57,6 +57,10 @@ router.post("/", async (req, res) => {
   try {
     const { rating, title, comment, createdBy, beat } = req.body;
   const {userid} = req.headers
+
+  if(!rating || !title || !comment || !userid) return res.status(400).json({message: 'Debes ingresar todos los campos'})
+ console.log('userid', userid, 'createdBy', createdBy)
+  try {
   const user = await userModel.findById(userid)
   const creator = await userModel.findById(createdBy);
   const reviewedBeat = await beatModel.findById(beat).populate('userCreator');
@@ -66,7 +70,7 @@ router.post("/", async (req, res) => {
     return res.status(400).json({ error: "this beat does not exist" });
   if (!creator)
     return res.status(400).json({ error: "this user does not exist" });
-  try {
+  
     const newReview = await reviewSchema.create({
       rating: rating,
       title: title,
@@ -132,13 +136,19 @@ router.put("/:id", async (req, res) => {
     const { id } = req.params;
     const {userid} = req.headers
     const { rating, title, comment } = req.body;
+
+    console.log(req.body, id, userid)
+    if(!rating || !title || !comment || !id) return res.status(400).json({message: 'Debes ingresar todos los campos'})
+
+
   
     if (id) {
       try {
         const reviewToModify = await reviewSchema.findById(id).populate('createdBy');
         if (!reviewToModify) return res.status(400).json({message: 'La review ingresada no es una review existente'})
-        const comprobacion = userModel.findById(userid)
-        if (!comprobacion.email !== reviewToModify.createdBy.email) return res.status(400).json({message: 'No puedes modificar una review ajena!'})
+        const comprobacion = await userModel.findById(userid)
+        console.log(comprobacion.email, reviewToModify.createdBy.email)
+        if (comprobacion.email !== reviewToModify.createdBy.email) return res.status(400).json({message: 'No puedes modificar una review ajena!'})
         rating && (reviewToModify.rating = rating);
         title && (reviewToModify.title = title);
         comment && (reviewToModify.comment = comment);
