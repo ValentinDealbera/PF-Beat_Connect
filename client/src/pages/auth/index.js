@@ -60,7 +60,7 @@ export default function Login() {
             label="Contraseña"
             placeholder="Contraseña"
           />
-          <p className="mt-6 w-full text-center font-light">
+          <p className=" w-full text-center font-light">
             ¿No recuerdas tu contraseña?{" "}
             <Link href="/auth/recover" className="font-medium text-red-700">
               Recuperar

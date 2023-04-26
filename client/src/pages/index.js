@@ -13,40 +13,37 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { serverUrl } from "@/data/config";
 
-
 import { fetchBeats } from "@/redux/slices/beats";
 import { resetCart } from "@/redux/slices/cart";
 import { convertInSeller } from "@/redux/slices/client/authSession";
-
 
 export default function Home() {
   // si hay un code valido en las querys, registra al usuario actual como vendedor
   const router = useRouter();
   const dispatch = useDispatch();
-  const id = useSelector((state) => state.client.authSession.session.current._id);
-
-
-  useEffect(() => {
-    dispatch(fetchBeats({ relevance: "desc" }));
-  }, []);
+  const id = useSelector(
+    (state) => state.client.authSession.session.current._id
+  );
 
   const sendOrder = async () => {
-    for (let i = 0; i < router.query.cart.split(',').length; i++) {
-       await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}orders`, {beat: router.query.cart.split(',')[i], buyer: id})
+    for (let i = 0; i < router.query.cart.split(",").length; i++) {
+      await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}orders`, {
+        beat: router.query.cart.split(",")[i],
+        buyer: id,
+      });
     }
-    dispatch(resetCart())
-  }
+    dispatch(resetCart());
+  };
 
-  useEffect(()=>{
-    if (router.query.cart && router.query.status === 'approved') {
+  useEffect(() => {
+    if (router.query.cart && router.query.status === "approved") {
       try {
-        sendOrder()
+        sendOrder();
       } catch (error) {
         console.log(error.message);
       }
     }
-  },[router.query.status])
-
+  }, [router.query.status]);
 
   useEffect(() => {
     if (router.query.code) {
