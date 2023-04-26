@@ -4,6 +4,7 @@ import {
   IslandDashboard,
   DynamicTable,
   BeatsRelatedSection,
+  Head,
 } from "@/components";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -107,17 +108,27 @@ export default function Carrito() {
 
   return (
     <>
-      <Main mode="">
+      <Head title="Carrito" />
+      <Main mode="transparent">
         <Section
-          subClassName="padding-x-estilo2 padding-y-estilo1"
-          className="bg-slate-200"
+          subClassName="padding-x-estilo2 pt-[108px]  pb-[10px] relative "
+          className=""
         >
-          <div className="flex flex-row gap-4">
-            <IslandDashboard className="flex w-full flex-col gap-4">
+          <div 
+           style={{backgroundImage: "url(/images/cartbg.png)", backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center", zIndex: "-1"}}
+           className="absolute min-h-[80%] w-full top-0 left-0 ">
+          </div>
+
+          <div className="flex flex-row gap-4 pt-10">
+            <IslandDashboard className="flex w-full flex-col gap-4 h-max"
+            style={{boxShadow: "0px 0px 15px 2px rgba(0, 0, 0, 0.08)"}}
+            >
               <h1 className="text-titulo2-medium">Carrito</h1>
               <DynamicTable headers={headers} rows={rows} />
             </IslandDashboard>
-            <IslandDashboard className="flex w-[40%] flex-col gap-4">
+            <IslandDashboard className="flex w-[40%] flex-col gap-4"
+            style={{boxShadow: "0px 0px 15px 2px rgba(0, 0, 0, 0.08)"}}
+            >
               <h2 className="text-subtitulo-medium">Tu orden</h2>
               <div id="precio_por_autor" className="flex flex-col gap-4">
                 {precio_por_autor.map((item) => (
@@ -167,7 +178,7 @@ export default function Carrito() {
                 </div>
               </div>
               <button
-                className="text-base-semibold rounded-md bg-red-700 py-2 text-white"
+                className="text-base-semibold rounded-full bg-red-700 py-2 text-white"
                 onClick={handlePayment}
               >
                 Comprar

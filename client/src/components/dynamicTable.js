@@ -2,8 +2,8 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 
 export default function DynamicTable({ headers, rows }) {
     return (
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650, tableLayout: "fixed" }} aria-label="simple table">
+      <TableContainer   className='shadow-none'>
+        <Table sx={{ minWidth: 650, tableLayout: "fixed" }} aria-label="simple table"  >
           <TableHead>
             <TableRow>
               {headers.map((header) => (
