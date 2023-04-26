@@ -1,8 +1,10 @@
 import {
   BeatCard,
-  BeatBottomSheet,
   BeatRightSheet,
   BeatDetailSideBar,
+  BeatBottomSheet,
+  ReviewForm,
+  EditReviewForm,
 } from "@/components";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -18,6 +20,16 @@ export default function BeatCardFlex(props) {
 
   BeatCardFlex.handleDropdownOpen = handleDropdownOpen;
 
+  const [visibilityEditReview, setVisibilityEditReview] = useState(false);
+  const manageEditReview = () => {
+    setVisibilityEditReview(!visibilityEditReview);
+  };
+
+  const [visibilityCreateReview, setVisibilityCreateReview] = useState(false);
+  const manageCreateReview = () => {
+    setVisibilityCreateReview(!visibilityCreateReview);
+  };
+
   return (
     <>
       {props.beats && props.beats <= 0 && (
@@ -27,7 +39,7 @@ export default function BeatCardFlex(props) {
           </h1>
         </div>
       )}
-      <div className="gap-estilo1 flex overflow-y-scroll xl:overflow-y-hidden flex-1 flex-shrink flex-grow   ">
+      <div className="gap-estilo1 flex flex-1 flex-shrink flex-grow overflow-y-scroll xl:overflow-y-hidden   ">
         {props.beats && props.beats.length > 0 && (
           <>
             {props.beats?.map((beat) => (
@@ -37,6 +49,8 @@ export default function BeatCardFlex(props) {
                   beat={beat}
                   variant="public"
                   manageView={handleDropdownOpen}
+                  manageEditReview={manageEditReview}
+                  manageCreateReview={manageCreateReview}
                   width="min-w-[75vw] md:min-w-[40vw] lg:min-w-[25vw] xl:min-w-[auto] basis-full"
                   mode="flex"
                 />
@@ -55,6 +69,40 @@ export default function BeatCardFlex(props) {
           <div className="flex sm:hidden">
             <BeatBottomSheet setIsDropdownOpen={setIsDropdownOpen}>
               <BeatDetailSideBar />
+            </BeatBottomSheet>
+          </div>
+        </>
+      )}
+      {visibilityEditReview && (
+        <>
+          <div className="hidden sm:flex">
+            <BeatRightSheet
+              width="w-[30vw]"
+              setIsDropdownOpen={setVisibilityEditReview}
+            >
+              <EditReviewForm manageEditReview={manageEditReview} />
+            </BeatRightSheet>
+          </div>
+          <div className="flex sm:hidden">
+            <BeatBottomSheet setIsDropdownOpen={setIsDropdownOpen}>
+              hey soy el sidebar
+            </BeatBottomSheet>
+          </div>
+        </>
+      )}
+      {visibilityCreateReview && (
+        <>
+          <div className="hidden sm:flex">
+            <BeatRightSheet
+              width="w-[30vw]"
+              setIsDropdownOpen={setVisibilityCreateReview}
+            >
+              <ReviewForm manageCreateReview={manageCreateReview} />
+            </BeatRightSheet>
+          </div>
+          <div className="flex sm:hidden">
+            <BeatBottomSheet setIsDropdownOpen={setIsDropdownOpen}>
+              hey soy el sidebar
             </BeatBottomSheet>
           </div>
         </>

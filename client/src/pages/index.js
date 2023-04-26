@@ -1,10 +1,7 @@
 import {
   Head,
   Main,
-  Section,
-  Search,
   BeatsSpecialSection,
-  BeatCategoryCard,
   Hero,
 } from "@/components";
 import axios from "axios";

@@ -7,7 +7,7 @@ import {
   ClientReview,
   NewBeatCardGrid,
   ReviewForm,
-EditReviewForm
+  EditReviewForm,
 } from "@/components";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -26,13 +26,13 @@ export default function ReviewCardGrid(props) {
     console.log("reviews cambio", reviews);
   }, [reviews]);
 
-const manageEditReview = () => {
-  setIsDropdownOpen(!isDropDown);
-}
+  const manageEditReview = () => {
+    setIsDropdownOpen(!isDropDown);
+  };
 
   return (
     <>
-      <div className="gap-estilo1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
+      <div className="gap-estilo1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
         {reviews && reviews.length > 0 && (
           <>
             {reviews.map((review) => (
@@ -57,7 +57,7 @@ const manageEditReview = () => {
               width="w-[30vw]"
               setIsDropdownOpen={setIsDropdownOpen}
             >
-              <EditReviewForm  manageEditReview={manageEditReview}/>
+              <EditReviewForm manageEditReview={manageEditReview} />
             </BeatRightSheet>
           </div>
           <div className="flex sm:hidden">

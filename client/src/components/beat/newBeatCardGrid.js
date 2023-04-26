@@ -25,6 +25,7 @@ export default function NewBeatCardGrid(props) {
   };
 
   NewBeatCardGrid.handleDropdownOpen = handleDropdownOpen;
+
   const [visibilityEditReview, setVisibilityEditReview] = useState(false);
   const manageEditReview = () => {
     setVisibilityEditReview(!visibilityEditReview);
@@ -34,6 +35,7 @@ export default function NewBeatCardGrid(props) {
   const manageCreateReview = () => {
     setVisibilityCreateReview(!visibilityCreateReview);
   };
+  
   return (
     <>
       {isLoading && <Loader />}

@@ -16,8 +16,8 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    resetCart(state, action){
-      state.cart = []
+    resetCart(state, action) {
+      state.cart = [];
     },
     //--------------------
     //SET CART
@@ -40,11 +40,23 @@ const cartSlice = createSlice({
 export const addToCart = (obj) => async (dispatch, getState) => {
   const state = getState().cart;
   const isInCart = state.cart.some((item) => item.beat._id === obj.beat._id);
-
+  const bougthBeats = getState().client.beats.bougthBeats;
+  const beat = obj.beat;
   if (isInCart === true) {
     toast.error("Ya esta en el carrito", toastWarning);
   } else {
     const id = getState().client.authSession.session.current._id;
+
+    const boughtBeat2 = bougthBeats.find(
+      (boughtBeat) => boughtBeat._id === beat._id
+    );
+
+    const boughtBeat = Boolean(boughtBeat2);
+
+    if (boughtBeat === true) {
+      toast.error("Ya compraste este beat", toastWarning);
+      return;
+    }
 
     if (id == obj.authorId) {
       toast.error("No puedes comprar tus propios beats", toastError);
@@ -55,5 +67,5 @@ export const addToCart = (obj) => async (dispatch, getState) => {
   }
 };
 
-export const { setCart, deleteFromCart,resetCart } = cartSlice.actions;
+export const { setCart, deleteFromCart, resetCart } = cartSlice.actions;
 export default cartSlice.reducer;

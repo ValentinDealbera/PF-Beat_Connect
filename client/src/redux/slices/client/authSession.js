@@ -12,7 +12,8 @@ import axios from "axios";
 import { createUserSession } from "@/utils/userSession";
 import { toastError, toastSuccess } from "@/utils/toastStyles";
 import { setBougthBeats, setOwnedBeats } from "./beats";
-import {setOwnedReviews} from "./reviews"
+import { setOwnedReviews } from "./reviews";
+import { setOrders } from "./orders";
 
 const initialState = {
   auth: {
@@ -175,6 +176,7 @@ export const getUserData = createAsyncThunk(
       const bougthBeats = response.bougthBeats;
       const ownedBeats = response.createdBeats;
       const ownedReviews = response.userReviews;
+      const orders = response.userOrders;
 
       console.log(
         "bougthBeats",
@@ -189,6 +191,7 @@ export const getUserData = createAsyncThunk(
       await dispatch(setBougthBeats(bougthBeats));
       await dispatch(setOwnedBeats(ownedBeats));
       await dispatch(setOwnedReviews(ownedReviews));
+    //  await dispatch(setOrders(orders));
 
       const auth = {
         isSeller: response.isSeller,
@@ -317,14 +320,16 @@ const authSession = createSlice({
       //--------------------
       //RECOVER PASSWORD
       .addCase(recoverPassword.pending, (state, action) => {
-        toast("Te estamos enviando un email con la solicitud de recuperación...");
+        toast(
+          "Te estamos enviando un email con la solicitud de recuperación..."
+        );
       })
       .addCase(recoverPassword.fulfilled, (state, action) => {
         toast.success("Se envió el email", toastSuccess);
       })
       .addCase(recoverPassword.rejected, (state, action) => {
         toast.error(action.payload, toastError);
-      })
+      });
   },
 });
 
