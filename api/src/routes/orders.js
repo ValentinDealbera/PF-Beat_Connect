@@ -70,7 +70,7 @@ router.post('/', async (req, res) => {
     try {
         const today = new Date()
        const {buyer, beat} = req.body
-        const beatBuyed = beatModel.findById(beat)
+        const beatBuyed = await beatModel.findById(beat)
         const comprobacion = await userModel.findById(buyer)
         if (comprobacion.bougthBeats.includes(beat)) return res.status(400).json({message: 'No puedes comprar un beat que ya tienes'})
        if (buyer === beatBuyed.userCreator) return res.status(400).json({message: 'No puedes comprar tu propio beat'})
