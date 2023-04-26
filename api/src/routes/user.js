@@ -39,70 +39,70 @@ const storage = getStorage();
 router.get("/", async (req, res) => {
   try {
     const users = await UserModel.find()
-    .populate({
-      path: "createdBeats",
-      populate: [
-        {
-          path: "genre",
-          model: "Genre",
-        },
-        {
-          path: "review",
-          model: "Review",
-        },
-        {
-          path: "userCreator",
-          model: "User",
-        },
-      ],
-    })
-    .populate({
-      path: "bougthBeats",
-      populate: [
-        {
-          path: "genre",
-          model: "Genre",
-        },
-        {
-          path: "review",
-          model: "Review",
-        },
-        {
-          path: "userCreator",
-          model: "User",
-        },
-      ],
-    })
-    .populate({
-      path: "userReviews",
-      populate: [
-        {
-          path: "beat",
-          model: "Beats",
-        },
-        {
-          path: "createdBy",
-          model: "User",
-        },
-      ],
-    })
-    .populate({
-      path: "userOrders",
-      populate: [
-        {
-          path: "beat",
-          model: "Beats",
-        },
-        {
-          path: "seller",
-          model: "User",
-        },
-        {
-          path: "buyer",
-          model: "User",
-        },
-      ],
-    });
+      .populate({
+        path: "createdBeats",
+        populate: [
+          {
+            path: "genre",
+            model: "Genre",
+          },
+          {
+            path: "review",
+            model: "Review",
+          },
+          {
+            path: "userCreator",
+            model: "User",
+          },
+        ],
+      })
+      .populate({
+        path: "bougthBeats",
+        populate: [
+          {
+            path: "genre",
+            model: "Genre",
+          },
+          {
+            path: "review",
+            model: "Review",
+          },
+          {
+            path: "userCreator",
+            model: "User",
+          },
+        ],
+      })
+      .populate({
+        path: "userReviews",
+        populate: [
+          {
+            path: "beat",
+            model: "Beats",
+          },
+          {
+            path: "createdBy",
+            model: "User",
+          },
+        ],
+      })
+      .populate({
+        path: "userOrders",
+        populate: [
+          {
+            path: "beat",
+            model: "Beats",
+          },
+          {
+            path: "seller",
+            model: "User",
+          },
+          {
+            path: "buyer",
+            model: "User",
+          },
+        ],
+      });
     res.json(users);
   } catch (err) {
     return res.status(SERVER_ERROR).send(USER_NOT_FOUND);
@@ -526,24 +526,6 @@ router.delete("/:id", async (req, res) => {
     }
   } catch (error) {
     return res.status(500).json({ message: error.message });
-  }
-});
-
-/******************************************** RECUPERACION DE CONTRASENA *******************************************/
-
-router.post("/recuperar-contraseña", async (req, res) => {
-  const { email } = req.body;
-
-  if (!email) return res.status(BAD_REQUEST).send(ALL_NOT_OK);
-
-  try {
-    const user = await UserModel.findOne({ email });
-    if (!user) {
-      return res.status(NOT_FOUND).send(USER_NOT_FOUND);
-    }
-    axios.post(BACKEND_URL + "api/mail/password", { email: email });
-  } catch (err) {
-    res.status(SERVER_ERROR).send(ALL_NOT_OK);
   }
 });
 
