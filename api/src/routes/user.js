@@ -39,10 +39,70 @@ const storage = getStorage();
 router.get("/", async (req, res) => {
   try {
     const users = await UserModel.find()
-      .populate("createdBeats")
-      .populate("bougthBeats")
-      .populate("userReviews")
-      .populate("userOrders");
+    .populate({
+      path: "createdBeats",
+      populate: [
+        {
+          path: "genre",
+          model: "Genre",
+        },
+        {
+          path: "review",
+          model: "Review",
+        },
+        {
+          path: "userCreator",
+          model: "User",
+        },
+      ],
+    })
+    .populate({
+      path: "bougthBeats",
+      populate: [
+        {
+          path: "genre",
+          model: "Genre",
+        },
+        {
+          path: "review",
+          model: "Review",
+        },
+        {
+          path: "userCreator",
+          model: "User",
+        },
+      ],
+    })
+    .populate({
+      path: "userReviews",
+      populate: [
+        {
+          path: "beat",
+          model: "Beats",
+        },
+        {
+          path: "createdBy",
+          model: "User",
+        },
+      ],
+    })
+    .populate({
+      path: "userOrders",
+      populate: [
+        {
+          path: "beat",
+          model: "Beats",
+        },
+        {
+          path: "seller",
+          model: "User",
+        },
+        {
+          path: "buyer",
+          model: "User",
+        },
+      ],
+    });
     res.json(users);
   } catch (err) {
     return res.status(SERVER_ERROR).send(USER_NOT_FOUND);
