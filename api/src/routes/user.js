@@ -102,7 +102,8 @@ router.get("/", async (req, res) => {
             model: "User",
           },
         ],
-      });
+      })
+      .populate("userFavorites");
     res.json(users);
   } catch (err) {
     return res.status(SERVER_ERROR).send(USER_NOT_FOUND);
@@ -115,7 +116,8 @@ router.get("/admin", async (req, res) => {
   try {
     const users = await UserModel.find()
       .populate("createdBeats")
-      .populate("bougthBeats");
+      .populate("bougthBeats")
+      .populate("userFavorites");
     let initialUser = page * limit - 5;
     let limitUser = page * limit;
     let sliceUsers = users.slice(initialUser, limitUser);
@@ -194,7 +196,8 @@ router.get("/:id", async (req, res) => {
             model: "User",
           },
         ],
-      });
+      })
+      .populate("userFavorites");
     allUserId
       ? res.status(OK).send(allUserId)
       : res.status(NOT_FOUND).send(USER_NOT_FOUND);
@@ -221,6 +224,7 @@ router.put("/:id", async (req, res) => {
     const image = req.files ? req.files.image : null;
     const backImage = req.files ? req.files.backImage : null;
     const {
+      favorite,
       mpcode,
       seller,
       admin,
@@ -251,6 +255,7 @@ router.put("/:id", async (req, res) => {
       return res.status(BAD_REQUEST).send(ALL_NOT_OK);
     }
     if (
+      favorite ||
       backImage ||
       image ||
       soft ||
@@ -265,6 +270,14 @@ router.put("/:id", async (req, res) => {
       bougthBeats
     ) {
       const user = await UserModel.findById(id);
+      if (favorite) {
+        if (!user.userFavorites.includes(favorite)) {
+          user.userFavorites = [...user.userFavorites, favorite];
+        } else {
+          const index = user.userFavorites.findIndex(e => e = favorite);
+          user.userFavorites = user.userFavorites.slice(index, index);
+        }
+      }
       if (username && username !== "") user.username = username;
       if (firstName && firstName !== "") user.firstName = firstName;
       if (lastName && lastName !== "") user.lastName = lastName;
@@ -369,6 +382,7 @@ router.put("/admin/:id", adminMiddleware, async (req, res) => {
       bio,
       password,
       bougthBeats,
+      favorite,
     } = req.body;
     if (
       (seller && seller !== "VENDEDOR") ||
@@ -383,6 +397,7 @@ router.put("/admin/:id", adminMiddleware, async (req, res) => {
     }
 
     if (
+      favorite ||
       backImage ||
       image ||
       soft ||
@@ -397,6 +412,14 @@ router.put("/admin/:id", adminMiddleware, async (req, res) => {
       bougthBeats
     ) {
       const user = await UserModel.findById(id);
+      if (favorite) {
+        if (!user.userFavorites.includes(favorite)) {
+          user.userFavorites = [...user.userFavorites, favorite];
+        } else {
+          const index = user.userFavorites.findIndex(e => e = favorite);
+          user.userFavorites = user.userFavorites.slice(index, index);
+        }
+      }
       if (username && username !== "") user.username = username;
       if (firstName && firstName !== "") user.firstName = firstName;
       if (lastName && lastName !== "") user.lastName = lastName;

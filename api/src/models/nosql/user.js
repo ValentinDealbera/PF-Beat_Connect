@@ -87,6 +87,12 @@ const UserSchema = new mongoose.Schema({
       ref: "Beats",
     },
   ],
+  userFavorites: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Beats",
+    },
+  ],
 });
 
 
