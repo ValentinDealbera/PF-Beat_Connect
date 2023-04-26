@@ -17,12 +17,7 @@ export default function SellerDashboardOverview() {
     console.log(beatData);  
     const router = useRouter();
     const [beatToDelete, setBeatToDelete] = useState(null);
-    const page = useSelector((state)=> state.admin.currentBeatPage);
-
-    if(beatData === 0){
-      dispatch(setCurrentBeatPage(page-1));
-    }
-   
+    const page = useSelector((state)=> state.admin.currentBeatPage);     
         
     useEffect(()=>{
       dispatch(adminGetBeats(page));

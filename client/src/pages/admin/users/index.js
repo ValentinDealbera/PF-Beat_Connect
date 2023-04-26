@@ -24,10 +24,7 @@ export default function SellerDashboardOverview() {
   const usersData = users;
   const page = useSelector((state)=> state.admin.currentPage);
 
-  if(usersData.length === 0){
-    dispatch(setCurrentPage -1)
-  };  
-
+  
   console.log("usersData", usersData);
 
   useEffect(() => {
