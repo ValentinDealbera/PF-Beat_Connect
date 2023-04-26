@@ -184,6 +184,8 @@ export const getUserData = createAsyncThunk(
         clientId,
         response
       );
+
+      console.log("setOwnedReviews", ownedReviews);
       await dispatch(setBougthBeats(bougthBeats));
       await dispatch(setOwnedBeats(ownedBeats));
       await dispatch(setOwnedReviews(ownedReviews));

@@ -1,19 +1,28 @@
 import { Main, Input, FormContainer } from "@/components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-//import { postBeatReview } from "@/redux/slices/client";
+import { postClientReview } from "@/redux/slices/client/reviews";
 
 export default function ReviewForm(props) {
+  const currentBeat = useSelector(
+    (state) => state?.client?.reviews?.activeBeatCreateReview
+  );
+
+  const currentUserId = useSelector(
+    (state) => state?.client?.authSession?.session?.current?._id
+  );
+
+  const dispatch = useDispatch();
+  const rating = [1, 2, 3, 4, 5];
+
+  const [ratingValue, setRatingValue] = useState(0);
   const [formFields, setFormFields] = useState({
     title: "",
     comment: "",
+    rating: ratingValue,
+    createdBy: currentUserId,
+    beat: currentBeat._id,
   });
-  const [ratingValue, setRatingValue] = useState(0);
-
-  const createdBy = useSelector((state) => state.client.client._id);
-  const dispatch = useDispatch();
-
-  const rating = [1, 2, 3, 4, 5];
 
   const handleInputChange = (event) => {
     setFormFields({
@@ -22,18 +31,21 @@ export default function ReviewForm(props) {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // dispatch(
-    //   postBeatReview({
-    //     ...formFields,
-    //     createdBy: createdBy,
-    //     beat: props.beatId,
-    //     rating: ratingValue,
-    //   })
-    // );
+    console.log(formFields);
+    await dispatch(postClientReview(formFields));
   };
+
+  useEffect(() => {
+    setFormFields({
+      ...formFields,
+      createdBy: currentUserId,
+      beat: currentBeat._id,
+      rating: ratingValue,
+    });
+  }, [ratingValue, currentUserId, currentBeat]);
+
 
   return (
     <Main>
