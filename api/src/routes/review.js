@@ -22,32 +22,32 @@ const router = express();
 router.post("/admin", adminMiddleware, async (req, res) => {
   try {
     const { rating, title, comment, createdBy, beat } = req.body;
-  const creator = await userModel.findById(createdBy);
-  const reviewedBeat = await beatModel.findById(beat);
-  if (!reviewedBeat)
-    return res.status(400).json({ error: "El beat no existe!" });
-  if (!creator)
-    return res.status(400).json({ error: "El usuario no existe!" });
-  try {
-    const newReview = await reviewSchema.create({
-      rating: rating,
-      title: title,
-      comment: comment,
-      createdBy: creator._id,
-      beat: reviewedBeat._id,
-    });
+    const creator = await userModel.findById(createdBy);
+    const reviewedBeat = await beatModel.findById(beat);
+    if (!reviewedBeat)
+      return res.status(400).json({ error: "El beat no existe!" });
+    if (!creator)
+      return res.status(400).json({ error: "El usuario no existe!" });
+    try {
+      const newReview = await reviewSchema.create({
+        rating: rating,
+        title: title,
+        comment: comment,
+        createdBy: creator._id,
+        beat: reviewedBeat._id,
+      });
 
-    creator.userReviews = [...creator.userReviews, newReview._id]
-    creator.save();
+      creator.userReviews = [...creator.userReviews, newReview._id];
+      creator.save();
 
-    reviewedBeat.review = [...reviewedBeat.review, newReview._id];
-    reviewedBeat.relevance = reviewedBeat.relevance + rating
-    reviewedBeat.save();
+      reviewedBeat.review = [...reviewedBeat.review, newReview._id];
+      reviewedBeat.relevance = reviewedBeat.relevance + rating;
+      reviewedBeat.save();
 
-    res.json(newReview).status(CREATED);
-  } catch (error) {
-    res.json({ error: error.message }).status(SERVER_ERROR);
-  }
+      res.json(newReview).status(CREATED);
+    } catch (error) {
+      res.json({ error: error.message }).status(SERVER_ERROR);
+    }
   } catch (error) {
     res.status(SERVER_ERROR).json({ message: error.message });
   }
@@ -56,42 +56,53 @@ router.post("/admin", adminMiddleware, async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const { rating, title, comment, createdBy, beat } = req.body;
-  const {userid} = req.headers
+    const { userid } = req.headers;
 
-  if(!rating || !title || !comment || !userid) return res.status(400).json({message: 'Debes ingresar todos los campos'})
- console.log('userid', userid, 'createdBy', createdBy)
-  try {
-  const user = await userModel.findById(userid)
-  const creator = await userModel.findById(createdBy);
-  const reviewedBeat = await beatModel.findById(beat).populate('userCreator');
-  if(user.email !== creator.email) return res.status(400).json({message: 'No puedes hacer una review a nombre de otro usuario'})
-  if(user.email === reviewedBeat.userCreator.email) return res.status(400).json({message: 'No puedes hacer una review a tu propio beat'})
-  if (!reviewedBeat)
-    return res.status(400).json({ error: "this beat does not exist" });
-  if (!creator)
-    return res.status(400).json({ error: "this user does not exist" });
-  
-    const newReview = await reviewSchema.create({
-      rating: rating,
-      title: title,
-      comment: comment,
-      createdBy: creator._id,
-      beat: reviewedBeat._id,
-    });
+    if (!rating || !title || !comment || !userid)
+      return res
+        .status(400)
+        .json({ message: "Debes ingresar todos los campos" });
+    console.log("userid", userid, "createdBy", createdBy);
+    try {
+      const user = await userModel.findById(userid);
+      const creator = await userModel.findById(createdBy);
+      const reviewedBeat = await beatModel
+        .findById(beat)
+        .populate("userCreator");
+      if (user.email !== creator.email)
+        return res.status(400).json({
+          message: "No puedes hacer una review a nombre de otro usuario",
+        });
+      if (user.email === reviewedBeat.userCreator.email)
+        return res
+          .status(400)
+          .json({ message: "No puedes hacer una review a tu propio beat" });
+      if (!reviewedBeat)
+        return res.status(400).json({ error: "this beat does not exist" });
+      if (!creator)
+        return res.status(400).json({ error: "this user does not exist" });
 
-    creator.userReviews = [...creator.userReviews, newReview._id]
-    creator.save();
+      const newReview = await reviewSchema.create({
+        rating: rating,
+        title: title,
+        comment: comment,
+        createdBy: creator._id,
+        beat: reviewedBeat._id,
+      });
 
-    reviewedBeat.relevance = reviewedBeat.relevance + rating
-    reviewedBeat.review = [...reviewedBeat.review, newReview._id];
-    reviewedBeat.save();
+      creator.userReviews = [...creator.userReviews, newReview._id];
+      creator.save();
 
-    res.json(newReview).status(CREATED);
+      reviewedBeat.relevance = reviewedBeat.relevance + rating;
+      reviewedBeat.review = [...reviewedBeat.review, newReview._id];
+      reviewedBeat.save();
+
+      res.json(newReview).status(CREATED);
+    } catch (error) {
+      res.json({ error: error.message }).status(SERVER_ERROR);
+    }
   } catch (error) {
-    res.json({ error: error.message }).status(SERVER_ERROR);
-  }
-  } catch (error) {
-    res.status(SERVER_ERROR).json({ message: error.message });    
+    res.status(SERVER_ERROR).json({ message: error.message });
   }
 });
 
@@ -134,59 +145,70 @@ router.get("/:id", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const {userid} = req.headers
-    const { rating, title, comment } = req.body;
+    const { userid } = req.headers;
+    const { rating, title, comment, softDelete } = req.body;
 
-    console.log(req.body, id, userid)
-    if(!rating || !title || !comment || !id) return res.status(400).json({message: 'Debes ingresar todos los campos'})
-
-
-  
-    if (id) {
+    console.log(req.body, id, userid);
+    if (rating || title || comment || id || softDelete){
       try {
-        const reviewToModify = await reviewSchema.findById(id).populate('createdBy');
-        if (!reviewToModify) return res.status(400).json({message: 'La review ingresada no es una review existente'})
-        const comprobacion = await userModel.findById(userid)
-        console.log(comprobacion.email, reviewToModify.createdBy.email)
-        if (comprobacion.email !== reviewToModify.createdBy.email) return res.status(400).json({message: 'No puedes modificar una review ajena!'})
+        const reviewToModify = await reviewSchema
+          .findById(id)
+          .populate("createdBy");
+        if (!reviewToModify)
+          return res.status(400).json({
+            message: "La review ingresada no es una review existente",
+          });
+        const comprobacion = await userModel.findById(userid);
+        console.log(comprobacion.email, reviewToModify.createdBy.email);
+        if (comprobacion.email !== reviewToModify.createdBy.email)
+          return res
+            .status(400)
+            .json({ message: "No puedes modificar una review ajena!" });
         rating && (reviewToModify.rating = rating);
         title && (reviewToModify.title = title);
         comment && (reviewToModify.comment = comment);
-  
+        if (softDelete) {
+          reviewToModify.softDelete = softDelete === "true" ? true : false;
+        }
         await reviewToModify.save();
-  
+
         return res.json(reviewToModify).status(ALL_OK);
       } catch (error) {
         res.json({ error: error.message }).status(NOT_FOUND);
       }
-    } else return res.send("Debes ingresar una ID").status(NOT_FOUND);
+    } else return res.status(400).json({message: 'ningun dato recibido'})
   } catch (error) {
     res.json({ error: error.message }).status(NOT_FOUND);
   }
+  
 });
 
 router.put("/admin/:id", adminMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
-    const {userid} = req.headers
-    const { rating, title, comment } = req.body;
-  
-    if (id) {
+    const { rating, title, comment, softDelete } = req.body;
+    if (rating || title || comment || id || softDelete){
       try {
         const reviewToModify = await getReviewById(id);
-        if (!reviewToModify) return res.status(400).json({message: 'La review ingresada no es una review existente'})
-        
+        if (!reviewToModify)
+          return res.status(400).json({
+            message: "La review ingresada no es una review existente",
+          });
+
         rating && (reviewToModify.rating = rating);
         title && (reviewToModify.title = title);
         comment && (reviewToModify.comment = comment);
-  
+        if (softDelete) {
+          reviewToModify.softDelete = softDelete === "true" ? true : false;
+        }
+
         await reviewToModify.save();
-  
+
         return res.json(reviewToModify).status(ALL_OK);
       } catch (error) {
         res.json({ error: error.message }).status(NOT_FOUND);
       }
-    } else return res.send("Debes ingresar una ID").status(NOT_FOUND);
+    } else return res.status(400).json({message: 'ningun dato recibido'})
   } catch (error) {
     res.json({ message: error.message }).status(NOT_FOUND);
   }
@@ -195,17 +217,26 @@ router.put("/admin/:id", adminMiddleware, async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const {userid} = req.headers
+    const { userid } = req.headers;
 
-    if(!userid) return res.status(400).json({message: 'Debes estar logueado para eliminar una review'})
+    if (!userid)
+      return res
+        .status(400)
+        .json({ message: "Debes estar logueado para eliminar una review" });
 
     console.log(id);
     if (id) {
       try {
-        const comprobacionReview = await reviewSchema.findById(id).populate('createdBy')
-        const comprobacionUser = await userModel.findById(userid)
-        if (!comprobacionReview) return res.status(400).json({message: 'Esa review no existe'})
-        if (comprobacionReview.createdBy.email !== comprobacionUser.email) return res.status(400).json({message: 'No puedes eliminar una review de otro/a usuario/a'})
+        const comprobacionReview = await reviewSchema
+          .findById(id)
+          .populate("createdBy");
+        const comprobacionUser = await userModel.findById(userid);
+        if (!comprobacionReview)
+          return res.status(400).json({ message: "Esa review no existe" });
+        if (comprobacionReview.createdBy.email !== comprobacionUser.email)
+          return res.status(400).json({
+            message: "No puedes eliminar una review de otro/a usuario/a",
+          });
         const deletedReview = await reviewSchema.findByIdAndDelete(id);
         const beat = await beatModel.findById(deletedReview.beat);
         const beatIndex = beat.review.findIndex(
@@ -217,8 +248,7 @@ router.delete("/:id", async (req, res) => {
       } catch (error) {
         res.json({ error: error.message }).status(SERVER_ERROR);
       }
-    }
-    else return res.status(400).json({message: 'ingresa una ID'})
+    } else return res.status(400).json({ message: "ingresa una ID" });
   } catch (error) {
     res.json({ message: error.message }).status(SERVER_ERROR);
   }
@@ -227,23 +257,22 @@ router.delete("/:id", async (req, res) => {
 router.delete("/admin/:id", adminMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
-  if (id) {
-    try {
-      const deletedReview = await reviewSchema.findByIdAndDelete(id);
-      const beat = await beatModel.findById(deletedReview.beat);
-      const beatIndex = beat.review.findIndex(
-        (beat) => beat._id === deletedReview._id
-      );
-      const deletedReviewInBeat = beat.review.splice(beatIndex, 1);
-      await beat.save();
-      res.json(deletedReview);
-    } catch (error) {
-      res.json({ error: error.message }).status(SERVER_ERROR);
-    }
-  }
-  else return res.status(400).json({message: 'ingresa una ID'})
+    if (id) {
+      try {
+        const deletedReview = await reviewSchema.findByIdAndDelete(id);
+        const beat = await beatModel.findById(deletedReview.beat);
+        const beatIndex = beat.review.findIndex(
+          (beat) => beat._id === deletedReview._id
+        );
+        const deletedReviewInBeat = beat.review.splice(beatIndex, 1);
+        await beat.save();
+        res.json(deletedReview);
+      } catch (error) {
+        res.json({ error: error.message }).status(SERVER_ERROR);
+      }
+    } else return res.status(400).json({ message: "ingresa una ID" });
   } catch (error) {
-  res.status(500).json({message: error.message})
+    res.status(500).json({ message: error.message });
   }
 });
 

@@ -14,6 +14,10 @@ const reviewSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  softDelete: {
+    type: Boolean,
+    default: false
+  },
   comment: {
     type: String,
     required: true,
