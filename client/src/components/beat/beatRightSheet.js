@@ -1,11 +1,47 @@
-export default function BeatRightSheet({ children, setIsDropdownOpen, width = "w-[360px]"}) {
-    return (
-      <>
-      <div onClick={()=>{setIsDropdownOpen(false)}} className="z-40 fixed w-screen h-screen top-0 left-0 bg-black opacity-50"></div>
-        <div className={`z-50 overflow-y-scroll fixed max-h-screen min-h-screen ${width} top-0 bottom-0 right-0 bg-white pb-10 pt-5 rounded-tl-3xl rounded-bl-3xl`}>
-            {children}
+import {
+  BeatImage,
+  AuthorName,
+  BeatPrice,
+  BeatBPM,
+  BeatTitle,
+  manageEditBeat,
+  MiniModalBox,
+} from "@/components";
+
+export default function BeatRightSheet({
+  children,
+  setIsDropdownOpen,
+  width = "w-[360px]",
+}) {
+  return (
+    <div
+      id="master-box"
+      className="fixed z-40 flex h-screen w-screen items-end  top-0 right-0 justify-end overflow-hidden"
+    >
+      <div
+        id="box"
+        className={`relative z-50 flex h-screen items-start justify-end rounded-bl-3xl rounded-tl-3xl bg-white ${width} overflow-hidden py-10`}
+      >
+        <img
+          onClick={() => {
+            setIsDropdownOpen(false);
+          }}
+          className=" absolute left-0 top-0 z-40 h-16 w-16 cursor-pointer p-6"
+          src="/icon/cross.svg"
+          alt="close"
+        />
+        <div className=" w-full h-full relative">
+        <div className="absolute w-full h-full">{children}</div>
         </div>
-      </>
-    );
-  }
-  
+        
+      </div>
+
+      <div
+        onClick={() => {
+          setIsDropdownOpen(false);
+        }}
+        className="fixed left-0 top-0 z-40 h-screen w-screen  bg-black opacity-50"
+      ></div>
+    </div>
+  );
+}

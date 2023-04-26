@@ -21,7 +21,6 @@ export const navPublic = [
     name: "Carrito",
     url: "/beats/cart",
     visible: false,
-    colorMode: "light",
   },
 ];
 

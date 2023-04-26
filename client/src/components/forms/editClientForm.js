@@ -31,7 +31,7 @@ export default function EditClientForm(props) {
     lastName: `${mode === "edit" ? defaultValues.lastName : ""}`,
     image: "",
     email: `${mode === "edit" ? defaultValues.email : ""}`,
-    password: `${mode === "edit" ? defaultValues.password : ""}`,
+    password: "",
     id: id,
     bio: `${mode === "edit" ? defaultValues.bio : ""}`,
     backImage: "",

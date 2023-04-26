@@ -7,8 +7,11 @@ import { serverUrl } from "@/data/config";
 import { toast } from "sonner";
 import axios from "axios";
 import { toastError, toastSuccess } from "@/utils/toastStyles";
+import { getUserData } from "./authSession";
+import { fetchBeats } from "../beats";
 
 const initialState = {
+  activeBeatCreateReview: null,
   activeEditingReview: null,
   reviews: [],
 };
@@ -20,24 +23,15 @@ export const postClientReview = createAsyncThunk(
   async (data, { rejectWithValue, dispatch, getState }) => {
     const id = getState().client.authSession.session.current._id;
     try {
-      const response = await axios.post(`${serverUrl}reviews`, data, {
+      const response = await axios.post(`${serverUrl}review`, data, {
         headers: {
           userid: id,
         },
       });
 
-      // const reviews = userReviews.map((review) => ({
-      //   rating: review.rating,
-      //   title: review.title,
-      //   comment: review.comment,
-      //   _id: review._id,
-      //   username: review.createdBy.username,
-      //   beat: id,
-      // }));
-
       await dispatch(getUserData(id));
       await dispatch(fetchBeats({}));
-      return response.data;
+      return;
     } catch (error) {
       console.log("ERROR xx", error);
       return rejectWithValue(error.response.data.message);
@@ -50,9 +44,10 @@ export const postClientReview = createAsyncThunk(
 export const deleteClientReview = createAsyncThunk(
   "client/deleteClientReview",
   async (data, { rejectWithValue, dispatch, getState }) => {
+    console.log("DATA", data);
     const id = getState().client.authSession.session.current._id;
     try {
-      const response = await axios.delete(`${serverUrl}reviews/${data}`, {
+      const response = await axios.delete(`${serverUrl}review/${data}`, {
         headers: {
           userid: id,
         },
@@ -75,9 +70,11 @@ export const editClientReview = createAsyncThunk(
   "client/editClientReview",
   async (data, { rejectWithValue, dispatch, getState }) => {
     const id = getState().client.authSession.session.current._id;
+    const reviewId = getState().client.reviews.activeEditingReview._id;
+    console.log("Enviado", id, data.createdBy);
     try {
       const response = await axios.put(
-        `${serverUrl}reviews/${data._id}`,
+        `${serverUrl}review/${reviewId}`,
         data,
         {
           headers: {
@@ -104,13 +101,21 @@ const reviewsSlice = createSlice({
     //--------------------
     //SET ACTIVE EDITING REVIEW
     setActiveEditingReview(state, action) {
+      console.log("ACTION", action.payload);
       state.activeEditingReview = action.payload;
     },
 
     //--------------------
     //SET OWN REVIEWS
     setOwnedReviews(state, action) {
+      console.log("setOwnedReviews rrr", action.payload);
       state.reviews = action.payload;
+    },
+
+    //--------------------
+    //SET ACTIVE BEAT CREATE REVIEW
+    setActiveBeatCreateReview(state, action) {
+      state.activeBeatCreateReview = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -119,7 +124,6 @@ const reviewsSlice = createSlice({
       //POST CLIENT REVIEW
       .addCase(postClientReview.fulfilled, (state, action) => {
         toast.success("Review creada", toastSuccess);
-        state.reviews = action.payload;
       })
       .addCase(postClientReview.rejected, (state, action) => {
         toast.error(action.payload, toastError);
@@ -154,6 +158,6 @@ const reviewsSlice = createSlice({
   },
 });
 
-export const { setActiveEditingReview, setOwnedReviews } = reviewsSlice.actions;
+export const { setActiveEditingReview, setOwnedReviews, setActiveBeatCreateReview } = reviewsSlice.actions;
 
 export default reviewsSlice.reducer;

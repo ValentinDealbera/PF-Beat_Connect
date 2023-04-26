@@ -8,7 +8,11 @@ import {
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-import { adminGetReviews, adminDeleteReview, setCurrentEditReview } from "@/redux/slices/admin";
+import {
+  adminGetReviews,
+  adminDeleteReview,
+  setCurrentEditReview,
+} from "@/redux/slices/admin";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 
@@ -21,14 +25,12 @@ export default function SellerDashboardOverview() {
   const [reviewToDelete, setReviewToDelete] = useState(null);
   const headers = [
     "Beat",
-    // "Id",
-    "Title",
+    "Titulo",
     "Rating",
-    "Comment",
-    "DateCreated",
-    "CreatedBy",
-    "Edit",
-    "Delete",
+    "Status",
+    "Creador",
+    "Editar",
+    "Eliminar",
   ];
 
   useEffect(() => {
@@ -48,12 +50,11 @@ export default function SellerDashboardOverview() {
 
   const rows = reviewsData.map((item) => {
     return {
-      title: item.title,
+      titulo: item.title,
       // id: item._id,
       rating: item.rating,
-      comment: item.comment,
-      datecreated: item.dateCreated,
-      createdby: item.createdBy.username,
+      status: item.softDelete ? "Banned" : "Ok",
+      creador: item.createdBy.username,
       beat: (
         <div className="flex w-2/5 items-center gap-4">
           <Image
@@ -65,7 +66,7 @@ export default function SellerDashboardOverview() {
           <h3 className="text-base-medium">{item.beat.name}</h3>
         </div>
       ),
-      edit: (
+      editar: (
         <button
           onClick={() => handleEdit(item)}
           className="background-neutral-gray-400 hover:background-neutral-gray-700 color-neutral-white 
@@ -74,7 +75,7 @@ export default function SellerDashboardOverview() {
           Edit
         </button>
       ),
-      delete: (
+      eliminar: (
         <button
           onClick={() => setReviewToDelete(item)}
           className="background-primary-red-500 hover:background-primary-red-700 color-neutral-white 
@@ -113,5 +114,3 @@ export default function SellerDashboardOverview() {
     </>
   );
 }
-
-

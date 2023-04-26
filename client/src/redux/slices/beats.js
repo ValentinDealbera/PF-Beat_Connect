@@ -13,13 +13,13 @@ import { data } from "autoprefixer";
 import { throttle } from "lodash";
 import createAbortController from "@/utils/abortController";
 
-
 const initialState = {
   //LOADING
   loadingBeats: false,
   //BEATS
   publicItems: [],
   activeItems: [],
+  featuredItems: [],
   activeItemDetail: null,
   generalActiveIndex: 0,
   //REVIEWS
@@ -56,8 +56,6 @@ export const fetchBeats = createAsyncThunk(
       priceAmount,
       rating,
       genre,
-         relevance,
-
       searchFilter,
     },
     { rejectWithValue }
@@ -74,15 +72,14 @@ export const fetchBeats = createAsyncThunk(
         ...(rating && { rating }),
         ...(genre && { genre }),
         ...(searchFilter && { searchFilter }),
-        ...(relevance && { relevance }),
       };
 
-    let queryString = "?";
-    Object.entries(queryParameters).forEach(([key, value]) => {
-      if (value !== null && value !== undefined) {
-        queryString += `&${key}=${encodeURIComponent(value)}`;
-      }
-    });
+      let queryString = "?";
+      Object.entries(queryParameters).forEach(([key, value]) => {
+        if (value !== null && value !== undefined) {
+          queryString += `&${key}=${encodeURIComponent(value)}`;
+        }
+      });
 
       const response = await axios.get(
         `${serverUrl}beats?page=${page}${queryString.substr(1)}`,
@@ -99,6 +96,22 @@ export const fetchBeats = createAsyncThunk(
         prev: response.data.prevPage,
         current: response.data.page,
         limit: response.data.totalPages,
+      };
+    } catch (err) {
+      return rejectWithValue(err.response.data.message);
+    }
+  }
+);
+
+//--------------------
+//FETCH FEATURED BEATS
+export const fetchFeaturedBeats = createAsyncThunk(
+  "beats/fetchFeaturedBeats",
+  async (page, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`${serverUrl}beats?relevance=desc`);
+      return {
+        docs: response.data.docs,
       };
     } catch (err) {
       return rejectWithValue(err.response.data.message);
@@ -208,6 +221,18 @@ const beatsSlice = createSlice({
       })
       .addCase(fetchCurrentAuthor.rejected, (state, action) => {
         console.error(action.error);
+      })
+
+      //--------------------
+      //Extra reducers para los beats destacados
+      .addCase(fetchFeaturedBeats.pending, (state, action) => {
+        state.loadingBeats = true;
+      })
+      .addCase(fetchFeaturedBeats.fulfilled, (state, action) => {
+        state.featuredItems = action.payload.docs || [];
+      })
+      .addCase(fetchFeaturedBeats.rejected, (state, action) => {
+        console.error(" fetch error", action.error);
       });
   },
 });

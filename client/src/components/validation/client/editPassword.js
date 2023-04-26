@@ -16,12 +16,12 @@ export function validationEditPassword(form, fieldsToValidate) {
       case "oldPassword":
         if (!regexPassword.test(form.oldPassword))
           error.oldPassword =
-            "The password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.";
+            "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un caracter especial; ademas de  un mínimo de 8 caracteres";
         break;
       case "newPassword":
         if (!regexPassword.test(form.newPassword))
           error.newPassword =
-            "The password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.";
+            "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un caracter especial; ademas de  un mínimo de 8 caracteres";
         break;
 
       default:

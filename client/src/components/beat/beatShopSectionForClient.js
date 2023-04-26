@@ -3,6 +3,7 @@ import {
   BuyerNavGeneral,
   NewBeatCardGrid,
   ClientReview,
+  ReviewCardGrid,
 } from "@/components";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -28,7 +29,9 @@ export default function BeatShopSectionForClient(props) {
   }, []);
 
   const { activeItems } = useSelector((state) => state?.beats) || [];
-  const {bougthBeats, ownedBeats} = useSelector((state) => state.client.beats);
+  const { bougthBeats, ownedBeats } = useSelector(
+    (state) => state.client.beats
+  );
 
   return (
     <Section subClassName="padding-x-estilo2 padding-y-estilo2 gap-8 flex flex-col">
@@ -39,31 +42,12 @@ export default function BeatShopSectionForClient(props) {
         <ForSellerOnly />
       ) : generalActiveIndex === 1 && isSeller === true ? (
         <NewBeatCardGrid beats={ownedBeats} />
-      ) : (
+      ) : generalActiveIndex === 2 ? (
         <div>
-          <div className="gap-estilo1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
-            <>
-              {activeReviewDetail.length > 0 &&
-                activeReviewDetail?.map((review) => (
-                  <>
-                    <ClientReview
-                      currentMode={props.currentMode}
-                      title={review.title}
-                      comment={review.comment}
-                      username={review.username}
-                    />
-                  </>
-                ))}
-            </>
-          </div>
-          {activeReviewDetail.length === 0 && (
-            <div className="flex w-full items-end justify-center">
-              <h1 className="mb-8 mt-5 text-center text-2xl font-medium">
-                Hey, parece que no hay nada por aqui 🤯
-              </h1>
-            </div>
-          )}
+          <NewBeatCardGrid beats={bougthBeats} />
         </div>
+      ) : (
+        <ReviewCardGrid />
       )}
     </Section>
   );

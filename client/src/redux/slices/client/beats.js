@@ -18,6 +18,7 @@ const initialState = {
   activeEditingBeat: null,
   bougthBeats: [],
   ownedBeats: [],
+  favoriteBeats: [],
 };
 
 //------------------ ASYNC THUNKS ------------------//
@@ -109,6 +110,60 @@ export const editClientBeat = createAsyncThunk(
   }
 );
 
+//--------------------
+//POST FAVORITE BEAT
+export const postFavoriteBeat = createAsyncThunk(
+  "client/postFavoriteBeat",
+  async (data, { rejectWithValue, dispatch, getState }) => {
+    const id = getState().client.authSession.session.current._id;
+    try {
+      const response = await axios.post(
+        `${serverUrl}beats/favorite/${data}`,
+        {},
+        {
+          headers: {
+            userid: id,
+          },
+        }
+      );
+
+      await dispatch(getUserData(id));
+      //  await dispatch(fetchBeats({}));
+
+      return response.data;
+    } catch (error) {
+      console.log("ERROR xx", error);
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+//--------------------
+//DELETE FAVORITE BEAT
+export const deleteFavoriteBeat = createAsyncThunk(
+  "client/deleteFavoriteBeat",
+  async (data, { rejectWithValue, dispatch, getState }) => {
+    const id = getState().client.authSession.session.current._id;
+    try {
+      const response = await axios.delete(
+        `${serverUrl}beats/favorite/${data}`,
+        {
+          headers: {
+            userid: id,
+          },
+        }
+      );
+
+      await dispatch(getUserData(id));
+
+      return response.data;
+    } catch (error) {
+      console.log("ERROR xx", error);
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
 //------------------ SLICE ------------------//
 
 const authSession = createSlice({
@@ -125,6 +180,12 @@ const authSession = createSlice({
     //SET OWNED BEATS
     setOwnedBeats(state, action) {
       state.ownedBeats = action.payload;
+    },
+
+    //--------------------
+    //SET FAVORITE BEATS
+    setFavoriteBeats(state, action) {
+      state.favoriteBeats = action.payload;
     },
     //--------------------
     //SET ACTIVE EDITING BEAT
@@ -168,11 +229,39 @@ const authSession = createSlice({
       })
       .addCase(editClientBeat.rejected, (state, action) => {
         toast(action.payload, toastError);
+      })
+
+      //--------------------
+      //POST FAVORITE BEAT
+      .addCase(postFavoriteBeat.pending, (state, action) => {
+        toast("Añadiendo a favoritos, espera la confirmación...");
+      })
+      .addCase(postFavoriteBeat.fulfilled, (state, action) => {
+        toast.success("Beat añadido a favoritos correctamente", toastSuccess);
+      })
+      .addCase(postFavoriteBeat.rejected, (state, action) => {
+        toast(action.payload, toastError);
+      })
+
+      //--------------------
+      //DELETE FAVORITE BEAT
+      .addCase(deleteFavoriteBeat.pending, (state, action) => {
+        toast("Borrando de favoritos, espera la confirmación...");
+      })
+      .addCase(deleteFavoriteBeat.fulfilled, (state, action) => {
+        toast.success("Beat borrado de favoritos correctamente", toastSuccess);
+      })
+      .addCase(deleteFavoriteBeat.rejected, (state, action) => {
+        toast(action.payload, toastError);
       });
   },
 });
 
-export const { setBougthBeats, setOwnedBeats, setActiveEditingBeat } =
-  authSession.actions;
+export const {
+  setBougthBeats,
+  setOwnedBeats,
+  setActiveEditingBeat,
+  setFavoriteBeats,
+} = authSession.actions;
 
 export default authSession.reducer;

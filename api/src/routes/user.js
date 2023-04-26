@@ -39,10 +39,89 @@ const storage = getStorage();
 router.get("/", async (req, res) => {
   try {
     const users = await UserModel.find()
+      .populate({
+        path: "createdBeats",
+        populate: [
+          {
+            path: "genre",
+            model: "Genre",
+          },
+          {
+            path: "review",
+            model: "Review",
+          },
+          {
+            path: "userCreator",
+            model: "User",
+          },
+        ],
+      })
+      .populate({
+        path: "bougthBeats",
+        populate: [
+          {
+            path: "genre",
+            model: "Genre",
+          },
+          {
+            path: "review",
+            model: "Review",
+          },
+          {
+            path: "userCreator",
+            model: "User",
+          },
+        ],
+      })
+      .populate({
+        path: "userReviews",
+        populate: [
+          {
+            path: "beat",
+            model: "Beats",
+          },
+          {
+            path: "createdBy",
+            model: "User",
+          },
+        ],
+      })
+      .populate({
+        path: "userOrders",
+        populate: [
+          {
+            path: "beat",
+            model: "Beats",
+          },
+          {
+            path: "seller",
+            model: "User",
+          },
+          {
+            path: "buyer",
+            model: "User",
+          },
+        ],
+      })
+      .populate("userFavorites");
+    res.json(users);
+  } catch (err) {
+    return res.status(SERVER_ERROR).send(USER_NOT_FOUND);
+  }
+});
+
+router.get("/admin", async (req, res) => {
+  const page = req.query.page || 1;
+  const limit = 5;
+  try {
+    const users = await UserModel.find()
       .populate("createdBeats")
       .populate("bougthBeats")
-      .populate("userReviews")
-    res.json(users);
+      .populate("userFavorites");
+    let initialUser = page * limit - 5;
+    let limitUser = page * limit;
+    let sliceUsers = users.slice(initialUser, limitUser);
+    res.json(sliceUsers);
   } catch (err) {
     return res.status(SERVER_ERROR).send(USER_NOT_FOUND);
   }
@@ -82,6 +161,10 @@ router.get("/:id", async (req, res) => {
             path: "review",
             model: "Review",
           },
+          {
+            path: "userCreator",
+            model: "User",
+          },
         ],
       })
       .populate({
@@ -97,6 +180,24 @@ router.get("/:id", async (req, res) => {
           },
         ],
       })
+      .populate({
+        path: "userOrders",
+        populate: [
+          {
+            path: "beat",
+            model: "Beats",
+          },
+          {
+            path: "seller",
+            model: "User",
+          },
+          {
+            path: "buyer",
+            model: "User",
+          },
+        ],
+      })
+      .populate("userFavorites");
     allUserId
       ? res.status(OK).send(allUserId)
       : res.status(NOT_FOUND).send(USER_NOT_FOUND);
@@ -123,6 +224,7 @@ router.put("/:id", async (req, res) => {
     const image = req.files ? req.files.image : null;
     const backImage = req.files ? req.files.backImage : null;
     const {
+      favorite,
       mpcode,
       seller,
       admin,
@@ -153,6 +255,7 @@ router.put("/:id", async (req, res) => {
       return res.status(BAD_REQUEST).send(ALL_NOT_OK);
     }
     if (
+      favorite ||
       backImage ||
       image ||
       soft ||
@@ -167,6 +270,14 @@ router.put("/:id", async (req, res) => {
       bougthBeats
     ) {
       const user = await UserModel.findById(id);
+      if (favorite) {
+        if (!user.userFavorites.includes(favorite)) {
+          user.userFavorites = [...user.userFavorites, favorite];
+        } else {
+          const index = user.userFavorites.findIndex(e => e = favorite);
+          user.userFavorites = user.userFavorites.slice(index, index);
+        }
+      }
       if (username && username !== "") user.username = username;
       if (firstName && firstName !== "") user.firstName = firstName;
       if (lastName && lastName !== "") user.lastName = lastName;
@@ -239,7 +350,7 @@ router.put("/:id", async (req, res) => {
             return res.status(NOT_FOUND).send(USER_NOT_FOUND);
           }
         } catch (err) {
-          res.status(SERVER_ERROR).send(err.message);
+          res.status(SERVER_ERROR).json({ message: error.message });
         }
       }
       user.save();
@@ -271,6 +382,7 @@ router.put("/admin/:id", adminMiddleware, async (req, res) => {
       bio,
       password,
       bougthBeats,
+      favorite,
     } = req.body;
     if (
       (seller && seller !== "VENDEDOR") ||
@@ -285,6 +397,7 @@ router.put("/admin/:id", adminMiddleware, async (req, res) => {
     }
 
     if (
+      favorite ||
       backImage ||
       image ||
       soft ||
@@ -299,6 +412,14 @@ router.put("/admin/:id", adminMiddleware, async (req, res) => {
       bougthBeats
     ) {
       const user = await UserModel.findById(id);
+      if (favorite) {
+        if (!user.userFavorites.includes(favorite)) {
+          user.userFavorites = [...user.userFavorites, favorite];
+        } else {
+          const index = user.userFavorites.findIndex(e => e = favorite);
+          user.userFavorites = user.userFavorites.slice(index, index);
+        }
+      }
       if (username && username !== "") user.username = username;
       if (firstName && firstName !== "") user.firstName = firstName;
       if (lastName && lastName !== "") user.lastName = lastName;
@@ -428,24 +549,6 @@ router.delete("/:id", async (req, res) => {
     }
   } catch (error) {
     return res.status(500).json({ message: error.message });
-  }
-});
-
-/******************************************** RECUPERACION DE CONTRASENA *******************************************/
-
-router.post("/recuperar-contraseña", async (req, res) => {
-  const { email } = req.body;
-
-  if(!email) return res.status(BAD_REQUEST).send(ALL_NOT_OK);
-
-  try {
-    const user = await UserModel.findOne({ email });
-    if (!user) {
-      return res.status(NOT_FOUND).send(USER_NOT_FOUND);
-    }
-    axios.post(BACKEND_URL + "api/mail/password", { email: email });
-  } catch (err) {
-    res.status(SERVER_ERROR).send(ALL_NOT_OK);
   }
 });
 

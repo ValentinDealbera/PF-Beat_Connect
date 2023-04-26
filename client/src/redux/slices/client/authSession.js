@@ -11,7 +11,10 @@ import { toast } from "sonner";
 import axios from "axios";
 import { createUserSession } from "@/utils/userSession";
 import { toastError, toastSuccess } from "@/utils/toastStyles";
-import { setBougthBeats, setOwnedBeats } from "./beats";
+import { setBougthBeats, setOwnedBeats, setFavoriteBeats } from "./beats";
+import { setOwnedReviews } from "./reviews";
+import { setOrders } from "./orders";
+
 
 const initialState = {
   auth: {
@@ -45,7 +48,7 @@ const initialState = {
 //JSON LOGIN
 export const jsonLogin = createAsyncThunk(
   "authSession/jsonLogin",
-  async (data, { rejectWithValue }) => {
+  async (data, { rejectWithValue, dispatch }) => {
     try {
       const { data: userResponse } = await axios.post(`${serverUrl}auth`, data);
       const session = createUserSession(userResponse.user);
@@ -60,6 +63,7 @@ export const jsonLogin = createAsyncThunk(
           token: userResponse.token,
         },
       };
+      dispatch(getUserData(userResponse.user._id));
       return { auth, session };
     } catch (error) {
       console.log("ERROR", error);
@@ -156,6 +160,24 @@ export const editClient = createAsyncThunk(
 );
 
 //--------------------
+//PASSWORD RECOVERY
+// export const passwordRecovery = createAsyncThunk(
+//   "authSession/passwordRecovery",
+//   async (data, { rejectWithValue }) => {
+//     const clientId = "64459913669bbb0d6e7838d9"; //Id de fabi durante testeo (hecho por fabi)
+
+//     try {
+//       const newPassword = { password: data.newPassword };
+
+//       await axios.put(`${serverUrl}user/${clientId}`, newPassword);
+//     } catch (error) {
+//       console.log("ERROR passwordRecovery", error);
+//       return rejectWithValue(error.response.data.message);
+//     }
+//   }
+// );
+
+//--------------------
 //GET USER DATA
 export const getUserData = createAsyncThunk(
   "authSession/getUserData",
@@ -172,7 +194,10 @@ export const getUserData = createAsyncThunk(
 
       const bougthBeats = response.bougthBeats;
       const ownedBeats = response.createdBeats;
-      //const ownedReviews = response.createdReviews;
+      const ownedReviews = response.userReviews;
+      const orders = response.userOrders;
+      //const favoriteBeats = response.favoriteBeats;
+
 
       console.log(
         "bougthBeats",
@@ -182,9 +207,13 @@ export const getUserData = createAsyncThunk(
         clientId,
         response
       );
+
+      console.log("setOwnedReviews", ownedReviews);
       await dispatch(setBougthBeats(bougthBeats));
       await dispatch(setOwnedBeats(ownedBeats));
-      //await dispatch(setOwnedReviews(ownedBeats));
+      await dispatch(setOwnedReviews(ownedReviews));
+     await dispatch(setOrders(orders));
+      //await dispatch(setFavoriteBeats(favoriteBeats));
 
       const auth = {
         isSeller: response.isSeller,
@@ -293,6 +322,17 @@ const authSession = createSlice({
         toast.error(action.payload, toastError);
       })
 
+      /***************** PASSWORD RECOVERY ******************/
+      // .addCase(passwordRecovery.pending, (state, action) => {
+      //   return;
+      // })
+      // .addCase(passwordRecovery.fulfilled, (state, action) => {
+      //   toast.success("Tu contraseña se cambio correctamente", toastSuccess);
+      // })
+      // .addCase(passwordRecovery.rejected, (state, action) => {
+      //   toast.error("Hubo un problema, intente mas tarde", toastError);
+      // })
+
       //--------------------
       //GET USER DATA
       .addCase(getUserData.pending, (state, action) => {
@@ -313,14 +353,16 @@ const authSession = createSlice({
       //--------------------
       //RECOVER PASSWORD
       .addCase(recoverPassword.pending, (state, action) => {
-        toast("Te estamos enviando un email con la solicitud de recuperación...");
+        toast(
+          "Te estamos enviando un email con la solicitud de recuperación..."
+        );
       })
       .addCase(recoverPassword.fulfilled, (state, action) => {
         toast.success("Se envió el email", toastSuccess);
       })
       .addCase(recoverPassword.rejected, (state, action) => {
         toast.error(action.payload, toastError);
-      })
+      });
   },
 });
 

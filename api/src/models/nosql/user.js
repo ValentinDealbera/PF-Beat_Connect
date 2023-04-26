@@ -75,7 +75,19 @@ const UserSchema = new mongoose.Schema({
       ref: "Review",
     },
   ],
+  userOrders: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Orders",
+    },
+  ],
   createdBeats: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Beats",
+    },
+  ],
+  userFavorites: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Beats",

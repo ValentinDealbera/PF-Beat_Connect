@@ -10,19 +10,37 @@ const initialState = {
   users: [],
   reviews: [],
   beats: [],
+  usersForms: [],
+  beatsForms: [],
   currentEditUser: null,
   currentEditReview: null,
   currentEditBeat: null,
+  currentPage: 1,
+  currentBeatPage: 1,
 };
+
+export const adminGetUsersForms = createAsyncThunk(
+  "client/adminGetUsersForms",
+  async (data, { rejectWithValue }) => {
+    try {
+      console.log("data", data);
+      const response = await axios.get(`${serverUrl}user`);
+      const userForms = response.data;
+
+      return { userForms };
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
 
 export const adminGetUsers = createAsyncThunk(
   "client/adminGetUsers",
   async (data, { rejectWithValue }) => {
     try {
-      console.log("data", data);
-      const response = await axios.get(`${serverUrl}user`);
+      console.log("data", data);      
+      const response = await axios.get(`${serverUrl}user/admin?page=${data}`);
       const userResponse = response.data;
-
       return { userResponse };
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -188,7 +206,22 @@ export const adminGetBeats = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       console.log("AdlminData", data);
-      const response = await axios.get(`${serverUrl}beats?limit=100`);
+      const response = await axios.get(`${serverUrl}beats?page=${data}`);
+      const beatResponse = response.data.docs;
+      console.log('++++++++++++++',beatResponse)
+      return beatResponse;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+export const adminGetFormBeats = createAsyncThunk(
+  "beats/adminGetFormBeats",
+  async (data, { rejectWithValue }) => {
+    try {
+      console.log("AdlminData", data);
+      const response = await axios.get(`${serverUrl}beats?limit=999999`);
       const beatResponse = response.data.docs;
       console.log('++++++++++++++',beatResponse)
       return beatResponse;
@@ -217,6 +250,7 @@ export const adminPostBeat = createAsyncThunk(
 
       return { beatResponse };
     } catch (error) {
+      console.log("Error de post", error)
       return rejectWithValue(error.response.data.message);
     }
   }
@@ -278,6 +312,12 @@ const beatsSlice = createSlice({
     setCurrentEditBeat(state, action) {
       state.currentEditBeat = action.payload;
     },
+    setCurrentPage(state, action) {
+      state.currentPage = action.payload;
+    },
+    setCurrentBeatPage(state, action) {
+      state.currentBeatPage = action.payload;
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -334,6 +374,16 @@ const beatsSlice = createSlice({
         console.log("action.payload pending");
         toast("Cargando usuarios...");
       })
+
+      //--------------------
+      //Extra reducers para adminGetUsersForms
+      .addCase(adminGetUsersForms.fulfilled, (state, action) => {
+        console.log("action.payload ok", action.payload);
+        state.usersForms = action.payload.userForms;        
+      })
+      .addCase(adminGetUsersForms.rejected, (state, action) => {
+        console.log("action.payload error", action.payload);        
+      })     
 
       //--------------------
       //Extra reducers para adminDeleteUser
@@ -547,6 +597,17 @@ const beatsSlice = createSlice({
       })
 
       //--------------------
+      //Extra reducers para adminGetFormBeats
+      .addCase(adminGetFormBeats.fulfilled, (state, action) => {
+        console.log("action.payload ok", action.payload);
+        state.beatsForms = action.payload;        
+      })
+      .addCase(adminGetFormBeats.rejected, (state, action) => {
+        console.log("action.payload error", action.payload);
+        
+      })      
+
+      //--------------------
       //Extra reducers para adminDeleteUser
       .addCase(adminDeleteBeat.fulfilled, (state, action) => {
         console.log("action.payload ok", action.payload);
@@ -599,7 +660,7 @@ const beatsSlice = createSlice({
   },
 });
 
-export const { setCurrentEditUser, setCurrentEditReview, setCurrentEditBeat } = beatsSlice.actions;
+export const { setCurrentEditUser, setCurrentEditReview, setCurrentEditBeat, setCurrentPage, setCurrentBeatPage } = beatsSlice.actions;
 
 
 export default beatsSlice.reducer;
