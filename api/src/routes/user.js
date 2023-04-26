@@ -552,22 +552,4 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-/******************************************** RECUPERACION DE CONTRASENA *******************************************/
-
-router.post("/recuperar-contraseña", async (req, res) => {
-  const { email } = req.body;
-
-  if (!email) return res.status(BAD_REQUEST).send(ALL_NOT_OK);
-
-  try {
-    const user = await UserModel.findOne({ email });
-    if (!user) {
-      return res.status(NOT_FOUND).send(USER_NOT_FOUND);
-    }
-    axios.post(BACKEND_URL + "api/mail/password", { email: email });
-  } catch (err) {
-    res.status(SERVER_ERROR).send(ALL_NOT_OK);
-  }
-});
-
 module.exports = router;
