@@ -5,6 +5,8 @@ import {
   Search,
   BeatsShopSection,
   Loader,
+  BeatsSpecialSection,
+  Section,
 } from "@/components";
 import { useDispatch, useSelector, getState } from "react-redux";
 import { setSearchFilter } from "@/redux/slices/filters";
@@ -50,6 +52,42 @@ export default function Beats() {
             />
           </div>
         </Hero>
+        <BeatsSpecialSection title={`Beats `}>
+          <span className="text-titulo2-semibold">destacados</span>
+        </BeatsSpecialSection>
+        <Section
+          subClassName=" bg-neutral-100 color-white gap-2 flex md:min-h-[350px]"
+          className="min-w-full bg-neutral-100"
+        >
+          <div className="flex min-w-full 2xl:container 2xl:pr-24">
+            <div className="padding-x-estilo2 padding-y-estilo1 flex h-full w-1/2 flex-col gap-2 ">
+              <h1 className="text-titulo2-regular leading-4">
+                95% de nuestros clientes
+                <span className="text-titulo2-semibold text-red-700">
+                  {" "}
+                  nos recomiendan.{" "}
+                </span>
+              </h1>
+              <p className="text-base-light">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
+                ornare sed nibh eu porta. In auctor dignissim nisi, vel iaculis
+                mi faucibus fermentum. Mauris fermentum lacinia auctor, lorem
+                ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare
+                sed nibh eu porta. In auctor dignissim nisi, vel iaculis mi
+                faucibus fermentum. Mauris fermentum lacinia auctor.
+              </p>
+            </div>
+            <div
+              style={{
+                backgroundImage:
+                  "url(/images/glenn-van-de-wiel-ySfXlAqg8QQ-unsplash.jpg)",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+              className="h-full w-1/2 "
+            ></div>
+          </div>
+        </Section>
         <BeatsShopSection />
         <div className="flex justify-center gap-4">
           <button

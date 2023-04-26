@@ -11,7 +11,7 @@ import { toast } from "sonner";
 import axios from "axios";
 import { createUserSession } from "@/utils/userSession";
 import { toastError, toastSuccess } from "@/utils/toastStyles";
-import { setBougthBeats, setOwnedBeats } from "./beats";
+import { setBougthBeats, setOwnedBeats, setFavoriteBeats } from "./beats";
 import { setOwnedReviews } from "./reviews";
 import { setOrders } from "./orders";
 
@@ -177,6 +177,8 @@ export const getUserData = createAsyncThunk(
       const ownedBeats = response.createdBeats;
       const ownedReviews = response.userReviews;
       const orders = response.userOrders;
+      //const favoriteBeats = response.favoriteBeats;
+
 
       console.log(
         "bougthBeats",
@@ -191,7 +193,8 @@ export const getUserData = createAsyncThunk(
       await dispatch(setBougthBeats(bougthBeats));
       await dispatch(setOwnedBeats(ownedBeats));
       await dispatch(setOwnedReviews(ownedReviews));
-    //  await dispatch(setOrders(orders));
+     await dispatch(setOrders(orders));
+      //await dispatch(setFavoriteBeats(favoriteBeats));
 
       const auth = {
         isSeller: response.isSeller,
