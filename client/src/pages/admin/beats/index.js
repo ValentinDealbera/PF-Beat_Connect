@@ -18,6 +18,10 @@ export default function SellerDashboardOverview() {
     const router = useRouter();
     const [beatToDelete, setBeatToDelete] = useState(null);
     const page = useSelector((state)=> state.admin.currentBeatPage);
+
+    if(beatData === 0){
+      dispatch(setCurrentBeatPage(page-1));
+    }
    
         
     useEffect(()=>{
@@ -96,6 +100,28 @@ export default function SellerDashboardOverview() {
         >
           <IslandDashboard className="flex flex-col gap-5 xl:gap-8">
           <DynamicTable headers={headers} rows={rows} />
+          <div className="flex justify-center gap-4">
+          <button
+          onClick={() => dispatch(setCurrentBeatPage(page-1))}
+          disabled={page === 1}
+          className={page === 1 ? "hidden" : "text-red-700"}
+        >
+          <span className="mr-2">&#11164;</span>
+        </button>        
+        <button
+          onClick={() => {
+            dispatch(setCurrentBeatPage(page + 1));
+          }}
+          disabled={beatData.length<5}
+          className={
+            beatData.length<5
+              ? "hidden"
+              : "text-red-700"
+          }
+        >          
+          <span className="ml-2">&#11166;</span>
+        </button>
+        </div>
           </IslandDashboard>
         </SellerDashboardLayout>
       </main>
@@ -105,28 +131,7 @@ export default function SellerDashboardOverview() {
       element={beatToDelete} 
       onClose={handleCloseModal} 
       onConfirm={() => 
-      dispatch(adminDeleteBeat(beatToDelete))} />)}
-
-      <button
-          onClick={() => dispatch(setCurrentBeatPage(page-1))}
-          disabled={page === 1}
-          className={page === 1 ? "text-red-800" : "text-black"}
-        >
-          Prev
-        </button>        
-        <button
-          onClick={() => {
-            dispatch(setCurrentBeatPage(page + 1));
-          }}
-          disabled={beatData.length<5}
-          className={
-            page === beatData.length<5
-              ? "text-red-800"
-              : "text-black"
-          }
-        >
-          Next
-        </button>
+      dispatch(adminDeleteBeat(beatToDelete))} />)}      
       </>
     );
   }

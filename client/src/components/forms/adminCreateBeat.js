@@ -143,7 +143,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
                 <Input
                   id="name"
                   name="name"
-                  label="Name"
+                  label="Nombre"
                   placeholder="Beat Name:"
                   defaultValue={mode === "edit" ? defaultValues.name : ""}
                   type="text"
@@ -153,7 +153,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
                 <Input
                   name="priceAmount"
                   id="priceAmount"
-                  label="Price Amount"
+                  label="Precio"
                   placeholder="Price Amount:"
                   defaultValue={mode === "edit" ? defaultValues.priceAmount : ""}
                   type="number"
@@ -162,7 +162,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
                 />
                 <Input
                   name="image"
-                  label="Image"
+                  label="Imagen"
                   placeholder="Image:"                  
                   type="file"
                   onChange={handleInput}
@@ -171,7 +171,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
                 
                 { mode==="edit" && <Input
                   name="userCreator"
-                  label="User Creator"
+                  label="Usuario creador:"
                   placeholder="User Creator:"
                   value = {mode === "edit"? defaultValues.userCreator.username:null}
                   defaultValue={mode === "edit" ? defaultValues.userCreator._id: ""}
@@ -180,9 +180,13 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
                   error={error.userCreator}
                 /> }
                 { mode==="create" &&
+                <label
+                htmlFor="userCreator"
+                className= "text-sm-medium flex min-w-0 flex-col gap-1"
+              > Creado por:
                 <Autocomplete
                 id="userCreator"
-                name="userCreator"
+                name="Usuario creador"
                 options={options}
                 getOptionLabel={(option) => option.label}
                 onChange={(event, newValue) => {
@@ -197,7 +201,8 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
                   <TextField {...params} label="Seleccionar opción" variant="outlined" />
                 )}
                 isOptionEqualToValue={(option, value) => option.value === value.value}
-              />}
+              />
+              </label>}
 
               </FormColumn>
               <FormColumn className="w-full">
@@ -212,7 +217,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
                 />
                 <label 
                 className="text-sm-medium flex min-w-0 flex-col gap-estilo4" >
-                 Chose a Genre
+                 Elige un Género
                 </label>
                 <select
                   name="genre"

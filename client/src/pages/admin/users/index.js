@@ -24,7 +24,15 @@ export default function SellerDashboardOverview() {
   const usersData = users;
   const page = useSelector((state)=> state.admin.currentPage);
 
+  if(usersData.length === 0){
+    dispatch(setCurrentPage -1)
+  };  
+
   console.log("usersData", usersData);
+
+  useEffect(() => {
+    dispatch(adminGetUsers(page));
+  }, [page]);
 
   useEffect(() => {
     dispatch(adminGetUsers(page));
@@ -100,10 +108,32 @@ console.log("la pagina", page)
             router.push("/admin/users/create");
           }}
         >
-          <IslandDashboard className="flex flex-col gap-5 xl:gap-8 w-full overflow-x-scroll">
+          <IslandDashboard className="flex flex-col gap-5 xl:gap-8 w-full">
             <DynamicTable 
             headers={headers} 
             rows={rows}  />
+            <div className="flex justify-center gap-4">
+         <button
+          onClick={() => dispatch(setCurrentPage(page-1))}
+          disabled={page === 1}
+          className={page === 1 ? "hidden" : "text-red-700"}
+        >
+          <span className="mr-2">&#11164;</span>
+        </button>        
+        <button
+          onClick={() => {
+            dispatch(setCurrentPage(page + 1));
+          }}
+          disabled={usersData.length<5}
+          className={
+            usersData.length<5
+              ? "hidden"
+              : "text-red-700"
+          }
+        >          
+          <span className="ml-2">&#11166;</span> 
+        </button>
+        </div>
           </IslandDashboard>
         </SellerDashboardLayout>
       </main>
@@ -117,27 +147,7 @@ console.log("la pagina", page)
             dispatch(adminDeleteUser(elementToDelete))
           }          
         />
-      )}
-      <button
-          onClick={() => dispatch(setCurrentPage(page-1))}
-          disabled={page === 1}
-          className={page === 1 ? "text-red-800" : "text-black"}
-        >
-          Prev
-        </button>        
-        <button
-          onClick={() => {
-            dispatch(setCurrentPage(page + 1));
-          }}
-          disabled={usersData.length<5}
-          className={
-            page === usersData.length<5
-              ? "text-red-800"
-              : "text-black"
-          }
-        >
-          Next
-        </button>
+      )}      
     </>
   );
 }
