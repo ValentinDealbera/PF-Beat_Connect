@@ -13,6 +13,8 @@ import { createUserSession } from "@/utils/userSession";
 import { toastError, toastSuccess } from "@/utils/toastStyles";
 import { setBougthBeats, setOwnedBeats } from "./beats";
 import { setOwnedReviews } from "./reviews";
+import { setOrders } from "./orders";
+
 
 const initialState = {
   auth: {
@@ -193,6 +195,7 @@ export const getUserData = createAsyncThunk(
       const bougthBeats = response.bougthBeats;
       const ownedBeats = response.createdBeats;
       const ownedReviews = response.userReviews;
+      const orders = response.userOrders;
 
       console.log(
         "bougthBeats",
@@ -207,6 +210,7 @@ export const getUserData = createAsyncThunk(
       await dispatch(setBougthBeats(bougthBeats));
       await dispatch(setOwnedBeats(ownedBeats));
       await dispatch(setOwnedReviews(ownedReviews));
+    //  await dispatch(setOrders(orders));
 
       const auth = {
         isSeller: response.isSeller,

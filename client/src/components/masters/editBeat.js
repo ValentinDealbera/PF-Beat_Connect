@@ -84,7 +84,6 @@ export default function EditBeat() {
     e.target.reset();
   };
 
-  console.log("activeEditingBeat", activeEditingBeat);
   useEffect(() => {
     if (!activeEditingBeat) return;
 

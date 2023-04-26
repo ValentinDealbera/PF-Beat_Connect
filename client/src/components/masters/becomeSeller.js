@@ -1,45 +1,40 @@
-import { BeatRightSheet, Input } from "@/components";
+import { BeatRightSheet } from "@/components";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 import { serverUrl } from "@/data/config";
+import { toast } from "sonner";
 import axios from "axios";
+import { toastError, toastSuccess } from "@/utils/toastStyles";
 import { useRouter } from "next/router";
 
 export const manageBecomeSeller = () => {
-  console.log("manageBecomeSeller");
-  console.log(BecomeSeller);
   BecomeSeller.handleOpenDropdown();
 };
 
 export default function BecomeSeller() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [terms, setTerms] = useState(false);
+  const router = useRouter();
 
   const handleOpenDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-const router = useRouter();
-
   BecomeSeller.handleOpenDropdown = handleOpenDropdown;
-
-  const dispatch = useDispatch();
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   await dispatch(convertInSeller());
-  //   e.target.reset();
-  //   setIsDropdownOpen(false);
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-    const data = await axios.get(`${serverUrl}cart/toseller`)
-    router.push(data.data.link)
-    } catch (error) {
-      console.log(error)
+    if (!terms) {
+      toast.error("Debes aceptar los términos y condiciones", toastError);
+      return;
     }
-  }
+    try {
+      const data = await axios.get(`${serverUrl}cart/toseller`);
+      router.push(data.data.link);
+    } catch (error) {
+      toast.error("Ocurrio un error, intenta más tarde", toastError);
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -61,19 +56,19 @@ const router = useRouter();
                 ti. Crea tu propia tienda virtual y vende tus beats fácilmente.
               </p>
             </div>
-            <form onSubmit={handleSubmit} className="w-full flex-col flex gap-4" >
+            <form
+              onSubmit={handleSubmit}
+              className="flex w-full flex-col gap-4"
+            >
               <div className="flex w-full flex-col items-center justify-start gap-4 ">
-                {/* <Input
-                  label="Id de Mercado Pago"
-                  placeholder="Ingresa tu id de mercado pago"
-                  type="text"
-                  name="idMercadoPago"
-                  id="idMercadoPago"
-                  className="w-full"
-                  labelClass="w-full"
-                /> */}
                 <div className="flex w-full flex-row items-center justify-start gap-2">
-                  <input type="checkbox" id="terms" name="terms" value="ok" />
+                  <input
+                    type="checkbox"
+                    id="terms"
+                    name="terms"
+                    value="ok"
+                    onChange={() => setTerms(!terms)}
+                  />
                   <label for="terms" className="text-base-light">
                     Acepto los términos y condiciones
                   </label>
