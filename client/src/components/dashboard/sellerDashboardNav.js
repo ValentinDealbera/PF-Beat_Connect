@@ -40,7 +40,7 @@ export default function SellerDashboardNav() {
           icon={"/icon/dashboard/overview.svg"}
         />
         <div className="gap-estilo4 flex  flex-col">
-          <h3 className="text-sm-medium color-primary-red-700 ">Dashboard</h3>
+          <h3 className="text-sm-medium color-primary-red-700  dark:text-[#047c64]">Dashboard</h3>
           {dashboardNav.map((item) => (
             <NavItems
               itemTitle={item.title}
