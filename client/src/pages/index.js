@@ -1,9 +1,4 @@
-import {
-  Head,
-  Main,
-  BeatsSpecialSection,
-  Hero,
-} from "@/components";
+import { Head, Main, BeatsSpecialSection, Hero } from "@/components";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -14,6 +9,8 @@ import { convertInSeller } from "@/redux/slices/client/authSession";
 import { fetchBeats } from "@/redux/slices/beats";
 import { useTranslation } from "react-i18next";
 import { resetCart } from "@/redux/slices/cart";
+import { postClientOrder } from "@/redux/slices/client/orders";
+
 
 
 export default function Home() {
@@ -28,18 +25,22 @@ export default function Home() {
 
   const sendOrder = async () => {
     for (let i = 0; i < router.query.cart.split(",").length; i++) {
-      await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}orders`, {
-        beat: router.query.cart.split(",")[i],
-        buyer: id,
-      });
+      // await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}orders`, {
+      //   beat: router.query.cart.split(",")[i],
+      //   buyer: id,
+      // });
+      dispatch(
+        postClientOrder({ beat: router.query.cart.split(",")[i], buyer: id })
+      );
     }
-    dispatch(resetCart());
+    // dispatch(resetCart());
   };
 
   useEffect(() => {
     if (router.query.cart && router.query.status === "approved") {
       try {
         sendOrder();
+        //     dispatch(postClientOrder({beat: router.query.cart.split(",")[0], buyer: id}));
       } catch (error) {
         console.log(error.message);
       }

@@ -5,6 +5,7 @@ import axios from "axios";
 import { toastError, toastSuccess } from "@/utils/toastStyles";
 import { getUserData } from "./authSession";
 import { fetchBeats } from "../beats";
+import { resetCart } from "../cart";
 
 const initialState = {
   orders: [],
@@ -17,14 +18,15 @@ export const postClientOrder = createAsyncThunk(
   async (data, { rejectWithValue, dispatch, getState }) => {
     const id = getState().client.authSession.session.current._id;
     try {
-      const response = await axios.post(`${serverUrl}review`, data, {
+      const response = await axios.post(`${serverUrl}orders`, data, {
         headers: {
           userid: id,
         },
       });
 
       await dispatch(getUserData(id));
-      await dispatch(fetchBeats({}));
+      await dispatch(resetCart());
+     // await dispatch(fetchBeats({}));
       return;
     } catch (error) {
       console.log("ERROR xx", error);

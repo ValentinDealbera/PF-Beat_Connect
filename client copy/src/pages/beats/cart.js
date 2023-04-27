@@ -57,6 +57,10 @@ export default function Carrito() {
             width={50}
             height={50}
             className="aspect-square rounded-full"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = "/images/placeholder.png";
+            }}
           />
           <h3 className="text-base-medium">{item.beat.name}</h3>
         </div>
@@ -129,6 +133,10 @@ export default function Carrito() {
                           width={50}
                           height={50}
                           className="rounded-full"
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = "/images/placeholder.png";
+                          }}
                         />
                         <h3 className="text-base-medium">{item.author}</h3>
                       </div>

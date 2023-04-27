@@ -26,8 +26,8 @@ export default function ClientReview(props) {
   return (
     <div
       className="relative"
-      onMouseEnter={() => setVisibilityOwnedModal(true)}
-      onMouseLeave={() => setVisibilityOwnedModal(false)}
+      onMouseEnter={() => {currentMode !== "showcase" && setVisibilityOwnedModal(true)}}
+      onMouseLeave={() => {currentMode !== "showcase" && setVisibilityOwnedModal(false)}}
     >
       <div
         className={`border-radius-estilo1  flex flex-col  gap-4 p-5 text-start ${
@@ -41,6 +41,10 @@ export default function ClientReview(props) {
             src={props.review.createdBy.image}
             width={40}
             height={40}
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = "/images/placeholder.png";
+            }}
           />
           <h1 className="text-base-medium flex text-sm">{props.username}</h1>
         </div>
