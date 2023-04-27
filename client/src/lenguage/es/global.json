@@ -1,5 +1,4 @@
 {
-
   "home": {
     "t1": "Comienza tu carrera musical, ",
     "t2": "compra o vende tus beats",
@@ -54,13 +53,18 @@
   "helpCenterIndex": {
     "t1": "Preguntas frecuentes",
     "t2": "¿Aun no encuentras tu respuesta?",
-    "t3": "Envianos un ticket",
-    "t4": "",
-    "t5": "",
-    "t6": "",
-    "t7": "",
-    "t8": "",
-    "t9": ""
+    "t3": "Envianos un ticket"
+  },
+
+  "faqs": {
+    "t1": "¿Cómo puedo encontrar el beat adecuado para mi proyecto musical?",
+    "c1": "En nuestra plataforma, puedes explorar los catálogos de los productores de música registrados y escuchar muestras de audio de cada beat.",
+    "t2": "¿Cómo puedo realizar el pago de manera segura?",
+    "c2": "Ofrecemos un proceso de pago seguro y eficiente a través de Mercado Pago. Una vez que hayas elegido el beat que deseas comprar, podrás realizar el pago de manera segura con diferentes métodos de pago.",
+    "t3": "¿Cómo recibiré el archivo del beat después de realizar el pago?",
+    "c3": "Una vez que hayas realizado el pago, recibirás el archivo del beat en tu correo electrónico. Asegúrate de proporcionar una dirección de correo electrónico válida durante el proceso de pago.",
+    "t4": "¿Cómo puedo registrarme como proveedor en la plataforma?",
+    "c4": "Para registrarte como proveedor, debes completar el formulario de registro. Una vez registrado, podrás crear y publicar tu catálogo de instrumentales."
   },
 
   "about": {
@@ -93,5 +97,34 @@
     "t15": "Vercel es una plataforma de alojamiento de aplicaciones web que permite a los desarrolladores desplegar aplicaciones web y API REST en la nube. ",
     "t16": "Trello es una herramienta de gestión de proyectos que permite a los equipos de trabajo organizar sus proyectos en tableros. ",
     "t17": "Git es un sistema de control de versiones distribuido de código abierto que permite a los desarrolladores colaborar en proyectos de software. GitHub es una plataforma de alojamiento de código fuente y control de versiones que utiliza Git."
+  },
+
+  "navPublic": {
+    "t1": "Inicio",
+    "t2": "Nosotros",
+    "t3": "Beats",
+    "t4": "Carrito"
+  },
+
+  "navHelp": {
+    "t1": "Inicio",
+    "t2": "Política de privacidad",
+    "t3": "Términos y condiciones"
+  },
+
+  "navClient": {
+    "t1": "Perfil",
+    "t2": "Inbox",
+    "t3": "Vende tus beats",
+    "t4": "Configuración",
+    "t5": "Facturación",
+    "t6": "Logout"
+  },
+
+  "navModalItem": {
+    "label": "Centro de ayuda",
+    "t2": "",
+    "t3": "",
+    "t4": ""
   }
 }
