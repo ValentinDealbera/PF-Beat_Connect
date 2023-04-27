@@ -3,24 +3,25 @@ import { useTranslation } from 'react-i18next';
 
 export const navPublic = [
   {
-    name: "Inicio",
+    name: "navPublic.t1",
     url: "/",
     visible: true,
   },
   {
-    name: "Nosotros",
+    name: "navPublic.t2",
     url: "/about",
     visible: true,
   },
   {
-    name: "Beats",
+    name: "navPublic.t3",
     url: "/beats",
     visible: true,
   },
   {
-    name: "Carrito",
+    name: "navPublic.t4",
     url: "/beats/cart",
     visible: false,
+    colorMode: "light",
   },
 ];
 
@@ -80,24 +81,20 @@ export const navClient = [
 
 export const faqs = [
   {
-    title: "¿Cómo puedo encontrar el beat adecuado para mi proyecto musical?",
-    content:
-      "En nuestra plataforma, puedes explorar los catálogos de los productores de música registrados y escuchar muestras de audio de cada beat. Si no encuentras lo que buscas.",
+    title: "faqs.t1",
+    content: "faqs.c1",
   },
   {
-    title: "¿Cómo puedo realizar el pago de manera segura?",
-    content:
-      "Ofrecemos un proceso de pago seguro y eficiente a través de Mercado Pago. Una vez que hayas elegido el beat que deseas comprar, podrás realizar el pago de manera segura con diferentes métodos de pago.",
+    title: "faqs.t2",
+    content: "faqs.c2",
   },
   {
-    title: "¿Cómo recibiré el archivo del beat después de realizar el pago?",
-    content:
-      "Una vez que hayas realizado el pago, recibirás el archivo del beat en tu correo electrónico. Asegúrate de proporcionar una dirección de correo electrónico válida durante el proceso de pago.",
+    title: "faqs.t3",
+    content: "faqs.c3",
   },
   {
-    title: "¿Cómo puedo registrarme como proveedor en la plataforma?",
-    content:
-      "Para registrarte como proveedor, debes completar el formulario de registro. Una vez registrado, podrás crear y publicar tu catálogo de instrumentales.",
+    title: "faqs.t4",
+    content: "faqs.c4",
   },
 ];
 

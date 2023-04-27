@@ -53,13 +53,18 @@
     "helpCenterIndex": {
       "t1": "Frequently asked questions",
       "t2": "Still can't find your answer?",
-      "t3": "Send us a ticket",
-      "t4": "",
-      "t5": "",
-      "t6": "",
-      "t7": "",
-      "t8": "",
-      "t9": ""
+      "t3": "Send us a ticket"
+    },
+
+    "faqs": {
+      "t1": "How can I find the appropriate beat for my music project?",
+      "c1": "In our platform, you can explore the catalogs of registered music producers and listen to audio samples of each beat.",
+      "t2": "How can I make a secure payment?",
+      "c2": "We offer a secure and efficient payment process through Mercado Pago. Once you have chosen the beat you wish to purchase, you can securely make the payment with different payment methods.",
+      "t3": "How will I receive the beat file after making the payment?",
+      "c3": "Once you have made the payment, you will receive the beat file in your email. Make sure to provide a valid email address during the payment process.",
+      "t4": "How can I register as a provider on the platform?",
+      "c4": "To register as a provider, you need to fill out the registration form. Once registered, you will be able to create and publish your catalog of instrumentals."
     },
 
     "about": {
@@ -92,7 +97,36 @@
       "t15": "Vercel es a web application hosting platform that allows developers to deploy web applications and REST APIs in the cloud.",
       "t16": "Trello is a project management tool that allows teams to organize their projects on boards.",
       "t17": "Git is an open-source distributed version control system that allows developers to collaborate on software projects. GitHub is a source code hosting and version control platform that uses Git."
-}
+    },
+
+    "navPublic": {
+      "t1": "Home",
+      "t2": "About",
+      "t3": "Beats",
+      "t4": "Cart"
+    },
+
+    "navHelp": {
+      "t1": "Home",
+      "t2": "Privacy Policy",
+      "t3": "Terms and Conditions"
+    },
+
+    "navClient": {
+      "t1": "Profile",
+      "t2": "Inbox",
+      "t3": "Sell your beats",
+      "t4": "Settings",
+      "t5": "Billing",
+      "t6": "Logout"
+    },
+
+    "navModalItem": {
+      "label": "Help Center",
+      "t2": "",
+      "t3": "",
+      "t4": ""
+    }
 }
 
 
