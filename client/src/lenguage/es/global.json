@@ -1,0 +1,97 @@
+{
+
+  "home": {
+    "t1": "Comienza tu carrera musical, ",
+    "t2": "compra o vende tus beats",
+    "t3": "Únete a nuestra plataforma y descubre un mundo de oportunidades para tu carrera musical. Con nuestra amplia selección de ritmos de varios géneros y estilos, estamos comprometidos a ayudarlo a alcanzar el éxito.",
+    "t4": "Ver todos los beats",
+    "t5": "destacados"
+  },
+
+  "helpCenter": {},
+
+  "helpTermsTitle":"Terminos de BeatConnect",
+  "helpTermsParagraph": " Los siguientes términos y condiciones establecen el acuerdo legal entre BeatConnect y los usuarios del sitio web. Al acceder y utilizar el sitio web, usted acepta estos términos y condiciones en su totalidad. Si no está de acuerdo con estos términos condiciones, por favor no utilice este sitio web. ",
+
+  "helpCenter-terms": {
+    "title": "Términos y condiciones",
+    "t1": "Bienvenido a nuestro sitio web. Si continúa navegando y utilizando este sitio, acepta cumplir y estar sujeto los siguientes términos y condiciones de uso, que junto a nuestra política de privacidad rigen la relacion de BeatConnect con usted en relación con este sitio web.",
+    "t2": "El término 'BeatConnect' o 'nosotos' se refiere al propietario del sitio web. El término 'usted' se refiere al usuario o visitando de nuestro sitio web",
+    "t3": "El uso de este sitio web está sujeto a los siguientes términos de uso:",
+    "t4": "El contenido de las páginas de este sitio web es para su Información general y uso. Está sujeto a cambios sin previo aviso. Ni nosotros ni terceros proporcionamos ninguna garantía o garantia en cuanto a la exactitud, oportunidad, desempeño, integridad o adecuación de la información y los materiales encontrados u ofrecidos en este sitio web para cualquier propósito en particular",
+    "t5": "Usted reconoce que dicha información y materiales pueden contener inexactitudes o errores y excluimos expresamente la responsabilidad por tales inexactitudes o errores en la máxima medida permitida por la ley.",
+    "t6": "El uso de cualquier información o material en este sitio web es bajo su propio riesgo, del cual no seremos responsables. Será su propia responsabilidad asegurarse de que cualquier producto, servicio o información disponible a través de este sitio web cumpla con sus requisitos específicos.",
+    "t7": "Este sitio web contiene material que es de nuestra propiedad o que se nos ha otorgado bajo licencia. Este material incluye, entre otros, el diseño, la presentación, la apariencia, los gráficos y las fotografías",
+    "t8": "Se prohíbe la reproducción, distribución, exhibición, transmisión o uso no autorizado de este material. Todas las marcas registradas reproducidas en este sitio web, que no son propiedad del operador ni están autorizadas para ello, se reconocen en el sitio web.",
+    "t9": "El uso no autorizado de este sitio web puede dar lugar a una reclamación por daños y perjuicios y ser un delito penal",
+    "t10": "Este sitio web también puede incluir enlaces a otros sitios web. Estos enlaces se proporcionan para su conveniencia para proporcionar más información. No significan que respaldamos los sitios web.",
+    "t11": "No tenemos ninguna responsabilidad por el contenido de los sitios web vinculados. Su uso de este sitio web y cualquier disputa que surja de dicho uso del sitio web está sujeto a las leyes de Argentina. Al utilizar este sitio web, usted acepta estos términos y condiciones en su totalidad. Si no está de acuerdo con estos términos y condiciones o con alguna parte de estos términos y condiciones, no utilice nuestro sitio web",
+    "t12": "Al utilizar este sitio web, usted acepta estos términos y condiciones en su totalidad. Si no está de acuerdo con estos términos y condiciones o con cualquier parte de estos términos y condiciones, no use nuestro sitio web."
+  },
+
+  "helpPrivacyTitle":"Politica de privacidad",
+  "helpPrivacyParagraph": "En nuestra plataforma, nos tomamos muy en serio la privacidad de nuestros usuarios y nos comprometemos a proteger la información personal que compartes con nosotros. Nuestra política de privacidad detalla cómo recopilamos, utilizamos, divulgamos y protegemos tu información personal, así como tus derechos y opciones en cuanto a su uso.",
+
+  "helpCenter-privacy": {
+    "title": "Politica de privacidad",
+    "t1": "En BeatConnect, nos tomamos muy en serio la privacidad de nuestros usuarios y nos comprometemos a proteger la información personal que compartes con nosotros. En esta política de privacidad, detallamos cómo recopilamos, utilizamos, divulgamos y protegemos tu información personal, así como tus derechos y opciones en cuanto a su uso. Al utilizar nuestra plataforma, aceptas nuestra política de privacidad y nuestras prácticas de manejo de información personal.",
+    "t2": "Información que recopilamos",
+    "t3": "Recopilamos información personal que nos proporcionas directamente, como tu nombre, dirección de correo electrónico y dirección de facturación. También podemos recopilar información sobre tus interacciones con nuestra plataforma, como las páginas que visitas y las acciones que realizas en la plataforma.",
+    "t4": "¿Cómo utilizamos tu información personal?",
+    "t5": "Utilizamos tu información personal para proporcionarte acceso a nuestra plataforma y mejorar la experiencia del usuario. También podemos utilizar tu información para comunicarnos contigo sobre actualizaciones y ofertas especiales, y para procesar tus transacciones en la plataforma.",
+    "t6": "¿Cómo protegemos tu información personal?",
+    "t7": "Nos comprometemos a proteger tu información personal utilizando medidas de seguridad físicas, técnicas y administrativas adecuadas. Esto incluye el uso de encriptación de datos y el control de accesoa la información personal",
+    "t8": "Divulgación de tu información",
+    "t9": "Podemos compartir tu información personal con terceros que prestan servicios en nuestro nombre, como proveedores de pagos y servicios de cumplimiento de pedidos. También podemos divulgar tu información personal en respuesta a una solicitud legal o si creemos que la divulgación es necesaria para proteger nuestros derechos, la seguridad de nuestros usuarios o el público en general.",
+    "t10": "Tus derechos y opciones",
+    "t11": "Puedes elegir no proporcionar cierta información personal, pero esto puede limitar tu capacidad para utilizar nuestra plataforma. También tienes ciertos derechos en relación con tu información personal, como el derecho a acceder, corregir y eliminar tu información personal."
+  },
+  
+  "helpIndexTitle":"Centro de ayuda",
+  "helpIndexParagraph": "En nuestro centro de ayuda, nos esforzamos por proporcionar una experiencia de usuario excepcional a todos nuestros clientes. Estamos aquí para responder cualquier pregunta que puedas tener y ayudarte a solucionar cualquier problema que puedas encontrar al utilizar nuestra plataforma.",
+  
+
+  "helpCenterIndex": {
+    "t1": "Preguntas frecuentes",
+    "t2": "¿Aun no encuentras tu respuesta?",
+    "t3": "Envianos un ticket",
+    "t4": "",
+    "t5": "",
+    "t6": "",
+    "t7": "",
+    "t8": "",
+    "t9": ""
+  },
+
+  "about": {
+    "t1": "Conozcámonos",
+    "t2": "un poco más",
+    "t3": "Somos un equipo de 8 alumnos del bootcamp Soy Henry, y estamos emocionados de poder compartir un poco más sobre nosotros. Estamos aprendiendo programación full stack utilizando las tecnologías MERN/PERN, y trabajando duro para desarrollar habilidades blandas y trabajar en equipo de manera efectiva. Nos apasiona el mundo de la tecnología y estamos comprometidos en aprender y crecer juntos en esta industria. Nos encanta descubrir nuevas soluciones creativas y atractivas para los usuarios, y estamos emocionados de aplicar nuestras habilidades técnicas para lograrlo.",
+    "t4": "Sobre la",
+    "t5": "aplicación",
+    "t6": "Nuestra plataforma cuenta con una lista de productores de música registrados, quienes han creado y publicado sus catálogos de instrumentales. Los usuarios pueden explorar los catálogos de los productores y escuchar muestras de audio de cada beat para decidir cuál es el más adecuado para sus necesidades. También contamos con un proceso de pago seguro y eficiente que permite a los usuarios comprar y descargar el beat en su correo electrónico. Si eres un productor de música, ¡también puedes registrarte en nuestra plataforma y crear y publicar tu catálogo de instrumentales! Mostrar tus muestras de audio y descripciones detalladas de cada beat, recibir solicitudes de beats personalizados, y comunicarte con los usuarios para discutir detalles adicionales.",
+    "t7": "Tecnologías",
+    "t8": "utilizadas",
+    "t9": ""
+  },
+
+  "tecnologias": {
+    "t1": "Next.js es un framework de React para la construcción de aplicaciones web de alto rendimiento y de alto rendimiento. Next.js te ayuda a crear aplicaciones web de una sola página con React fácilmente.",
+    "t2": "Redux es una librería de gestión de estado para aplicaciones JavaScript de una sola página (SPA). Se utiliza principalmente con React, pero también se puede utilizar con otras bibliotecas o marcos de trabajo de JavaScript. Redux se basa en la arquitectura Flux y se centra en la idea de que el estado de la aplicación debe ser centralizado y predecible.",
+    "t3": "Postman es una herramienta de colaboración para diseñar, probar y documentar las API. Con Postman puedes enviar solicitudes HTTP a un servidor web y recibir respuestas. Puedes organizar tus solicitudes en colecciones y agregar tests automatizados a tus solicitudes para asegurarte de que tus API funcionan correctamente.",
+    "t4": "Sass es un preprocesador de CSS que permite escribir código CSS de manera más eficiente y estructurada. Con Sass, puedes utilizar variables, anidamiento de selectores, mixins, funciones y operadores matemáticos, lo que facilita la escritura y el mantenimiento de hojas de estilo. Además, Sass permite la creación de archivos parciales que se pueden importar en otros archivos para una mayor modularidad y reutilización de código.",
+    "t5": "Figma es una herramienta de diseño de interfaz de usuario (UI) basada en la nube que permite a los diseñadores y equipos de diseño colaborar en tiempo real. Figma cuenta con una interfaz intuitiva y fácil de usar que permite crear diseños, prototipos y animaciones interactivas. Figma también ofrece una amplia variedad de recursos, como iconos, componentes, plantillas y complementos, que facilitan la creación de diseños de alta calidad de manera más rápida y eficiente.",
+    "t6": "Tailwind CSS es un framework de CSS de bajo nivel que te ayuda a crear diseños de interfaz de usuario (UI) de manera rápida y sencilla. Con Tailwind CSS, puedes crear diseños de interfaz de usuario (UI) personalizados sin tener que escribir CSS.",
+    "t7": "Express.js es un framework de servidor web para Node.js que permite crear aplicaciones web y API REST de manera rápida y sencilla. Express.js se basa en el concepto de middleware, que es una función que se ejecuta entre la solicitud y la respuesta del servidor. Express.js proporciona una serie de middleware predefinidos que facilitan la creación de aplicaciones web y API REST.",
+    "t8": "JSON Web Token (JWT) es un estándar abierto que define un formato compacto y autónomo para transmitir información de forma segura entre dos partes como un objeto JSON. Los tokens JWT se pueden firmar usando un secreto (con el algoritmo HMAC) o una clave pública / privada usando RSA o ECDSA.",
+    "t9": "MongoDB es un sistema de base de datos NoSQL orientado a documentos que utiliza documentos JSON con esquemas.",
+    "t10": "Mongoose es una biblioteca de modelado de objetos de MongoDB diseñada para trabajar en un entorno asíncrono. Mongoose soporta tanto promesas como devoluciones de llamada. Mongoose simplifica la creación de modelos de esquema, validación, creación, consulta, actualización y eliminación de registros.",
+    "t11": "Mercado Pago es una plataforma de pagos online que permite a los usuarios realizar pagos a través de tarjetas de crédito, débito, efectivo y transferencias bancarias.",
+    "t12": "Auth0 es una plataforma de autenticación y autorización que permite a los desarrolladores agregar autenticación y autorización a sus aplicaciones web, móviles y de escritorio.",
+    "t13": "Firebase es una plataforma de desarrollo de aplicaciones móviles y web que ofrece servicios de base de datos, almacenamiento, autenticación, análisis, mensajería y más.",
+    "t14": "Render es una plataforma de alojamiento de aplicaciones web que permite a los desarrolladores desplegar aplicaciones web y API REST en la nube. ",
+    "t15": "Vercel es una plataforma de alojamiento de aplicaciones web que permite a los desarrolladores desplegar aplicaciones web y API REST en la nube. ",
+    "t16": "Trello es una herramienta de gestión de proyectos que permite a los equipos de trabajo organizar sus proyectos en tableros. ",
+    "t17": "Git es un sistema de control de versiones distribuido de código abierto que permite a los desarrolladores colaborar en proyectos de software. GitHub es una plataforma de alojamiento de código fuente y control de versiones que utiliza Git."
+  }
+}
