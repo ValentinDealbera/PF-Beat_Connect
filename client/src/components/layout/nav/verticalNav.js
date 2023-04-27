@@ -28,7 +28,7 @@ export default function VerticalNav(props) {
                           props.onClick;
                         }}
                       >
-                        {item.name}
+                        {t(item.name)}
                       </li>
                     </Link>
                   )}
