@@ -19,6 +19,7 @@ const initialState = {
   bougthBeats: [],
   ownedBeats: [],
   favoriteBeats: [],
+  isLoading: false,
 };
 
 //------------------ ASYNC THUNKS ------------------//
@@ -179,17 +180,20 @@ const authSession = createSlice({
     setBougthBeats(state, action) {
       console.log("action.payload setBoughtBeats", action.payload);
       state.bougthBeats = action.payload;
+      state.isLoading = false;
     },
     //--------------------
     //SET OWNED BEATS
     setOwnedBeats(state, action) {
       state.ownedBeats = action.payload;
+      state.isLoading = false;
     },
 
     //--------------------
     //SET FAVORITE BEATS
     setFavoriteBeats(state, action) {
       state.favoriteBeats = action.payload ?? [];
+      state.isLoading = false;
     },
     //--------------------
     //SET ACTIVE EDITING BEAT
@@ -203,9 +207,11 @@ const authSession = createSlice({
       //DELETE CLIENT BEAT
       .addCase(postClientBeat.pending, (state, action) => {
         toast("Subiendo beat, espera la confirmación...");
+        state.isLoading = true;
       })
       .addCase(postClientBeat.fulfilled, (state, action) => {
         toast.success("Beat subido correctamente", toastSuccess);
+        state.isLoading = false;
       })
       .addCase(postClientBeat.rejected, (state, action) => {
         toast(action.payload, toastError);
@@ -215,9 +221,11 @@ const authSession = createSlice({
       //DELETE CLIENT BEAT
       .addCase(deleteClientBeat.pending, (state, action) => {
         toast("Borrando beat, espera la confirmación...");
+        state.isLoading = true;
       })
       .addCase(deleteClientBeat.fulfilled, (state, action) => {
         toast.success("Beat borrado correctamente", toastSuccess);
+        state.isLoading = false;
       })
       .addCase(deleteClientBeat.rejected, (state, action) => {
         toast(action.payload, toastError);
@@ -227,9 +235,11 @@ const authSession = createSlice({
       //EDIT CLIENT BEAT
       .addCase(editClientBeat.pending, (state, action) => {
         toast("Editando beat, espera la confirmación...");
+        state.isLoading = true;
       })
       .addCase(editClientBeat.fulfilled, (state, action) => {
         toast.success("Beat editado correctamente", toastSuccess);
+        state.isLoading = false;
       })
       .addCase(editClientBeat.rejected, (state, action) => {
         toast(action.payload, toastError);
@@ -239,9 +249,11 @@ const authSession = createSlice({
       //POST FAVORITE BEAT
       .addCase(postFavoriteBeat.pending, (state, action) => {
         toast("Añadiendo a favoritos, espera la confirmación...");
+        state.isLoading = true;
       })
       .addCase(postFavoriteBeat.fulfilled, (state, action) => {
         toast.success("Beat añadido a favoritos correctamente", toastSuccess);
+        state.isLoading = false;
       })
       .addCase(postFavoriteBeat.rejected, (state, action) => {
         toast(action.payload, toastError);
@@ -251,9 +263,11 @@ const authSession = createSlice({
       //DELETE FAVORITE BEAT
       .addCase(deleteFavoriteBeat.pending, (state, action) => {
         toast("Borrando de favoritos, espera la confirmación...");
+        state.isLoading = true;
       })
       .addCase(deleteFavoriteBeat.fulfilled, (state, action) => {
         toast.success("Beat borrado de favoritos correctamente", toastSuccess);
+        state.isLoading = false;
       })
       .addCase(deleteFavoriteBeat.rejected, (state, action) => {
         toast(action.payload, toastError);

@@ -197,7 +197,16 @@ router.get("/:id", async (req, res) => {
           },
         ],
       })
-      .populate("userFavorites");
+      .populate({
+        path: "userFavorites",
+        populate: [
+          {
+            path: "userCreator",
+            model: "User",
+          }
+        ]
+      }
+      );
     allUserId
       ? res.status(OK).send(allUserId)
       : res.status(NOT_FOUND).send(USER_NOT_FOUND);

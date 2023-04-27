@@ -26,8 +26,8 @@ export default function ClientReview(props) {
   return (
     <div
       className="relative"
-      onMouseEnter={() => setVisibilityOwnedModal(true)}
-      onMouseLeave={() => setVisibilityOwnedModal(false)}
+      onMouseEnter={() => {currentMode !== "showcase" && setVisibilityOwnedModal(true)}}
+      onMouseLeave={() => {currentMode !== "showcase" && setVisibilityOwnedModal(false)}}
     >
       <div
         className={`border-radius-estilo1  flex flex-col  gap-4 p-5 text-start ${

@@ -33,18 +33,20 @@ export default function BeatShopSectionForClient(props) {
     (state) => state.client.beats
   );
 
+  const isLoading = useSelector((state) => state.client.beats.isLoading);
+
   return (
     <Section subClassName="padding-x-estilo2 padding-y-estilo2 gap-8 flex flex-col">
       <BuyerNavGeneral />
       {generalActiveIndex === 0 ? (
-        <NewBeatCardGrid beats={bougthBeats} />
+        <NewBeatCardGrid beats={bougthBeats} isLoading={isLoading} />
       ) : generalActiveIndex === 1 && isSeller === false ? (
         <ForSellerOnly />
       ) : generalActiveIndex === 1 && isSeller === true ? (
-        <NewBeatCardGrid beats={ownedBeats} />
+        <NewBeatCardGrid beats={ownedBeats} isLoading={isLoading} />
       ) : generalActiveIndex === 2 ? (
         <div>
-          <NewBeatCardGrid beats={favoriteBeats} />
+          <NewBeatCardGrid beats={favoriteBeats} isLoading={isLoading} />
         </div>
       ) : (
         <ReviewCardGrid />

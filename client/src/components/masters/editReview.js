@@ -117,7 +117,7 @@ export default function EditReviewForm(props) {
                     placeholder={"Comentario"}
                     type={"text"}
                     onChange={handleInputChange}
-                    className=" w-full"
+                    className=" w-full h-24"
                     defaultValue={currentReview.comment}
                   />
                 </FormColumn>

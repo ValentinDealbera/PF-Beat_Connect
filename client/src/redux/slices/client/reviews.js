@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import axios from "axios";
 import { toastError, toastSuccess } from "@/utils/toastStyles";
 import { getUserData } from "./authSession";
-import { fetchBeats } from "../beats";
+import { fetchBeats, fetchFeaturedBeats } from "../beats";
 
 const initialState = {
   activeBeatCreateReview: null,
@@ -31,6 +31,7 @@ export const postClientReview = createAsyncThunk(
 
       await dispatch(getUserData(id));
       await dispatch(fetchBeats({}));
+      await dispatch(fetchFeaturedBeats());
       return;
     } catch (error) {
       console.log("ERROR xx", error);
