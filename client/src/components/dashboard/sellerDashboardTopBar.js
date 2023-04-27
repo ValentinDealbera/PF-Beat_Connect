@@ -1,7 +1,7 @@
 export default function SellerDashboardTopBar(props) {
   return (
     <>
-      <div className="padding-x-dashboard-estilo1 py-10">
+      <div className="padding-x-dashboard-estilo1 py-10 dark:text-white">
         {props.mode === "action" && (
           <div className="flex items-center gap-6">
             <h3 className="text-titulo3-medium">{props.message}</h3>
