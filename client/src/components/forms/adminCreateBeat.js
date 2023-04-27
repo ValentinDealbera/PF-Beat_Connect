@@ -57,7 +57,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
         }));
 
       console.log("Data para el form", form);
-     // // console.log("USERCREATOR", defaultValues.userCreator)
+     // console.log("USERCREATOR", defaultValues.userCreator)
 
       const handleInput = (e) => {
         handleInputChange(
