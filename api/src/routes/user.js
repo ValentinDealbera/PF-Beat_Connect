@@ -219,6 +219,7 @@ router.post("/admin", adminMiddleware, async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   const { userid } = req.headers;
+  console.log(req.body);
   try {
     const { id } = req.params;
     const image = req.files ? req.files.image : null;
@@ -234,16 +235,24 @@ router.put("/:id", async (req, res) => {
       lastName,
       email,
       bio,
-      password,
+      newPassword,
+      oldPassword,
       bougthBeats,
     } = req.body;
     const userin = await UserModel.findById(id);
     const userAux = await UserModel.findById(userid);
+    console.log("userin >", userin, "userAux >", userAux);
+
+    const passwordIsValid = await bcrypt.compare(
+      oldPassword.trim(),
+      userin.password.trim()
+    );
+
     if (!userin)
       return res
         .status(400)
         .json({ message: "El usuario que quieres actualizar no existe" });
-    if (userin.email !== userAux.email)
+    if (userin?.email !== userAux?.email)
       return res
         .status(400)
         .json({ message: "No puedes actualizar otro usuario!" });
@@ -254,6 +263,16 @@ router.put("/:id", async (req, res) => {
     ) {
       return res.status(BAD_REQUEST).send(ALL_NOT_OK);
     }
+    if (!passwordIsValid) {
+      return res.status(BAD_REQUEST).json({
+        message: "La contraseña no coincide con tu contraseña actual",
+      });
+    } else if (oldPassword && newPassword && oldPassword === newPassword) {
+      return res
+        .status(BAD_REQUEST)
+        .json({ message: "La nueva contraseña debe ser distinta a la actual" });
+    }
+
     if (
       favorite ||
       backImage ||
@@ -266,7 +285,8 @@ router.put("/:id", async (req, res) => {
       lastName ||
       email ||
       bio ||
-      password ||
+      newPassword ||
+      oldPassword ||
       bougthBeats
     ) {
       const user = await UserModel.findById(id);
@@ -274,7 +294,7 @@ router.put("/:id", async (req, res) => {
         if (!user.userFavorites.includes(favorite)) {
           user.userFavorites = [...user.userFavorites, favorite];
         } else {
-          const index = user.userFavorites.findIndex(e => e = favorite);
+          const index = user.userFavorites.findIndex((e) => (e = favorite));
           user.userFavorites = user.userFavorites.slice(index, index);
         }
       }
@@ -283,9 +303,9 @@ router.put("/:id", async (req, res) => {
       if (lastName && lastName !== "") user.lastName = lastName;
       if (email && email !== "") user.email = email;
       if (bio && bio !== "") user.bio = bio;
-      if (password && password !== "") {
+      if (newPassword && newPassword !== "") {
         const saltRounds = 10;
-        const hashedPassword = bcrypt.hashSync(password, saltRounds);
+        const hashedPassword = bcrypt.hashSync(newPassword, saltRounds);
         user.password = hashedPassword;
       }
       if (image) {
@@ -416,7 +436,7 @@ router.put("/admin/:id", adminMiddleware, async (req, res) => {
         if (!user.userFavorites.includes(favorite)) {
           user.userFavorites = [...user.userFavorites, favorite];
         } else {
-          const index = user.userFavorites.findIndex(e => e = favorite);
+          const index = user.userFavorites.findIndex((e) => (e = favorite));
           user.userFavorites = user.userFavorites.slice(index, index);
         }
       }
