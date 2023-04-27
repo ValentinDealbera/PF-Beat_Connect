@@ -15,6 +15,7 @@ import { setBougthBeats, setOwnedBeats, setFavoriteBeats } from "./beats";
 import { setOwnedReviews } from "./reviews";
 import { setOrders } from "./orders";
 
+
 const initialState = {
   auth: {
     isLogged: false,
@@ -40,6 +41,9 @@ const initialState = {
       userName: "",
       backImage: "",
     },
+  },
+  actionStatus: {
+    getUserDataLoading: false,
   },
 };
 
@@ -351,7 +355,8 @@ const authSession = createSlice({
       //--------------------
       //GET USER DATA
       .addCase(getUserData.pending, (state, action) => {
-        return;
+        console.log("getUserData.pending");
+        state.actionStatus.getUserDataLoading = true;
       })
       .addCase(getUserData.fulfilled, (state, action) => {
         state.session.current = {
@@ -360,9 +365,11 @@ const authSession = createSlice({
         };
         state.auth = { ...state.auth, ...action.payload.auth };
         console.log("action.payload", action.payload);
+        state.actionStatus.getUserDataLoading = false;
       })
       .addCase(getUserData.rejected, (state, action) => {
         toast.error(action.payload, toastError);
+        console.log("getUserData.rejected", action.error);
       })
 
       //--------------------
