@@ -147,6 +147,7 @@ router.get("/:id", async (req, res) => {
           {
             path: "userCreator",
             model: "User",
+            select: "firstName lastName _id image",
           },
         ],
       })
@@ -164,6 +165,7 @@ router.get("/:id", async (req, res) => {
           {
             path: "userCreator",
             model: "User",
+            select: "firstName lastName _id image",
           },
         ],
       })
@@ -177,6 +179,7 @@ router.get("/:id", async (req, res) => {
           {
             path: "createdBy",
             model: "User",
+            select: "firstName lastName _id image",
           },
         ],
       })
@@ -186,14 +189,24 @@ router.get("/:id", async (req, res) => {
           {
             path: "beat",
             model: "Beats",
+            select: "name image price userCreator _id priceAmount",
+            populate: [
+              {
+                path: "userCreator",
+                model: "User",
+                select: "firstName lastName _id image",
+              },
+            ],
           },
           {
             path: "seller",
             model: "User",
+            select: "firstName lastName _id image",
           },
           {
             path: "buyer",
             model: "User",
+            select: "firstName lastName _id image",
           },
         ],
       })
@@ -203,10 +216,25 @@ router.get("/:id", async (req, res) => {
           {
             path: "userCreator",
             model: "User",
-          }
-        ]
-      }
-      );
+            select: "firstName lastName _id image",
+          },
+        ],
+      })
+      .lean();
+
+    if (allUserId) {
+      allUserId.userOrders = allUserId.userOrders.map((order) => {
+        if (order.buyer._id.toString() === id) {
+          order.operationType = "Compra";
+          console.log("compra", order.buyer._id.toString(),  order.beat.name.toString(), id);
+        } else {
+          order.operationType = "Venta";
+          console.log("venta");
+        }
+        return order;
+      });
+    }
+
     allUserId
       ? res.status(OK).send(allUserId)
       : res.status(NOT_FOUND).send(USER_NOT_FOUND);
@@ -283,7 +311,7 @@ router.put("/:id", async (req, res) => {
         if (!user.userFavorites.includes(favorite)) {
           user.userFavorites = [...user.userFavorites, favorite];
         } else {
-          const index = user.userFavorites.findIndex(e => e = favorite);
+          const index = user.userFavorites.findIndex((e) => (e = favorite));
           user.userFavorites = user.userFavorites.slice(index, index);
         }
       }
@@ -425,7 +453,7 @@ router.put("/admin/:id", adminMiddleware, async (req, res) => {
         if (!user.userFavorites.includes(favorite)) {
           user.userFavorites = [...user.userFavorites, favorite];
         } else {
-          const index = user.userFavorites.findIndex(e => e = favorite);
+          const index = user.userFavorites.findIndex((e) => (e = favorite));
           user.userFavorites = user.userFavorites.slice(index, index);
         }
       }

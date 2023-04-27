@@ -38,7 +38,7 @@ export default function BuyerProfile() {
         </div>
       ),
       monto: <p className="text-sm-medium">${item.beat.priceAmount}</p>,
-      operacion: <p className="text-sm-medium">PENDIENTE DE BACKEND</p>,
+      operacion: <p className="text-sm-medium">{item.operationType} </p>,
       fecha: <p className="text-sm-medium">{item.date}</p>,
     };
   });
