@@ -39,7 +39,7 @@ const UserSchema = new mongoose.Schema({
   },
   backImage: {
     type: String,
-    default: ''
+    default: 'https://wallpaperaccess.com/full/1909846.jpg'
   },
   image: {
     type: String,

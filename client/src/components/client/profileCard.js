@@ -15,10 +15,7 @@ export default function ProfileCard({
           height={75}
           alt="Profile photo"
           className="aspect-square rounded-full border object-cover"
-          onError={(e) => {
-            e.target.onerror = null;
-            e.target.src = "/images/placeholder.png";
-          }}
+          
         />
         <div className="mx-auto my-auto px-2">
           <div className="gap-estilo4 flex flex-row items-center justify-start">
