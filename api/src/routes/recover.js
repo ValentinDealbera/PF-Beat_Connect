@@ -52,8 +52,21 @@ router.post("/recuperar-contraseña", async (req, res) => {
 
 router.put("/password", async (req, res) => {
   const { newPassword, email } = req.body;
+
   try {
     const user = await UserModel.findOne({ email });
+
+    const passwordIsEqual = await bcrypt.compare(
+      newPassword.trim(),
+      user.password.trim()
+    );
+
+    if (passwordIsEqual) {
+      return res.status(BAD_REQUEST).json({
+        message: "Debes colocar una contraseña que no hayas usado antes",
+      });
+    }
+
     const saltRounds = 10;
     const hashedPassword = bcrypt.hashSync(newPassword, saltRounds);
     user.password = hashedPassword;
