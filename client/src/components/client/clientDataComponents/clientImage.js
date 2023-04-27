@@ -1,10 +1,11 @@
 import Image from "next/image"
+import { validateImage } from "@/utils/validateImage";
 
 export default function ClientImage({client, height, width}) {
-
+  const imageSrc = validateImage(client.profilePicture);
     return(
         <Image
-        src={client.profilePicture}
+        src={imageSrc}
         width={height}
         height={width}
         alt="Profile photo"

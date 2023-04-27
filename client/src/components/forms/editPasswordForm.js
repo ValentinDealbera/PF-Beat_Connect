@@ -6,7 +6,7 @@ import {
 } from "@/data/formLogic";
 import { useState, useRef, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editClient } from "@/redux/slices/client/authSession";
+import { changePassword } from "@/redux/slices/client/authSession";
 import { useRouter } from "next/router";
 import { validationEditPassword } from "@/components/validation/client/editPassword";
 export default function EditPasswordForm(props) {
@@ -44,9 +44,9 @@ export default function EditPasswordForm(props) {
       const formErrors = validationEditPassword(form, "*");
       if (Object.keys(formErrors).length === 0) {
         console.log("DESPACHADO", form);
-        await dispatch(editClient(form));
+        await dispatch(changePassword(form));
         formRef.current.reset();
-        // router.push("/client");
+         router.push("/client");
       } else {
         setErrors(formErrors);
         console.log("form Error", formErrors);

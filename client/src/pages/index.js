@@ -10,7 +10,7 @@ import { fetchBeats } from "@/redux/slices/beats";
 import { useTranslation } from "react-i18next";
 import { resetCart } from "@/redux/slices/cart";
 import { postClientOrder } from "@/redux/slices/client/orders";
-import { convertInSeller } from "@/redux/slices/client/authSession";
+
 
 
 export default function Home() {

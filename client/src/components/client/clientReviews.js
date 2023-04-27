@@ -6,9 +6,13 @@ import {
 import { MiniModalBox } from "@/components";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { validateImage } from "@/utils/validateImage";
 
 export default function ClientReview(props) {
   const dispatch = useDispatch();
+
+ const imageSrc = validateImage(props.review.createdBy.image);
+
 
   const [visibilityOwnedModal, setVisibilityOwnedModal] = useState(false);
 
@@ -38,7 +42,7 @@ export default function ClientReview(props) {
           <Image
             alt="client"
             className="aspect-square rounded-full object-cover"
-            src={props.review.createdBy.image}
+            src={imageSrc}
             width={40}
             height={40}
           />

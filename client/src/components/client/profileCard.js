@@ -1,15 +1,17 @@
 import Image from "next/image";
-
+import { validateImage } from "@/utils/validateImage";
 export default function ProfileCard({
   profilePhoto,
   profileName,
   profileMessage,
 }) {
+  const imageSrc = validateImage(profilePhoto);
+
   return (
-    <div className="flex w-max max-w-full flex-row overflow-hidden rounded-full bg-white  sm:max-w-[300px] py-2 pl-2 pr-5">
+    <div className="flex w-max max-w-full flex-row overflow-hidden rounded-full bg-white  py-2 pl-2 pr-5 sm:max-w-[300px]">
       <div className="gap-estilo4 flex flex-row ">
         <Image
-          src={profilePhoto}
+          src={imageSrc}
           width={75}
           height={75}
           alt="Profile photo"

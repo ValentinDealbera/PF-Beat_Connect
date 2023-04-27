@@ -226,10 +226,8 @@ router.get("/:id", async (req, res) => {
       allUserId.userOrders = allUserId.userOrders.map((order) => {
         if (order.buyer._id.toString() === id) {
           order.operationType = "Compra";
-          console.log("compra", order.buyer._id.toString(),  order.beat.name.toString(), id);
         } else {
           order.operationType = "Venta";
-          console.log("venta");
         }
         return order;
       });
@@ -256,8 +254,9 @@ router.post("/admin", adminMiddleware, async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   const { userid } = req.headers;
-  console.log(req.body);
+  //console.log(req.body);
   try {
+    console.log("hacemos put");
     const { id } = req.params;
     const image = req.files ? req.files.image : null;
     const backImage = req.files ? req.files.backImage : null;
@@ -272,18 +271,17 @@ router.put("/:id", async (req, res) => {
       lastName,
       email,
       bio,
-      newPassword,
-      oldPassword,
+      newPassword = "",
+      oldPassword = "",
       bougthBeats,
     } = req.body;
     const userin = await UserModel.findById(id);
     const userAux = await UserModel.findById(userid);
-    console.log("userin >", userin, "userAux >", userAux);
+   // console.log("userin >", userin, "userAux >", userAux);
 
-    const passwordIsValid = await bcrypt.compare(
-      oldPassword.trim(),
-      userin.password.trim()
-    );
+    //si la contraseña nueva llega vacia, no se actualiza
+    const userWantUpdatePassword = oldPassword && newPassword;
+    const passwordIsValid = await bcrypt.compare(oldPassword, userin.password);
 
     if (!userin)
       return res
@@ -300,7 +298,7 @@ router.put("/:id", async (req, res) => {
     ) {
       return res.status(BAD_REQUEST).send(ALL_NOT_OK);
     }
-    if (!passwordIsValid) {
+    if (oldPassword && newPassword && !passwordIsValid) {
       return res.status(BAD_REQUEST).json({
         message: "La contraseña no coincide con tu contraseña actual",
       });
@@ -328,11 +326,16 @@ router.put("/:id", async (req, res) => {
     ) {
       const user = await UserModel.findById(id);
       if (favorite) {
+        console.log("Añadimos el fav", favorite);
         if (!user.userFavorites.includes(favorite)) {
           user.userFavorites = [...user.userFavorites, favorite];
         } else {
-          const index = user.userFavorites.findIndex((e) => (e = favorite));
-          user.userFavorites = user.userFavorites.slice(index, index);
+          console.log("Borramos el fav", favorite);
+          user.userFavorites = user.userFavorites.filter((e) => e._id.toString() !== favorite);
+          // const index = user.userFavorites.findIndex((e) => (e = favorite));
+          // user.userFavorites = user.userFavorites.slice(index, index);
+          // 
+          // user.userFavorites = user.userFavorites.filter((e) => e._id !== favorite);
         }
       }
       if (username && username !== "") user.username = username;

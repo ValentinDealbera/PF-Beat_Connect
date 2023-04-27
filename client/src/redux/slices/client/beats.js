@@ -151,7 +151,7 @@ export const deleteFavoriteBeat = createAsyncThunk(
     Object.keys(data).forEach((key) => {
       formData.append(key, data[key]);
     });
-    console.log("data", formData);
+    console.log("DELETE FAVORITE BEAT", formData);
     try {
       const response = await axios.put(`${serverUrl}user/${id}`, formData, {
         headers: {
