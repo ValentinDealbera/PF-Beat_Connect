@@ -84,7 +84,9 @@ router.post('/', async (req, res) => {
         buyerUser.bougthBeats = [...buyerUser.bougthBeats, beat]
         buyerUser.userOrders = [...buyerUser.userOrders, order._id]
         await buyerUser.save()
-
+        const sellerUser = await userModel.findById(beatBuyed.userCreator)
+        sellerUser.userOrders = [...sellerUser.userOrders, order._id]
+        await sellerUser.save()
         res.status(200).json(order)
     } catch (error) {
         console.log(error.message);

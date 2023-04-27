@@ -247,16 +247,16 @@ router.get("/:id", async (req, res) => {
       })
       .lean();
 
-    if (allUserId) {
-      allUserId.userOrders = allUserId.userOrders.map((order) => {
-        if (order.buyer._id.toString() === id) {
-          order.operationType = "Compra";
-        } else {
-          order.operationType = "Venta";
-        }
-        return order;
-      });
-    }
+      if (allUserId && allUserId.userOrders && allUserId.userOrders.length > 0) {
+        allUserId.userOrders = allUserId.userOrders.map((order) => {
+          if (order.buyer._id.toString() === id) {
+            order.operationType = "Compra";
+          } else {
+            order.operationType = "Venta";
+          }
+          return order;
+        });
+      }
 
     allUserId
       ? res.status(OK).send(allUserId)
@@ -445,6 +445,7 @@ router.put("/:id", async (req, res) => {
         .status(500)
         .json({ message: "el usuario no se ha modificado" });
   } catch (error) {
+    console.log(error);
     return res.status(SERVER_ERROR).json({ message: error.message });
   }
 });
