@@ -168,6 +168,13 @@ router.get("/:id", async (req, res) => {
           {
             path: "review",
             model: "Review",
+            populate: [
+              {
+                path: "createdBy",
+                model: "User",
+                select: "firstName lastName _id image",
+              }
+            ]
           },
           {
             path: "userCreator",

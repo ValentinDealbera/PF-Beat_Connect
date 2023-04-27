@@ -1,9 +1,6 @@
 import Image from "next/image";
-import { validateImage } from "@/utils/validateImage";
 
-export default function BeatImage({ beat, height, width }) {
-
-const imageSrc = validateImage(beat.image);
+const BeatImage = ({ beat, height, width }) => {
 
   return (
     <div
@@ -11,11 +8,17 @@ const imageSrc = validateImage(beat.image);
       style={{ height: height, width: width }}
     >
       <Image
-        src={imageSrc}
+        src={beat.image}
         alt="Beat image"
         layout="fill"
         className="rounded-xl object-cover"
+        onError={(e) => {
+          e.target.onerror = null;
+          e.target.src = "/images/placeholder.png";
+        }}
       />
     </div>
   );
-}
+};
+
+export default BeatImage;

@@ -11,7 +11,7 @@ import {
 } from "@/components";
 import { useSelector } from "react-redux";
 import Image from "next/image";
-import { validateImage } from "@/utils/validateImage";
+
 
 export default function BuyerProfile() {
   const activeIndex = useSelector((state) => state.profile.settingsActiveIndex);
@@ -21,16 +21,20 @@ export default function BuyerProfile() {
   const headers = ["Beat", "Monto", "Operacion", "Fecha"];
 
   const rows = beats.map((item) => {
-    const imageSrc = validateImage(item.beat.image);
+ 
     return {
 
       beat: (
         <div className="flex items-center gap-4 ">
           <Image
-            src={imageSrc}
+            src={item.beat.image}
             width={70}
             height={70}
-            className="aspect-square rounded-xl"
+            className="aspect-square rounded-xl object-cover"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = "/images/placeholder.png";
+            }}
           />
           <div className="flex flex-col">
             <h3 className="text-base-medium">{item.beat.name}</h3>
