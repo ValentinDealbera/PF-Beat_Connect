@@ -4,7 +4,7 @@ export default function ModalPopUp(props) {
     <>
       <div
         style={{ background: "#00000080" }}
-        className="padding-estilo2 fixed min-w-[100vw] left-0 top-0 z-50 flex h-screen w-full items-center justify-center"
+        className="padding-estilo2 fixed min-w-[100vw] left-0 top-0 z-[60] flex h-screen w-full items-center justify-center"
       >
         {props.children}
       </div>

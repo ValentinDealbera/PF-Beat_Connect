@@ -1,6 +1,7 @@
 import Image from "next/image";
 
-export default function BeatImage({ beat, height, width }) {
+const BeatImage = ({ beat, height, width }) => {
+
   return (
     <div
       className="relative aspect-square rounded-md object-cover"
@@ -11,7 +12,13 @@ export default function BeatImage({ beat, height, width }) {
         alt="Beat image"
         layout="fill"
         className="rounded-xl object-cover"
+        onError={(e) => {
+          e.target.onerror = null;
+          e.target.src = "/images/placeholder.png";
+        }}
       />
     </div>
   );
-}
+};
+
+export default BeatImage;

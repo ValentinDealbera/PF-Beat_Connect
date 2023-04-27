@@ -92,10 +92,10 @@ export default function BeatCard({
 
     const favoriteActions = {
       handleAddFavorite: () => {
-        dispatch(postFavoriteBeat(beat._id));
+        dispatch(postFavoriteBeat({favorite: beat._id}));
       },
       handleDeleteFavorite: () => {
-        dispatch(deleteFavoriteBeat(beat._id));
+        dispatch(deleteFavoriteBeat({favorite: beat._id}));
       },
     };
 

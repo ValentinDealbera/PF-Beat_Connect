@@ -73,7 +73,25 @@ router.get("/", async (req, res) => {
         collation: {
           locale: "en",
         },
-        populate: ["userCreator", "genre"],
+        populate: [
+          {
+            path: "userCreator",
+            model: userModel
+          },
+          {
+            path: "genre",
+            model: genreModel
+          },
+          {
+            path: "review",
+            model: reviewModel,
+            //poblamos el usuario que hizo el review
+            populate: {
+              path: "createdBy",
+              model: userModel,
+            },
+          }
+        ]
       }
     );
 

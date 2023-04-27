@@ -10,10 +10,14 @@ import {
   BeatTitle,
   BeatAudio,
   AddToCart,
+  BeatReviewPopup,
 } from "@/components";
+import { useState } from "react";
 
 export default function BeatDetailSideBar() {
   const currentBeat = useSelector((state) => state.beats.activeItemDetail);
+
+  const hasReview = currentBeat.review.length > 0 ? true : false;
 
   const dynamicBeatDetailBox = [
     {
@@ -42,6 +46,10 @@ export default function BeatDetailSideBar() {
   //     beat: currentBeat,
   //   },
   // ];
+  const [showModalReview, setShowModalReview] = useState(false);
+  const handleModalReview = () => {
+    setShowModalReview(!showModalReview);
+  };
 
   return (
     <>
@@ -68,8 +76,20 @@ export default function BeatDetailSideBar() {
             })}
           </div>
           <BeatAudio beat={currentBeat} />
+          {hasReview && (
+            <button
+              className="background-primary-red-700 mt-2 color-neutral-white rounded-full px-5 py-3 text-sm font-semibold"
+              onClick={handleModalReview}
+            >
+              Ver reviews
+            </button>
+          )}
         </div>
       </div>
+      <BeatReviewPopup
+        modal={showModalReview}
+        handleModalReview={handleModalReview}
+      />
     </>
   );
 }
@@ -99,7 +119,11 @@ function BeatDetailBox({ msg1, msg2, beat, type }) {
       <p className="pb-1 text-base font-medium text-black">{msg1}</p>
       <p className=" mb-1 text-sm font-semibold text-red-700">{msg2}</p>
       {type === "free" ? (
-        <a className=" text-sm font-semibold text-red-700" download href={beat.audioMP3}>  
+        <a
+          className=" text-sm font-semibold text-red-700"
+          download
+          href={beat.audioMP3}
+        >
           Descargar
         </a>
       ) : (
