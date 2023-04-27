@@ -29,6 +29,7 @@ export default function AdminBeatsCreate() {
 
   return (
     <>
+    <Head title="Editar beat" />
       <main>
         <SellerDashboardLayout
           topBarMode="action"

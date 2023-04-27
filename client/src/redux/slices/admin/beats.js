@@ -3,17 +3,17 @@ import { serverUrl } from "@/data/config";
 import { toast } from "sonner";
 import axios from "axios";
 import { toastError, toastSuccess } from "@/utils/toastStyles";
-
+const tokenAdmin = process.env.NEXT_PUBLIC_TOKEN_ADMIN;
 const initialState = {
   beats: [],
-  currentEdtingBeat: null,
+  currentEdtingBeat: {},
 };
 
 //------------------ ASYNC THUNKS ------------------//
 //POST ADMIN BEAT
 export const adminPostBeat = createAsyncThunk(
   "beats/adminPostBeat",
-  async (data, { rejectWithValue }) => {
+  async (data, { rejectWithValue, dispatch }) => {
     try {
       delete data.id;
       const response = await axios.post(`${serverUrl}beats/admin`, data, {
@@ -37,7 +37,7 @@ export const adminPostBeat = createAsyncThunk(
 //EDIT ADMIN BEAT
 export const adminEditBeat = createAsyncThunk(
   "beats/adminEditBeat",
-  async (data, { rejectWithValue }) => {
+  async (data, { rejectWithValue, dispatch }) => {
     try {
       const response = await axios.put(
         `${serverUrl}beats/admin/${data.id}`,
@@ -61,7 +61,8 @@ export const adminEditBeat = createAsyncThunk(
 //DELETE ADMIN BEAT
 export const adminDeleteBeat = createAsyncThunk(
   "beats/adminDeleteBeat",
-  async (data, { rejectWithValue }) => {
+  async (data, { rejectWithValue, dispatch }) => {
+    console.log("adminDeleteBeat", data);
     try {
       const response = await axios.delete(
         `${serverUrl}beats/admin/${data._id}`,
@@ -71,9 +72,11 @@ export const adminDeleteBeat = createAsyncThunk(
           },
         }
       );
+      console.log("response", response);
       await dispatch(adminGetBeats());
       return { userResponse: response.data };
     } catch (error) {
+      console.log("error", error);
       return rejectWithValue(error);
     }
   }
@@ -83,11 +86,11 @@ export const adminDeleteBeat = createAsyncThunk(
 //GET ADMIN BEATS
 export const adminGetBeats = createAsyncThunk(
   "beats/adminGetBeats",
-  async (data, { rejectWithValue }) => {
+  async (data, { rejectWithValue, dispatch }) => {
     try {
-        console.log("procesando");
+      console.log("procesando");
       const response = await axios.get(`${serverUrl}beats?limit=999999`);
-        console.log("response", response);
+      console.log("response", response);
       return { beatResponse: response.data.docs };
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -99,7 +102,7 @@ export const adminGetBeats = createAsyncThunk(
 //GET ADMIN BEAT
 export const adminGetBeat = createAsyncThunk(
   "beats/adminGetBeat",
-  async (data, { rejectWithValue }) => {
+  async (data, { rejectWithValue, dispatch }) => {
     try {
       const response = await axios.get(`${serverUrl}beats/${data}`);
       return { beatResponse: response.data };
@@ -130,7 +133,7 @@ const adminBeatsSlice = createSlice({
         toast.error(action.payload, toastError);
       })
       .addCase(adminPostBeat.pending, (state, action) => {
-        toast("Creando beat...")
+        toast("Creando beat...");
       })
 
       //--------------------
@@ -139,10 +142,10 @@ const adminBeatsSlice = createSlice({
         toast.error(action.payload, toastError);
       })
       .addCase(adminEditBeat.fulfilled, (state, action) => {
-        toast.success("Beat eliminado correctamente", toastSuccess);
+        toast.success("Beat editado correctamente", toastSuccess);
       })
       .addCase(adminEditBeat.pending, (state, action) => {
-        toast("Editando beat...")
+        toast("Editando beat...");
       })
 
       //--------------------
@@ -160,15 +163,15 @@ const adminBeatsSlice = createSlice({
       //--------------------
       //GET ADMIN BEATS
       .addCase(adminGetBeats.fulfilled, (state, action) => {
-        console.log("action", action.payload);
+        console.log("action", action.payload.beatResponse);
         state.beats = action.payload.beatResponse;
-        toast.success("Beats obtenidos correctamente", toastSuccess);
+        //toast.success("Beats obtenidos correctamente", toastSuccess);
       })
       .addCase(adminGetBeats.rejected, (state, action) => {
         toast.error(action.payload, toastError);
       })
       .addCase(adminGetBeats.pending, (state, action) => {
-        toast("Cargando beat...");
+       // toast("Cargando beat...");
       })
 
       //--------------------
