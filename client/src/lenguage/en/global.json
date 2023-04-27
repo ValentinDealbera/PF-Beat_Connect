@@ -1,0 +1,101 @@
+{
+  "home": {
+    "t1": "Start your musical career, ",
+    "t2": "buy or sell your beats",
+    "t3": "Join our plataform and discover a world of opportunities for you musical career. Withour extensive selectionof beats of various genres and styles, we are committed to helping you achieve success.",
+    "t4": "See all beats",
+    "t5": "featured"
+  },
+
+  "helpCenter": {},
+
+  "helpTermsTitle":"Terms of BeatConnect",
+  "helpTermsParagraph": "The following terms and conditions establish the legal agreement between BeatConnect and users of the website. By accessing and using the website, you agree to these terms and conditions in their entirety. If you do not agree with these terms and conditions, please do not use this website.",
+
+  "helpCenter-terms": {
+    "title" : "Terms and Conditions",
+    "t1": "Welcome to our website. If you continue browsing and using this website, you agree to comply with and be bound by the following terms and conditions of use, which together with our privacy policy Privacy Policy govern BeatConnect's relationship with you in connection with this website.",
+    "t2": "The term 'BeatConnect' or'we' refers to the owner of the website. The term 'you' refers to the user or visitor to our website.",
+    "t3": "The use of this website is subject to the following terms of use:",
+    "t4": "The content of the pages of this website is for your general information and use. It is subject to change without prior notice Neither we nor third parties provide any warranty or guarantee as to the accuracy, timeliness, performance, completeness or adequacy of the information and materials found or offered on this website for any particular purpose.",
+    "t5": "You acknowledge that such information and materials may contain inaccuracies or errors and we expressly exclude liability for any such inaccuracies or errors to the fullest extent permitted by law.",
+    "t6": "This website contains material which is owned by us or licensed to us. This material includes, but is not limited to, the design, layout, look, graphics and photographs.",
+    "t7": "This website contains material which is owned by us or licensed to us. This material includes, but is not limited to, the design, layout, look, graphics and photographs.",
+    "t8": "Reproduction, distribution, display, transmission or unauthorized use of this material is prohibited. All trademarks reproduced in this website, which are not the property of, or licensed to the operator, are acknowledged on the website.",
+    "t9": "Unauthorized use of this website may give rise to a claim for damages and/or be a criminal offense.",
+    "t10": "This website may also include links to other websites. These links are provided for your convenience to provide further information. They do not signify that we endorse the website(s).",
+    "t11": "We have no responsibility for the content of the linked website(s). Your use of this website and any dispute arising out of such use of the website is subject to the laws of Argentina. By using this website, you accept these terms and conditions in full. If you disagree with these terms and conditions or any part of these terms and conditions, do not use our website.",
+    "t12": "By using this website, you agree to these terms and conditions in their entirety. If you do not agree with these terms and conditions or any part of these terms and conditions, please do not use our website."
+  },
+
+  "helpPrivacyTitle":"Privacy policy",
+  "helpPrivacyParagraph": "On our platform, we take the privacy of our users very seriously and are committed to protecting the personal information you share with us. Our privacy policy details how we collect, use, disclose, and protect your personal information, as well as your rights and options regarding its use.",
+
+    "helpCenter-privacy": {
+      "title": "Privacy Policy",
+      "t1": "At BeatConnect, we take our users' privacy very seriously and are committed to protecting the personal information you share with us. In this privacy policy, we detail how we collect, use, disclose, and protect your personal information, as well as your rights and options regarding its use. By using our platform, you accept our privacy policy and our practices for handling personal information.",
+      "t2": "Information we collect",
+      "t3": "We collect personal information that you provide to us directly, such as your name, email address, and billing address. We may also collect information about your interactions with our platform, such as the pages you visit and the actions you take on the platform.",
+      "t4": "How we use your personal information?",
+      "t5": "We use your personal information to provide you with access to our platform and improve the user experience. We may also use your information to communicate with you about updates and special offers, and to process your transactions on the platform",
+      "t6": "How we protect your personal information?",
+      "t7": "We are committed to protecting your personal information by using appropriate physical, technical, and administrative security measures. This includes the use of data encryption and access control to personal information.",
+      "t8": "Disclosure of your information",
+      "t9": "We may share your personal information with third parties who provide services on our behalf, such as payment providers and order fulfillment services. We may also disclose your personal information in response to a legal request or if we believe that disclosure is necessary to protect our rights, the safety of our users, or the general public.",
+      "t10": "Your rights and options",
+      "t11": "You can choose not to provide certain personal information, but this may limit your ability to use our platform. You also have certain rights with respect to your personal information, such as the right to access, correct, and delete your personal information."
+    },
+
+    "helpIndexTitle":"Help center",
+    "helpIndexParagraph": "At our help center, we strive to provide an exceptional user experience to all of our customers. We are here to answer any questions you may have and help you troubleshoot any issues you may encounter while using our platform.",
+    
+
+    "helpCenterIndex": {
+      "t1": "Frequently asked questions",
+      "t2": "Still can't find your answer?",
+      "t3": "Send us a ticket",
+      "t4": "",
+      "t5": "",
+      "t6": "",
+      "t7": "",
+      "t8": "",
+      "t9": ""
+    },
+
+    "about": {
+      "t1": "Let's get to",
+      "t2": "know each other a little more",
+      "t3": "We are a team of 8 students from the Soy Henry bootcamp, and we are excited to share a little more about ourselves. We are learning full-stack programming using MERN/PERN technologies, and working hard to develop soft skills and effective teamwork. We are passionate about the world of technology and committed to learning and growing together in this industry. We love discovering new creative and engaging solutions for users, and we are excited to apply our technical skills to achieve it.",
+      "t4": "About the",
+      "t5": "application",
+      "t6": "Our platform features a list of registered music producers, who have created and published their catalogs of instrumentals. Users can explore producers' catalogs and listen to audio samples of each beat to decide which one is most suitable for their needs. We also have a secure and efficient payment process that allows users to purchase and download the beat to their email. If you are a music producer, you can also register on our platform and create and publish your catalog of instrumentals! Showcase your audio samples and detailed descriptions of each beat, receive requests for custom beats, and communicate with users to discuss additional details.",
+      "t7": "Used",
+      "t8": "technology",
+      "t9": ""
+    },
+
+    "tecnologias": {
+      "t1": "Next.js is a React framework for building high-performance web applications. Next.js helps you easily create single-page web applications with React.",
+      "t2": "Redux is a state management library for single-page JavaScript applications (SPAs). It is primarily used with React, but can also be used with other JavaScript libraries or frameworks. Redux is based on the Flux architecture and focuses on the idea that the application state should be centralized and predictable.",
+      "t3": "Postman is a collaboration tool for designing, testing, and documenting APIs. With Postman, you can send HTTP requests to a web server and receive responses. You can organize your requests into collections and add automated tests to your requests to ensure that your APIs are working correctly.",
+      "t4": "Sass is a CSS preprocessor that allows you to write CSS code more efficiently and in a more structured way. With Sass, you can use variables, selector nesting, mixins, functions, and mathematical operators, which makes writing and maintaining stylesheets easier. Additionally, Sass allows the creation of partial files that can be imported into other files for greater modularity and code reuse.",
+      "t5": "Figma is a cloud-based user interface (UI) design tool that enables designers and design teams to collaborate in real time. Figma has an intuitive and user-friendly interface that allows for the creation of designs, prototypes, and interactive animations. Figma also offers a wide variety of resources, such as icons, components, templates, and plugins, which make it easier to create high-quality designs more quickly and efficiently.",
+      "t6": "Tailwind CSS is a low-level CSS framework that helps you create UI designs quickly and easily. With Tailwind CSS, you can create custom UI designs without having to write CSS.",
+      "t7": "Express.js is a web server framework for Node.js that allows you to create web applications and RESTful APIs quickly and easily. Express.js is based on the concept of middleware, which is a function that runs between the server request and response. Express.js provides a set of predefined middleware that make it easy to create web applications and RESTful APIs.",
+      "t8": "JSON Web Token (JWT) is an open standard that defines a compact and self-contained format for securely transmitting information between two parties as a JSON object. JWTs can be signed using a secret (with HMAC algorithm) or a public/private key using RSA or ECDSA.",
+      "t9": "MongoDB is a document-oriented NoSQL database system that uses JSON documents with schemas.",
+      "t10": "Mongoose is an object modeling library for MongoDB designed to work in an asynchronous environment. Mongoose supports both promises and callbacks. Mongoose simplifies the creation of schema models, validation, record creation, querying, updating, and deleting.",
+      "t11": "Mercado Pago is an online payment platform that allows users to make payments using credit cards, debit cards, cash, and bank transfers.",
+      "t12": "Auth0 is an authentication and authorization platform that allows developers to add authentication and authorization to their web, mobile, and desktop applications.",
+      "t13": "Firebase is a mobile and web application development platform that offers database, storage, authentication, analytics, messaging, and more services.",
+      "t14": "Render is a web hosting platform that allows developers to deploy web applications and REST APIs in the cloud.",
+      "t15": "Vercel es a web application hosting platform that allows developers to deploy web applications and REST APIs in the cloud.",
+      "t16": "Trello is a project management tool that allows teams to organize their projects on boards.",
+      "t17": "Git is an open-source distributed version control system that allows developers to collaborate on software projects. GitHub is a source code hosting and version control platform that uses Git."
+}
+}
+
+
+  
+
+

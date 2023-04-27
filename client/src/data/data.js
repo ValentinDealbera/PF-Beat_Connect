@@ -1,4 +1,5 @@
 import { manageBecomeSeller } from "../components/masters/becomeSeller";
+import { useTranslation } from 'react-i18next';
 
 export const navPublic = [
   {
@@ -105,110 +106,102 @@ export const tecnologias = [
     id: 1,
     title: "NextJS",
     image: "/icon/tecnologias/next-js.svg",
-    description: "Next.js es un framework de React para la construcción de aplicaciones web de alto rendimiento y de alto rendimiento. Next.js te ayuda a crear aplicaciones web de una sola página con React fácilmente.",
+    description: "tecnologias.t1",
   },
   {
     id: 4,
     title: "Redux Toolkit",
     image: "/icon/tecnologias/redux.svg",
-    description:
-      "Redux es una librería de gestión de estado para aplicaciones JavaScript de una sola página (SPA). Se utiliza principalmente con React, pero también se puede utilizar con otras bibliotecas o marcos de trabajo de JavaScript. Redux se basa en la arquitectura Flux y se centra en la idea de que el estado de la aplicación debe ser centralizado y predecible.",
+    description: "tecnologias.t2",
   },
   {
     id: 5,
     title: "Postman",
     image: "/icon/tecnologias/postman.svg",
-    description:
-      "Postman es una herramienta de colaboración para diseñar, probar y documentar las API. Con Postman puedes enviar solicitudes HTTP a un servidor web y recibir respuestas. Puedes organizar tus solicitudes en colecciones y agregar tests automatizados a tus solicitudes para asegurarte de que tus API funcionan correctamente.",
+    description: "tecnologias.t3",
   },
   {
     id: 6,
     title: "Sass",
     image: "/icon/tecnologias/sass.svg",
-    description:
-      "Sass es un preprocesador de CSS que permite escribir código CSS de manera más eficiente y estructurada. Con Sass, puedes utilizar variables, anidamiento de selectores, mixins, funciones y operadores matemáticos, lo que facilita la escritura y el mantenimiento de hojas de estilo. Además, Sass permite la creación de archivos parciales que se pueden importar en otros archivos para una mayor modularidad y reutilización de código.",
+    description: "tecnologias.t4",
   },
   {
     id: 7,
     title: "Figma",
     image: "/icon/tecnologias/figma.svg",
-    description:
-      "Figma es una herramienta de diseño de interfaz de usuario (UI) basada en la nube que permite a los diseñadores y equipos de diseño colaborar en tiempo real. Figma cuenta con una interfaz intuitiva y fácil de usar que permite crear diseños, prototipos y animaciones interactivas. Figma también ofrece una amplia variedad de recursos, como iconos, componentes, plantillas y complementos, que facilitan la creación de diseños de alta calidad de manera más rápida y eficiente.",
+    description: "tecnologias.t5",
   },
   {
     id: 8,
     title: "TailwindCSS",
     image: "/icon/tecnologias/tailwindCSS.svg",
-    description: "Tailwind CSS es un framework de CSS de bajo nivel que te ayuda a crear diseños de interfaz de usuario (UI) de manera rápida y sencilla. Con Tailwind CSS, puedes crear diseños de interfaz de usuario (UI) personalizados sin tener que escribir CSS.",
+    description: "tecnologias.t6",
   },
   {
     id: 10,
     title: "Express.js",
     image: "/icon/tecnologias/express.svg",
-    description:
-      "Express.js es un framework de servidor web para Node.js que permite crear aplicaciones web y API REST de manera rápida y sencilla. Express.js se basa en el concepto de middleware, que es una función que se ejecuta entre la solicitud y la respuesta del servidor. Express.js proporciona una serie de middleware predefinidos que facilitan la creación de aplicaciones web y API REST.",
+    description: "tecnologias.t7",
   },
   {
     id: 11,
     title: "JWT (JSON Web Token)",
     image: "/icon/tecnologias/jwt.svg",
-    description:
-      "JSON Web Token (JWT) es un estándar abierto que define un formato compacto y autónomo para transmitir información de forma segura entre dos partes como un objeto JSON. Los tokens JWT se pueden firmar usando un secreto (con el algoritmo HMAC) o una clave pública / privada usando RSA o ECDSA.",
+    description: "tecnologias.t8",
   },
   {
     id: 12,
     title: "MongoDB",
     image: "/icon/tecnologias/mongo.svg",
-    description:
-      "MongoDB es un sistema de base de datos NoSQL orientado a documentos que utiliza documentos JSON con esquemas. MongoDB es un sistema de base de datos NoSQL orientado a documentos que utiliza documentos JSON con esquemas. MongoDB es un sistema de base de datos NoSQL orientado a documentos que utiliza documentos JSON con esquemas.",
+    description: "tecnologias.t9",
   },
   {
     id: 13,
     title: "Mongoose",
     image: "/icon/tecnologias/mongoose.png",
-    description:
-      "Mongoose es una biblioteca de modelado de objetos de MongoDB diseñada para trabajar en un entorno asíncrono. Mongoose soporta tanto promesas como devoluciones de llamada. Mongoose simplifica la creación de modelos de esquema, validación, creación, consulta, actualización y eliminación de registros.",
+    description: "tecnologias.t10",
   },
   {
     id: 14,
     title: "Mercado Pago",
     image: "/icon/tecnologias/mercadopago.png",
-    description: "Mercado Pago es una plataforma de pagos online que permite a los usuarios realizar pagos a través de tarjetas de crédito, débito, efectivo y transferencias bancarias. Mercado Pago es una plataforma de pagos online que permite a los usuarios realizar pagos a través de tarjetas de crédito, débito, efectivo y transferencias bancarias.",
+    description: "tecnologias.t11",
   },
   {
     id: 15,
     title: "Auth0",
     image: "/icon/tecnologias/auth0.svg",
-    description: "Auth0 es una plataforma de autenticación y autorización que permite a los desarrolladores agregar autenticación y autorización a sus aplicaciones web, móviles y de escritorio. Auth0 es una plataforma de autenticación y autorización que permite a los desarrolladores agregar autenticación y autorización a sus aplicaciones web, móviles y de escritorio.",
+    description: "tecnologias.t12",
   },
   {
     id: 16,
     title: "Firebase",
     image: "/icon/tecnologias/firebase.svg",
-    description: "Firebase es una plataforma de desarrollo de aplicaciones móviles y web que ofrece servicios de base de datos, almacenamiento, autenticación, análisis, mensajería y más. Firebase es una plataforma de desarrollo de aplicaciones móviles y web que ofrece servicios de base de datos, almacenamiento, autenticación, análisis, mensajería y más.",
+    description: "tecnologias.t13",
   },
   {
     id: 17,
     title: "Render",
     image: "/icon/tecnologias/render.svg",
-    description: "Render es una plataforma de alojamiento de aplicaciones web que permite a los desarrolladores desplegar aplicaciones web y API REST en la nube. Render es una plataforma de alojamiento de aplicaciones web que permite a los desarrolladores desplegar aplicaciones web y API REST en la nube.",
+    description: "tecnologias.t14",
   },
   {
     id: 18,
     title: "Vercel",
     image: "/icon/tecnologias/vercel.svg",
-    description: "Vercel es una plataforma de alojamiento de aplicaciones web que permite a los desarrolladores desplegar aplicaciones web y API REST en la nube. Vercel es una plataforma de alojamiento de aplicaciones web que permite a los desarrolladores desplegar aplicaciones web y API REST en la nube.",
+    description: "tecnologias.t15",
   },
   {
     id: 19,
     title: "Trello",
     image: "/icon/tecnologias/trello.svg",
-    description: "Trello es una herramienta de gestión de proyectos que permite a los equipos de trabajo organizar sus proyectos en tableros. Trello es una herramienta de gestión de proyectos que permite a los equipos de trabajo organizar sus proyectos en tableros.",
+    description: "tecnologias.t16",
     },
   {
     id: 20,
     title: "Git + GitHub",
     image: "/icon/tecnologias/github.svg",
-    description: "Git es un sistema de control de versiones distribuido de código abierto que permite a los desarrolladores colaborar en proyectos de software. GitHub es una plataforma de alojamiento de código fuente y control de versiones que utiliza Git.",
+    description: "tecnologias.t17",
   }
 ];

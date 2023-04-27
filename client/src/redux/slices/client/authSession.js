@@ -15,7 +15,6 @@ import { setBougthBeats, setOwnedBeats, setFavoriteBeats } from "./beats";
 import { setOwnedReviews } from "./reviews";
 import { setOrders } from "./orders";
 
-
 const initialState = {
   auth: {
     isLogged: false,
@@ -133,23 +132,21 @@ export const editClient = createAsyncThunk(
   "authSession/editClient",
   async (data, { rejectWithValue, getState }) => {
     const clientId = getState().client.authSession.session.current._id;
-    const formData = new FormData();
-    Object.keys(data).forEach((key) => {
-      formData.append(key, data[key]);
-    });
+    // const formData = new FormData();
+    // Object.keys(data).forEach((key) => {
+    //   formData.append(key, data[key]);
+    // });
+    // ESTO ESTA COMENTADO PORQUE LO PROBE Y NO ME ANDABA,
+    // El consoleLog de "formData" era un objeto vacio mientras que "Data" tenia los datos
 
     try {
       console.log("prev", data, clientId);
-      const response = await axios.put(
-        `${serverUrl}user/${clientId}`,
-        formData,
-        {
-          headers: {
-            userid: clientId,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const response = await axios.put(`${serverUrl}user/${clientId}`, data, {
+        headers: {
+          userid: clientId,
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       const userResponse = createUserSession(response.data);
       return { userResponse };
@@ -161,21 +158,17 @@ export const editClient = createAsyncThunk(
 
 //--------------------
 //PASSWORD RECOVERY
-// export const passwordRecovery = createAsyncThunk(
-//   "authSession/passwordRecovery",
-//   async (data, { rejectWithValue }) => {
-//     const clientId = "64459913669bbb0d6e7838d9"; //Id de fabi durante testeo (hecho por fabi)
-
-//     try {
-//       const newPassword = { password: data.newPassword };
-
-//       await axios.put(`${serverUrl}user/${clientId}`, newPassword);
-//     } catch (error) {
-//       console.log("ERROR passwordRecovery", error);
-//       return rejectWithValue(error.response.data.message);
-//     }
-//   }
-// );
+export const passwordRecovery = createAsyncThunk(
+  "authSession/passwordRecovery",
+  async (data, { rejectWithValue }) => {
+    try {
+      await axios.put(`${serverUrl}recover/password`, data);
+    } catch (error) {
+      console.log("ERROR passwordRecovery", error);
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
 
 //--------------------
 //GET USER DATA
@@ -198,7 +191,6 @@ export const getUserData = createAsyncThunk(
       const orders = response.userOrders;
       const favoriteBeats = response.userFavorites;
 
-
       console.log(
         "bougthBeats",
         bougthBeats,
@@ -212,8 +204,8 @@ export const getUserData = createAsyncThunk(
       await dispatch(setBougthBeats(bougthBeats));
       await dispatch(setOwnedBeats(ownedBeats));
       await dispatch(setOwnedReviews(ownedReviews));
-     await dispatch(setOrders(orders));
-      await dispatch(setFavoriteBeats(favoriteBeats));
+      await dispatch(setOrders(orders));
+      //await dispatch(setFavoriteBeats(favoriteBeats));
 
       const auth = {
         isSeller: response.isSeller,
@@ -318,20 +310,20 @@ const authSession = createSlice({
         toast.success("Se editó correctamente", toastSuccess);
       })
       .addCase(editClient.rejected, (state, action) => {
-        console.log("editClient.rejected", action.error);
+        console.log("editClient.rejected", action.payload);
         toast.error(action.payload, toastError);
       })
 
       /***************** PASSWORD RECOVERY ******************/
-      // .addCase(passwordRecovery.pending, (state, action) => {
-      //   return;
-      // })
-      // .addCase(passwordRecovery.fulfilled, (state, action) => {
-      //   toast.success("Tu contraseña se cambio correctamente", toastSuccess);
-      // })
-      // .addCase(passwordRecovery.rejected, (state, action) => {
-      //   toast.error("Hubo un problema, intente mas tarde", toastError);
-      // })
+      .addCase(passwordRecovery.pending, (state, action) => {
+        return;
+      })
+      .addCase(passwordRecovery.fulfilled, (state, action) => {
+        toast.success("Tu contraseña se cambio correctamente", toastSuccess);
+      })
+      .addCase(passwordRecovery.rejected, (state, action) => {
+        toast.error(action.payload, toastError);
+      })
 
       //--------------------
       //GET USER DATA

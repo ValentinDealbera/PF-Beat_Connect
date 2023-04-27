@@ -1,8 +1,11 @@
 import { Logo } from "@/components";
 import Link from "next/link";
 import { helpItems, generalItems, accountItems } from "@/data/navItems";
+import { useTranslation } from "react-i18next";
+import i18n from "i18next";
 
 export default function Footer(props) {
+  const [t, i18n] = useTranslation("global");
   return (
     <>
       <footer
@@ -19,6 +22,18 @@ export default function Footer(props) {
             <FooterNav items={helpItems} title="Ayuda" mode={props.mode} />
             <FooterNav items={accountItems} title="Cuenta" mode={props.mode} />
           </div>
+          <button
+            onClick={() => i18n.changeLanguage("es")}
+            className="color-primary-red-500"
+          >
+            Es
+          </button>
+          <button
+            onClick={() => i18n.changeLanguage("en")}
+            className="color-primary-red-500"
+          >
+            En
+          </button>
         </div>
       </footer>
     </>

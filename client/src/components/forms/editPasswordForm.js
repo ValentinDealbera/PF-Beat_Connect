@@ -17,13 +17,13 @@ export default function EditPasswordForm(props) {
   const [fieldsToValidate, setFieldsToValidate] = useState([]);
   const [error, setErrors] = useState({});
 
-  const defaultValues =
-    useSelector((state) => state.client.authSession.session.current) || {};
-  const id = useSelector(
-    (state) => state.client.authSession.session.current._id
-  );
+  // const defaultValues =
+  //   useSelector((state) => state.client.authSession.session.current) || {};
+  // const id = useSelector(
+  //   (state) => state.client.authSession.session.current._id
+  // );
 
-  const mode = props.mode;
+  // const mode = props.mode;
 
   const [form, setForm] = useState({
     oldPassword: "",
@@ -46,7 +46,7 @@ export default function EditPasswordForm(props) {
         console.log("DESPACHADO", form);
         await dispatch(editClient(form));
         formRef.current.reset();
-        router.push("/client");
+        // router.push("/client");
       } else {
         setErrors(formErrors);
         console.log("form Error", formErrors);
