@@ -41,10 +41,6 @@ export default function ClientReview(props) {
             src={props.review.createdBy.image}
             width={40}
             height={40}
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src = "/images/placeholder.png";
-            }}
           />
           <h1 className="text-base-medium flex text-sm">{props.username}</h1>
         </div>
