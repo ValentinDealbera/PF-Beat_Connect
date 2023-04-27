@@ -1,40 +1,59 @@
-import {
-  Head,
-  Main,
-  Section,
-  Search,
-  BeatsSpecialSection,
-  BeatCategoryCard,
-  Hero,
-} from "@/components";
-import { categories } from "@/data/data";
+import { Head, Main, BeatsSpecialSection, Hero } from "@/components";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { serverUrl } from "@/data/config";
 
+import { convertInSeller } from "@/redux/slices/client/authSession";
+import { fetchBeats } from "@/redux/slices/beats";
+import { useTranslation } from "react-i18next";
+import { resetCart } from "@/redux/slices/cart";
+import { postClientOrder } from "@/redux/slices/client/orders";
+
+
+
 export default function Home() {
   // si hay un code valido en las querys, registra al usuario actual como vendedor
   const router = useRouter();
-  const id = useSelector((state) => state.client.client._id);
 
-  if (router.query.code) {
-    async function data(id) {
+ const [t, i18n] = useTranslation("global");
+  const dispatch = useDispatch();
+  const id = useSelector(
+    (state) => state.client.authSession.session.current._id
+  );
+
+  const sendOrder = async () => {
+    for (let i = 0; i < router.query.cart.split(",").length; i++) {
+      // await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}orders`, {
+      //   beat: router.query.cart.split(",")[i],
+      //   buyer: id,
+      // });
+      dispatch(
+        postClientOrder({ beat: router.query.cart.split(",")[i], buyer: id })
+      );
+    }
+    // dispatch(resetCart());
+  };
+
+  useEffect(() => {
+    if (router.query.cart && router.query.status === "approved") {
       try {
-        const dato = await axios.put(
-          `${serverUrl}user/${id}`,
-
-          { seller: "VENDEDOR", mpcode: router.query.code },
-          { headers: { userid: id } }
-        );
-        return dato;
+        sendOrder();
+        //     dispatch(postClientOrder({beat: router.query.cart.split(",")[0], buyer: id}));
       } catch (error) {
         console.log(error.message);
       }
     }
-    data(id);
-  }
+  }, [router.query.status]);
+
+
+  useEffect(() => {
+    if (router.query.code) {
+      dispatch(convertInSeller());
+    }
+  }, [router.query.code]);
+
   //hacemos console.log del env
   return (
     <>
@@ -49,29 +68,28 @@ export default function Home() {
             <div className="flex w-full flex-col justify-center gap-2">
               <div id="text-box">
                 <h1 className="text-titulo1-regular text-white">
-                  Comienza tu carrera musical,{" "}
+                  {t("home.t1")}
                   <span className="text-titulo1-semibold text-white">
-                    compra o vende tus beats
+                    {t("home.t2")}
                   </span>
                 </h1>
                 <p className="text-paragraph1-regular text-base-light text-white lg:w-[75%] ">
-                  Únete a nuestra plataforma y descubre un mundo de
-                  oportunidades para tu carrera musical. Con nuestra amplia
-                  selección de beats de diversos géneros y estilos, estamos
-                  comprometidos en ayudarte a alcanzar el éxito.
+                  {t("home.t3")}
                 </p>
               </div>
               <button
                 className="background-primary-red-700 color-neutral-white w-max rounded-full px-8 py-3 text-sm font-semibold"
                 onClick={() => router.push("/beats")}
               >
-                Ver todos los beats
+                {t("home.t4")}
               </button>
             </div>
           </div>
         </Hero>
         <BeatsSpecialSection title={`Beats `}>
-          <span className="text-titulo2-semibold">destacados</span>
+
+          <span className="text-titulo2-semibold">{t("home.t5")}</span>
+
         </BeatsSpecialSection>
       </Main>
     </>

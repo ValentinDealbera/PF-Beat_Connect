@@ -3,36 +3,42 @@ import {
   BeatRightSheet,
   BeatDetailSideBar,
   BeatBottomSheet,
-  BeatDeteailSideBar,
+  Loader,
+  ClientReview,
+  ReviewForm,
+  EditReviewForm,
 } from "@/components";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 
 export function externalManageDropdown() {
-  NewBeatCardGrid.handleDropdownOpen();
+  // NewBeatCardGrid.handleDropdownOpen();
 }
 
 export default function NewBeatCardGrid(props) {
   const [isDropDown, setIsDropdownOpen] = useState(false);
   const { beatsDisplayMode, generalActiveIndex } =
     useSelector((state) => state?.beats) || 0;
-  const state = useSelector((state) => state?.beats) || [];
-  const { activeItems } = useSelector((state) => state?.beats) || [];
-
   const handleDropdownOpen = () => {
     setIsDropdownOpen(!isDropDown);
   };
 
-  //<BeatCard key={beat.id} beat={beat} variant="public" />
-
   NewBeatCardGrid.handleDropdownOpen = handleDropdownOpen;
-  useEffect(() => {
 
-  }, [beatsDisplayMode]);
+  const [visibilityEditReview, setVisibilityEditReview] = useState(false);
+  const manageEditReview = () => {
+    setVisibilityEditReview(!visibilityEditReview);
+  };
 
+  const [visibilityCreateReview, setVisibilityCreateReview] = useState(false);
+  const manageCreateReview = () => {
+    setVisibilityCreateReview(!visibilityCreateReview);
+  };
+  console.log("props.isLoading", props.isLoading)
   return (
     <>
-      {props.beats && props.beats <= 0 && (
+      {props.isLoading && <Loader />}
+      {props.isLoading !== true && props.beats && props.beats <= 0 && (
         <div className="flex w-full items-end justify-center">
           <h1 className="mt-5 text-center text-2xl font-medium">
             Hey, parece que no hay nada por aqui 🤯
@@ -40,11 +46,18 @@ export default function NewBeatCardGrid(props) {
         </div>
       )}
       <div className="gap-estilo1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
-        {props.beats && props.beats.length > 0 && (
+        {props.isLoading !== true && props.beats && props.beats.length > 0 && (
           <>
             {props.beats?.map((beat) => (
               <>
-                <BeatCard key={beat.id} beat={beat} variant="public" />
+                <BeatCard
+                  key={beat.id}
+                  beat={beat}
+                  variant="public"
+                  manageView={handleDropdownOpen}
+                  manageEditReview={manageEditReview}
+                  manageCreateReview={manageCreateReview}
+                />
               </>
             ))}
           </>
@@ -60,6 +73,40 @@ export default function NewBeatCardGrid(props) {
           <div className="flex sm:hidden">
             <BeatBottomSheet setIsDropdownOpen={setIsDropdownOpen}>
               <BeatDetailSideBar />
+            </BeatBottomSheet>
+          </div>
+        </>
+      )}
+      {visibilityEditReview && (
+        <>
+          <div className="hidden sm:flex">
+            <BeatRightSheet
+              width="w-[30vw]"
+              setIsDropdownOpen={setVisibilityEditReview}
+            >
+              <EditReviewForm manageEditReview={manageEditReview} />
+            </BeatRightSheet>
+          </div>
+          <div className="flex sm:hidden">
+            <BeatBottomSheet setIsDropdownOpen={setIsDropdownOpen}>
+              hey soy el sidebar
+            </BeatBottomSheet>
+          </div>
+        </>
+      )}
+      {visibilityCreateReview && (
+        <>
+          <div className="hidden sm:flex">
+            <BeatRightSheet
+              width="w-[30vw]"
+              setIsDropdownOpen={setVisibilityCreateReview}
+            >
+              <ReviewForm manageCreateReview={manageCreateReview} />
+            </BeatRightSheet>
+          </div>
+          <div className="flex sm:hidden">
+            <BeatBottomSheet setIsDropdownOpen={setIsDropdownOpen}>
+              hey soy el sidebar
             </BeatBottomSheet>
           </div>
         </>

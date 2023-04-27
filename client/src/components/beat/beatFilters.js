@@ -20,7 +20,7 @@ import {
   setSorter,
 } from "@/redux/slices/filters";
 import { fetchBeats } from "@/redux/slices/beats";
-import { debounce } from 'lodash';
+import { debounce } from "lodash";
 import { useRef } from "react";
 // import { useDebounce } from 'use-debounce';
 
@@ -35,12 +35,12 @@ export default function BeatFilters() {
   const currentPage = useSelector((state) => state.beats.pageIndex);
   const genre = useSelector((state) => state.filters.genresFilter);
 
-
   //const mode = useSelector((state) => state?.beats?.beatsDisplayMode);
 
   const genres = useSelector((state) => state.filters.genres);
   const filterObj = useSelector((state) => state.filters);
   const { sorter, sorterValues } = useSelector((state) => state?.filters);
+  const searchFilter = useSelector((state) => state.filters.searchFilter);
 
   const router = useRouter();
 
@@ -56,7 +56,6 @@ export default function BeatFilters() {
 
   //Primer pedido
 
-
   //Sorter
   useEffect(() => {
     dispatch(setSorter(sort));
@@ -64,7 +63,6 @@ export default function BeatFilters() {
 
   //Filtro Precio
   useEffect(() => {
-
     dispatch(setPriceFilter(prices));
   }, [prices, dispatch]);
 
@@ -107,27 +105,30 @@ export default function BeatFilters() {
     return cancelDebounce;
   }, [delayedFetchGenres]);
 
-  const filters = useMemo(() => [prices, BPM, sort, currentPage, genre], [prices, BPM, sort, currentPage, genre,]);
+  const filters = useMemo(
+    () => [prices, BPM, sort, currentPage, genre, searchFilter],
+    [prices, BPM, sort, currentPage, genre, searchFilter]
+  );
 
   const delayedDispatch = debounce(() => {
-    dispatch(fetchBeats({
-      minPrice: prices.min,
-      maxPrice: prices.max,
-      minBPM: BPM.min,
-      maxBPM: BPM.max,
-      page: currentPage.page,
-      genre,
-      ...sortValue,
-    }));
+    dispatch(
+      fetchBeats({
+        minPrice: prices.min,
+        maxPrice: prices.max,
+        minBPM: BPM.min,
+        maxBPM: BPM.max,
+        page: currentPage.page,
+        searchFilter,
+        genre,
+        ...sortValue,
+      })
+    );
   }, 500); // ajusta el tiempo de espera según sea necesario
 
   useEffect(() => {
     delayedDispatch();
     return delayedDispatch.cancel; // cancelar el debounce cuando se desmonte el componente
   }, filters);
-
-
-
 
   // useEffect(() => {
   //   delayedDispatch();
@@ -142,7 +143,6 @@ export default function BeatFilters() {
   //   currentPage.page,
   //   genre,
   // ]);
-
 
   // useEffect(() => {
   //   const maxPrice = beats.reduce((acc, beat) => {
@@ -159,7 +159,7 @@ export default function BeatFilters() {
 
   const generos = genres;
 
-  useEffect(() => { }, [mode]);
+  useEffect(() => {}, [mode]);
 
   useEffect(() => {
     dispatch(setGenresFilter(beatGenre.map((e) => e.value)));

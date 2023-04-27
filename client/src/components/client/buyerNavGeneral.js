@@ -9,8 +9,11 @@ const buyerGeneralNav = [
     title: "Mis Beats",
   },
   {
-    title: "Reviews",
+    title: "Favoritos",
   },
+  {
+    title: "Reviews",
+  }
 ];
 
 export default function BuyerNavGeneral() {

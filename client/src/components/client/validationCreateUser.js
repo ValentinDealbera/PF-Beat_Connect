@@ -29,9 +29,9 @@ export function ValidationCreateUser(form, fieldsToValidate) {
         break;
 
         case "bio":
-        if (form.bio.length < 1 || form.bio.length > 50 || !form.bio)
+        if (form.bio && (form.bio.length < 1 || form.bio.length > 50))
           error.bio =
-            "The name of your beat must have between one and 50 characters.";
+            "Your bio phrase must have between one and 50 characters.";
 
         break;
 
@@ -53,7 +53,7 @@ export function ValidationCreateUser(form, fieldsToValidate) {
         break;
 
       case "password":
-        if (!regexPassword.test(form.password))
+        if (form.password && !regexPassword.test(form.password))
           error.password =
             "The password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.";
         break;

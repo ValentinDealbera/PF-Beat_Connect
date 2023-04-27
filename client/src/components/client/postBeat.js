@@ -1,12 +1,11 @@
 import { BeatRightSheet, Input, Select } from "@/components";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postClientBeat } from "@/redux/slices/client";
+import { postClientBeat } from "@/redux/slices/client/beats";
 import { ValidationCreateBeat } from "../client/validationCreateBeat";
 import { fetchGenres } from "@/redux/slices/filters";
 
 export const managePostBeat = () => {
-
   PostBeat.handleOpenDropdown();
 };
 
@@ -19,8 +18,10 @@ export default function PostBeat() {
   const [error, setErrors] = useState({});
 
   const genres = useSelector((state) => state.filters.genres);
-  const { client } = useSelector((state) => state.client);
-  const { _id } = client;
+  const { _id } = useSelector(
+    (state) => state.client.authSession.session.current
+  );
+  //const { _id } = client;
 
   const [form, setForm] = useState({
     name: "",
@@ -39,11 +40,15 @@ export default function PostBeat() {
 
   PostBeat.handleOpenDropdown = handleOpenDropdown;
 
-  const handleInputChange = (e) => {
-   
+  //useeffect para cargar id
 
+  useEffect(() => {
+    setForm((prevForm) => ({ ...prevForm, userCreator: _id, _id: _id }));
+  }, [_id]);
+
+  const handleInputChange = (e) => {
     if (e.target.type === "file") {
-        setForm({
+      setForm({
         ...form,
         [e.target.name]: e.target.files[0],
       });
@@ -58,7 +63,6 @@ export default function PostBeat() {
   };
 
   const handleSelectChange = (e) => {
-
     setSelected(e);
     setForm((prevForm) => ({ ...prevForm, genre: e }));
   };
@@ -68,7 +72,6 @@ export default function PostBeat() {
   }, []);
 
   useEffect(() => {
-
     setErrors(ValidationCreateBeat(form, fieldsToValidate));
   }, [form, fieldsToValidate]);
 
@@ -76,7 +79,9 @@ export default function PostBeat() {
     e.preventDefault();
     const formErrors = ValidationCreateBeat(form, "*");
     if (Object.keys(formErrors).length === 0) {
+      console.log(form);
       await dispatch(postClientBeat(form));
+      setIsDropdownOpen(false);
     } else {
       setErrors(formErrors);
     }
@@ -126,49 +131,48 @@ export default function PostBeat() {
                     className="w-full"
                     labelClass="w-full"
                   />
-        
-                    <Select
-                      label={"Elige un genero"}
-                      valores={genres}
-                      setSeleccionados={handleSelectChange}
-                      value={selected}
-                      seleccionados={selected}
-                      error={error.genre}
-                      className="flex w-full flex-col gap-2"
-                      labelClass="w-full text-sm-regular text-sm-medium"
-                    />
-                    <Input
-                      name={"bpm"}
-                      label={"BPMs"}
-                      placeholder={"BPMs"}
-                      type={"number"}
-                      onChange={handleInputChange}
-                      error={error.bpm}
-                      className="w-full"
-                      labelClass="w-full"
-                    />
 
-                    <Input
-                      name={"image"}
-                      label={"Sube una portada"}
-                      placeholder={"Beat Image"}
-                      type={"file"}
-                      onChange={handleInputChange}
-                      error={error.image}
-                      className="w-full"
-                      labelClass="w-full"
-                    />
-                    <Input
-                      name={"audioMP3"}
-                      label={"Sube tu beat"}
-                      placeholder={"Upload your Beat"}
-                      type={"file"}
-                      onChange={handleInputChange}
-                      error={error.audioMP3}
-                      className="w-full"
-                      labelClass="w-full"
-                    />
-             
+                  <Select
+                    label={"Elige un genero"}
+                    valores={genres}
+                    setSeleccionados={handleSelectChange}
+                    value={selected}
+                    seleccionados={selected}
+                    error={error.genre}
+                    className="flex w-full flex-col gap-2"
+                    labelClass="w-full text-sm-regular text-sm-medium"
+                  />
+                  <Input
+                    name={"bpm"}
+                    label={"BPMs"}
+                    placeholder={"BPMs"}
+                    type={"number"}
+                    onChange={handleInputChange}
+                    error={error.bpm}
+                    className="w-full"
+                    labelClass="w-full"
+                  />
+
+                  <Input
+                    name={"image"}
+                    label={"Sube una portada"}
+                    placeholder={"Beat Image"}
+                    type={"file"}
+                    onChange={handleInputChange}
+                    error={error.image}
+                    className="w-full"
+                    labelClass="w-full"
+                  />
+                  <Input
+                    name={"audioMP3"}
+                    label={"Sube tu beat"}
+                    placeholder={"Upload your Beat"}
+                    type={"file"}
+                    onChange={handleInputChange}
+                    error={error.audioMP3}
+                    className="w-full"
+                    labelClass="w-full"
+                  />
                 </div>
                 <button
                   type="submit"

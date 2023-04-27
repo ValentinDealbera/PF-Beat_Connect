@@ -10,8 +10,10 @@ import {
 
 import Image from "next/image";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function HelpOverview() {
+  const [t, i18n] = useTranslation("global");
   const [modal, setModal] = useState(false);
 
   return (
@@ -19,22 +21,22 @@ export default function HelpOverview() {
       <Head title={"Help Center"} description={"Head from about"} />
       <Main mode="transparent">
         <HelpContainer
-          title="Centro de ayuda"
-          paragraph="En nuestro centro de ayuda, nos esforzamos por proporcionar una experiencia de usuario excepcional a todos nuestros clientes. Estamos aquí para responder cualquier pregunta que puedas tener y ayudarte a solucionar cualquier problema que puedas encontrar al utilizar nuestra plataforma. "
+          helpTitle={"helpIndexTitle"}
+          helpParagraph={"helpIndexParagraph"}
         >
           <div className="gap-estilo1 flex flex-col ">
             <h1 className="text-titulo3-semibold text-red-700 ">
-              Preguntas frecuentes
+            {t("helpCenterIndex.t1")}
             </h1>
-            <FaqsGrid />
+            <FaqsGrid />   
             <div
               className="flex w-full justify-center"
               onClick={() => setModal(true)}
             >
               <p className="mt-6 w-full cursor-pointer text-center font-light">
-                ¿Aun no encuentras tu respuesta?{" "}
+              {t("helpCenterIndex.t2")}{" "}
                 <span className="font-medium text-red-700">
-                  Envianos un ticket
+                {t("helpCenterIndex.t2")}
                 </span>
               </p>
             </div>

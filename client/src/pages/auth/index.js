@@ -6,7 +6,7 @@ import {
   AuthLayout,
 } from "@/components";
 import Link from "next/link";
-import { setCurrentClient, loginSystem } from "@/redux/slices/client";
+import { setCurrentClient, jsonLogin } from "@/redux/slices/client/authSession";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 
@@ -16,16 +16,13 @@ export default function Login() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    try {      
+    try {
       const data = {
         email: e.target.email.value,
         password: e.target.password.value,
       };
 
-  
-
-      dispatch(loginSystem(data));
-      
+      dispatch(jsonLogin(data));
     } catch (error) {
       toast.error("Ocurrio un error, recarga la pagina", {
         style: {
@@ -34,11 +31,11 @@ export default function Login() {
         },
       });
     }
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-   // router.push("/client");
+    // router.push("/client");
   };
   return (
     <>
@@ -63,7 +60,12 @@ export default function Login() {
             label="Contraseña"
             placeholder="Contraseña"
           />
-
+          <p className=" w-full text-center font-light">
+            ¿No recuerdas tu contraseña?{" "}
+            <Link href="/auth/recover" className="font-medium text-red-700">
+              Recuperar
+            </Link>
+          </p>
           <button
             type="submit"
             className="text-base-semibold mt-2  w-full rounded-full bg-red-700 py-2 text-white"

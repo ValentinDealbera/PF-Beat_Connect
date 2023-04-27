@@ -1,7 +1,7 @@
 import { BeatRightSheet, Input, Select } from "@/components";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postClientBeat } from "@/redux/slices/client";
+import { editClientBeat } from "@/redux/slices/client/beats";
 import { ValidationCreateBeat } from "../client/validationCreateBeat";
 import { fetchGenres } from "@/redux/slices/filters";
 
@@ -11,15 +11,18 @@ export const manageEditBeat = () => {
 
 export default function EditBeat() {
   const dispatch = useDispatch();
-  const {activeEditingItem} = useSelector((state) => state.client);
+  const activeEditingBeat = useSelector(
+    (state) => state.client.beats.activeEditingBeat
+  );
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [fieldsToValidate, setFieldsToValidate] = useState([]);
   const [selected, setSelected] = useState("");
   const [error, setErrors] = useState({});
 
   const genres = useSelector((state) => state.filters.genres);
-  const { client } = useSelector((state) => state.client);
-  const { _id } = client;
+  const { _id } = useSelector(
+    (state) => state.client.authSession.session.current
+  );
 
   const [form, setForm] = useState({
     name: "",
@@ -39,9 +42,8 @@ export default function EditBeat() {
   EditBeat.handleOpenDropdown = handleOpenDropdown;
 
   const handleInputChange = (e) => {
-
     if (e.target.type === "file") {
-        setForm({
+      setForm({
         ...form,
         [e.target.name]: e.target.files[0],
       });
@@ -56,7 +58,6 @@ export default function EditBeat() {
   };
 
   const handleSelectChange = (e) => {
-   
     setSelected(e);
     setForm((prevForm) => ({ ...prevForm, genre: e }));
   };
@@ -66,20 +67,37 @@ export default function EditBeat() {
   }, []);
 
   useEffect(() => {
-
     setErrors(ValidationCreateBeat(form, fieldsToValidate));
   }, [form, fieldsToValidate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formErrors = ValidationCreateBeat(form, "*");
+    const formErrors = ValidationCreateBeat(form, "*", "edit");
     if (Object.keys(formErrors).length === 0) {
-      await dispatch(postClientBeat(form));
+      console.log("form", form);
+      await dispatch(editClientBeat(form));
+      setIsDropdownOpen(false);
     } else {
+      console.log("formErrors", formErrors);
       setErrors(formErrors);
     }
     e.target.reset();
   };
+
+  useEffect(() => {
+    if (!activeEditingBeat) return;
+
+    setSelected(activeEditingBeat.genre?._id ?? "");
+
+    setForm({
+      name: activeEditingBeat.name,
+      priceAmount: activeEditingBeat.priceAmount,
+      genre: activeEditingBeat.genre?._id ?? "",
+      userCreator: _id,
+      _id: _id,
+      BPM: activeEditingBeat.BPM,
+    });
+  }, [activeEditingBeat]);
 
   return (
     <>
@@ -89,13 +107,13 @@ export default function EditBeat() {
             <div className="flex w-full flex-col gap-5 overflow-y-hidden">
               <div className="flex flex-col items-center justify-center gap-0">
                 <h4 className="text-titulo3-regular text-center">
-                  ¿En que haz estado{" "}
+                  Editemos tu{" "}
                   <span className="text-titulo3-semibold text-red-700">
-                    trabajando?
+                    beat
                   </span>{" "}
                 </h4>
                 <p className="text-base-light text-center">
-                  Sube tu beat y empieza a vender
+                  Haz los ajustes que creas necesarios
                 </p>
               </div>
               <form
@@ -112,6 +130,7 @@ export default function EditBeat() {
                     className="w-full"
                     placeholder="Ingresa un nombre increible"
                     labelClass="w-full"
+                    defaultValue={activeEditingBeat.name}
                   />
                   <Input
                     name={"priceAmount"}
@@ -123,56 +142,47 @@ export default function EditBeat() {
                     placeholder="Ingresa un precio"
                     className="w-full"
                     labelClass="w-full"
+                    defaultValue={activeEditingBeat.priceAmount}
                   />
-        
-                    <Select
-                      label={"Elige un genero"}
-                      valores={genres}
-                      setSeleccionados={handleSelectChange}
-                      value={selected}
-                      seleccionados={selected}
-                      error={error.genre}
-                      className="flex w-full flex-col gap-2"
-                      labelClass="w-full text-sm-regular text-sm-medium"
-                    />
-                    <Input
-                      name={"bpm"}
-                      label={"BPMs"}
-                      placeholder={"BPMs"}
-                      type={"number"}
-                      onChange={handleInputChange}
-                      error={error.bpm}
-                      className="w-full"
-                      labelClass="w-full"
-                    />
 
-                    <Input
-                      name={"image"}
-                      label={"Sube una portada"}
-                      placeholder={"Beat Image"}
-                      type={"file"}
-                      onChange={handleInputChange}
-                      error={error.image}
-                      className="w-full"
-                      labelClass="w-full"
-                    />
-                    <Input
-                      name={"audioMP3"}
-                      label={"Sube tu beat"}
-                      placeholder={"Upload your Beat"}
-                      type={"file"}
-                      onChange={handleInputChange}
-                      error={error.audioMP3}
-                      className="w-full"
-                      labelClass="w-full"
-                    />
-             
+                  <Select
+                    label={"Elige un genero"}
+                    valores={genres}
+                    setSeleccionados={handleSelectChange}
+                    value={selected}
+                    seleccionados={selected}
+                    error={error.genre}
+                    className="flex w-full flex-col gap-2"
+                    labelClass="w-full text-sm-regular text-sm-medium"
+                  />
+                  <Input
+                    name={"bpm"}
+                    label={"BPMs"}
+                    placeholder={"BPMs"}
+                    type={"number"}
+                    onChange={handleInputChange}
+                    error={error.bpm}
+                    className="w-full"
+                    labelClass="w-full"
+                    defaultValue={activeEditingBeat.BPM}
+                  />
+
+                  <Input
+                    name={"image"}
+                    label={"Sube una portada"}
+                    placeholder={"Beat Image"}
+                    type={"file"}
+                    onChange={handleInputChange}
+                    error={error.image}
+                    className="w-full"
+                    labelClass="w-full"
+                  />
                 </div>
                 <button
                   type="submit"
                   className="text-base-semibold mt-2  w-full rounded-full bg-red-700 py-2 text-white"
                 >
-                  Crear publicacion
+                  Guardar publicacion
                 </button>
               </form>
             </div>

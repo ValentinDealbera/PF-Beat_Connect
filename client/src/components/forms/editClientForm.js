@@ -1,17 +1,14 @@
 import { FormColumn, FormContainer, FormRow, Input } from "@/components";
-
 import {
   handleInputChange,
   handleSubmit,
   validateForm,
 } from "@/data/formLogic";
-
-import { forwardRef, useImperativeHandle } from "react";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editClient } from "@/redux/slices/client";
+import { editClient } from "@/redux/slices/client/authSession";
 import { useRouter } from "next/router";
-
+import { validationEditUser } from "@/components/validation/client/editUser";
 export default function EditClientForm(props) {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -19,21 +16,22 @@ export default function EditClientForm(props) {
   const validateMode = "user";
   const [fieldsToValidate, setFieldsToValidate] = useState([]);
   const [error, setErrors] = useState({});
-  // const defaultValues = useSelector((state) => state.client.editClient) || {};
-  const defaultValues = useSelector((state) => state.client.client) || {};
-  const id = useSelector((state) => state.client.client._id);
-  console.log("----------------", id);
+
+  const defaultValues =
+    useSelector((state) => state.client.authSession.session.current) || {};
+  const id = useSelector(
+    (state) => state.client.authSession.session.current._id
+  );
+
   const mode = props.mode;
 
-  console.log("defaultValues", defaultValues);
-
   const [form, setForm] = useState({
-    username: `${mode === "edit" ? defaultValues.username : ""}`,
+    username: `${mode === "edit" ? defaultValues.userName : ""}`,
     firstName: `${mode === "edit" ? defaultValues.firstName : ""}`,
     lastName: `${mode === "edit" ? defaultValues.lastName : ""}`,
     image: "",
     email: `${mode === "edit" ? defaultValues.email : ""}`,
-    password: `${mode === "edit" ? defaultValues.password : ""}`,
+    password: "",
     id: id,
     bio: `${mode === "edit" ? defaultValues.bio : ""}`,
     backImage: "",
@@ -51,17 +49,19 @@ export default function EditClientForm(props) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const actionToDispatch = editClient;
+
     try {
-      await handleSubmit({
-        form: form,
-        actionToDispatch: actionToDispatch,
-        dispatch: dispatch,
-        setErrors: setErrors,
-        validateMode: validateMode,
-        formRef: formRef.current,
-      });
-      router.push("/client");
+      const formErrors = validationEditUser(form, "*");
+      if (Object.keys(formErrors).length === 0) {
+        console.log("DESPACHADO", form);
+        await dispatch(editClient(form));
+        formRef.current.reset();
+        router.push("/client");
+      } else {
+        setErrors(formErrors);
+        console.log("form Error", formErrors);
+        throw new Error("Form Error");
+      }
     } catch (error) {
       console.error(error);
     }
@@ -79,51 +79,50 @@ export default function EditClientForm(props) {
             <Input
               id="firstName"
               name="firstName"
-              label="First Name"
-              placeholder="First Name:"
+              label="Nombre"
+              placeholder="Nombre"
               defaultValue={mode === "edit" ? defaultValues.firstName : ""}
               type="text"
               onChange={handleInput}
               error={error.firstName}
             />
             <Input
-              name={"lastName"}
-              id={"lastName"}
-              label={"Last Name"}
-              placeholder={"Last Name:"}
-              defaultValue={mode === "edit" ? defaultValues.lastName : ""}
-              type={"text"}
-              onChange={handleInput}
-              error={error.lastName}
-            />
-            <Input
-              name={"username"}
-              label={"UserName"}
-              placeholder={"UserName:"}
-              defaultValue={mode === "edit" ? defaultValues.username : ""}
-              type={"text"}
-              onChange={handleInput}
-              error={error.username}
-            />
-          </FormColumn>
-          <FormColumn className="w-full">
-            <Input
-              name={"password"}
-              label={"password"}
-              placeholder={"password:"}
-              defaultValue={mode === "edit" ? defaultValues.password : ""}
-              type={"password"}
-              onChange={handleInput}
-              error={error.password}
-            />
-            <Input
               name={"email"}
               label={"Email"}
-              placeholder={"Email:"}
+              placeholder={"Email"}
               defaultValue={mode === "edit" ? defaultValues.email : ""}
               type={"email"}
               onChange={handleInput}
               error={error.email}
+            />
+            <Input
+              name={"username"}
+              label={"Nombre de usuario"}
+              placeholder={"Nombre de usuario"}
+              defaultValue={mode === "edit" ? defaultValues.userName : ""}
+              type={"text"}
+              onChange={handleInput}
+              error={error.username}
+            />
+            <Input
+              name="image"
+              label="Imagen de perfil"
+              placeholder="Imagen de perfil"
+              type="file"
+              onChange={handleInput}
+              error={error.backImage}
+            />
+          </FormColumn>
+          <FormColumn className="w-full">
+            <Input
+              name={"lastName"}
+              id={"lastName"}
+              label={"Apellido"}
+              placeholder={"Apellido"}
+              defaultValue={mode === "edit" ? defaultValues.lastName : ""}
+              type={"text"}
+              onChange={handleInput}
+              error={error.lastName}
             />
             <Input
               id="bio"
@@ -137,16 +136,21 @@ export default function EditClientForm(props) {
             />
             <Input
               name="backImage"
-              label="Cover Image"
-              placeholder="Cover Image:"
+              label="Imagen de portada"
+              placeholder="Imagen de portada"
               type="file"
               onChange={handleInput}
               error={error.backImage}
             />
           </FormColumn>
         </FormRow>
+        <button
+          type="submit"
+          className="background-primary-red-700 color-neutral-white w-max rounded-full px-5 py-3 text-sm font-semibold"
+        >
+          Guardar
+        </button>
       </FormContainer>
-      <button type="submit">Modificar</button>
     </form>
   );
 }

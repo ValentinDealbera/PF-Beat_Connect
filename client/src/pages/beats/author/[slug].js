@@ -20,7 +20,7 @@ export default function AuthorProfile() {
     <>
       <Head title="Buyer Profile" />
       <Main mode="transparent">
-        <Hero style={{ height: "45vh" }} image="/images/category2.jpg">
+        <Hero style={{ height: "45vh" }} image={currentAuthor?.backImage} >
           <div
             id="contenido"
             className="padding-x-estilo2 flex h-full w-full flex-col justify-end pb-8"
@@ -29,7 +29,7 @@ export default function AuthorProfile() {
               <ProfileCard
                 profilePhoto={currentAuthor?.profilePicture}
                 profileName={`${currentAuthor?.firstName} ${currentAuthor?.lastName}`}
-                profileMessage="Lorem ipsum dolor sit "
+                profileMessage={currentAuthor?.bio}
               />
             </div>
           </div>

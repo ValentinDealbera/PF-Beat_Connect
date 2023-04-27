@@ -1,29 +1,39 @@
-import { Section, BeatCardFlex, BeatCardGrid, NewBeatCardGrid } from "@/components";
+import {
+  Section,
+  BeatCardFlex,
+  BeatCardGrid,
+  NewBeatCardGrid,
+} from "@/components";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { setBeatsDisplayMode } from "@/redux/slices/beats";
+import { setBeatsDisplayMode, fetchBeats, fetchFeaturedBeats } from "@/redux/slices/beats";
 
 export default function BeatsSpecialSection(props) {
-  const { activeItems } = useSelector((state) => state?.beats) || [];
-  const state = useSelector((state) => state.beats);
+  const featuredBeats = useSelector((state) => state?.beats.featuredItems) || [];
+  const dispatch = useDispatch();
 
+  //Limit the number of items to 10
 
-//Limit the number of items to 10
-
-const limit = 10;
-const limitedItems = activeItems.slice(0, limit);
+  // const limit = 10;
+  // const limitedItems = activeItems.slice(0, limit);
 
   useEffect(() => {
-   // dispatch(setBeatsDisplayMode("shop"));
+    // dispatch(setBeatsDisplayMode("shop"));
   }, []);
+
+  useEffect(() => {
+    dispatch(fetchFeaturedBeats());
+  }, []);
+
   return (
     <Section subClassName="padding-x-estilo2 padding-y-estilo2 gap-8 flex flex-col">
       <h1 className="text-titulo2-regular">
         {props.title}
         {props.children}{" "}
       </h1>
-      <NewBeatCardGrid beats={limitedItems} />
+
+      <BeatCardFlex beats={featuredBeats} />
     </Section>
   );
 }

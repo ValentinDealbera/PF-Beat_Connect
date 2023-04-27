@@ -95,17 +95,17 @@ summary {
   //Titulo 2
 .text-titulo2-semibold {
     @apply text-3xl font-semibold;
-    line-height: 135%;
+    line-height: 125%;
   }
 
   .text-titulo2-medium {
     @apply text-3xl font-medium;
-    line-height: 135%;
+    line-height: 125%;
   }
 
   .text-titulo2-regular {
     @apply text-3xl font-normal;
-    line-height: 135%;
+    line-height: 125%;
   }
 
   //Titulo 3
@@ -225,7 +225,7 @@ summary {
   }
 
   .padding-y-estilo2 {
-    @apply py-14
+    @apply py-16
   }
 
   .padding-estilo2 {

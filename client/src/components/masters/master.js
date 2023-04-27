@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import {
   fetchBeats,
   fetchCurrentAuthor,
-  fetchUserBeats,
   setActiveItemsForProfile,
   setBeatsDisplayMode,
   setUserFavoriteBeats,
@@ -21,32 +20,29 @@ export default function Master(props) {
     beatsDisplayMode,
     publicBeatsFetchStatus,
     authorFetchStatus,
-    setGeneralActiveIndex
+    setGeneralActiveIndex,
   } = useSelector((state) => state.beats);
 
   useEffect(() => {
-  console.log("fetch master");
-  if (router.pathname.startsWith("/client")) return;
-  else if (router.pathname.startsWith("/beats/author")) return;
-  else if (router.pathname === "/beats") return;
-    dispatch(fetchBeats({}));
+    console.log("fetch master");
+    if (router.pathname.startsWith("/client")) return;
+    else if (router.pathname.startsWith("/beats/author")) return;
+    else if (router.pathname === "/beats") return;
+    // dispatch(fetchBeats({}));
   }, [dispatch, router.pathname]);
 
   useEffect(() => {
     if (router.pathname.startsWith("/client")) {
-      dispatch(fetchUserBeats());
-      
-    }
-    else if (router.pathname.startsWith("/beats/author")) return;
+      // dispatch(fetchUserBeats());
+    } else if (router.pathname.startsWith("/beats/author")) return;
     else if (router.pathname === "/beats") {
-    //  dispatch(setBeatsDisplayMode(0));
-    return;
-    }
-   else  {
-    dispatch(setBeatsDisplayMode(1));
+      //  dispatch(setBeatsDisplayMode(0));
+      return;
+    } else {
+      dispatch(setBeatsDisplayMode(1));
 
-   // dispatch(fetchBeats());
-  }
+      // dispatch(fetchBeats());
+    }
   }, [dispatch, router]);
 
   // useEffect(() => {
@@ -80,77 +76,3 @@ export default function Master(props) {
 
   return <>{props.children}</>;
 }
-
-// import { fetchBeats } from "@/redux/slices/beats";
-// import { useEffect, useState } from "react";
-// import { useDispatch } from "react-redux";
-// import { useSelector } from "react-redux";
-// import { useRouter } from "next/router";
-// import {
-//   setBeatsDisplayMode,
-//   fetchCurrentAuthor,
-//   setUserOwnedBeats,
-//   setUserPurchasedBeats,
-//   setUserFavoriteBeats,
-//   fetchUserBeats,
-//   setActiveItemsForProfile,
-// } from "@/redux/slices/beats";
-
-// export default function Master(props) {
-//   const router = useRouter();
-
-//   const { generalActiveIndex, beatsDisplayMode } = useSelector(
-//     (state) => state.beats
-//   );
-
-// const [beatsLoaded, setBeatsLoaded] = useState(false);
-
-//   const dispatch = useDispatch();
-//   useEffect(() => {
-//     dispatch(fetchBeats()).then(() => {
-//       setBeatsLoaded(true);
-//     });
-//   }, []);
-
-//   useEffect(() => {
-//     if (router.pathname === "/beats") {
-//       dispatch(setBeatsDisplayMode(0));
-//     } else if (router.pathname === "/client") {
-//       dispatch(fetchUserBeats());
-//       dispatch(setBeatsDisplayMode(2));
-//     } else if (router.pathname.startsWith("/beats/author")) {
-//       const { slug } = router.query;
-//       dispatch(fetchCurrentAuthor(slug));
-//     } else {
-//       console.log("solicitamos display 1");
-//       if (beatsLoaded) {
-//         dispatch(setBeatsDisplayMode(1));
-//       }
-//     }
-//   }, [
-//     router.pathname,
-//     router.pathname.startsWith("/beats/author") ? router.query.slug : "",
-//   ]);
-
-//   useEffect(() => {
-//     if (beatsDisplayMode === 2) {
-//       if (generalActiveIndex === 0) {
-//         console.log("solicitamos setUserPurchasedBeats");
-//         dispatch(setActiveItemsForProfile(0));
-//       } else if (generalActiveIndex === 1) {
-//         console.log("solicitamos setUserOwnedBeats");
-//         dispatch(setActiveItemsForProfile(1));
-//       } else if (generalActiveIndex === 2) {
-//         console.log("solicitamos setUserFavoriteBeats");
-//         dispatch(setActiveItemsForProfile(2));
-//       }
-//     }
-//     console.log(
-//       "generalActiveIndex, beatsDisplayMode",
-//       generalActiveIndex,
-//       beatsDisplayMode
-//     );
-//   }, [generalActiveIndex]);
-
-//   return <>{props.children}</>;
-// }

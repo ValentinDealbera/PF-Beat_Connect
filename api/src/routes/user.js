@@ -39,20 +39,6 @@ const storage = getStorage();
 router.get("/", async (req, res) => {
   try {
     const users = await UserModel.find()
-      .populate("createdBeats")
-      .populate("bougthBeats");
-    res.json(users);
-  } catch (err) {
-    return res.status(SERVER_ERROR).send(USER_NOT_FOUND);
-  }
-});
-
-router.get("/:id", async (req, res) => {
-  try {
-  } catch (error) {}
-  const { id } = req.params;
-  try {
-    const allUserId = await UserModel.findById(id)
       .populate({
         path: "createdBeats",
         populate: [
@@ -81,8 +67,197 @@ router.get("/:id", async (req, res) => {
             path: "review",
             model: "Review",
           },
+          {
+            path: "userCreator",
+            model: "User",
+          },
         ],
-      });
+      })
+      .populate({
+        path: "userReviews",
+        populate: [
+          {
+            path: "beat",
+            model: "Beats",
+          },
+          {
+            path: "createdBy",
+            model: "User",
+          },
+        ],
+      })
+      .populate({
+        path: "userOrders",
+        populate: [
+          {
+            path: "beat",
+            model: "Beats",
+          },
+          {
+            path: "seller",
+            model: "User",
+          },
+          {
+            path: "buyer",
+            model: "User",
+          },
+        ],
+      })
+      .populate("userFavorites");
+    res.json(users);
+  } catch (err) {
+    return res.status(SERVER_ERROR).send(USER_NOT_FOUND);
+  }
+});
+
+router.get("/admin", async (req, res) => {
+  const page = req.query.page || 1;
+  const limit = 5;
+  try {
+    const users = await UserModel.find()
+      .populate("createdBeats")
+      .populate("bougthBeats")
+      .populate("userFavorites");
+    let initialUser = page * limit - 5;
+    let limitUser = page * limit;
+    let sliceUsers = users.slice(initialUser, limitUser);
+    res.json(sliceUsers);
+  } catch (err) {
+    return res.status(SERVER_ERROR).send(USER_NOT_FOUND);
+  }
+});
+
+router.get("/:id", async (req, res) => {
+  try {
+  } catch (error) {}
+  const { id } = req.params;
+  try {
+    const allUserId = await UserModel.findById(id)
+      .populate({
+        path: "createdBeats",
+        populate: [
+          {
+            path: "genre",
+            model: "Genre",
+          },
+          {
+            path: "review",
+            model: "Review",
+            populate: [
+              {
+                path: "createdBy",
+                model: "User",
+                select: "firstName lastName _id image",
+              }
+            ]
+          },
+          {
+            path: "userCreator",
+            model: "User",
+            select: "firstName lastName _id image",
+          },
+        ],
+      })
+      .populate({
+        path: "bougthBeats",
+        populate: [
+          {
+            path: "genre",
+            model: "Genre",
+          },
+          {
+            path: "review",
+            model: "Review",
+            populate: [
+              {
+                path: "createdBy",
+                model: "User",
+                select: "firstName lastName _id image",
+              }
+            ]
+          },
+          {
+            path: "userCreator",
+            model: "User",
+            select: "firstName lastName _id image",
+          },
+        ],
+      })
+      .populate({
+        path: "userReviews",
+        populate: [
+          {
+            path: "beat",
+            model: "Beats",
+          },
+          {
+            path: "createdBy",
+            model: "User",
+            select: "firstName lastName _id image",
+          },
+        ],
+      })
+      .populate({
+        path: "userOrders",
+        populate: [
+          {
+            path: "beat",
+            model: "Beats",
+            select: "name image price userCreator _id priceAmount",
+            populate: [
+              {
+                path: "userCreator",
+                model: "User",
+                select: "firstName lastName _id image",
+              },
+            ],
+          },
+          {
+            path: "seller",
+            model: "User",
+            select: "firstName lastName _id image",
+          },
+          {
+            path: "buyer",
+            model: "User",
+            select: "firstName lastName _id image",
+          },
+        ],
+      })
+      .populate({
+        path: "userFavorites",
+        populate: [
+          {
+            path: "userCreator",
+            model: "User",
+            select: "firstName lastName _id image review",
+          },
+          {
+            path: "review",
+            model: "Review",
+            populate: [
+              {
+                path: "createdBy",
+                model: "User",
+                select: "firstName lastName _id image",
+              }
+            ]
+          },
+        ],
+      })
+      .lean();
+
+      if (allUserId && allUserId.userOrders && allUserId.userOrders.length > 0) {
+        allUserId.userOrders = allUserId.userOrders.map((order) => {
+          if (order.buyer._id.toString() === id) {
+            order.operationType = "Compra";
+          } else {
+            order.operationType = "Venta";
+          }
+          return order;
+        });
+      }
+
     allUserId
       ? res.status(OK).send(allUserId)
       : res.status(NOT_FOUND).send(USER_NOT_FOUND);
@@ -93,7 +268,7 @@ router.get("/:id", async (req, res) => {
 
 router.post("/admin", adminMiddleware, async (req, res) => {
   const { body } = req;
-  if (body.image === '') delete body.image
+  if (body.image === "") delete body.image;
   try {
     const user = await UserModel.create(body);
     res.send(user);
@@ -104,11 +279,14 @@ router.post("/admin", adminMiddleware, async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   const { userid } = req.headers;
+  //console.log(req.body);
   try {
+    console.log("hacemos put");
     const { id } = req.params;
-    const image = req.files ? req.files.image : null
-    const backImage = req.files ? req.files.backImage : null
+    const image = req.files ? req.files.image : null;
+    const backImage = req.files ? req.files.backImage : null;
     const {
+      favorite,
       mpcode,
       seller,
       admin,
@@ -118,16 +296,23 @@ router.put("/:id", async (req, res) => {
       lastName,
       email,
       bio,
-      password,
+      newPassword = "",
+      oldPassword = "",
       bougthBeats,
     } = req.body;
     const userin = await UserModel.findById(id);
     const userAux = await UserModel.findById(userid);
+   // console.log("userin >", userin, "userAux >", userAux);
+
+    //si la contraseña nueva llega vacia, no se actualiza
+    const userWantUpdatePassword = oldPassword && newPassword;
+    const passwordIsValid = await bcrypt.compare(oldPassword, userin.password);
+
     if (!userin)
       return res
         .status(400)
         .json({ message: "El usuario que quieres actualizar no existe" });
-    if (userin.email !== userAux.email)
+    if (userin?.email !== userAux?.email)
       return res
         .status(400)
         .json({ message: "No puedes actualizar otro usuario!" });
@@ -138,7 +323,18 @@ router.put("/:id", async (req, res) => {
     ) {
       return res.status(BAD_REQUEST).send(ALL_NOT_OK);
     }
+    if (oldPassword && newPassword && !passwordIsValid) {
+      return res.status(BAD_REQUEST).json({
+        message: "La contraseña no coincide con tu contraseña actual",
+      });
+    } else if (oldPassword && newPassword && oldPassword === newPassword) {
+      return res
+        .status(BAD_REQUEST)
+        .json({ message: "La nueva contraseña debe ser distinta a la actual" });
+    }
+
     if (
+      favorite ||
       backImage ||
       image ||
       soft ||
@@ -149,18 +345,32 @@ router.put("/:id", async (req, res) => {
       lastName ||
       email ||
       bio ||
-      password ||
+      newPassword ||
+      oldPassword ||
       bougthBeats
     ) {
       const user = await UserModel.findById(id);
+      if (favorite) {
+        console.log("Añadimos el fav", favorite);
+        if (!user.userFavorites.includes(favorite)) {
+          user.userFavorites = [...user.userFavorites, favorite];
+        } else {
+          console.log("Borramos el fav", favorite);
+          user.userFavorites = user.userFavorites.filter((e) => e._id.toString() !== favorite);
+          // const index = user.userFavorites.findIndex((e) => (e = favorite));
+          // user.userFavorites = user.userFavorites.slice(index, index);
+          // 
+          // user.userFavorites = user.userFavorites.filter((e) => e._id !== favorite);
+        }
+      }
       if (username && username !== "") user.username = username;
       if (firstName && firstName !== "") user.firstName = firstName;
       if (lastName && lastName !== "") user.lastName = lastName;
       if (email && email !== "") user.email = email;
       if (bio && bio !== "") user.bio = bio;
-      if (password && password !== "") {
+      if (newPassword && newPassword !== "") {
         const saltRounds = 10;
-        const hashedPassword = bcrypt.hashSync(password, saltRounds);
+        const hashedPassword = bcrypt.hashSync(newPassword, saltRounds);
         user.password = hashedPassword;
       }
       if (image) {
@@ -225,7 +435,7 @@ router.put("/:id", async (req, res) => {
             return res.status(NOT_FOUND).send(USER_NOT_FOUND);
           }
         } catch (err) {
-          res.status(SERVER_ERROR).send(err.message);
+          res.status(SERVER_ERROR).json({ message: error.message });
         }
       }
       user.save();
@@ -235,17 +445,18 @@ router.put("/:id", async (req, res) => {
         .status(500)
         .json({ message: "el usuario no se ha modificado" });
   } catch (error) {
+    console.log(error);
     return res.status(SERVER_ERROR).json({ message: error.message });
   }
 });
 
 router.put("/admin/:id", adminMiddleware, async (req, res) => {
   try {
-    console.log('-------------', req)
+    console.log("-------------", req);
     const { id } = req.params;
-      const image = req.files ? req.files.image : null
-      console.log('ESTA ES LA IMAGEN Y COMO LLEGA', image)
-      const backImage = req.files ? req.files.backImage : null
+    const image = req.files ? req.files.image : null;
+    console.log("ESTA ES LA IMAGEN Y COMO LLEGA", image);
+    const backImage = req.files ? req.files.backImage : null;
     const {
       seller,
       admin,
@@ -257,6 +468,7 @@ router.put("/admin/:id", adminMiddleware, async (req, res) => {
       bio,
       password,
       bougthBeats,
+      favorite,
     } = req.body;
     if (
       (seller && seller !== "VENDEDOR") ||
@@ -271,6 +483,7 @@ router.put("/admin/:id", adminMiddleware, async (req, res) => {
     }
 
     if (
+      favorite ||
       backImage ||
       image ||
       soft ||
@@ -285,6 +498,14 @@ router.put("/admin/:id", adminMiddleware, async (req, res) => {
       bougthBeats
     ) {
       const user = await UserModel.findById(id);
+      if (favorite) {
+        if (!user.userFavorites.includes(favorite)) {
+          user.userFavorites = [...user.userFavorites, favorite];
+        } else {
+          const index = user.userFavorites.findIndex((e) => (e = favorite));
+          user.userFavorites = user.userFavorites.slice(index, index);
+        }
+      }
       if (username && username !== "") user.username = username;
       if (firstName && firstName !== "") user.firstName = firstName;
       if (lastName && lastName !== "") user.lastName = lastName;
@@ -300,7 +521,7 @@ router.put("/admin/:id", adminMiddleware, async (req, res) => {
       if (soft) user.softDelete = !user.softDelete;
       if (image) {
         const imageData = fs.readFileSync(image.tempFilePath);
-        console.log('Procesando imagen');
+        console.log("Procesando imagen");
         const imageStorageRef = ref(
           storage,
           `users/${user.username}/image/${user.username}`
@@ -317,7 +538,7 @@ router.put("/admin/:id", adminMiddleware, async (req, res) => {
         );
         const downloadImageURL = await getDownloadURL(imageSnapshot.ref);
         user.image = downloadImageURL ? downloadImageURL : user.image;
-        console.log('Imagen subida');
+        console.log("Imagen subida");
       }
       if (backImage) {
         const imageData = fs.readFileSync(backImage.tempFilePath);

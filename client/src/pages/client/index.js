@@ -10,8 +10,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function BuyerProfile() {
-  const currentUser = useSelector((state) => state.client.client);
-  console.log("currentUser", currentUser);
+  const currentUser = useSelector((state) => state.client.authSession.session.current);
 
   return (
     <>
@@ -19,8 +18,13 @@ export default function BuyerProfile() {
       <Main mode="transparent">
         <Hero
           style={{ height: "45vh" }}
-          image="/images/category3.jpg"
+          image={currentUser.backImage}
+          alt="hero"
           className="items-center justify-center align-middle"
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = "/images/placeholder.png";
+          }}
         >
           <div
             id="contenido"

@@ -3,9 +3,6 @@ import {
   Nav,
   UserBoxNav,
   VerticalNav,
-  BeatRightSheet,
-  Input,
-  CheckboxGroup,
   BecomeSeller,
   PostBeat,
   managePostBeat,
@@ -24,9 +21,7 @@ export default function Header() {
   const [headerType, setHeaderType] = useState("default");
   const currentItem = navPublic.find((item) => currentSlug === item.url);
   const currentMode = currentItem ? currentItem.colorMode : "transparent";
-  //obtenemos isSeller
-  const { authSettings } = useSelector((state) => state.client);
-  const { isSeller } = authSettings;
+  const { isSeller } = useSelector((state) => state.client.authSession.auth);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,7 +48,7 @@ export default function Header() {
       name: "Inbox",
       url: "/client/inbox",
       colorMode: "light",
-      visibility: true,
+      visibility: false,
     },
     {
       name: "Vende tus beats",

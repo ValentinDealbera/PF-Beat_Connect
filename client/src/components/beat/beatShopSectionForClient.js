@@ -1,80 +1,55 @@
 import {
-  BeatCardGrid,
   Section,
   BuyerNavGeneral,
-  BeatFilters,
   NewBeatCardGrid,
   ClientReview,
+  ReviewCardGrid,
 } from "@/components";
 
-import { reviews } from "../../data/fakeDB";
-
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
-import { fetchUserReviews } from "@/redux/slices/beats";
+import { useEffect } from "react";
+//import { fetchUserReviews } from "@/redux/slices/beats";
 
 export default function BeatShopSectionForClient(props) {
-  const { authSettings } = useSelector((state) => state.client);
-  const { _id } = useSelector((state) => state.client.client);
-  const { activeReviewDetail } = useSelector((state) => state.beats);
-  const { isSeller } = authSettings;
-  const dispatch = useDispatch();
-  const { beatsDisplayMode, generalActiveIndex } = useSelector(
+  const {
+    auth: { isSeller },
+    session: {
+      current: { _id },
+    },
+  } = useSelector((state) => state.client.authSession);
+
+  const { activeReviewDetail, generalActiveIndex } = useSelector(
     (state) => state.beats
   );
 
-  // console.log(
-  //   "isSeller",
-  //   isSeller,
-  //   "beatsDisplayMode",
-  //   beatsDisplayMode,
-  //   "generalActiveIndex",
-  //   generalActiveIndex
-  // );
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchUserReviews(_id));
+    //dispatch(fetchUserReviews(_id));
   }, []);
 
   const { activeItems } = useSelector((state) => state?.beats) || [];
+  const { bougthBeats, ownedBeats, favoriteBeats } = useSelector(
+    (state) => state.client.beats
+  );
 
-  const [sellerVisibility, setSellerVisibility] = useState(true);
-
+  const isLoading = useSelector((state) => state.client.authSession.actionStatus.getUserDataLoading);
+console.log("isLoadingxxx", isLoading);
   return (
     <Section subClassName="padding-x-estilo2 padding-y-estilo2 gap-8 flex flex-col">
       <BuyerNavGeneral />
       {generalActiveIndex === 0 ? (
-        <NewBeatCardGrid beats={activeItems} />
+        <NewBeatCardGrid beats={bougthBeats} isLoading={isLoading} />
       ) : generalActiveIndex === 1 && isSeller === false ? (
         <ForSellerOnly />
       ) : generalActiveIndex === 1 && isSeller === true ? (
-        <NewBeatCardGrid beats={activeItems} />
-      ) : (
+        <NewBeatCardGrid beats={ownedBeats} isLoading={isLoading} />
+      ) : generalActiveIndex === 2 ? (
         <div>
-          <div className="gap-estilo1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
-            <>
-              {activeReviewDetail.length > 0 &&
-                activeReviewDetail?.map((review) => (
-                  <>
-                    <ClientReview
-                      currentMode={props.currentMode}
-                      title={review.title}
-                      comment={review.comment}
-                      username={review.username}
-                    />
-                  </>
-                ))}
-            </>
-          </div>
-          {activeReviewDetail.length === 0 && (
-            <div className="flex w-full items-end justify-center">
-              <h1 className="mt-5 text-center text-2xl font-medium mb-8">
-                Hey, parece que no hay nada por aqui 🤯
-              </h1>
-            </div>
-          )}
+          <NewBeatCardGrid beats={favoriteBeats} isLoading={isLoading} />
         </div>
-        
+      ) : (
+        <ReviewCardGrid />
       )}
     </Section>
   );

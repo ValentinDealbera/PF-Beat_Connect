@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { PROD_ACCESS_TOKEN, TEST_ACCESS_TOKEN, BACKEND_URL } = process.env;
+const { PROD_ACCESS_TOKEN, TEST_ACCESS_TOKEN, BACKEND_URL, FRONTEND_URL } = process.env;
 const mercadopago = require("mercadopago");
 const Beats = require("../models/nosql/beats");
 const userModel = require("../models/nosql/user");
@@ -53,9 +53,9 @@ module.exports = async (req, res) => {
       // }],
       marketplace_fee: beatPercentage(beatsToCheckout, 15),
       back_urls: {
-        success: `${BACKEND_URL}api/feedback`,
-        failure: `${BACKEND_URL}api/feedback`,
-        pending: `${BACKEND_URL}api/feedback`, // 3001 es el backend
+        success: `${FRONTEND_URL}?cart=${cart}`,
+        failure: `${FRONTEND_URL}`,
+        pending: `${FRONTEND_URL}`, // 3001 es el backend
       },
       payer: {
         name: userBuyer.firstName,

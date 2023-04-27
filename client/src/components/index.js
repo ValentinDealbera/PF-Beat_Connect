@@ -36,6 +36,7 @@ export { default as SwitchForm } from "./common/switchForm";
 export { default as FormAdmin } from "./common/adminForm"; //creado pero sin colocar (SoftDelete, SwitchForm)
 export { default as ValidationEditUsers } from "./common/validationEditUsers";
 export { default as ReviewForm } from "./common/reviewForm";
+export { default as SetUser } from "./common/setUser";
 
 //Modal
 export { default as ModalMinMax } from "./modal/modalMinMax";
@@ -69,7 +70,6 @@ export { default as NewBeatCardGrid } from "./beat/newBeatCardGrid";
 export { default as BeatShopSectionForClient } from "./beat/beatShopSectionForClient";
 export { default as BeatsRelatedSection } from "./beat/beatRelatedSection";
 export { default as BeatCardFlex } from "./beat/beatCardFlex";
-
 
 //beatDataComponents
 export { default as AuthorName } from "./beat/beatDataComponents/authorName";
@@ -124,6 +124,12 @@ export { default as AdminCreateUserForm } from "./forms/adminCreateUser";
 export { default as AdminCreateReviewForm } from "./forms/adminCreateReview";
 export { default as AdminCreateBeatForm } from "./forms/adminCreateBeat";
 export { default as EditClientForm } from "./forms/editClientForm";
+export { default as EditPasswordForm } from "./forms/editPasswordForm";
+export { default as ReviewCardGrid } from "./client/reviewCardGrid";
+export { default as RecoveryPasswordForm } from "./forms/recoveryPasswordForm";
+export { default as EditReviewForm } from "./masters/editReview";
+export { default as BeatReviewPopup } from "./beat/beatReviewPopup";
+
 
 //export { default as BeatImage } from "./beat/beatImage";
 //export { default as Checkbox } from "./common/checkbox";

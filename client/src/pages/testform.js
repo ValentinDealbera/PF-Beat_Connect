@@ -1,32 +1,14 @@
 import { Main, Head, Search, Switch, Input } from "@/components";
-import { usuariosDos } from "../data/fakeDB";
-import { beats } from "../data/fakeDB";
-import TableBody from "./admin/tableTest";
-import FormCreateBeat from "@/components/client/formCreateBeat";
-import TableAdminUsers from "@/components/tables/tableAdminUsers";
-import TableAdminBeats from "@/components/tables/tableAdminBeats";
+import SetUser from "@/components/common/setUser";
 
-export default function TestForm() {
-
-  const usuariosDosJson = JSON.stringify(usuariosDos);
-  console.log(usuariosDosJson)
- 
+export default function TestForm() {  
 
   return (
     <>
       <Head title={"Test"} description={"Head from test"} />
       <Main>
 
-        <div className="bg-slate-500"> 
-      <TableBody data={usuariosDosJson} /> 
-      </div>
-      <br />
-
-      <TableAdminUsers data={usuariosDosJson} />
-      <br />
-      <TableAdminBeats data={usuariosDosJson} />
-      <br />
-      <FormCreateBeat />
+        <SetUser />     
                   
       </Main>    
             
