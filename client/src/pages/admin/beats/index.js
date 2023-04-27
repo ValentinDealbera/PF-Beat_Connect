@@ -11,39 +11,36 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   adminGetBeats,
-  setCurrentEditBeat,
   adminDeleteBeat,
-  setCurrentBeatPage,
-  adminGetFormBeats,
-} from "@/redux/slices/admin";
+  adminGetBeat,
+} from "@/redux/slices/admin/beats";
 
 export default function SellerDashboardOverview() {
   const dispatch = useDispatch();
-  const beatData = useSelector((state) => state.admin.beats);
-  console.log(beatData);
   const router = useRouter();
+const state = useSelector((state) => state.admin);
+console.log("STATE",state);
+  const beatData = useSelector((state) => state.admin.beats.beats) || [];
+
+ // const page = useSelector((state) => state.admin.currentBeatPage);
+  //const allBeats = useSelector((state) => state.admin.beatsForms);
+
   const [beatToDelete, setBeatToDelete] = useState(null);
-  const page = useSelector((state) => state.admin.currentBeatPage);
-  const allBeats = useSelector((state) => state.admin.beatsForms);
-  const itemsPerPage = 5;
-  const totalPages = Math.ceil(allBeats.length / itemsPerPage);
+
+  // const itemsPerPage = 5;
+  // const totalPages = Math.ceil(allBeats.length / itemsPerPage);
+
 
   useEffect(() => {
-    dispatch(adminGetBeats(page));
-    console.log("beats truchos", beatData);
-  }, [page]);
-
-  useEffect(() => {
-    dispatch(adminGetFormBeats());
+    console.log("useEffectXX");
+    dispatch(adminGetBeats());
   }, []);
 
   const handleCloseModal = async () => {
-    dispatch(adminGetBeats());
     setBeatToDelete(null);
   };
 
   const handleEdit = async (data) => {
-    console.log("handleEdit", data);
     await dispatch(setCurrentEditBeat(data));
     router.push(`/admin/beats/${data._id}`);
   };
@@ -115,42 +112,7 @@ export default function SellerDashboardOverview() {
         >
           <IslandDashboard className="flex flex-col gap-5 xl:gap-8">
             <DynamicTable headers={headers} rows={rows} />
-            <div className="flex justify-center gap-4">
-              {page > 1 && (
-                <button
-                  onClick={() => dispatch(setCurrentBeatPage(page - 1))}
-                  className="text-red-700"
-                >
-                  &#11164;
-                </button>
-              )}
 
-              {[...Array(Math.min(totalPages, 3))].map((_, index) => {
-                const pageNumber = page - 1 + index;
-                return (
-                  pageNumber < totalPages && (
-                    <button
-                      key={pageNumber}
-                      onClick={() =>
-                        dispatch(setCurrentBeatPage(pageNumber + 1))
-                      }
-                      className={pageNumber + 1 === page ? "font-bold" : ""}
-                    >
-                      {pageNumber + 1}
-                    </button>
-                  )
-                );
-              })}
-
-              {page < totalPages && (
-                <button
-                  onClick={() => dispatch(setCurrentBeatPage(page + 1))}
-                  className="text-red-700"
-                >
-                  &#11166;
-                </button>
-              )}
-            </div>
           </IslandDashboard>
         </SellerDashboardLayout>
       </main>
