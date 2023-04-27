@@ -196,7 +196,7 @@ export const getUserData = createAsyncThunk(
       const ownedBeats = response.createdBeats;
       const ownedReviews = response.userReviews;
       const orders = response.userOrders;
-      //const favoriteBeats = response.favoriteBeats;
+      const favoriteBeats = response.userFavorites;
 
 
       console.log(
@@ -213,7 +213,7 @@ export const getUserData = createAsyncThunk(
       await dispatch(setOwnedBeats(ownedBeats));
       await dispatch(setOwnedReviews(ownedReviews));
      await dispatch(setOrders(orders));
-      //await dispatch(setFavoriteBeats(favoriteBeats));
+      await dispatch(setFavoriteBeats(favoriteBeats));
 
       const auth = {
         isSeller: response.isSeller,

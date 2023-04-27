@@ -29,7 +29,7 @@ export default function BeatShopSectionForClient(props) {
   }, []);
 
   const { activeItems } = useSelector((state) => state?.beats) || [];
-  const { bougthBeats, ownedBeats } = useSelector(
+  const { bougthBeats, ownedBeats, favoriteBeats } = useSelector(
     (state) => state.client.beats
   );
 
@@ -44,7 +44,7 @@ export default function BeatShopSectionForClient(props) {
         <NewBeatCardGrid beats={ownedBeats} />
       ) : generalActiveIndex === 2 ? (
         <div>
-          <NewBeatCardGrid beats={bougthBeats} />
+          <NewBeatCardGrid beats={favoriteBeats} />
         </div>
       ) : (
         <ReviewCardGrid />
