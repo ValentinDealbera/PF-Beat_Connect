@@ -16,12 +16,12 @@ import {
 import { forwardRef, useImperativeHandle } from "react";
 import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import {
-//   adminEditReview,
-//   adminPostReview,
-//   adminGetFormBeats,
-//   adminGetUsersForms,
-// } from "@/redux/slices/admin";
+import {
+  adminEditReview,
+  adminPostReview,
+  adminGetFormBeats,
+  adminGetUsersForms,
+} from "@/redux/slices/admin/reviews";
 import { useRouter } from "next/router";
 import { Autocomplete, TextField } from "@mui/material";
 
@@ -33,7 +33,7 @@ const AdminCreateReviewForm = forwardRef((props, ref) => {
   const [fieldsToValidate, setFieldsToValidate] = useState([]);
   const [error, setErrors] = useState({});
   const defaultValues =
-    useSelector((state) => state.admin.currentEditReview) || {};
+    useSelector((state) => state.admin.currentEditingReview) || {};
   const mode = props.mode;
   const defaultUsers = useSelector((state) => state.admin.usersForms);
   const defaultBeats = useSelector((state) => state.admin.beatsForms);
