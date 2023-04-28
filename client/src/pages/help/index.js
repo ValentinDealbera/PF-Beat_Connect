@@ -36,7 +36,7 @@ export default function HelpOverview() {
               <p className="mt-6 w-full cursor-pointer text-center font-light">
               {t("helpCenterIndex.t2")}{" "}
                 <span className="font-medium text-red-700">
-                {t("helpCenterIndex.t2")}
+                {t("helpCenterIndex.t3")}
                 </span>
               </p>
             </div>

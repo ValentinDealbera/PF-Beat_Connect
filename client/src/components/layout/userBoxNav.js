@@ -10,8 +10,10 @@ import {
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
 export default function UserBoxNav({ children, id }) {
+  const [t, i18n] = useTranslation("global");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const client = useSelector(
@@ -53,7 +55,7 @@ export default function UserBoxNav({ children, id }) {
         ) : (
           <Link href="/auth">
             <div className="flex gap-2 rounded-full bg-red-700 pb-2 pl-4 pr-4 pt-2 text-sm font-semibold text-white">
-              <p>Iniciar sesión</p>
+              <p>{t("userBoxNav")}</p>
             </div>
           </Link>
         )}

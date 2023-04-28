@@ -5,6 +5,8 @@ import { toast } from "sonner";
 import axios from "axios";
 import { toastError, toastSuccess } from "@/utils/toastStyles";
 import { useRouter } from "next/router";
+import { useTranslation } from "react-i18next";
+
 
 export const manageBecomeSeller = () => {
   BecomeSeller.handleOpenDropdown();
@@ -14,6 +16,7 @@ export default function BecomeSeller() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [terms, setTerms] = useState(false);
   const router = useRouter();
+  const [t, i18n] = useTranslation("global");
 
   const handleOpenDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -24,14 +27,14 @@ export default function BecomeSeller() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!terms) {
-      toast.error("Debes aceptar los términos y condiciones", toastError);
+      toast.error(t("becomeSeller.error1"), toastError);
       return;
     }
     try {
       const data = await axios.get(`${serverUrl}cart/toseller`);
       router.push(data.data.link);
     } catch (error) {
-      toast.error("Ocurrio un error, intenta más tarde", toastError);
+      toast.error(t("becomeSeller.error2"), toastError);
       console.log(error);
     }
   };
@@ -43,17 +46,15 @@ export default function BecomeSeller() {
           <div className="flex h-full flex-col items-center justify-center gap-7 px-14 py-10  ">
             <div className="flex flex-col items-center justify-center gap-2">
               <h4 className="text-titulo2-regular text-center">
-                Convertirte en vendedor de{" "}
+                  {t("becomeSeller.t1")}{" "}
                 <span className="text-titulo2-semibold text-red-700">
                   BeatConnect
                 </span>{" "}
-                es una{" "}
-                <span className="text-titulo2-semibold">excelente idea!</span>
+                  {t("becomeSeller.t2")}{" "}
+                <span className="text-titulo2-semibold">{t("becomeSeller.t3")}</span>
               </h4>
               <p className="text-base-light text-center">
-                ¿Eres productor musical y estás buscando una plataforma en línea
-                para vender tus beats? BeatConnect es la solución perfecta para
-                ti. Crea tu propia tienda virtual y vende tus beats fácilmente.
+                {t("becomeSeller.t4")}
               </p>
             </div>
             <form
@@ -70,7 +71,7 @@ export default function BecomeSeller() {
                     onChange={() => setTerms(!terms)}
                   />
                   <label for="terms" className="text-base-light">
-                    Acepto los términos y condiciones
+                      {t("becomeSeller.t5")}
                   </label>
                 </div>
               </div>
@@ -78,7 +79,7 @@ export default function BecomeSeller() {
                 type="submit"
                 className="text-base-semibold mt-2  w-full rounded-full bg-red-700 py-2 text-white"
               >
-                Empezar a vender
+                  {t("becomeSeller.t6")}
               </button>
             </form>
           </div>
