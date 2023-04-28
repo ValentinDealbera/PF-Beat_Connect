@@ -9,7 +9,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { editClient } from "@/redux/slices/client/authSession";
 import { useRouter } from "next/router";
 import { validationEditUser } from "@/components/validation/client/editUser";
+import { useTranslation } from "react-i18next";
+
 export default function EditClientForm(props) {
+  const [t, i18n] = useTranslation("global");
   const router = useRouter();
   const dispatch = useDispatch();
   const formRef = useRef(null);
@@ -79,8 +82,8 @@ export default function EditClientForm(props) {
             <Input
               id="firstName"
               name="firstName"
-              label="Nombre"
-              placeholder="Nombre"
+              label={t("settingsClient.t1")}
+              placeholder={t("settingsClient.t1")}
               defaultValue={mode === "edit" ? defaultValues.firstName : ""}
               type="text"
               onChange={handleInput}
@@ -88,8 +91,8 @@ export default function EditClientForm(props) {
             />
             <Input
               name={"email"}
-              label={"Email"}
-              placeholder={"Email"}
+              label={t("settingsClient.t2")}
+              placeholder={t("settingsClient.t2")}
               defaultValue={mode === "edit" ? defaultValues.email : ""}
               type={"email"}
               onChange={handleInput}
@@ -97,8 +100,8 @@ export default function EditClientForm(props) {
             />
             <Input
               name={"username"}
-              label={"Nombre de usuario"}
-              placeholder={"Nombre de usuario"}
+              label={t("settingsClient.t3")}
+              placeholder={t("settingsClient.t3")}
               defaultValue={mode === "edit" ? defaultValues.userName : ""}
               type={"text"}
               onChange={handleInput}
@@ -106,8 +109,8 @@ export default function EditClientForm(props) {
             />
             <Input
               name="image"
-              label="Imagen de perfil"
-              placeholder="Imagen de perfil"
+              label={t("settingsClient.t4")}
+              placeholder={t("settingsClient.t4")}
               type="file"
               onChange={handleInput}
               error={error.backImage}
@@ -117,8 +120,8 @@ export default function EditClientForm(props) {
             <Input
               name={"lastName"}
               id={"lastName"}
-              label={"Apellido"}
-              placeholder={"Apellido"}
+              label={t("settingsClient.t5")}
+              placeholder={t("settingsClient.t5")}
               defaultValue={mode === "edit" ? defaultValues.lastName : ""}
               type={"text"}
               onChange={handleInput}
@@ -127,8 +130,8 @@ export default function EditClientForm(props) {
             <Input
               id="bio"
               name="bio"
-              label="Bio"
-              placeholder="Bio:"
+              label={t("settingsClient.t6")}
+              placeholder={t("settingsClient.t6")}
               defaultValue={mode === "edit" ? defaultValues.bio : ""}
               type="text"
               onChange={handleInput}
@@ -136,8 +139,8 @@ export default function EditClientForm(props) {
             />
             <Input
               name="backImage"
-              label="Imagen de portada"
-              placeholder="Imagen de portada"
+              label={t("settingsClient.t7")}
+              placeholder={t("settingsClient.t7")}
               type="file"
               onChange={handleInput}
               error={error.backImage}
@@ -148,7 +151,7 @@ export default function EditClientForm(props) {
           type="submit"
           className="background-primary-red-700 color-neutral-white w-max rounded-full px-5 py-3 text-sm font-semibold"
         >
-          Guardar
+            {t("settingsClient.tosave")}
         </button>
       </FormContainer>
     </form>

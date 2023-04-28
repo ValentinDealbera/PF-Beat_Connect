@@ -4,12 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { postClientBeat } from "@/redux/slices/client/beats";
 import { ValidationCreateBeat } from "../client/validationCreateBeat";
 import { fetchGenres } from "@/redux/slices/filters";
+import { useTranslation } from "react-i18next";
 
 export const managePostBeat = () => {
   PostBeat.handleOpenDropdown();
 };
 
 export default function PostBeat() {
+  const [t, i18n] = useTranslation("global");
   const dispatch = useDispatch();
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -97,13 +99,13 @@ export default function PostBeat() {
             <div className="flex w-full flex-col gap-5 overflow-y-hidden">
               <div className="flex flex-col items-center justify-center gap-0">
                 <h4 className="text-titulo3-regular text-center">
-                  ¿En que haz estado{" "}
+                    {t("postBeat.t1")}{" "}
                   <span className="text-titulo3-semibold text-red-700">
-                    trabajando?
+                    {t("postBeat.t2")}
                   </span>{" "}
                 </h4>
                 <p className="text-base-light text-center">
-                  Sube tu beat y empieza a vender
+                    {t("postBeat.t3")}
                 </p>
               </div>
               <form
@@ -113,28 +115,28 @@ export default function PostBeat() {
                 <div className="flex flex-col gap-4">
                   <Input
                     name={"name"}
-                    label={"Nombre del beat"}
+                    label={t("postBeat.form1")}
                     type={"text"}
                     onChange={handleInputChange}
                     error={error.name}
                     className="w-full"
-                    placeholder="Ingresa un nombre increible"
+                    placeholder={t("postBeat.form2")}
                     labelClass="w-full"
                   />
                   <Input
                     name={"priceAmount"}
                     prefix={"$"}
-                    label={"Precio del beat"}
+                    label={t("postBeat.form3")}
                     type={"number"}
                     onChange={handleInputChange}
                     error={error.priceAmount}
-                    placeholder="Ingresa un precio"
+                    placeholder={t("postBeat.form4")}
                     className="w-full"
                     labelClass="w-full"
                   />
 
                   <Select
-                    label={"Elige un genero"}
+                    label={t("postBeat.form5")}
                     valores={genres}
                     setSeleccionados={handleSelectChange}
                     value={selected}
@@ -145,7 +147,7 @@ export default function PostBeat() {
                   />
                   <Input
                     name={"bpm"}
-                    label={"BPMs"}
+                    label={t("postBeat.form7")}
                     placeholder={"BPMs"}
                     type={"number"}
                     onChange={handleInputChange}
@@ -156,7 +158,7 @@ export default function PostBeat() {
 
                   <Input
                     name={"image"}
-                    label={"Sube una portada"}
+                    label={t("postBeat.form9")}
                     placeholder={"Beat Image"}
                     type={"file"}
                     onChange={handleInputChange}
@@ -166,7 +168,7 @@ export default function PostBeat() {
                   />
                   <Input
                     name={"audioMP3"}
-                    label={"Ingresa un beat de baja calidad (MP3)"}
+                    label={t("postBeat.form12")}
                     placeholder={"Upload your Beat"}
                     type={"file"}
                     onChange={handleInputChange}
@@ -189,7 +191,7 @@ export default function PostBeat() {
                   type="submit"
                   className="text-base-semibold mt-2  w-full rounded-full bg-red-700 py-2 text-white"
                 >
-                  Crear publicacion
+                    {t("postBeat.form13")}
                 </button>
               </form>
             </div>

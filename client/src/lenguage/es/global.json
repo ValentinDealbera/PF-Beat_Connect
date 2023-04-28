@@ -49,7 +49,6 @@
   "helpIndexTitle":"Centro de ayuda",
   "helpIndexParagraph": "En nuestro centro de ayuda, nos esforzamos por proporcionar una experiencia de usuario excepcional a todos nuestros clientes. Estamos aquí para responder cualquier pregunta que puedas tener y ayudarte a solucionar cualquier problema que puedas encontrar al utilizar nuestra plataforma.",
   
-
   "helpCenterIndex": {
     "t1": "Preguntas frecuentes",
     "t2": "¿Aun no encuentras tu respuesta?",
@@ -116,15 +115,115 @@
     "t1": "Perfil",
     "t2": "Inbox",
     "t3": "Vende tus beats",
-    "t4": "Configuración",
-    "t5": "Facturación",
-    "t6": "Logout"
+    "t4": "Publicar un beat",
+    "t5": "Configuración",
+    "t6": "Facturación",
+    "t7": "Logout"
   },
 
   "navModalItem": {
-    "label": "Centro de ayuda",
-    "t2": "",
-    "t3": "",
-    "t4": ""
+    "label": "Centro de ayuda"
+  },
+
+  "authIndex": {
+    "t1": "Hey, bienvenido",
+    "t2": "de nuevo",
+    "t3": "¿No recuerdas tu contraseña?",
+    "t4": "Recuperar",
+    "t5": "Ingresar",
+    "t6": "¿No tienes una cuenta?",
+    "t7": "Regístrate",
+    "label": "Correo electrónico",
+    "placeholder" : "Correo electrónico",
+    "labelPassword" : "Contraseña",
+    "placeholderPassword": "Contraseña",
+    "continueGoogle" : "Continuar con Google"
+  },
+
+  "landing": {
+    "t1": "Explora los mejores beats, encuentra nuevos artistas,",
+    "t2": "Descubre BeatConnect.",
+    "t3": "Sumérgete en el mundo de la música con BeatConnect, donde podrás descubrir los mejores beats, explorar nuevos artistas y desatar tu creatividad.",
+    "t4": "Ingresar ahora"
+  },
+
+  "footerNav": {
+    "general": "General",
+    "help": "Ayuda",
+    "account": "Cuenta"
+  },
+
+  "generalItems": {
+    "t1": "Inicio",
+    "t2": "Nosotros",
+    "t3": "Beats"
+  },
+
+  "helpItems": {
+    "t1": "Inicio",
+    "t2": "Política de privacidad",
+    "t3": "Términos y condiciones"
+  },
+
+  "accountItems": {
+    "t1": "Iniciar Sesión",
+    "t2": "Registrarse"
+  },
+
+  "userBoxNav" : "Iniciar Sesión",
+
+  "becomeSeller": {
+    "t1": "Convertirte en vendedor de",
+    "t2": "es una",
+    "t3": "excelente idea!",
+    "t4": "¿Eres productor musical y estás buscando una plataforma en línea para vender tus beats? BeatConnect es la solución perfecta para ti. Crea tu propia tienda virtual y vende tus beats fácilmente.",
+    "t5": "Acepto los términos y condiciones",
+    "t6": "Empezar a vender",
+    "error1" : "Debes aceptar los términos y condiciones",
+    "error2" : "Ocurrio un error, intenta más tarde"
+  },
+
+  "postBeat": {
+    "t1": "¿En que haz estado",
+    "t2": "trabajando?",
+    "t3": "Sube tu beat y empieza a vender",
+    "form1": "Nombre del beat",
+    "form2": "Ingresa un nombre increible",
+    "form3": "Precio del beat",
+    "form4": "Ingresa un precio",
+    "form5": "Elige un genero",
+    "form6": "Seleccionar Género",
+    "form7": "BPMs",
+    "form8": "",
+    "form9": "Sube una portada",
+    "form10": "Seleccionar archivos",
+    "form11": "Sin archivos seleccionados",
+    "form12": "Sube tu beat",
+    "form13": "Crear publicacion"
+  },
+
+  "buyerGeneralNav": {
+    "profile" : "Perfil",
+    "password" : "Contraseña",
+    "t1": "Beats comprados",
+    "t2": "Mis Beats",
+    "t3": "Favoritos",
+    "t4": "Reviews"
+  },
+
+  "NoBeats": "Hey, parece que no hay nada por aqui",
+
+  "settingsClient": {
+    "title": "Configura tu cuenta",
+    "t1": "Nombre",
+    "t2": "Email",
+    "t3": "Nombre de usuario",
+    "t4": "Imagen de perfil",
+    "t5": "Apellido",
+    "t6": "Bio",
+    "t7": "Imagen de portada",
+    "tosave": "Guardar"
   }
+
+
 }

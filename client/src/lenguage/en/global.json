@@ -49,7 +49,6 @@
     "helpIndexTitle":"Help center",
     "helpIndexParagraph": "At our help center, we strive to provide an exceptional user experience to all of our customers. We are here to answer any questions you may have and help you troubleshoot any issues you may encounter while using our platform.",
     
-
     "helpCenterIndex": {
       "t1": "Frequently asked questions",
       "t2": "Still can't find your answer?",
@@ -116,16 +115,114 @@
       "t1": "Profile",
       "t2": "Inbox",
       "t3": "Sell your beats",
-      "t4": "Settings",
-      "t5": "Billing",
-      "t6": "Logout"
+      "t4": "Release a beat",
+      "t5": "Settings",
+      "t6": "Billing",
+      "t7": "Logout"
     },
 
     "navModalItem": {
-      "label": "Help Center",
-      "t2": "",
-      "t3": "",
-      "t4": ""
+      "label": "Help Center"
+    },
+
+    "authIndex": {
+      "t1": "Hey, welcome",
+      "t2": "back",
+      "t3": "Don't remember your password?",
+      "t4": "Recover",
+      "t5": "Sign in",
+      "t6": "Don't have an account?",
+      "t7": "Register",
+      "label": "Email",
+      "placeholder" : "Email",
+      "labelPassword" : "Password",
+      "placeholderPassword": "Password",
+      "continueGoogle" : "Continue with Google"
+    },
+
+    "landing": {
+      "t1": "Explore the best beats, discover new artists,",
+      "t2": "Discover BeatConnect",
+      "t3": "Immerse yourself in the world of music with BeatConnect, where you can discover the best beats, explore new artists, and unleash your creativity.",
+      "t4": "Sign in now"
+    },
+
+    "footerNav": {
+      "general": "General",
+      "help": "Help",
+      "account": "Account"
+    },
+
+    "generalItems": {
+      "t1": "Home",
+      "t2": "About",
+      "t3": "Beats"
+    },
+
+    "helpItems": {
+      "t1": "Home",
+      "t2": "Privacy Policy",
+      "t3": "Terms and Conditions"
+    },
+
+    "accountItems": {
+      "t1": "Log in",
+      "t2": "Register"
+    },
+
+    "userBoxNav" : "Log in",
+
+    "becomeSeller": {
+      "t1": "Become a seller on",
+      "t2": "it's a",
+      "t3": "great idea!",
+      "t4": "Are you a music producer looking for an online platform to sell your beats? BeatConnect is the perfect solution for you. Create your own virtual store and easily sell your beats.",
+      "t5": "I accept the terms and conditions.",
+      "t6": "Start selling",
+      "error1" : "You must accept the terms and conditions",
+      "error2" : "An error occurred, please try again later"
+    },
+
+    "postBeat": {
+      "t1": "How have you been",
+      "t2": "working?",
+      "t3": "Upload your beat and start selling.",
+      "form1": "Beat name",
+      "form2": "Enter an amazing name",
+      "form3": "Beat price",
+      "form4": "Enter a price",
+      "form5": "Choose a genre",
+      "form6": "Select Gender",
+      "form7": "BPMs",
+      "form8": "",
+      "form9": "Upload a cover",
+      "form10": "Select files",
+      "form11": "No files selected",
+      "form12": "Upload your beat",
+      "form13": "Create post"
+    },
+
+    "buyerGeneralNav": {
+      "profile" : "Profile",
+      "password" : "Password",
+      "t1": "Purchased Beats",
+      "t2": "My Beats",
+      "t3": "Favorites",
+      "t4": "Reviews"
+    },
+
+    "NoBeats": "Hey, it seems like there's nothing here",
+
+    "settingsClient": {
+      "title": "Set up your account",
+      "t1": "First name",
+      "t2": "Email",
+      "t3": "Username",
+      "t4": "Profile picture",
+      "t5": "Last name",
+      "t6": "Bio",
+      "t7": "Cover image",
+      "tosave": "Tosave"
     }
 }
 
