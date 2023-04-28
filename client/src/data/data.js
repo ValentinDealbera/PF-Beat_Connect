@@ -58,7 +58,7 @@ export const navClient = [
   {
     name: "Vende tus beats",
     url: "",
-    onClick: () => manageBecomeSeller()
+    onClick: () => manageBecomeSeller(),
   },
   {
     name: "Configuracion",
@@ -105,7 +105,8 @@ export const tecnologias = [
     id: 1,
     title: "NextJS",
     image: "/icon/tecnologias/next-js.svg",
-    description: "Next.js es un framework de React para la construcción de aplicaciones web de alto rendimiento y de alto rendimiento. Next.js te ayuda a crear aplicaciones web de una sola página con React fácilmente.",
+    description:
+      "Next.js es un framework de React para la construcción de aplicaciones web de alto rendimiento y de alto rendimiento. Next.js te ayuda a crear aplicaciones web de una sola página con React fácilmente.",
   },
   {
     id: 4,
@@ -139,7 +140,8 @@ export const tecnologias = [
     id: 8,
     title: "TailwindCSS",
     image: "/icon/tecnologias/tailwindCSS.svg",
-    description: "Tailwind CSS es un framework de CSS de bajo nivel que te ayuda a crear diseños de interfaz de usuario (UI) de manera rápida y sencilla. Con Tailwind CSS, puedes crear diseños de interfaz de usuario (UI) personalizados sin tener que escribir CSS.",
+    description:
+      "Tailwind CSS es un framework de CSS de bajo nivel que te ayuda a crear diseños de interfaz de usuario (UI) de manera rápida y sencilla. Con Tailwind CSS, puedes crear diseños de interfaz de usuario (UI) personalizados sin tener que escribir CSS.",
   },
   {
     id: 10,
@@ -173,42 +175,155 @@ export const tecnologias = [
     id: 14,
     title: "Mercado Pago",
     image: "/icon/tecnologias/mercadopago.png",
-    description: "Mercado Pago es una plataforma de pagos online que permite a los usuarios realizar pagos a través de tarjetas de crédito, débito, efectivo y transferencias bancarias. Mercado Pago es una plataforma de pagos online que permite a los usuarios realizar pagos a través de tarjetas de crédito, débito, efectivo y transferencias bancarias.",
+    description:
+      "Mercado Pago es una plataforma de pagos online que permite a los usuarios realizar pagos a través de tarjetas de crédito, débito, efectivo y transferencias bancarias. Mercado Pago es una plataforma de pagos online que permite a los usuarios realizar pagos a través de tarjetas de crédito, débito, efectivo y transferencias bancarias.",
   },
   {
     id: 15,
     title: "Auth0",
     image: "/icon/tecnologias/auth0.svg",
-    description: "Auth0 es una plataforma de autenticación y autorización que permite a los desarrolladores agregar autenticación y autorización a sus aplicaciones web, móviles y de escritorio. Auth0 es una plataforma de autenticación y autorización que permite a los desarrolladores agregar autenticación y autorización a sus aplicaciones web, móviles y de escritorio.",
+    description:
+      "Auth0 es una plataforma de autenticación y autorización que permite a los desarrolladores agregar autenticación y autorización a sus aplicaciones web, móviles y de escritorio. Auth0 es una plataforma de autenticación y autorización que permite a los desarrolladores agregar autenticación y autorización a sus aplicaciones web, móviles y de escritorio.",
   },
   {
     id: 16,
     title: "Firebase",
     image: "/icon/tecnologias/firebase.svg",
-    description: "Firebase es una plataforma de desarrollo de aplicaciones móviles y web que ofrece servicios de base de datos, almacenamiento, autenticación, análisis, mensajería y más. Firebase es una plataforma de desarrollo de aplicaciones móviles y web que ofrece servicios de base de datos, almacenamiento, autenticación, análisis, mensajería y más.",
+    description:
+      "Firebase es una plataforma de desarrollo de aplicaciones móviles y web que ofrece servicios de base de datos, almacenamiento, autenticación, análisis, mensajería y más. Firebase es una plataforma de desarrollo de aplicaciones móviles y web que ofrece servicios de base de datos, almacenamiento, autenticación, análisis, mensajería y más.",
   },
   {
     id: 17,
     title: "Render",
     image: "/icon/tecnologias/render.svg",
-    description: "Render es una plataforma de alojamiento de aplicaciones web que permite a los desarrolladores desplegar aplicaciones web y API REST en la nube. Render es una plataforma de alojamiento de aplicaciones web que permite a los desarrolladores desplegar aplicaciones web y API REST en la nube.",
+    description:
+      "Render es una plataforma de alojamiento de aplicaciones web que permite a los desarrolladores desplegar aplicaciones web y API REST en la nube. Render es una plataforma de alojamiento de aplicaciones web que permite a los desarrolladores desplegar aplicaciones web y API REST en la nube.",
   },
   {
     id: 18,
     title: "Vercel",
     image: "/icon/tecnologias/vercel.svg",
-    description: "Vercel es una plataforma de alojamiento de aplicaciones web que permite a los desarrolladores desplegar aplicaciones web y API REST en la nube. Vercel es una plataforma de alojamiento de aplicaciones web que permite a los desarrolladores desplegar aplicaciones web y API REST en la nube.",
+    description:
+      "Vercel es una plataforma de alojamiento de aplicaciones web que permite a los desarrolladores desplegar aplicaciones web y API REST en la nube. Vercel es una plataforma de alojamiento de aplicaciones web que permite a los desarrolladores desplegar aplicaciones web y API REST en la nube.",
   },
   {
     id: 19,
     title: "Trello",
     image: "/icon/tecnologias/trello.svg",
-    description: "Trello es una herramienta de gestión de proyectos que permite a los equipos de trabajo organizar sus proyectos en tableros. Trello es una herramienta de gestión de proyectos que permite a los equipos de trabajo organizar sus proyectos en tableros.",
-    },
+    description:
+      "Trello es una herramienta de gestión de proyectos que permite a los equipos de trabajo organizar sus proyectos en tableros. Trello es una herramienta de gestión de proyectos que permite a los equipos de trabajo organizar sus proyectos en tableros.",
+  },
   {
     id: 20,
     title: "Git + GitHub",
     image: "/icon/tecnologias/github.svg",
-    description: "Git es un sistema de control de versiones distribuido de código abierto que permite a los desarrolladores colaborar en proyectos de software. GitHub es una plataforma de alojamiento de código fuente y control de versiones que utiliza Git.",
-  }
+    description:
+      "Git es un sistema de control de versiones distribuido de código abierto que permite a los desarrolladores colaborar en proyectos de software. GitHub es una plataforma de alojamiento de código fuente y control de versiones que utiliza Git.",
+  },
+];
+
+export const nosotros = [
+  {
+    id: 1,
+    name: "Lucas Regner",
+    image: "/images/nosotros/lucas.png", //crear carpeta e importar imagenes propias
+    //description: "",
+    redes: {
+      //importar fotos de las redes como svg
+      linkedin: "/icon/tecnologias/linkedin.svg",
+      github: "/icon/tecnologias/github2.svg",
+      gmail: "/icon/tecnologias/gmail.svg",
+    },
+  },
+
+  {
+    id: 2,
+    name: "Carla Frías",
+    image: "/images/nosotros/lucas.png", //crear carpeta e importar imagenes propias
+    //description: "",
+    redes: {
+      //importar fotos de las redes como svg
+      linkedin: "/icon/tecnologias/linkedin.svg",
+      github: "/icon/tecnologias/github2.svg",
+      gmail: "/icon/tecnologias/gmail.svg",
+    },
+  },
+
+  {
+    id: 3,
+    name: "Micaela Savournin",
+    image: "/images/nosotros/lucas.png", //crear carpeta e importar imagenes propias
+    //description: "",
+    redes: {
+      //importar fotos de las redes como svg
+      linkedin: "/icon/tecnologias/linkedin.svg",
+      github: "/icon/tecnologias/github2.svg",
+      gmail: "/icon/tecnologias/gmail.svg",
+    },
+  },
+
+  {
+    id: 4,
+    name: "Fabian Pacheco",
+    image: "/images/nosotros/lucas.png", //crear carpeta e importar imagenes propias
+    //description: "",
+    redes: {
+      //importar fotos de las redes como svg
+      linkedin: "/icon/tecnologias/linkedin.svg",
+      github: "/icon/tecnologias/github2.svg",
+      gmail: "/icon/tecnologias/gmail.svg",
+    },
+  },
+
+  {
+    id: 5,
+    name: "Valentin Dealbera",
+    image: "/images/nosotros/lucas.png", //crear carpeta e importar imagenes propias
+    //description: "",
+    redes: {
+      //importar fotos de las redes como svg
+      linkedin: "/icon/tecnologias/linkedin.svg",
+      github: "/icon/tecnologias/github2.svg",
+      gmail: "/icon/tecnologias/gmail.svg",
+    },
+  },
+
+  {
+    id: 6,
+    name: "Tadeo Massó",
+    image: "/images/nosotros/lucas.png", //crear carpeta e importar imagenes propias
+    //description: "",
+    redes: {
+      //importar fotos de las redes como svg
+      linkedin: "/icon/tecnologias/linkedin.svg",
+      github: "/icon/tecnologias/github2.svg",
+      gmail: "/icon/tecnologias/gmail.svg",
+    },
+  },
+
+  {
+    id: 7,
+    name: "Leonardo Pischetz",
+    image: "/images/nosotros/lucas.png", //crear carpeta e importar imagenes propias
+    //description: "",
+    redes: {
+      //importar fotos de las redes como svg
+      linkedin: "/icon/tecnologias/linkedin.svg",
+      github: "/icon/tecnologias/github2.svg",
+      gmail: "/icon/tecnologias/gmail.svg",
+    },
+  },
+
+  {
+    id: 8,
+    name: "Thomas Barenghi",
+    image: "/images/nosotros/lucas.png", //crear carpeta e importar imagenes propias
+    //description: "",
+    redes: {
+      //importar fotos de las redes como svg
+      linkedin: "/icon/tecnologias/linkedin.svg",
+      github: "/icon/tecnologias/github2.svg",
+      gmail: "/icon/tecnologias/gmail.svg",
+    },
+  },
 ];

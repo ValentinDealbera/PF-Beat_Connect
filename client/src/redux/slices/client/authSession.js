@@ -15,7 +15,6 @@ import { setBougthBeats, setOwnedBeats, setFavoriteBeats } from "./beats";
 import { setOwnedReviews } from "./reviews";
 import { setOrders } from "./orders";
 
-
 const initialState = {
   auth: {
     isLogged: false,
@@ -161,21 +160,17 @@ export const editClient = createAsyncThunk(
 
 //--------------------
 //PASSWORD RECOVERY
-// export const passwordRecovery = createAsyncThunk(
-//   "authSession/passwordRecovery",
-//   async (data, { rejectWithValue }) => {
-//     const clientId = "64459913669bbb0d6e7838d9"; //Id de fabi durante testeo (hecho por fabi)
-
-//     try {
-//       const newPassword = { password: data.newPassword };
-
-//       await axios.put(`${serverUrl}user/${clientId}`, newPassword);
-//     } catch (error) {
-//       console.log("ERROR passwordRecovery", error);
-//       return rejectWithValue(error.response.data.message);
-//     }
-//   }
-// );
+export const passwordRecovery = createAsyncThunk(
+  "authSession/passwordRecovery",
+  async (data, { rejectWithValue }) => {
+    try {
+      await axios.put(`${serverUrl}recover/password`, data);
+    } catch (error) {
+      console.log("ERROR passwordRecovery", error);
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
 
 //--------------------
 //GET USER DATA
@@ -198,7 +193,6 @@ export const getUserData = createAsyncThunk(
       const orders = response.userOrders;
       //const favoriteBeats = response.favoriteBeats;
 
-
       console.log(
         "bougthBeats",
         bougthBeats,
@@ -212,7 +206,7 @@ export const getUserData = createAsyncThunk(
       await dispatch(setBougthBeats(bougthBeats));
       await dispatch(setOwnedBeats(ownedBeats));
       await dispatch(setOwnedReviews(ownedReviews));
-     await dispatch(setOrders(orders));
+      await dispatch(setOrders(orders));
       //await dispatch(setFavoriteBeats(favoriteBeats));
 
       const auth = {
@@ -323,15 +317,15 @@ const authSession = createSlice({
       })
 
       /***************** PASSWORD RECOVERY ******************/
-      // .addCase(passwordRecovery.pending, (state, action) => {
-      //   return;
-      // })
-      // .addCase(passwordRecovery.fulfilled, (state, action) => {
-      //   toast.success("Tu contraseña se cambio correctamente", toastSuccess);
-      // })
-      // .addCase(passwordRecovery.rejected, (state, action) => {
-      //   toast.error("Hubo un problema, intente mas tarde", toastError);
-      // })
+      .addCase(passwordRecovery.pending, (state, action) => {
+        return;
+      })
+      .addCase(passwordRecovery.fulfilled, (state, action) => {
+        toast.success("Tu contraseña se cambio correctamente", toastSuccess);
+      })
+      .addCase(passwordRecovery.rejected, (state, action) => {
+        toast.error("Hubo un problema, intente mas tarde", toastError);
+      })
 
       //--------------------
       //GET USER DATA
