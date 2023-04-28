@@ -22,22 +22,17 @@ export default function SellerDashboardNav() {
     {
       title: "Beats",
       link: "/admin/beats",
-      icon: "/icon/dashboard/beats.svg",
+      icon: "/icon/dashboard/musical-black.svg",
     },
     {
       title: "Usuarios",
       link: "/admin/users",
-      icon: "/icon/dashboard/orders.svg",
+      icon: "/icon/dashboard/user-black.svg",
     },
     {
       title: "Reviews",
       link: "/admin/reviews",
       icon: "/icon/dashboard/reviews.svg",
-    },
-    {
-      title: "Analytics",
-      link: "/admin/analytics",
-      icon: "/icon/dashboard/analytics.svg",
     },
   ];
 
@@ -52,7 +47,7 @@ export default function SellerDashboardNav() {
           icon={"/icon/dashboard/overview.svg"}
         />
         <div className="gap-estilo4 flex  flex-col">
-          <h3 className="text-sm-medium color-primary-red-700  dark:text-[#047c64]">
+          <h3 className="text-sm-medium color-primary-red-700  dark:text-red-600">
             Dashboard
           </h3>
           {dashboardNav.map((item) => (
