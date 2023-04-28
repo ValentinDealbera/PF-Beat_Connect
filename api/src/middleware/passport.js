@@ -31,7 +31,8 @@ async function(accessToken, refreshToken, profile, done) {
                 lastName: lastName,
                 username: username,
                 image: profile.photos[0].value,
-                email: profile.emails[0].value
+                email: profile.emails[0].value,
+                password: "",
             }
             user = await User.create(newUser)
             console.log("creating new user");

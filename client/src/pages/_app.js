@@ -5,9 +5,11 @@ import store, { persistor } from "@/redux/store/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { Toaster, toast } from "sonner";
 import { I18nextProvider } from "react-i18next";
+import { ThemeProvider } from 'next-themes';
 import i18next from "i18next";
 import global_es from "../lenguage/es/global.json";
 import global_en from "../lenguage/en/global.json";
+
 
 i18next.init({
   interpolation: {
@@ -40,6 +42,9 @@ export default function App({ Component, pageProps, router }) {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <HOC>
+
+          
+            <ThemeProvider attribute="class">
             <I18nextProvider i18n={i18next}>
               {headerVisibility && <Header />}
               <Master>
@@ -48,6 +53,8 @@ export default function App({ Component, pageProps, router }) {
               </Master>
               {headerVisibility && <Footer mode={mode} />}
             </I18nextProvider>
+              </ThemeProvider>
+
           </HOC>
         </PersistGate>
       </Provider>

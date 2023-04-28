@@ -33,7 +33,8 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
     const genres = useSelector((state) => state.filters.genres);
     const [softD, setSoftD] = useState(defaultValues.softDelete);       
       
-     console.log("defaultValues", defaultValues);    
+    // console.log("defaultValues", defaultValues);
+    
 
     const [form, setForm] = useState({
         name: `${mode === "edit" ? defaultValues.name : ""}`,
@@ -56,7 +57,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
         }));
 
       console.log("Data para el form", form);
-      // console.log("USERCREATOR", defaultValues.userCreator)
+     // console.log("USERCREATOR", defaultValues.userCreator)
 
       const handleInput = (e) => {
         handleInputChange(

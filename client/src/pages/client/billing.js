@@ -31,10 +31,6 @@ export default function BuyerProfile() {
             width={70}
             height={70}
             className="aspect-square rounded-xl object-cover"
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src = "/images/placeholder.png";
-            }}
           />
           <div className="flex flex-col">
             <h3 className="text-base-medium">{item.beat.name}</h3>

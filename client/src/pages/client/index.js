@@ -21,10 +21,6 @@ export default function BuyerProfile() {
           image={currentUser.backImage}
           alt="hero"
           className="items-center justify-center align-middle"
-          onError={(e) => {
-            e.target.onerror = null;
-            e.target.src = "/images/placeholder.png";
-          }}
         >
           <div
             id="contenido"

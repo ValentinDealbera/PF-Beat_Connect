@@ -27,19 +27,19 @@ export const navPublic = [
 
 export const navHelp = [
   {
-    name: "Inicio",
+    name: "navHelp.t1",
     url: "/help",
     colorMode: "light",
     visibility: true,
   },
   {
-    name: "Política de privacidad",
+    name: "navHelp.t2",
     url: "/help/privacy",
     colorMode: "light",
     visibility: true,
   },
   {
-    name: "Términos y condiciones",
+    name: "navHelp.t3",
     url: "/help/terms",
     colorMode: "light",
     visibility: true,
