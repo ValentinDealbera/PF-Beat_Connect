@@ -1,9 +1,11 @@
 import { Search, DashboardItem } from "@/components";
-import { useTheme } from "next-themes";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 
 export default function SellerDashboardNav() {
-  const { theme, setTheme } = useTheme();
-  console.log("THEME", theme);
+
+  const theme = useSelector((state) => state.client.authSession.theme);
 
   const dashboardNav = [
     {
@@ -11,7 +13,7 @@ export default function SellerDashboardNav() {
       link: "/admin/",
       icon: (() => {
         if (theme === "dark") {
-          return "/icon/dashboard/black-overview.svg";
+          return "/icon/dashboard/overview.svg";
         } else {
           return "/icon/dashboard/overview.svg";
         }

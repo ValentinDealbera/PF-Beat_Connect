@@ -19,7 +19,7 @@ import { useEffect, useState } from "react";
 export default function SellerDashboardOverview() {
   const dispatch = useDispatch();
   const router = useRouter();
-  const { reviews } = useSelector((state) => state.admin);
+  const { reviews } = useSelector((state) => state.admin.reviews);
   const reviewsData = reviews;
   
   const [reviewToDelete, setReviewToDelete] = useState(null);

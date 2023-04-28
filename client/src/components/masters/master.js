@@ -11,6 +11,9 @@ import {
   setUserPurchasedBeats,
 } from "@/redux/slices/beats";
 
+import { setTheme } from "@/redux/slices/client/authSession";
+import darkmode from "@/utils/darkMode";
+
 export default function Master(props) {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -23,6 +26,18 @@ export default function Master(props) {
     setGeneralActiveIndex,
   } = useSelector((state) => state.beats);
 
+
+  const getTheme= async () => {
+    const prefersDarkMode = await darkmode();
+    const mode = prefersDarkMode ? "dark" : "light";
+    console.log("mode", mode);
+    dispatch(setTheme(mode));
+  };
+
+useEffect(() => {
+ getTheme();
+}, [window.matchMedia('(prefers-color-scheme: dark)').matches]);
+
   useEffect(() => {
     console.log("fetch master");
     if (router.pathname.startsWith("/client")) return;
@@ -30,6 +45,8 @@ export default function Master(props) {
     else if (router.pathname === "/beats") return;
     // dispatch(fetchBeats({}));
   }, [dispatch, router.pathname]);
+
+
 
   useEffect(() => {
     if (router.pathname.startsWith("/client")) {

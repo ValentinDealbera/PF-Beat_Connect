@@ -5,7 +5,7 @@ import axios from "axios";
 import { toastError, toastSuccess } from "@/utils/toastStyles";
 const tokenAdmin = process.env.NEXT_PUBLIC_TOKEN_ADMIN;
 const initialState = {
-  reviews:[],
+  reviews: [],
   currentEditingReview: {},
 };
 
@@ -19,8 +19,9 @@ export const adminGetReviews = createAsyncThunk(
       const response = await axios.get(`${serverUrl}review`);
       // console.log("cargandolol");
       // return { reviewResponse: response.data.docs };
+      console.log("response review", response);
       const reviewResponse = response.data;
-      return { reviewResponse } 
+      return { reviewResponse };
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
@@ -120,7 +121,9 @@ const adminReviewsSlice = createSlice({
       .addCase(adminGetReviews.fulfilled, (state, action) => {
         console.log("action.payload ok review", action.payload);
         // state.reviews = action.payload.reviewResponse;
-        state.reviews = Array.isArray(action.payload.reviewResponse) ? action.payload.reviewResponse : [];
+        state.reviews = Array.isArray(action.payload.reviewResponse)
+          ? action.payload.reviewResponse
+          : [];
         toast.success("Reviews cargadas correctamente", {
           style: {
             background: "#F0FFF0",

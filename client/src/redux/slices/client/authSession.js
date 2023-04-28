@@ -15,7 +15,6 @@ import { setBougthBeats, setOwnedBeats, setFavoriteBeats } from "./beats";
 import { setOwnedReviews } from "./reviews";
 import { setOrders } from "./orders";
 
-
 const initialState = {
   auth: {
     isLogged: false,
@@ -45,6 +44,7 @@ const initialState = {
   actionStatus: {
     getUserDataLoading: false,
   },
+  theme: "light",
 };
 
 //------------------ ASYNC THUNKS ------------------//
@@ -278,6 +278,13 @@ const authSession = createSlice({
     resetReducer(state, action) {
       state = initialState;
     },
+
+    //--------------------
+    //SET THEME
+    setTheme(state, action) {
+      console.log("setTheme", action.payload);
+      state.theme = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -400,7 +407,7 @@ const authSession = createSlice({
   },
 });
 
-export const { setLoginMethod, setGoogleSuccessful, resetReducer } =
+export const { setLoginMethod, setGoogleSuccessful, resetReducer, setTheme } =
   authSession.actions;
 
 export default authSession.reducer;

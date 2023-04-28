@@ -5,7 +5,7 @@ import axios from "axios";
 import { toastError, toastSuccess } from "@/utils/toastStyles";
 import { adminGetUsers } from "./users";
 import { adminGetBeats } from "./beats";
-//import { adminGetReviews } from "./reviews";
+import { adminGetReviews } from "./reviews";
 const tokenAdmin = process.env.NEXT_PUBLIC_TOKEN_ADMIN;
 const initialState = {
   users: [],
@@ -20,7 +20,7 @@ export const adminGetData = createAsyncThunk(
     try {
       await dispatch(adminGetUsers());
       await dispatch(adminGetBeats());
-      //   await dispatch(adminGetReviews());
+      await dispatch(adminGetReviews());
       return { success: true };
     } catch (error) {
       return rejectWithValue(error.response.data.message);
