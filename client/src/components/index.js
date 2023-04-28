@@ -127,8 +127,9 @@ export { default as EditClientForm } from "./forms/editClientForm";
 export { default as EditPasswordForm } from "./forms/editPasswordForm";
 export { default as ReviewCardGrid } from "./client/reviewCardGrid";
 export { default as RecoveryPasswordForm } from "./forms/recoveryPasswordForm";
-export { default as EditReviewForm } from "./masters/editReview";
 export { default as BeatReviewPopup } from "./beat/beatReviewPopup";
+export { default as EditReviewForm } from "./masters/editReview";
+
 
 
 //export { default as BeatImage } from "./beat/beatImage";
