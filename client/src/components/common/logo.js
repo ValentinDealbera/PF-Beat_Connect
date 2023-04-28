@@ -9,7 +9,7 @@ export default function Logo() {
     <Link href="/">
       <div className="logo relative" style={{ width: "150px", height: "40px" }}>
         <Image
-          src={logoPath}
+          src="/icon/logo.svg"
           alt="logo"
           layout="fill"
           objectFit="contain"

@@ -15,7 +15,7 @@ import {
 import { forwardRef, useImperativeHandle } from "react";
 import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { adminPostUser, adminEditUser } from "@/redux/slices/admin";
+import { adminPostUser, adminEditUser } from "@/redux/slices/admin/users";
 import { useRouter } from "next/router";
 
 const AdminCreateUserForm = forwardRef((props, ref) => {
@@ -26,7 +26,7 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
   const [fieldsToValidate, setFieldsToValidate] = useState([]);
   const [error, setErrors] = useState({});
   const defaultValues =
-    useSelector((state) => state.admin.currentEditUser) || {};
+    useSelector((state) => state.admin.users.currentEdtingUser) || {};
   const mode = props.mode;
   const [softD, setSoftD] = useState(defaultValues.softDelete);
   const [sellerState, setSellerState] = useState(defaultValues.isSeller);
@@ -61,7 +61,7 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
   };
 
   const onSubmit = async (e) => {
-    console.log("onSubmit", e, validateMode);
+    console.log("onSubmit", mode, validateMode);
     const actionToDispatch = mode === "edit" ? adminEditUser : adminPostUser;
     try {
       await handleSubmit({
