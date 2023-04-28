@@ -1,34 +1,41 @@
 import { Search, DashboardItem } from "@/components";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-export const dashboardNav = [
-  {
-    title: "Overview",
-    link: "/admin/",
-    icon: "/icon/dashboard/overview.svg",
-  },
-  {
-    title: "Beats",
-    link: "/admin/beats",
-    icon: "/icon/dashboard/beats.svg",
-  },
-  {
-    title: "Usuarios",
-    link: "/admin/users",
-    icon: "/icon/dashboard/orders.svg",
-  },
-  {
-    title: "Reviews",
-    link: "/admin/reviews",
-    icon: "/icon/dashboard/reviews.svg",
-  },
-  {
-    title: "Analytics",
-    link: "/admin/analytics",
-    icon: "/icon/dashboard/analytics.svg",
-  },
-];
 
 export default function SellerDashboardNav() {
+
+  const theme = useSelector((state) => state.client.authSession.theme);
+
+  const dashboardNav = [
+    {
+      title: "Overview",
+      link: "/admin/",
+      icon: (() => {
+        if (theme === "dark") {
+          return "/icon/dashboard/overview.svg";
+        } else {
+          return "/icon/dashboard/overview.svg";
+        }
+      })(),
+    },
+    {
+      title: "Beats",
+      link: "/admin/beats",
+      icon: "/icon/dashboard/musical-black.svg",
+    },
+    {
+      title: "Usuarios",
+      link: "/admin/users",
+      icon: "/icon/dashboard/user-black.svg",
+    },
+    {
+      title: "Reviews",
+      link: "/admin/reviews",
+      icon: "/icon/dashboard/reviews.svg",
+    },
+  ];
+
   return (
     <>
       <div className="gap-estilo2 flex flex-col">
@@ -40,7 +47,9 @@ export default function SellerDashboardNav() {
           icon={"/icon/dashboard/overview.svg"}
         />
         <div className="gap-estilo4 flex  flex-col">
-          <h3 className="text-sm-medium color-primary-red-700  dark:text-[#047c64]">Dashboard</h3>
+          <h3 className="text-sm-medium color-primary-red-700  dark:text-red-600">
+            Dashboard
+          </h3>
           {dashboardNav.map((item) => (
             <NavItems
               itemTitle={item.title}

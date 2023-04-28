@@ -7,6 +7,7 @@ import {
   Input,
   SwitchForm,
   AdminCreateBeatForm,
+  Head,
 } from "@/components";
 
 import {
@@ -29,6 +30,7 @@ export default function AdminBeatsCreate() {
 
   return (
     <>
+    <Head title="Editar beat" />
       <main>
         <SellerDashboardLayout
           topBarMode="action"

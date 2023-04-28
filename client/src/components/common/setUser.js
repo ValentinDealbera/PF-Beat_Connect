@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Autocomplete } from "@mui/material";
 import { TextField } from "@mui/material"; 
 import { useDispatch, useSelector } from "react-redux";
-import { adminGetUsersForms } from "@/redux/slices/admin";
+//import { adminGetUsersForms } from "@/redux/slices/admin";
 
 export default function SetUser (id, name, onChange){
 
@@ -14,7 +14,7 @@ export default function SetUser (id, name, onChange){
       }));
 
       useEffect(() => {
-      dispatch(adminGetUsersForms());        
+    //  dispatch(adminGetUsersForms());        
       }, []);
 
       console.log("usuarios", options);     

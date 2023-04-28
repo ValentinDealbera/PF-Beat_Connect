@@ -4,71 +4,77 @@ import {
   FaqsGrid,
   DynamicTable,
   ModalTables,
+  Head,
 } from "@/components";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   adminGetBeats,
-  setCurrentEditBeat,
   adminDeleteBeat,
-  setCurrentBeatPage,
-  adminGetFormBeats,
-} from "@/redux/slices/admin";
+  setCurrentEditingBeat,
+} from "@/redux/slices/admin/beats";
+
+import { useEffect, useMemo } from "react";
+import { debounce } from "lodash";
 
 export default function SellerDashboardOverview() {
   const dispatch = useDispatch();
-  const beatData = useSelector((state) => state.admin.beats);
-  console.log(beatData);
   const router = useRouter();
+  const state = useSelector((state) => state.admin);
+  console.log("STATE", state);
+  const beatData = useSelector((state) => state.admin.beats.beats) || [];
+
+  // const page = useSelector((state) => state.admin.currentBeatPage);
+  //const allBeats = useSelector((state) => state.admin.beatsForms);
+
   const [beatToDelete, setBeatToDelete] = useState(null);
-  const page = useSelector((state) => state.admin.currentBeatPage);
-  const allBeats = useSelector((state) => state.admin.beatsForms);
-  const itemsPerPage = 5;
-  const totalPages = Math.ceil(allBeats.length / itemsPerPage);
+
+  // const itemsPerPage = 5;
+  // const totalPages = Math.ceil(allBeats.length / itemsPerPage);
+  const delayedAdminGetBeats = useMemo(
+    () => debounce((value) => dispatch(adminGetBeats(value)), 500),
+    [dispatch]
+  );
 
   useEffect(() => {
-    dispatch(adminGetBeats(page));
-    console.log("beats truchos", beatData);
-  }, [page]);
+    const cancelDebounce = () => {
+      delayedAdminGetBeats.cancel();
+    };
 
-  useEffect(() => {
-    dispatch(adminGetFormBeats());
-  }, []);
+    delayedAdminGetBeats();
+
+    return cancelDebounce;
+  }, [delayedAdminGetBeats]);
 
   const handleCloseModal = async () => {
-    dispatch(adminGetBeats());
     setBeatToDelete(null);
   };
 
   const handleEdit = async (data) => {
-    console.log("handleEdit", data);
-    await dispatch(setCurrentEditBeat(data));
+    await dispatch(setCurrentEditingBeat(data));
     router.push(`/admin/beats/${data._id}`);
   };
 
-  const headers = [
-    "Item",
-    "AudioMP3",
-    "Creador",
-    "Status",
-    "Precio",
-    "Editar",
-    "Eliminar",
-  ];
+  const headers = ["Beat", "Precio","Status", "AudioMP3", "Acciones"];
 
   const rows = beatData.map((item) => {
     return {
-      item: (
+      beat: (
         <div className="flex items-center gap-4">
           <Image
             src={item.image}
-            width={50}
-            height={50}
-            className="aspect-square rounded-full object-cover"
+            width={70}
+            height={70}
+            className="aspect-square rounded-xl object-cover"
           />
-          <h3 className="text-base-medium">{item.name}</h3>
+          <div className="flex flex-col">
+            <h3 className="text-base-medium">{item.name}</h3>
+            <p className="text-sm-light">
+              {item.userCreator.firstName} {item.userCreator.lastName}
+            </p>
+          </div>
         </div>
       ),
       audiomp3: (
@@ -78,32 +84,32 @@ export default function SellerDashboardOverview() {
           </audio>
         </div>
       ),
-      precio: item.priceAmount,
-      creador: item.userCreator ? item.userCreator.username : "",
+      precio: <p className="text-sm-light">${item.priceAmount}</p>,
       status: item.softDelete ? "Baneado" : "Activo",
-      editar: (
-        <button
-          onClick={() => handleEdit(item)}
-          className="background-neutral-gray-400 hover:background-neutral-gray-700 color-neutral-white 
-            text-sm-semibold border-radius-estilo2 px-4 py-2"
-        >
-          Edit
-        </button>
-      ),
-      eliminar: (
-        <button
-          onClick={() => setBeatToDelete(item)}
-          className="background-primary-red-500 hover:background-primary-red-700 color-neutral-white 
-            text-sm-semibold border-radius-estilo2 px-4 py-2"
-        >
-          Eliminar
-        </button>
+      acciones: (
+        <div className="flex w-max gap-4" key={item._id}>
+          <button
+            onClick={() => handleEdit(item)}
+            className=" hover:background-neutral-gray-700 text-sm-semibold 
+            border-radius-estilo2 text-black "
+          >
+            Editar
+          </button>
+          <button
+            onClick={() => setBeatToDelete(item)}
+            className=" hover:background-primary-red-700 text-sm-semibold 
+            border-radius-estilo2 text-red-700 "
+          >
+            Eliminar
+          </button>
+        </div>
       ),
     };
   });
 
   return (
     <>
+      <Head title="Beats" />
       <main>
         <SellerDashboardLayout
           topBarMode="action"
@@ -115,42 +121,6 @@ export default function SellerDashboardOverview() {
         >
           <IslandDashboard className="flex flex-col gap-5 xl:gap-8">
             <DynamicTable headers={headers} rows={rows} />
-            <div className="flex justify-center gap-4">
-              {page > 1 && (
-                <button
-                  onClick={() => dispatch(setCurrentBeatPage(page - 1))}
-                  className="text-red-700"
-                >
-                  &#11164;
-                </button>
-              )}
-
-              {[...Array(Math.min(totalPages, 3))].map((_, index) => {
-                const pageNumber = page - 1 + index;
-                return (
-                  pageNumber < totalPages && (
-                    <button
-                      key={pageNumber}
-                      onClick={() =>
-                        dispatch(setCurrentBeatPage(pageNumber + 1))
-                      }
-                      className={pageNumber + 1 === page ? "font-bold" : ""}
-                    >
-                      {pageNumber + 1}
-                    </button>
-                  )
-                );
-              })}
-
-              {page < totalPages && (
-                <button
-                  onClick={() => dispatch(setCurrentBeatPage(page + 1))}
-                  className="text-red-700"
-                >
-                  &#11166;
-                </button>
-              )}
-            </div>
           </IslandDashboard>
         </SellerDashboardLayout>
       </main>
