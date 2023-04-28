@@ -1,6 +1,5 @@
 const { Router } = require("express");
 const { initializeApp } = require("firebase/app");
-const adminMiddleware = require("../middleware/adminVerify");
 const config = require("../../config/firebaseConfig");
 
 /* ----------- Controllers ----------- */
