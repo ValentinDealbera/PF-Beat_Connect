@@ -15,9 +15,16 @@ import {
 import { useState } from "react";
 
 export default function BeatDetailSideBar() {
+
+  const {bougthBeats} = useSelector(state => state.client.beats)
+  
   const currentBeat = useSelector((state) => state.beats.activeItemDetail);
 
   const hasReview = currentBeat.review.length > 0 ? true : false;
+
+  const buyed = Boolean(
+    bougthBeats.find(beat=> beat._id === currentBeat._id)
+  )
 
   const dynamicBeatDetailBox = [
     {
@@ -30,7 +37,7 @@ export default function BeatDetailSideBar() {
       msg1: "Standart License, WAV",
       msg2: `$${currentBeat.priceAmount}`,
       beat: currentBeat.audioWAV,
-      type: "paid",
+      type: buyed ? "buyed" : "paid",
     },
   ];
 
@@ -50,6 +57,7 @@ export default function BeatDetailSideBar() {
   const handleModalReview = () => {
     setShowModalReview(!showModalReview);
   };
+
 
   return (
     <>
@@ -110,6 +118,7 @@ function BeatDataBox({ beat }) {
   );
 }
 
+
 function BeatDetailBox({ msg1, msg2, beat, type }) {
   const dispatch = useDispatch();
 
@@ -121,11 +130,17 @@ function BeatDetailBox({ msg1, msg2, beat, type }) {
       {type === "free" ? (
         <a
           className=" text-sm font-semibold text-red-700"
-          download
+          download={beat.name}
           href={beat.audioMP3}
         >
           Descargar
         </a>
+      ) : type === 'buyed' ? (
+        <a
+          className=" text-sm font-semibold text-red-700"
+          download={beat.name}
+          href={beat.audioWAV}
+        >Descargar</a>
       ) : (
         <AddToCart beat={beat} posAction={() => externalManageDropdown()} />
       )}
