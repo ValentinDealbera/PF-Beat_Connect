@@ -53,15 +53,16 @@ export const deleteClientBeat = createAsyncThunk(
   "client/deleteClientBeat",
   async (data, { rejectWithValue, dispatch, getState }) => {
     const id = getState().client.authSession.session.current._id;
+    console.log("DELETE BEAT data", data);
     try {
       const response = await axios.delete(`${serverUrl}beats/${data}`, {
         headers: {
-          "Content-Type": "multipart/form-data",
           userid: id,
         },
       });
 
-      await dispatch(getUserData(id));
+      console.log("DELETE BEAT", data,  response.data);
+      await dispatch(getUserData());
       await dispatch(fetchBeats({}));
 
       return response.data;

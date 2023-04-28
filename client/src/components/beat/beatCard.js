@@ -81,6 +81,7 @@ export default function BeatCard({
         manageEditBeat();
       },
       handleDelete: () => {
+        console.log("DELETE BEAT - card", beat._id);
         dispatch(deleteClientBeat(beat._id));
       },
     };

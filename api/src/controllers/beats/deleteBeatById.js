@@ -5,8 +5,7 @@ const reviewModel = require("../../models/nosql/reviews");
 module.exports = async (req, res) => {
   const { id } = req.params;
   const { userid } = req.headers;
-  console.log(req.headers);
-  console.log(id, userid);
+  console.log("a borrar: " + id);
 
   try {
     const beat = await beatModel.findById(id).populate("userCreator");
@@ -30,7 +29,7 @@ module.exports = async (req, res) => {
       beat: deletedBeat._id,
     });
 
-    res.json(deletedBeat);
+    res.status(200).json(deletedBeat);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
