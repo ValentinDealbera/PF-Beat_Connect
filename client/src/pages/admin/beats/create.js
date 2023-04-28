@@ -29,6 +29,7 @@ export default function AdminUserCreate() {
 
   return (
     <>
+      <Head title="Crear beat" />
       <main>
         <SellerDashboardLayout
           topBarMode="action"
@@ -44,4 +45,3 @@ export default function AdminUserCreate() {
     </>
   );
 }
-

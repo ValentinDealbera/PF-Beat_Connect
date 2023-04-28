@@ -11,17 +11,17 @@ import { useSelector } from "react-redux";
 import {
   adminGetReviews,
   adminDeleteReview,
-  setCurrentEditReview,
-} from "@/redux/slices/admin";
+  setCurrentEditingReview,
+} from "@/redux/slices/admin/reviews";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 
 export default function SellerDashboardOverview() {
-  const { reviews } = useSelector((state) => state.admin);
-  const reviewsData = reviews;
   const dispatch = useDispatch();
-
   const router = useRouter();
+  const { reviews } = useSelector((state) => state.admin.reviews);
+  const reviewsData = reviews;
+  
   const [reviewToDelete, setReviewToDelete] = useState(null);
   const headers = [
     "Beat",
