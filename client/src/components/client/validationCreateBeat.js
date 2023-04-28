@@ -1,12 +1,13 @@
 export function ValidationCreateBeat(form, fieldsToValidate, mode) {
   const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
+  const MAX_WAV_SIZE = 150 * 1024 * 1042; // 150 MB
   let error = {};
   const modeOf = mode
 
 
   const regexName = /^.{1,50}$/;
   const regexImage = /\.jpg$|\.png$/i;
-  const regexAudioMP3 = /\.mp3$|\.wav$/i;
+  const regexAudioMP3 = /\.mp3$|\.wav$|\.ogg$/i;
 
   if (fieldsToValidate === "*") {
 //pasamos de object a array
@@ -47,6 +48,17 @@ export function ValidationCreateBeat(form, fieldsToValidate, mode) {
             "The size of the audio is too large. Maximum allowed size is 10 MB.";
         if (!form.audioMP3) error.audioMP3 = "You must upload a Beat";
         if (!regexAudioMP3.test(form.audioMP3.name))
+          error.audioMP3 = "You must upload a mp3 or wav file";
+        break;
+
+        case "audioWAV":
+        if (mode === "edit") break;
+
+        if (form.audioWAV.size > MAX_WAV_SIZE)
+          error.audioWAV =
+            "The size of the audio is too large. Maximum allowed size is 150 MB.";
+        if (!form.audioWAV) error.audioWAV = "You must upload a Beat";
+        if (!regexAudioMP3.test(form.audioWAV.name))
           error.audioMP3 = "You must upload a mp3 or wav file";
         break;
 

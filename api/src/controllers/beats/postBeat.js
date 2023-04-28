@@ -52,33 +52,37 @@ module.exports = async (req, res) => {
         .status(400)
         .json({ message: "Este usuario no esta registrado como vendedor" });
     const audioMP3Data = fs.readFileSync(req.files.audioMP3.tempFilePath);
-    // const audioWAVData = fs.readFileSync(req.files.audioWAV.tempFilePath);
+    const audioWAVData = fs.readFileSync(req.files.audioWAV.tempFilePath);
 
-    const dateTime = giveCurrentDateTime();
-    if (!comprobacion && audioMP3Data && genre && creator && req.body.bpm) {
+    if (
+      !comprobacion &&
+      audioWAVData &&
+      audioMP3Data &&
+      genre &&
+      creator &&
+      req.body.bpm
+    ) {
       //-------------------------------------audio WAV
-      // const audioWAVStorageRef = ref(
-      //   storage,
-      //   `beats/${req.body.name}/audioWAV/${
-      //     req.files.audioWav.name + " - " + dateTime
-      //   }`
-      // );
+      const audioWAVStorageRef = ref(
+        storage,
+        `beats/${req.body.name}/audioWAV/${req.body.name}.wav`
+      );
 
-      // const audioWAVMetadata = {
-      //   contentType: req.files.audioMP3.mimetype,
-      // };
+      const audioWAVMetadata = {
+        contentType: req.files.audioMP3.mimetype,
+      };
 
-      // const audioWAVSnapshot = await uploadBytesResumable(
-      //   audioWAVStorageRef,
-      //   audioWAVData,
-      //   audioWAVMetadata
-      // );
+      const audioWAVSnapshot = await uploadBytesResumable(
+        audioWAVStorageRef,
+        audioWAVData,
+        audioWAVMetadata
+      );
 
-      // const downloadaudioWAVURL = await getDownloadURL(audioWAVSnapshot.ref);
+      const downloadaudioWAVURL = await getDownloadURL(audioWAVSnapshot.ref);
       //-------------------------------------audio MP3
       const audioStorageRef = ref(
         storage,
-        `beats/${req.body.name}/audioMP3/${req.body.name}`
+        `beats/${req.body.name}/audioMP3/${req.body.name}.mp3`
       );
 
       const audioMetadata = {
@@ -116,7 +120,7 @@ module.exports = async (req, res) => {
 
       const newBeat = await beatModel.create({
         audioMP3: downloadAudioURL,
-        // audioWAV: downloadaudioWAVURL,
+        audioWAV: downloadaudioWAVURL,
         BPM: Number(req.body.bpm),
         image: downloadImageURL,
         name: req.body.name,
@@ -134,14 +138,4 @@ module.exports = async (req, res) => {
     console.log(error.message);
     res.status(500).json({ message: error.message });
   }
-};
-
-const giveCurrentDateTime = () => {
-  const today = new Date();
-  const date =
-    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
-  const time =
-    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-  const dateTime = date + " " + time;
-  return dateTime;
 };

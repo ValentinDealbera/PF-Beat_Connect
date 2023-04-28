@@ -31,6 +31,7 @@ export default function PostBeat() {
     bpm: "",
     image: {},
     audioMP3: {},
+    audioWAV: {},
     _id: _id,
   });
 
@@ -165,11 +166,21 @@ export default function PostBeat() {
                   />
                   <Input
                     name={"audioMP3"}
-                    label={"Sube tu beat"}
+                    label={"Ingresa un beat de baja calidad (MP3)"}
                     placeholder={"Upload your Beat"}
                     type={"file"}
                     onChange={handleInputChange}
                     error={error.audioMP3}
+                    className="w-full"
+                    labelClass="w-full"
+                  />
+                  <Input
+                    name={"audioWAV"}
+                    label={"Ingresa un beat de alta calidad (WAV, OGG)"}
+                    placeholder={"Upload your Beat"}
+                    type={"file"}
+                    onChange={handleInputChange}
+                    error={error.audioWAV}
                     className="w-full"
                     labelClass="w-full"
                   />
