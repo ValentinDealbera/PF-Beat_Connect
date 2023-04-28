@@ -1,7 +1,7 @@
 const axios = require("axios");
 const bcrypt = require("bcryptjs");
-const userModel = require("../models/nosql/user");
-const jwt = require("../utils/jwt");
+const userModel = require("../../models/nosql/user");
+const jwt = require("../../utils/jwt");
 //TRAEMOS ENV
 require("dotenv").config();
 const { BACKEND_URL } = process.env;
