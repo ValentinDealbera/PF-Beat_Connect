@@ -1,19 +1,21 @@
 import { setSettingsActiveIndex } from "@/redux/slices/profile";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const buyerGeneralNav = [
   {
-    title: "Perfil",
+    title: "buyerGeneralNav.profile",
   },
   {
-    title: "Contraseña",
+    title: "buyerGeneralNav.password",
   },
 ];
 
 export default function BuyerNavSettings() {
-  
+  const [t, i18n] = useTranslation("global");
   const activeIndex = useSelector((state) => state.profile.settingsActiveIndex);
   const dispatch = useDispatch();
+  
 
   return (
     <>
@@ -26,7 +28,7 @@ export default function BuyerNavSettings() {
               }`}
               onClick={() => dispatch(setSettingsActiveIndex(index))}
             >
-              {item.title}
+              {t(item.title)}
             </h5>
         ))}
       </div>

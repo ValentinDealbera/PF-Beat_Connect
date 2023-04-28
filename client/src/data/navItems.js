@@ -1,40 +1,42 @@
+import { useTranslation } from 'react-i18next';
+
 export const generalItems = [
   {
-    name: "Inicio",
+    name: "generalItems.t1",
     url: "/",
   },
   {
-    name: "Nosotros",
+    name: "generalItems.t2",
     url: "/about",
   },
   {
-    name: "Beats",
+    name: "generalItems.t3",
     url: "/beats",
   },
 ];
 
 export const helpItems = [
   {
-    name: "Inicio",
+    name: "helpItems.t1",
     url: "/help",
   },
   {
-    name: "Política de privacidad",
+    name: "helpItems.t2",
     url: "/help/privacy",
   },
   {
-    name: "Terminos y condiciones",
+    name: "helpItems.t3",
     url: "/help/terms",
   },
 ];
 
 export const accountItems = [
   {
-    name: "Iniciar sesión",
+    name: "accountItems.t1",
     url: "/auth",
   },
   {
-    name: "Registrarse",
+    name: "accountItems.t2",
     url: "/auth/register",
   },
 ];
