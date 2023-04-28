@@ -1,4 +1,4 @@
-const UserModel = require("../models/nosql/user");
+const UserModel = require("../../models/nosql/user");
 
 const getActiveUser = async () => {
   try {

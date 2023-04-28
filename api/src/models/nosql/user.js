@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
-  googleId:{
+  googleId: {
     type: String,
-    default: ''
+    default: "",
   },
-  name:{
-    type: String
+  name: {
+    type: String,
   },
   id: {
     type: mongoose.Types.ObjectId,
@@ -35,11 +35,12 @@ const UserSchema = new mongoose.Schema({
   },
   bio: {
     type: String,
-    default: ''
+    default: "",
   },
   backImage: {
     type: String,
     default: 'https://wallpaperaccess.com/full/1909846.jpg'
+
   },
   image: {
     type: String,
@@ -61,7 +62,7 @@ const UserSchema = new mongoose.Schema({
   },
   accessToken: {
     type: String,
-    default: ''
+    default: "",
   },
   bougthBeats: [
     {
@@ -94,6 +95,5 @@ const UserSchema = new mongoose.Schema({
     },
   ],
 });
-
 
 module.exports = mongoose.model("User", UserSchema);
