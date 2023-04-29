@@ -65,7 +65,7 @@ export const adminDeleteBeat = createAsyncThunk(
     console.log("adminDeleteBeat", data);
     try {
       const response = await axios.delete(
-        `${serverUrl}/admin/beat/${data._id}`,
+        `${serverUrl}admin/beat/${data._id}`,
         {
           headers: {
             admintoken: tokenAdmin,
