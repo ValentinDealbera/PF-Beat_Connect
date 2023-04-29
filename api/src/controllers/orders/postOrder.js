@@ -6,8 +6,9 @@ module.exports = async (req, res) => {
   try {
     const today = new Date();
     const { buyer, beat } = req.body;
-    const beatBuyed = await beatModel.findById(beat);
-    const comprobacion = await userModel.findById(buyer);
+    console.log(buyer, beat);
+    const beatBuyed = await beatModel.findOne({_id:beat});
+    const comprobacion = await userModel.findOne({_id:buyer});
     if (comprobacion.bougthBeats.includes(beat))
       return res
         .status(400)
