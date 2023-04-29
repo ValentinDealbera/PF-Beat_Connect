@@ -77,7 +77,7 @@ export const adminDeleteBeat = createAsyncThunk(
       return { userResponse: response.data };
     } catch (error) {
       console.log("error", error);
-      return rejectWithValue(error);
+      return rejectWithValue(error.response.data.message);
     }
   }
 );

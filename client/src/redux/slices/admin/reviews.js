@@ -33,7 +33,7 @@ export const adminGetReview = createAsyncThunk(
   "client/adminGetReview",
   async (data, { rejectWithValue, dispatch }) => {
     try {
-      const response = await axios.get(`${serverUrl}review/${data}`);
+      const response = await axios.get(`${serverUrl}admin/review/${data}`);
       return { reviewResponse: response.data };
     } catch (error) {
       return rejectWithValue(error.response.data.message);

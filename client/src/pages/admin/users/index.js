@@ -43,7 +43,7 @@ export default function SellerDashboardOverview() {
     router.push(`/admin/users/${data._id}`);
   };
 
-  const headers = ["USUARIO", "ESTATUS", "ACCIONES"];
+  const headers = ["Usuario", "Estatus", "Acciones"];
 
   const rows = usersData.map((item) => {
     return {

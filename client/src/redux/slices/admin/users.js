@@ -143,7 +143,7 @@ const adminUsersSlice = createSlice({
         toast.error(action.payload, toastError);
       })
       .addCase(adminEditUser.fulfilled, (state, action) => {
-        toast.success("Usuario eliminado correctamente", toastSuccess);
+        toast.success("Usuario editado correctamente", toastSuccess);
       })
       .addCase(adminEditUser.pending, (state, action) => {
         toast("Editando usuario...");
@@ -152,13 +152,13 @@ const adminUsersSlice = createSlice({
       //--------------------
       //DELETE ADMIN USER
       .addCase(adminDeleteUser.fulfilled, (state, action) => {
-        toast.success("Usuario eliminado correctamente", toastSuccess);
+        toast.success("Usuario borrado correctamente", toastSuccess);
       })
       .addCase(adminDeleteUser.rejected, (state, action) => {
         toast.error(action.payload, toastError);
       })
       .addCase(adminDeleteUser.pending, (state, action) => {
-        toast("Eliminando usuario...");
+        toast("Borrando usuario...");
       })
 
       //--------------------
@@ -178,7 +178,6 @@ const adminUsersSlice = createSlice({
       //--------------------
       //GET ADMIN USER
       .addCase(adminGetUser.fulfilled, (state, action) => {
-        toast.success("usuario obtenido correctamente", toastSuccess);
         state.currentEdtingUser = action.payload.userResponse;
       })
       .addCase(adminGetUser.rejected, (state, action) => {

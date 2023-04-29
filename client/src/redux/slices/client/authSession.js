@@ -115,7 +115,7 @@ export const convertInSeller = createAsyncThunk(
   "authSession/convertInSeller",
   async (data, { rejectWithValue, getState }) => {
     const clientId = getState().client.authSession.session.current._id;
-    const send = { seller: "VENDEDOR" };
+    const send = { seller: "VENDEDOR", mpcode: data.mpcode };
 
     try {
       const { data: response } = await axios.put(

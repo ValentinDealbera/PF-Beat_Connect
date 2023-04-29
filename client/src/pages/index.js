@@ -50,7 +50,7 @@ export default function Home() {
 
   useEffect(() => {
     if (router.query.code) {
-      dispatch(convertInSeller());
+      dispatch(convertInSeller({mpcode: router.query.code}));
     }
   }, [router.query.code]);
 

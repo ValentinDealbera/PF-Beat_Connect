@@ -9,7 +9,7 @@ const {
 const config = require("../../../config/firebaseConfig");
 const beatModel = require("../../models/nosql/beats");
 const userModel = require("../../models/nosql/user");
-
+const sharp = require("sharp");
 initializeApp(config.firebaseConfig);
 const storage = getStorage();
 
@@ -47,9 +47,15 @@ module.exports = async (req, res) => {
         contentType: req.files.image.mimetype,
       };
 
+      const imageBuffer = fs.readFileSync(req.files.image.tempFilePath);
+      const resizedImageBuffer = await sharp(imageBuffer)
+      .resize({ width: 400, height: 400 }) // Ajusta las dimensiones según tus requisitos
+      .webp({ quality: 80 }) // Ajusta la calidad WebP según tus necesidades
+        .toBuffer();
+      
       const imageSnapshot = await uploadBytesResumable(
         imageStorageRef,
-        imageData,
+        resizedImageBuffer,
         imageMetadata
       );
       const downloadImageURL = await getDownloadURL(imageSnapshot.ref);

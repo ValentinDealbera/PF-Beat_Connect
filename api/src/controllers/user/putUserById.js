@@ -11,7 +11,7 @@ const {
   uploadBytesResumable,
 } = require("firebase/storage");
 const { getUserId } = require("./userController");
-
+const sharp = require("sharp");
 initializeApp(config.firebaseConfig);
 const storage = getStorage();
 
@@ -127,9 +127,15 @@ module.exports = async (req, res) => {
           contentType: image.mimetype,
         };
 
+        const imageBuffer = fs.readFileSync(req.files.image.tempFilePath);
+        const resizedImageBuffer = await sharp(imageBuffer)
+        .resize({ width: 400, height: 400 }) // Ajusta las dimensiones según tus requisitos
+        .webp({ quality: 80 }) // Ajusta la calidad WebP según tus necesidades
+          .toBuffer();
+
         const imageSnapshot = await uploadBytesResumable(
           imageStorageRef,
-          imageData,
+          resizedImageBuffer,
           imageMetadata
         );
         const downloadImageURL = await getDownloadURL(imageSnapshot.ref);
@@ -146,14 +152,21 @@ module.exports = async (req, res) => {
           contentType: backImage.mimetype,
         };
 
-        const imageSnapshot = await uploadBytesResumable(
+        const imageBuffer = fs.readFileSync(req.files.backImage.tempFilePath);
+        const resizedImageBuffer = await sharp(imageBuffer)
+          .resize({ width: 1500, height: 800 }) // Ajusta las dimensiones según tus requisitos
+          .webp({ quality: 80 }) // Ajusta la calidad WebP según tus necesidades
+          .toBuffer();
+
+        const imageSnapshot2 = await uploadBytesResumable(
           imageStorageRef,
-          imageData,
+          resizedImageBuffer,
           imageMetadata
         );
-        const downloadBackImageURL = await getDownloadURL(imageSnapshot.ref);
+        const downloadBackImageURL = await getDownloadURL(imageSnapshot2.ref);
         user.backImage = downloadBackImageURL;
       }
+      console.log("seller", seller, "mpcode", mpcode);
       if (seller && mpcode) {
         try {
           const code = req.body.mpcode;

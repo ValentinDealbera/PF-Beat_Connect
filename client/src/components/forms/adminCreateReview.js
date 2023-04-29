@@ -31,7 +31,7 @@ const AdminCreateReviewForm = forwardRef((props, ref) => {
   const [fieldsToValidate, setFieldsToValidate] = useState([]);
   const [error, setErrors] = useState({});
   const defaultValues =
-    useSelector((state) => state.admin.currentEditingReview) || {};
+    useSelector((state) => state.admin.reviews.currentEditingReview) || {};
   const mode = props.mode;
   const defaultUsers = useSelector((state) => state.admin.users.users);
   const defaultBeats = useSelector((state) => state.admin.beats.beats);

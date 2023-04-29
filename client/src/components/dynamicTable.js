@@ -155,8 +155,7 @@ export default function DynamicTable({ headers, rows }) {
         <TableBody
           sx={{
             "& .MuiTableCell-root": {
-              width: "100%",
-              maxWidth: "100%",
+    
             },
           }}
         >
