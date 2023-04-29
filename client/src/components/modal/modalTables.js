@@ -36,4 +36,5 @@ export default function ModalTables(props) {
       </div>
     </ModalPopUp>
   );
+  
 }
