@@ -12,10 +12,11 @@ const login = async (req, res) => {
   if (!email || !password) {
     return res.status(400).json({ message: "Faltan credenciales" });
   }
-
+//pasamos el email a minusculas
+let emailCase = email.toLowerCase();
   try {
     // Buscar al usuario por su email
-    const user = await userModel.findOne({ email: email });
+    const user = await userModel.findOne({ email: emailCase });
 
     // Si el usuario no existe, devolver un error
     if (!user) {
@@ -47,10 +48,10 @@ const register = async (req, res) => {
   if (!email || !password || !firstName || !lastName || !username) {
     return res.status(400).json({ message: "Faltan credenciales" });
   }
-
+  let emailCase = email.toLowerCase();
   try {
     // Verificar si el usuario ya existe
-    const existingUser = await userModel.findOne({ email: email });
+    const existingUser = await userModel.findOne({ email: emailCase });
     if (existingUser) {
       console.log(existingUser);
       return res.status(400).json({ message: "El email ya está en uso" });
@@ -62,7 +63,7 @@ const register = async (req, res) => {
 
     // Crear un nuevo usuario
     const userOK = await userModel.create({
-      email,
+      emailCase,
       password: hashedPassword,
       firstName,
       lastName,
