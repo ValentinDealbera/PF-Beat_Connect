@@ -15,6 +15,7 @@ initializeApp(config.firebaseConfig);
 const storage = getStorage();
 
 module.exports = async (req, res) => {
+  console.log(req.body);
   const comprobacion = await beatModel.findOne({ name: req.body.name });
   if (comprobacion) {
     if (comprobacion.name.toLocaleLowerCase() === req.body.name.toLowerCase())
@@ -26,29 +27,29 @@ module.exports = async (req, res) => {
   if (!creator)
     return res.status(400).json({ message: "Este usuario no existe" });
   const audioMP3Data = fs.readFileSync(req.files.audioMP3.tempFilePath);
-  // const audioWAVData = fs.readFileSync(req.files.audioWAV.tempFilePath);
+  const audioWAVData = fs.readFileSync(req.files.audioWAV.tempFilePath);
   try {
     const dateTime = giveCurrentDateTime();
-    if (!comprobacion && audioMP3Data && genre && creator && req.body.bpm) {
+    if (!comprobacion && audioMP3Data && genre && creator && audioWAVData && req.body.bpm) {
       //-------------------------------------audio WAV
-      // const audioWAVStorageRef = ref(
-      //   storage,
-      //   `beats/${req.body.name}/audioWAV/${
-      //     req.files.audioWav.name + " - " + dateTime
-      //   }`
-      // );
+      const audioWAVStorageRef = ref(
+        storage,
+        `beats/${req.body.name}/audioWAV/${
+          req.files.audioWAV.name + " - " + dateTime
+        }`
+      );
 
-      // const audioWAVMetadata = {
-      //   contentType: req.files.audioMP3.mimetype,
-      // };
+      const audioWAVMetadata = {
+        contentType: req.files.audioMP3.mimetype,
+      };
 
-      // const audioWAVSnapshot = await uploadBytesResumable(
-      //   audioWAVStorageRef,
-      //   audioWAVData,
-      //   audioWAVMetadata
-      // );
+      const audioWAVSnapshot = await uploadBytesResumable(
+        audioWAVStorageRef,
+        audioWAVData,
+        audioWAVMetadata
+      );
 
-      // const downloadaudioWAVURL = await getDownloadURL(audioWAVSnapshot.ref);
+      const downloadaudioWAVURL = await getDownloadURL(audioWAVSnapshot.ref);
       //-------------------------------------audio MP3
       const audioStorageRef = ref(
         storage,
@@ -94,7 +95,7 @@ module.exports = async (req, res) => {
 
       const newBeat = await beatModel.create({
         audioMP3: downloadAudioURL,
-        // audioWAV: downloadaudioWAVURL,
+        audioWAV: downloadaudioWAVURL,
         BPM: Number(req.body.bpm),
         image: downloadImageURL,
         name: req.body.name,
@@ -109,6 +110,7 @@ module.exports = async (req, res) => {
       return res.json(newBeat);
     }
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: error.message });
   }
 };

@@ -43,6 +43,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
     genre: `${mode === "edit" ? defaultValues.genre._id : ""}`,
     image: `${mode === "edit" ? defaultValues.image : ""}`,
     audioMP3: `${mode === "edit" ? defaultValues.audioMP3 : ""}`,
+    audioWAV: `${mode === "edit" ? defaultValues.audioWAV : ""}`,
     userCreator: `${mode === "edit" ? defaultValues.userCreator._id : ""}`,
     bpm: `${mode === "edit" ? defaultValues.BPM : ""}`,
     id: `${mode === "edit" ? defaultValues._id : ""}`,
@@ -269,6 +270,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
               </select>
             </label>
             {mode == "create" && (
+              <>
               <Input
                 name="audioMP3"
                 label="Audio MP3"
@@ -278,6 +280,16 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
                 onChange={handleInput}
                 error={error.audioMP3}
               />
+              <Input
+                name="audioWAV"
+                label="Audio WAV"
+                placeholder="Audio WAV:"
+                defaultValue={mode === "edit" ? defaultValues.audioWAV : ""}
+                type="file"
+                onChange={handleInput}
+                error={error.audioWAV}
+              />
+              </>
             )}
             {mode === "edit" && (
               <SwitchForm

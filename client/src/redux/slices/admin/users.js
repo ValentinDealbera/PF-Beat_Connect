@@ -16,7 +16,7 @@ export const adminPostUser = createAsyncThunk(
   async (data, { rejectWithValue, dispatch }) => {
     try {
       delete data.id;
-      const response = await axios.post(`${serverUrl}users/admin`, data, {
+      const response = await axios.post(`${serverUrl}admin/user`, data, {
         headers: {
           admintoken: tokenAdmin,
           "Content-Type": "multipart/form-data",
@@ -40,7 +40,7 @@ export const adminEditUser = createAsyncThunk(
   async (data, { rejectWithValue, dispatch }) => {
     try {
       const response = await axios.put(
-        `${serverUrl}user/admin/${data.id}`,
+        `${serverUrl}admin/user/${data.id}`,
         data,
         {
           headers: {
@@ -65,7 +65,7 @@ export const adminDeleteUser = createAsyncThunk(
     console.log("adminDeleteUser", data);
     try {
       const response = await axios.delete(
-        `${serverUrl}user/admin/${data._id}`,
+        `${serverUrl}admin/user/${data._id}`,
         {
           headers: {
             admintoken: tokenAdmin,
