@@ -111,7 +111,7 @@ export default function SellerDashboardOverview() {
       <main>
         <SellerDashboardLayout
           topBarMode="message"
-          topBarMessage="Reviews de la pagina"
+          topBarMessage="Ordenes de la pagina"
           topBarButtonLabel="Crear review"
         >
           <IslandDashboard className="flex flex-col gap-5 xl:gap-8 ">

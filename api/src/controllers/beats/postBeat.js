@@ -118,7 +118,7 @@ module.exports = async (req, res) => {
 
         const imageBuffer = fs.readFileSync(req.files.image.tempFilePath);
         const resizedImageBuffer = await sharp(imageBuffer)
-          .resize({ width: 800, height: 800 }) // Ajusta las dimensiones según tus requisitos
+          .resize({ width: 400, height: 400 }) // Ajusta las dimensiones según tus requisitos
           .webp({ quality: 80 }) // Ajusta la calidad WebP según tus necesidades
           .toBuffer();
 

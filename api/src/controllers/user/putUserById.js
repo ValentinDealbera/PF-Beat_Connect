@@ -129,8 +129,8 @@ module.exports = async (req, res) => {
 
         const imageBuffer = fs.readFileSync(req.files.image.tempFilePath);
         const resizedImageBuffer = await sharp(imageBuffer)
-          .resize({ width: 800, height: 800 }) // Ajusta las dimensiones según tus requisitos
-          .webp({ quality: 80 }) // Ajusta la calidad WebP según tus necesidades
+        .resize({ width: 400, height: 400 }) // Ajusta las dimensiones según tus requisitos
+        .webp({ quality: 80 }) // Ajusta la calidad WebP según tus necesidades
           .toBuffer();
 
         const imageSnapshot = await uploadBytesResumable(
@@ -152,20 +152,21 @@ module.exports = async (req, res) => {
           contentType: backImage.mimetype,
         };
 
-        const imageBuffer = fs.readFileSync(req.files.image.tempFilePath);
+        const imageBuffer = fs.readFileSync(req.files.backImage.tempFilePath);
         const resizedImageBuffer = await sharp(imageBuffer)
-          .resize({ width: 800, height: 800 }) // Ajusta las dimensiones según tus requisitos
+          .resize({ width: 1500, height: 800 }) // Ajusta las dimensiones según tus requisitos
           .webp({ quality: 80 }) // Ajusta la calidad WebP según tus necesidades
           .toBuffer();
 
-        const imageSnapshot = await uploadBytesResumable(
+        const imageSnapshot2 = await uploadBytesResumable(
           imageStorageRef,
           resizedImageBuffer,
           imageMetadata
         );
-        const downloadBackImageURL = await getDownloadURL(imageSnapshot.ref);
+        const downloadBackImageURL = await getDownloadURL(imageSnapshot2.ref);
         user.backImage = downloadBackImageURL;
       }
+      console.log("seller", seller, "mpcode", mpcode);
       if (seller && mpcode) {
         try {
           const code = req.body.mpcode;
