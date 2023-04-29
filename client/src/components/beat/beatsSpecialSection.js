@@ -4,11 +4,11 @@ import {
   BeatCardGrid,
   NewBeatCardGrid,
 } from "@/components";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { setBeatsDisplayMode, fetchBeats, fetchFeaturedBeats } from "@/redux/slices/beats";
-
+import { debounce } from "lodash";
 export default function BeatsSpecialSection(props) {
   const featuredBeats = useSelector((state) => state?.beats.featuredItems) || [];
   const dispatch = useDispatch();
@@ -22,9 +22,23 @@ export default function BeatsSpecialSection(props) {
     // dispatch(setBeatsDisplayMode("shop"));
   }, []);
 
+
+  const delayedFeaturedBeats = useMemo(() => {
+    return debounce(() => {
+      dispatch(fetchFeaturedBeats());
+    }, 500); // ajusta el tiempo de espera según sea necesario
+  }, [dispatch]);
+
   useEffect(() => {
-    dispatch(fetchFeaturedBeats());
-  }, []);
+    const cancelDebounce = () => {
+      delayedFeaturedBeats.cancel();
+    };
+
+    delayedFeaturedBeats();
+
+    return cancelDebounce;
+  }, [delayedFeaturedBeats]);
+
 
   return (
     <Section subClassName="padding-x-estilo2 padding-y-estilo2 gap-8 flex flex-col">

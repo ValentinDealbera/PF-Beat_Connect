@@ -5,14 +5,13 @@ import { postClientBeat } from "@/redux/slices/client/beats";
 import { ValidationCreateBeat } from "../client/validationCreateBeat";
 import { fetchGenres } from "@/redux/slices/filters";
 
-export const managePostBeat = () => {
-  PostBeat.handleOpenDropdown();
-};
+// export const managePostBeat = () => {
+//   PostBeat.handleOpenDropdown();
+// };
 
-export default function PostBeat() {
+export default function PostBeat({managePostBeat, setPostBeatVisibility}) {
   const dispatch = useDispatch();
 
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [fieldsToValidate, setFieldsToValidate] = useState([]);
   const [selected, setSelected] = useState("");
   const [error, setErrors] = useState({});
@@ -34,11 +33,11 @@ export default function PostBeat() {
     _id: _id,
   });
 
-  const handleOpenDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
+  // const handleOpenDropdown = () => {
+  //   setIsDropdownOpen(!isDropdownOpen);
+  // };
 
-  PostBeat.handleOpenDropdown = handleOpenDropdown;
+  // PostBeat.handleOpenDropdown = handleOpenDropdown;
 
   //useeffect para cargar id
 
@@ -81,7 +80,7 @@ export default function PostBeat() {
     if (Object.keys(formErrors).length === 0) {
       console.log(form);
       await dispatch(postClientBeat(form));
-      setIsDropdownOpen(false);
+      managePostBeat();
     } else {
       setErrors(formErrors);
     }
@@ -90,8 +89,7 @@ export default function PostBeat() {
 
   return (
     <>
-      {isDropdownOpen && (
-        <BeatRightSheet width="w-[35vw]" setIsDropdownOpen={setIsDropdownOpen}>
+        <BeatRightSheet width="w-[35vw]" setIsDropdownOpen={setPostBeatVisibility}>
           <div className="flex h-full w-full flex-col items-center justify-center gap-7 overflow-y-hidden px-14 pb-4 pt-7 ">
             <div className="flex w-full flex-col gap-5 overflow-y-hidden">
               <div className="flex flex-col items-center justify-center gap-0">
@@ -184,7 +182,6 @@ export default function PostBeat() {
             </div>
           </div>
         </BeatRightSheet>
-      )}
     </>
   );
 }

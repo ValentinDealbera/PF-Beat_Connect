@@ -6,20 +6,17 @@ import axios from "axios";
 import { toastError, toastSuccess } from "@/utils/toastStyles";
 import { useRouter } from "next/router";
 
-export const manageBecomeSeller = () => {
-  BecomeSeller.handleOpenDropdown();
-};
 
-export default function BecomeSeller() {
+export default function BecomeSeller({manageBecomeSeller, BecomeSellerVisibility, setBecomeSellerVisibility}) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [terms, setTerms] = useState(false);
   const router = useRouter();
 
-  const handleOpenDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
+  // const handleOpenDropdown = () => {
+  //   setIsDropdownOpen(!isDropdownOpen);
+  // };
 
-  BecomeSeller.handleOpenDropdown = handleOpenDropdown;
+  // BecomeSeller.handleOpenDropdown = handleOpenDropdown;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,8 +35,8 @@ export default function BecomeSeller() {
 
   return (
     <>
-      {isDropdownOpen && (
-        <BeatRightSheet width="w-[35vw]" setIsDropdownOpen={setIsDropdownOpen}>
+      {BecomeSellerVisibility && (
+        <BeatRightSheet width="w-[35vw]" setIsDropdownOpen={setBecomeSellerVisibility}>
           <div className="flex h-full flex-col items-center justify-center gap-7 px-14 py-10  ">
             <div className="flex flex-col items-center justify-center gap-2">
               <h4 className="text-titulo2-regular text-center">

@@ -91,8 +91,8 @@ export default function BeatFilters() {
 
   const delayedFetchGenres = useMemo(() => {
     return debounce(() => {
-      dispatch(fetchGenres());
-    }, 300); // ajusta el tiempo de espera según sea necesario
+     dispatch(fetchGenres());
+    }, 500); // ajusta el tiempo de espera según sea necesario
   }, [dispatch]);
 
   useEffect(() => {

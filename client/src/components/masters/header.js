@@ -5,8 +5,7 @@ import {
   VerticalNav,
   BecomeSeller,
   PostBeat,
-  managePostBeat,
-  manageBecomeSeller,
+
   EditBeat,
   AdminHeaderBar,
 } from "@/components";
@@ -37,6 +36,22 @@ export default function Header() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const [PostBeatVisibility, setPostBeatVisibility] = useState(false);
+  const [BecomeSellerVisibility, setBecomeSellerVisibility] = useState(false);
+  const [EditBeatVisibility, setEditBeatVisibility] = useState(false);
+
+  const managePostBeat = () => {
+    setPostBeatVisibility(!PostBeatVisibility);
+  };
+
+  const manageBecomeSeller = () => {
+    setBecomeSellerVisibility(!BecomeSellerVisibility);
+  };
+
+  const manageEditBeat = () => {
+    setEditBeatVisibility(!EditBeatVisibility);
+  };
 
   const navClient = [
     {
@@ -89,10 +104,25 @@ export default function Header() {
 
   return (
     <>
-      <BecomeSeller />
-      <PostBeat />
+      {
+        BecomeSellerVisibility && (
+          <BecomeSeller
+            manageBecomeSeller={manageBecomeSeller}
+            setBecomeSellerVisibility={setBecomeSellerVisibility}
+            BecomeSellerVisibility={BecomeSellerVisibility}
+          />
+        )
+      }
+      {PostBeatVisibility && (
+        <PostBeat
+          managePostBeat={managePostBeat}
+          setPostBeatVisibility={setPostBeatVisibility}
+          PostBeatVisibility={PostBeatVisibility}
+        />
+      )}
+
       <EditBeat />
-      
+
       <header
         className={`fixed z-30 flex  w-full  flex-row justify-center py-8 ${
           currentMode === "light" ? "background-neutral-white " : ""
