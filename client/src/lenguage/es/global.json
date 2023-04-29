@@ -199,7 +199,8 @@
     "form10": "Seleccionar archivos",
     "form11": "Sin archivos seleccionados",
     "form12": "Sube tu beat",
-    "form13": "Crear publicacion"
+    "form13": "Ingresa un beat de alta calidad (WAV, OGG)",
+    "form14": "Crear publicacion"
   },
 
   "buyerGeneralNav": {
@@ -223,6 +224,78 @@
     "t6": "Bio",
     "t7": "Imagen de portada",
     "tosave": "Guardar"
+  },
+
+  "beats": {
+    "t1": "Encuentra ese beat",
+    "t2": "soñado.",
+    "t3": "Beats ",
+    "t4": "destacados",
+    "t5": "95% de nuestros clientes",
+    "t6": "nos recomiendan.",
+    "t7": "En BeatConnect, nos esforzamos por brindar el mejor servicio posible a nuestros clientes. Estamos orgullosos de que el 95% de ellos nos recomienden a sus amigos y colegas. Esta estadística es un testimonio de nuestro compromiso con la calidad y la satisfacción del cliente. Si aún no has probado nuestros servicios, ¡te invitamos a hacerlo y unirte a nuestra lista de clientes satisfechos!",
+    "t8": "",
+    "t9": ""
+  },
+
+  "beatShopSection": {
+    "t1": "Anterior",
+    "t2": "Siguiente",
+    "filterName1": "Generos",
+    "filterName2": "Precio",
+    "sortBy": "Ordenar por:",
+    "t6": "",
+    "t7": "",
+    "t8": "",
+    "t9": ""
+  },
+
+  "search": "¿Que estas buscando?",
+
+  "billing" : {
+    "t1": "Facturación",
+    "t2" : "Monto",
+    "t3" : "Operación",
+    "t4" : "Fecha"
+  },
+
+  "sliceAuthSession": {
+    "t1": "Se logueó correctamente",
+    "t2": "Se registró correctamente",
+    "t3": "Se estáaaaaaaaaaaaaaaaaa convirtiendo en vendedor...",
+    "t4": "Se convirtió en vendedor",
+    "t5": "Se está editando...",
+    "t6": "Se editó correctamente",
+    "t7": "Tu contraseña se cambio correctamente",
+    "t8": "Te estamos enviando un email con la solicitud de recuperación...",
+    "t9": "Se envió el email",
+    "t10": "Se está cambiando la contraseña...",
+    "t11": "Se cambió la contraseña"
+  },
+
+  "miniCart": {
+    "t1": "Parece que tu carrito esta vacio",
+    "t2": "Ver carrito"
+  },
+
+  "cartHeaders": {
+    "title" : "Carrito",
+    "t1": "Precio",
+    "t2": "Acciones",
+    "t3" : "Eliminar",
+    "t4" : "Tu orden",
+    "t5" : "Subtotal",
+    "t6" : "Descuentos",
+    "t7" : "Total",
+    "t8" : "Comprar",
+    "t9" : "Beats ",
+    "t10" : "Relacionados"
+  },
+
+  "beatDetailSideBar" : {
+    "t1" : "Precios y licencias",
+    "t2": "Descargar",
+    "t3": "Añadir al carrito"
   }
 
 

@@ -3,6 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { BeatRightSheet, MiniCartItem } from "@/components";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
 export default function MiniCart() {
 
@@ -25,6 +26,7 @@ export default function MiniCart() {
   const cartItems = useSelector((state) => state?.cart.cart) || [];
 
   const [visible, setVisible] = useState(false);
+  const [t, i18n] = useTranslation("global");
 
   return (
     <>
@@ -44,7 +46,7 @@ export default function MiniCart() {
             {cartItems.length === 0 && (
               <div className="flex flex-col items-center justify-center">
                 <h4 className="text-center">
-                  Parece que tu carrito esta vacio
+                  {t("miniCart.t1")}
                 </h4>
               </div>
             )}
@@ -58,7 +60,7 @@ export default function MiniCart() {
               <div id="total">
                 <Link href="/beats/cart" onClick={() => setVisible(!visible)}>
                   <button className="mt-6 w-full rounded-full bg-red-700 px-4 py-2 font-semibold text-white">
-                    Ver carrito
+                    {t("miniCart.t2")}
                   </button>
                 </Link>
               </div>

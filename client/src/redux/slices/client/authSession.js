@@ -14,6 +14,8 @@ import { toastError, toastSuccess } from "@/utils/toastStyles";
 import { setBougthBeats, setOwnedBeats, setFavoriteBeats } from "./beats";
 import { setOwnedReviews } from "./reviews";
 import { setOrders } from "./orders";
+import { useTranslation } from "react-i18next";
+import i18n from 'i18next';
 
 const initialState = {
   auth: {
@@ -250,7 +252,6 @@ export const getUserData = createAsyncThunk(
 );
 
 //------------------ SLICE ------------------//
-
 const authSession = createSlice({
   name: "authSession",
   initialState,
