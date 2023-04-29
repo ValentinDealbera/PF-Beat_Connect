@@ -63,7 +63,7 @@ const register = async (req, res) => {
 
     // Crear un nuevo usuario
     const userOK = await userModel.create({
-      emailCase,
+      email: emailCase,
       password: hashedPassword,
       firstName,
       lastName,

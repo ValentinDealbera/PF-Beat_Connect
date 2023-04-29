@@ -3,9 +3,11 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toastError, toastSuccess } from "@/utils/toastStyles";
 import { serverUrl } from "@/data/config";
+import { toast } from "sonner";
 
-import { convertInSeller } from "@/redux/slices/client/authSession";
+import { convertInSeller, getUserData } from "@/redux/slices/client/authSession";
 import { fetchBeats } from "@/redux/slices/beats";
 import { useTranslation } from "react-i18next";
 import { resetCart } from "@/redux/slices/cart";
@@ -25,15 +27,21 @@ export default function Home() {
 
   const sendOrder = async () => {
     for (let i = 0; i < router.query.cart.split(",").length; i++) {
-      // await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}orders`, {
-      //   beat: router.query.cart.split(",")[i],
-      //   buyer: id,
-      // });
-      dispatch(
-        postClientOrder({ beat: router.query.cart.split(",")[i], buyer: id })
-      );
+      try {
+        await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}orders`, {
+          beat: router.query.cart.split(",")[i],
+          buyer: id,
+        });
+        toast.success("Orden cargada", toastSuccess);
+      } catch (error) {
+        toast.error(error.response.data.message, toastError);
+      }
+      // dispatch(
+      //   postClientOrder({ beat: router.query.cart.split(",")[i], buyer: id })
+      // );
     }
-    // dispatch(resetCart());
+    dispatch(getUserData(id));
+    dispatch(resetCart());
   };
 
   useEffect(() => {

@@ -1,6 +1,7 @@
 const UserModel = require("../../models/nosql/user");
 const beatModel = require("../../models/nosql/beats");
 const ReviewModel = require("../../models/nosql/reviews");
+const OrderModel = require("../../models/nosql/orders");
 
 module.exports = async (req, res) => {
   try {
@@ -28,6 +29,14 @@ module.exports = async (req, res) => {
       // Elimino review asociadas con los beats del usuario.
       await ReviewModel.deleteMany({
         beat: { $in: userBeats.map((beat) => beat._id) },
+      });
+
+      // Eliminar todas las ordenes asociadas al usuario
+      await OrderModel.deleteMany({
+        buyer: id,
+      });
+      await OrderModel.deleteMany({
+        seller: id,
       });
 
       // Elimino el usuario
