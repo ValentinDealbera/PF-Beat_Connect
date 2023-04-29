@@ -15,7 +15,7 @@ export default function SellerDashboardLayout({
   return (
     <>
       <AdminMaster>
-        <section className="background-neutral-slate-100 flex min-h-screen flex-col items-stretch pb-10 dark:bg-neutral-950 xl:flex-row xl:pb-0">
+        <section className="background-neutral-slate-100 flex min-h-screen flex-col items-stretch pb-10 dark:bg-customDark-700 xl:flex-row xl:pb-0">
           <div id="col1" className=" hidden w-[20%] xl:flex">
             <SellerDashboardSidebar />
           </div>
@@ -29,7 +29,7 @@ export default function SellerDashboardLayout({
               buttonLabel={topBarButtonLabel}
               onClick={onClick}
             />
-            <div className="padding-x-dashboard-estilo1  w-full">
+            <div className="padding-x-dashboard-estilo1 pb-10 w-full">
               {children}
             </div>
           </div>

@@ -40,16 +40,7 @@ export default function SellerDashboardNav() {
     <>
       <div className="gap-estilo2 flex flex-col">
         {/* <Search colorMode={"red"} sizeMode={"small"} className={"w-full"} /> */}
-
-        <DashboardItem
-          title={"Inbox"}
-          link={"/admin/inbox"}
-          icon={"/icon/dashboard/overview.svg"}
-        />
-        <div className="gap-estilo4 flex  flex-col">
-          <h3 className="text-sm-medium color-primary-red-700  dark:text-red-600">
-            Dashboard
-          </h3>
+        <div className="gap-6 flex  flex-col">
           {dashboardNav.map((item) => (
             <NavItems
               itemTitle={item.title}

@@ -81,6 +81,7 @@ export default function BeatCard({
         manageEditBeat();
       },
       handleDelete: () => {
+        console.log("DELETE BEAT - card", beat._id);
         dispatch(deleteClientBeat(beat._id));
       },
     };
@@ -109,7 +110,7 @@ export default function BeatCard({
     return (
       <>
         <div
-          className="relative w-full"
+          className="relative w-full "
           onMouseEnter={() => {
             setVisibilityReviewsModal(true);
             setVisibilityOwnedModal(true);
@@ -124,7 +125,7 @@ export default function BeatCard({
             className={mode === "grid" ? "w-full" : `${width}`}
           >
             <div
-              className={`background-neutral-white gap-estilo3 flex flex-col ${
+              className={`gap-estilo3 flex flex-col ${
                 variant === "public"
                   ? ""
                   : "border-radius-estilo1 px-2 pb-5 pt-2 "

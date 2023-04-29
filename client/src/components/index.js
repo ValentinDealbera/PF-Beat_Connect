@@ -127,10 +127,14 @@ export { default as EditClientForm } from "./forms/editClientForm";
 export { default as EditPasswordForm } from "./forms/editPasswordForm";
 export { default as ReviewCardGrid } from "./client/reviewCardGrid";
 export { default as RecoveryPasswordForm } from "./forms/recoveryPasswordForm";
-export { default as EditReviewForm } from "./masters/editReview";
 export { default as BeatReviewPopup } from "./beat/beatReviewPopup";
-export { default as AdminMaster } from "./masters/adminMaster";
 
+export { default as EditReviewForm } from "./masters/editReview";
+
+
+export { default as AdminMaster } from "./masters/adminMaster";
+export { default as AdminHeaderBar } from "./masters/adminHeaderBar";
+export { default as ImageCache } from "./common/imageCache";
 
 //export { default as BeatImage } from "./beat/beatImage";
 //export { default as Checkbox } from "./common/checkbox";

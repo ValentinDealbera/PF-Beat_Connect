@@ -154,7 +154,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
               id="name"
               name="name"
               label="Nombre"
-              placeholder="Nombre del Beat:"
+              placeholder="Nombre"
               defaultValue={mode === "edit" ? defaultValues.name : ""}
               type="text"
               onChange={handleInput}
@@ -164,7 +164,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
               name="priceAmount"
               id="priceAmount"
               label="Precio"
-              placeholder="Precio:"
+              placeholder="Precio"
               defaultValue={mode === "edit" ? defaultValues.priceAmount : ""}
               type="number"
               onChange={handleInput}
@@ -173,7 +173,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
             <Input
               name="image"
               label="Imagen"
-              placeholder="Image:"
+              placeholder="Imagen"
               type="file"
               onChange={handleInput}
               error={error.image}
@@ -182,8 +182,8 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
             {mode === "edit" && (
               <Input
                 name="userCreator"
-                label="Usuario creador:"
-                placeholder="User Creator:"
+                label="Usuario creador"
+                placeholder="Usuario creador"
                 value={
                   mode === "edit" ? defaultValues.userCreator.username : null
                 }
@@ -200,8 +200,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
                 htmlFor="userCreator"
                 className="text-sm-medium flex min-w-0 flex-col gap-1"
               >
-                {" "}
-                Creado por:
+                Usuario creador
                 <Autocomplete
                   id="userCreator"
                   name="Usuario creador"
@@ -218,8 +217,11 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
                   renderInput={(params) => (
                     <TextField
                       {...params}
-                      label="Seleccionar opción"
-                      variant="outlined"
+                     // variant="filled"
+                     size="small"
+          
+                      C
+                      className="border-radius-estilo2 bg-white px-4 py-2 text-sm placeholder:text-sm dark:bg-customDark-700 dark:text-black"
                     />
                   )}
                   isOptionEqualToValue={(option, value) =>
@@ -233,40 +235,39 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
             <Input
               name="bpm"
               label="BPM"
-              placeholder="BPM:"
+              placeholder="BPM"
               defaultValue={mode === "edit" ? defaultValues.BPM : ""}
               type="number"
               onChange={handleInput}
               error={error.bpm}
             />
-            <label className="text-sm-medium gap-estilo4 flex min-w-0 flex-col">
+            <label className="text-sm-medium flex min-w-0 flex-col gap-1">
               Elige un Género
-            </label>
-            <select
-              name="genre"
-              id="genre"
-              type="text"
-              defaultValue=""
-              className="text-sm-regular border-radius-estilo2 color-neutral-black-950 placeholder:text-sm-light
-                  placeholder:color-neutral-gray-400 border border-slate-200 bg-white px-4 py-2"
-              onChange={handleInput}
-              error={error.genre}
-            >
-              <option value="" disabled selected>
-                Seleccionar género
-              </option>
-              {genres.map((genre) => (
-                <option
-                  value={genre.value}
-                  selected={
-                    mode === "edit" && genre.value === defaultValues.genre._id
-                  }
-                >
-                  {genre.label}
+              <select
+                name="genre"
+                id="genre"
+                type="text"
+                defaultValue=""
+                className="text-sm-regular border-radius-estilo2 color-neutral-black-950 placeholder:text-sm-light
+                  placeholder:color-neutral-gray-400 border border-slate-200 bg-white px-4 py-2 dark:border-none dark:bg-customDark-700 dark:text-white"
+                onChange={handleInput}
+                error={error.genre}
+              >
+                <option value="" disabled selected>
+                  Seleccionar género
                 </option>
-              ))}
-            </select>
-
+                {genres.map((genre) => (
+                  <option
+                    value={genre.value}
+                    selected={
+                      mode === "edit" && genre.value === defaultValues.genre._id
+                    }
+                  >
+                    {genre.label}
+                  </option>
+                ))}
+              </select>
+            </label>
             {mode == "create" && (
               <Input
                 name="audioMP3"

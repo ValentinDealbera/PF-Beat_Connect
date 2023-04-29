@@ -34,7 +34,7 @@ export default function AdminBeatsCreate() {
       <main>
         <SellerDashboardLayout
           topBarMode="action"
-          topBarMessage="Edit Beat"
+          topBarMessage="Editar Beat"
           topBarButtonLabel="Guardar cambios"
           onClick={handleExternalSubmit}
         >

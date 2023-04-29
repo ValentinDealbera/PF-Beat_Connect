@@ -124,12 +124,6 @@ const adminReviewsSlice = createSlice({
         state.reviews = Array.isArray(action.payload.reviewResponse)
           ? action.payload.reviewResponse
           : [];
-        toast.success("Reviews cargadas correctamente", {
-          style: {
-            background: "#F0FFF0",
-            color: "#00B300",
-          },
-        });
       })
 
       .addCase(adminGetReviews.rejected, (state, action) => {
@@ -143,7 +137,6 @@ const adminReviewsSlice = createSlice({
       })
       .addCase(adminGetReviews.pending, (state, action) => {
         console.log("action.payload pending");
-        toast("Cargando reviews...");
       })
       //--------------------
       //DELETE ADMIN REVIEWS

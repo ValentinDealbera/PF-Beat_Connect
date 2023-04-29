@@ -5,6 +5,7 @@ import {
   Input,
   SwitchForm,
   TextArea,
+  Head,
 } from "@/components";
 
 import {
@@ -16,12 +17,9 @@ import {
 import { forwardRef, useImperativeHandle } from "react";
 import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  adminEditReview,
-  adminPostReview,
-  adminGetFormBeats,
-  adminGetUsersForms,
-} from "@/redux/slices/admin/reviews";
+import { adminEditReview, adminPostReview } from "@/redux/slices/admin/reviews";
+import { adminGetBeats } from "@/redux/slices/admin/beats";
+import { adminGetUsers } from "@/redux/slices/admin/users";
 import { useRouter } from "next/router";
 import { Autocomplete, TextField } from "@mui/material";
 
@@ -35,8 +33,8 @@ const AdminCreateReviewForm = forwardRef((props, ref) => {
   const defaultValues =
     useSelector((state) => state.admin.currentEditingReview) || {};
   const mode = props.mode;
-  const defaultUsers = useSelector((state) => state.admin.usersForms);
-  const defaultBeats = useSelector((state) => state.admin.beatsForms);
+  const defaultUsers = useSelector((state) => state.admin.users.users);
+  const defaultBeats = useSelector((state) => state.admin.beats.beats);
   const [softD, setSoftD] = useState(defaultValues.softDelete);
 
   console.log("defaultValues", defaultValues);
@@ -104,11 +102,11 @@ const AdminCreateReviewForm = forwardRef((props, ref) => {
   }));
 
   useEffect(() => {
-    dispatch(adminGetUsersForms());
+    dispatch(adminGetUsers());
   }, []);
 
   useEffect(() => {
-    dispatch(adminGetFormBeats());
+    dispatch(adminGetBeats());
   }, []);
 
   useEffect(() => {
@@ -158,7 +156,7 @@ const AdminCreateReviewForm = forwardRef((props, ref) => {
                 className="text-sm-medium flex min-w-0 flex-col gap-1"
               >
                 {" "}
-                Creada por:
+                Usuario creador
                 <Autocomplete
                   id="createdBy"
                   name="createdBy"
@@ -175,8 +173,9 @@ const AdminCreateReviewForm = forwardRef((props, ref) => {
                   renderInput={(params) => (
                     <TextField
                       {...params}
-                      label="Seleccionar opción"
+                      size="small"
                       variant="outlined"
+                      className="border-radius-estilo2 bg-white px-4 py-2 text-sm placeholder:text-sm dark:bg-customDark-700 dark:text-black"
                     />
                   )}
                   isOptionEqualToValue={(option, value) =>
@@ -190,7 +189,7 @@ const AdminCreateReviewForm = forwardRef((props, ref) => {
               type="text"
               name="title"
               placeholder="Titulo"
-              label="Titulo del review"
+              label="Titulo"
               onChange={handleInput}
               error={error.title}
               defaultValue={mode === "edit" ? defaultValues.title : ""}
@@ -201,13 +200,13 @@ const AdminCreateReviewForm = forwardRef((props, ref) => {
               name="rating"
               step="0.1"
               placeholder="Rating"
-              label="Rating del review"
+              label="Rating"
               onChange={handleInput}
               error={error.rating}
               defaultValue={mode === "edit" ? defaultValues.rating : ""}
             />
             <SwitchForm
-              label="Bannear"
+              label="Banear"
               name="softDelete"
               nameInput="softDelete"
               // defaultValue={mode === "edit" ? defaultValues.softDelete : ""}
@@ -240,7 +239,8 @@ const AdminCreateReviewForm = forwardRef((props, ref) => {
                   renderInput={(params) => (
                     <TextField
                       {...params}
-                      label="Seleccionar opción"
+                      size="small"
+                      className="border-radius-estilo2 bg-white px-4 py-2 text-sm placeholder:text-sm dark:bg-customDark-700 dark:text-black"
                       variant="outlined"
                     />
                   )}
@@ -258,7 +258,7 @@ const AdminCreateReviewForm = forwardRef((props, ref) => {
               error={error.comment}
               onChange={handleInput}
               defaultValue={mode === "edit" ? defaultValues.comment : ""}
-              className="h-60"
+              className="h-20"
             />
           </FormColumn>
         </FormRow>

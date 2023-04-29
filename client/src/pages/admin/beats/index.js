@@ -57,7 +57,7 @@ export default function SellerDashboardOverview() {
     router.push(`/admin/beats/${data._id}`);
   };
 
-  const headers = ["Beat", "Precio","Status", "AudioMP3", "Acciones"];
+  const headers = ["Beat","Status", "AudioMP3", "Acciones"];
 
   const rows = beatData.map((item) => {
     return {
@@ -74,6 +74,7 @@ export default function SellerDashboardOverview() {
             <p className="text-sm-light">
               {item.userCreator.firstName} {item.userCreator.lastName}
             </p>
+            <p className="text-sm-light">${item.priceAmount}</p>
           </div>
         </div>
       ),
@@ -84,14 +85,13 @@ export default function SellerDashboardOverview() {
           </audio>
         </div>
       ),
-      precio: <p className="text-sm-light">${item.priceAmount}</p>,
       status: item.softDelete ? "Baneado" : "Activo",
       acciones: (
         <div className="flex w-max gap-4" key={item._id}>
           <button
             onClick={() => handleEdit(item)}
             className=" hover:background-neutral-gray-700 text-sm-semibold 
-            border-radius-estilo2 text-black "
+            border-radius-estilo2 text-black dark:text-white"
           >
             Editar
           </button>

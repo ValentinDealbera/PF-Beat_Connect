@@ -16,12 +16,16 @@ import Image from "next/image";
 export default function BuyerProfile() {
   const activeIndex = useSelector((state) => state.profile.settingsActiveIndex);
   const beats = useSelector((state) => state.client.orders.orders);
-
+const state = useSelector((state) => state.client);
+console.log("STATE", state.orders.orders);
   //obtenemos los beats
   const headers = ["Beat", "Monto", "Operacion", "Fecha"];
+//revisamoa que beats tenga una propieadad de beat y si no la tiene lo borramos
 
-  const rows = beats.map((item) => {
- 
+const beatsFiltered = beats.filter((item) => item.beat);
+
+  const rows = beatsFiltered.map((item) => {
+ console.log("ITEM", item);
     return {
 
       beat: (

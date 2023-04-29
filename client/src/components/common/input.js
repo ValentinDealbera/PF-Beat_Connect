@@ -14,11 +14,11 @@ export default function Input(props) {
         prefix={props.prefix}
         onChange={props.onChange}
         placeholder={props.placeholder}
-        className={`${props.className} text-sm-regular border-radius-estilo2 dark:text-white color-neutral-black-950 placeholder:text-sm-light placeholder:color-neutral-gray-400 dark:placeholder:text-white border-slate-200 dark:border-neutral-700 dark:bg-neutral-700 bg-white px-4 py-2`}
+        className={`${props.className} text-sm-regular border-radius-estilo2 dark:text-white color-neutral-black-950 placeholder:text-sm-light placeholder:color-neutral-gray-400 dark:placeholder:text-white border-slate-200 dark:border-none dark:bg-customDark-700 bg-white px-4 py-2`}
         style={{ borderWidth: "1px" }}
       />
       {props.error && (
-        <p className="gap-estilo4 text-sm-medium color-primary-red-500 ml-2 flex">
+        <p className="gap-estilo4 text-sm-medium color-primary-red-500 dark:text-red-800 ml-2 flex">
           {props.error}
         </p>
       )}

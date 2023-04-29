@@ -7,6 +7,7 @@ import {
   Input,
   SwitchForm,
   AdminCreateBeatForm,
+  Head,
 } from "@/components";
 
 import {
