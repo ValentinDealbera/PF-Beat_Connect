@@ -10,6 +10,7 @@ import { editClient } from "@/redux/slices/client/authSession";
 import { useRouter } from "next/router";
 import { validationEditUser } from "@/components/validation/client/editUser";
 import { useTranslation } from "react-i18next";
+import i18n from 'i18next';
 
 export default function EditClientForm(props) {
   const [t, i18n] = useTranslation("global");

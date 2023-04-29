@@ -13,8 +13,10 @@ import { serverUrl } from "@/data/config";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 
 export default function Carrito() {
+  const [t, i18n] = useTranslation("global");
   const router = useRouter();
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state?.cart.cart) || [];
@@ -46,7 +48,7 @@ export default function Carrito() {
     }
   });
 
-  const headers = ["Beat", "Precio", "Acciones"];
+  const headers = ["Beat", t("cartHeaders.t1"), t("cartHeaders.t2")];
 
   const rows = cartItems.map((item) => {
     return {
@@ -70,7 +72,7 @@ export default function Carrito() {
       precio: <p className="text-sm-medium">${item.beat.priceAmount}</p>,
       acciones: (
         <button className="text-sm-medium" onClick={() => dispatch(deleteFromCart({ id: item.beat._id }))}>
-          Eliminar
+          {t("cartHeaders.t3")}
         </button>
       ),
     };
@@ -134,14 +136,14 @@ export default function Carrito() {
               className="flex h-max w-full flex-col gap-4"
               style={{ boxShadow: "0px 0px 15px 2px rgba(0, 0, 0, 0.08)" }}
             >
-              <h1 className="text-titulo2-medium">Carrito</h1>
+              <h1 className="text-titulo2-medium">{t("cartHeaders.title")}</h1>
               <DynamicTable headers={headers} rows={rows} />
             </IslandDashboard>
             <IslandDashboard
               className="flex h-max w-[40%] flex-col gap-6"
               style={{ boxShadow: "0px 0px 15px 2px rgba(0, 0, 0, 0.08)" }}
             >
-              <h2 className="text-subtitulo-medium">Tu orden</h2>
+              <h2 className="text-subtitulo-medium">{t("cartHeaders.t4")}</h2>
               <div id="precio_por_autor" className="flex flex-col gap-4">
                 {precio_por_autor.map((item) => (
                   <div>
@@ -165,7 +167,7 @@ export default function Carrito() {
               </div>
               <div id="total" className="flex flex-col items-center gap-2">
                 <div className="flex w-full items-center justify-between gap-4">
-                  <h3 className="text-base-light">Subtotal</h3>
+                  <h3 className="text-base-light">{t("cartHeaders.t5")}</h3>
                   <span className="text-base-semibold text-red-700">
                     $
                     {cartItems.reduce(
@@ -175,11 +177,11 @@ export default function Carrito() {
                   </span>
                 </div>
                 <div className="flex w-full items-center justify-between">
-                  <h3 className="text-base-light">Descuentos</h3>
+                  <h3 className="text-base-light">{t("cartHeaders.t6")}</h3>
                   <span className="text-base-semibold text-red-700">$0</span>
                 </div>
                 <div className="flex w-full items-center justify-between">
-                  <h3 className="text-base-semibold">Total</h3>
+                  <h3 className="text-base-semibold">{t("cartHeaders.t7")}</h3>
                   <span className="text-base-semibold text-red-700">
                     $
                     {cartItems.reduce(
@@ -193,13 +195,13 @@ export default function Carrito() {
                 className="text-base-semibold rounded-full bg-red-700 py-2 text-white"
                 onClick={handlePayment}
               >
-                Comprar
+                {t("cartHeaders.t8")}
               </button>
             </IslandDashboard>
           </div>
         </Section>
-        <BeatsRelatedSection title="Beats ">
-          <span className="text-titulo2-semibold">relacionados</span>
+        <BeatsRelatedSection title={t("cartHeaders.t9")}>
+          <span className="text-titulo2-semibold">{t("cartHeaders.t10")}</span>
         </BeatsRelatedSection>
       </Main>
     </>

@@ -178,7 +178,7 @@ export default function PostBeat() {
                   />
                   <Input
                     name={"audioWAV"}
-                    label={"Ingresa un beat de alta calidad (WAV, OGG)"}
+                    label={t("postBeat.form13")}
                     placeholder={"Upload your Beat"}
                     type={"file"}
                     onChange={handleInputChange}
@@ -191,7 +191,7 @@ export default function PostBeat() {
                   type="submit"
                   className="text-base-semibold mt-2  w-full rounded-full bg-red-700 py-2 text-white"
                 >
-                    {t("postBeat.form13")}
+                    {t("postBeat.form14")}
                 </button>
               </form>
             </div>

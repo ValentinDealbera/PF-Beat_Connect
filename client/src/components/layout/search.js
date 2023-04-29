@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 
 export default function Search({
   colorMode,
@@ -6,7 +7,9 @@ export default function Search({
   className,
   response,
   value,
-}) {
+})
+ {
+  const [t, i18n] = useTranslation("global");
   return (
     <>
       <div
@@ -31,7 +34,7 @@ export default function Search({
         />
         <input
           type="text"
-          placeholder="¿Que estas buscando?"
+          placeholder={t("search")}
           value={value}
           className={`border-none bg-transparent outline-none ${
             colorMode === "light"

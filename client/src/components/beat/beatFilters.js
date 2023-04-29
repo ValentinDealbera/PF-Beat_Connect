@@ -22,9 +22,12 @@ import {
 import { fetchBeats } from "@/redux/slices/beats";
 import { debounce } from "lodash";
 import { useRef } from "react";
+import { useTranslation } from "react-i18next";
+
 // import { useDebounce } from 'use-debounce';
 
 export default function BeatFilters() {
+  const [t, i18n] = useTranslation("global");
   const dispatch = useDispatch();
   const [beatGenre, setBeatGenre] = useState([]);
   const [prices, setPrices] = useState({ min: 0, max: 0 });
@@ -195,7 +198,7 @@ export default function BeatFilters() {
           <div className="z-10 hidden flex-row justify-between sm:flex">
             <div className="gap-estilo3 flex items-end">
               <MultiSelect
-                label="Generos"
+                label={t("beatShopSection.filterName1")}
                 values={generos}
                 seleccionados={beatGenre}
                 setSeleccionados={setBeatGenre}
@@ -207,7 +210,7 @@ export default function BeatFilters() {
             setSeleccionados={setBeatTypes}
           /> */}
               <ModalMinMax
-                label="Precio"
+                label={t("beatShopSection.filterName2")}
                 seleccionados={prices}
                 setSeleccionados={setPrices}
               />
@@ -219,7 +222,7 @@ export default function BeatFilters() {
             </div>
             <Select
               value={sorter}
-              label="Sort By:"
+              label={t("beatShopSection.sortBy")}
               valores={sortArr}
               setSeleccionados={setSort}
               labelClass="text-base-semibold"

@@ -11,8 +11,10 @@ import {
 import { useDispatch, useSelector, getState } from "react-redux";
 import { setSearchFilter } from "@/redux/slices/filters";
 import { setCurrentPage } from "@/redux/slices/beats";
+import { useTranslation } from "react-i18next";
 
 export default function Beats() {
+  const [t, i18n] = useTranslation("global");
   const dispatch = useDispatch();
   const { searchFilter } = useSelector((state) => state.filters);
   const { pages } = useSelector((state) => state.beats);
@@ -40,8 +42,8 @@ export default function Beats() {
         >
           <div className="padding-estilo2  gap-estilo3 mt-6 flex h-full w-full flex-col items-start justify-between align-middle md:flex-row md:items-center">
             <h1 className="text-titulo1-regular text-white">
-              Encuentra ese beat{" "}
-              <span className="text-titulo1-semibold text-white">soñado.</span>
+                {t("beats.t1")}{" "}
+              <span className="text-titulo1-semibold text-white">{t("beats.t2")}</span>
             </h1>
             <Search
               value={searchFilter}
@@ -52,8 +54,8 @@ export default function Beats() {
             />
           </div>
         </Hero>
-        <BeatsSpecialSection title={`Beats `}>
-          <span className="text-titulo2-semibold">destacados</span>
+        <BeatsSpecialSection title={t("beats.t3")}>
+          <span className="text-titulo2-semibold">{t("beats.t4")}</span>
         </BeatsSpecialSection>
         <Section
           subClassName=" bg-neutral-100 color-white gap-2 flex md:min-h-[350px]"
@@ -62,19 +64,14 @@ export default function Beats() {
           <div className="flex min-w-full 2xl:container 2xl:pr-24">
             <div className="padding-x-estilo2 padding-y-estilo1 flex h-full w-1/2 flex-col gap-2 ">
               <h1 className="text-titulo2-regular leading-4">
-                95% de nuestros clientes
+                {t("beats.t5")}
                 <span className="text-titulo2-semibold text-red-700">
                   {" "}
-                  nos recomiendan.{" "}
+                  {t("beats.t6")}{" "}
                 </span>
               </h1>
               <p className="text-base-light">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-                ornare sed nibh eu porta. In auctor dignissim nisi, vel iaculis
-                mi faucibus fermentum. Mauris fermentum lacinia auctor, lorem
-                ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare
-                sed nibh eu porta. In auctor dignissim nisi, vel iaculis mi
-                faucibus fermentum. Mauris fermentum lacinia auctor.
+                {t("beats.t7")}
               </p>
             </div>
             <div
@@ -89,7 +86,6 @@ export default function Beats() {
           </div>
         </Section>
         <BeatsShopSection />
-       
       </Main>
     </>
   );

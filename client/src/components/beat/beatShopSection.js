@@ -1,8 +1,10 @@
 import { Section, BeatFilters, NewBeatCardGrid } from "@/components";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentPage } from "@/redux/slices/beats";
+import { useTranslation } from "react-i18next";
 
 export default function BeatShopSection() {
+  const [t, i18n] = useTranslation("global");
   const { pages } = useSelector((state) => state.beats);
   const filteredBeats = useSelector((state) => state.beats.publicItems);
   const dispatch = useDispatch();
@@ -26,7 +28,7 @@ export default function BeatShopSection() {
           disabled={pages.current === 1}
           className={pages.current === 1 ? "text-black" : " text-red-800"} 
         >
-          Anterior
+          {t("beatShopSection.t1")}
         </button>
         <div className="flex justify-center gap-4">
           {visiblePages.map((page) => (
@@ -51,7 +53,7 @@ export default function BeatShopSection() {
               : "text-red-800"
           }
         >
-          Siguiente
+          {t("beatShopSection.t2")}
         </button>
       </div>
     </Section>

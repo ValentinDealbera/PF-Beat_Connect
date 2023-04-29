@@ -199,7 +199,8 @@
       "form10": "Select files",
       "form11": "No files selected",
       "form12": "Upload your beat",
-      "form13": "Create post"
+      "form13": "Upload a high-quality beat (WAV, OGG)",
+      "form14": "Create post"
     },
 
     "buyerGeneralNav": {
@@ -223,7 +224,79 @@
       "t6": "Bio",
       "t7": "Cover image",
       "tosave": "Tosave"
-    }
+    },
+
+    "beats": {
+      "t1": "Find that dream",
+      "t2": "beat.",
+      "t3": "Featured ",
+      "t4": "Beats",
+      "t5": "95% of our clients",
+      "t6": "recommend us.",
+      "t7": "In BeatConnect, we strive to provide the best possible service to our customers. We are proud that 95% of them recommend us to their friends and colleagues. This statistic is a testament to our commitment to quality and customer satisfaction. If you haven't tried our services yet, we invite you to do so and join our list of satisfied customers!",
+      "t8": "",
+      "t9": ""
+    },
+
+    "beatShopSection": {
+      "t1": "Previous",
+      "t2": "Next",
+      "filterName1": "Genres",
+      "filterName2": "Price",
+      "sortBy": "Sort By",
+      "t6": "",
+      "t7": "",
+      "t8": "",
+      "t9": ""
+    },
+
+    "search": "What are you looking for?",
+
+    "billing" : {
+      "t1": "Billing",
+      "t2" : "Amount",
+      "t3" : "Operation",
+      "t4" : "Date"
+    },
+
+    "sliceAuthSession": {
+      "t1": "Logged in successfully",
+      "t2": "Registered successfully",
+      "t3": "Becoming a seller...",
+      "t4": "Became a seller",
+      "t5": "Editing...",
+      "t6": "Edited successfully",
+      "t7": "Your password has been changed successfully",
+      "t8": "Sending you an email with recovery request...",
+      "t9": "Email sent",
+      "t10": "Changing password...",
+      "t11": "Password changed"
+    },
+
+    "miniCart": {
+      "t1": "It seems like your cart is empty",
+      "t2": "View cart"
+      },
+
+    "cartHeaders": {
+      "title" : "Cart",
+      "t1": "Price",
+      "t2": "Actions",
+      "t3" : "Delete",
+      "t4": "Your order",
+      "t5": "Subtotal",
+      "t6": "Discounts",
+      "t7": "Total",
+      "t8": "Buy",
+      "t9": "Related ",
+      "t10" : "Beats"
+      },
+
+      "beatDetailSideBar": {
+        "t1": "Prices and Licenses",
+        "t2": "Download",
+        "t3": "Add to Cart"
+        }
 }
 
 
