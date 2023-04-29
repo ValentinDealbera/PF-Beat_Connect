@@ -14,8 +14,6 @@ export default function RecoveryPasswordForm(props) {
   const [error, setErrors] = useState({});
   const userEmail = router.query.email;
 
-  const userEmail = router.query.email;
-
   const id = useSelector(
     (state) => state.client.authSession.session.current._id
   );
@@ -39,7 +37,6 @@ export default function RecoveryPasswordForm(props) {
     try {
       const formErrors = validationRecoverPassword(form, "*");
       if (Object.keys(formErrors).length === 0) {
-
         console.log("DESPACHADO", {});
 
         dispatch(
@@ -48,7 +45,6 @@ export default function RecoveryPasswordForm(props) {
         formRef.current.reset();
 
         // router.push("/auth");
-
       } else {
         setErrors(formErrors);
         console.log("form Error", formErrors);
