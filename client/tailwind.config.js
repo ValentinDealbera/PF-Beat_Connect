@@ -8,11 +8,19 @@ module.exports = {
     './src/app/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+
+
     screens: {
       'xs': '380px',
       ...defaultTheme.screens,
     },
     extend: {
+      colors: {
+        customDark: {
+          900: '#121418',
+          700: '#1B1F24',
+        },
+      },
       
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

@@ -43,7 +43,7 @@ export default function SellerDashboardOverview() {
     router.push(`/admin/users/${data._id}`);
   };
 
-  const headers = ["Usuario", "Email", "Vendedor", "Status", "Acciones"];
+  const headers = ["USUARIO", "ESTATUS", "ACCIONES"];
 
   const rows = usersData.map((item) => {
     return {
@@ -55,20 +55,24 @@ export default function SellerDashboardOverview() {
             height={50}
             className="aspect-square rounded-full object-cover"
           />
-          <h3 className="text-base-medium max-w-[50px] overflow-ellipsis">
+
+          <div className="flex flex-col">
+          <h3 className="text-base-medium overflow-ellipsis dark:text-white">
             {item.username}
           </h3>
+            <p className="text-sm-light dark:text-white">
+              {item.email}
+            </p>
+          </div>
         </div>
       ),
-      email:  (<p className="text-sm-light">{item.email}</p>),
-      vendedor: item.isSeller ? "Si" : "No",
-      status: item.softDelete ? "Banned" : "Ok",
+      estatus:  (<p className="text-sm-light dark:text-white">{item.softDelete ? "Baneado" : "Activo"}</p>),
       acciones: (
         <div className="flex w-max gap-4" key={item._id}>
           <button
             onClick={() => handleEdit(item)}
             className=" hover:background-neutral-gray-700 text-sm-semibold 
-            border-radius-estilo2 text-black "
+            border-radius-estilo2 text-black dark:text-white "
           >
             Editar
           </button>

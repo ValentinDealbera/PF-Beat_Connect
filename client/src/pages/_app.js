@@ -1,5 +1,5 @@
 import "@/styles/globals.scss";
-import { Header, Footer, Master, HOC } from "@/components";
+import { Header, Footer, Master, HOC, AdminHeaderBar } from "@/components";
 import { Provider, useDispatch } from "react-redux";
 import store, { persistor } from "@/redux/store/store";
 import { PersistGate } from "redux-persist/integration/react";
@@ -44,10 +44,10 @@ export default function App({ Component, pageProps, router }) {
     <>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-        <ThemeProvider attribute="class">
           <HOC>
           
               <I18nextProvider i18n={i18next}>
+              <AdminHeaderBar />
                 {headerVisibility && <Header />}
                 <Master>
                   <Toaster position="bottom-left" />
@@ -57,7 +57,6 @@ export default function App({ Component, pageProps, router }) {
               </I18nextProvider>
            
           </HOC>
-          </ThemeProvider>
         </PersistGate>
       </Provider>
     </>

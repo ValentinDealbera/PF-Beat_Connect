@@ -8,6 +8,7 @@ import {
   managePostBeat,
   manageBecomeSeller,
   EditBeat,
+  AdminHeaderBar,
 } from "@/components";
 import { useRouter } from "next/router";
 import { navPublic } from "@/data/data";
@@ -91,13 +92,14 @@ export default function Header() {
       <BecomeSeller />
       <PostBeat />
       <EditBeat />
+      
       <header
-        className={`fixed z-30 flex w-full  flex-row justify-center py-8 ${
+        className={`fixed z-30 flex  w-full  flex-row justify-center py-8 ${
           currentMode === "light" ? "background-neutral-white " : ""
         }`}
         style={
           headerType === "alternative"
-            ? { background: "#000000b3", backdropFilter: "blur(3px)" }
+            ? { background: "#000000b3", backdropFilter: "blur(3px)", top: 0 }
             : {}
         }
       >

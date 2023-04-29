@@ -4,6 +4,7 @@ import {
   FaqsGrid,
   DynamicTable,
   ModalTables,
+  Head,
 } from "@/components";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -25,12 +26,9 @@ export default function SellerDashboardOverview() {
   const [reviewToDelete, setReviewToDelete] = useState(null);
   const headers = [
     "Beat",
-    "Titulo",
-    "Rating",
-    "Status",
+    "Review",
     "Creador",
-    "Editar",
-    "Eliminar",
+    "Acciones",
   ];
 
   useEffect(() => {
@@ -50,44 +48,48 @@ export default function SellerDashboardOverview() {
 
   const rows = reviewsData.map((item) => {
     return {
-      titulo: item.title,
       // id: item._id,
-      rating: item.rating,
-      status: item.softDelete ? "Banned" : "Ok",
+      review: (<div>
+         <p className="text-sm-light">{item.title}</p>
+        <p className="text-sm-light">{item.rating} estrellas</p>
+      </div>),
       creador: item.createdBy.username,
       beat: (
-        <div className="flex w-2/5 items-center gap-4">
+        <div className="flex items-center gap-4 ">
           <Image
             src={item.beat.image}
-            width={50}
-            height={50}
-            className="aspect-square rounded-full object-cover"
+            width={70}
+            height={70}
+            className="aspect-square rounded-xl object-cover"
           />
-          <h3 className="text-base-medium">{item.beat.name}</h3>
+          <div className="flex flex-col">
+            <h3 className="text-base-medium">{item.beat.name}</h3>
+          </div>
         </div>
       ),
-      editar: (
-        <button
-          onClick={() => handleEdit(item)}
-          className="background-neutral-gray-400 hover:background-neutral-gray-700 color-neutral-white 
-            text-sm-semibold border-radius-estilo2 px-4 py-2"
-        >
-          Edit
-        </button>
-      ),
-      eliminar: (
-        <button
-          onClick={() => setReviewToDelete(item)}
-          className="background-primary-red-500 hover:background-primary-red-700 color-neutral-white 
-            text-sm-semibold border-radius-estilo2 px-4 py-2"
-        >
-          Eliminar
-        </button>
+      acciones: (
+        <div className="flex w-max gap-4" key={item._id}>
+          <button
+            onClick={() => handleEdit(item)}
+            className=" hover:background-neutral-gray-700 text-sm-semibold 
+            border-radius-estilo2 text-black dark:text-white"
+          >
+            Editar
+          </button>
+          <button
+            onClick={() => setReviewToDelete(item)}
+            className=" hover:background-primary-red-700 text-sm-semibold 
+            border-radius-estilo2 text-red-700 "
+          >
+            Eliminar
+          </button>
+        </div>
       ),
     };
   });
   return (
     <>
+      <Head title="Reviews" />
       <main>
         <SellerDashboardLayout
           topBarMode="action"

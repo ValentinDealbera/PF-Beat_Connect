@@ -9,7 +9,8 @@ import {
   SwitchForm,
   TextArea,
   AdminCreateUserForm,
-  AdminCreateReviewForm
+  AdminCreateReviewForm,
+  Head,
 } from "@/components";
 
 import {
@@ -110,6 +111,7 @@ export default function SellerDashboardOverview() {
 
   return (
     <>
+      <Head title="Crear review" />
       <main>
         <SellerDashboardLayout
           topBarMode="action"

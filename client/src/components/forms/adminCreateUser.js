@@ -204,8 +204,8 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
             <Input
               id="firstName"
               name="firstName"
-              label="Primer nombre"
-              placeholder="Primer nombre:"
+              label="Nombre"
+              placeholder="Nombre"
               defaultValue={mode === "edit" ? defaultValues.firstName : ""}
               type="text"
               onChange={handleInput}
@@ -215,7 +215,7 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
               name="lastName"
               id="lastName"
               label="Apellido"
-              placeholder="Apellido:"
+              placeholder="Apellido"
               defaultValue={mode === "edit" ? defaultValues.lastName : ""}
               type="text"
               onChange={handleInput}
@@ -224,8 +224,8 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
             <Input
               name="username"
               id="username"
-              label="UserName"
-              placeholder="UserName:"
+              label="Nombre de usuario"
+              placeholder="Nombre de usuario"
               defaultValue={mode === "edit" ? defaultValues.username : ""}
               type="text"
               onChange={handleInput}
@@ -234,19 +234,48 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
             <Input
               id="bio"
               name="bio"
-              label="Bio"
-              placeholder="Bio:"
+              label="Biografia"
+              placeholder="Biografia"
               defaultValue={mode === "edit" ? defaultValues.bio : ""}
               type="text"
               onChange={handleInput}
               error={error.bio}
             />
+             <div className="flex justify-start items-start gap-4 w-full">
+              <SwitchForm
+                label="Banneado"
+                name="soft"
+                nameInput="soft"
+                // defaultValue={mode === "edit" ? defaultValues.softDelete : ""}
+                onChange={handleInput}
+                arrayButtons={arraySoftDelete.arrayButtons}
+                error={error.soft}
+              />
+              <SwitchForm
+                label="Vendedor"
+                name="seller"
+                nameInput="seller"
+                // defaultValue={mode === "edit" ? defaultValues.IsSeller : ""}
+                onChange={handleInput}
+                arrayButtons={arraySeller.arrayButtons}
+                error={error.seller}
+              />
+              <SwitchForm
+                label="Super Admin"
+                name="admin"
+                nameInput="admin"
+                // defaultValue={mode === "edit" ? defaultValues.superAdmin : ""}
+                onChange={handleInput}
+                arrayButtons={arrayAdmin.arrayButtons}
+                error={error.admin}
+              />
+            </div>
           </FormColumn>
           <FormColumn className="w-full">
             <Input
               name="password"
-              label="Password"
-              placeholder="password:"
+              label="Contraseña"
+              placeholder="Contraseña"
               defaultValue={mode === "edit" ? null : ""}
               type="password"
               onChange={handleInput}
@@ -255,7 +284,7 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
             <Input
               name="email"
               label="Email"
-              placeholder="Email:"
+              placeholder="Email"
               defaultValue={mode === "edit" ? defaultValues.email : ""}
               type="email"
               onChange={handleInput}
@@ -264,49 +293,20 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
             <Input
               name="backImage"
               label="Foto de Portada"
-              placeholder="Foto de Portada:"
+              placeholder="Foto de Portada"
               type="file"
               onChange={handleInput}
               error={error.backImage}
             />
             <Input
               name="image"
-              label="Imagen de Perfil"
-              placeholder="Imagen de Perfil:"
+              label="Foto de Perfil"
+              placeholder="Foto de Perfil"
               type="file"
               onChange={handleInput}
               error={error.image}
             />
           </FormColumn>
-        </FormRow>
-        <FormRow>
-          <SwitchForm
-            label="Banneado"
-            name="soft"
-            nameInput="soft"
-            // defaultValue={mode === "edit" ? defaultValues.softDelete : ""}
-            onChange={handleInput}
-            arrayButtons={arraySoftDelete.arrayButtons}
-            error={error.soft}
-          />
-          <SwitchForm
-            label="Vendedor"
-            name="seller"
-            nameInput="seller"
-            // defaultValue={mode === "edit" ? defaultValues.IsSeller : ""}
-            onChange={handleInput}
-            arrayButtons={arraySeller.arrayButtons}
-            error={error.seller}
-          />
-          <SwitchForm
-            label="Super Admin"
-            name="admin"
-            nameInput="admin"
-            // defaultValue={mode === "edit" ? defaultValues.superAdmin : ""}
-            onChange={handleInput}
-            arrayButtons={arrayAdmin.arrayButtons}
-            error={error.admin}
-          />
         </FormRow>
       </FormContainer>
     </form>
