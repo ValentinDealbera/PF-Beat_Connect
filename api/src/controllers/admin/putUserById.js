@@ -9,6 +9,7 @@ const {
   getDownloadURL,
   uploadBytesResumable,
 } = require("firebase/storage");
+const sharp = require("sharp");
 
 initializeApp(config.firebaseConfig);
 
@@ -94,9 +95,15 @@ module.exports = async (req, res) => {
           contentType: image.mimetype,
         };
 
+        const imageBuffer = fs.readFileSync(req.files.image.tempFilePath);
+        const resizedImageBuffer = await sharp(imageBuffer)
+          .resize({ width: 800, height: 800 }) // Ajusta las dimensiones según tus requisitos
+          .webp({ quality: 80 }) // Ajusta la calidad WebP según tus necesidades
+          .toBuffer();
+
         const imageSnapshot = await uploadBytesResumable(
           imageStorageRef,
-          imageData,
+          resizedImageBuffer,
           imageMetadata
         );
         const downloadImageURL = await getDownloadURL(imageSnapshot.ref);
