@@ -1,6 +1,8 @@
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
 export default function VerticalNav(props) {
+  const [t, i18n] = useTranslation("global");
   return (
     <>
       <div className="flex flex-col gap-4">
@@ -26,7 +28,7 @@ export default function VerticalNav(props) {
                           props.onClick;
                         }}
                       >
-                        {item.name}
+                        {t(item.name)}
                       </li>
                     </Link>
                   )}

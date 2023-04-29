@@ -6,10 +6,10 @@ const BeatsSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
-  // audioWAV: {
-  //   type: String,
-  //   require: true,
-  // },
+  audioWAV: {
+    type: String,
+    require: true,
+  },
   relevance: {
     type: Number,
     default: 0,

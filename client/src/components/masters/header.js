@@ -8,14 +8,17 @@ import {
   managePostBeat,
   manageBecomeSeller,
   EditBeat,
+  AdminHeaderBar,
 } from "@/components";
 import { useRouter } from "next/router";
 import { navPublic } from "@/data/data";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import i18n from "i18next";
 
 export default function Header() {
-  const router = useRouter();
+const router = useRouter();
+  
 
   const currentSlug = router.pathname;
   const [headerType, setHeaderType] = useState("default");
@@ -39,13 +42,13 @@ export default function Header() {
 
   const navClient = [
     {
-      name: "Perfil",
+      name: "navClient.t1",
       url: "/client",
       colorMode: "light",
       visibility: true,
     },
     {
-      name: "Inbox",
+      name: "navClient.t2",
       url: "/client/inbox",
       colorMode: "light",
       visibility: false,
@@ -67,19 +70,19 @@ export default function Header() {
       visibility: true,
     },
     {
-      name: "Configuracion",
+      name: "navClient.t5",
       url: "/client/settings",
       colorMode: "light",
       visibility: true,
     },
     {
-      name: "Facturacion",
+      name: "navClient.t6",
       url: "/client/billing",
       colorMode: "light",
       visibility: true,
     },
     {
-      name: "Logout",
+      name: "navClient.t7",
       url: "/auth/logout",
       colorMode: "light",
       visibility: true,
@@ -91,13 +94,14 @@ export default function Header() {
       <BecomeSeller />
       <PostBeat />
       <EditBeat />
+      
       <header
-        className={`fixed z-30 flex w-full  flex-row justify-center py-8 ${
+        className={`fixed z-30 flex  w-full  flex-row justify-center py-8 ${
           currentMode === "light" ? "background-neutral-white " : ""
         }`}
         style={
           headerType === "alternative"
-            ? { background: "#000000b3", backdropFilter: "blur(3px)" }
+            ? { background: "#000000b3", backdropFilter: "blur(3px)", top: 0 }
             : {}
         }
       >

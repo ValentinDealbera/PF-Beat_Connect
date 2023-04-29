@@ -53,15 +53,16 @@ export const deleteClientBeat = createAsyncThunk(
   "client/deleteClientBeat",
   async (data, { rejectWithValue, dispatch, getState }) => {
     const id = getState().client.authSession.session.current._id;
+    console.log("DELETE BEAT data", data);
     try {
       const response = await axios.delete(`${serverUrl}beats/${data}`, {
         headers: {
-          "Content-Type": "multipart/form-data",
           userid: id,
         },
       });
 
-      await dispatch(getUserData(id));
+      console.log("DELETE BEAT", data,  response.data);
+      await dispatch(getUserData());
       await dispatch(fetchBeats({}));
 
       return response.data;
@@ -116,18 +117,20 @@ export const postFavoriteBeat = createAsyncThunk(
   "client/postFavoriteBeat",
   async (data, { rejectWithValue, dispatch, getState }) => {
     const id = getState().client.authSession.session.current._id;
+    const formData = new FormData();
+    Object.keys(data).forEach((key) => {
+      formData.append(key, data[key]);
+    });
     try {
-      const response = await axios.post(
-        `${serverUrl}beats/favorite/${data}`,
-        {},
-        {
-          headers: {
-            userid: id,
-          },
-        }
-      );
+      const response = await axios.put(`${serverUrl}user/${id}`, formData, {
+        headers: {
+          userid: id,
+        },
+      });
 
-      await dispatch(getUserData(id));
+      setTimeout(async () => {
+        await dispatch(getUserData(id));
+      }, 200);
       //  await dispatch(fetchBeats({}));
 
       return response.data;
@@ -143,18 +146,24 @@ export const postFavoriteBeat = createAsyncThunk(
 export const deleteFavoriteBeat = createAsyncThunk(
   "client/deleteFavoriteBeat",
   async (data, { rejectWithValue, dispatch, getState }) => {
+    console.log("data", data);
     const id = getState().client.authSession.session.current._id;
-    try {
-      const response = await axios.delete(
-        `${serverUrl}beats/favorite/${data}`,
-        {
-          headers: {
-            userid: id,
-          },
-        }
-      );
+    const formData = new FormData();
 
-      await dispatch(getUserData(id));
+    Object.keys(data).forEach((key) => {
+      formData.append(key, data[key]);
+    });
+    console.log("DELETE FAVORITE BEAT", formData);
+    try {
+      const response = await axios.put(`${serverUrl}user/${id}`, formData, {
+        headers: {
+          userid: id,
+        },
+      });
+
+      setTimeout(async () => {
+        await dispatch(getUserData(id));
+      }, 200);
 
       return response.data;
     } catch (error) {
@@ -166,8 +175,8 @@ export const deleteFavoriteBeat = createAsyncThunk(
 
 //------------------ SLICE ------------------//
 
-const authSession = createSlice({
-  name: "authSession",
+const clientBeats = createSlice({
+  name: "clientBeats",
   initialState,
   reducers: {
     //--------------------
@@ -185,7 +194,7 @@ const authSession = createSlice({
     //--------------------
     //SET FAVORITE BEATS
     setFavoriteBeats(state, action) {
-      state.favoriteBeats = action.payload;
+      state.favoriteBeats = action.payload ?? [];
     },
     //--------------------
     //SET ACTIVE EDITING BEAT
@@ -262,6 +271,6 @@ export const {
   setOwnedBeats,
   setActiveEditingBeat,
   setFavoriteBeats,
-} = authSession.actions;
+} = clientBeats.actions;
 
-export default authSession.reducer;
+export default clientBeats.reducer;

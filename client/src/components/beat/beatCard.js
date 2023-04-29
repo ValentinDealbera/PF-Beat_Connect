@@ -1,7 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import { setActiveItemDetail } from "@/redux/slices/beats";
 import { useState } from "react";
-
+import Image from "next/image";
+import Link from "next/link";
 import {
   deleteClientBeat,
   setActiveEditingBeat,
@@ -22,6 +23,8 @@ import {
   BeatTitle,
   manageEditBeat,
   MiniModalBox,
+  ModalPopUp,
+  BeatReviewPopup,
 } from "@/components";
 
 export default function BeatCard({
@@ -37,9 +40,12 @@ export default function BeatCard({
   const [visibilityReviewsModal, setVisibilityReviewsModal] = useState(false);
   const [visibilityOwnedModal, setVisibilityOwnedModal] = useState(false);
   const [visibilityFavoriteModal, setVisibilityFavoriteModal] = useState(false);
+  const [logged, setLogged] = useState(false);
   const { bougthBeats, favoriteBeats } = useSelector(
     (state) => state.client.beats
   );
+
+  const { isLogged } = useSelector((state) => state.client.authSession.auth);
 
   const isFavorite = Boolean(
     favoriteBeats.find((favoriteBeat) => favoriteBeat._id === beat._id)
@@ -75,6 +81,7 @@ export default function BeatCard({
         manageEditBeat();
       },
       handleDelete: () => {
+        console.log("DELETE BEAT - card", beat._id);
         dispatch(deleteClientBeat(beat._id));
       },
     };
@@ -92,17 +99,18 @@ export default function BeatCard({
 
     const favoriteActions = {
       handleAddFavorite: () => {
-        dispatch(postFavoriteBeat(beat._id));
+        if (!isLogged) return setLogged(true);
+        dispatch(postFavoriteBeat({ favorite: beat._id }));
       },
       handleDeleteFavorite: () => {
-        dispatch(deleteFavoriteBeat(beat._id));
+        dispatch(deleteFavoriteBeat({ favorite: beat._id }));
       },
     };
 
     return (
       <>
         <div
-          className="relative w-full"
+          className="relative w-full "
           onMouseEnter={() => {
             setVisibilityReviewsModal(true);
             setVisibilityOwnedModal(true);
@@ -117,7 +125,7 @@ export default function BeatCard({
             className={mode === "grid" ? "w-full" : `${width}`}
           >
             <div
-              className={`background-neutral-white gap-estilo3 flex flex-col ${
+              className={`gap-estilo3 flex flex-col ${
                 variant === "public"
                   ? ""
                   : "border-radius-estilo1 px-2 pb-5 pt-2 "
@@ -144,6 +152,8 @@ export default function BeatCard({
             </div>
           </div>
           <Modals
+            setLogged={setLogged}
+            logged={logged}
             fromClient={fromClient}
             visibilityOwnedModal={visibilityOwnedModal}
             visibilityReviewsModal={visibilityReviewsModal}
@@ -167,6 +177,8 @@ export default function BeatCard({
 }
 
 function Modals({
+  setLogged,
+  logged,
   fromClient,
   visibilityOwnedModal,
   visibilityReviewsModal,
@@ -203,6 +215,37 @@ function Modals({
             </div>
           </MiniModalBox>
         </div>
+      )}
+
+      {logged && (
+        <ModalPopUp>
+          <div className="relative flex max-h-full w-12 flex-col justify-center overflow-hidden rounded-3xl bg-white p-10 xl:w-[40%] ">
+            <Image
+              src="/icon/cross.svg"
+              width={15}
+              height={15}
+              onClick={() => setLogged(false)}
+              alt="close"
+              className="absolute right-4 top-4 cursor-pointer"
+            />
+            <div className="flex w-full flex-col items-center justify-center">
+              <h1 className="text-lg pb-3 font-bold text-red-700">
+                ¿Te gusto este Beat?
+              </h1>
+              <h2>
+                  ¡Inicia sesion para guardar tus beats favoritos!
+              </h2>
+              <p>Únete a nuestra comunidad en crecimiento de músicos y</p> 
+              <p className="pb-2">productores de la música urbana.</p>
+              <p className="mb-4">¡Empieza a descubrir tus beats favoritos ahora mismo!</p>
+              <Link href="/auth">
+            <div className="flex gap-2 rounded-full bg-red-700 pb-2 pl-4 pr-4 pt-2 text-base font-semibold text-white">
+              <p>Inicia sesión aqui!</p>
+            </div>
+          </Link>
+            </div>
+          </div>
+        </ModalPopUp>
       )}
 
       {!fromClient && visibilityReviewsModal && boughtBeat && (

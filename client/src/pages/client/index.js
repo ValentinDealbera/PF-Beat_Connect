@@ -11,7 +11,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function BuyerProfile() {
   const currentUser = useSelector((state) => state.client.authSession.session.current);
-  console.log("currentUser", currentUser);
 
   return (
     <>

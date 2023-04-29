@@ -10,10 +10,21 @@ import {
   BeatTitle,
   BeatAudio,
   AddToCart,
+  BeatReviewPopup,
 } from "@/components";
+import { useState } from "react";
 
 export default function BeatDetailSideBar() {
+
+  const {bougthBeats} = useSelector(state => state.client.beats)
+  
   const currentBeat = useSelector((state) => state.beats.activeItemDetail);
+
+  const hasReview = currentBeat.review.length > 0 ? true : false;
+
+  const buyed = Boolean(
+    bougthBeats.find(beat=> beat._id === currentBeat._id)
+  )
 
   const dynamicBeatDetailBox = [
     {
@@ -26,7 +37,7 @@ export default function BeatDetailSideBar() {
       msg1: "Standart License, WAV",
       msg2: `$${currentBeat.priceAmount}`,
       beat: currentBeat.audioWAV,
-      type: "paid",
+      type: buyed ? "buyed" : "paid",
     },
   ];
 
@@ -42,6 +53,11 @@ export default function BeatDetailSideBar() {
   //     beat: currentBeat,
   //   },
   // ];
+  const [showModalReview, setShowModalReview] = useState(false);
+  const handleModalReview = () => {
+    setShowModalReview(!showModalReview);
+  };
+
 
   return (
     <>
@@ -68,8 +84,20 @@ export default function BeatDetailSideBar() {
             })}
           </div>
           <BeatAudio beat={currentBeat} />
+          {hasReview && (
+            <button
+              className="background-primary-red-700 mt-2 color-neutral-white rounded-full px-5 py-3 text-sm font-semibold"
+              onClick={handleModalReview}
+            >
+              Ver reviews
+            </button>
+          )}
         </div>
       </div>
+      <BeatReviewPopup
+        modal={showModalReview}
+        handleModalReview={handleModalReview}
+      />
     </>
   );
 }
@@ -90,6 +118,7 @@ function BeatDataBox({ beat }) {
   );
 }
 
+
 function BeatDetailBox({ msg1, msg2, beat, type }) {
   const dispatch = useDispatch();
 
@@ -99,9 +128,19 @@ function BeatDetailBox({ msg1, msg2, beat, type }) {
       <p className="pb-1 text-base font-medium text-black">{msg1}</p>
       <p className=" mb-1 text-sm font-semibold text-red-700">{msg2}</p>
       {type === "free" ? (
-        <a className=" text-sm font-semibold text-red-700" download href={beat.audioMP3}>  
+        <a
+          className=" text-sm font-semibold text-red-700"
+          download={beat.name}
+          href={beat.audioMP3}
+        >
           Descargar
         </a>
+      ) : type === 'buyed' ? (
+        <a
+          className=" text-sm font-semibold text-red-700"
+          download={beat.name}
+          href={beat.audioWAV}
+        >Descargar</a>
       ) : (
         <AddToCart beat={beat} posAction={() => externalManageDropdown()} />
       )}

@@ -8,8 +8,11 @@ import {
 } from "@/components";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+
 
 export default function BeatCardFlex(props) {
+  const [t, i18n] = useTranslation("global");
   const [isDropDown, setIsDropdownOpen] = useState(false);
   const { beatsDisplayMode, generalActiveIndex } =
     useSelector((state) => state?.beats) || 0;
@@ -35,7 +38,7 @@ export default function BeatCardFlex(props) {
       {props.beats && props.beats <= 0 && (
         <div className="flex w-full items-end justify-center">
           <h1 className="mt-5 text-center text-2xl font-medium">
-            Hey, parece que no hay nada por aqui 🤯
+            {t("NoBeats")} 🤯
           </h1>
         </div>
       )}

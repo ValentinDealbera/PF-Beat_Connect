@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 export default function Select({
   valores,
   setSeleccionados,
@@ -6,6 +8,7 @@ export default function Select({
   labelClass,
   error,
 }) {
+  const [t, i18n] = useTranslation("global");
   return (
     <div
       type="text"
@@ -21,7 +24,7 @@ export default function Select({
       >
         {/* Valor default */}
         <option value="" disabled selected>
-          Seleccionar género
+          {t("postBeat.form6")}
         </option>
         {valores.map((valor) => (
           <option value={valor.value}>{valor.label}</option>

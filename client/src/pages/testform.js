@@ -1,5 +1,6 @@
 import { Main, Head, Search, Switch, Input } from "@/components";
 import SetUser from "@/components/common/setUser";
+import Landbot from "@/components/common/landBot";
 
 export default function TestForm() {  
 
@@ -7,8 +8,11 @@ export default function TestForm() {
     <>
       <Head title={"Test"} description={"Head from test"} />
       <Main>
+        
+        
+        <SetUser />  
 
-        <SetUser />     
+        <Landbot />   
                   
       </Main>    
             

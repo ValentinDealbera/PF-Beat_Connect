@@ -10,7 +10,7 @@ import { toast } from "sonner";
 
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { registerClientUser } from "@/redux/slices/client";
+import { jsonRegister } from "@/redux/slices/client/authSession";
 import { useDispatch } from "react-redux";
 
 export default function Login() {
@@ -27,7 +27,7 @@ export default function Login() {
     e.preventDefault();
     console.log(form);
     try {
-      await dispatch(registerClientUser(form));
+      await dispatch(jsonRegister(form));
     setTimeout(() => {
       router.push("/auth");
     }, 2000);

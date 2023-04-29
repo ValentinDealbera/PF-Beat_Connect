@@ -12,6 +12,7 @@ export default function RecoveryPasswordForm(props) {
   const validateMode = "user";
   const [fieldsToValidate, setFieldsToValidate] = useState([]);
   const [error, setErrors] = useState({});
+  const userEmail = router.query.email;
 
   const userEmail = router.query.email;
 
@@ -38,15 +39,16 @@ export default function RecoveryPasswordForm(props) {
     try {
       const formErrors = validationRecoverPassword(form, "*");
       if (Object.keys(formErrors).length === 0) {
-        console.log("DESPACHADO", {
-          newPassword: form.newPassword,
-          email: userEmail,
-        });
+
+        console.log("DESPACHADO", {});
+
         dispatch(
           passwordRecovery({ newPassword: form.newPassword, email: userEmail })
         );
         formRef.current.reset();
-        router.push("/auth");
+
+        // router.push("/auth");
+
       } else {
         setErrors(formErrors);
         console.log("form Error", formErrors);

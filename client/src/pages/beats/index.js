@@ -89,44 +89,7 @@ export default function Beats() {
           </div>
         </Section>
         <BeatsShopSection />
-        <div className="flex justify-center gap-4">
-          <button
-            onClick={() =>
-              dispatch(setCurrentPage({ page: pages.current - 1 }))
-            }
-            disabled={pages.current === 1}
-            className={pages.current === 1 ? "text-red-800" : "text-black"}
-          >
-            Prev
-          </button>
-          <div className="flex justify-center gap-4">
-            {visiblePages.map((page) => (
-              <button
-                key={page}
-                onClick={() => dispatch(setCurrentPage({ page: page }))}
-                disabled={pages.current === page}
-                className={
-                  pages.current === page ? "text-red-800" : "text-black"
-                }
-              >
-                {page}
-              </button>
-            ))}
-          </div>
-          <button
-            onClick={() => {
-              dispatch(setCurrentPage({ page: pages.current + 1 }));
-            }}
-            disabled={pages.current === visiblePages[visiblePages.length - 1]}
-            className={
-              pages.current === visiblePages[visiblePages.length - 1]
-                ? "text-red-800"
-                : "text-black"
-            }
-          >
-            Next
-          </button>
-        </div>
+       
       </Main>
     </>
   );

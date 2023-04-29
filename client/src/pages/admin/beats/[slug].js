@@ -7,6 +7,7 @@ import {
   Input,
   SwitchForm,
   AdminCreateBeatForm,
+  Head,
 } from "@/components";
 
 import {
@@ -29,10 +30,11 @@ export default function AdminBeatsCreate() {
 
   return (
     <>
+    <Head title="Editar beat" />
       <main>
         <SellerDashboardLayout
           topBarMode="action"
-          topBarMessage="Edit Beat"
+          topBarMessage="Editar Beat"
           topBarButtonLabel="Guardar cambios"
           onClick={handleExternalSubmit}
         >

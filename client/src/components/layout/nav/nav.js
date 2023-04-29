@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import {NavModalItem, VerticalNav} from "@/components"
-import {navHelp, navPublic} from "@/data/data"
+import {NavModalItem, VerticalNav} from "@/components";
+import {navHelp, navPublic} from "@/data/data";
+import { useTranslation } from "react-i18next";
 
 export default function Nav({ currentMode}) {
   const router = useRouter();
+  const [t, i18n] = useTranslation("global");
 
   return (
     <>
@@ -26,13 +28,13 @@ export default function Nav({ currentMode}) {
                         : "color-neutral-white"
                     }`}
                   >
-                    {item.name}
+                    {t(item.name)}
                   </Link>
                 </li>
               )
           )}
           <li className="relative" >
-            <NavModalItem iconStatus={false} label={"Centro de ayuda"}  id={"helpItemModal"} labelClass={"text-base-light text-white"}>
+            <NavModalItem iconStatus={false} label={t("navModalItem.label")}  id={"helpItemModal"} labelClass={"text-base-light text-white"}>
               <VerticalNav navItems={navHelp} title={"Centro de ayuda"} />
             </NavModalItem>
             </li>

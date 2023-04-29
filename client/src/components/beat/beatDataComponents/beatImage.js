@@ -1,6 +1,9 @@
 import Image from "next/image";
+import { ImageCache } from "@/components";
 
-export default function BeatImage({ beat, height, width }) {
+
+const BeatImage = ({ beat, height, width }) => {
+try {
   return (
     <div
       className="relative aspect-square rounded-md object-cover"
@@ -8,10 +11,18 @@ export default function BeatImage({ beat, height, width }) {
     >
       <Image
         src={beat.image}
-        alt="Beat image"
+        alt={beat.name}
         layout="fill"
         className="rounded-xl object-cover"
       />
+      {/* <ImageCache imageUrl={beat.image} /> */}
     </div>
   );
 }
+catch (error) {
+  console.log("error", error);
+}
+};
+
+
+export default BeatImage;

@@ -5,7 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLoginMethod } from "@/redux/slices/client/authSession";
 import { useRouter } from "next/router";
 import { serverUrl } from "@/data/config";
+import { useTranslation } from "react-i18next";
+
 export default function GoogleButton() {
+  const [t, i18n] = useTranslation("global");
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -29,7 +32,7 @@ export default function GoogleButton() {
           className="aspect-square"
         />
       </div>
-      <span>Continuar con Google</span>
+      <span>{t("authIndex.continueGoogle")}</span>
     </button>
   );
 }
