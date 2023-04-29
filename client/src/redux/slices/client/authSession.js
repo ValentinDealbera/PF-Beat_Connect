@@ -216,6 +216,7 @@ export const getUserData = createAsyncThunk(
       const ownedBeats = response.createdBeats;
       const ownedReviews = response.userReviews;
       const orders = response.userOrders;
+
       const favoriteBeats = response.userFavorites;
 
       console.log(
@@ -232,6 +233,7 @@ export const getUserData = createAsyncThunk(
       await dispatch(setOwnedBeats(ownedBeats));
       await dispatch(setOwnedReviews(ownedReviews));
       await dispatch(setOrders(orders));
+
       await dispatch(setFavoriteBeats(favoriteBeats));
 
       const auth = {
@@ -356,6 +358,7 @@ const authSession = createSlice({
         toast.success("Tu contraseña se cambio correctamente", toastSuccess);
       })
       .addCase(passwordRecovery.rejected, (state, action) => {
+
         toast.error(action.payload, toastError);
       })
 

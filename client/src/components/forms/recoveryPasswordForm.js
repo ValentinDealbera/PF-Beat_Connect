@@ -38,10 +38,12 @@ export default function RecoveryPasswordForm(props) {
       const formErrors = validationRecoverPassword(form, "*");
       if (Object.keys(formErrors).length === 0) {
         console.log("DESPACHADO", {});
+
         dispatch(
           passwordRecovery({ newPassword: form.newPassword, email: userEmail })
         );
         formRef.current.reset();
+
         // router.push("/auth");
       } else {
         setErrors(formErrors);

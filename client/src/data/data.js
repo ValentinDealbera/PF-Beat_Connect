@@ -60,7 +60,7 @@ export const navClient = [
   {
     name: "Vende tus beats",
     url: "",
-    onClick: () => manageBecomeSeller()
+    onClick: () => manageBecomeSeller(),
   },
   {
     name: "Configuracion",
@@ -103,7 +103,9 @@ export const tecnologias = [
     id: 1,
     title: "NextJS",
     image: "/icon/tecnologias/next-js.svg",
+
     description: "tecnologias.t1",
+
   },
   {
     id: 4,
@@ -133,7 +135,9 @@ export const tecnologias = [
     id: 8,
     title: "TailwindCSS",
     image: "/icon/tecnologias/tailwindCSS.svg",
+
     description: "tecnologias.t6",
+
   },
   {
     id: 10,
@@ -163,42 +167,161 @@ export const tecnologias = [
     id: 14,
     title: "Mercado Pago",
     image: "/icon/tecnologias/mercadopago.png",
+
     description: "tecnologias.t11",
   },
   {
     id: 15,
     title: "Auth0",
     image: "/icon/tecnologias/auth0.svg",
+
     description: "tecnologias.t12",
+
   },
   {
     id: 16,
     title: "Firebase",
     image: "/icon/tecnologias/firebase.svg",
+
     description: "tecnologias.t13",
+
   },
   {
     id: 17,
     title: "Render",
     image: "/icon/tecnologias/render.svg",
+
     description: "tecnologias.t14",
+
   },
   {
     id: 18,
     title: "Vercel",
     image: "/icon/tecnologias/vercel.svg",
+
     description: "tecnologias.t15",
+
   },
   {
     id: 19,
     title: "Trello",
     image: "/icon/tecnologias/trello.svg",
+
     description: "tecnologias.t16",
     },
+
   {
     id: 20,
     title: "Git + GitHub",
     image: "/icon/tecnologias/github.svg",
-    description: "tecnologias.t17",
-  }
+
+    description:
+      "Git es un sistema de control de versiones distribuido de código abierto que permite a los desarrolladores colaborar en proyectos de software. GitHub es una plataforma de alojamiento de código fuente y control de versiones que utiliza Git.",
+  },
+];
+
+export const nosotros = [
+  {
+    id: 1,
+    name: "Lucas Regner",
+    image: "/images/nosotros/lucas.png", //crear carpeta e importar imagenes propias
+    //description: "",
+    redes: {
+      //importar fotos de las redes como svg
+      linkedin: "/icon/tecnologias/linkedin.svg",
+      github: "/icon/tecnologias/github2.svg",
+      gmail: "/icon/tecnologias/gmail.svg",
+    },
+  },
+
+  {
+    id: 2,
+    name: "Carla Frías",
+    image: "/images/nosotros/lucas.png", //crear carpeta e importar imagenes propias
+    //description: "",
+    redes: {
+      //importar fotos de las redes como svg
+      linkedin: "/icon/tecnologias/linkedin.svg",
+      github: "/icon/tecnologias/github2.svg",
+      gmail: "/icon/tecnologias/gmail.svg",
+    },
+  },
+
+  {
+    id: 3,
+    name: "Micaela Savournin",
+    image: "/images/nosotros/lucas.png", //crear carpeta e importar imagenes propias
+    //description: "",
+    redes: {
+      //importar fotos de las redes como svg
+      linkedin: "/icon/tecnologias/linkedin.svg",
+      github: "/icon/tecnologias/github2.svg",
+      gmail: "/icon/tecnologias/gmail.svg",
+    },
+  },
+
+  {
+    id: 4,
+    name: "Fabian Pacheco",
+    image: "/images/nosotros/lucas.png", //crear carpeta e importar imagenes propias
+    //description: "",
+    redes: {
+      //importar fotos de las redes como svg
+      linkedin: "/icon/tecnologias/linkedin.svg",
+      github: "/icon/tecnologias/github2.svg",
+      gmail: "/icon/tecnologias/gmail.svg",
+    },
+  },
+
+  {
+    id: 5,
+    name: "Valentin Dealbera",
+    image: "/images/nosotros/lucas.png", //crear carpeta e importar imagenes propias
+    //description: "",
+    redes: {
+      //importar fotos de las redes como svg
+      linkedin: "/icon/tecnologias/linkedin.svg",
+      github: "/icon/tecnologias/github2.svg",
+      gmail: "/icon/tecnologias/gmail.svg",
+    },
+  },
+
+  {
+    id: 6,
+    name: "Tadeo Massó",
+    image: "/images/nosotros/lucas.png", //crear carpeta e importar imagenes propias
+    //description: "",
+    redes: {
+      //importar fotos de las redes como svg
+      linkedin: "/icon/tecnologias/linkedin.svg",
+      github: "/icon/tecnologias/github2.svg",
+      gmail: "/icon/tecnologias/gmail.svg",
+    },
+  },
+
+  {
+    id: 7,
+    name: "Leonardo Pischetz",
+    image: "/images/nosotros/lucas.png", //crear carpeta e importar imagenes propias
+    //description: "",
+    redes: {
+      //importar fotos de las redes como svg
+      linkedin: "/icon/tecnologias/linkedin.svg",
+      github: "/icon/tecnologias/github2.svg",
+      gmail: "/icon/tecnologias/gmail.svg",
+    },
+  },
+
+  {
+    id: 8,
+    name: "Thomas Barenghi",
+    image: "/images/nosotros/lucas.png", //crear carpeta e importar imagenes propias
+    //description: "",
+    redes: {
+      //importar fotos de las redes como svg
+      linkedin: "/icon/tecnologias/linkedin.svg",
+      github: "/icon/tecnologias/github2.svg",
+      gmail: "/icon/tecnologias/gmail.svg",
+    },
+  },
 ];
