@@ -16,7 +16,7 @@ export const adminPostUser = createAsyncThunk(
   async (data, { rejectWithValue, dispatch }) => {
     try {
       delete data.id;
-      const response = await axios.post(`${serverUrl}users/admin`, data, {
+      const response = await axios.post(`${serverUrl}admin/user`, data, {
         headers: {
           admintoken: tokenAdmin,
           "Content-Type": "multipart/form-data",
@@ -40,7 +40,7 @@ export const adminEditUser = createAsyncThunk(
   async (data, { rejectWithValue, dispatch }) => {
     try {
       const response = await axios.put(
-        `${serverUrl}user/admin/${data.id}`,
+        `${serverUrl}admin/user/${data.id}`,
         data,
         {
           headers: {
@@ -65,7 +65,7 @@ export const adminDeleteUser = createAsyncThunk(
     console.log("adminDeleteUser", data);
     try {
       const response = await axios.delete(
-        `${serverUrl}user/admin/${data._id}`,
+        `${serverUrl}admin/user/${data._id}`,
         {
           headers: {
             admintoken: tokenAdmin,
@@ -143,7 +143,7 @@ const adminUsersSlice = createSlice({
         toast.error(action.payload, toastError);
       })
       .addCase(adminEditUser.fulfilled, (state, action) => {
-        toast.success("Usuario eliminado correctamente", toastSuccess);
+        toast.success("Usuario editado correctamente", toastSuccess);
       })
       .addCase(adminEditUser.pending, (state, action) => {
         toast("Editando usuario...");
@@ -152,13 +152,13 @@ const adminUsersSlice = createSlice({
       //--------------------
       //DELETE ADMIN USER
       .addCase(adminDeleteUser.fulfilled, (state, action) => {
-        toast.success("Usuario eliminado correctamente", toastSuccess);
+        toast.success("Usuario borrado correctamente", toastSuccess);
       })
       .addCase(adminDeleteUser.rejected, (state, action) => {
         toast.error(action.payload, toastError);
       })
       .addCase(adminDeleteUser.pending, (state, action) => {
-        toast("Eliminando usuario...");
+        toast("Borrando usuario...");
       })
 
       //--------------------
@@ -178,7 +178,6 @@ const adminUsersSlice = createSlice({
       //--------------------
       //GET ADMIN USER
       .addCase(adminGetUser.fulfilled, (state, action) => {
-        toast.success("usuario obtenido correctamente", toastSuccess);
         state.currentEdtingUser = action.payload.userResponse;
       })
       .addCase(adminGetUser.rejected, (state, action) => {

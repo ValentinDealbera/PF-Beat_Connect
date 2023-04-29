@@ -33,7 +33,7 @@ export const adminGetReview = createAsyncThunk(
   "client/adminGetReview",
   async (data, { rejectWithValue, dispatch }) => {
     try {
-      const response = await axios.get(`${serverUrl}review/${data}`);
+      const response = await axios.get(`${serverUrl}admin/review/${data}`);
       return { reviewResponse: response.data };
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -47,7 +47,7 @@ export const adminDeleteReview = createAsyncThunk(
   async (data, { rejectWithValue, dispatch }) => {
     try {
       console.log("data", data);
-      const response = await axios.delete(`${serverUrl}review/admin/${data}`, {
+      const response = await axios.delete(`${serverUrl}admin/review/${data}`, {
         headers: {
           admintoken: tokenAdmin,
         },
@@ -68,7 +68,7 @@ export const adminPostReview = createAsyncThunk(
       //Quitamos id del objeto data para que no de error
       delete data.id;
 
-      const response = await axios.post(`${serverUrl}review/admin`, data, {
+      const response = await axios.post(`${serverUrl}admin/review`, data, {
         headers: {
           admintoken: tokenAdmin,
           "Content-Type": "multipart/form-data",
@@ -87,7 +87,7 @@ export const adminEditReview = createAsyncThunk(
   async (data, { rejectWithValue, dispatch }) => {
     try {
       const response = await axios.put(
-        `${serverUrl}review/admin/${data.id}`,
+        `${serverUrl}admin/review/${data.id}`,
         data,
         {
           headers: {

@@ -9,6 +9,7 @@ const {
   getDownloadURL,
   uploadBytesResumable,
 } = require("firebase/storage");
+const sharp = require("sharp");
 
 initializeApp(config.firebaseConfig);
 
@@ -83,6 +84,7 @@ module.exports = async (req, res) => {
       if (admin) user.superAdmin = !user.superAdmin;
       if (soft) user.softDelete = !user.softDelete;
       if (image) {
+        console.log("imagen existe", image);
         const imageData = fs.readFileSync(image.tempFilePath);
         console.log("Procesando imagen");
         const imageStorageRef = ref(
@@ -94,9 +96,15 @@ module.exports = async (req, res) => {
           contentType: image.mimetype,
         };
 
+        const imageBuffer = fs.readFileSync(req.files.image.tempFilePath);
+        const resizedImageBuffer = await sharp(imageBuffer)
+        .resize({ width: 400, height: 400 }) // Ajusta las dimensiones según tus requisitos
+        .webp({ quality: 80 }) // Ajusta la calidad WebP según tus necesidades
+          .toBuffer();
+
         const imageSnapshot = await uploadBytesResumable(
           imageStorageRef,
-          imageData,
+          resizedImageBuffer,
           imageMetadata
         );
         const downloadImageURL = await getDownloadURL(imageSnapshot.ref);
@@ -114,9 +122,15 @@ module.exports = async (req, res) => {
           contentType: backImage.mimetype,
         };
 
+        const imageBuffer = fs.readFileSync(req.files.backImage.tempFilePath);
+        const resizedImageBuffer = await sharp(imageBuffer)
+          .resize({ width: 1500, height: 800 }) // Ajusta las dimensiones según tus requisitos
+          .webp({ quality: 80 }) // Ajusta la calidad WebP según tus necesidades
+          .toBuffer();
+
         const imageSnapshot = await uploadBytesResumable(
           imageStorageRef,
-          imageData,
+          resizedImageBuffer,
           imageMetadata
         );
         const downloadBackImageURL = await getDownloadURL(imageSnapshot.ref);

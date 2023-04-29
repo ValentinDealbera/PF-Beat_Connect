@@ -81,7 +81,7 @@ export default function SellerDashboardOverview() {
       audiomp3: (
         <div className="w-max-[30px] flex items-center">
           <audio controls className="w-full">
-            <source src={item.audioMP3} type="audio/mpeg" />
+            <source src={item.audioMP3} type="audio/mpeg"/>
           </audio>
         </div>
       ),

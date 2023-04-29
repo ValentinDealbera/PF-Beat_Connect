@@ -90,6 +90,8 @@ export const fetchBeats = createAsyncThunk(
         }
       );
 
+
+
       return {
         docs: response.data.docs,
         next: response.data.nextPage,

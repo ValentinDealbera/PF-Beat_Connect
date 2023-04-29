@@ -25,7 +25,7 @@ export default function BuyerNavGeneral() {
 
   return (
     <>
-      <div className="gap-estilo2 flex flex-row overflow-scroll">
+      <div className="gap-estilo2 flex flex-row overflow-scroll lg:overflow-hidden">
         {buyerGeneralNav.map((item, index) => (
           <h5
             className={`cursor-pointer whitespace-nowrap ${index === activeIndex

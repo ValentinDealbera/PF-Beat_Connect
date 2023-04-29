@@ -7,6 +7,7 @@ import {
   Input,
   SwitchForm,
   AdminCreateUserForm,
+  Head,
 } from "@/components";
 
 import {
@@ -29,6 +30,7 @@ export default function AdminUserCreate() {
 
   return (
     <>
+      <Head title="Editar usuario" />
       <main>
         <SellerDashboardLayout
           topBarMode="action"

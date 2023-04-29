@@ -2,9 +2,7 @@ import { Search, DashboardItem } from "@/components";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-
 export default function SellerDashboardNav() {
-
   const theme = useSelector((state) => state.client.authSession.theme);
 
   const dashboardNav = [
@@ -34,13 +32,18 @@ export default function SellerDashboardNav() {
       link: "/admin/reviews",
       icon: "/icon/dashboard/reviews.svg",
     },
+    {
+      title: "Ordenes",
+      link: "/admin/orders",
+      icon: "/icon/dashboard/orders.svg",
+    },
   ];
 
   return (
     <>
       <div className="gap-estilo2 flex flex-col">
         {/* <Search colorMode={"red"} sizeMode={"small"} className={"w-full"} /> */}
-        <div className="gap-6 flex  flex-col">
+        <div className="flex flex-col  gap-6">
           {dashboardNav.map((item) => (
             <NavItems
               itemTitle={item.title}

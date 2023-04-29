@@ -1,5 +1,5 @@
 const UserModel = require("../../models/nosql/user");
-
+const sharp = require("sharp");
 module.exports = async (req, res) => {
   const { body } = req;
   if (body.image === "") delete body.image;

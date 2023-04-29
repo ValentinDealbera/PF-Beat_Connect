@@ -45,7 +45,6 @@ export default function App({ Component, pageProps, router }) {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <HOC>
-          
               <I18nextProvider i18n={i18next}>
               <AdminHeaderBar />
                 {headerVisibility && <Header />}
