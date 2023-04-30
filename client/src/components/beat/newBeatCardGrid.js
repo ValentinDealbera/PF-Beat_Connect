@@ -36,7 +36,7 @@ export default function NewBeatCardGrid(props) {
   const manageCreateReview = () => {
     setVisibilityCreateReview(!visibilityCreateReview);
   };
-  console.log("props.isLoading", props.isLoading)
+  console.log("props.isLoading", props.isLoading);
   return (
     <>
       {props.isLoading && <Loader />}
@@ -81,35 +81,25 @@ export default function NewBeatCardGrid(props) {
       )}
       {visibilityEditReview && (
         <>
-          <div className="hidden sm:flex">
+          <div>
             <BeatRightSheet
-              width="w-[30vw]"
+              width="min-w-[100vw] xs:min-w-[90vw] sm:min-w-[450px] "
               setIsDropdownOpen={setVisibilityEditReview}
             >
               <EditReviewForm manageEditReview={manageEditReview} />
             </BeatRightSheet>
           </div>
-          <div className="flex sm:hidden">
-            <BeatBottomSheet setIsDropdownOpen={setIsDropdownOpen}>
-              hey soy el sidebar
-            </BeatBottomSheet>
-          </div>
         </>
       )}
       {visibilityCreateReview && (
         <>
-          <div className="hidden sm:flex">
+          <div className="">
             <BeatRightSheet
-              width="w-[30vw]"
+              width="min-w-[100vw] xs:min-w-[90vw] sm:min-w-[450px] "
               setIsDropdownOpen={setVisibilityCreateReview}
             >
               <ReviewForm manageCreateReview={manageCreateReview} />
             </BeatRightSheet>
-          </div>
-          <div className="flex sm:hidden">
-            <BeatBottomSheet setIsDropdownOpen={setIsDropdownOpen}>
-              hey soy el sidebar
-            </BeatBottomSheet>
           </div>
         </>
       )}

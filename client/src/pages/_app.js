@@ -49,7 +49,9 @@ export default function App({ Component, pageProps, router }) {
               <AdminHeaderBar />
                 {headerVisibility && <Header />}
                 <Master>
-                  <Toaster position="bottom-left" />
+                  <Toaster position="bottom-left" 
+                   toastOptions={{ className: 'max-w-[85vw] xs:max-w-none ' }}
+                  />
                   <Component {...pageProps} />
                 </Master>
                 {headerVisibility && <Footer mode={mode} />}

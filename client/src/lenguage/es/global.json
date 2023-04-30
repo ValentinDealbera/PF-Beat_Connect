@@ -268,7 +268,7 @@
   "billing" : {
     "t1": "Facturación",
     "t2" : "Monto",
-    "t3" : "Operación",
+    "t3" : "Operacion",
     "t4" : "Fecha"
   },
 
@@ -316,6 +316,7 @@
     "edit" : "Editar",
     "delete": "Borrar",
     "editReview": "Editar review",
+    "createReview": "Crear review",
     "purchased" : "COMPRADO",
     "modalPopUp1" : "¿Te gusto este Beat?",
     "modalPopUp2" : "¡Inicia sesion para guardar tus beats favoritos!",

@@ -1,4 +1,12 @@
+import { useRouter } from "next/router";
+
 export default function TextArea(props) {
+  const router = useRouter();
+  const className = `${
+    router.pathname.startsWith("/admin")
+      ? " dark:text-white   dark:placeholder:text-white border-slate-200 dark:border-none dark:bg-customDark-700"
+      : "placeholder:text-sm-light placeholder:color-neutral-gray-400   color-neutral-black-950"
+  }`;
   return (
     <label
       htmlFor={props.name}
@@ -11,7 +19,7 @@ export default function TextArea(props) {
         value={props.value}
         onChange={props.onChange}
         placeholder={props.placeholder}
-        className={`${props.className} ttext-sm-regular border-radius-estilo2 color-neutral-black-950 placeholder:text-sm-light placeholder:color-neutral-gray-400 border-slate-200 bg-white px-4 py-2 dark:border-none dark:bg-customDark-700 dark:text-white dark:placeholder:text-white`}
+        className={`${props.className} text-sm-regular border-radius-estilo2 px-4 py-2 ${className}`}
         style={{ borderWidth: "1px" }}
       />
       {props.error && (

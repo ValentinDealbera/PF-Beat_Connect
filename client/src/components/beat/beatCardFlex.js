@@ -80,16 +80,11 @@ export default function BeatCardFlex(props) {
         <>
           <div className="hidden sm:flex">
             <BeatRightSheet
-              width="w-[30vw]"
+               width="min-w-[100vw] xs:min-w-[90vw] sm:min-w-[450px] "
               setIsDropdownOpen={setVisibilityEditReview}
             >
               <EditReviewForm manageEditReview={manageEditReview} />
             </BeatRightSheet>
-          </div>
-          <div className="flex sm:hidden">
-            <BeatBottomSheet setIsDropdownOpen={setIsDropdownOpen}>
-              hey soy el sidebar
-            </BeatBottomSheet>
           </div>
         </>
       )}
@@ -97,16 +92,11 @@ export default function BeatCardFlex(props) {
         <>
           <div className="hidden sm:flex">
             <BeatRightSheet
-              width="w-[30vw]"
+               width="min-w-[100vw] xs:min-w-[90vw] sm:min-w-[450px] "
               setIsDropdownOpen={setVisibilityCreateReview}
             >
               <ReviewForm manageCreateReview={manageCreateReview} />
             </BeatRightSheet>
-          </div>
-          <div className="flex sm:hidden">
-            <BeatBottomSheet setIsDropdownOpen={setIsDropdownOpen}>
-              hey soy el sidebar
-            </BeatBottomSheet>
           </div>
         </>
       )}
