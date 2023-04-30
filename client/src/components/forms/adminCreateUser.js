@@ -25,9 +25,9 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
   const validateMode = "user";
   const [fieldsToValidate, setFieldsToValidate] = useState([]);
   const [error, setErrors] = useState({});
-  const defaultValues =
-    useSelector((state) => state.admin.users.currentEdtingUser) || {};
   const mode = props.mode;
+  const defaultValues = mode === "create"?{}:
+    useSelector((state) => state.admin.users.currentEdtingUser);  
   const [softD, setSoftD] = useState(defaultValues.softDelete);
   const [sellerState, setSellerState] = useState(defaultValues.isSeller);
   const [adminState, setAdminState] = useState(defaultValues.superAdmin);
@@ -119,7 +119,7 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
     arrayButtons: [
       {
         text: "Yes",
-        active: !softD,
+        active: softD,
         handleAction: () => {
           setForm({
             ...form,
@@ -129,7 +129,7 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
       },
       {
         text: "No",
-        active: softD,
+        active: !softD,
         handleAction: () => {
           setForm({
             ...form,
@@ -146,7 +146,7 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
     arrayButtons: [
       {
         text: "Yes",
-        active: !sellerState,
+        active: sellerState,
         handleAction: () => {
           setForm({
             ...form,
@@ -156,7 +156,7 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
       },
       {
         text: "No",
-        active: sellerState,
+        active: !sellerState,
         handleAction: () => {
           setForm({
             ...form,
@@ -173,7 +173,7 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
     arrayButtons: [
       {
         text: "Yes",
-        active: !adminState,
+        active: adminState,
         handleAction: () => {
           setForm({
             ...form,
@@ -183,7 +183,7 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
       },
       {
         text: "No",
-        active: adminState,
+        active: !adminState,
         handleAction: () => {
           setForm({
             ...form,

@@ -20,7 +20,7 @@ const LandBot = () => {
         Abrir chatbot
       </button>
       {isOpen && (
-        <div className="fixed bottom-0 right-0 w-96 h-5/6">
+        <div className="fixed bottom-0 right-0 w-96 h-5/6"style={{zIndex: 9999}}>
           <button
             onClick={closeChatBot}
             className="absolute top-0 right-0 p-3 bg-blue-500 text-white rounded-full mr-4 mt-4"
