@@ -225,6 +225,12 @@
     "t4": "Reviews"
   },
 
+  "NoBougthBeats": "Hey, you didn't buy any beats!",
+  "NoOwnedBeats": "Hey, you didnt published any beats!",
+  "NoFavBeats": "Did you like any beat?",
+  "NoBougthBeatsButton": "Find one!",
+  "NoOwnedBeatsButton": "Publish one now!",
+  "NoFavBeatsButton": "Find one",
   "NoBeats": "Hey, it seems like there's nothing here",
   
   "settingsClient": {

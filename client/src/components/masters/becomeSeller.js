@@ -6,6 +6,7 @@ import axios from "axios";
 import { toastError, toastSuccess } from "@/utils/toastStyles";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
+import Link from "next/link";
 
 
 export const manageBecomeSeller = () => {
@@ -70,9 +71,11 @@ export default function BecomeSeller() {
                     value="ok"
                     onChange={() => setTerms(!terms)}
                   />
-                  <label for="terms" className="text-base-light">
+                  <Link href={'help/terms'}>
+                  <label for="terms" onClick={()=>handleOpenDropdown()} className="text-base-light hover:cursor-pointer">
                       {t("becomeSeller.t5")}
                   </label>
+                  </Link>
                 </div>
               </div>
               <button
