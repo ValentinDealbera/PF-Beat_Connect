@@ -14,7 +14,6 @@ import { resetCart } from "@/redux/slices/cart";
 import { postClientOrder } from "@/redux/slices/client/orders";
 
 
-
 export default function Home() {
   // si hay un code valido en las querys, registra al usuario actual como vendedor
   const router = useRouter();
@@ -98,7 +97,7 @@ export default function Home() {
 
           <span className="text-titulo2-semibold">{t("home.t5")}</span>
 
-        </BeatsSpecialSection>
+        </BeatsSpecialSection>        
       </Main>
     </>
   );
