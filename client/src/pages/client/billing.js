@@ -7,7 +7,7 @@ import {
   EditClientForm,
   EditPasswordForm,
   Section,
-  DynamicTable,
+  DynamicTableLight,
 } from "@/components";
 import { useSelector } from "react-redux";
 import Image from "next/image";
@@ -56,7 +56,7 @@ const beatsFiltered = beats.filter((item) => item.beat);
       <Main mode="transparent">
         <SettingsHero title="Facturación" />
         <Section subClassName="padding-x-estilo2 padding-y-estilo2 gap-estilo2 flex flex-col">
-          <DynamicTable headers={headers} rows={rows} />
+          <DynamicTableLight headers={headers} rows={rows} />
         </Section>
       </Main>
     </>

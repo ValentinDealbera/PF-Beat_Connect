@@ -23,32 +23,23 @@ const TableCellStyledHead = styled(TableCell)({
   paddingBottom: "10px",
   paddingTop: "0px",
   fontFamily: "Outfit, sans-serif",
-  color: "#ffffff", // Establecer el color en blanco para el modo oscuro
-  borderBottom: "1px solid #1B1F24",
-  "@media (prefers-color-scheme: light)": {
     color: "#000000", // Establecer el color en negro para el modo claro
     borderBottom: "1px solid #ccc",
-  },
+  
 });
 
 const TableCellStyled = styled(TableCell)({
   fontFamily: "Outfit, sans-serif",
-  color: "#ffffff", // Establecer el color en blanco para el modo oscuro
-  borderBottom: "1px solid #1B1F24",
-  "@media (prefers-color-scheme: light)": {
     color: "#000000", // Establecer el color en negro para el modo claro
-    borderBottom: "1px solid #ccc",
-  },
+    borderBottom: "1px solid #ccc"
 });
 
 const TablePaginationStyled = styled(TablePagination)(({ theme }) => ({
-  color: theme.palette.mode === "dark" ? "#ffffff" : "inherit",
+
   width: "100%",
-  borderBottom: "1px solid #1B1F24",
-  "@media (prefers-color-scheme: light)": {
     color: "#000000", // Establecer el color en negro para el modo claro
     borderBottom: "1px solid #ccc",
-  },
+  
 }));
 
 function TablePaginationActions(props) {
@@ -120,7 +111,7 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-export default function DynamicTable({ headers, rows }) {
+export default function DynamicTableLight({ headers, rows }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
