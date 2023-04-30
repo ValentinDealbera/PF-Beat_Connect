@@ -16,8 +16,10 @@ import {
 } from "@/redux/slices/admin/orders";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function SellerDashboardOverview() {
+  const [t] = useTranslation("global");
   const dispatch = useDispatch();
   const router = useRouter();
   const { orders } = useSelector((state) => state.admin.orders);
@@ -26,11 +28,11 @@ export default function SellerDashboardOverview() {
   const [reviewToDelete, setReviewToDelete] = useState(null);
   const headers = [
     "Beat",
-    "Comprador",
-    "Vendedor",
-    "Monto",
-    "Fecha",
-    "Acciones",
+    t("adminCreateUser.t1"),
+    t("adminCreateUser.t2"),
+    t("adminCreateUser.t3"),
+    t("adminCreateUser.t4"),
+    t("adminCreateUser.t5"),
   ];
 
   useEffect(() => {
@@ -99,7 +101,7 @@ export default function SellerDashboardOverview() {
             className=" hover:background-primary-red-700 text-sm-semibold 
               border-radius-estilo2 text-red-700 "
           >
-            Eliminar
+            {t("dashboardNav.delete")}
           </button>
         </div>
       ),
@@ -111,7 +113,7 @@ export default function SellerDashboardOverview() {
       <main>
         <SellerDashboardLayout
           topBarMode="message"
-          topBarMessage="Ordenes de la pagina"
+          topBarMessage={t("dashboardNav.title3")}
           topBarButtonLabel="Crear review"
         >
           <IslandDashboard className="flex flex-col gap-5 xl:gap-8 ">

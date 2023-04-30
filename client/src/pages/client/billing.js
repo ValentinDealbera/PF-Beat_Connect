@@ -11,15 +11,16 @@ import {
 } from "@/components";
 import { useSelector } from "react-redux";
 import Image from "next/image";
-
+import { useTranslation } from "react-i18next";
 
 export default function BuyerProfile() {
+  const [t, i18n] = useTranslation("global");
   const activeIndex = useSelector((state) => state.profile.settingsActiveIndex);
   const beats = useSelector((state) => state.client.orders.orders);
 const state = useSelector((state) => state.client);
 console.log("STATE", state.orders.orders);
   //obtenemos los beats
-  const headers = ["Beat", "Monto", "Operacion", "Fecha"];
+  const headers = ["Beat", t("billing.t2"), t("billing.t3"), t("billing.t4")];
 //revisamoa que beats tenga una propieadad de beat y si no la tiene lo borramos
 
 const beatsFiltered = beats.filter((item) => item.beat);
@@ -54,7 +55,7 @@ const beatsFiltered = beats.filter((item) => item.beat);
     <>
       <Head title="Facturación" />
       <Main mode="transparent">
-        <SettingsHero title="Facturación" />
+        <SettingsHero title={t("billing.t1")} />
         <Section subClassName="padding-x-estilo2 padding-y-estilo2 gap-estilo2 flex flex-col">
           <DynamicTable headers={headers} rows={rows} />
         </Section>

@@ -3,6 +3,7 @@ import { setActiveItemDetail } from "@/redux/slices/beats";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 import {
   deleteClientBeat,
   setActiveEditingBeat,
@@ -36,6 +37,7 @@ export default function BeatCard({
   manageEditReview,
   manageCreateReview,
 }) {
+  const [t, i18n] = useTranslation("global");
   const dispatch = useDispatch();
   const [visibilityReviewsModal, setVisibilityReviewsModal] = useState(false);
   const [visibilityOwnedModal, setVisibilityOwnedModal] = useState(false);
@@ -136,7 +138,7 @@ export default function BeatCard({
                 {boughtBeat ? (
                   <>
                     <span className="color-primary-red-700 font-semibold">
-                      COMPRADO
+                      {t("beatCar.purchased")}
                     </span>
                     <BeatBPM beat={beat} />
                   </>
@@ -192,13 +194,15 @@ function Modals({
   handleAddFavorite,
   handleDeleteFavorite,
 }) {
+
+  const [t, i18n] = useTranslation("global");
   const fromClientBtns = [
     {
-      text: "Editar",
+      text: "beatCar.edit",
       action: handleEdit,
     },
     {
-      text: "Borrar",
+      text: "beatCar.delete",
       action: handleDelete,
     },
   ];
@@ -210,7 +214,7 @@ function Modals({
           <MiniModalBox className="right-1 top-1  ">
             <div className="flex flex-col gap-1">
               {fromClientBtns.map((btn, index) => (
-                <Button key={index} text={btn.text} action={btn.action} />
+                <Button key={index} text={t(btn.text)} action={btn.action} />
               ))}
             </div>
           </MiniModalBox>
@@ -230,17 +234,17 @@ function Modals({
             />
             <div className="flex w-full flex-col items-center justify-center">
               <h1 className="text-lg pb-3 font-bold text-red-700">
-                ¿Te gusto este Beat?
+                  {t("beatCar.modalPopUp1")}
               </h1>
               <h2>
-                  ¡Inicia sesion para guardar tus beats favoritos!
+                  {t("beatCar.modalPopUp2")}
               </h2>
-              <p>Únete a nuestra comunidad en crecimiento de músicos y</p> 
-              <p className="pb-2">productores de la música urbana.</p>
-              <p className="mb-4">¡Empieza a descubrir tus beats favoritos ahora mismo!</p>
+              <p>{t("beatCar.modalPopUp3")}</p> 
+              <p className="pb-2">{t("beatCar.modalPopUp4")}</p>
+              <p className="mb-4">{t("beatCar.modalPopUp5")}</p>
               <Link href="/auth">
             <div className="flex gap-2 rounded-full bg-red-700 pb-2 pl-4 pr-4 pt-2 text-base font-semibold text-white">
-              <p>Inicia sesión aqui!</p>
+              <p>{t("beatCar.modalPopUp6")}</p>
             </div>
           </Link>
             </div>
@@ -253,10 +257,10 @@ function Modals({
           <MiniModalBox className="right-1 top-1">
             <div className="flex flex-col">
               {boughtBeat && !reviewed && !fromClient && (
-                <Button text={"Crear review"} action={handleCreateReview} />
+                <Button text={t("beatCar.editReview")} action={handleCreateReview} />
               )}
               {boughtBeat && reviewed && !fromClient && (
-                <Button text={"Editar review"} action={handleEditReview} />
+                <Button text={t("beatCar.editReview")} action={handleEditReview} />
               )}
             </div>
           </MiniModalBox>

@@ -22,6 +22,7 @@ import { adminGetBeats } from "@/redux/slices/admin/beats";
 import { adminGetUsers } from "@/redux/slices/admin/users";
 import { useRouter } from "next/router";
 import { Autocomplete, TextField } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const AdminCreateReviewForm = forwardRef((props, ref) => {
   const router = useRouter();
@@ -36,6 +37,7 @@ const AdminCreateReviewForm = forwardRef((props, ref) => {
   const defaultUsers = useSelector((state) => state.admin.users.users);
   const defaultBeats = useSelector((state) => state.admin.beats.beats);
   const [softD, setSoftD] = useState(defaultValues.softDelete);
+  const [t] = useTranslation("global");
 
   console.log("defaultValues", defaultValues);
   console.log("DEFAULT BEATS", defaultBeats);
@@ -156,7 +158,7 @@ const AdminCreateReviewForm = forwardRef((props, ref) => {
                 className="text-sm-medium flex min-w-0 flex-col gap-1"
               >
                 {" "}
-                Usuario creador
+                  {t("adminCreateReviewForm.t1")}
                 <Autocomplete
                   id="createdBy"
                   name="createdBy"
@@ -188,8 +190,8 @@ const AdminCreateReviewForm = forwardRef((props, ref) => {
               id="title"
               type="text"
               name="title"
-              placeholder="Titulo"
-              label="Titulo"
+              placeholder={t("adminCreateReviewForm.t2")}
+              label={t("adminCreateReviewForm.t2")}
               onChange={handleInput}
               error={error.title}
               defaultValue={mode === "edit" ? defaultValues.title : ""}
@@ -206,7 +208,7 @@ const AdminCreateReviewForm = forwardRef((props, ref) => {
               defaultValue={mode === "edit" ? defaultValues.rating : ""}
             />
             <SwitchForm
-              label="Banear"
+              label={t("adminCreateReviewForm.t4")}
               name="softDelete"
               nameInput="softDelete"
               // defaultValue={mode === "edit" ? defaultValues.softDelete : ""}
@@ -253,8 +255,8 @@ const AdminCreateReviewForm = forwardRef((props, ref) => {
             <TextArea
               id="comment"
               name="comment"
-              placeholder="Comentario"
-              label="Comentario"
+              placeholder={t("adminCreateReviewForm.t5")}
+              label={t("adminCreateReviewForm.t5")}
               error={error.comment}
               onChange={handleInput}
               defaultValue={mode === "edit" ? defaultValues.comment : ""}

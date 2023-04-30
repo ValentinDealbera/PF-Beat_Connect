@@ -21,8 +21,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { adminGetUsers } from "@/redux/slices/admin/users";
 import { useRouter } from "next/router";
 import { adminPostBeat, adminEditBeat } from "@/redux/slices/admin/beats";
+import { useTranslation } from "react-i18next";
 
 const AdminCreateBeatForm = forwardRef((props, ref) => {
+  const [t] = useTranslation("global");
   const router = useRouter();
   const dispatch = useDispatch();
   const formRef = useRef(null);
@@ -154,8 +156,8 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
             <Input
               id="name"
               name="name"
-              label="Nombre"
-              placeholder="Nombre"
+              label={t("adminBeatsCreate.f1")}
+              placeholder={t("adminBeatsCreate.f1")}
               defaultValue={mode === "edit" ? defaultValues.name : ""}
               type="text"
               onChange={handleInput}
@@ -164,8 +166,8 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
             <Input
               name="priceAmount"
               id="priceAmount"
-              label="Precio"
-              placeholder="Precio"
+              label={t("adminBeatsCreate.f2")}
+              placeholder={t("adminBeatsCreate.f2")}
               defaultValue={mode === "edit" ? defaultValues.priceAmount : ""}
               type="number"
               onChange={handleInput}
@@ -173,8 +175,8 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
             />
             <Input
               name="image"
-              label="Imagen"
-              placeholder="Imagen"
+              label={t("adminBeatsCreate.f3")}
+              placeholder={t("adminBeatsCreate.f3")}
               type="file"
               onChange={handleInput}
               error={error.image}
@@ -183,8 +185,8 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
             {mode === "edit" && (
               <Input
                 name="userCreator"
-                label="Usuario creador"
-                placeholder="Usuario creador"
+                label={t("adminBeatsCreate.f4")}
+                placeholder={t("adminBeatsCreate.f4")}
                 value={
                   mode === "edit" ? defaultValues.userCreator.username : null
                 }
@@ -204,7 +206,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
                 Usuario creador
                 <Autocomplete
                   id="userCreator"
-                  name="Usuario creador"
+                  name={t("adminBeatsCreate.f4")}
                   options={options}
                   getOptionLabel={(option) => option.label}
                   onChange={(event, newValue) => {
@@ -243,7 +245,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
               error={error.bpm}
             />
             <label className="text-sm-medium flex min-w-0 flex-col gap-1">
-              Elige un Género
+                {t("adminBeatsCreate.f5")}
               <select
                 name="genre"
                 id="genre"
@@ -255,7 +257,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
                 error={error.genre}
               >
                 <option value="" disabled selected>
-                  Seleccionar género
+                  {t("adminBeatsCreate.f6")}
                 </option>
                 {genres.map((genre) => (
                   <option
@@ -293,7 +295,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
             )}
             {mode === "edit" && (
               <SwitchForm
-                label="Pausar"
+                label={t("adminBeatsCreate.f7")}
                 name="softDelete"
                 nameInput="softDelete"
                 // defaultValue={mode === "edit" ? form.softDelete : ""}

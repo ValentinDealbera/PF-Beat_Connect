@@ -4,24 +4,38 @@ import {
   FaqsGrid,
   Head,
 } from "@/components";
+import { useTranslation } from "react-i18next";
 
 export default function SellerDashboardOverview() {
+  const [t, i18n] = useTranslation("global");
   return (
     <>
       <Head title="Panel de control" />
       <main>
         <SellerDashboardLayout
           topBarMode="message"
-          topBarMessage="Hola, bienvenido a tu panel de control."
+          topBarMessage={t("admin.t1")}
           
         >
           <IslandDashboard className="flex flex-col gap-5 xl:gap-8 ">
             <h1 className="text-subtitulo-semibold dark:text-white ">
-              Preguntas frecuentes
+                {t("admin.t2")}
             </h1>
             <FaqsGrid />
           </IslandDashboard>
         </SellerDashboardLayout>
+        <button
+            onClick={() => i18n.changeLanguage("es")}
+            className="color-primary-red-500"
+          >
+            Español
+          </button>
+          <button
+            onClick={() => i18n.changeLanguage("en")}
+            className="color-primary-red-500"
+          >
+            English
+          </button>
       </main>
     </>
   );

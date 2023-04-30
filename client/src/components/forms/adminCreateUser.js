@@ -17,8 +17,10 @@ import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { adminPostUser, adminEditUser } from "@/redux/slices/admin/users";
 import { useRouter } from "next/router";
+import { useTranslation } from "react-i18next";
 
 const AdminCreateUserForm = forwardRef((props, ref) => {
+  const [t] = useTranslation("global");
   const router = useRouter();
   const dispatch = useDispatch();
   const formRef = useRef(null);
@@ -204,8 +206,8 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
             <Input
               id="firstName"
               name="firstName"
-              label="Nombre"
-              placeholder="Nombre"
+              label={t("register.t2")}
+              placeholder={t("register.t2")}
               defaultValue={mode === "edit" ? defaultValues.firstName : ""}
               type="text"
               onChange={handleInput}
@@ -214,8 +216,8 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
             <Input
               name="lastName"
               id="lastName"
-              label="Apellido"
-              placeholder="Apellido"
+              label={t("register.t3")}
+              placeholder={t("register.t3")}
               defaultValue={mode === "edit" ? defaultValues.lastName : ""}
               type="text"
               onChange={handleInput}
@@ -224,8 +226,8 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
             <Input
               name="username"
               id="username"
-              label="Nombre de usuario"
-              placeholder="Nombre de usuario"
+              label={t("register.t6")}
+              placeholder={t("register.t6")}
               defaultValue={mode === "edit" ? defaultValues.username : ""}
               type="text"
               onChange={handleInput}
@@ -234,8 +236,8 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
             <Input
               id="bio"
               name="bio"
-              label="Biografia"
-              placeholder="Biografia"
+              label={t("register.t11")}
+              placeholder={t("register.t11")}
               defaultValue={mode === "edit" ? defaultValues.bio : ""}
               type="text"
               onChange={handleInput}
@@ -243,7 +245,7 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
             />
              <div className="flex justify-start items-start gap-4 w-full">
               <SwitchForm
-                label="Banneado"
+                label={t("register.t14")}
                 name="soft"
                 nameInput="soft"
                 // defaultValue={mode === "edit" ? defaultValues.softDelete : ""}
@@ -252,7 +254,7 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
                 error={error.soft}
               />
               <SwitchForm
-                label="Vendedor"
+                label={t("register.t15")}
                 name="seller"
                 nameInput="seller"
                 // defaultValue={mode === "edit" ? defaultValues.IsSeller : ""}
@@ -274,8 +276,8 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
           <FormColumn className="w-full">
             <Input
               name="password"
-              label="Contraseña"
-              placeholder="Contraseña"
+              label={t("register.t7")}
+              placeholder={t("register.t7")}
               defaultValue={mode === "edit" ? null : ""}
               type="password"
               onChange={handleInput}
@@ -292,16 +294,16 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
             />
             <Input
               name="backImage"
-              label="Foto de Portada"
-              placeholder="Foto de Portada"
+              label={t("register.t12")}
+              placeholder={t("register.t12")}
               type="file"
               onChange={handleInput}
               error={error.backImage}
             />
             <Input
               name="image"
-              label="Foto de Perfil"
-              placeholder="Foto de Perfil"
+              label={t("register.t13")}
+              placeholder={t("register.t13")}
               type="file"
               onChange={handleInput}
               error={error.image}

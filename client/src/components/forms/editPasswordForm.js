@@ -9,7 +9,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { changePassword } from "@/redux/slices/client/authSession";
 import { useRouter } from "next/router";
 import { validationEditPassword } from "@/components/validation/client/editPassword";
+import { useTranslation } from "react-i18next";
+
 export default function EditPasswordForm(props) {
+  const [t, i18n] = useTranslation("global");
   const router = useRouter();
   const dispatch = useDispatch();
   const formRef = useRef(null);
@@ -71,8 +74,8 @@ export default function EditPasswordForm(props) {
             <Input
               id="oldPassword"
               name="oldPassword"
-              label="Contraseña anterior"
-              placeholder="Contraseña anterior"
+              label={t("editPassword.t1")}
+              placeholder={t("editPassword.t1")}
               type="password"
               onChange={handleInput}
               error={error.oldPassword}
@@ -82,8 +85,8 @@ export default function EditPasswordForm(props) {
             <Input
               id="newPassword"
               name="newPassword"
-              label="Nueva contraseña"
-              placeholder="Nueva contraseña"
+              label={t("editPassword.t2")}
+              placeholder={t("editPassword.t2")}
               type="password"
               onChange={handleInput}
               error={error.newPassword}
