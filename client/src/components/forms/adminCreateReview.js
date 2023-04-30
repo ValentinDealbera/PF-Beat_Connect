@@ -52,6 +52,8 @@ const AdminCreateReviewForm = forwardRef((props, ref) => {
     // softDelete: `${mode === "edit" ? defaultValues.softDelete : ""}`,
   });
 
+  console.log("data para el form", form);
+
   const options = defaultUsers.map((user) => ({
     label: user.username,
     value: user._id,
@@ -126,7 +128,7 @@ const AdminCreateReviewForm = forwardRef((props, ref) => {
       {
         text: "Yes",
         //segun is seller, dinamicamente se pone el active
-        active: !softD,
+        active: softD,
         handleAction: () => {
           setForm({
             ...form,
@@ -136,7 +138,7 @@ const AdminCreateReviewForm = forwardRef((props, ref) => {
       },
       {
         text: "No",
-        active: softD,
+        active: !softD,
         handleAction: () => {
           setForm({
             ...form,
@@ -207,7 +209,7 @@ const AdminCreateReviewForm = forwardRef((props, ref) => {
               error={error.rating}
               defaultValue={mode === "edit" ? defaultValues.rating : ""}
             />
-            <SwitchForm
+            { mode === "edit" && <SwitchForm
               label={t("adminCreateReviewForm.t4")}
               name="softDelete"
               nameInput="softDelete"
@@ -215,7 +217,7 @@ const AdminCreateReviewForm = forwardRef((props, ref) => {
               onChange={handleInput}
               arrayButtons={arraySoftDelete.arrayButtons}
               error={error.softDelete}
-            />
+            />}
           </FormColumn>
           <FormColumn className="w-full">
             {mode === "create" && (

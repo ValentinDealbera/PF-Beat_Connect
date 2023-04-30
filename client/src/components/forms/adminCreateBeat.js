@@ -37,7 +37,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
   const genres = useSelector((state) => state.filters.genres);
   const [softD, setSoftD] = useState(defaultValues.softDelete);
 
-  // console.log("defaultValues", defaultValues);
+   console.log("defaultValues", defaultValues);
 
   const [form, setForm] = useState({
     name: `${mode === "edit" ? defaultValues.name : ""}`,
@@ -127,7 +127,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
       {
         text: "Yes",
         //segun is seller, dinamicamente se pone el active
-        active: !softD,
+        active: softD,
         handleAction: () => {
           setForm({
             ...form,
@@ -137,7 +137,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
       },
       {
         text: "No",
-        active: softD,
+        active: !softD,
         handleAction: () => {
           setForm({
             ...form,
