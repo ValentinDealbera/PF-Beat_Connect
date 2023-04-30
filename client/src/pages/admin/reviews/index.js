@@ -26,6 +26,7 @@ export default function SellerDashboardOverview() {
   const reviewsData = reviews;
   
   const [reviewToDelete, setReviewToDelete] = useState(null);
+
   const headers = [
     "Beat",
     "Review",
@@ -48,6 +49,13 @@ export default function SellerDashboardOverview() {
     router.push(`/admin/reviews/${data._id}`);
   };
 
+  const [creatorVar, setCreatorVar] = useState("");
+  const [actionsVar, setActionsVar] = useState("");
+  useEffect(() => {
+    setCreatorVar(t("adminCreateReview.t1").toLocaleLowerCase());
+    setActionsVar(t("dashboardNav.actions").toLocaleLowerCase());
+  }, [t("adminCreateReview.t1"), t("dashboardNav.actions")]);
+
   const rows = reviewsData.map((item) => {
     return {
       // id: item._id,
@@ -55,7 +63,7 @@ export default function SellerDashboardOverview() {
          <p className="text-sm-light">{item.title}</p>
         <p className="text-sm-light">{item.rating} {t("clientReview")}</p>
       </div>),
-      creador: item.createdBy.username,
+      [creatorVar]: item.createdBy.username,
       beat: (
         <div className="flex items-center gap-4 ">
           <Image
@@ -69,7 +77,7 @@ export default function SellerDashboardOverview() {
           </div>
         </div>
       ),
-      acciones: (
+      [actionsVar]: (
         <div className="flex w-max gap-4" key={item._id}>
           <button
             onClick={() => handleEdit(item)}
@@ -95,8 +103,8 @@ export default function SellerDashboardOverview() {
       <main>
         <SellerDashboardLayout
           topBarMode="action"
-          topBarMessage="Reviews de la pagina"
-          topBarButtonLabel="Crear review"
+          topBarMessage={t("dashboardNav.title4")}
+          topBarButtonLabel={t("dashboardNav.createReview")}
           onClick={() => {
             router.push("/admin/reviews/create");
           }}

@@ -12,9 +12,10 @@ import {
 import { useSelector } from "react-redux";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
+import { useState, useEffect  } from "react";
 
 export default function BuyerProfile() {
-  const [t, i18n] = useTranslation("global");
+  const [t] = useTranslation("global");
   const activeIndex = useSelector((state) => state.profile.settingsActiveIndex);
   const beats = useSelector((state) => state.client.orders.orders);
 const state = useSelector((state) => state.client);
@@ -24,6 +25,16 @@ console.log("STATE", state.orders.orders);
 //revisamoa que beats tenga una propieadad de beat y si no la tiene lo borramos
 
 const beatsFiltered = beats.filter((item) => item.beat);
+
+const [montoVar, setMontoVar] = useState("");
+const [operacionVar, setOperacionVar] = useState("");
+const [fechaVar, setFechaVar] = useState("");
+  useEffect(() => {
+    setMontoVar(t("billing.t2").toLocaleLowerCase());
+    setOperacionVar(t("billing.t3").toLocaleLowerCase());
+    setFechaVar(t("billing.t4").toLocaleLowerCase());
+  }, [t("billing.t2"), t("billing.t3"), t("billing.t4")]);
+
 
   const rows = beatsFiltered.map((item) => {
  console.log("ITEM", item);
@@ -45,9 +56,9 @@ const beatsFiltered = beats.filter((item) => item.beat);
           </div>
         </div>
       ),
-      monto: <p className="text-sm-medium">${item.beat.priceAmount}</p>,
-      operacion: <p className="text-sm-medium">{item.operationType} </p>,
-      fecha: <p className="text-sm-medium">{item.date}</p>,
+      [montoVar]: <p className="text-sm-medium">${item.beat.priceAmount}</p>,
+      [operacionVar]: <p className="text-sm-medium">{item.operationType} </p>,
+      [fechaVar]: <p className="text-sm-medium">{item.date}</p>,
     };
   });
 

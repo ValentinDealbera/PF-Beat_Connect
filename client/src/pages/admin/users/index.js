@@ -47,9 +47,18 @@ export default function SellerDashboardOverview() {
 
   const headers = [t("dashboardNav.t4"), t("dashboardNav.status"), t("dashboardNav.actions")];
 
+  const [userVar, setUserVar] = useState("");
+  const [statusVar, setStatusVar] = useState("");
+  const [actionsVar, setActionsVar] = useState("");
+  useEffect(() => {
+    setUserVar(t("dashboardNav.t4").toLocaleLowerCase());
+    setStatusVar(t("dashboardNav.status").toLocaleLowerCase());
+    setActionsVar(t("dashboardNav.actions").toLocaleLowerCase());
+  }, [t("dashboardNav.t4"), t("dashboardNav.status"), t("dashboardNav.actions")]);
+
   const rows = usersData.map((item) => {
     return {
-      usuario: (
+      [userVar]: (
         <div className="flex max-w-[50px] items-center gap-4">
           <Image
             src={item.image}
@@ -68,8 +77,8 @@ export default function SellerDashboardOverview() {
           </div>
         </div>
       ),
-      status:  (<p className="text-sm-light dark:text-white">{item.softDelete ? "Baneado" : "Activo"}</p>),
-      acciones: (
+      [statusVar]:  (<p className="text-sm-light dark:text-white">{item.softDelete ? "Baneado" : "Activo"}</p>),
+      [actionsVar]: (
         <div className="flex w-max gap-4" key={item._id}>
           <button
             onClick={() => handleEdit(item)}

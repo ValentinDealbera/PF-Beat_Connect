@@ -61,6 +61,12 @@ export default function SellerDashboardOverview() {
 
   const headers = ["Beat","Status", "AudioMP3", t("dashboardNav.actions")];
 
+  const [actionsVar, setActionsVar] = useState("");
+  useEffect(() => {
+    setActionsVar(t("dashboardNav.actions").toLocaleLowerCase());
+  }, [t("dashboardNav.actions")]);
+
+
   const rows = beatData.map((item) => {
     return {
       beat: (
@@ -88,7 +94,7 @@ export default function SellerDashboardOverview() {
         </div>
       ),
       status: item.softDelete ? t("dashboardNav.status1") : t("dashboardNav.status2"),
-      acciones: (
+      [actionsVar]: (
         <div className="flex w-max gap-4" key={item._id}>
           <button
             onClick={() => handleEdit(item)}

@@ -51,6 +51,20 @@ export default function SellerDashboardOverview() {
   };
 
   const beatsFiltered = reviewsData.filter((item) => item.beat);
+
+  const [buyerVar, setBuyerVar] = useState("");
+  const [sellerVar, setSellerVar] = useState("");
+  const [amountVar, setAmountVar] = useState("");
+  const [dateVar, setDateVar] = useState("");
+  const [actionsVar, setActionsVar] = useState("");
+  useEffect(() => {
+    setBuyerVar(t("adminCreateUser.t1").toLocaleLowerCase());
+    setSellerVar(t("adminCreateUser.t2").toLocaleLowerCase());
+    setAmountVar(t("adminCreateUser.t3").toLocaleLowerCase());
+    setDateVar(t("adminCreateUser.t4").toLocaleLowerCase());
+    setActionsVar(t("adminCreateUser.t5").toLocaleLowerCase());
+  }, [t("adminCreateUser.t1"), t("adminCreateUser.t2"), t("adminCreateUser.t3"), t("adminCreateUser.t4"),t("adminCreateUser.t5")]);
+
   const rows = beatsFiltered.map((item) => {
     console.log("ITEM", item);
     return {
@@ -70,8 +84,8 @@ export default function SellerDashboardOverview() {
           </div>
         </div>
       ),
-      monto: <p className="text-sm-medium">${item.beat.priceAmount}</p>,
-      comprador: (
+      [amountVar]: <p className="text-sm-medium">${item.beat.priceAmount}</p>,
+      [buyerVar]: (
         <div className="flex items-center gap-4 ">
           <p className="text-sm-medium dark:text-white">
             {" "}
@@ -81,7 +95,7 @@ export default function SellerDashboardOverview() {
           </p>
         </div>
       ),
-      vendedor: (
+      [sellerVar]: (
         <div className="flex items-center gap-4 ">
           <p className="text-sm-medium dark:text-white">
             {" "}
@@ -93,8 +107,8 @@ export default function SellerDashboardOverview() {
           </p>
         </div>
       ),
-      fecha: <p className="text-sm-medium">{item.date}</p>,
-      acciones: (
+      [dateVar]: <p className="text-sm-medium">{item.date}</p>,
+      [actionsVar]: (
         <div className="flex w-max gap-4" key={item._id}>
           <button
             onClick={() => setReviewToDelete(item)}

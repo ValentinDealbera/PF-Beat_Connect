@@ -264,6 +264,7 @@ const authSession = createSlice({
       state.auth.loginMethod = action.payload;
     },
 
+
     //--------------------
     //SET GOOGLE SUCCESSFUL
     setGoogleSuccessful(state, action) {
