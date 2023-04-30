@@ -9,11 +9,11 @@
 
   "helpCenter": {},
 
-  "helpTermsTitle":"Terms of BeatConnect",
+  "helpTermsTitle": "Terms of BeatConnect",
   "helpTermsParagraph": "The following terms and conditions establish the legal agreement between BeatConnect and users of the website. By accessing and using the website, you agree to these terms and conditions in their entirety. If you do not agree with these terms and conditions, please do not use this website.",
-
+  
   "helpCenter-terms": {
-    "title" : "Terms and Conditions",
+    "title": "Terms and Conditions",
     "t1": "Welcome to our website. If you continue browsing and using this website, you agree to comply with and be bound by the following terms and conditions of use, which together with our privacy policy Privacy Policy govern BeatConnect's relationship with you in connection with this website.",
     "t2": "The term 'BeatConnect' or'we' refers to the owner of the website. The term 'you' refers to the user or visitor to our website.",
     "t3": "The use of this website is subject to the following terms of use:",
@@ -28,275 +28,391 @@
     "t12": "By using this website, you agree to these terms and conditions in their entirety. If you do not agree with these terms and conditions or any part of these terms and conditions, please do not use our website."
   },
 
-  "helpPrivacyTitle":"Privacy policy",
+  "helpPrivacyTitle": "Privacy policy",
   "helpPrivacyParagraph": "On our platform, we take the privacy of our users very seriously and are committed to protecting the personal information you share with us. Our privacy policy details how we collect, use, disclose, and protect your personal information, as well as your rights and options regarding its use.",
 
-    "helpCenter-privacy": {
-      "title": "Privacy Policy",
-      "t1": "At BeatConnect, we take our users' privacy very seriously and are committed to protecting the personal information you share with us. In this privacy policy, we detail how we collect, use, disclose, and protect your personal information, as well as your rights and options regarding its use. By using our platform, you accept our privacy policy and our practices for handling personal information.",
-      "t2": "Information we collect",
-      "t3": "We collect personal information that you provide to us directly, such as your name, email address, and billing address. We may also collect information about your interactions with our platform, such as the pages you visit and the actions you take on the platform.",
-      "t4": "How we use your personal information?",
-      "t5": "We use your personal information to provide you with access to our platform and improve the user experience. We may also use your information to communicate with you about updates and special offers, and to process your transactions on the platform",
-      "t6": "How we protect your personal information?",
-      "t7": "We are committed to protecting your personal information by using appropriate physical, technical, and administrative security measures. This includes the use of data encryption and access control to personal information.",
-      "t8": "Disclosure of your information",
-      "t9": "We may share your personal information with third parties who provide services on our behalf, such as payment providers and order fulfillment services. We may also disclose your personal information in response to a legal request or if we believe that disclosure is necessary to protect our rights, the safety of our users, or the general public.",
-      "t10": "Your rights and options",
-      "t11": "You can choose not to provide certain personal information, but this may limit your ability to use our platform. You also have certain rights with respect to your personal information, such as the right to access, correct, and delete your personal information."
+  "helpCenter-privacy": {
+    "title": "Privacy Policy",
+    "t1": "At BeatConnect, we take our users' privacy very seriously and are committed to protecting the personal information you share with us. In this privacy policy, we detail how we collect, use, disclose, and protect your personal information, as well as your rights and options regarding its use. By using our platform, you accept our privacy policy and our practices for handling personal information.",
+    "t2": "Information we collect",
+    "t3": "We collect personal information that you provide to us directly, such as your name, email address, and billing address. We may also collect information about your interactions with our platform, such as the pages you visit and the actions you take on the platform.",
+    "t4": "How we use your personal information?",
+    "t5": "We use your personal information to provide you with access to our platform and improve the user experience. We may also use your information to communicate with you about updates and special offers, and to process your transactions on the platform",
+    "t6": "How we protect your personal information?",
+    "t7": "We are committed to protecting your personal information by using appropriate physical, technical, and administrative security measures. This includes the use of data encryption and access control to personal information.",
+    "t8": "Disclosure of your information",
+    "t9": "We may share your personal information with third parties who provide services on our behalf, such as payment providers and order fulfillment services. We may also disclose your personal information in response to a legal request or if we believe that disclosure is necessary to protect our rights, the safety of our users, or the general public.",
+    "t10": "Your rights and options",
+    "t11": "You can choose not to provide certain personal information, but this may limit your ability to use our platform. You also have certain rights with respect to your personal information, such as the right to access, correct, and delete your personal information."
+  },
+
+  "helpIndexTitle": "Help center",
+  "helpIndexParagraph": "At our help center, we strive to provide an exceptional user experience to all of our customers. We are here to answer any questions you may have and help you troubleshoot any issues you may encounter while using our platform.",
+  
+  "helpCenterIndex": {
+    "t1": "Frequently asked questions",
+    "t2": "Still can't find your answer?",
+    "t3": "Send us a ticket"
+  },
+
+  "faqs": {
+    "t1": "How can I find the appropriate beat for my music project?",
+    "c1": "In our platform, you can explore the catalogs of registered music producers and listen to audio samples of each beat.",
+    "t2": "How can I make a secure payment?",
+    "c2": "We offer a secure and efficient payment process through Mercado Pago. Once you have chosen the beat you wish to purchase, you can securely make the payment with different payment methods.",
+    "t3": "How will I receive the beat file after making the payment?",
+    "c3": "Once you have made the payment, you will receive the beat file in your email. Make sure to provide a valid email address during the payment process.",
+    "t4": "How can I register as a provider on the platform?",
+    "c4": "To register as a provider, you need to fill out the registration form. Once registered, you will be able to create and publish your catalog of instrumentals."
+  },
+
+  "faqsAdmin": {
+    "t1": "How can I find the appropriate beat for my music project?",
+    "c1": "In our platform, you can explore the catalogs of registered music producers and listen to audio samples of each beat.",
+    "t2": "How can I make a secure payment?",
+    "c2": "We offer a secure and efficient payment process through Mercado Pago. Once you have chosen the beat you wish to purchase, you can securely make the payment with different payment methods.",
+    "t3": "How will I receive the beat file after making the payment?",
+    "c3": "Once you have made the payment, you will receive the beat file in your email. Make sure to provide a valid email address during the payment process.",
+    "t4": "How can I register as a provider on the platform?",
+    "c4": "To register as a provider, you need to fill out the registration form. Once registered, you will be able to create and publish your catalog of instrumentals."
+  },
+
+  "about": {
+    "t1": "Let's get to",
+    "t2": "know each other a little more",
+    "t3": "We are a team of 8 students from the Soy Henry bootcamp! We are excited to share a bit more about ourselves. During the course, we learned full-stack programming using the MERN/PERN technologies. Additionally, we developed soft skills and the ability to work effectively in a team. We are passionate about the world of technology and committed to learning and growing together in this industry. We love discovering new creative and engaging solutions for users by applying our technical skills to achieve it.",
+    "t4": "About the",
+    "t5": "application",
+    "t6": "Our platform features a list of registered music producers, who have created and published their catalogs of instrumentals. Users can explore producers' catalogs and listen to audio samples of each beat to decide which one is most suitable for their needs. We also have a secure and efficient payment process that allows users to purchase and download the beat to their email. If you are a music producer, you can also register on our platform and create and publish your catalog of instrumentals! Showcase your audio samples and detailed descriptions of each beat, receive requests for custom beats, and communicate with users to discuss additional details.",
+    "t7": "Used",
+    "t8": "technology",
+    "title1": "About the",
+    "title2": "creators",
+    "title3": "and"
+  },
+
+  "tecnologias": {
+    "t1": "Next.js is a React framework for building high-performance web applications. Next.js helps you easily create single-page web applications with React.",
+    "t2": "Redux is a state management library for single-page JavaScript applications (SPAs). It is primarily used with React, but can also be used with other JavaScript libraries or frameworks. Redux is based on the Flux architecture and focuses on the idea that the application state should be centralized and predictable.",
+    "t3": "Postman is a collaboration tool for designing, testing, and documenting APIs. With Postman, you can send HTTP requests to a web server and receive responses. You can organize your requests into collections and add automated tests to your requests to ensure that your APIs are working correctly.",
+    "t4": "Sass is a CSS preprocessor that allows you to write CSS code more efficiently and in a more structured way. With Sass, you can use variables, selector nesting, mixins, functions, and mathematical operators, which makes writing and maintaining stylesheets easier. Additionally, Sass allows the creation of partial files that can be imported into other files for greater modularity and code reuse.",
+    "t5": "Figma is a cloud-based user interface (UI) design tool that enables designers and design teams to collaborate in real time. Figma has an intuitive and user-friendly interface that allows for the creation of designs, prototypes, and interactive animations. Figma also offers a wide variety of resources, such as icons, components, templates, and plugins, which make it easier to create high-quality designs more quickly and efficiently.",
+    "t6": "Tailwind CSS is a low-level CSS framework that helps you create UI designs quickly and easily. With Tailwind CSS, you can create custom UI designs without having to write CSS.",
+    "t7": "Express.js is a web server framework for Node.js that allows you to create web applications and RESTful APIs quickly and easily. Express.js is based on the concept of middleware, which is a function that runs between the server request and response. Express.js provides a set of predefined middleware that make it easy to create web applications and RESTful APIs.",
+    "t8": "JSON Web Token (JWT) is an open standard that defines a compact and self-contained format for securely transmitting information between two parties as a JSON object. JWTs can be signed using a secret (with HMAC algorithm) or a public/private key using RSA or ECDSA.",
+    "t9": "MongoDB is a document-oriented NoSQL database system that uses JSON documents with schemas.",
+    "t10": "Mongoose is an object modeling library for MongoDB designed to work in an asynchronous environment. Mongoose supports both promises and callbacks. Mongoose simplifies the creation of schema models, validation, record creation, querying, updating, and deleting.",
+    "t11": "Mercado Pago is an online payment platform that allows users to make payments using credit cards, debit cards, cash, and bank transfers.",
+    "t12": "Auth0 is an authentication and authorization platform that allows developers to add authentication and authorization to their web, mobile, and desktop applications.",
+    "t13": "Firebase is a mobile and web application development platform that offers database, storage, authentication, analytics, messaging, and more services.",
+    "t14": "Render is a web hosting platform that allows developers to deploy web applications and REST APIs in the cloud.",
+    "t15": "Vercel es a web application hosting platform that allows developers to deploy web applications and REST APIs in the cloud.",
+    "t16": "Trello is a project management tool that allows teams to organize their projects on boards.",
+    "t17": "Git is an open-source distributed version control system that allows developers to collaborate on software projects. GitHub is a source code hosting and version control platform that uses Git."
+  },
+
+  "navPublic": {
+    "t1": "Home",
+    "t2": "About",
+    "t3": "Beats",
+    "t4": "Cart"
+  },
+
+  "navHelp": {
+    "t1": "Home",
+    "t2": "Privacy Policy",
+    "t3": "Terms and Conditions"
+  },
+
+  "navClient": {
+    "t1": "Profile",
+    "t2": "Inbox",
+    "t3": "Sell your beats",
+    "t4": "Release a beat",
+    "t5": "Settings",
+    "t6": "Billing",
+    "t7": "Logout"
+  },
+
+  "navModalItem": {
+    "label": "Help Center"
+  },
+
+  "authIndex": {
+    "t1": "Hey, welcome",
+    "t2": "back",
+    "t3": "Don't remember your password?",
+    "t4": "Recover",
+    "t5": "Sign in",
+    "t6": "Don't have an account?",
+    "t7": "Register",
+    "label": "Email",
+    "placeholder": "Email",
+    "labelPassword": "Password",
+    "placeholderPassword": "Password",
+    "continueGoogle": "Continue with Google"
+  },
+
+  "landing": {
+    "t1": "Explore the best beats, discover new artists,",
+    "t2": "Discover BeatConnect",
+    "t3": "Immerse yourself in the world of music with BeatConnect, where you can discover the best beats, explore new artists, and unleash your creativity.",
+    "t4": "Sign in now"
+  },
+
+  "footerNav": {
+    "general": "General",
+    "help": "Help",
+    "account": "Account"
+  },
+
+  "generalItems": {
+    "t1": "Home",
+    "t2": "About",
+    "t3": "Beats"
+  },
+
+  "helpItems": {
+    "t1": "Home",
+    "t2": "Privacy Policy",
+    "t3": "Terms and Conditions"
+  },
+
+  "accountItems": {
+    "t1": "Log in",
+    "t2": "Register"
+  },
+
+  "userBoxNav": "Log in",
+
+  "becomeSeller": {
+    "t1": "Become a seller on",
+    "t2": "it's a",
+    "t3": "great idea!",
+    "t4": "Are you a music producer looking for an online platform to sell your beats? BeatConnect is the perfect solution for you. Create your own virtual store and easily sell your beats.",
+    "t5": "I accept the terms and conditions.",
+    "t6": "Start selling",
+    "error1": "You must accept the terms and conditions",
+    "error2": "An error occurred, please try again later"
+  },
+
+  "postBeat": {
+    "t1": "How have you been",
+    "t2": "working?",
+    "t3": "Upload your beat and start selling.",
+    "form1": "Beat name",
+    "form2": "Enter an amazing name",
+    "form3": "Beat price",
+    "form4": "Enter a price",
+    "form5": "Choose a genre",
+    "form6": "Select Gender",
+    "form7": "BPMs",
+    "form8": "",
+    "form9": "Upload a cover",
+    "form10": "Select files",
+    "form11": "No files selected",
+    "form12": "Upload your beat",
+    "form13": "Upload a high-quality beat (WAV, OGG)",
+    "form14": "Create post"
+  },
+
+  "buyerGeneralNav": {
+    "profile": "Profile",
+    "password": "Password",
+    "t1": "Purchased Beats",
+    "t2": "My Beats",
+    "t3": "Favorites",
+    "t4": "Reviews"
+  },
+
+  "NoBeats": "Hey, it seems like there's nothing here",
+  
+  "settingsClient": {
+    "title": "Set up your account",
+    "t1": "First name",
+    "t2": "Email",
+    "t3": "Username",
+    "t4": "Profile picture",
+    "t5": "Last name",
+    "t6": "Bio",
+    "t7": "Cover image",
+    "tosave": "Tosave"
+  },
+
+  "beats": {
+    "t1": "Find that dream",
+    "t2": "beat.",
+    "t3": "Featured ",
+    "t4": "Beats",
+    "t5": "95% of our clients",
+    "t6": "recommend us.",
+    "t7": "In BeatConnect, we strive to provide the best possible service to our customers. We are proud that 95% of them recommend us to their friends and colleagues. This statistic is a testament to our commitment to quality and customer satisfaction. If you haven't tried our services yet, we invite you to do so and join our list of satisfied customers!",
+    "t8": "",
+    "t9": ""
+  },
+
+  "beatShopSection": {
+    "t1": "Previous",
+    "t2": "Next",
+    "filterName1": "Genres",
+    "filterName2": "Price",
+    "sortBy": "Sort By",
+    "t6": "",
+    "t7": "",
+    "t8": "",
+    "t9": ""
+  },
+
+  "search": "What are you looking for?",
+  
+  "billing": {
+    "t1": "Billing",
+    "t2": "Amount",
+    "t3": "Operation",
+    "t4": "Date"
+  },
+
+  "sliceAuthSession": {
+    "t1": "Logged in successfully",
+    "t2": "Registered successfully",
+    "t3": "Becoming a seller...",
+    "t4": "Became a seller",
+    "t5": "Editing...",
+    "t6": "Edited successfully",
+    "t7": "Your password has been changed successfully",
+    "t8": "Sending you an email with recovery request...",
+    "t9": "Email sent",
+    "t10": "Changing password...",
+    "t11": "Password changed"
+  },
+
+  "miniCart": {
+    "t1": "It seems like your cart is empty",
+    "t2": "View cart"
+  },
+
+  "cartHeaders": {
+    "title": "Cart",
+    "t1": "Price",
+    "t2": "Actions",
+    "t3": "Delete",
+    "t4": "Your order",
+    "t5": "Subtotal",
+    "t6": "Discounts",
+    "t7": "Total",
+    "t8": "Buy",
+    "t9": "Related ",
+    "t10": "Beats"
+  },
+
+  "beatDetailSideBar": {
+    "t1": "Prices and Licenses",
+    "t2": "Download",
+    "t3": "Add to Cart",
+    "t4": "See reviews"
+  },
+
+  "beatCar": {
+    "edit": "Edit",
+    "delete": "Delete",
+    "editReview": "Edit review",
+    "purchased": "PURCHASED",
+    "modalPopUp1": "Did you like this Beat?",
+    "modalPopUp2": "Log in to save your favorite beats!",
+    "modalPopUp3": "Join our growing community of musicians and",
+    "modalPopUp4": "urban music producers.",
+    "modalPopUp5": "Start discovering your favorite beats right now!",
+    "modalPopUp6": "Log in here!"
+  },
+
+  "editReview": {
+    "t1": "Let's modify your",
+    "t2": "opinion",
+    "t3": "Title",
+    "t4": "Comment",
+    "t5": "Save Review"
+  },
+
+  "editPassword": {
+    "t1": "Previous password",
+    "t2": "New password"
+  },
+
+  "clientReview": "Stars",
+
+  "register": {
+    "t1": "Register on",
+    "t2": "First name",
+    "t3": "Last name",
+    "t4": "Next",
+    "t5": "Email",
+    "t6": "Username",
+    "t7": "Password",
+    "t8": "Register",
+    "t9": "Already have an account?",
+    "t10": "Log in",
+    "t11": "Biography",
+    "t12": "Cover Photo",
+    "t13": "Profile Photo",
+    "t14": "Banned",
+    "t15": "Seller"
+  },
+
+  "admin": {
+    "t1": "Hello, welcome to your control panel.",
+    "t2": "Frequently Asked Questions"
+  },
+
+  "dashboardNav": {
+    "title" : "Beats of the page",
+    "title2" : "Users of the page",
+    "title3" : "Orders on the page",
+    "createReview" : "Create Review",
+    "createBeat" : "Create Beat",
+    "createUser" : "Create User",
+    "t1": "Overview",
+    "t2": "Users",
+    "t3": "Orders",
+    "t4" : "User",
+    "status": "Status",
+    "actions": "Actions",
+    "status1": "Banned",
+    "status2": "Active",
+    "edit": "Edit",
+    "delete" : "Delete"
+  },
+
+  "adminBeatsCreate" : {
+    "title" : "Create Beat",
+    "t1" : "Save Changes",
+    "f1" : "Name",
+    "f2": "Price",
+    "f3": "Image",
+    "f4" : "Creator User",
+    "f5": "Choose a Genre",
+    "f6": "Select a Genre",
+    "f7": "Pause"
     },
 
-    "helpIndexTitle":"Help center",
-    "helpIndexParagraph": "At our help center, we strive to provide an exceptional user experience to all of our customers. We are here to answer any questions you may have and help you troubleshoot any issues you may encounter while using our platform.",
-    
-    "helpCenterIndex": {
-      "t1": "Frequently asked questions",
-      "t2": "Still can't find your answer?",
-      "t3": "Send us a ticket"
-    },
-
-    "faqs": {
-      "t1": "How can I find the appropriate beat for my music project?",
-      "c1": "In our platform, you can explore the catalogs of registered music producers and listen to audio samples of each beat.",
-      "t2": "How can I make a secure payment?",
-      "c2": "We offer a secure and efficient payment process through Mercado Pago. Once you have chosen the beat you wish to purchase, you can securely make the payment with different payment methods.",
-      "t3": "How will I receive the beat file after making the payment?",
-      "c3": "Once you have made the payment, you will receive the beat file in your email. Make sure to provide a valid email address during the payment process.",
-      "t4": "How can I register as a provider on the platform?",
-      "c4": "To register as a provider, you need to fill out the registration form. Once registered, you will be able to create and publish your catalog of instrumentals."
-    },
-
-    "about": {
-      "t1": "Let's get to",
-      "t2": "know each other a little more",
-      "t3": "We are a team of 8 students from the Soy Henry bootcamp, and we are excited to share a little more about ourselves. We are learning full-stack programming using MERN/PERN technologies, and working hard to develop soft skills and effective teamwork. We are passionate about the world of technology and committed to learning and growing together in this industry. We love discovering new creative and engaging solutions for users, and we are excited to apply our technical skills to achieve it.",
-      "t4": "About the",
-      "t5": "application",
-      "t6": "Our platform features a list of registered music producers, who have created and published their catalogs of instrumentals. Users can explore producers' catalogs and listen to audio samples of each beat to decide which one is most suitable for their needs. We also have a secure and efficient payment process that allows users to purchase and download the beat to their email. If you are a music producer, you can also register on our platform and create and publish your catalog of instrumentals! Showcase your audio samples and detailed descriptions of each beat, receive requests for custom beats, and communicate with users to discuss additional details.",
-      "t7": "Used",
-      "t8": "technology",
-      "t9": ""
-    },
-
-    "tecnologias": {
-      "t1": "Next.js is a React framework for building high-performance web applications. Next.js helps you easily create single-page web applications with React.",
-      "t2": "Redux is a state management library for single-page JavaScript applications (SPAs). It is primarily used with React, but can also be used with other JavaScript libraries or frameworks. Redux is based on the Flux architecture and focuses on the idea that the application state should be centralized and predictable.",
-      "t3": "Postman is a collaboration tool for designing, testing, and documenting APIs. With Postman, you can send HTTP requests to a web server and receive responses. You can organize your requests into collections and add automated tests to your requests to ensure that your APIs are working correctly.",
-      "t4": "Sass is a CSS preprocessor that allows you to write CSS code more efficiently and in a more structured way. With Sass, you can use variables, selector nesting, mixins, functions, and mathematical operators, which makes writing and maintaining stylesheets easier. Additionally, Sass allows the creation of partial files that can be imported into other files for greater modularity and code reuse.",
-      "t5": "Figma is a cloud-based user interface (UI) design tool that enables designers and design teams to collaborate in real time. Figma has an intuitive and user-friendly interface that allows for the creation of designs, prototypes, and interactive animations. Figma also offers a wide variety of resources, such as icons, components, templates, and plugins, which make it easier to create high-quality designs more quickly and efficiently.",
-      "t6": "Tailwind CSS is a low-level CSS framework that helps you create UI designs quickly and easily. With Tailwind CSS, you can create custom UI designs without having to write CSS.",
-      "t7": "Express.js is a web server framework for Node.js that allows you to create web applications and RESTful APIs quickly and easily. Express.js is based on the concept of middleware, which is a function that runs between the server request and response. Express.js provides a set of predefined middleware that make it easy to create web applications and RESTful APIs.",
-      "t8": "JSON Web Token (JWT) is an open standard that defines a compact and self-contained format for securely transmitting information between two parties as a JSON object. JWTs can be signed using a secret (with HMAC algorithm) or a public/private key using RSA or ECDSA.",
-      "t9": "MongoDB is a document-oriented NoSQL database system that uses JSON documents with schemas.",
-      "t10": "Mongoose is an object modeling library for MongoDB designed to work in an asynchronous environment. Mongoose supports both promises and callbacks. Mongoose simplifies the creation of schema models, validation, record creation, querying, updating, and deleting.",
-      "t11": "Mercado Pago is an online payment platform that allows users to make payments using credit cards, debit cards, cash, and bank transfers.",
-      "t12": "Auth0 is an authentication and authorization platform that allows developers to add authentication and authorization to their web, mobile, and desktop applications.",
-      "t13": "Firebase is a mobile and web application development platform that offers database, storage, authentication, analytics, messaging, and more services.",
-      "t14": "Render is a web hosting platform that allows developers to deploy web applications and REST APIs in the cloud.",
-      "t15": "Vercel es a web application hosting platform that allows developers to deploy web applications and REST APIs in the cloud.",
-      "t16": "Trello is a project management tool that allows teams to organize their projects on boards.",
-      "t17": "Git is an open-source distributed version control system that allows developers to collaborate on software projects. GitHub is a source code hosting and version control platform that uses Git."
-    },
-
-    "navPublic": {
-      "t1": "Home",
-      "t2": "About",
-      "t3": "Beats",
-      "t4": "Cart"
-    },
-
-    "navHelp": {
-      "t1": "Home",
-      "t2": "Privacy Policy",
-      "t3": "Terms and Conditions"
-    },
-
-    "navClient": {
-      "t1": "Profile",
-      "t2": "Inbox",
-      "t3": "Sell your beats",
-      "t4": "Release a beat",
-      "t5": "Settings",
-      "t6": "Billing",
-      "t7": "Logout"
-    },
-
-    "navModalItem": {
-      "label": "Help Center"
-    },
-
-    "authIndex": {
-      "t1": "Hey, welcome",
-      "t2": "back",
-      "t3": "Don't remember your password?",
-      "t4": "Recover",
-      "t5": "Sign in",
-      "t6": "Don't have an account?",
-      "t7": "Register",
-      "label": "Email",
-      "placeholder" : "Email",
-      "labelPassword" : "Password",
-      "placeholderPassword": "Password",
-      "continueGoogle" : "Continue with Google"
-    },
-
-    "landing": {
-      "t1": "Explore the best beats, discover new artists,",
-      "t2": "Discover BeatConnect",
-      "t3": "Immerse yourself in the world of music with BeatConnect, where you can discover the best beats, explore new artists, and unleash your creativity.",
-      "t4": "Sign in now"
-    },
-
-    "footerNav": {
-      "general": "General",
-      "help": "Help",
-      "account": "Account"
-    },
-
-    "generalItems": {
-      "t1": "Home",
-      "t2": "About",
-      "t3": "Beats"
-    },
-
-    "helpItems": {
-      "t1": "Home",
-      "t2": "Privacy Policy",
-      "t3": "Terms and Conditions"
-    },
-
-    "accountItems": {
-      "t1": "Log in",
-      "t2": "Register"
-    },
-
-    "userBoxNav" : "Log in",
-
-    "becomeSeller": {
-      "t1": "Become a seller on",
-      "t2": "it's a",
-      "t3": "great idea!",
-      "t4": "Are you a music producer looking for an online platform to sell your beats? BeatConnect is the perfect solution for you. Create your own virtual store and easily sell your beats.",
-      "t5": "I accept the terms and conditions.",
-      "t6": "Start selling",
-      "error1" : "You must accept the terms and conditions",
-      "error2" : "An error occurred, please try again later"
-    },
-
-    "postBeat": {
-      "t1": "How have you been",
-      "t2": "working?",
-      "t3": "Upload your beat and start selling.",
-      "form1": "Beat name",
-      "form2": "Enter an amazing name",
-      "form3": "Beat price",
-      "form4": "Enter a price",
-      "form5": "Choose a genre",
-      "form6": "Select Gender",
-      "form7": "BPMs",
-      "form8": "",
-      "form9": "Upload a cover",
-      "form10": "Select files",
-      "form11": "No files selected",
-      "form12": "Upload your beat",
-      "form13": "Upload a high-quality beat (WAV, OGG)",
-      "form14": "Create post"
-    },
-
-    "buyerGeneralNav": {
-      "profile" : "Profile",
-      "password" : "Password",
-      "t1": "Purchased Beats",
-      "t2": "My Beats",
-      "t3": "Favorites",
-      "t4": "Reviews"
-    },
-
-    "NoBeats": "Hey, it seems like there's nothing here",
-
-    "settingsClient": {
-      "title": "Set up your account",
-      "t1": "First name",
-      "t2": "Email",
-      "t3": "Username",
-      "t4": "Profile picture",
-      "t5": "Last name",
-      "t6": "Bio",
-      "t7": "Cover image",
-      "tosave": "Tosave"
-    },
-
-    "beats": {
-      "t1": "Find that dream",
-      "t2": "beat.",
-      "t3": "Featured ",
-      "t4": "Beats",
-      "t5": "95% of our clients",
-      "t6": "recommend us.",
-      "t7": "In BeatConnect, we strive to provide the best possible service to our customers. We are proud that 95% of them recommend us to their friends and colleagues. This statistic is a testament to our commitment to quality and customer satisfaction. If you haven't tried our services yet, we invite you to do so and join our list of satisfied customers!",
-      "t8": "",
-      "t9": ""
-    },
-
-    "beatShopSection": {
-      "t1": "Previous",
-      "t2": "Next",
-      "filterName1": "Genres",
-      "filterName2": "Price",
-      "sortBy": "Sort By",
-      "t6": "",
-      "t7": "",
-      "t8": "",
-      "t9": ""
-    },
-
-    "search": "What are you looking for?",
-
-    "billing" : {
-      "t1": "Billing",
-      "t2" : "Amount",
-      "t3" : "Operation",
-      "t4" : "Date"
-    },
-
-    "sliceAuthSession": {
-      "t1": "Logged in successfully",
-      "t2": "Registered successfully",
-      "t3": "Becoming a seller...",
-      "t4": "Became a seller",
-      "t5": "Editing...",
-      "t6": "Edited successfully",
-      "t7": "Your password has been changed successfully",
-      "t8": "Sending you an email with recovery request...",
-      "t9": "Email sent",
-      "t10": "Changing password...",
-      "t11": "Password changed"
-    },
-
-    "miniCart": {
-      "t1": "It seems like your cart is empty",
-      "t2": "View cart"
+    "adminCreateUser" : {
+      "t1" : "Buyer",
+      "t2": "Seller",
+      "t3": "Amount",
+      "t4" : "Date",
+      "t5": "Actions"
       },
 
-    "cartHeaders": {
-      "title" : "Cart",
-      "t1": "Price",
-      "t2": "Actions",
-      "t3" : "Delete",
-      "t4": "Your order",
-      "t5": "Subtotal",
-      "t6": "Discounts",
-      "t7": "Total",
-      "t8": "Buy",
-      "t9": "Related ",
-      "t10" : "Beats"
-      },
+    "adminCreateReview" : {
+      "t1" : "Creator"
+  },
 
-      "beatDetailSideBar": {
-        "t1": "Prices and Licenses",
-        "t2": "Download",
-        "t3": "Add to Cart"
-        }
+  "adminCreateReviewForm": {
+    "t1" : "Creator User",
+    "t2": "Title",
+    "t3": "Amount",
+    "t4" : "Ban User",
+    "t5": "Comment"
+    }
 }
 
 

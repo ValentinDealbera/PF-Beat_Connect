@@ -98,6 +98,25 @@ export const faqs = [
   },
 ];
 
+export const faqsAdmin = [
+  {
+    title: "faqsAdmin.t1",
+    content: "faqsAdmin.c1",
+  },
+  {
+    title: "faqsAdmin.t2",
+    content: "faqsAdmin.c2",
+  },
+  {
+    title: "faqsAdmin.t3",
+    content: "faqsAdmin.c3",
+  },
+  {
+    title: "faqsAdmin.t4",
+    content: "faqsAdmin.c4",
+  },
+];
+
 export const tecnologias = [
   {
     id: 1,
@@ -216,7 +235,7 @@ export const tecnologias = [
     image: "/icon/tecnologias/github.svg",
 
     description:
-      "Git es un sistema de control de versiones distribuido de código abierto que permite a los desarrolladores colaborar en proyectos de software. GitHub es una plataforma de alojamiento de código fuente y control de versiones que utiliza Git.",
+    "tecnologias.t17",
   },
 ];
 

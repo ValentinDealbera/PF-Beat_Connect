@@ -16,8 +16,10 @@ import {
 } from "@/redux/slices/admin/reviews";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function SellerDashboardOverview() {
+  const [t] = useTranslation("global");
   const dispatch = useDispatch();
   const router = useRouter();
   const { reviews } = useSelector((state) => state.admin.reviews);
@@ -27,8 +29,8 @@ export default function SellerDashboardOverview() {
   const headers = [
     "Beat",
     "Review",
-    "Creador",
-    "Acciones",
+    t("adminCreateReview.t1"),
+    t("dashboardNav.actions"),
   ];
 
   useEffect(() => {
@@ -51,7 +53,7 @@ export default function SellerDashboardOverview() {
       // id: item._id,
       review: (<div>
          <p className="text-sm-light">{item.title}</p>
-        <p className="text-sm-light">{item.rating} estrellas</p>
+        <p className="text-sm-light">{item.rating} {t("clientReview")}</p>
       </div>),
       creador: item.createdBy.username,
       beat: (
@@ -74,14 +76,14 @@ export default function SellerDashboardOverview() {
             className=" hover:background-neutral-gray-700 text-sm-semibold 
             border-radius-estilo2 text-black dark:text-white"
           >
-            Editar
+            {t("dashboardNav.edit")}
           </button>
           <button
             onClick={() => setReviewToDelete(item)}
             className=" hover:background-primary-red-700 text-sm-semibold 
             border-radius-estilo2 text-red-700 "
           >
-            Eliminar
+            {t("dashboardNav.delete")}
           </button>
         </div>
       ),
