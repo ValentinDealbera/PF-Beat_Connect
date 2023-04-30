@@ -18,15 +18,18 @@ export default function BuyerProfile() {
     <>
       <Head title="Perfil" />
       <Main mode="transparent">
-        <SettingsHero title= {t("settingsClient.title")} />
+        <SettingsHero title={t("settingsClient.title")} />
         <BuyerProfileLayout>
-          {activeIndex === 0 && <>
-          <EditClientForm
-          mode="edit"
-          /></>}
-          {activeIndex === 1 && <>
-          <EditPasswordForm mode="edit" />
-          </>}
+          {activeIndex === 0 && (
+            <>
+              <EditClientForm mode="edit" />
+            </>
+          )}
+          {activeIndex === 1 && (
+            <>
+              <EditPasswordForm mode="edit" />
+            </>
+          )}
         </BuyerProfileLayout>
       </Main>
     </>

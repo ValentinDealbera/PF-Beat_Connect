@@ -4,7 +4,7 @@ export default function SellerDashboardHeader() {
   return (
     <>
       <header
-        className={`"background-neutral-white" fixed z-50 flex  w-full flex-row justify-center py-8 background-neutral-white`}
+        className={`"background-neutral-white" dark:bg-customDark-900 fixed z-50 flex  w-full flex-row justify-center py-8 background-neutral-white`}
       >
         <div
           className={`padding-x-dashboard-estilo1 w-full flex items-center  justify-between align-middle `}

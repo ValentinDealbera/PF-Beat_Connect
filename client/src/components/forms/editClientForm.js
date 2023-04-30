@@ -10,7 +10,7 @@ import { editClient } from "@/redux/slices/client/authSession";
 import { useRouter } from "next/router";
 import { validationEditUser } from "@/components/validation/client/editUser";
 import { useTranslation } from "react-i18next";
-import i18n from 'i18next';
+import i18n from "i18next";
 
 export default function EditClientForm(props) {
   const [t, i18n] = useTranslation("global");
@@ -90,32 +90,6 @@ export default function EditClientForm(props) {
               onChange={handleInput}
               error={error.firstName}
             />
-            <Input
-              name={"email"}
-              label={t("settingsClient.t2")}
-              placeholder={t("settingsClient.t2")}
-              defaultValue={mode === "edit" ? defaultValues.email : ""}
-              type={"email"}
-              onChange={handleInput}
-              error={error.email}
-            />
-            <Input
-              name={"username"}
-              label={t("settingsClient.t3")}
-              placeholder={t("settingsClient.t3")}
-              defaultValue={mode === "edit" ? defaultValues.userName : ""}
-              type={"text"}
-              onChange={handleInput}
-              error={error.username}
-            />
-            <Input
-              name="image"
-              label={t("settingsClient.t4")}
-              placeholder={t("settingsClient.t4")}
-              type="file"
-              onChange={handleInput}
-              error={error.backImage}
-            />
           </FormColumn>
           <FormColumn className="w-full">
             <Input
@@ -128,6 +102,34 @@ export default function EditClientForm(props) {
               onChange={handleInput}
               error={error.lastName}
             />
+          </FormColumn>
+        </FormRow>
+        <FormRow>
+          <FormColumn className="w-full">
+            <Input
+              name={"email"}
+              label={t("settingsClient.t2")}
+              placeholder={t("settingsClient.t2")}
+              defaultValue={mode === "edit" ? defaultValues.email : ""}
+              type={"email"}
+              onChange={handleInput}
+              error={error.email}
+            />
+          </FormColumn>
+          <FormColumn className="w-full">
+            <Input
+              name={"username"}
+              label={t("settingsClient.t3")}
+              placeholder={t("settingsClient.t3")}
+              defaultValue={mode === "edit" ? defaultValues.userName : ""}
+              type={"text"}
+              onChange={handleInput}
+              error={error.username}
+            />
+          </FormColumn>
+        </FormRow>
+        <FormRow>
+          <FormColumn className="w-full">
             <Input
               id="bio"
               name="bio"
@@ -138,6 +140,20 @@ export default function EditClientForm(props) {
               onChange={handleInput}
               error={error.bio}
             />
+          </FormColumn>
+          <FormColumn className="w-full">
+            <Input
+              name="image"
+              label={t("settingsClient.t4")}
+              placeholder={t("settingsClient.t4")}
+              type="file"
+              onChange={handleInput}
+              error={error.backImage}
+            />
+          </FormColumn>
+        </FormRow>
+        <FormRow>
+          <FormColumn className="w-full">
             <Input
               name="backImage"
               label={t("settingsClient.t7")}
@@ -147,12 +163,15 @@ export default function EditClientForm(props) {
               error={error.backImage}
             />
           </FormColumn>
+          <FormColumn className="w-full">
+            <div></div>
+          </FormColumn>
         </FormRow>
         <button
           type="submit"
-          className="background-primary-red-700 color-neutral-white w-max rounded-full px-5 py-3 text-sm font-semibold"
+          className="mt-1 background-primary-red-700 color-neutral-white w-max rounded-full px-5 py-3 text-sm font-semibold"
         >
-            {t("settingsClient.tosave")}
+          {t("settingsClient.tosave")}
         </button>
       </FormContainer>
     </form>

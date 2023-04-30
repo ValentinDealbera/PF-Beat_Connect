@@ -54,7 +54,7 @@ export default function BeatCardFlex(props) {
                   manageView={handleDropdownOpen}
                   manageEditReview={manageEditReview}
                   manageCreateReview={manageCreateReview}
-                  width="min-w-[75vw] md:min-w-[40vw] lg:min-w-[25vw] xl:min-w-[auto] basis-full"
+                  width="min-w-[75vw] sm:min-w-[40vw] md:min-w-[40vw] lg:min-w-[25vw] xl:min-w-[auto] basis-full"
                   mode="flex"
                 />
               </>
