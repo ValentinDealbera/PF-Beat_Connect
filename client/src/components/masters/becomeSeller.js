@@ -6,6 +6,7 @@ import axios from "axios";
 import { toastError, toastSuccess } from "@/utils/toastStyles";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
+import Link from "next/link";
 
 
 export const manageBecomeSeller = () => {
@@ -42,8 +43,8 @@ export default function BecomeSeller() {
   return (
     <>
       {isDropdownOpen && (
-        <BeatRightSheet width="w-[35vw]" setIsDropdownOpen={setIsDropdownOpen}>
-          <div className="flex h-full flex-col items-center justify-center gap-7 px-14 py-10  ">
+        <BeatRightSheet width="min-w-[100vw] xs:min-w-[90vw] sm:min-w-[450px] " setIsDropdownOpen={setIsDropdownOpen}>
+          <div className="flex h-full flex-col items-center justify-center gap-7 px-4 xs:px-8 sm:px-14 sm:py-10  ">
             <div className="flex flex-col items-center justify-center gap-2">
               <h4 className="text-titulo2-regular text-center">
                   {t("becomeSeller.t1")}{" "}
@@ -70,9 +71,11 @@ export default function BecomeSeller() {
                     value="ok"
                     onChange={() => setTerms(!terms)}
                   />
-                  <label for="terms" className="text-base-light">
+                  <Link href={'help/terms'}>
+                  <label for="terms" onClick={()=>handleOpenDropdown()} className="text-base-light hover:cursor-pointer">
                       {t("becomeSeller.t5")}
                   </label>
+                  </Link>
                 </div>
               </div>
               <button

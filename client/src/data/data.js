@@ -1,5 +1,5 @@
 import { manageBecomeSeller } from "../components/masters/becomeSeller";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 export const navPublic = [
   {
@@ -21,7 +21,6 @@ export const navPublic = [
     name: "navPublic.t4",
     url: "/beats/cart",
     visible: false,
-    colorMode: "light",
   },
 ];
 
@@ -124,7 +123,6 @@ export const tecnologias = [
     image: "/icon/tecnologias/next-js.svg",
 
     description: "tecnologias.t1",
-
   },
   {
     id: 4,
@@ -156,7 +154,6 @@ export const tecnologias = [
     image: "/icon/tecnologias/tailwindCSS.svg",
 
     description: "tecnologias.t6",
-
   },
   {
     id: 10,
@@ -195,7 +192,6 @@ export const tecnologias = [
     image: "/icon/tecnologias/auth0.svg",
 
     description: "tecnologias.t12",
-
   },
   {
     id: 16,
@@ -203,7 +199,6 @@ export const tecnologias = [
     image: "/icon/tecnologias/firebase.svg",
 
     description: "tecnologias.t13",
-
   },
   {
     id: 17,
@@ -211,7 +206,6 @@ export const tecnologias = [
     image: "/icon/tecnologias/render.svg",
 
     description: "tecnologias.t14",
-
   },
   {
     id: 18,
@@ -219,7 +213,6 @@ export const tecnologias = [
     image: "/icon/tecnologias/vercel.svg",
 
     description: "tecnologias.t15",
-
   },
   {
     id: 19,
@@ -227,7 +220,7 @@ export const tecnologias = [
     image: "/icon/tecnologias/trello.svg",
 
     description: "tecnologias.t16",
-    },
+  },
 
   {
     id: 20,
@@ -241,9 +234,8 @@ export const tecnologias = [
 
 export const nosotros = [
   {
-    id: 1,
     name: "Lucas Regner",
-    image: "/images/nosotros/lucas.png", //crear carpeta e importar imagenes propias
+    image: "/images/nosotros/placeholder.png", //crear carpeta e importar imagenes propias
     //description: "",
     redes: {
       //importar fotos de las redes como svg
@@ -254,9 +246,8 @@ export const nosotros = [
   },
 
   {
-    id: 2,
     name: "Carla Frías",
-    image: "/images/nosotros/lucas.png", //crear carpeta e importar imagenes propias
+    image: "/images/nosotros/placeholder.png", //crear carpeta e importar imagenes propias
     //description: "",
     redes: {
       //importar fotos de las redes como svg
@@ -267,9 +258,8 @@ export const nosotros = [
   },
 
   {
-    id: 3,
     name: "Micaela Savournin",
-    image: "/images/nosotros/lucas.png", //crear carpeta e importar imagenes propias
+    image: "/images/nosotros/placeholder.png", //crear carpeta e importar imagenes propias
     //description: "",
     redes: {
       //importar fotos de las redes como svg
@@ -280,9 +270,8 @@ export const nosotros = [
   },
 
   {
-    id: 4,
     name: "Fabian Pacheco",
-    image: "/images/nosotros/lucas.png", //crear carpeta e importar imagenes propias
+    image: "/images/nosotros/placeholder.png", //crear carpeta e importar imagenes propias
     //description: "",
     redes: {
       //importar fotos de las redes como svg
@@ -293,9 +282,8 @@ export const nosotros = [
   },
 
   {
-    id: 5,
     name: "Valentin Dealbera",
-    image: "/images/nosotros/lucas.png", //crear carpeta e importar imagenes propias
+    image: "/images/nosotros/placeholder.png", //crear carpeta e importar imagenes propias
     //description: "",
     redes: {
       //importar fotos de las redes como svg
@@ -306,9 +294,8 @@ export const nosotros = [
   },
 
   {
-    id: 6,
     name: "Tadeo Massó",
-    image: "/images/nosotros/lucas.png", //crear carpeta e importar imagenes propias
+    image: "/images/nosotros/placeholder.png", //crear carpeta e importar imagenes propias
     //description: "",
     redes: {
       //importar fotos de las redes como svg
@@ -319,9 +306,8 @@ export const nosotros = [
   },
 
   {
-    id: 7,
     name: "Leonardo Pischetz",
-    image: "/images/nosotros/lucas.png", //crear carpeta e importar imagenes propias
+    image: "/images/nosotros/placeholder.png", //crear carpeta e importar imagenes propias
     //description: "",
     redes: {
       //importar fotos de las redes como svg
@@ -332,9 +318,8 @@ export const nosotros = [
   },
 
   {
-    id: 8,
     name: "Thomas Barenghi",
-    image: "/images/nosotros/lucas.png", //crear carpeta e importar imagenes propias
+    image: "/images/nosotros/placeholder.png", //crear carpeta e importar imagenes propias
     //description: "",
     redes: {
       //importar fotos de las redes como svg

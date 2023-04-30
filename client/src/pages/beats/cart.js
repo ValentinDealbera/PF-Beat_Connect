@@ -3,9 +3,14 @@ import {
   Section,
   IslandDashboard,
   DynamicTable,
+  DynamicTableLight,
   BeatsRelatedSection,
   Head,
+  BeatsSpecialSection,
 } from "@/components";
+
+import { useEffect } from "react";
+import Link from "next/link";
 
 import { useSelector, useDispatch } from "react-redux";
 import { deleteFromCart } from "@/redux/slices/cart";
@@ -121,12 +126,19 @@ export default function Carrito() {
       });
   };
 
+  let className;
+  if (cartItems.length === 0) {
+    className = "h-full";
+  } else {
+    className = "h-[80%]";
+  }
+
   return (
     <>
       <Head title="Carrito" />
       <Main mode="transparent">
         <Section
-          subClassName="padding-x-estilo2 pt-[108px]  pb-[10px] relative "
+          subClassName="padding-x-estilo2 pt-[108px]   pb-[0px]"
           className=""
         >
           <div
@@ -137,81 +149,94 @@ export default function Carrito() {
               backgroundPosition: "center",
               zIndex: "-1",
             }}
-            className="absolute left-0 top-0 h-[80%] max-h-[65vh] w-full "
+            className={`absolute left-0 top-0  ${className} max-h-[65vh] w-full`}
           ></div>
+          {cartItems.length <= 0 && (
+            <div className="flex items-center justify-center ">
+              <h1 className="text-titulo2-medium pb-10 text-white">
+                Tu carrito esta vacio
+              </h1>
+            </div>
+          )}
 
-          <div className="flex flex-row gap-5 xl:gap-10 pt-10">
-            <IslandDashboard
-              className="flex h-max w-full flex-col gap-4"
-              style={{ boxShadow: "0px 0px 15px 2px rgba(0, 0, 0, 0.08)" }}
-            >
-              <h1 className="text-titulo2-medium">{t("cartHeaders.title")}</h1>
-              <DynamicTable headers={headers} rows={rows} />
-            </IslandDashboard>
-            <IslandDashboard
-              className="flex h-max w-[40%] flex-col gap-6"
-              style={{ boxShadow: "0px 0px 15px 2px rgba(0, 0, 0, 0.08)" }}
-            >
-              <h2 className="text-subtitulo-medium">{t("cartHeaders.t4")}</h2>
-              <div id="precio_por_autor" className="flex flex-col gap-4">
-                {precio_por_autor.map((item) => (
-                  <div>
-                    <div className="flex items-center justify-between gap-4">
-                      <div className="flex items-center gap-1">
-                        <Image
-                          src={item.image}
-                          width={50}
-                          height={50}
-                          className="rounded-full"
-                        />
-                        <h3 className="text-base-medium">{item.author}</h3>
-                      </div>
-                      <span className="text-base-semibold text-red-700">
-                        ${item.price}
-                      </span>
-                    </div>
-                    <hr className="mt-4 border-slate-200" />
-                  </div>
-                ))}
-              </div>
-              <div id="total" className="flex flex-col items-center gap-2">
-                <div className="flex w-full items-center justify-between gap-4">
-                  <h3 className="text-base-light">{t("cartHeaders.t5")}</h3>
-                  <span className="text-base-semibold text-red-700">
-                    $
-                    {cartItems.reduce(
-                      (acc, item) => acc + item.beat.priceAmount,
-                      0
-                    )}
-                  </span>
-                </div>
-                <div className="flex w-full items-center justify-between">
-                  <h3 className="text-base-light">{t("cartHeaders.t6")}</h3>
-                  <span className="text-base-semibold text-red-700">$0</span>
-                </div>
-                <div className="flex w-full items-center justify-between">
-                  <h3 className="text-base-semibold">{t("cartHeaders.t7")}</h3>
-                  <span className="text-base-semibold text-red-700">
-                    $
-                    {cartItems.reduce(
-                      (acc, item) => acc + item.beat.priceAmount,
-                      0
-                    )}
-                  </span>
-                </div>
-              </div>
-              <button
-                className="text-base-semibold rounded-full bg-red-700 py-2 text-white"
-                onClick={handlePayment}
+          {cartItems.length > 0 && (
+            <div className="flex flex-col gap-5 pt-10 lg:flex-row xl:gap-10">
+              <IslandDashboard
+                className="flex h-max w-full flex-col gap-4"
+                style={{ boxShadow: "0px 0px 15px 2px rgba(0, 0, 0, 0.08)" }}
               >
-                {t("cartHeaders.t8")}
-              </button>
-            </IslandDashboard>
-          </div>
+                <h1 className="text-titulo2-medium">
+                  {t("cartHeaders.title")}
+                </h1>
+                <DynamicTableLight headers={headers} rows={rows} />
+              </IslandDashboard>
+              <IslandDashboard
+                className="flex h-max w-full flex-col gap-6 lg:w-[40%]"
+                style={{ boxShadow: "0px 0px 15px 2px rgba(0, 0, 0, 0.08)" }}
+              >
+                <h2 className="text-subtitulo-medium">{t("cartHeaders.t4")}</h2>
+                <div id="precio_por_autor" className="flex flex-col gap-4">
+                  {precio_por_autor.map((item) => (
+                    <div>
+                      <div className="flex items-center justify-between gap-4">
+                        <div className="flex items-center gap-1">
+                          <Image
+                            src={item.image}
+                            width={50}
+                            height={50}
+                            className="rounded-full"
+                          />
+                          <h3 className="text-base-medium">{item.author}</h3>
+                        </div>
+                        <span className="text-base-semibold text-red-700">
+                          ${item.price}
+                        </span>
+                      </div>
+                      <hr className="mt-4 border-slate-200" />
+                    </div>
+                  ))}
+                </div>
+                <div id="total" className="flex flex-col items-center gap-2">
+                  <div className="flex w-full items-center justify-between gap-4">
+                    <h3 className="text-base-light">{t("cartHeaders.t5")}</h3>
+                    <span className="text-base-semibold text-red-700">
+                      $
+                      {cartItems.reduce(
+                        (acc, item) => acc + item.beat.priceAmount,
+                        0
+                      )}
+                    </span>
+                  </div>
+                  <div className="flex w-full items-center justify-between">
+                    <h3 className="text-base-light">{t("cartHeaders.t6")}</h3>
+                    <span className="text-base-semibold text-red-700">$0</span>
+                  </div>
+                  <div className="flex w-full items-center justify-between">
+                    <h3 className="text-base-semibold">
+                      {t("cartHeaders.t7")}
+                    </h3>
+                    <span className="text-base-semibold text-red-700">
+                      $
+                      {cartItems.reduce(
+                        (acc, item) => acc + item.beat.priceAmount,
+                        0
+                      )}
+                    </span>
+                  </div>
+                </div>
+                <button
+                  className="text-base-semibold rounded-full bg-red-700 py-2 text-white"
+                  onClick={handlePayment}
+                >
+                  {t("cartHeaders.t8")}
+                </button>
+              </IslandDashboard>
+            </div>
+          )}
         </Section>
-        <BeatsRelatedSection title={t("cartHeaders.t9")}>
-          <span className="text-titulo2-semibold">{t("cartHeaders.t10")}</span>
-        </BeatsRelatedSection>
+        <BeatsSpecialSection title={`Beats `}>
+          <span className="text-titulo2-semibold">{t("home.t5")}</span>
+        </BeatsSpecialSection>
       </Main>
     </>
   );

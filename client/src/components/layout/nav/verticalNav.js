@@ -4,8 +4,8 @@ import { useTranslation } from "react-i18next";
 export default function VerticalNav(props) {
   const [t, i18n] = useTranslation("global");
   return (
-    <>
-      <div className="flex flex-col gap-4">
+    <div className={props.className}>
+      <div className="flex flex-col gap-4 ">
         <ul className="flex flex-col gap-2">
           {props.navItems.map((item, index) => (
             <>
@@ -38,6 +38,6 @@ export default function VerticalNav(props) {
           ))}
         </ul>
       </div>
-    </>
+    </div>
   );
 }

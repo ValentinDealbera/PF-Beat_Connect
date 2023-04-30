@@ -49,7 +49,7 @@ export default function EditPasswordForm(props) {
         console.log("DESPACHADO", form);
         await dispatch(changePassword(form));
         formRef.current.reset();
-         router.push("/client");
+        router.push("/client");
       } else {
         setErrors(formErrors);
         console.log("form Error", formErrors);
@@ -95,7 +95,7 @@ export default function EditPasswordForm(props) {
         </FormRow>
         <button
           type="submit"
-          className="background-primary-red-700 color-neutral-white w-max rounded-full px-5 py-3 text-sm font-semibold"
+          className="background-primary-red-700 color-neutral-white mt-1 w-max rounded-full px-5 py-3 text-sm font-semibold"
         >
           Guardar
         </button>

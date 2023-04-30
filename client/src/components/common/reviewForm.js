@@ -54,7 +54,7 @@ export default function ReviewForm(props) {
   }, [ratingValue, currentUserId, currentBeat]);
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center gap-7 overflow-y-hidden px-14 pb-4  ">
+    <div className="flex h-full flex-col items-center justify-center gap-7 px-4 xs:px-8 sm:px-14 sm:py-10 overflow-y-hidden  ">
       <div className="flex w-full flex-col gap-3 overflow-y-hidden">
         <div className="flex flex-col items-center justify-center gap-4">
           <h4 className="text-titulo3-regular text-center">
