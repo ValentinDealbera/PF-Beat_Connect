@@ -4,6 +4,7 @@ import {
   NewBeatCardGrid,
   ClientReview,
   ReviewCardGrid,
+  manageBecomeSeller,
 } from "@/components";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -33,20 +34,34 @@ export default function BeatShopSectionForClient(props) {
     (state) => state.client.beats
   );
 
-  const isLoading = useSelector((state) => state.client.authSession.actionStatus.getUserDataLoading);
-console.log("isLoadingxxx", isLoading);
+  const isLoading = useSelector(
+    (state) => state.client.authSession.actionStatus.getUserDataLoading
+  );
+  console.log("isLoadingxxx", isLoading);
   return (
     <Section subClassName="padding-x-estilo2 padding-y-estilo2 gap-8 flex flex-col">
       <BuyerNavGeneral />
       {generalActiveIndex === 0 ? (
-        <NewBeatCardGrid beats={bougthBeats} isLoading={isLoading} />
+        <NewBeatCardGrid
+          beats={bougthBeats}
+          mode="bougth"
+          isLoading={isLoading}
+        />
       ) : generalActiveIndex === 1 && isSeller === false ? (
         <ForSellerOnly />
       ) : generalActiveIndex === 1 && isSeller === true ? (
-        <NewBeatCardGrid beats={ownedBeats} isLoading={isLoading} />
+        <NewBeatCardGrid
+          beats={ownedBeats}
+          mode="owned"
+          isLoading={isLoading}
+        />
       ) : generalActiveIndex === 2 ? (
         <div>
-          <NewBeatCardGrid beats={favoriteBeats} isLoading={isLoading} />
+          <NewBeatCardGrid
+            beats={favoriteBeats}
+            mode="favorite"
+            isLoading={isLoading}
+          />
         </div>
       ) : (
         <ReviewCardGrid />
@@ -57,8 +72,18 @@ console.log("isLoadingxxx", isLoading);
 
 function ForSellerOnly() {
   return (
-    <div>
-      <h1>Esta caracteristica es solo para vendedores</h1>
+    <div className="flex w-full flex-col justify-center gap-4">
+      <h1 className="mt-5 text-center text-2xl font-medium">
+        Esta caracteristica es solo para vendedores
+      </h1>
+      <div className="flex w-full justify-center ">
+        <button
+          className="text-base-semibold mt-2 w-fit rounded-full bg-red-700 px-4 py-2 text-white"
+          onClick={() => manageBecomeSeller()}
+        >
+          Conviertete en vendedor!
+        </button>
+      </div>
     </div>
   );
 }
