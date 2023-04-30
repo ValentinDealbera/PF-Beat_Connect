@@ -20,7 +20,7 @@ export default function BeatRightSheet({
     >
       <div
         id="box"
-        className={`relative z-50 flex h-screen items-start justify-end rounded-bl-3xl rounded-tl-3xl bg-white ${width} overflow-hidden py-10`}
+        className={`relative z-50 flex h-screen items-start justify-end sm:rounded-bl-3xl sm:rounded-tl-3xl bg-white ${width} overflow-hidden py-10`}
       >
         <img
           onClick={() => {
