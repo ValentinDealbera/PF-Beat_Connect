@@ -13,8 +13,10 @@ import {
   BeatReviewPopup,
 } from "@/components";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function BeatDetailSideBar() {
+  const [t, i18n] = useTranslation("global");
 
   const {bougthBeats} = useSelector(state => state.client.beats)
   
@@ -65,7 +67,7 @@ export default function BeatDetailSideBar() {
         <BeatDataBox beat={currentBeat} />
         <div className="flex flex-col gap-3">
           <p className=" color-primary-red-700  text-sm font-medium">
-            Precios y licencias
+              {t("beatDetailSideBar.t1")}
           </p>
           <div className=" flex flex-col gap-4">
             {dynamicBeatDetailBox.map((box) => {
@@ -89,7 +91,7 @@ export default function BeatDetailSideBar() {
               className="background-primary-red-700 mt-2 color-neutral-white rounded-full px-5 py-3 text-sm font-semibold"
               onClick={handleModalReview}
             >
-              Ver reviews
+              {t("beatDetailSideBar.t4")}
             </button>
           )}
         </div>
@@ -103,6 +105,7 @@ export default function BeatDetailSideBar() {
 }
 
 function BeatDataBox({ beat }) {
+  
   return (
     <div className="gap-estilo3 flex w-[286px] flex-row bg-white">
       <BeatImage beat={beat} height={80} width={80} />
@@ -120,6 +123,7 @@ function BeatDataBox({ beat }) {
 
 
 function BeatDetailBox({ msg1, msg2, beat, type }) {
+  const [t, i18n] = useTranslation("global");
   const dispatch = useDispatch();
 
   //que el boton pueda descargar el beat
@@ -133,14 +137,14 @@ function BeatDetailBox({ msg1, msg2, beat, type }) {
           download={beat.name}
           href={beat.audioMP3}
         >
-          Descargar
+          {t("beatDetailSideBar.t2")}
         </a>
       ) : type === 'buyed' ? (
         <a
           className=" text-sm font-semibold text-red-700"
           download={beat.name}
           href={beat.audioWAV}
-        >Descargar</a>
+        >{t("beatDetailSideBar.t2")}</a>
       ) : (
         <AddToCart beat={beat} posAction={() => externalManageDropdown()} />
       )}

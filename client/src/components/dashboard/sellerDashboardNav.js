@@ -1,13 +1,15 @@
 import { Search, DashboardItem } from "@/components";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 export default function SellerDashboardNav() {
   const theme = useSelector((state) => state.client.authSession.theme);
+  const [t] = useTranslation("global");
 
   const dashboardNav = [
     {
-      title: "Overview",
+      title: "dashboardNav.t1",
       link: "/admin/",
       icon: (() => {
         if (theme === "dark") {
@@ -23,7 +25,7 @@ export default function SellerDashboardNav() {
       icon: "/icon/dashboard/musical-black.svg",
     },
     {
-      title: "Usuarios",
+      title: "dashboardNav.t2",
       link: "/admin/users",
       icon: "/icon/dashboard/user-black.svg",
     },
@@ -33,7 +35,7 @@ export default function SellerDashboardNav() {
       icon: "/icon/dashboard/reviews.svg",
     },
     {
-      title: "Ordenes",
+      title: "dashboardNav.t3",
       link: "/admin/orders",
       icon: "/icon/dashboard/orders.svg",
     },
@@ -46,7 +48,7 @@ export default function SellerDashboardNav() {
         <div className="flex flex-col  gap-6">
           {dashboardNav.map((item) => (
             <NavItems
-              itemTitle={item.title}
+              itemTitle={t(item.title)}
               itemLink={item.link}
               itemIcon={item.icon}
             />

@@ -17,8 +17,8 @@ export default function About() {
         >
           <div className="padding-estilo2 mt-6 flex h-full flex-row items-center justify-center align-middle">
             <h1 className="text-titulo1-regular text-center text-white">
-              Sobre los{" "}
-              <span className="text-titulo1-semibold">creadores </span>y{" "}
+                {t("about.title1")}{" "}
+              <span className="text-titulo1-semibold">{t("about.title2")} </span>{t("about.title3")}{" "}
               <span className="text-titulo1-semibold">BeatConnect</span>
             </h1>
           </div>
@@ -29,15 +29,7 @@ export default function About() {
             <span className="text-titulo1-semibold">{t("about.t2")} ❤️ </span>
           </h1>
           <p className="text-base-light color-neutral-900">
-            Somos un equipo de 8 alumnos del bootcamp Soy Henry! Estamos
-            emocionados de poder compartir un poco más sobre nosotros. Durante
-            la cursada estuvimos aprendiendo programación full-stack utilizando
-            las tecnologías MERN/PERN, además, desarrollamos habilidades blandas
-            y el trabajar en equipo de manera efectiva. Nos apasiona el mundo de
-            la tecnología, estamos comprometidos en aprender y crecer juntos en
-            esta industria. Nos encanta descubrir nuevas soluciones creativas y
-            atractivas para los usuarios aplicando nuestras habilidades técnicas
-            para lograrlo.
+            {t("about.t3")}
           </p>
         </Section>
 
@@ -102,18 +94,7 @@ export default function About() {
             <span className="text-titulo1-semibold">{t("about.t5")} 🤯😎 </span>
           </h1>
           <p className="text-base-light color-neutral-900">
-            Nuestra plataforma cuenta con una lista de productores de música
-            registrados, quienes han creado y publicado sus catálogos de
-            instrumentales. Los usuarios pueden explorar los catálogos de los
-            productores y escuchar muestras de audio de cada beat para decidir
-            cuál es el más adecuado para sus necesidades. También contamos con
-            un proceso de pago seguro y eficiente que permite a los usuarios
-            comprar y descargar el beat en su correo electrónico. Si eres un
-            productor de música, ¡también puedes registrarte en nuestra
-            plataforma y crear y publicar tu catálogo de instrumentales! Mostrar
-            tus muestras de audio y descripciones detalladas de cada beat,
-            recibir solicitudes de beats personalizados, y comunicarte con los
-            usuarios para discutir detalles adicionales.
+              {t("about.t6")}
           </p>
         </Section>
         <Section subClassName="padding-x-estilo2 padding-y-estilo1 flex flex-col gap-12">

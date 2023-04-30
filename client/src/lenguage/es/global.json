@@ -66,16 +66,29 @@
     "c4": "Para registrarte como proveedor, debes completar el formulario de registro. Una vez registrado, podrás crear y publicar tu catálogo de instrumentales."
   },
 
+  "faqsAdmin": {
+    "t1": "¿Cómo puedo encontrar el beat adecuado para mi proyecto musical?",
+    "c1": "En nuestra plataforma, puedes explorar los catálogos de los productores de música registrados y escuchar muestras de audio de cada beat.",
+    "t2": "¿Cómo puedo realizar el pago de manera segura?",
+    "c2": "Ofrecemos un proceso de pago seguro y eficiente a través de Mercado Pago. Una vez que hayas elegido el beat que deseas comprar, podrás realizar el pago de manera segura con diferentes métodos de pago.",
+    "t3": "¿Cómo recibiré el archivo del beat después de realizar el pago?",
+    "c3": "Una vez que hayas realizado el pago, recibirás el archivo del beat en tu correo electrónico. Asegúrate de proporcionar una dirección de correo electrónico válida durante el proceso de pago.",
+    "t4": "¿Cómo puedo registrarme como proveedor en la plataforma?",
+    "c4": "Para registrarte como proveedor, debes completar el formulario de registro. Una vez registrado, podrás crear y publicar tu catálogo de instrumentales."
+  },
+
   "about": {
     "t1": "Conozcámonos",
     "t2": "un poco más",
-    "t3": "Somos un equipo de 8 alumnos del bootcamp Soy Henry, y estamos emocionados de poder compartir un poco más sobre nosotros. Estamos aprendiendo programación full stack utilizando las tecnologías MERN/PERN, y trabajando duro para desarrollar habilidades blandas y trabajar en equipo de manera efectiva. Nos apasiona el mundo de la tecnología y estamos comprometidos en aprender y crecer juntos en esta industria. Nos encanta descubrir nuevas soluciones creativas y atractivas para los usuarios, y estamos emocionados de aplicar nuestras habilidades técnicas para lograrlo.",
+    "t3": "Somos un equipo de 8 alumnos del bootcamp Soy Henry! Estamos emocionados de poder compartir un poco más sobre nosotros. Durante la cursada estuvimos aprendiendo programación full-stack utilizando las tecnologías MERN/PERN, además, desarrollamos habilidades blandas y el trabajar en equipo de manera efectiva. Nos apasiona el mundo de la tecnología, estamos comprometidos en aprender y crecer juntos en esta industria. Nos encanta descubrir nuevas soluciones creativas y atractivas para los usuarios aplicando nuestras habilidades técnicas para lograrlo.",
     "t4": "Sobre la",
     "t5": "aplicación",
     "t6": "Nuestra plataforma cuenta con una lista de productores de música registrados, quienes han creado y publicado sus catálogos de instrumentales. Los usuarios pueden explorar los catálogos de los productores y escuchar muestras de audio de cada beat para decidir cuál es el más adecuado para sus necesidades. También contamos con un proceso de pago seguro y eficiente que permite a los usuarios comprar y descargar el beat en su correo electrónico. Si eres un productor de música, ¡también puedes registrarte en nuestra plataforma y crear y publicar tu catálogo de instrumentales! Mostrar tus muestras de audio y descripciones detalladas de cada beat, recibir solicitudes de beats personalizados, y comunicarte con los usuarios para discutir detalles adicionales.",
     "t7": "Tecnologías",
     "t8": "utilizadas",
-    "t9": ""
+    "title1": "Sobre los",
+    "title2": "creadores",
+    "title3": "y"
   },
 
   "tecnologias": {
@@ -295,8 +308,109 @@
   "beatDetailSideBar" : {
     "t1" : "Precios y licencias",
     "t2": "Descargar",
-    "t3": "Añadir al carrito"
+    "t3": "Añadir al carrito",
+    "t4" : "Ver reviews"
+  },
+
+  "beatCar" : {
+    "edit" : "Editar",
+    "delete": "Borrar",
+    "editReview": "Editar review",
+    "purchased" : "COMPRADO",
+    "modalPopUp1" : "¿Te gusto este Beat?",
+    "modalPopUp2" : "¡Inicia sesion para guardar tus beats favoritos!",
+    "modalPopUp3" : "Únete a nuestra comunidad en crecimiento de músicos y",
+    "modalPopUp4" : "productores de la música urbana.",
+    "modalPopUp5" : "¡Empieza a descubrir tus beats favoritos ahora mismo!",
+    "modalPopUp6" : "Inicia sesión aqui!"
+  },
+
+  "editReview": {
+    "t1" : "Modifiquemos tu",
+    "t2": "opinión",
+    "t3": "Titulo",
+    "t4" : "Comentario",
+    "t5" : "Guardar Review"
+  },
+
+  "editPassword": {
+    "t1" : "Contraseña anterior",
+    "t2": "Nueva contraseña"
+  },
+
+  "clientReview" : "Estrellas",
+
+  "register" : {
+    "t1" : "Registrate en",
+    "t2": "Nombre",
+    "t3" : "Apellido",
+    "t4": "Siguiente",
+    "t5" : "Correo electrónico",
+    "t6": "Nombre de usuario",
+    "t7" : "Contraseña",
+    "t8": " Registrarme",
+    "t9" : "¿Ya tienes una cuenta?",
+    "t10": "Inicia sesión",
+    "t11": "Biografia",
+    "t12": "Foto de portada",
+    "t13": "Foto de Perfil",
+    "t14": "Baneado",
+    "t15": "Vendedor"
+  },
+
+  "admin": {
+    "t1" : "Hola, bienvenido a tu panel de control",
+    "t2": "Preguntas frecuentes"
+  },
+
+  "dashboardNav" : {
+    "title" : "Beats de la página",
+    "title2" : "Usuarios de la página",
+    "title3": "Ordenes de la pagina",
+    "createBeat" : "Crear Beat",
+    "createUser" : "Crear Usuario",
+    "createReview" : "Crear Review",
+    "t1" : "General",
+    "t2": "Usuarios",
+    "t3": "Ordenes",
+    "t4" : "Usuario",
+    "status": "Status",
+    "actions": "Acciones",
+    "status1": "Baneado",
+    "status2": "Activo",
+    "edit": "Editar",
+    "delete" : "Eliminar"
+  },
+
+  "adminBeatsCreate" : {
+    "title" : "Editar Beat",
+    "t1" : "Guardar cambios",
+    "f1" : "Nombre",
+    "f2": "Precio",
+    "f3": "Imagen",
+    "f4" : "Usuario Creador",
+    "f5": "Elige un Género",
+    "f6": "Selecciona un Género",
+    "f7": "Pausar"
+  },
+
+  "adminCreateUser" : {
+    "t1" : "Comprador",
+    "t2": "Vendedor",
+    "t3": "Monto",
+    "t4" : "Fecha",
+    "t5": "Acciones"
+  },
+
+  "adminCreateReview" : {
+    "t1" : "Creador"
+  },
+
+  "adminCreateReviewForm": {
+    "t1" : "Usuario Creador",
+    "t2": "Titulo",
+    "t3": "Monto",
+    "t4" : "Banear",
+    "t5": "Comentario"
   }
-
-
 }

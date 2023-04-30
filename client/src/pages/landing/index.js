@@ -30,6 +30,18 @@ export default function Landing() {
                 {t("landing.t4")}
               </button>
                 </Link>
+                <button
+                  onClick={() => i18n.changeLanguage("es")}
+                  className="color-primary-red-500"
+                >
+                 Español
+                </button>
+                <button
+                  onClick={() => i18n.changeLanguage("en")}
+                  className="color-primary-red-500"
+                >
+                English
+                </button>
             </div>
           </div>
         </Hero>

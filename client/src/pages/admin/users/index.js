@@ -16,8 +16,10 @@ import {
 } from "@/redux/slices/admin/users";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function SellerDashboardOverview() {
+  const [t] = useTranslation("global");
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -43,7 +45,7 @@ export default function SellerDashboardOverview() {
     router.push(`/admin/users/${data._id}`);
   };
 
-  const headers = ["Usuario", "Estatus", "Acciones"];
+  const headers = [t("dashboardNav.t4"), t("dashboardNav.status"), t("dashboardNav.actions")];
 
   const rows = usersData.map((item) => {
     return {
@@ -66,7 +68,7 @@ export default function SellerDashboardOverview() {
           </div>
         </div>
       ),
-      estatus:  (<p className="text-sm-light dark:text-white">{item.softDelete ? "Baneado" : "Activo"}</p>),
+      status:  (<p className="text-sm-light dark:text-white">{item.softDelete ? "Baneado" : "Activo"}</p>),
       acciones: (
         <div className="flex w-max gap-4" key={item._id}>
           <button
@@ -74,14 +76,14 @@ export default function SellerDashboardOverview() {
             className=" hover:background-neutral-gray-700 text-sm-semibold 
             border-radius-estilo2 text-black dark:text-white "
           >
-            Editar
+            {t("dashboardNav.edit")}
           </button>
           <button
             onClick={() => setElementToDelete(item)}
             className=" hover:background-primary-red-700 text-sm-semibold 
             border-radius-estilo2 text-red-700 "
           >
-            Eliminar
+            {t("dashboardNav.delete")}
           </button>
         </div>
       ),
@@ -94,8 +96,8 @@ export default function SellerDashboardOverview() {
       <main>
         <SellerDashboardLayout
           topBarMode="action"
-          topBarMessage="Usuarios de la pagina"
-          topBarButtonLabel="Crear usuario"
+          topBarMessage={t("dashboardNav.title2")}
+          topBarButtonLabel={t("dashboardNav.createUser")}
           onClick={() => {
             router.push("/admin/users/create");
           }}

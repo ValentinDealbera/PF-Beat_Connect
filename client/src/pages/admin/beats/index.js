@@ -18,8 +18,10 @@ import {
 
 import { useEffect, useMemo } from "react";
 import { debounce } from "lodash";
+import { useTranslation } from "react-i18next";
 
 export default function SellerDashboardOverview() {
+  const [t] = useTranslation("global");
   const dispatch = useDispatch();
   const router = useRouter();
   const state = useSelector((state) => state.admin);
@@ -57,7 +59,7 @@ export default function SellerDashboardOverview() {
     router.push(`/admin/beats/${data._id}`);
   };
 
-  const headers = ["Beat","Status", "AudioMP3", "Acciones"];
+  const headers = ["Beat","Status", "AudioMP3", t("dashboardNav.actions")];
 
   const rows = beatData.map((item) => {
     return {
@@ -85,7 +87,7 @@ export default function SellerDashboardOverview() {
           </audio>
         </div>
       ),
-      status: item.softDelete ? "Baneado" : "Activo",
+      status: item.softDelete ? t("dashboardNav.status1") : t("dashboardNav.status2"),
       acciones: (
         <div className="flex w-max gap-4" key={item._id}>
           <button
@@ -93,14 +95,14 @@ export default function SellerDashboardOverview() {
             className=" hover:background-neutral-gray-700 text-sm-semibold 
             border-radius-estilo2 text-black dark:text-white"
           >
-            Editar
+            {t("dashboardNav.edit")}
           </button>
           <button
             onClick={() => setBeatToDelete(item)}
             className=" hover:background-primary-red-700 text-sm-semibold 
             border-radius-estilo2 text-red-700 "
           >
-            Eliminar
+            {t("dashboardNav.delete")}
           </button>
         </div>
       ),
@@ -113,8 +115,8 @@ export default function SellerDashboardOverview() {
       <main>
         <SellerDashboardLayout
           topBarMode="action"
-          topBarMessage="Beats de la pagina"
-          topBarButtonLabel="Crear beat"
+          topBarMessage= {t("dashboardNav.title")}
+          topBarButtonLabel={t("dashboardNav.createBeat")}
           onClick={() => {
             router.push("/admin/beats/create");
           }}
