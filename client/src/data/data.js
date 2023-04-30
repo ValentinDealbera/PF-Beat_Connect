@@ -21,7 +21,6 @@ export const navPublic = [
     name: "navPublic.t4",
     url: "/beats/cart",
     visible: false,
-    colorMode: "light",
   },
 ];
 

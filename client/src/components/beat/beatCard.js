@@ -91,10 +91,12 @@ export default function BeatCard({
     const reviewActions = {
       handleCreateReview: () => {
         dispatch(setActiveBeatCreateReview(beat));
+        console.log("creando");
         manageCreateReview();
       },
       handleEditReview: async () => {
         await dispatch(setActiveEditingReview(currentReview));
+        console.log("editando");
         manageEditReview();
       },
     };
@@ -257,7 +259,7 @@ function Modals({
           <MiniModalBox className="right-1 top-1">
             <div className="flex flex-col">
               {boughtBeat && !reviewed && !fromClient && (
-                <Button text={t("beatCar.editReview")} action={handleCreateReview} />
+                <Button text={t("beatCar.createReview")} action={handleCreateReview} />
               )}
               {boughtBeat && reviewed && !fromClient && (
                 <Button text={t("beatCar.editReview")} action={handleEditReview} />

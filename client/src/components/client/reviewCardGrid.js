@@ -48,7 +48,7 @@ export default function ReviewCardGrid(props) {
               </div>
         )}
         {reviews && reviews.length > 0 && (
-      <div className="gap-estilo1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
+      <div className="gap-estilo1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3">
           <>
             {reviews.map((review) => (
               <>
@@ -69,16 +69,11 @@ export default function ReviewCardGrid(props) {
         <>
           <div className="hidden sm:flex">
             <BeatRightSheet
-              width="w-[30vw]"
+             width="min-w-[100vw] xs:min-w-[90vw] sm:min-w-[450px] "
               setIsDropdownOpen={setIsDropdownOpen}
             >
               <EditReviewForm manageEditReview={manageEditReview} />
             </BeatRightSheet>
-          </div>
-          <div className="flex sm:hidden">
-            <BeatBottomSheet setIsDropdownOpen={setIsDropdownOpen}>
-              hey soy el sidebar
-            </BeatBottomSheet>
           </div>
         </>
       )}
