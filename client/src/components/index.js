@@ -37,6 +37,7 @@ export { default as FormAdmin } from "./common/adminForm"; //creado pero sin col
 export { default as ValidationEditUsers } from "./common/validationEditUsers";
 export { default as ReviewForm } from "./common/reviewForm";
 export { default as SetUser } from "./common/setUser";
+export { default as Hamburger } from "./masters/hamburguer"
 
 //Modal
 export { default as ModalMinMax } from "./modal/modalMinMax";
