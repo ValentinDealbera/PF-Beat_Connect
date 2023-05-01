@@ -1,4 +1,4 @@
-import { Head, Main, BeatsSpecialSection, Hero } from "@/components";
+import { Head, Main, BeatsSpecialSection, Hero, LandBot } from "@/components";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -97,7 +97,8 @@ export default function Home() {
 
           <span className="text-titulo2-semibold">{t("home.t5")}</span>
 
-        </BeatsSpecialSection>        
+        </BeatsSpecialSection>   
+        <LandBot />     
       </Main>
     </>
   );

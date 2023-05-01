@@ -444,5 +444,8 @@
     "t8" : "Cambiar contraseña",
     "t9" : "La contraseñaaaaaaaaaaaaaa debe contener al menos una letra mayúscula, una letra minúscula, un número y un caracter especial; ademas de  un mínimo de 8 caracteres",
     "t10" : "Las contraseñas deben ser iguales"
-  }
+  },
+
+  "bot": "Soporte en línea / Reclamos"
+
 }

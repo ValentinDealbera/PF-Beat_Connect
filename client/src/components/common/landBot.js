@@ -1,10 +1,25 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import MiniModalBox from "../modal/miniModalBox";
+import { useTranslation } from "react-i18next";
+import ChatbotWindow from "./chatBotWindow";
 
 const LandBot = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [t, i18n] = useTranslation("global");
+  const chatbotRef = useRef(null);
+
+  const handleMouseEnter = () => {
+    setShowModal(true);
+  };
+
+  const handleMouseLeave = () => {
+    setShowModal(false);
+  };
 
   const openChatBot = () => {
     setIsOpen(true);
+    setShowModal(false);
   };
 
   const closeChatBot = () => {
@@ -13,28 +28,22 @@ const LandBot = () => {
 
   return (
     <>
-      <button
-        onClick={openChatBot}
-        className="fixed bottom-0 right-0 p-3 bg-blue-500 text-white rounded-full mr-4 mb-4"
-      >
-        Abrir chatbot
-      </button>
-      {isOpen && (
-        <div className="fixed bottom-0 right-0 w-96 h-5/6"style={{zIndex: 9999}}>
-          <button
-            onClick={closeChatBot}
-            className="absolute top-0 right-0 p-3 bg-blue-500 text-white rounded-full mr-4 mt-4"
-          >
-            Cerrar chatbot
-          </button>
-          <iframe
-            src="https://landbot.online/v3/H-1574271-FEG9MHL1FPUII1AS/index.html"
-            width="100%"
-            height="100%"
-            frameBorder="0"
-          ></iframe>
+      {!isOpen && (
+        <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+          <img
+            src="/icon/chatbot.png"
+            alt="Botón de abrir chatbot"
+            onClick={openChatBot}
+            className="border-radius-full background-neutral-white fixed bottom-0 left-[20px] mb-4 mr-4 w-[30px] cursor-pointer hover:w-[40px]"
+          />
+          {showModal && (
+            <div className="text-sm-regular fixed bottom-[60px] left-[10px] flex w-auto rounded-xl bg-slate-100 p-1 shadow-2xl">
+              <span>{t("bot")}</span>
+            </div>
+          )}
         </div>
       )}
+      {isOpen && <ChatbotWindow closeChatBot={closeChatBot} />}
     </>
   );
 };
