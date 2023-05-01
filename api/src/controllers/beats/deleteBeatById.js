@@ -10,7 +10,6 @@ module.exports = async (req, res) => {
   try {
     const beat = await beatModel.findById(id).populate("userCreator");
     const userAux = await userModel.findById(userid);
-    console.log(beat.userCreator._id, userAux._id);
     if (!beat) return res.status(400).json({ message: "Este beat no existe" });
     if (beat.userCreator.email !== userAux.email)
       return res.status(400).json({
@@ -22,7 +21,9 @@ module.exports = async (req, res) => {
     const beatIndex = user.createdBeats.findIndex(
       (beat) => beat._id === deletedBeat._id
     );
-    const deletedBeatInUser = user.createdBeats.splice(beatIndex, 1);
+    user.createdBeats = user.createdBeats.filter(
+      (beat) => beat._id !== deletedBeat._id
+    );
     await user.save();
 
     const reviewsDeletedInConsequence = await reviewModel.deleteMany({
