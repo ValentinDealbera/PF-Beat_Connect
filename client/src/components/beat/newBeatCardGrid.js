@@ -4,7 +4,6 @@ import {
   BeatDetailSideBar,
   BeatBottomSheet,
   Loader,
-  ClientReview,
   ReviewForm,
   EditReviewForm,
   managePostBeat,
