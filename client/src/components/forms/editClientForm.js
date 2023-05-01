@@ -71,9 +71,15 @@ export default function EditClientForm(props) {
     }
   };
 
+  // useEffect(() => {
+  //   setErrors(validateForm(form, fieldsToValidate, validateMode));
+  // }, [form, fieldsToValidate]);
+
   useEffect(() => {
-    setErrors(validateForm(form, fieldsToValidate, validateMode));
+    setErrors(validationEditUser(form, fieldsToValidate, validateMode));
   }, [form, fieldsToValidate]);
+
+  console.log("Errores", error);
 
   return (
     <form onSubmit={onSubmit} ref={formRef}>
@@ -148,7 +154,7 @@ export default function EditClientForm(props) {
               placeholder={t("settingsClient.t4")}
               type="file"
               onChange={handleInput}
-              error={error.backImage}
+              error={error.image}
             />
           </FormColumn>
         </FormRow>
@@ -169,7 +175,7 @@ export default function EditClientForm(props) {
         </FormRow>
         <button
           type="submit"
-          className="mt-1 background-primary-red-700 color-neutral-white w-max rounded-full px-5 py-3 text-sm font-semibold"
+          className="background-primary-red-700 color-neutral-white mt-1 w-max rounded-full px-5 py-3 text-sm font-semibold"
         >
           {t("settingsClient.tosave")}
         </button>
