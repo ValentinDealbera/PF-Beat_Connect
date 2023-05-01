@@ -20,8 +20,9 @@ module.exports = async (req, res) => {
 
     const image = req?.files?.image ?? null;
 
-    const { name, priceAmount, review, softDelete, genre, relevance } =
+    const { name, priceAmount, review, softDelete, genre, relevance, bpm } =
       req.body;
+      console.log(req.body);
     const updatedBeat = await beatModel.findById(id).populate("userCreator");
     const userAux = await userModel.findById(userid);
     if (!updatedBeat)
@@ -30,6 +31,7 @@ module.exports = async (req, res) => {
       return res.status(400).json({
         message: "No puedes modificar un beat que no sea de tu autoria",
       });
+    if (bpm) updatedBeat.BPM = Number(bpm)
     if (name) updatedBeat.name = name;
     if (priceAmount) updatedBeat.priceAmount = Number(priceAmount);
     if (review) updatedBeat.review = [...updatedBeat.review, review];

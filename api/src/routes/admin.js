@@ -21,12 +21,12 @@ router.delete("/user/:id", adminMiddleware, deleteUserById);
 /* ------ BEATS ------ */
 
 const postBeat = require("../controllers/admin/postBeat");
-const putBeatById = require("../controllers/admin/putBeatById");
+const putBeatByIdAdmin = require("../controllers/beats/putBeatByIdAdmin");
 const deleteBeatById = require("../controllers/admin/deleteBeatById");
 
 router.post("/beat", adminMiddleware, postBeat);
 
-router.put("/beat/:id", adminMiddleware, putBeatById);
+router.put("/beat/:id", adminMiddleware, putBeatByIdAdmin);
 
 router.delete("/beat/:id", adminMiddleware, deleteBeatById);
 
