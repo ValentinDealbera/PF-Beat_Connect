@@ -44,7 +44,7 @@ export default function About() {
                 className="gap-estilo4 flex min-w-[75vw] flex-col sm:min-w-[40vw] md:min-w-[40vw] lg:min-w-full"
                 key={index}
               >
-                <div className=" flex flex-col items-center justify-start gap-6  align-middle ">
+                <div className=" flex flex-col items-center justify-start gap-2  align-middle ">
                   <div className="relative aspect-square h-full w-full">
                     <Image
                       src={nosotros.image}
@@ -53,23 +53,17 @@ export default function About() {
                       className="aspect-square rounded-xl object-cover"
                     />
                   </div>
-                  <div className="flex flex-col justify-center gap-6  ">
+                  <div className="flex flex-col justify-center gap-2  ">
                     <div className="flex flex-col justify-center  ">
                       <h3 className="text-titulo3-semibold color-neutral-950 text-center">
                         {nosotros.name}
                       </h3>
-                      <p className="text-base-light text-center">
-                        This is your Team section paragraph. Click here to add a
-                        brief description of this person’s role and
-                        responsibilities, or a short bio with a background
-                        summary.
-                      </p>
                     </div>
                     <div className="flex flex-row justify-center  ">
                       {Object.entries(nosotros.redes).map(([red, icono]) => (
                         <a
                           className="align-middle"
-                          href={`https://${red}.com`}
+                          href={nosotros.enlaces[red]}
                           key={red}
                         >
                           <img
