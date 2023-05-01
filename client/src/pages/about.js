@@ -1,4 +1,4 @@
-import { Main, Head, Hero, Section, ScrollToTop } from "@/components";
+import { Main, Head, Hero, Section, ScrollToTop, LandBot } from "@/components";
 import { tecnologias, nosotros } from "@/data/data";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
@@ -17,8 +17,11 @@ export default function About() {
         >
           <div className="padding-estilo2 mt-6 flex h-full flex-row items-center justify-center align-middle">
             <h1 className="text-titulo1-regular text-center text-white">
-                {t("about.title1")}{" "}
-              <span className="text-titulo1-semibold">{t("about.title2")} </span>{t("about.title3")}{" "}
+              {t("about.title1")}{" "}
+              <span className="text-titulo1-semibold">
+                {t("about.title2")}{" "}
+              </span>
+              {t("about.title3")}{" "}
               <span className="text-titulo1-semibold">BeatConnect</span>
             </h1>
           </div>
@@ -28,9 +31,7 @@ export default function About() {
             {t("about.t1")}{" "}
             <span className="text-titulo1-semibold">{t("about.t2")} ❤️ </span>
           </h1>
-          <p className="text-base-light color-neutral-900">
-            {t("about.t3")}
-          </p>
+          <p className="text-base-light color-neutral-900">{t("about.t3")}</p>
         </Section>
 
         <Section
@@ -93,9 +94,7 @@ export default function About() {
             {t("about.t4")}{" "}
             <span className="text-titulo1-semibold">{t("about.t5")} 🤯😎 </span>
           </h1>
-          <p className="text-base-light color-neutral-900">
-              {t("about.t6")}
-          </p>
+          <p className="text-base-light color-neutral-900">{t("about.t6")}</p>
         </Section>
         <Section subClassName="padding-x-estilo2 padding-y-estilo1 flex flex-col gap-12">
           <h1 className="text-titulo1-regular color-neutral-950 text-center ">
@@ -126,6 +125,7 @@ export default function About() {
           </div>
         </Section>
         <ScrollToTop />
+        <LandBot />
       </Main>
     </>
   );

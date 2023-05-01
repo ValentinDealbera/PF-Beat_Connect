@@ -5,12 +5,15 @@ import {
   ProfileCard,
   Head,
   BeatShopSectionForClient,
+  LandBot,
 } from "@/components";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function BuyerProfile() {
-  const currentUser = useSelector((state) => state.client.authSession.session.current);
+  const currentUser = useSelector(
+    (state) => state.client.authSession.session.current
+  );
 
   return (
     <>
@@ -38,6 +41,7 @@ export default function BuyerProfile() {
           </div>
         </Hero>
         <BeatShopSectionForClient />
+        <LandBot />
       </Main>
     </>
   );

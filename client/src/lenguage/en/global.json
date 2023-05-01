@@ -445,7 +445,9 @@
     "t8": "Change password",
     "t9": "The password must contain at least one uppercase letter, one lowercase letter, one number, and one special character; in addition to a minimum of 8 characters.",
     "t10": "Passwords must match"
-    }
+    },
+
+    "bot": "Online support / Reports"
 }
 
 
