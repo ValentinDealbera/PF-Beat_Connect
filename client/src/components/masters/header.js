@@ -14,7 +14,7 @@ import { useRouter } from "next/router";
 import { navPublic } from "@/data/data";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import i18n from "i18next";
+import { useTranslation } from "react-i18next";
 
 export default function Header() {
 const router = useRouter();
@@ -25,6 +25,8 @@ const router = useRouter();
   const currentItem = navPublic.find((item) => currentSlug === item.url);
   const currentMode = currentItem ? currentItem.colorMode : "transparent";
   const { isSeller } = useSelector((state) => state.client.authSession.auth);
+  const [t, i18n] = useTranslation("global");
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,15 +56,15 @@ const router = useRouter();
       visibility: false,
     },
     {
-      name: "Vende tus beats",
+      name:  t("navClient.t3"),
       url: "",
       onClick: () => manageBecomeSeller(),
       // // visibility: !isSeller,
       visibility: true,
-      visibility: true,
+      // visibility: true,
     },
     {
-      name: "Publicar un beat",
+      name: t("navClient.t4"),
       url: "",
       onClick: () => managePostBeat(),
       //  //  visibility: isSeller,

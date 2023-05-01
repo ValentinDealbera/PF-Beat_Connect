@@ -281,7 +281,7 @@
   "sliceAuthSession": {
     "t1": "Se logueó correctamente",
     "t2": "Se registró correctamente",
-    "t3": "Se estáaaaaaaaaaaaaaaaaa convirtiendo en vendedor...",
+    "t3": "Se está convirtiendo en vendedor...",
     "t4": "Se convirtió en vendedor",
     "t5": "Se está editando...",
     "t6": "Se editó correctamente",
@@ -374,6 +374,7 @@
     "title" : "Beats de la página",
     "title2" : "Usuarios de la página",
     "title3": "Ordenes de la pagina",
+    "title4": "Reviews de la pagina",
     "createBeat" : "Crear Beat",
     "createUser" : "Crear Usuario",
     "createReview" : "Crear Review",
@@ -391,6 +392,8 @@
 
   "adminBeatsCreate" : {
     "title" : "Editar Beat",
+    "title2" : "Editar Usuario",
+    "title3": "Editar Review",
     "t1" : "Guardar cambios",
     "f1" : "Nombre",
     "f2": "Precio",
@@ -399,6 +402,15 @@
     "f5": "Elige un Género",
     "f6": "Selecciona un Género",
     "f7": "Pausar"
+  },
+
+  "delete" : {
+    "b" : "Borrar ",
+    "b1" : "¿Seguro que quieres borrar este item de ",
+    "b2": "Cancelar",
+    "b3": "Si, estoy seguro",
+    "u4" : "",
+    "u5": ""
   },
 
   "adminCreateUser" : {
@@ -419,5 +431,18 @@
     "t3": "Monto",
     "t4" : "Banear",
     "t5": "Comentario"
+  },
+
+  "recover" : {
+    "t1" : "Recupera tu ",
+    "t2": "contraseña",
+    "t3": "Ingresa tu email",
+    "t4" : "Enviar solicitud",
+    "t5" : "Cambiá tu",
+    "t6": "Nueva contraseña",
+    "t7" : "Repite Nueva Contraseña",
+    "t8" : "Cambiar contraseña",
+    "t9" : "La contraseñaaaaaaaaaaaaaa debe contener al menos una letra mayúscula, una letra minúscula, un número y un caracter especial; ademas de  un mínimo de 8 caracteres",
+    "t10" : "Las contraseñas deben ser iguales"
   }
 }

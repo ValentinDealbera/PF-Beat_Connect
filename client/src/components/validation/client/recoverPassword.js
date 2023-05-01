@@ -13,7 +13,7 @@ export function validationRecoverPassword(form, fieldsToValidate) {
       case "newPassword":
         if (!regexPassword.test(form.newPassword))
           error.newPassword =
-            "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un caracter especial; ademas de  un mínimo de 8 caracteres";
+            "La contraseñaaaaaaaaaaaaa debe contener al menos una letra mayúscula, una letra minúscula, un número y un caracter especial; ademas de  un mínimo de 8 caracteres";
         break;
       case "repeatNewPassword":
         if (form.newPassword !== form.repeatNewPassword)

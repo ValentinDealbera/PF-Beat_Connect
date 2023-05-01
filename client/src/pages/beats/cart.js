@@ -9,7 +9,7 @@ import {
   BeatsSpecialSection,
 } from "@/components";
 
-import { useEffect } from "react";
+
 import Link from "next/link";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -19,6 +19,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
+import { useState, useEffect  } from "react";
 
 export default function Carrito() {
   const [t, i18n] = useTranslation("global");
@@ -55,7 +56,15 @@ export default function Carrito() {
 
   const headers = ["Beat", t("cartHeaders.t1"), t("cartHeaders.t2")];
 
+  const [price, setPrice] = useState("");
+    const [actions, setActions] = useState("");
+    useEffect(() => {
+      setPrice(t("cartHeaders.t1").toLocaleLowerCase());
+      setActions(t("cartHeaders.t2").toLocaleLowerCase());
+    }, [t("cartHeaders.t1"), t("cartHeaders.t2")]);
+
   const rows = cartItems.map((item) => {
+  
     return {
       id: item.beat._id,
       beat: (
@@ -74,12 +83,9 @@ export default function Carrito() {
           </div>
         </div>
       ),
-      precio: <p className="text-sm-medium">${item.beat.priceAmount}</p>,
-      acciones: (
-        <button
-          className="text-sm-medium"
-          onClick={() => dispatch(deleteFromCart({ id: item.beat._id }))}
-        >
+      [price]: <p className="text-sm-medium">${item.beat.priceAmount}</p>,
+      [actions]: (
+        <button className="text-sm-medium" onClick={() => dispatch(deleteFromCart({ id: item.beat._id }))}>
           {t("cartHeaders.t3")}
         </button>
       ),

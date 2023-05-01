@@ -1,6 +1,8 @@
 import ModalPopUp from "./modalPopup";
+import { useTranslation } from "react-i18next";
 
 export default function ModalTables(props) {
+  const [t] = useTranslation("global");
   const { label, element, onClose, onConfirm, name } = props;
 
   const handleClick = async () => {
@@ -12,10 +14,10 @@ export default function ModalTables(props) {
     <ModalPopUp>
       <div className="background-neutral-white border-radius-estilo2 w-96 bg-customDark-700 p-8">
         <h2 className="mb-4 text-xl font-bold dark:text-white">
-          Borrar {label}
+          {t("delete.b")} {label}
         </h2>
         <p className="mb-4 text-sm dark:text-white">
-          ¿Seguro que quieres borrar este item de {label}?
+          {t("delete.b1")} {label}?
         </p>
         <div className="flex justify-end gap-4">
           <button
@@ -23,14 +25,14 @@ export default function ModalTables(props) {
             className="background-neutral-gray-400 hover:background-neutral-gray-700 color-neutral-white 
               text-sm-semibold border-radius-estilo2 px-4 py-2 dark:bg-customDark-900"
           >
-            Cancelar
+            {t("delete.b2")}
           </button>
           <button
             onClick={handleClick}
             className="background-primary-red-500 hover:background-primary-red-700 color-neutral-white 
               text-sm-semibold border-radius-estilo2 px-4 py-2 dark:bg-red-800"
           >
-            Si, estoy seguro
+            {t("delete.b3")}
           </button>
         </div>
       </div>

@@ -373,6 +373,7 @@
     "title" : "Beats of the page",
     "title2" : "Users of the page",
     "title3" : "Orders on the page",
+    "title4": "Page Reviews",
     "createReview" : "Create Review",
     "createBeat" : "Create Beat",
     "createUser" : "Create User",
@@ -390,6 +391,8 @@
 
   "adminBeatsCreate" : {
     "title" : "Create Beat",
+    "title2": "Edit User",
+    "title3": "Edit Review",
     "t1" : "Save Changes",
     "f1" : "Name",
     "f2": "Price",
@@ -398,6 +401,16 @@
     "f5": "Choose a Genre",
     "f6": "Select a Genre",
     "f7": "Pause"
+    },
+
+    
+  "delete": {
+    "b" : "Delete ",
+    "b1": "Are you sure you want to delete this item from ",
+    "b2": "Cancel",
+    "b3": "Yes, I'm sure",
+    "u4": "",
+    "u5": ""
     },
 
     "adminCreateUser" : {
@@ -418,6 +431,20 @@
     "t3": "Amount",
     "t4" : "Ban User",
     "t5": "Comment"
+    },
+
+    
+  "recover": {
+    "t1": "Recover your ",
+    "t2": "password",
+    "t3": "Enter your email",
+    "t4": "Send request",
+    "t5": "Change your",
+    "t6": "New password",
+    "t7": "Confirm new password",
+    "t8": "Change password",
+    "t9": "The password must contain at least one uppercase letter, one lowercase letter, one number, and one special character; in addition to a minimum of 8 characters.",
+    "t10": "Passwords must match"
     }
 }
 

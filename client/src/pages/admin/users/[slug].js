@@ -10,6 +10,8 @@ import {
   Head,
 } from "@/components";
 
+import { useTranslation } from "react-i18next";
+
 import {
   handleInputChange,
   handleSubmit,
@@ -22,6 +24,7 @@ import { adminPostUser } from "@/redux/slices/admin";
 import { useRouter } from "next/router";
 
 export default function AdminUserCreate() {
+  const [t] = useTranslation("global");
   const childRef = useRef(null);
 
   const handleExternalSubmit = () => {
@@ -34,8 +37,8 @@ export default function AdminUserCreate() {
       <main>
         <SellerDashboardLayout
           topBarMode="action"
-          topBarMessage="Editar usuario"
-          topBarButtonLabel="Guardar cambios"
+          topBarMessage={t("adminBeatsCreate.title2")}
+          topBarButtonLabel={t("adminBeatsCreate.t1")}
           onClick={handleExternalSubmit}
         >
           <IslandDashboard className="flex flex-col gap-5 xl:gap-8 ">
