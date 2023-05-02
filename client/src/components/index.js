@@ -143,3 +143,5 @@ export { default as DynamicTableLight } from "./dynamicTableLight";
 
 //export { default as BeatImage } from "./beat/beatImage";
 //export { default as Checkbox } from "./common/checkbox";
+
+export { default as HamburgerAdmin } from "./dashboard/hamburgerAdmin";

@@ -15,7 +15,7 @@ const BeatImage = ({ beat, height, width, tapVisible = false }) => {
           className="rounded-xl object-cover"
         />
         { tapVisible && (
-        <p className="text-sm-regular absolute left-1/2 px-3 py-1 rounded-full top-1/2 z-10 w-max -translate-x-1/2 -translate-y-1/2 transform bg-[#000000b3] text-center text-white">
+        <p className="text-sm-regular absolute left-1/2 px-3 py-1 rounded-full top-1/2 z-10 w-max -translate-x-1/2 -translate-y-1/2 transform bg-[#000000b3] text-center text-white lg:hidden">
         Doble tap para más detalles
       </p>
         )
