@@ -29,7 +29,7 @@ export default function HOC(props) {
 
   console.log("state", state);
 
-  const hocIsWorking = false;
+  const hocIsWorking = true;
   const experimentalIsClient = isLogged;
   const experimentalIsAdmin = isAdmin;
 
