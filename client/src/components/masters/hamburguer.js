@@ -9,7 +9,7 @@ import { UserBoxNav } from "@/components";
 export default function Hamburger({ options, manageHamburguer, userMenu }) {
   const [dropDown, setDropDown] = useState(false);
   const [pageIndex, setPageIndex] = useState(0);
-  const [t, i18n] = useTranslation("global");
+  const [t] = useTranslation("global");
   return (
     <>
       <div
@@ -57,7 +57,7 @@ export default function Hamburger({ options, manageHamburguer, userMenu }) {
                   className="text-titulo1-medium text-white"
                   onClick={() => setPageIndex(1)}
                 >
-                  Centro de ayuda
+                  {t("hamburguer.t1")}
                 </h1>
               </div>
             </div>
@@ -68,7 +68,7 @@ export default function Hamburger({ options, manageHamburguer, userMenu }) {
                 className="text-base-medium mb-4 cursor-pointer text-white"
                 onClick={() => setPageIndex(0)}
               >
-                Volver atras
+                {t("hamburguer.t2")}
               </p>
               <div className="flex flex-col gap-4 ">
                 {pageIndex === 1 &&

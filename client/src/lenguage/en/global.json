@@ -189,7 +189,8 @@
     "form11": "No files selected",
     "form12": "Upload your beat",
     "form13": "Upload a high-quality beat (WAV, OGG)",
-    "form14": "Create post"
+    "form14": "Create post",
+    "form15": "Save publication"
   },
   "buyerGeneralNav": {
     "profile": "Profile",
@@ -485,9 +486,40 @@
     "t6": "You must upload a mp3 or wav file",
     "t7": "The size of the audio is too large. Maximum allowed size is 150 MB.",
     "t8": "Your beat must have between 20 and 350 bpm.",
-    "t9": "You must select a genre"
+    "t9": "You must select a genre",
+    "t10" : "You must upload a Beat",
+    "t11" : "You must upload a wav or ogg file"
   },
-   "bot": "Online support / Reports"
+   "bot": "Online support / Reports",
+
+   "editBeat" : {
+    "t1": "Let's edit your",
+    "t2": "Make the adjustments that you consider necessary",
+    "t3": "",
+    "t4": "Debes subir un archivo jpg o png",
+    "t5": "El tamaño del audio es demasiado grande. El tamaño máximo permitido es de 10 MB.",
+    "t6": "Debes subir un archivo mp3 o wav",
+    "t7": "El tamaño del audio es demasiado grande. El tamaño máximo permitido es de 150 MB.",
+    "t8": "Tu beat debe tener entre 20 y 350 bpm.",
+    "t9": "Debes seleccionar un género"
+    }, 
+
+    "validationCreateUser" : {
+      "t1": "",
+      "t2": "",
+      "t3": "",
+      "t4": "",
+      "t5": "",
+      "t6": "",
+      "t7": "",
+      "t8": "",
+      "t9": ""
+      },
+
+      "hamburguer": {
+        "t1": "Help Center",
+        "t2": "Go back"
+        }
 }
 
 

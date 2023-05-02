@@ -11,7 +11,7 @@ export default function SellerDashboardOverview() {
   return (
     <>
       <Head title="Panel de control" />
-      <main>
+      <main >
         <SellerDashboardLayout
           topBarMode="message"
           topBarMessage={t("admin.t1")}
@@ -36,6 +36,7 @@ export default function SellerDashboardOverview() {
           >
             English
           </button>
+          
       </main>
     </>
   );
