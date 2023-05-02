@@ -2,10 +2,11 @@ import { Search, DashboardItem } from "@/components";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import i18n from "i18next";
 
 export default function SellerDashboardNav() {
   const theme = useSelector((state) => state.client.authSession.theme);
-  const [t] = useTranslation("global");
+  const [t, i18n] = useTranslation("global");
 
   const dashboardNav = [
     {
@@ -54,6 +55,21 @@ export default function SellerDashboardNav() {
             />
           ))}
         </div>
+        <br />
+        <div className="flex justify-center gap-4 flex-direction: column" >
+          <button
+            onClick={() => i18n.changeLanguage("es")}
+            className="background-primary-red-700 color-neutral-white border-radius-estilo1 text-base-semibold w-max px-3 py-2"
+          >
+            Español
+          </button>
+          <button
+            onClick={() => i18n.changeLanguage("en")}
+            className="background-primary-red-700 color-neutral-white border-radius-estilo1 text-base-semibold w-max px-3 py-2"
+          >
+            English
+          </button>
+          </div>
       </div>
     </>
   );

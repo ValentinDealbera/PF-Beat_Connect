@@ -93,18 +93,20 @@ export default function RecoveryPasswordForm(props) {
           >
               {t("recover.t8")}
           </button>
+          <div className="flex justify-center gap-4">
           <button
             onClick={() => i18n.changeLanguage("es")}
-            className="color-primary-red-500"
+            className="background-primary-red-700 color-neutral-white border-radius-estilo1 text-base-semibold w-max px-3 py-2"
           >
             Español
           </button>
           <button
             onClick={() => i18n.changeLanguage("en")}
-            className="color-primary-red-500"
+            className="background-primary-red-700 color-neutral-white border-radius-estilo1 text-base-semibold w-max px-3 py-2"
           >
             English
           </button>
+          </div>
         </div>
       </FormContainer>
     </form>

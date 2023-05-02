@@ -15,7 +15,6 @@ export default function SellerDashboardOverview() {
         <SellerDashboardLayout
           topBarMode="message"
           topBarMessage={t("admin.t1")}
-          
         >
           <IslandDashboard className="flex flex-col gap-5 xl:gap-8 ">
             <h1 className="text-subtitulo-semibold dark:text-white ">
@@ -23,20 +22,7 @@ export default function SellerDashboardOverview() {
             </h1>
             <FaqsGrid />
           </IslandDashboard>
-        </SellerDashboardLayout>
-        <button
-            onClick={() => i18n.changeLanguage("es")}
-            className="color-primary-red-500"
-          >
-            Español
-          </button>
-          <button
-            onClick={() => i18n.changeLanguage("en")}
-            className="color-primary-red-500"
-          >
-            English
-          </button>
-          
+        </SellerDashboardLayout> 
       </main>
     </>
   );
