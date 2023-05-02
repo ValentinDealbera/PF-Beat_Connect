@@ -21,12 +21,16 @@ export default function BeatShopSection() {
   return (
     <Section subClassName="padding-x-estilo2 padding-y-estilo2 gap-8 flex flex-col">
       <BeatFilters />
-      <NewBeatCardGrid beats={filteredBeats} isLoading={isLoading} />
-      <div className="flex justify-center gap-4 mt-4">
+      <NewBeatCardGrid
+        beats={filteredBeats}
+        mode="beats"
+        isLoading={isLoading}
+      />
+      {pages.current === 1 && pages.next !== null && (<div className="mt-4 flex justify-center gap-4">
         <button
           onClick={() => dispatch(setCurrentPage({ page: pages.current - 1 }))}
           disabled={pages.current === 1}
-          className={pages.current === 1 ? "text-black" : " text-red-800"} 
+          className={pages.current === 1 ? "text-black" : " text-red-800"}
         >
           {t("beatShopSection.t1")}
         </button>
@@ -36,7 +40,11 @@ export default function BeatShopSection() {
               key={page}
               onClick={() => dispatch(setCurrentPage({ page: page }))}
               disabled={pages.current === page}
-              className={`${pages.current === page ? "bg-red-800 text-white border-red-800" : "text-black"} p-2 border aspect-square flex justify-center items-center rounded-md`}
+              className={`${
+                pages.current === page
+                  ? "border-red-800 bg-red-800 text-white"
+                  : "text-black"
+              } flex aspect-square items-center justify-center rounded-md border p-2`}
             >
               {page}
             </button>
@@ -55,7 +63,7 @@ export default function BeatShopSection() {
         >
           {t("beatShopSection.t2")}
         </button>
-      </div>
+      </div>)}
     </Section>
   );
 }

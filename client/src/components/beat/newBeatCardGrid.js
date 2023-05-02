@@ -48,8 +48,9 @@ export default function NewBeatCardGrid(props) {
             {props.mode === "owned" && t("NoOwnedBeats") + " 🤯"}
             {props.mode === "favorite" && t("NoFavBeats") + " 🤯"}
             {props.mode === "review" && t("NoReviews") + " 🤯"}
+            {props.mode === "beats" && t("NoBeats") + " 🤯"}
           </h1>
-          <div className="flex w-full justify-center ">
+          {props.mode !== "beats" && (<div className="flex w-full justify-center ">
             {props.mode === "bougth" || props.mode === "favorite" ? (
               <Link href="/beats">
                 <button className="text-base-semibold mt-2 w-full rounded-full bg-red-700 px-4 py-2 text-white">
@@ -65,7 +66,7 @@ export default function NewBeatCardGrid(props) {
                 {t("NoOwnedBeatsButton")}
               </button>
             )}
-          </div>
+          </div>)}
         </div>
       )}
       <div className="gap-estilo1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
