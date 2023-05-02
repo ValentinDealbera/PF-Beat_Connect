@@ -14,7 +14,7 @@ export default function Logout() {
   );
 
   const logOutJson = async () => {
-    // dispatch(resetReducer());
+    dispatch(resetReducer());
     // resetPersist()
     console.log("borrando...");
     await resetPersist();
@@ -29,11 +29,25 @@ export default function Logout() {
       if (loginMethod === "google") {
         router.push(`${serverUrl}google/logout`);
       } else {
-        router.push("/");
         window.location.reload();
+        router.push("/");
       }
     };
 
-    logOut();
+    if (loginMethod !== "") {
+      logOut();
+    }
+    else {
+      router.push("/");
+    }
+
+
+    console.log("loginMethod", loginMethod);
   }, []);
+
+  return (
+    <>
+
+    </>
+  ); // Opcionalmente puedes retornar algún contenido o null si no necesitas mostrar nada en este componente
 }
