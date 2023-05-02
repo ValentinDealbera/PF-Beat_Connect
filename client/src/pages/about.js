@@ -1,4 +1,4 @@
-import { Main, Head, Hero, Section, ScrollToTop } from "@/components";
+import { Main, Head, Hero, Section, ScrollToTop, LandBot } from "@/components";
 import { tecnologias, nosotros } from "@/data/data";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
@@ -17,8 +17,11 @@ export default function About() {
         >
           <div className="padding-estilo2 mt-6 flex h-full flex-row items-center justify-center align-middle">
             <h1 className="text-titulo1-regular text-center text-white">
-                {t("about.title1")}{" "}
-              <span className="text-titulo1-semibold">{t("about.title2")} </span>{t("about.title3")}{" "}
+              {t("about.title1")}{" "}
+              <span className="text-titulo1-semibold">
+                {t("about.title2")}{" "}
+              </span>
+              {t("about.title3")}{" "}
               <span className="text-titulo1-semibold">BeatConnect</span>
             </h1>
           </div>
@@ -28,22 +31,20 @@ export default function About() {
             {t("about.t1")}{" "}
             <span className="text-titulo1-semibold">{t("about.t2")} ❤️ </span>
           </h1>
-          <p className="text-base-light color-neutral-900">
-            {t("about.t3")}
-          </p>
+          <p className="text-base-light color-neutral-900">{t("about.t3")}</p>
         </Section>
 
         <Section
           subClassName="padding-x-estilo2  bg-white color-white gap-2 flex-col flex"
           className="bg-white"
         >
-          <div className="gap-estilo1 flex max-w-[100vw] flex-1 flex-shrink flex-grow grid-cols-1 overflow-scroll overflow-x-scroll pb-24 md:grid-cols-4 lg:grid lg:flex-none lg:flex-shrink-0 lg:flex-grow-0 lg:gap-y-14 lg:overflow-x-hidden">
+          <div className="gap-estilo1 flex max-w-[100vw] flex-1 flex-shrink flex-grow grid-cols-1 overflow-scroll overflow-y-hidden overflow-x-scroll pb-24 md:grid-cols-4 lg:grid lg:flex-none lg:flex-shrink-0 lg:flex-grow-0 lg:gap-y-14 lg:overflow-x-hidden">
             {nosotros.map((nosotros, index) => (
               <div
                 className="gap-estilo4 flex min-w-[75vw] flex-col sm:min-w-[40vw] md:min-w-[40vw] lg:min-w-full"
                 key={index}
               >
-                <div className=" flex flex-col items-center justify-start gap-6  align-middle ">
+                <div className=" flex flex-col items-center justify-start gap-2  align-middle ">
                   <div className="relative aspect-square h-full w-full">
                     <Image
                       src={nosotros.image}
@@ -52,23 +53,17 @@ export default function About() {
                       className="aspect-square rounded-xl object-cover"
                     />
                   </div>
-                  <div className="flex flex-col justify-center gap-6  ">
+                  <div className="flex flex-col justify-center gap-2  ">
                     <div className="flex flex-col justify-center  ">
                       <h3 className="text-titulo3-semibold color-neutral-950 text-center">
                         {nosotros.name}
                       </h3>
-                      <p className="text-base-light text-center">
-                        This is your Team section paragraph. Click here to add a
-                        brief description of this person’s role and
-                        responsibilities, or a short bio with a background
-                        summary.
-                      </p>
                     </div>
                     <div className="flex flex-row justify-center  ">
                       {Object.entries(nosotros.redes).map(([red, icono]) => (
                         <a
                           className="align-middle"
-                          href={`https://${red}.com`}
+                          href={nosotros.enlaces[red]}
                           key={red}
                         >
                           <img
@@ -93,9 +88,7 @@ export default function About() {
             {t("about.t4")}{" "}
             <span className="text-titulo1-semibold">{t("about.t5")} 🤯😎 </span>
           </h1>
-          <p className="text-base-light color-neutral-900">
-              {t("about.t6")}
-          </p>
+          <p className="text-base-light color-neutral-900">{t("about.t6")}</p>
         </Section>
         <Section subClassName="padding-x-estilo2 padding-y-estilo1 flex flex-col gap-12">
           <h1 className="text-titulo1-regular color-neutral-950 text-center ">
@@ -126,6 +119,7 @@ export default function About() {
           </div>
         </Section>
         <ScrollToTop />
+        <LandBot />
       </Main>
     </>
   );

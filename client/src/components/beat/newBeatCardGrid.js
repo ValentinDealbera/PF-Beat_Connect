@@ -4,7 +4,6 @@ import {
   BeatDetailSideBar,
   BeatBottomSheet,
   Loader,
-  ClientReview,
   ReviewForm,
   EditReviewForm,
   managePostBeat,
@@ -43,7 +42,7 @@ export default function NewBeatCardGrid(props) {
     <>
       {props.isLoading && <Loader />}
       {props.isLoading !== true && props.beats && props.beats <= 0 && (
-        <div className="flex w-full flex-col justify-center gap-4">
+        <div className="flex w-full flex-col justify-center gap-2">
           <h1 className="mt-5 text-center text-2xl font-medium">
             {props.mode === "bougth" && t("NoBougthBeats") + " 🤯"}
             {props.mode === "owned" && t("NoOwnedBeats") + " 🤯"}
@@ -60,7 +59,7 @@ export default function NewBeatCardGrid(props) {
               </Link>
             ) : (
               <button
-                className="text-base-semibold mt-2 w-full rounded-full bg-red-700 px-4 py-2 text-white"
+                className="text-base-semibold  w-max rounded-full bg-red-700 px-4 py-2 text-white"
                 onClick={() => managePostBeat()}
               >
                 {t("NoOwnedBeatsButton")}

@@ -6,8 +6,6 @@ export function ValidationCreateReview(form, fieldsToValidate) {
     fieldsToValidate = Object.keys(form);
   }
 
-
-
   fieldsToValidate.forEach((field) => {
     switch (field) {
       case "createdBy":
@@ -20,6 +18,10 @@ export function ValidationCreateReview(form, fieldsToValidate) {
       case "rating":
         if (!form.rating || form.rating === "") {
           error.rating = "You must enter a rating";
+        }
+
+        if (form.rating > 5) {
+          error.rating = "You must select a number between one and five";
         }
 
         break;

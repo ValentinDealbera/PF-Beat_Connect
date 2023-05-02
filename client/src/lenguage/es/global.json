@@ -487,5 +487,7 @@
     "t7": "El tamaño del audio es demasiado grande. El tamaño máximo permitido es de 150 MB.",
     "t8": "Tu beat debe tener entre 20 y 350 bpm.",
     "t9": "Debes seleccionar un género"
-    }
+    },
+  
+  "bot": "Soporte en línea / Reclamos"
 }

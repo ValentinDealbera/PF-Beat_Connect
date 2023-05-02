@@ -7,6 +7,7 @@ import {
   Loader,
   BeatsSpecialSection,
   Section,
+  LandBot
 } from "@/components";
 import { useDispatch, useSelector, getState } from "react-redux";
 import { setSearchFilter } from "@/redux/slices/filters";
@@ -86,6 +87,7 @@ export default function Beats() {
           </div>
         </Section>
         <BeatsShopSection />
+        <LandBot />
       </Main>
     </>
   );

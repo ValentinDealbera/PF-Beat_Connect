@@ -1,6 +1,27 @@
 import { manageBecomeSeller } from "../components/masters/becomeSeller";
 import { useTranslation } from "react-i18next";
 
+export const navPublicMobile = [
+  {
+    name: "navPublic.t1",
+    url: "/",
+    visible: true,
+    //accion vacia
+    action: () => {},
+  },
+  {
+    name: "navPublic.t2",
+    url: "/about",
+    visible: true,
+    action: () => {},
+  },
+  {
+    name: "navPublic.t3",
+    url: "/beats",
+    visible: true,
+  },
+];
+
 export const navPublic = [
   {
     name: "navPublic.t1",
@@ -50,6 +71,7 @@ export const navClient = [
     name: "Perfil",
     url: "/client",
     colorMode: "light",
+    visibility: true,
   },
   {
     name: "Inbox",
@@ -60,21 +82,25 @@ export const navClient = [
     name: "Vende tus beats",
     url: "",
     onClick: () => manageBecomeSeller(),
+    visibility: true,
   },
   {
     name: "Configuracion",
     url: "/client/settings",
     colorMode: "light",
+    visibility: true,
   },
   {
     name: "Facturacion",
     url: "/client/billing",
     colorMode: "light",
+    visibility: true,
   },
   {
     name: "Logout",
     url: "/auth/logout",
     colorMode: "light",
+    visibility: true,
   },
 ];
 
@@ -227,87 +253,117 @@ export const tecnologias = [
     title: "Git + GitHub",
     image: "/icon/tecnologias/github.svg",
 
-    description:
-    "tecnologias.t17",
+    description: "tecnologias.t17",
   },
 ];
 
 export const nosotros = [
   {
     name: "Lucas Regner",
-    image: "/images/nosotros/placeholder.png", //crear carpeta e importar imagenes propias
+    image: "/images/nosotros/lucas2.png", //crear carpeta e importar imagenes propias
     //description: "",
     redes: {
       //importar fotos de las redes como svg
       linkedin: "/icon/tecnologias/linkedin.svg",
       github: "/icon/tecnologias/github2.svg",
       gmail: "/icon/tecnologias/gmail.svg",
+    },
+    enlaces: {
+      linkedin: "https://www.linkedin.com/in/lucas-regner/",
+      github: "https://github.com/LucasRegner1",
+      gmail: "mailto:lucasregner.dev@gmail.com",
     },
   },
 
   {
     name: "Carla Frías",
-    image: "/images/nosotros/placeholder.png", //crear carpeta e importar imagenes propias
+    image: "/images/nosotros/carla2.png", //crear carpeta e importar imagenes propias
     //description: "",
     redes: {
       //importar fotos de las redes como svg
       linkedin: "/icon/tecnologias/linkedin.svg",
       github: "/icon/tecnologias/github2.svg",
       gmail: "/icon/tecnologias/gmail.svg",
+    },
+    enlaces: {
+      linkedin: "https://www.linkedin.com/in/friascarla/",
+      github: "https://github.com/CarlaFrias",
+      gmail: "mailto:carlajimenafrias@gmail.com",
     },
   },
 
   {
     name: "Micaela Savournin",
-    image: "/images/nosotros/placeholder.png", //crear carpeta e importar imagenes propias
+    image: "/images/nosotros/mica2.png", //crear carpeta e importar imagenes propias
     //description: "",
     redes: {
       //importar fotos de las redes como svg
       linkedin: "/icon/tecnologias/linkedin.svg",
       github: "/icon/tecnologias/github2.svg",
       gmail: "/icon/tecnologias/gmail.svg",
+    },
+    enlaces: {
+      linkedin: "http://linkedin.com/in/micaela-savournin",
+      github: "https://github.com/Micasavournin ",
+      gmail: "mailto:micaasavoo@gmail.com",
     },
   },
 
   {
     name: "Fabian Pacheco",
-    image: "/images/nosotros/placeholder.png", //crear carpeta e importar imagenes propias
+    image: "/images/nosotros/fabian.png", //crear carpeta e importar imagenes propias
     //description: "",
     redes: {
       //importar fotos de las redes como svg
       linkedin: "/icon/tecnologias/linkedin.svg",
       github: "/icon/tecnologias/github2.svg",
       gmail: "/icon/tecnologias/gmail.svg",
+    },
+    enlaces: {
+      linkedin:
+        "https://www.linkedin.com/in/fabian-gerardo-pacheco-ramirez-6a4898237",
+      github: "https://github.com/fabgpr",
+      gmail: "mailto:fabiangpachecor@gmail.com",
     },
   },
 
   {
     name: "Valentin Dealbera",
-    image: "/images/nosotros/placeholder.png", //crear carpeta e importar imagenes propias
+    image: "/images/nosotros/valen3.png", //crear carpeta e importar imagenes propias
     //description: "",
     redes: {
       //importar fotos de las redes como svg
       linkedin: "/icon/tecnologias/linkedin.svg",
       github: "/icon/tecnologias/github2.svg",
       gmail: "/icon/tecnologias/gmail.svg",
+    },
+    enlaces: {
+      linkedin: "https://www.linkedin.com/in/valentin-dealbera-b30561262/",
+      github: "https://github.com/ValentinDealbera",
+      gmail: "mailto:valentindealbera01@gmail.com",
     },
   },
 
   {
     name: "Tadeo Massó",
-    image: "/images/nosotros/placeholder.png", //crear carpeta e importar imagenes propias
+    image: "/images/nosotros/tadeo.png", //crear carpeta e importar imagenes propias
     //description: "",
     redes: {
       //importar fotos de las redes como svg
       linkedin: "/icon/tecnologias/linkedin.svg",
       github: "/icon/tecnologias/github2.svg",
       gmail: "/icon/tecnologias/gmail.svg",
+    },
+    enlaces: {
+      linkedin: "https://www.linkedin.com/in/tadeo-mass%C3%B3-612045269/",
+      github: "https://github.com/TadeoMasso",
+      gmail: "mailto:massotadeo@gmail.com",
     },
   },
 
   {
     name: "Leonardo Pischetz",
-    image: "/images/nosotros/placeholder.png", //crear carpeta e importar imagenes propias
+    image: "/images/nosotros/leo2.png", //crear carpeta e importar imagenes propias
     //description: "",
     redes: {
       //importar fotos de las redes como svg
@@ -315,17 +371,28 @@ export const nosotros = [
       github: "/icon/tecnologias/github2.svg",
       gmail: "/icon/tecnologias/gmail.svg",
     },
+    enlaces: {
+      linkedin:
+        "https://www.linkedin.com/in/leonardo-iv%C3%A1n-pischetz-865054216",
+      github: "https://github.com/leopischetz",
+      gmail: "mailto:leonardo.pischetz@gmail.com",
+    },
   },
 
   {
     name: "Thomas Barenghi",
-    image: "/images/nosotros/placeholder.png", //crear carpeta e importar imagenes propias
+    image: "/images/nosotros/thomas.png", //crear carpeta e importar imagenes propias
     //description: "",
     redes: {
       //importar fotos de las redes como svg
       linkedin: "/icon/tecnologias/linkedin.svg",
       github: "/icon/tecnologias/github2.svg",
       gmail: "/icon/tecnologias/gmail.svg",
+    },
+    enlaces: {
+      linkedin: "https://www.linkedin.com/in/thomasbarenghi/",
+      github: "https://github.com/thomasbarenghi",
+      gmail: "mailto:thomasbarenghi@gmail.com",
     },
   },
 ];

@@ -37,7 +37,10 @@ export { default as FormAdmin } from "./common/adminForm"; //creado pero sin col
 export { default as ValidationEditUsers } from "./common/validationEditUsers";
 export { default as ReviewForm } from "./common/reviewForm";
 export { default as SetUser } from "./common/setUser";
-export { default as Hamburger } from "./masters/hamburguer"
+export { default as Hamburger } from "./masters/hamburguer";
+export { default as LandBot } from "./common/landBot";
+export { default as ChatbotWindow } from "./common/chatBotWindow";
+
 
 //Modal
 export { default as ModalMinMax } from "./modal/modalMinMax";
@@ -129,9 +132,7 @@ export { default as EditPasswordForm } from "./forms/editPasswordForm";
 export { default as ReviewCardGrid } from "./client/reviewCardGrid";
 export { default as RecoveryPasswordForm } from "./forms/recoveryPasswordForm";
 export { default as BeatReviewPopup } from "./beat/beatReviewPopup";
-
 export { default as EditReviewForm } from "./masters/editReview";
-
 
 export { default as AdminMaster } from "./masters/adminMaster";
 export { default as AdminHeaderBar } from "./masters/adminHeaderBar";
@@ -140,3 +141,5 @@ export { default as DynamicTableLight } from "./dynamicTableLight";
 
 //export { default as BeatImage } from "./beat/beatImage";
 //export { default as Checkbox } from "./common/checkbox";
+
+export { default as HamburgerAdmin } from "./dashboard/hamburgerAdmin";

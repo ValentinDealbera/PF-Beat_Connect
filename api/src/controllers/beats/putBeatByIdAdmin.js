@@ -16,8 +16,9 @@ module.exports = async (req, res) => {
   try {
     const { id } = req.params;
     const image = req.files ? req.files.image : null;
-    const { name, priceAmount, review, softDelete, genre, relevance } =
+    const { name, priceAmount, review, softDelete, genre, relevance, bpm } =
       req.body;
+      console.log('---------------',req.body);
     const updatedBeat = await beatModel.findById(id);
     if (!updatedBeat) return res.status(400).json({ error: "Beat not Found" });
     if (name) updatedBeat.name = name;
@@ -26,6 +27,7 @@ module.exports = async (req, res) => {
     if (softDelete)
       updatedBeat.softDelete = softDelete === "true" ? true : false;
     if (genre) updatedBeat.genre = genre;
+    if (bpm) updatedBeat.BPM = Number(bpm)
     if (image) {
       const imageData = fs.readFileSync(image.tempFilePath);
       const imageStorageRef = ref(
