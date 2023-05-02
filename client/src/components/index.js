@@ -69,6 +69,7 @@ export { default as BeatsSpecialSection } from "./beat/beatsSpecialSection";
 export { default as BeatCardGrid } from "./beat/beatCardGrid";
 export { default as BeatsShopSection } from "./beat/beatShopSection";
 export { default as BeatFilters } from "./beat/beatFilters";
+export { default as BeatFilters } from "./beat/beatFilters";
 export { default as BeatCard } from "./beat/beatCard";
 export { default as NewBeatCardGrid } from "./beat/newBeatCardGrid";
 export { default as BeatShopSectionForClient } from "./beat/beatShopSectionForClient";
@@ -137,7 +138,6 @@ export { default as EditReviewForm } from "./masters/editReview";
 export { default as AdminMaster } from "./masters/adminMaster";
 export { default as AdminHeaderBar } from "./masters/adminHeaderBar";
 export { default as ImageCache } from "./common/imageCache";
-
 export { default as DynamicTableLight } from "./dynamicTableLight";
 
 //export { default as BeatImage } from "./beat/beatImage";
