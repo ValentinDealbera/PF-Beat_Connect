@@ -41,10 +41,10 @@ export default function BeatRightSheet({
         <motion.div
           id="box"
           className={`relative z-50 flex h-screen items-start justify-end bg-white xs:rounded-bl-3xl xs:rounded-tl-3xl ${width} overflow-hidden py-10`}
-          initial={{ x: "100%" }}
-          animate={{ x: 0 }}
-          exit={{ x: "100%" }}
-          transition={{ duration: 0.6 }}
+          // initial={{ x: "100%" }}
+          // animate={{ x: 0 }}
+          // exit={{ x: "100%" }}
+          // transition={{ duration: 0.6 }}
         >
           <img
             onClick={() => {

@@ -5,6 +5,7 @@ import NavModalItem from "../layout/nav/navModalItem";
 import VerticalNav from "../layout/nav/verticalNav";
 import { navHelp,navClient } from "@/data/data";
 import { UserBoxNav } from "@/components";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Hamburger({ options, manageHamburguer, userMenu }) {
   const [dropDown, setDropDown] = useState(false);
@@ -12,14 +13,19 @@ export default function Hamburger({ options, manageHamburguer, userMenu }) {
   const [t] = useTranslation("global");
   return (
     <>
-      <div
+    <AnimatePresence>
+      <motion.div
         className="fixed top-0 z-[100] h-screen w-screen "
         style={{
           background: "#000000b3",
           backdropFilter: "blur(10px)",
           top: 0,
         }}
-      >
+        initial={{ x: "100%" }}
+        animate={{ x: 0 }}
+        exit={{ x: "100%" }}
+        transition={{ duration: 0.6 }}
+       >
         <div className=" absolute left-0 top-0 z-40 flex w-screen items-center justify-between px-4 xs:px-8 py-6 ">
           <UserBoxNav id={"userBoxNavUnique"}>
           <VerticalNav navItems={userMenu} title={"Centro de ayuda"} />
@@ -89,7 +95,8 @@ export default function Hamburger({ options, manageHamburguer, userMenu }) {
             </div>
           )}
         </div>
-      </div>
+      </motion.div>
+      </AnimatePresence>
     </>
   );
 }

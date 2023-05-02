@@ -42,7 +42,6 @@ export const clearState = async () => {
   await window.localStorage.clear();
   await window.sessionStorage.clear();
   //recarga la pagina
-  await window.location.reload();
   await persistor.persist();
 };
 
