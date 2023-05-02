@@ -1,6 +1,27 @@
 import { manageBecomeSeller } from "../components/masters/becomeSeller";
 import { useTranslation } from "react-i18next";
 
+export const navPublicMobile = [
+  {
+    name: "navPublic.t1",
+    url: "/",
+    visible: true,
+    //accion vacia
+    action: () => {},
+  },
+  {
+    name: "navPublic.t2",
+    url: "/about",
+    visible: true,
+    action: () => {},
+  },
+  {
+    name: "navPublic.t3",
+    url: "/beats",
+    visible: true,
+  },
+];
+
 export const navPublic = [
   {
     name: "navPublic.t1",
@@ -50,6 +71,7 @@ export const navClient = [
     name: "Perfil",
     url: "/client",
     colorMode: "light",
+    visibility: true,
   },
   {
     name: "Inbox",
@@ -60,21 +82,25 @@ export const navClient = [
     name: "Vende tus beats",
     url: "",
     onClick: () => manageBecomeSeller(),
+    visibility: true,
   },
   {
     name: "Configuracion",
     url: "/client/settings",
     colorMode: "light",
+    visibility: true,
   },
   {
     name: "Facturacion",
     url: "/client/billing",
     colorMode: "light",
+    visibility: true,
   },
   {
     name: "Logout",
     url: "/auth/logout",
     colorMode: "light",
+    visibility: true,
   },
 ];
 

@@ -27,6 +27,33 @@ export default function UserBoxNav({ children, id }) {
     setIsDropdownOpen(state);
   };
 
+  const handleAction = () => {
+    if (window.innerWidth < 1024) {
+      setIsDropdownOpen(!isDropdownOpen);
+    }
+  };
+
+  useEffect(() => {
+    const pageClickEvent = (e) => {
+      // If the active element exists and is clicked outside of
+      if (
+        dropdownRef.current !== null &&
+        !dropdownRef.current.contains(e.target)
+      ) {
+        setIsDropdownOpen(!isDropdownOpen);
+      }
+    };
+
+    // If the item is active (ie open) then listen for clicks
+    if (isDropdownOpen) {
+      window.addEventListener("click", pageClickEvent);
+    }
+
+    return () => {
+      window.removeEventListener("click", pageClickEvent);
+    };
+  }, [isDropdownOpen]);
+
   return (
     <>
       <div className=" flex flex-row items-center justify-center gap-4 align-middle">
@@ -39,6 +66,7 @@ export default function UserBoxNav({ children, id }) {
             className="relative"
             onMouseEnter={() => handleDropdown(true)}
             onMouseLeave={() => handleDropdown(false)}
+            onClick={() => handleAction()}
           >
             <div className="flex gap-2 rounded-full border bg-white pb-1 pl-1 pr-1 pt-1 lg:pr-4">
               <ClientImage client={client} height={35} width={35} />
