@@ -24,13 +24,13 @@ export default function Footer(props) {
           </div>
           <button
             onClick={() => i18n.changeLanguage("es")}
-            className="color-primary-red-500"
+            className="color-primary-red-500 font-bold"
           >
             Español
           </button>
           <button
             onClick={() => i18n.changeLanguage("en")}
-            className="color-primary-red-500"
+            className="color-primary-red-500 font-bold"
           >
             English
           </button>

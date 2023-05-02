@@ -25,23 +25,29 @@ export default function Landing() {
               <p className="text-base-light color-neutral-white mb-5">
                   {t("landing.t3")}
               </p>
+                <br />
               <Link href="/">
-              <button className="background-primary-red-700 color-neutral-white border-radius-estilo1 text-base-semibold w-max px-8 py-4">
-                {t("landing.t4")}
-              </button>
                 </Link>
+                <div className="gap-4">
                 <button
                   onClick={() => i18n.changeLanguage("es")}
-                  className="color-primary-red-500"
+                  className="background-primary-red-700 color-neutral-white border-radius-estilo1 text-base-semibold w-max px-3 py-2 mx-1"
                 >
                  Español
                 </button>
                 <button
                   onClick={() => i18n.changeLanguage("en")}
-                  className="color-primary-red-500"
+                  className="background-primary-red-700 color-neutral-white border-radius-estilo1 text-base-semibold w-max px-3 py-2 mx-1"
                 >
                 English
                 </button>
+                </div>
+                <br />
+                <br />
+                <br />
+                <button className="background-primary-red-700 color-neutral-white border-radius-estilo1 text-base-semibold w-max px-8 py-4">
+                {t("landing.t4")}
+              </button>
             </div>
           </div>
         </Hero>

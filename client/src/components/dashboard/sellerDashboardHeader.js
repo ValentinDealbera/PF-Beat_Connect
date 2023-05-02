@@ -44,7 +44,7 @@ export default function SellerDashboardHeader() {
       <header
         className={`"background-neutral-white" background-neutral-white fixed z-50 flex  w-full flex-row justify-center py-8 dark:bg-customDark-900`}
       >
-        <div
+        {/* <div
           className={`padding-x-dashboard-estilo1 flex w-full items-center  justify-between align-middle `}
         >
           <Logo mode={"light"} />
@@ -53,7 +53,8 @@ export default function SellerDashboardHeader() {
             className="dashboard-item__icon flex cursor-pointer fill-current text-white dark:text-white lg:hidden"
             onClick={() => setHamburguerVisible(!hamburguerVisible)}
           />
-        </div>
+        </div> */}
+        
       </header>
       {hamburguerVisible && (
         <HamburgerAdmin
