@@ -4,12 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { editClientBeat } from "@/redux/slices/client/beats";
 import { ValidationCreateBeat } from "../client/validationCreateBeat";
 import { fetchGenres } from "@/redux/slices/filters";
+import { useTranslation } from "react-i18next";
 
 export const manageEditBeat = () => {
   EditBeat.handleOpenDropdown();
 };
 
 export default function EditBeat() {
+  const [t] = useTranslation("global");
   const dispatch = useDispatch();
   const activeEditingBeat = useSelector(
     (state) => state.client.beats.activeEditingBeat
@@ -107,13 +109,13 @@ export default function EditBeat() {
             <div className="flex w-full flex-col gap-5 overflow-y-hidden">
               <div className="flex flex-col items-center justify-center gap-0">
                 <h4 className="text-titulo3-regular text-center">
-                  Editemos tu{" "}
+                    {t("editBeat.t1")}{" "}
                   <span className="text-titulo3-semibold text-red-700">
                     beat
                   </span>{" "}
                 </h4>
                 <p className="text-base-light text-center">
-                  Haz los ajustes que creas necesarios
+                  {t("editBeat.t2")}
                 </p>
               </div>
               <form
@@ -123,30 +125,30 @@ export default function EditBeat() {
                 <div className="flex flex-col gap-4">
                   <Input
                     name={"name"}
-                    label={"Nombre del beat"}
+                    label={t("postBeat.form1")}
                     type={"text"}
                     onChange={handleInputChange}
                     error={error.name}
                     className="w-full"
-                    placeholder="Ingresa un nombre increible"
+                    placeholder={t("postBeat.form2")}
                     labelClass="w-full"
                     defaultValue={activeEditingBeat.name}
                   />
                   <Input
                     name={"priceAmount"}
                     prefix={"$"}
-                    label={"Precio del beat"}
+                    label={t("postBeat.form3")}
                     type={"number"}
                     onChange={handleInputChange}
                     error={error.priceAmount}
-                    placeholder="Ingresa un precio"
+                    placeholder={t("postBeat.form4")}
                     className="w-full"
                     labelClass="w-full"
                     defaultValue={activeEditingBeat.priceAmount}
                   />
 
                   <Select
-                    label={"Elige un genero"}
+                    label={t("postBeat.form5")}
                     valores={genres}
                     setSeleccionados={handleSelectChange}
                     value={selected}
@@ -169,7 +171,7 @@ export default function EditBeat() {
 
                   <Input
                     name={"image"}
-                    label={"Sube una portada"}
+                    label={t("postBeat.form9")}
                     placeholder={"Beat Image"}
                     type={"file"}
                     onChange={handleInputChange}
@@ -182,7 +184,7 @@ export default function EditBeat() {
                   type="submit"
                   className="text-base-semibold mt-2  w-full rounded-full bg-red-700 py-2 text-white"
                 >
-                  Guardar publicacion
+                    {t("postBeat.form15")}
                 </button>
               </form>
             </div>
