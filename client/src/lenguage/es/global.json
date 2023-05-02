@@ -6,12 +6,9 @@
     "t4": "Ver todos los beats",
     "t5": "destacados"
   },
-
   "helpCenter": {},
-
-  "helpTermsTitle":"Terminos de BeatConnect",
+  "helpTermsTitle": "Terminos de BeatConnect",
   "helpTermsParagraph": " Los siguientes términos y condiciones establecen el acuerdo legal entre BeatConnect y los usuarios del sitio web. Al acceder y utilizar el sitio web, usted acepta estos términos y condiciones en su totalidad. Si no está de acuerdo con estos términos condiciones, por favor no utilice este sitio web. ",
-
   "helpCenter-terms": {
     "title": "Términos y condiciones",
     "t1": "Bienvenido a nuestro sitio web. Si continúa navegando y utilizando este sitio, acepta cumplir y estar sujeto los siguientes términos y condiciones de uso, que junto a nuestra política de privacidad rigen la relacion de BeatConnect con usted en relación con este sitio web.",
@@ -27,10 +24,8 @@
     "t11": "No tenemos ninguna responsabilidad por el contenido de los sitios web vinculados. Su uso de este sitio web y cualquier disputa que surja de dicho uso del sitio web está sujeto a las leyes de Argentina. Al utilizar este sitio web, usted acepta estos términos y condiciones en su totalidad. Si no está de acuerdo con estos términos y condiciones o con alguna parte de estos términos y condiciones, no utilice nuestro sitio web",
     "t12": "Al utilizar este sitio web, usted acepta estos términos y condiciones en su totalidad. Si no está de acuerdo con estos términos y condiciones o con cualquier parte de estos términos y condiciones, no use nuestro sitio web."
   },
-
-  "helpPrivacyTitle":"Politica de privacidad",
+  "helpPrivacyTitle": "Politica de privacidad",
   "helpPrivacyParagraph": "En nuestra plataforma, nos tomamos muy en serio la privacidad de nuestros usuarios y nos comprometemos a proteger la información personal que compartes con nosotros. Nuestra política de privacidad detalla cómo recopilamos, utilizamos, divulgamos y protegemos tu información personal, así como tus derechos y opciones en cuanto a su uso.",
-
   "helpCenter-privacy": {
     "title": "Politica de privacidad",
     "t1": "En BeatConnect, nos tomamos muy en serio la privacidad de nuestros usuarios y nos comprometemos a proteger la información personal que compartes con nosotros. En esta política de privacidad, detallamos cómo recopilamos, utilizamos, divulgamos y protegemos tu información personal, así como tus derechos y opciones en cuanto a su uso. Al utilizar nuestra plataforma, aceptas nuestra política de privacidad y nuestras prácticas de manejo de información personal.",
@@ -45,16 +40,13 @@
     "t10": "Tus derechos y opciones",
     "t11": "Puedes elegir no proporcionar cierta información personal, pero esto puede limitar tu capacidad para utilizar nuestra plataforma. También tienes ciertos derechos en relación con tu información personal, como el derecho a acceder, corregir y eliminar tu información personal."
   },
-  
-  "helpIndexTitle":"Centro de ayuda",
+  "helpIndexTitle": "Centro de ayuda",
   "helpIndexParagraph": "En nuestro centro de ayuda, nos esforzamos por proporcionar una experiencia de usuario excepcional a todos nuestros clientes. Estamos aquí para responder cualquier pregunta que puedas tener y ayudarte a solucionar cualquier problema que puedas encontrar al utilizar nuestra plataforma.",
-  
   "helpCenterIndex": {
     "t1": "Preguntas frecuentes",
     "t2": "¿Aun no encuentras tu respuesta?",
     "t3": "Envianos un ticket"
   },
-
   "faqs": {
     "t1": "¿Cómo puedo encontrar el beat adecuado para mi proyecto musical?",
     "c1": "En nuestra plataforma, puedes explorar los catálogos de los productores de música registrados y escuchar muestras de audio de cada beat.",
@@ -65,7 +57,6 @@
     "t4": "¿Cómo puedo registrarme como proveedor en la plataforma?",
     "c4": "Para registrarte como proveedor, debes completar el formulario de registro. Una vez registrado, podrás crear y publicar tu catálogo de instrumentales."
   },
-
   "faqsAdmin": {
     "t1": "¿Cómo puedo encontrar el beat adecuado para mi proyecto musical?",
     "c1": "En nuestra plataforma, puedes explorar los catálogos de los productores de música registrados y escuchar muestras de audio de cada beat.",
@@ -76,7 +67,6 @@
     "t4": "¿Cómo puedo registrarme como proveedor en la plataforma?",
     "c4": "Para registrarte como proveedor, debes completar el formulario de registro. Una vez registrado, podrás crear y publicar tu catálogo de instrumentales."
   },
-
   "about": {
     "t1": "Conozcámonos",
     "t2": "un poco más",
@@ -90,17 +80,16 @@
     "title2": "creadores",
     "title3": "y"
   },
-
   "tecnologias": {
     "t1": "Next.js es un framework de React para la construcción de aplicaciones web de alto rendimiento y de alto rendimiento. Next.js te ayuda a crear aplicaciones web de una sola página con React fácilmente.",
-    "t2": "Redux es una librería de gestión de estado para aplicaciones JavaScript de una sola página (SPA). Se utiliza principalmente con React, pero también se puede utilizar con otras bibliotecas o marcos de trabajo de JavaScript.",
+    "t2": "Redux es una librería de gestión de estado para aplicaciones JavaScript de una sola página (SPA). Se utiliza principalmente con React, pero también se puede utilizar con otras bibliotecas o marcos de trabajo de JavaScript. Redux se basa en la arquitectura Flux y se centra en la idea de que el estado de la aplicación debe ser centralizado y predecible.",
     "t3": "Postman es una herramienta de colaboración para diseñar, probar y documentar las API. Con Postman puedes enviar solicitudes HTTP a un servidor web y recibir respuestas. Puedes organizar tus solicitudes en colecciones y agregar tests automatizados a tus solicitudes para asegurarte de que tus API funcionan correctamente.",
     "t4": "Sass es un preprocesador de CSS que permite escribir código CSS de manera más eficiente y estructurada. Con Sass, puedes utilizar variables, anidamiento de selectores, mixins, funciones y operadores matemáticos, lo que facilita la escritura y el mantenimiento de hojas de estilo. Además, Sass permite la creación de archivos parciales que se pueden importar en otros archivos para una mayor modularidad y reutilización de código.",
-    "t5": "Figma es una herramienta de diseño de interfaz de usuario (UI) basada en la nube que permite a los diseñadores y equipos de diseño colaborar en tiempo real. Figma cuenta con una interfaz intuitiva y fácil de usar que permite crear diseños, prototipos y animaciones interactivas.",
+    "t5": "Figma es una herramienta de diseño de interfaz de usuario (UI) basada en la nube que permite a los diseñadores y equipos de diseño colaborar en tiempo real. Figma cuenta con una interfaz intuitiva y fácil de usar que permite crear diseños, prototipos y animaciones interactivas. Figma también ofrece una amplia variedad de recursos, como iconos, componentes, plantillas y complementos, que facilitan la creación de diseños de alta calidad de manera más rápida y eficiente.",
     "t6": "Tailwind CSS es un framework de CSS de bajo nivel que te ayuda a crear diseños de interfaz de usuario (UI) de manera rápida y sencilla. Con Tailwind CSS, puedes crear diseños de interfaz de usuario (UI) personalizados sin tener que escribir CSS.",
     "t7": "Express.js es un framework de servidor web para Node.js que permite crear aplicaciones web y API REST de manera rápida y sencilla. Express.js se basa en el concepto de middleware, que es una función que se ejecuta entre la solicitud y la respuesta del servidor. Express.js proporciona una serie de middleware predefinidos que facilitan la creación de aplicaciones web y API REST.",
     "t8": "JSON Web Token (JWT) es un estándar abierto que define un formato compacto y autónomo para transmitir información de forma segura entre dos partes como un objeto JSON. Los tokens JWT se pueden firmar usando un secreto (con el algoritmo HMAC) o una clave pública / privada usando RSA o ECDSA.",
-    "t9": "MongoDB es una base de datos NoSQL orientada a documentos que apareció a mediados de la década de 2000. Se utiliza para almacenar volúmenes masivos de datos. A diferencia de una base de datos relacional SQL tradicional, MongoDB no se basa en tablas y columnas. ",
+    "t9": "MongoDB es un sistema de base de datos NoSQL orientado a documentos que utiliza documentos JSON con esquemas.",
     "t10": "Mongoose es una biblioteca de modelado de objetos de MongoDB diseñada para trabajar en un entorno asíncrono. Mongoose soporta tanto promesas como devoluciones de llamada. Mongoose simplifica la creación de modelos de esquema, validación, creación, consulta, actualización y eliminación de registros.",
     "t11": "Mercado Pago es una plataforma de pagos online que permite a los usuarios realizar pagos a través de tarjetas de crédito, débito, efectivo y transferencias bancarias.",
     "t12": "Auth0 es una plataforma de autenticación y autorización que permite a los desarrolladores agregar autenticación y autorización a sus aplicaciones web, móviles y de escritorio.",
@@ -110,20 +99,17 @@
     "t16": "Trello es una herramienta de gestión de proyectos que permite a los equipos de trabajo organizar sus proyectos en tableros. ",
     "t17": "Git es un sistema de control de versiones distribuido de código abierto que permite a los desarrolladores colaborar en proyectos de software. GitHub es una plataforma de alojamiento de código fuente y control de versiones que utiliza Git."
   },
-
   "navPublic": {
     "t1": "Inicio",
     "t2": "Nosotros",
     "t3": "Beats",
     "t4": "Carrito"
   },
-
   "navHelp": {
     "t1": "Inicio",
     "t2": "Política de privacidad",
     "t3": "Términos y condiciones"
   },
-
   "navClient": {
     "t1": "Perfil",
     "t2": "Inbox",
@@ -133,11 +119,9 @@
     "t6": "Facturación",
     "t7": "Logout"
   },
-
   "navModalItem": {
     "label": "Centro de ayuda"
   },
-
   "authIndex": {
     "t1": "Hey, bienvenido",
     "t2": "de nuevo",
@@ -147,44 +131,37 @@
     "t6": "¿No tienes una cuenta?",
     "t7": "Regístrate",
     "label": "Correo electrónico",
-    "placeholder" : "Correo electrónico",
-    "labelPassword" : "Contraseña",
+    "placeholder": "Correo electrónico",
+    "labelPassword": "Contraseña",
     "placeholderPassword": "Contraseña",
-    "continueGoogle" : "Continuar con Google"
+    "continueGoogle": "Continuar con Google"
   },
-
   "landing": {
     "t1": "Explora los mejores beats, encuentra nuevos artistas,",
     "t2": "Descubre BeatConnect.",
     "t3": "Sumérgete en el mundo de la música con BeatConnect, donde podrás descubrir los mejores beats, explorar nuevos artistas y desatar tu creatividad.",
     "t4": "Ingresar ahora"
   },
-
   "footerNav": {
     "general": "General",
     "help": "Ayuda",
     "account": "Cuenta"
   },
-
   "generalItems": {
     "t1": "Inicio",
     "t2": "Nosotros",
     "t3": "Beats"
   },
-
   "helpItems": {
     "t1": "Inicio",
     "t2": "Política de privacidad",
     "t3": "Términos y condiciones"
   },
-
   "accountItems": {
     "t1": "Iniciar Sesión",
     "t2": "Registrarse"
   },
-
-  "userBoxNav" : "Iniciar Sesión",
-
+  "userBoxNav": "Iniciar Sesión",
   "becomeSeller": {
     "t1": "Convertirte en vendedor de",
     "t2": "es una",
@@ -192,10 +169,9 @@
     "t4": "¿Eres productor musical y estás buscando una plataforma en línea para vender tus beats? BeatConnect es la solución perfecta para ti. Crea tu propia tienda virtual y vende tus beats fácilmente.",
     "t5": "Acepto los términos y condiciones",
     "t6": "Empezar a vender",
-    "error1" : "Debes aceptar los términos y condiciones",
-    "error2" : "Ocurrio un error, intenta más tarde"
+    "error1": "Debes aceptar los términos y condiciones",
+    "error2": "Ocurrio un error, intenta más tarde"
   },
-
   "postBeat": {
     "t1": "¿En que haz estado",
     "t2": "trabajando?",
@@ -215,16 +191,14 @@
     "form13": "Ingresa un beat de alta calidad (WAV, OGG)",
     "form14": "Crear publicacion"
   },
-
   "buyerGeneralNav": {
-    "profile" : "Perfil",
-    "password" : "Contraseña",
+    "profile": "Perfil",
+    "password": "Contraseña",
     "t1": "Beats comprados",
     "t2": "Mis Beats",
     "t3": "Favoritos",
     "t4": "Reviews"
   },
-
   "NoBougthBeats": "Hey, no compraste ningun beat!",
   "NoOwnedBeats": "Hey, no has publicado ningun beat!",
   "NoFavBeats": "Te ha gustado algun beat?",
@@ -232,7 +206,6 @@
   "NoOwnedBeatsButton": "Publica uno ahora!",
   "NoFavBeatsButton": "Encuentra uno!",
   "NoBeats": "Hey, parece que no hay nada por aqui",
-
   "settingsClient": {
     "title": "Configura tu cuenta",
     "t1": "Nombre",
@@ -244,7 +217,6 @@
     "t7": "Imagen de portada",
     "tosave": "Guardar"
   },
-
   "beats": {
     "t1": "Encuentra ese beat",
     "t2": "soñado.",
@@ -252,32 +224,22 @@
     "t4": "destacados",
     "t5": "95% de nuestros clientes",
     "t6": "nos recomiendan.",
-    "t7": "En BeatConnect, nos esforzamos por brindar el mejor servicio posible a nuestros clientes. Estamos orgullosos de que el 95% de ellos nos recomienden a sus amigos y colegas. Esta estadística es un testimonio de nuestro compromiso con la calidad y la satisfacción del cliente. Si aún no has probado nuestros servicios, ¡te invitamos a hacerlo y unirte a nuestra lista de clientes satisfechos!",
-    "t8": "",
-    "t9": ""
+    "t7": "En BeatConnect, nos esforzamos por brindar el mejor servicio posible a nuestros clientes. Estamos orgullosos de que el 95% de ellos nos recomienden a sus amigos y colegas. Esta estadística es un testimonio de nuestro compromiso con la calidad y la satisfacción del cliente. Si aún no has probado nuestros servicios, ¡te invitamos a hacerlo y unirte a nuestra lista de clientes satisfechos!"
   },
-
   "beatShopSection": {
     "t1": "Anterior",
     "t2": "Siguiente",
     "filterName1": "Generos",
     "filterName2": "Precio",
-    "sortBy": "Ordenar por:",
-    "t6": "",
-    "t7": "",
-    "t8": "",
-    "t9": ""
+    "sortBy": "Ordenar por:"
   },
-
   "search": "¿Que estas buscando?",
-
-  "billing" : {
+  "billing": {
     "t1": "Facturación",
-    "t2" : "Monto",
-    "t3" : "Operacion",
-    "t4" : "Fecha"
+    "t2": "Monto",
+    "t3": "Operación",
+    "t4": "Fecha"
   },
-
   "sliceAuthSession": {
     "t1": "Se logueó correctamente",
     "t2": "Se registró correctamente",
@@ -291,72 +253,143 @@
     "t10": "Se está cambiando la contraseña...",
     "t11": "Se cambió la contraseña"
   },
-
+  "sliceBeats": {
+    "t1": "Beat creado correctamente",
+    "t2": "Creando beat...",
+    "t3": "Beat editado correctamente",
+    "t4": "Editando beat...",
+    "t5": "Beat eliminado correctamente",
+    "t6": "Eliminando beat...",
+    "t7": "Beat obtenido correctamente",
+    "t8": "Cargando beat...",
+    "t9": "Beat obtenido correctamente",
+    "t10": "Cargando beat..."
+  },
+  "sliceClientBeats": {
+    "t1": "Subiendo beat, espera la confirmación...",
+    "t2": "Beat subido correctamente",
+    "t3": "Borrando beat, espera la confirmación...",
+    "t4": "Beat borrado correctamente",
+    "t5": "Editando beat, espera la confirmación...",
+    "t6": "Beat editado correctamente",
+    "t7": "Añadiendo a favoritos, espera la confirmación...",
+    "t8": "Beat añadido a favoritos correctamente",
+    "t9": "Borrando de favoritos, espera la confirmación...",
+    "t10": "Beat borrado de favoritos correctamente"
+  },
+  "sliceCart": {
+    "t1": "Ya está en el carrito",
+    "t2": "Ya compraste este beat",
+    "t3": "No puedes comprar tus propios beats",
+    "t4": "Se agregó al carrito",
+    "t5": "Se eliminó del carrito",
+    "t6": "Error al crear orden"
+  },
+  "sliceOrders": {
+    "t1": "Borrando Orden...",
+    "t2": "Orden Borrada",
+    "t3": "Error al borrar orden",
+    "t4": "Creando Orden...",
+    "t5": "Orden Creada",
+    "t6": "Error al crear orden"
+  },
+  "sliceClientOrders": {
+    "t1": "Orden cargada",
+    "t2": "Cargando orden..."
+  },
+  "sliceReviews": {
+    "t1": "Review borrada correctamente",
+    "t2": "Borrando review...",
+    "t3": "Review editada correctamente",
+    "t4": "Editando review...",
+    "t5": "Review creada correctamente",
+    "t6": "Creando review..."
+  },
+  "sliceClientReviews": {
+    "t1": "Review creada",
+    "t2": "Creando review...",
+    "t3": "Review eliminada",
+    "t4": "Eliminando review...",
+    "t5": "Review editada",
+    "t6": "Editando review..."
+  },
+  "sliceUser": {
+    "t1": "Usuario creado correctamente",
+    "t2": "Creando usuario...",
+    "t3": "Usuario editado correctamente",
+    "t4": "Editando usuario...",
+    "t5": "Usuario borrado correctamente",
+    "t6": "Borrando usuario..."
+  },
+  "slices": "Faltan credenciales",
+  "slicesErrorGenres": "Error al cargar los géneros",
   "miniCart": {
     "t1": "Parece que tu carrito esta vacio",
-    "t2": "Ver carrito"
+    "t2": "Ver carrito",
+    "t3": "Tu carrito esta vacío"
   },
-
+  "reviewForm": {
+    "t1": "Dejanos tu ",
+    "t2": "opinión",
+    "t3": "Postear Review",
+    "t4": "Título",
+    "t5": "Comentario"
+  },
   "cartHeaders": {
-    "title" : "Carrito",
+    "title": "Carrito",
     "t1": "Precio",
     "t2": "Acciones",
-    "t3" : "Eliminar",
-    "t4" : "Tu orden",
-    "t5" : "Subtotal",
-    "t6" : "Descuentos",
-    "t7" : "Total",
-    "t8" : "Comprar",
-    "t9" : "Beats ",
-    "t10" : "Relacionados"
+    "t3": "Eliminar",
+    "t4": "Tu orden",
+    "t5": "Subtotal",
+    "t6": "Descuentos",
+    "t7": "Total",
+    "t8": "Comprar",
+    "t9": "Beats ",
+    "t10": "Relacionados"
   },
-
-  "beatDetailSideBar" : {
-    "t1" : "Precios y licencias",
+  "beatDetailSideBar": {
+    "t1": "Precios y licencias",
     "t2": "Descargar",
     "t3": "Añadir al carrito",
-    "t4" : "Ver reviews"
+    "t4": "Ver reviews"
   },
-
-  "beatCar" : {
-    "edit" : "Editar",
+  "beatCar": {
+    "edit": "Editar",
     "delete": "Borrar",
     "editReview": "Editar review",
     "createReview": "Crear review",
-    "purchased" : "COMPRADO",
-    "modalPopUp1" : "¿Te gusto este Beat?",
-    "modalPopUp2" : "¡Inicia sesion para guardar tus beats favoritos!",
-    "modalPopUp3" : "Únete a nuestra comunidad en crecimiento de músicos y",
-    "modalPopUp4" : "productores de la música urbana.",
-    "modalPopUp5" : "¡Empieza a descubrir tus beats favoritos ahora mismo!",
-    "modalPopUp6" : "Inicia sesión aqui!"
+    "purchased": "COMPRADO",
+    "modalPopUp1": "¿Te gusto este Beat?",
+    "modalPopUp2": "¡Inicia sesion para guardar tus beats favoritos!",
+    "modalPopUp3": "Únete a nuestra comunidad en crecimiento de músicos y",
+    "modalPopUp4": "productores de la música urbana.",
+    "modalPopUp5": "¡Empieza a descubrir tus beats favoritos ahora mismo!",
+    "modalPopUp6": "Inicia sesión aqui!"
   },
-
   "editReview": {
-    "t1" : "Modifiquemos tu",
+    "t1": "Modifiquemos tu",
     "t2": "opinión",
     "t3": "Titulo",
-    "t4" : "Comentario",
-    "t5" : "Guardar Review"
+    "t4": "Comentario",
+    "t5": "Guardar Review"
   },
-
   "editPassword": {
-    "t1" : "Contraseña anterior",
-    "t2": "Nueva contraseña"
+    "t1": "Contraseña anterior",
+    "t2": "Nueva contraseña",
+    "t3": "Guardar"
   },
-
-  "clientReview" : "Estrellas",
-
-  "register" : {
-    "t1" : "Registrate en",
+  "clientReview": "Estrellas",
+  "register": {
+    "t1": "Registrate en",
     "t2": "Nombre",
-    "t3" : "Apellido",
+    "t3": "Apellido",
     "t4": "Siguiente",
-    "t5" : "Correo electrónico",
+    "t5": "Correo electrónico",
     "t6": "Nombre de usuario",
-    "t7" : "Contraseña",
+    "t7": "Contraseña",
     "t8": " Registrarme",
-    "t9" : "¿Ya tienes una cuenta?",
+    "t9": "¿Ya tienes una cuenta?",
     "t10": "Inicia sesión",
     "t11": "Biografia",
     "t12": "Foto de portada",
@@ -364,85 +397,95 @@
     "t14": "Baneado",
     "t15": "Vendedor"
   },
-
   "admin": {
-    "t1" : "Hola, bienvenido a tu panel de control",
+    "t1": "Hola, bienvenido a tu panel de control",
     "t2": "Preguntas frecuentes"
   },
-
-  "dashboardNav" : {
-    "title" : "Beats de la página",
-    "title2" : "Usuarios de la página",
+  "dashboardNav": {
+    "title": "Beats de la página",
+    "title2": "Usuarios de la página",
     "title3": "Ordenes de la pagina",
     "title4": "Reviews de la pagina",
-    "createBeat" : "Crear Beat",
-    "createUser" : "Crear Usuario",
-    "createReview" : "Crear Review",
-    "t1" : "General",
+    "createBeat": "Crear Beat",
+    "createUser": "Crear Usuario",
+    "createReview": "Crear Review",
+    "t1": "General",
     "t2": "Usuarios",
     "t3": "Ordenes",
-    "t4" : "Usuario",
+    "t4": "Usuario",
     "status": "Status",
     "actions": "Acciones",
     "status1": "Baneado",
     "status2": "Activo",
     "edit": "Editar",
-    "delete" : "Eliminar"
+    "delete": "Eliminar"
   },
-
-  "adminBeatsCreate" : {
-    "title" : "Editar Beat",
-    "title2" : "Editar Usuario",
+  "adminBeatsCreate": {
+    "title": "Editar Beat",
+    "title2": "Editar Usuario",
     "title3": "Editar Review",
-    "t1" : "Guardar cambios",
-    "f1" : "Nombre",
+    "t1": "Guardar cambios",
+    "f1": "Nombre",
     "f2": "Precio",
     "f3": "Imagen",
-    "f4" : "Usuario Creador",
+    "f4": "Usuario Creador",
     "f5": "Elige un Género",
     "f6": "Selecciona un Género",
     "f7": "Pausar"
   },
-
-  "delete" : {
-    "b" : "Borrar ",
-    "b1" : "¿Seguro que quieres borrar este item de ",
+  "delete": {
+    "b": "Borrar ",
+    "b1": "¿Seguro que quieres borrar este item de ",
     "b2": "Cancelar",
-    "b3": "Si, estoy seguro",
-    "u4" : "",
-    "u5": ""
+    "b3": "Si, estoy seguro"
   },
-
-  "adminCreateUser" : {
-    "t1" : "Comprador",
+  "adminCreateUser": {
+    "t1": "Comprador",
     "t2": "Vendedor",
     "t3": "Monto",
-    "t4" : "Fecha",
+    "t4": "Fecha",
     "t5": "Acciones"
   },
-
-  "adminCreateReview" : {
-    "t1" : "Creador"
+  "adminCreateReview": {
+    "t1": "Creador"
   },
-
   "adminCreateReviewForm": {
-    "t1" : "Usuario Creador",
+    "t1": "Usuario Creador",
     "t2": "Titulo",
     "t3": "Monto",
-    "t4" : "Banear",
+    "t4": "Banear",
     "t5": "Comentario"
   },
-
-  "recover" : {
-    "t1" : "Recupera tu ",
+  "recover": {
+    "t1": "Recupera tu ",
     "t2": "contraseña",
     "t3": "Ingresa tu email",
-    "t4" : "Enviar solicitud",
-    "t5" : "Cambiá tu",
+    "t4": "Enviar solicitud",
+    "t5": "Cambiá tu",
     "t6": "Nueva contraseña",
-    "t7" : "Repite Nueva Contraseña",
-    "t8" : "Cambiar contraseña",
-    "t9" : "La contraseñaaaaaaaaaaaaaa debe contener al menos una letra mayúscula, una letra minúscula, un número y un caracter especial; ademas de  un mínimo de 8 caracteres",
-    "t10" : "Las contraseñas deben ser iguales"
-  }
+    "t7": "Repite Nueva Contraseña",
+    "t8": "Cambiar contraseña",
+    "t9": "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un caracter especial; ademas de  un mínimo de 8 caracteres",
+    "t10": "Las contraseñas deben ser iguales"
+  },
+  "beatShopSectionForClient": {
+    "t1": "Esta caracteristica es solo para vendedores",
+    "t2": "Conviertete en vendedor!"
+  },
+  "reviewCardGrid": {
+    "t1": "Debes comprar un beat para darle una review! ",
+    "t2": "Compra uno ahora!"
+  },
+
+  "validationCreateBeat" : {
+    "t1": "El nombre de tu beat debe tener entre uno y 50 caracteres.",
+    "t2": "El precio de tu beat debe ser mayor a 1.",
+    "t3": "El tamaño de la imagen es demasiado grande. El tamaño máximo permitido es de 10 MB.",
+    "t4": "Debes subir un archivo jpg o png",
+    "t5": "El tamaño del audio es demasiado grande. El tamaño máximo permitido es de 10 MB.",
+    "t6": "Debes subir un archivo mp3 o wav",
+    "t7": "El tamaño del audio es demasiado grande. El tamaño máximo permitido es de 150 MB.",
+    "t8": "Tu beat debe tener entre 20 y 350 bpm.",
+    "t9": "Debes seleccionar un género"
+    }
 }

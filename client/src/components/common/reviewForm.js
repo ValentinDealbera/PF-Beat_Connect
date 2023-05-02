@@ -8,8 +8,10 @@ import {
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postClientReview } from "@/redux/slices/client/reviews";
+import { useTranslation } from "react-i18next";
 
 export default function ReviewForm(props) {
+  const [t] = useTranslation("global");
   const currentBeat = useSelector(
     (state) => state?.client?.reviews?.activeBeatCreateReview
   );
@@ -58,8 +60,8 @@ export default function ReviewForm(props) {
       <div className="flex w-full flex-col gap-3 overflow-y-hidden">
         <div className="flex flex-col items-center justify-center gap-4">
           <h4 className="text-titulo3-regular text-center">
-            Dejanos tu{" "}
-            <span className="text-titulo3-semibold text-red-700">opinión</span>{" "}
+              {t("reviewForm.t1")}{" "}
+            <span className="text-titulo3-semibold text-red-700">{t("reviewForm.t2")}</span>{" "}
           </h4>
         </div>
         <div className=" flex place-content-center gap-2">
@@ -87,16 +89,16 @@ export default function ReviewForm(props) {
               <FormColumn className="w-full">
                 <Input
                   name={"title"}
-                  label={"Titulo"}
-                  placeholder={"Titulo"}
+                  label={t("reviewForm.t4")}
+                  placeholder={t("reviewForm.t4")}
                   type={"text"}
                   onChange={handleInputChange}
                   className="w-full"
                 />
                 <TextArea
                   name={"comment"}
-                  label={"Comentario"}
-                  placeholder={"Comentario"}
+                  label={t("reviewForm.t5")}
+                  placeholder={t("reviewForm.t5")}
                   type={"text"}
                   onChange={handleInputChange}
                   className="h-24 w-full"
@@ -107,7 +109,7 @@ export default function ReviewForm(props) {
               type="submit"
               className="text-base-semibold mt-2  w-full rounded-full bg-red-700 py-2 text-white"
             >
-              Postear Review
+              {t("reviewForm.t3")}
             </button>
           </FormContainer>
         </form>

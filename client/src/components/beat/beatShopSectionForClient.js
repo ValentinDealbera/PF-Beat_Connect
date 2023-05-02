@@ -7,11 +7,14 @@ import {
   manageBecomeSeller,
 } from "@/components";
 
+import { useTranslation } from "react-i18next";
+
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 //import { fetchUserReviews } from "@/redux/slices/beats";
 
 export default function BeatShopSectionForClient(props) {
+
   const {
     auth: { isSeller },
     session: {
@@ -71,17 +74,18 @@ export default function BeatShopSectionForClient(props) {
 }
 
 function ForSellerOnly() {
+  const [t] = useTranslation("global");
   return (
     <div className="flex w-full flex-col justify-center gap-4">
       <h1 className="mt-5 text-center text-2xl font-medium">
-        Esta caracteristica es solo para vendedores
+          {t("beatShopSectionForClient.t1")}
       </h1>
       <div className="flex w-full justify-center ">
         <button
           className="text-base-semibold mt-2 w-fit rounded-full bg-red-700 px-4 py-2 text-white"
           onClick={() => manageBecomeSeller()}
         >
-          Conviertete en vendedor!
+            {t("beatShopSectionForClient.t2")}
         </button>
       </div>
     </div>

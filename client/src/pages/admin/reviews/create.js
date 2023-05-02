@@ -113,7 +113,7 @@ export default function SellerDashboardOverview() {
 
   return (
     <>
-      <Head title="Crear review" />
+      <Head title="Crear rev" />
       <main>
         <SellerDashboardLayout
           topBarMode="action"

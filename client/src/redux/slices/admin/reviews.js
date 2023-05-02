@@ -3,6 +3,7 @@ import { serverUrl } from "@/data/config";
 import { toast } from "sonner";
 import axios from "axios";
 import { toastError, toastSuccess } from "@/utils/toastStyles";
+import i18next from 'i18next';
 const tokenAdmin = process.env.NEXT_PUBLIC_TOKEN_ADMIN;
 const initialState = {
   reviews: [],
@@ -142,7 +143,8 @@ const adminReviewsSlice = createSlice({
       //DELETE ADMIN REVIEWS
       .addCase(adminDeleteReview.fulfilled, (state, action) => {
         console.log("action.payload ok", action.payload);
-        toast.success("Review borrada correctamente", {
+        let trad= i18next?.language == "en"? "Review deleted successfully" : "Review borrada correctamente"
+        toast.success(trad, {
           style: {
             background: "#F0FFF0",
             color: "#00B300",
@@ -160,13 +162,15 @@ const adminReviewsSlice = createSlice({
       })
       .addCase(adminDeleteReview.pending, (state, action) => {
         console.log("action.payload pending");
-        toast("Borrando review...");
+        let trad= i18next?.language == "en"? "Deleting review..." : "Borrando review..."
+        toast(trad);
       })
       //--------------------
       //EDIT ADMIN REVIEW
       .addCase(adminEditReview.fulfilled, (state, action) => {
         console.log("action.payload ok", action.payload);
-        toast.success("Review editada correctamente", {
+        let trad= i18next?.language == "en"? "Review edited successfully" : "Review editada correctamente"
+        toast.success(trad, {
           style: {
             background: "#F0FFF0",
             color: "#00B300",
@@ -186,14 +190,16 @@ const adminReviewsSlice = createSlice({
       })
       .addCase(adminEditReview.pending, (state, action) => {
         console.log("action.payload pending");
-        toast("Editando review...");
+        let trad= i18next?.language == "en"? "Editing review..." : "Editando review..."
+        toast(trad);
       })
       //--------------------
       //POST ADMIN REVIEW
 
       .addCase(adminPostReview.fulfilled, (state, action) => {
         console.log("action.payload ok", action.payload);
-        toast.success("Review creada correctamente", {
+        let trad= i18next?.language == "en"? "Review created successfully" : "Review creada correctamente"
+        toast.success(trad, {
           style: {
             background: "#F0FFF0",
             color: "#00B300",
@@ -212,19 +218,22 @@ const adminReviewsSlice = createSlice({
       })
       .addCase(adminPostReview.pending, (state, action) => {
         console.log("action.payload pending");
-        toast("Creando review...");
+        let trad= i18next?.language == "en"? "Creating review..." : "Creando review..."
+        toast(trad);
       })
       //--------------------
       //GET ADMIN REVIEW
       .addCase(adminGetReview.fulfilled, (state, action) => {
-        toast.success("Beat obtenido correctamente", toastSuccess);
+        let trad= i18next?.language == "en"? "Beat obtained successfully" : "Beat obtenido correctamente"
+        toast.success(trad, toastSuccess);
         state.setCurrentEditingReview = action.payload.reviewResponse;
       })
       .addCase(adminGetReview.rejected, (state, action) => {
         toast.error(action.payload, toastError);
       })
       .addCase(adminGetReview.pending, (state, action) => {
-        toast("Cargando beat...");
+        let trad= i18next?.language == "en"? "Loading beat..." : "Cargando beat..."
+        toast(trad);
       });
   },
 });

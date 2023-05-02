@@ -128,7 +128,7 @@ export default function SellerDashboardOverview() {
         <SellerDashboardLayout
           topBarMode="message"
           topBarMessage={t("dashboardNav.title3")}
-          topBarButtonLabel="Crear review"
+          topBarButtonLabel="Crear rev"
         >
           <IslandDashboard className="flex flex-col gap-5 xl:gap-8 ">
             <DynamicTable headers={headers} rows={rows} />

@@ -14,8 +14,7 @@ import { toastError, toastSuccess } from "@/utils/toastStyles";
 import { setBougthBeats, setOwnedBeats, setFavoriteBeats } from "./beats";
 import { setOwnedReviews } from "./reviews";
 import { setOrders } from "./orders";
-import { useTranslation } from "react-i18next";
-import i18n from 'i18next';
+import i18next from 'i18next';
 
 const initialState = {
   auth: {
@@ -303,7 +302,15 @@ const authSession = createSlice({
           ...state.session.current,
           ...action.payload.session,
         };
-        toast.success("Se logueó correctamente", toastSuccess);
+        console.log(i18next.language)
+        // if(i18next.language == "en"){ 
+        //   toast.success("Logged in successfully", toastSuccess);
+        // }
+        // else {
+        //   toast.success("Se logueo correctamente", toastSuccess);
+        // }
+        let trad= i18next?.language == "en"? "Logged in successfully" :"Se logueo correctamente"
+        toast.success(trad, toastSuccess);
       })
       .addCase(jsonLogin.rejected, (state, action) => {
         console.log("jsonLogin.rejected", action);
@@ -316,7 +323,8 @@ const authSession = createSlice({
         return;
       })
       .addCase(jsonRegister.fulfilled, (state, action) => {
-        toast.success("Se registró correctamente", toastSuccess);
+        let trad= i18next?.language == "en"? "Registered successfully" :"Se registró correctamente"
+        toast.success(trad, toastSuccess);
       })
       .addCase(jsonRegister.rejected, (state, action) => {
         toast.error(action.payload, toastError);
@@ -325,11 +333,13 @@ const authSession = createSlice({
       //--------------------
       //CONVERT IN SELLER
       .addCase(convertInSeller.pending, (state, action) => {
-        toast("Se está convirtiendo en vendedor...");
+        let trad= i18next?.language == "en"? "Becoming a seller..." :"Se está convirtiendo en vendedor..."
+        toast(trad);
       })
       .addCase(convertInSeller.fulfilled, (state, action) => {
         state.auth.isSeller = true;
-        toast.success("Se convirtió en vendedor", toastSuccess);
+        let trad= i18next?.language == "en"? "Became a seller" :"Se convirtió en vendedor"
+        toast.success(trad, toastSuccess);
       })
       .addCase(convertInSeller.rejected, (state, action) => {
         toast.error(action.payload, toastError);
@@ -338,14 +348,16 @@ const authSession = createSlice({
       //--------------------
       //EDIT CLIENT
       .addCase(editClient.pending, (state, action) => {
-        toast("Se está editando...");
+        let trad= i18next?.language == "en"? "Editing..." :"Se está editando..."
+        toast(trad);
       })
       .addCase(editClient.fulfilled, (state, action) => {
         state.session.current = {
           ...state.session.current,
           ...action.payload.userResponse,
         };
-        toast.success("Se editó correctamente", toastSuccess);
+        let trad= i18next?.language == "en"? "Edited successfully" :"Se editó correctamente"
+        toast.success(trad, toastSuccess);
       })
       .addCase(editClient.rejected, (state, action) => {
         console.log("editClient.rejected", action.payload);
@@ -357,7 +369,8 @@ const authSession = createSlice({
         return;
       })
       .addCase(passwordRecovery.fulfilled, (state, action) => {
-        toast.success("Tu contraseña se cambio correctamente", toastSuccess);
+        let trad= i18next?.language == "en"? "Your password has been changed successfully" :"Tu contraseña se cambio correctamente"
+        toast.success(trad, toastSuccess);
       })
       .addCase(passwordRecovery.rejected, (state, action) => {
 
@@ -387,12 +400,12 @@ const authSession = createSlice({
       //--------------------
       //RECOVER PASSWORD
       .addCase(recoverPassword.pending, (state, action) => {
-        toast(
-          "Te estamos enviando un email con la solicitud de recuperación..."
-        );
+        let trad= i18next?.language == "en"? "Sending you an email with recovery request..." :"Te estamos enviando un email con la solicitud de recuperación..."
+        toast(trad);
       })
       .addCase(recoverPassword.fulfilled, (state, action) => {
-        toast.success("Se envió el email", toastSuccess);
+        let trad= i18next?.language == "en"? "Email sent" :"Se envió el email"
+        toast.success(trad, toastSuccess);
       })
       .addCase(recoverPassword.rejected, (state, action) => {
         toast.error(action.payload, toastError);
@@ -401,10 +414,12 @@ const authSession = createSlice({
       //--------------------
       //CHANGE PASSWORD
       .addCase(changePassword.pending, (state, action) => {
-        toast("Se está cambiando la contraseña...");
+        let trad= i18next?.language == "en"? "Changing password..." :"Se está cambiando la contraseña..."
+        toast(trad);
       })
       .addCase(changePassword.fulfilled, (state, action) => {
-        toast.success("Se cambió la contraseña", toastSuccess);
+        let trad= i18next?.language == "en"? "Password changed" :"Se cambió la contraseña"
+        toast.success(trad, toastSuccess);
       })
       .addCase(changePassword.rejected, (state, action) => {
         toast.error(action.payload, toastError);

@@ -154,7 +154,7 @@ export default function Carrito() {
           {cartItems.length <= 0 && (
             <div className="flex items-center justify-center ">
               <h1 className="text-titulo2-medium pb-10 text-white">
-                Tu carrito esta vacio
+                {t("miniCart.t3")}
               </h1>
             </div>
           )}
