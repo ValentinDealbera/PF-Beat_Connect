@@ -60,8 +60,8 @@ export default function Header() {
       name: t("navClient.t3"),
       url: "",
       onClick: () => {manageBecomeSeller(), setHamburguerVisible(false)},
-      // // visibility: !isSeller,
-      visibility: true,
+      visibility: !isSeller,
+  
    
       // visibility: true,
     },
@@ -69,9 +69,9 @@ export default function Header() {
       name: t("navClient.t4"),
       url: "",
       onClick: () => {managePostBeat(), setHamburguerVisible(false)},
-      //  //  visibility: isSeller,
-      visibility: true,
-      visibility: true,
+       visibility: isSeller,
+      //visibility: true,
+
     },
     {
       name: t("navClient.t5"),

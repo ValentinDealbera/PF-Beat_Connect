@@ -360,12 +360,12 @@
     "editReview": "Editar review",
     "createReview": "Crear review",
     "purchased": "COMPRADO",
-    "modalPopUp1": "¿Te gusto este Beat?",
+    "modalPopUp1": "¿Te gustó este Beat?",
     "modalPopUp2": "¡Inicia sesion para guardar tus beats favoritos!",
-    "modalPopUp3": "Únete a nuestra comunidad en crecimiento de músicos y",
-    "modalPopUp4": "productores de la música urbana.",
+    "modalPopUp3": "Únete a nuestra comunidad en crecimiento de músicos y productores de la música urbana.",
+    "modalPopUp4": "",
     "modalPopUp5": "¡Empieza a descubrir tus beats favoritos ahora mismo!",
-    "modalPopUp6": "Inicia sesión aqui!"
+    "modalPopUp6": "Inicia sesión ahora"
   },
   "editReview": {
     "t1": "Modifiquemos tu",
