@@ -14,8 +14,10 @@ import { useSelector } from "react-redux";
 
 import Image from "next/image";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function BeatReviewPopup({ modal, handleModalReview }) {
+  const [t] = useTranslation("global");
   //const [modal, setModal] = useState(false);
 
   const currentBeatReview = useSelector(
@@ -47,7 +49,7 @@ const averageRating = rating.reduce((a, b) => a + b, 0) / rating.length;
                 {currentBeatReview.name}{" "}
               </h1>
               <p className="text-base-regular">
-                {averageRating} Estrellas | {currentBeatReview.review.length} Reviews
+                {averageRating} {t("clientReview")} | {currentBeatReview.review.length} Reviews
               </p>
             </div>
             

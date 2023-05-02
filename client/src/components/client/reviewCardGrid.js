@@ -12,12 +12,14 @@ import {
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
 export function externalManageDropdown() {
   // NewBeatCardGrid.handleDropdownOpen();
 }
 
 export default function ReviewCardGrid(props) {
+  const [t] = useTranslation("global");
   const [isDropDown, setIsDropdownOpen] = useState(false);
   const reviews = useSelector((state) => state.client.reviews.reviews);
 
@@ -36,12 +38,12 @@ export default function ReviewCardGrid(props) {
         {reviews && reviews.length === 0 && (
           <div className="flex w-full flex-col justify-center gap-4">
           <h1 className="mt-5 text-center text-2xl font-medium">
-          Debes comprar un beat para darle una review! 
+              {t("reviewCardGrid.t1")}
           </h1>
           <div className="flex w-full justify-center ">
               <Link href="/beats">
                 <button className="text-base-semibold mt-2 w-full rounded-full bg-red-700 px-4 py-2 text-white">
-                  Compra uno ahora!
+                  {t("reviewCardGrid.t2")}
                 </button>
               </Link>
               </div>

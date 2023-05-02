@@ -6,12 +6,9 @@
     "t4": "See all beats",
     "t5": "featured"
   },
-
   "helpCenter": {},
-
   "helpTermsTitle": "Terms of BeatConnect",
   "helpTermsParagraph": "The following terms and conditions establish the legal agreement between BeatConnect and users of the website. By accessing and using the website, you agree to these terms and conditions in their entirety. If you do not agree with these terms and conditions, please do not use this website.",
-  
   "helpCenter-terms": {
     "title": "Terms and Conditions",
     "t1": "Welcome to our website. If you continue browsing and using this website, you agree to comply with and be bound by the following terms and conditions of use, which together with our privacy policy Privacy Policy govern BeatConnect's relationship with you in connection with this website.",
@@ -27,10 +24,8 @@
     "t11": "We have no responsibility for the content of the linked website(s). Your use of this website and any dispute arising out of such use of the website is subject to the laws of Argentina. By using this website, you accept these terms and conditions in full. If you disagree with these terms and conditions or any part of these terms and conditions, do not use our website.",
     "t12": "By using this website, you agree to these terms and conditions in their entirety. If you do not agree with these terms and conditions or any part of these terms and conditions, please do not use our website."
   },
-
   "helpPrivacyTitle": "Privacy policy",
   "helpPrivacyParagraph": "On our platform, we take the privacy of our users very seriously and are committed to protecting the personal information you share with us. Our privacy policy details how we collect, use, disclose, and protect your personal information, as well as your rights and options regarding its use.",
-
   "helpCenter-privacy": {
     "title": "Privacy Policy",
     "t1": "At BeatConnect, we take our users' privacy very seriously and are committed to protecting the personal information you share with us. In this privacy policy, we detail how we collect, use, disclose, and protect your personal information, as well as your rights and options regarding its use. By using our platform, you accept our privacy policy and our practices for handling personal information.",
@@ -45,16 +40,13 @@
     "t10": "Your rights and options",
     "t11": "You can choose not to provide certain personal information, but this may limit your ability to use our platform. You also have certain rights with respect to your personal information, such as the right to access, correct, and delete your personal information."
   },
-
   "helpIndexTitle": "Help center",
   "helpIndexParagraph": "At our help center, we strive to provide an exceptional user experience to all of our customers. We are here to answer any questions you may have and help you troubleshoot any issues you may encounter while using our platform.",
-  
   "helpCenterIndex": {
     "t1": "Frequently asked questions",
     "t2": "Still can't find your answer?",
     "t3": "Send us a ticket"
   },
-
   "faqs": {
     "t1": "How can I find the appropriate beat for my music project?",
     "c1": "In our platform, you can explore the catalogs of registered music producers and listen to audio samples of each beat.",
@@ -65,7 +57,6 @@
     "t4": "How can I register as a provider on the platform?",
     "c4": "To register as a provider, you need to fill out the registration form. Once registered, you will be able to create and publish your catalog of instrumentals."
   },
-
   "faqsAdmin": {
     "t1": "How can I find the appropriate beat for my music project?",
     "c1": "In our platform, you can explore the catalogs of registered music producers and listen to audio samples of each beat.",
@@ -76,7 +67,6 @@
     "t4": "How can I register as a provider on the platform?",
     "c4": "To register as a provider, you need to fill out the registration form. Once registered, you will be able to create and publish your catalog of instrumentals."
   },
-
   "about": {
     "t1": "Let's get to",
     "t2": "know each other a little more",
@@ -90,7 +80,6 @@
     "title2": "creators",
     "title3": "and"
   },
-
   "tecnologias": {
     "t1": "Next.js is a React framework for building high-performance web applications. Next.js helps you easily create single-page web applications with React.",
     "t2": "Redux is a state management library for single-page JavaScript applications (SPAs). It is primarily used with React, but can also be used with other JavaScript libraries or frameworks. Redux is based on the Flux architecture and focuses on the idea that the application state should be centralized and predictable.",
@@ -110,20 +99,17 @@
     "t16": "Trello is a project management tool that allows teams to organize their projects on boards.",
     "t17": "Git is an open-source distributed version control system that allows developers to collaborate on software projects. GitHub is a source code hosting and version control platform that uses Git."
   },
-
   "navPublic": {
     "t1": "Home",
     "t2": "About",
     "t3": "Beats",
     "t4": "Cart"
   },
-
   "navHelp": {
     "t1": "Home",
     "t2": "Privacy Policy",
     "t3": "Terms and Conditions"
   },
-
   "navClient": {
     "t1": "Profile",
     "t2": "Inbox",
@@ -133,11 +119,9 @@
     "t6": "Billing",
     "t7": "Logout"
   },
-
   "navModalItem": {
     "label": "Help Center"
   },
-
   "authIndex": {
     "t1": "Hey, welcome",
     "t2": "back",
@@ -152,39 +136,32 @@
     "placeholderPassword": "Password",
     "continueGoogle": "Continue with Google"
   },
-
   "landing": {
     "t1": "Explore the best beats, discover new artists,",
     "t2": "Discover BeatConnect",
     "t3": "Immerse yourself in the world of music with BeatConnect, where you can discover the best beats, explore new artists, and unleash your creativity.",
     "t4": "Sign in now"
   },
-
   "footerNav": {
     "general": "General",
     "help": "Help",
     "account": "Account"
   },
-
   "generalItems": {
     "t1": "Home",
     "t2": "About",
     "t3": "Beats"
   },
-
   "helpItems": {
     "t1": "Home",
     "t2": "Privacy Policy",
     "t3": "Terms and Conditions"
   },
-
   "accountItems": {
     "t1": "Log in",
     "t2": "Register"
   },
-
   "userBoxNav": "Log in",
-
   "becomeSeller": {
     "t1": "Become a seller on",
     "t2": "it's a",
@@ -195,7 +172,6 @@
     "error1": "You must accept the terms and conditions",
     "error2": "An error occurred, please try again later"
   },
-
   "postBeat": {
     "t1": "How have you been",
     "t2": "working?",
@@ -215,7 +191,6 @@
     "form13": "Upload a high-quality beat (WAV, OGG)",
     "form14": "Create post"
   },
-
   "buyerGeneralNav": {
     "profile": "Profile",
     "password": "Password",
@@ -224,7 +199,6 @@
     "t3": "Favorites",
     "t4": "Reviews"
   },
-
   "NoBougthBeats": "Hey, you didn't buy any beats!",
   "NoOwnedBeats": "Hey, you didnt published any beats!",
   "NoFavBeats": "Did you like any beat?",
@@ -232,7 +206,6 @@
   "NoOwnedBeatsButton": "Publish one now!",
   "NoFavBeatsButton": "Find one",
   "NoBeats": "Hey, it seems like there's nothing here",
-  
   "settingsClient": {
     "title": "Set up your account",
     "t1": "First name",
@@ -244,7 +217,6 @@
     "t7": "Cover image",
     "tosave": "Tosave"
   },
-
   "beats": {
     "t1": "Find that dream",
     "t2": "beat.",
@@ -252,32 +224,22 @@
     "t4": "Beats",
     "t5": "95% of our clients",
     "t6": "recommend us.",
-    "t7": "In BeatConnect, we strive to provide the best possible service to our customers. We are proud that 95% of them recommend us to their friends and colleagues. This statistic is a testament to our commitment to quality and customer satisfaction. If you haven't tried our services yet, we invite you to do so and join our list of satisfied customers!",
-    "t8": "",
-    "t9": ""
+    "t7": "In BeatConnect, we strive to provide the best possible service to our customers. We are proud that 95% of them recommend us to their friends and colleagues. This statistic is a testament to our commitment to quality and customer satisfaction. If you haven't tried our services yet, we invite you to do so and join our list of satisfied customers!"
   },
-
   "beatShopSection": {
     "t1": "Previous",
     "t2": "Next",
     "filterName1": "Genres",
     "filterName2": "Price",
-    "sortBy": "Sort By",
-    "t6": "",
-    "t7": "",
-    "t8": "",
-    "t9": ""
+    "sortBy": "Sort By"
   },
-
   "search": "What are you looking for?",
-  
   "billing": {
     "t1": "Billing",
     "t2": "Amount",
     "t3": "Operation",
     "t4": "Date"
   },
-
   "sliceAuthSession": {
     "t1": "Logged in successfully",
     "t2": "Registered successfully",
@@ -291,12 +253,88 @@
     "t10": "Changing password...",
     "t11": "Password changed"
   },
-
+  "sliceBeats": {
+    "t1": "Beat created successfully",
+    "t2": "Creating beat...",
+    "t3": "Beat edited successfully",
+    "t4": "Editing beat...",
+    "t5": "Beat deleted successfully",
+    "t6": "Deleting beat...",
+    "t7": "Beat retrieved successfully",
+    "t8": "Loading beat...",
+    "t9": "Beat obtained successfully",
+    "t10": "Loading beat..."
+  },
+  "sliceClientBeats": {
+    "t1": "Uploading beat, please wait for confirmation...",
+    "t2": "Beat uploaded successfully",
+    "t3": "Deleting beat, please wait for confirmation...",
+    "t4": "Beat deleted successfully",
+    "t5": "Editing beat, please wait for confirmation...",
+    "t6": "Beat edited successfully",
+    "t7": "Adding to favorites, please wait for confirmation...",
+    "t8": "Beat added to favorites successfully",
+    "t9": "Removing from favorites, please wait for confirmation...",
+    "t10": "Beat removed from favorites successfully"
+  },
+  "sliceCart": {
+    "t1": "Already in cart",
+    "t2": "You already bought this beat",
+    "t3": "You can't buy your own beats",
+    "t4": "Added to cart",
+    "t5": "Removed from cart",
+    "t6": "Error creating order"
+  },
+  "sliceOrders": {
+    "t1": "Deleting order...",
+    "t2": "Order deleted",
+    "t3": "Error deleting order",
+    "t4": "Creating order...",
+    "t5": "Order created",
+    "t6": "Error creating order"
+  },
+  "sliceClientOrders": {
+    "t1": "Order loaded",
+    "t2": "Loading order..."
+  },
+  "sliceReviews": {
+    "t1": "Review deleted successfully",
+    "t2": "Deleting review...",
+    "t3": "Review edited successfully",
+    "t4": "Editing review...",
+    "t5": "Review created successfully",
+    "t6": "Creating review..."
+  },
+  "sliceClientReviews": {
+    "t1": "Review created",
+    "t2": "Creating review...",
+    "t3": "Review deleted",
+    "t4": "Deleting review...",
+    "t5": "Review edited",
+    "t6": "Editing review..."
+  },
+  "sliceUser": {
+    "t1": "User created successfully",
+    "t2": "Creating user...",
+    "t3": "User edited successfully",
+    "t4": "Editing user...",
+    "t5": "User deleted successfully",
+    "t6": "Deleting user..."
+  },
+  "slices": "Missing credentials",
+  "slicesErrorGenres": "Error loading genres",
   "miniCart": {
     "t1": "It seems like your cart is empty",
-    "t2": "View cart"
+    "t2": "View cart",
+    "t3": "Your cart is empty"
   },
-
+  "reviewForm": {
+    "t1": "Leave your",
+    "t2": "opinion",
+    "t3": "Post Review",
+    "t4": "Title",
+    "t5": "Comment"
+  },
   "cartHeaders": {
     "title": "Cart",
     "t1": "Price",
@@ -310,18 +348,17 @@
     "t9": "Related ",
     "t10": "Beats"
   },
-
   "beatDetailSideBar": {
     "t1": "Prices and Licenses",
     "t2": "Download",
     "t3": "Add to Cart",
     "t4": "See reviews"
   },
-
   "beatCar": {
     "edit": "Edit",
     "delete": "Delete",
     "editReview": "Edit review",
+    "createReview": "Create review",
     "purchased": "PURCHASED",
     "modalPopUp1": "Did you like this Beat?",
     "modalPopUp2": "Log in to save your favorite beats!",
@@ -330,7 +367,6 @@
     "modalPopUp5": "Start discovering your favorite beats right now!",
     "modalPopUp6": "Log in here!"
   },
-
   "editReview": {
     "t1": "Let's modify your",
     "t2": "opinion",
@@ -338,14 +374,12 @@
     "t4": "Comment",
     "t5": "Save Review"
   },
-
   "editPassword": {
     "t1": "Previous password",
-    "t2": "New password"
+    "t2": "New password",
+    "t3": "Save"
   },
-
   "clientReview": "Stars",
-
   "register": {
     "t1": "Register on",
     "t2": "First name",
@@ -363,77 +397,65 @@
     "t14": "Banned",
     "t15": "Seller"
   },
-
   "admin": {
     "t1": "Hello, welcome to your control panel.",
     "t2": "Frequently Asked Questions"
   },
-
   "dashboardNav": {
-    "title" : "Beats of the page",
-    "title2" : "Users of the page",
-    "title3" : "Orders on the page",
+    "title": "Beats of the page",
+    "title2": "Users of the page",
+    "title3": "Orders on the page",
     "title4": "Page Reviews",
-    "createReview" : "Create Review",
-    "createBeat" : "Create Beat",
-    "createUser" : "Create User",
+    "createReview": "Create Review",
+    "createBeat": "Create Beat",
+    "createUser": "Create User",
     "t1": "Overview",
     "t2": "Users",
     "t3": "Orders",
-    "t4" : "User",
+    "t4": "User",
     "status": "Status",
     "actions": "Actions",
     "status1": "Banned",
     "status2": "Active",
     "edit": "Edit",
-    "delete" : "Delete"
+    "delete": "Delete"
   },
-
-  "adminBeatsCreate" : {
-    "title" : "Create Beat",
+  "adminBeatsCreate": {
+    "title": "Create Beat",
     "title2": "Edit User",
     "title3": "Edit Review",
-    "t1" : "Save Changes",
-    "f1" : "Name",
+    "t1": "Save Changes",
+    "f1": "Name",
     "f2": "Price",
     "f3": "Image",
-    "f4" : "Creator User",
+    "f4": "Creator User",
     "f5": "Choose a Genre",
     "f6": "Select a Genre",
     "f7": "Pause"
-    },
-
-    
+  },
   "delete": {
-    "b" : "Delete ",
+    "b": "Delete ",
     "b1": "Are you sure you want to delete this item from ",
     "b2": "Cancel",
-    "b3": "Yes, I'm sure",
-    "u4": "",
-    "u5": ""
-    },
-
-    "adminCreateUser" : {
-      "t1" : "Buyer",
-      "t2": "Seller",
-      "t3": "Amount",
-      "t4" : "Date",
-      "t5": "Actions"
-      },
-
-    "adminCreateReview" : {
-      "t1" : "Creator"
+    "b3": "Yes, I'm sure"
   },
-
+  "adminCreateUser": {
+    "t1": "Buyer",
+    "t2": "Seller",
+    "t3": "Amount",
+    "t4": "Date",
+    "t5": "Actions"
+  },
+  "adminCreateReview": {
+    "t1": "Creator"
+  },
   "adminCreateReviewForm": {
-    "t1" : "Creator User",
+    "t1": "Creator User",
     "t2": "Title",
     "t3": "Amount",
-    "t4" : "Ban User",
+    "t4": "Ban User",
     "t5": "Comment"
-    },
-
-    
+  },
   "recover": {
     "t1": "Recover your ",
     "t2": "password",
@@ -445,9 +467,27 @@
     "t8": "Change password",
     "t9": "The password must contain at least one uppercase letter, one lowercase letter, one number, and one special character; in addition to a minimum of 8 characters.",
     "t10": "Passwords must match"
-    },
-
-    "bot": "Online support / Reports"
+  },
+  "beatShopSectionForClient": {
+    "t1": "This feature is only for sellers",
+    "t2": "Become a seller!"
+  },
+  "reviewCardGrid": {
+    "t1": "You must purchase a beat to leave a review! ",
+    "t2": "Buy one now!"
+  },
+  "validationCreateBeat" : {
+    "t1": "The name of your beat must have between one and 50 characters.",
+    "t2": "The price of your beat must be greater than 1.",
+    "t3": "The size of the image is too large. Maximum allowed size is 10 MB.",
+    "t4": "You must upload a jpg or png file",
+    "t5": "The size of the audio is too large. Maximum allowed size is 10 MB.",
+    "t6": "You must upload a mp3 or wav file",
+    "t7": "The size of the audio is too large. Maximum allowed size is 150 MB.",
+    "t8": "Your beat must have between 20 and 350 bpm.",
+    "t9": "You must select a genre"
+  },
+   "bot": "Online support / Reports"
 }
 
 

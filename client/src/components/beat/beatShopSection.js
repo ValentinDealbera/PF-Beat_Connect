@@ -4,7 +4,7 @@ import { setCurrentPage } from "@/redux/slices/beats";
 import { useTranslation } from "react-i18next";
 
 export default function BeatShopSection() {
-  const [t, i18n] = useTranslation("global");
+  const [t] = useTranslation("global");
   const { pages } = useSelector((state) => state.beats);
   const filteredBeats = useSelector((state) => state.beats.publicItems);
   const dispatch = useDispatch();

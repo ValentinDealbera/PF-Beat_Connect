@@ -13,6 +13,7 @@ import axios from "axios";
 import { toastError, toastSuccess } from "@/utils/toastStyles";
 import { getUserData } from "./authSession";
 import { fetchBeats, fetchFeaturedBeats } from "../beats";
+import i18next from 'i18next';
 
 const initialState = {
   activeEditingBeat: null,
@@ -209,10 +210,12 @@ const clientBeats = createSlice({
       //--------------------
       //DELETE CLIENT BEAT
       .addCase(postClientBeat.pending, (state, action) => {
-        toast("Subiendo beat, espera la confirmación...");
+        let trad= i18next?.language == "en"? "Uploading beat, please wait for confirmation..." : "Subiendo beat, espera la confirmación..."
+        toast(trad);
       })
       .addCase(postClientBeat.fulfilled, (state, action) => {
-        toast.success("Beat subido correctamente", toastSuccess);
+        let trad= i18next?.language == "en"? "Beat uploaded successfully" : "Beat subido correctamente"
+        toast.success(trad, toastSuccess);
       })
       .addCase(postClientBeat.rejected, (state, action) => {
         toast(action.payload, toastError);
@@ -221,10 +224,12 @@ const clientBeats = createSlice({
       //--------------------
       //DELETE CLIENT BEAT
       .addCase(deleteClientBeat.pending, (state, action) => {
-        toast("Borrando beat, espera la confirmación...");
+        let trad= i18next?.language == "en"? "Deleting beat, please wait for confirmation..." : "Borrando beat, espera la confirmación..."
+        toast(trad);
       })
       .addCase(deleteClientBeat.fulfilled, (state, action) => {
-        toast.success("Beat borrado correctamente", toastSuccess);
+        let trad= i18next?.language == "en"? "Beat deleted successfully" : "Beat borrado correctamente"
+        toast.success(trad, toastSuccess);
       })
       .addCase(deleteClientBeat.rejected, (state, action) => {
         toast(action.payload, toastError);
@@ -233,10 +238,12 @@ const clientBeats = createSlice({
       //--------------------
       //EDIT CLIENT BEAT
       .addCase(editClientBeat.pending, (state, action) => {
-        toast("Editando beat, espera la confirmación...");
+        let trad= i18next?.language == "en"? "Editing beat, please wait for confirmation..." : "Editando beat, espera la confirmación..."
+        toast(trad);
       })
       .addCase(editClientBeat.fulfilled, (state, action) => {
-        toast.success("Beat editado correctamente", toastSuccess);
+        let trad= i18next?.language == "en"? "Beat edited successfully" : "Beat editado correctamente"
+        toast.success(trad, toastSuccess);
       })
       .addCase(editClientBeat.rejected, (state, action) => {
         toast(action.payload, toastError);
@@ -245,10 +252,12 @@ const clientBeats = createSlice({
       //--------------------
       //POST FAVORITE BEAT
       .addCase(postFavoriteBeat.pending, (state, action) => {
-        toast("Añadiendo a favoritos, espera la confirmación...");
+        let trad= i18next?.language == "en"? "Adding to favorites, please wait for confirmation..." : "Añadiendo a favoritos, espera la confirmación..."
+        toast(trad);
       })
       .addCase(postFavoriteBeat.fulfilled, (state, action) => {
-        toast.success("Beat añadido a favoritos correctamente", toastSuccess);
+        let trad= i18next?.language == "en"? "Beat added to favorites successfully" : "Beat añadido a favoritos correctamente"
+        toast.success(trad, toastSuccess);
       })
       .addCase(postFavoriteBeat.rejected, (state, action) => {
         toast(action.payload, toastError);
@@ -257,10 +266,12 @@ const clientBeats = createSlice({
       //--------------------
       //DELETE FAVORITE BEAT
       .addCase(deleteFavoriteBeat.pending, (state, action) => {
-        toast("Borrando de favoritos, espera la confirmación...");
+        let trad= i18next?.language == "en"? "Removing from favorites, please wait for confirmation..." : "Borrando de favoritos, espera la confirmación..."
+        toast(trad);
       })
       .addCase(deleteFavoriteBeat.fulfilled, (state, action) => {
-        toast.success("Beat borrado de favoritos correctamente", toastSuccess);
+        let trad= i18next?.language == "en"? "Beat removed from favorites successfully" : "Beat borrado de favoritos correctamente"
+        toast.success(trad, toastSuccess);
       })
       .addCase(deleteFavoriteBeat.rejected, (state, action) => {
         toast(action.payload, toastError);

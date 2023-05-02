@@ -6,6 +6,7 @@ import { toastError, toastSuccess } from "@/utils/toastStyles";
 import { getUserData } from "./authSession";
 import { fetchBeats } from "../beats";
 import { resetCart } from "../cart";
+import i18next from 'i18next';
 
 const initialState = {
   orders: [],
@@ -52,13 +53,15 @@ const ordersSlice = createSlice({
       //--------------------
       //POST CLIENT ORDER
       .addCase(postClientOrder.fulfilled, (state, action) => {
-        toast.success("Orden cargada", toastSuccess);
+        let trad= i18next?.language == "en"? "Order loaded" : "Orden cargada"
+        toast.success(trad, toastSuccess);
       })
       .addCase(postClientOrder.rejected, (state, action) => {
         toast.error(action.payload, toastError);
       })
       .addCase(postClientOrder.pending, (state, action) => {
-        toast("Cargando orden...");
+        let trad= i18next?.language == "en"? "Loading order..." : "Cargando orden..."
+        toast(trad);
       });
   },
 });

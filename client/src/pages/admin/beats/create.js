@@ -23,7 +23,7 @@ import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 
 export default function AdminUserCreate() {
-  const [t, i18n] = useTranslation("global");
+  const [t] = useTranslation("global");
   const childRef = useRef(null);
 
   const handleExternalSubmit = () => {

@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { serverUrl } from "@/data/config";
 import { toast } from "sonner";
 import axios from "axios";
+import i18next from 'i18next';
 import { toastError, toastSuccess } from "@/utils/toastStyles";
 const tokenAdmin = process.env.NEXT_PUBLIC_TOKEN_ADMIN;
 const initialState = {
@@ -128,13 +129,15 @@ const adminUsersSlice = createSlice({
       //--------------------
       //POST ADMIN USER
       .addCase(adminPostUser.fulfilled, (state, action) => {
-        toast.success("Usuario creado correctamente", toastSuccess);
+        let trad= i18next?.language == "en"? "User created successfully" : "Usuario creado correctamente"
+        toast.success(trad, toastSuccess);;
       })
       .addCase(adminPostUser.rejected, (state, action) => {
         toast.error(action.payload, toastError);
       })
       .addCase(adminPostUser.pending, (state, action) => {
-        toast("Creando usuario...");
+        let trad= i18next?.language == "en"? "Creating user..." : "Creando usuario..."
+        toast(trad);
       })
 
       //--------------------
@@ -143,22 +146,26 @@ const adminUsersSlice = createSlice({
         toast.error(action.payload, toastError);
       })
       .addCase(adminEditUser.fulfilled, (state, action) => {
-        toast.success("Usuario editado correctamente", toastSuccess);
+        let trad= i18next?.language == "en"? "User edited successfully" : "Usuario editado correctamente"
+        toast.success(trad, toastSuccess);
       })
       .addCase(adminEditUser.pending, (state, action) => {
-        toast("Editando usuario...");
+        let trad= i18next?.language == "en"? "Editing user..." : "Editando usuario..."
+        toast(trad);
       })
 
       //--------------------
       //DELETE ADMIN USER
       .addCase(adminDeleteUser.fulfilled, (state, action) => {
-        toast.success("Usuario borrado correctamente", toastSuccess);
+        let trad= i18next?.language == "en"? "User deleted successfully" : "Usuario borrado correctamente"
+        toast.success(trad, toastSuccess);
       })
       .addCase(adminDeleteUser.rejected, (state, action) => {
         toast.error(action.payload, toastError);
       })
       .addCase(adminDeleteUser.pending, (state, action) => {
-        toast("Borrando usuario...");
+        let trad= i18next?.language == "en"? "Deleting user..." : "Borrando usuario..."
+        toast(trad);
       })
 
       //--------------------
