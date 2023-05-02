@@ -30,8 +30,8 @@ export default function BecomeSeller() {
   return (
     <>
       {isDropdownOpen && (
-        <BeatRightSheet width="w-[35vw]" setIsDropdownOpen={setIsDropdownOpen}>
-          <div className="flex h-full flex-col items-center justify-center gap-7 px-14 py-10  ">
+         <BeatRightSheet width="min-w-[100vw] xs:min-w-[90vw] sm:min-w-[450px] " setIsDropdownOpen={setIsDropdownOpen}>
+          <div className="flex h-full flex-col items-center justify-center gap-7 px-4 xs:px-8 sm:px-14 sm:py-10  ">
             <div className="flex flex-col items-center justify-center gap-2">
               <h4 className="text-titulo2-regular text-center">
                 Convertirte en vendedor de{" "}

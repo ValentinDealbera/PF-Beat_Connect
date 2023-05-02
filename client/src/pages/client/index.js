@@ -5,12 +5,15 @@ import {
   ProfileCard,
   Head,
   BeatShopSectionForClient,
+  LandBot,
 } from "@/components";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function BuyerProfile() {
-  const currentUser = useSelector((state) => state.client.authSession.session.current);
+  const currentUser = useSelector(
+    (state) => state.client.authSession.session.current
+  );
 
   return (
     <>
@@ -21,10 +24,6 @@ export default function BuyerProfile() {
           image={currentUser.backImage}
           alt="hero"
           className="items-center justify-center align-middle"
-          onError={(e) => {
-            e.target.onerror = null;
-            e.target.src = "/images/placeholder.png";
-          }}
         >
           <div
             id="contenido"
@@ -42,6 +41,7 @@ export default function BuyerProfile() {
           </div>
         </Hero>
         <BeatShopSectionForClient />
+        <LandBot />
       </Main>
     </>
   );

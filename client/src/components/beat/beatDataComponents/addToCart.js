@@ -1,7 +1,9 @@
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/redux/slices/cart";
+import { useTranslation } from "react-i18next";
 
 export default function AddToCart({ beat, posAction }) {
+  const [t, i18n] = useTranslation("global");
   const dispatch = useDispatch();
 
   const authorId = beat.userCreator._id
@@ -16,7 +18,7 @@ export default function AddToCart({ beat, posAction }) {
         posAction();
       }}
     >
-      Añadir al carrito
+      {t("beatDetailSideBar.t3")}
     </button>
   );
 }

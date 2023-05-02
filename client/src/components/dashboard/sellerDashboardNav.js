@@ -1,49 +1,54 @@
 import { Search, DashboardItem } from "@/components";
-
-export const dashboardNav = [
-  {
-    title: "Overview",
-    link: "/admin/",
-    icon: "/icon/dashboard/overview.svg",
-  },
-  {
-    title: "Beats",
-    link: "/admin/beats",
-    icon: "/icon/dashboard/beats.svg",
-  },
-  {
-    title: "Usuarios",
-    link: "/admin/users",
-    icon: "/icon/dashboard/orders.svg",
-  },
-  {
-    title: "Reviews",
-    link: "/admin/reviews",
-    icon: "/icon/dashboard/reviews.svg",
-  },
-  {
-    title: "Analytics",
-    link: "/admin/analytics",
-    icon: "/icon/dashboard/analytics.svg",
-  },
-];
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 export default function SellerDashboardNav() {
+  const theme = useSelector((state) => state.client.authSession.theme);
+  const [t] = useTranslation("global");
+
+  const dashboardNav = [
+    {
+      title: "dashboardNav.t1",
+      link: "/admin/",
+      icon: (() => {
+        if (theme === "dark") {
+          return "/icon/dashboard/overview.svg";
+        } else {
+          return "/icon/dashboard/overview.svg";
+        }
+      })(),
+    },
+    {
+      title: "Beats",
+      link: "/admin/beats",
+      icon: "/icon/dashboard/musical-black.svg",
+    },
+    {
+      title: "dashboardNav.t2",
+      link: "/admin/users",
+      icon: "/icon/dashboard/user-black.svg",
+    },
+    {
+      title: "Reviews",
+      link: "/admin/reviews",
+      icon: "/icon/dashboard/reviews.svg",
+    },
+    {
+      title: "dashboardNav.t3",
+      link: "/admin/orders",
+      icon: "/icon/dashboard/orders.svg",
+    },
+  ];
+
   return (
     <>
       <div className="gap-estilo2 flex flex-col">
         {/* <Search colorMode={"red"} sizeMode={"small"} className={"w-full"} /> */}
-
-        <DashboardItem
-          title={"Inbox"}
-          link={"/admin/inbox"}
-          icon={"/icon/dashboard/overview.svg"}
-        />
-        <div className="gap-estilo4 flex  flex-col">
-          <h3 className="text-sm-medium color-primary-red-700 ">Dashboard</h3>
+        <div className="flex flex-col  gap-6">
           {dashboardNav.map((item) => (
             <NavItems
-              itemTitle={item.title}
+              itemTitle={t(item.title)}
               itemLink={item.link}
               itemIcon={item.icon}
             />

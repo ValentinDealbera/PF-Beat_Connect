@@ -102,8 +102,8 @@ export default function EditBeat() {
   return (
     <>
       {isDropdownOpen && (
-        <BeatRightSheet width="w-[35vw]" setIsDropdownOpen={setIsDropdownOpen}>
-          <div className="flex h-full w-full flex-col items-center justify-center gap-7 overflow-y-hidden px-14 pb-4 pt-7 ">
+          <BeatRightSheet width="min-w-[100vw] xs:min-w-[90vw] sm:min-w-[450px] " setIsDropdownOpen={setIsDropdownOpen}>
+         <div className="flex h-full flex-col items-center justify-center gap-7 px-4 xs:px-8 sm:px-14 sm:py-10 overflow-y-hidden  ">
             <div className="flex w-full flex-col gap-5 overflow-y-hidden">
               <div className="flex flex-col items-center justify-center gap-0">
                 <h4 className="text-titulo3-regular text-center">

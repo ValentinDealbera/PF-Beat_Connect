@@ -4,66 +4,61 @@ import {
   FaqsGrid,
   DynamicTable,
   ModalTables,
+  Head,
 } from "@/components";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import {
   adminGetUsers,
   adminDeleteUser,
-  setCurrentEditUser,
+  setCurrentEditingUser,
   setCurrentPage,
-  adminGetUsersForms,
-} from "@/redux/slices/admin";
+} from "@/redux/slices/admin/users";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { pageExtensions } from "../../../../next.config";
+import { useTranslation } from "react-i18next";
 
 export default function SellerDashboardOverview() {
+  const [t] = useTranslation("global");
   const router = useRouter();
-  const [elementToDelete, setElementToDelete] = useState(null);
   const dispatch = useDispatch();
-  const { users } = useSelector((state) => state.admin);
+
+  const [elementToDelete, setElementToDelete] = useState(null);
+  const { users } = useSelector((state) => state.admin.users);
+  const allUsers = useSelector((state) => state.admin.users.users);
   const usersData = users;
-  const page = useSelector((state) => state.admin.currentPage);
-  const allUsers = useSelector((state) => state.admin.usersForms);
-  const itemsPerPage = 5;
-  const totalPages = Math.ceil(allUsers.length / itemsPerPage);
 
   console.log("usersData", usersData);
 
   useEffect(() => {
-    dispatch(adminGetUsers(page));
-  }, [page]);
-
-  useEffect(() => {
-    dispatch(adminGetUsersForms());
+    dispatch(adminGetUsers());
   }, []);
 
   const handleCloseModal = async () => {
-    dispatch(adminGetUsers(page));
+    dispatch(adminGetUsers());
     setElementToDelete(null);
   };
 
   const handleEdit = async (data) => {
     console.log("handleEdit", data);
-    await dispatch(setCurrentEditUser(data));
+    await dispatch(setCurrentEditingUser(data));
     router.push(`/admin/users/${data._id}`);
   };
 
-  console.log("la pagina", page);
+  const headers = [t("dashboardNav.t4"), t("dashboardNav.status"), t("dashboardNav.actions")];
 
-  const headers = [
-    "Usuario",
-    "Email",
-    "Vendedor",
-    "Status",
-    "Editar",
-    "Eliminar",
-  ];
+  const [userVar, setUserVar] = useState("");
+  const [statusVar, setStatusVar] = useState("");
+  const [actionsVar, setActionsVar] = useState("");
+  useEffect(() => {
+    setUserVar(t("dashboardNav.t4").toLocaleLowerCase());
+    setStatusVar(t("dashboardNav.status").toLocaleLowerCase());
+    setActionsVar(t("dashboardNav.actions").toLocaleLowerCase());
+  }, [t("dashboardNav.t4"), t("dashboardNav.status"), t("dashboardNav.actions")]);
 
   const rows = usersData.map((item) => {
     return {
-      usuario: (
+      [userVar]: (
         <div className="flex max-w-[50px] items-center gap-4">
           <Image
             src={item.image}
@@ -71,82 +66,53 @@ export default function SellerDashboardOverview() {
             height={50}
             className="aspect-square rounded-full object-cover"
           />
-          <h3 className="text-base-medium max-w-[50px] overflow-ellipsis">
+
+          <div className="flex flex-col">
+          <h3 className="text-base-medium overflow-ellipsis dark:text-white">
             {item.username}
           </h3>
+            <p className="text-sm-light dark:text-white">
+              {item.email}
+            </p>
+          </div>
         </div>
       ),
-      email: item.email,
-      vendedor: item.isSeller ? "Si" : "No",
-      status: item.softDelete ? "Banned" : "Ok",
-      editar: (
-        <button
-          onClick={() => handleEdit(item)}
-          className="background-neutral-gray-400 hover:background-neutral-gray-700 color-neutral-white 
-            text-sm-semibold border-radius-estilo2 px-4 py-2"
-        >
-          Edit
-        </button>
-      ),
-      eliminar: (
-        <button
-          onClick={() => setElementToDelete(item)}
-          className="background-primary-red-500 hover:background-primary-red-700 color-neutral-white 
-            text-sm-semibold border-radius-estilo2 px-4 py-2"
-        >
-          Eliminar
-        </button>
+      [statusVar]:  (<p className="text-sm-light dark:text-white">{item.softDelete ? "Baneado" : "Activo"}</p>),
+      [actionsVar]: (
+        <div className="flex w-max gap-4" key={item._id}>
+          <button
+            onClick={() => handleEdit(item)}
+            className=" hover:background-neutral-gray-700 text-sm-semibold 
+            border-radius-estilo2 text-black dark:text-white "
+          >
+            {t("dashboardNav.edit")}
+          </button>
+          <button
+            onClick={() => setElementToDelete(item)}
+            className=" hover:background-primary-red-700 text-sm-semibold 
+            border-radius-estilo2 text-red-700 "
+          >
+            {t("dashboardNav.delete")}
+          </button>
+        </div>
       ),
     };
   });
 
   return (
     <>
+      <Head title="Usuarios" />
       <main>
         <SellerDashboardLayout
           topBarMode="action"
-          topBarMessage="Usuarios de la pagina"
-          topBarButtonLabel="Crear usuario"
+          topBarMessage={t("dashboardNav.title2")}
+          topBarButtonLabel={t("dashboardNav.createUser")}
           onClick={() => {
             router.push("/admin/users/create");
           }}
         >
           <IslandDashboard className="flex w-full flex-col gap-5 xl:gap-8">
             <DynamicTable headers={headers} rows={rows} />
-            <div className="flex justify-center gap-4">
-              {page > 1 && (
-                <button
-                  onClick={() => dispatch(setCurrentPage(page - 1))}
-                  className="text-red-700"
-                >
-                  &#11164;
-                </button>
-              )}
-
-              {[...Array(Math.min(totalPages, 3))].map((_, index) => {
-                const pageNumber = page - 1 + index;
-                return (
-                  pageNumber < totalPages && (
-                    <button
-                      key={pageNumber}
-                      onClick={() => dispatch(setCurrentPage(pageNumber + 1))}
-                      className={pageNumber + 1 === page ? "font-bold" : ""}
-                    >
-                      {pageNumber + 1}
-                    </button>
-                  )
-                );
-              })}
-
-              {page < totalPages && (
-                <button
-                  onClick={() => dispatch(setCurrentPage(page + 1))}
-                  className="text-red-700"
-                >
-                  &#11166;
-                </button>
-              )}
-            </div>
           </IslandDashboard>
         </SellerDashboardLayout>
       </main>

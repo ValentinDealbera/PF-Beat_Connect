@@ -12,8 +12,10 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { jsonRegister } from "@/redux/slices/client/authSession";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 export default function Login() {
+  const [t, i18n] = useTranslation("global");
   const [step, setStep] = useState(1);
   const [form, setForm] = useState({});
   const router = useRouter();
@@ -43,7 +45,7 @@ export default function Login() {
       <SimpleHeader />
       <AuthLayout>
         <h1 className="text-titulo3-regular mb-6">
-          Registrate en{" "}
+            {t("register.t1")}{" "}
           <span className="text-titulo3-semibold">BeatConnect</span>
         </h1>
         <form className="flex w-full flex-col gap-4" onSubmit={handleSubmit}>
@@ -52,16 +54,16 @@ export default function Login() {
               <Input
                 type="text"
                 name="firstName"
-                label="Nombre"
-                placeholder="Nombre"
+                label={t("register.t2")}
+                placeholder={t("register.t2")}
                 className="w-full"
                 onChange={handleChange}
               />
               <Input
                 type="text"
                 name="lastName"
-                label="Apellido"
-                placeholder="Apellido"
+                label={t("register.t3")}
+                placeholder={t("register.t3")}
                 className="w-full"
                 onChange={handleChange}
               />
@@ -70,7 +72,7 @@ export default function Login() {
                 className="text-base-semibold mt-2  w-full rounded-full bg-red-700 py-2 text-white"
                 onClick={() => setStep(2)}
               >
-                Siguiente
+                  {t("register.t4")}
               </button>
             </div>
           )}
@@ -79,31 +81,31 @@ export default function Login() {
               <Input
                 type="email"
                 name="email"
-                label="Correo electrónico"
-                placeholder="Correo electrónico"
+                label={t("register.t5")}
+                placeholder={t("register.t5")}
                 className="w-full"
                 onChange={handleChange}
               />
               <Input
                 type="text"
                 name="username"
-                label="Nombre de usuario"
-                placeholder="Nombre de usuario"
+                label={t("register.t6")}
+                placeholder={t("register.t6")}
                 className="w-full"
                 onChange={handleChange}
               />
               <Input
                 type="password"
                 name="password"
-                label="Contraseña"
-                placeholder="Contraseña"
+                label={t("register.t7")}
+                placeholder={t("register.t7")}
                 onChange={handleChange}
               />
               <button
                 type="submit"
                 className="text-base-semibold mt-2  w-full rounded-full bg-red-700 py-2 text-white"
               >
-                Registrarme
+                  {t("register.t8")}
               </button>
             </div>
           )}
@@ -111,9 +113,9 @@ export default function Login() {
         <hr className="my-6 w-full" />
         <GoogleButton />
         <p className="mt-6 w-full text-center font-light">
-          ¿Ya tienes una cuenta?{" "}
+          {t("register.t9")}{" "}
           <Link href="/auth" className="font-medium text-red-700">
-            Inicia sesión
+              {t("register.t10")}
           </Link>
         </p>
       </AuthLayout>

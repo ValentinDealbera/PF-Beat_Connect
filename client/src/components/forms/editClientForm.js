@@ -9,7 +9,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { editClient } from "@/redux/slices/client/authSession";
 import { useRouter } from "next/router";
 import { validationEditUser } from "@/components/validation/client/editUser";
+import { useTranslation } from "react-i18next";
+import i18n from "i18next";
+
 export default function EditClientForm(props) {
+  const [t, i18n] = useTranslation("global");
   const router = useRouter();
   const dispatch = useDispatch();
   const formRef = useRef(null);
@@ -67,9 +71,15 @@ export default function EditClientForm(props) {
     }
   };
 
+  // useEffect(() => {
+  //   setErrors(validateForm(form, fieldsToValidate, validateMode));
+  // }, [form, fieldsToValidate]);
+
   useEffect(() => {
-    setErrors(validateForm(form, fieldsToValidate, validateMode));
+    setErrors(validationEditUser(form, fieldsToValidate, validateMode));
   }, [form, fieldsToValidate]);
+
+  console.log("Errores", error);
 
   return (
     <form onSubmit={onSubmit} ref={formRef}>
@@ -79,76 +89,95 @@ export default function EditClientForm(props) {
             <Input
               id="firstName"
               name="firstName"
-              label="Nombre"
-              placeholder="Nombre"
+              label={t("settingsClient.t1")}
+              placeholder={t("settingsClient.t1")}
               defaultValue={mode === "edit" ? defaultValues.firstName : ""}
               type="text"
               onChange={handleInput}
               error={error.firstName}
-            />
-            <Input
-              name={"email"}
-              label={"Email"}
-              placeholder={"Email"}
-              defaultValue={mode === "edit" ? defaultValues.email : ""}
-              type={"email"}
-              onChange={handleInput}
-              error={error.email}
-            />
-            <Input
-              name={"username"}
-              label={"Nombre de usuario"}
-              placeholder={"Nombre de usuario"}
-              defaultValue={mode === "edit" ? defaultValues.userName : ""}
-              type={"text"}
-              onChange={handleInput}
-              error={error.username}
-            />
-            <Input
-              name="image"
-              label="Imagen de perfil"
-              placeholder="Imagen de perfil"
-              type="file"
-              onChange={handleInput}
-              error={error.backImage}
             />
           </FormColumn>
           <FormColumn className="w-full">
             <Input
               name={"lastName"}
               id={"lastName"}
-              label={"Apellido"}
-              placeholder={"Apellido"}
+              label={t("settingsClient.t5")}
+              placeholder={t("settingsClient.t5")}
               defaultValue={mode === "edit" ? defaultValues.lastName : ""}
               type={"text"}
               onChange={handleInput}
               error={error.lastName}
             />
+          </FormColumn>
+        </FormRow>
+        <FormRow>
+          <FormColumn className="w-full">
+            <Input
+              name={"email"}
+              label={t("settingsClient.t2")}
+              placeholder={t("settingsClient.t2")}
+              defaultValue={mode === "edit" ? defaultValues.email : ""}
+              type={"email"}
+              onChange={handleInput}
+              error={error.email}
+            />
+          </FormColumn>
+          <FormColumn className="w-full">
+            <Input
+              name={"username"}
+              label={t("settingsClient.t3")}
+              placeholder={t("settingsClient.t3")}
+              defaultValue={mode === "edit" ? defaultValues.userName : ""}
+              type={"text"}
+              onChange={handleInput}
+              error={error.username}
+            />
+          </FormColumn>
+        </FormRow>
+        <FormRow>
+          <FormColumn className="w-full">
             <Input
               id="bio"
               name="bio"
-              label="Bio"
-              placeholder="Bio:"
+              label={t("settingsClient.t6")}
+              placeholder={t("settingsClient.t6")}
               defaultValue={mode === "edit" ? defaultValues.bio : ""}
               type="text"
               onChange={handleInput}
               error={error.bio}
             />
+          </FormColumn>
+          <FormColumn className="w-full">
+            <Input
+              name="image"
+              label={t("settingsClient.t4")}
+              placeholder={t("settingsClient.t4")}
+              type="file"
+              onChange={handleInput}
+              error={error.image}
+            />
+          </FormColumn>
+        </FormRow>
+        <FormRow>
+          <FormColumn className="w-full">
             <Input
               name="backImage"
-              label="Imagen de portada"
-              placeholder="Imagen de portada"
+              label={t("settingsClient.t7")}
+              placeholder={t("settingsClient.t7")}
               type="file"
               onChange={handleInput}
               error={error.backImage}
             />
           </FormColumn>
+          <FormColumn className="w-full">
+            <div></div>
+          </FormColumn>
         </FormRow>
         <button
           type="submit"
-          className="background-primary-red-700 color-neutral-white w-max rounded-full px-5 py-3 text-sm font-semibold"
+          className="background-primary-red-700 color-neutral-white mt-1 w-max rounded-full px-5 py-3 text-sm font-semibold"
         >
-          Guardar
+          {t("settingsClient.tosave")}
         </button>
       </FormContainer>
     </form>

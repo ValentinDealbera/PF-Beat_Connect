@@ -6,8 +6,10 @@ import {
 import { MiniModalBox } from "@/components";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function ClientReview(props) {
+  const [t, i18n] = useTranslation("global");
   const dispatch = useDispatch();
 
   const [visibilityOwnedModal, setVisibilityOwnedModal] = useState(false);
@@ -41,10 +43,6 @@ export default function ClientReview(props) {
             src={props.review.createdBy.image}
             width={40}
             height={40}
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src = "/images/placeholder.png";
-            }}
           />
           <h1 className="text-base-medium flex text-sm">{props.username}</h1>
         </div>
@@ -55,7 +53,7 @@ export default function ClientReview(props) {
         <p className="text-base-semibold text-sm">
           {props.review.beat.name}
           {" | "}
-          {props.review.rating} Estrellas
+          {props.review.rating} {t("clientReview")}
         </p>
       </div>
       <Modals
@@ -68,13 +66,14 @@ export default function ClientReview(props) {
 }
 
 function Modals({ visibilityOwnedModal, handleEdit, handleDelete }) {
+  const [t, i18n] = useTranslation("global");
   const fromClientBtns = [
     {
-      text: "Editar",
+      text: "beatCar.edit",
       action: handleEdit,
     },
     {
-      text: "Borrar",
+      text: "beatCar.delete",
       action: handleDelete,
     },
   ];
@@ -86,7 +85,7 @@ function Modals({ visibilityOwnedModal, handleEdit, handleDelete }) {
           <MiniModalBox className="right-1 top-1">
             <div className="flex flex-col gap-1">
               {fromClientBtns.map((btn, index) => (
-                <Button key={index} text={btn.text} action={btn.action} />
+                <Button key={index} text={t(btn.text)} action={btn.action} />
               ))}
             </div>
           </MiniModalBox>

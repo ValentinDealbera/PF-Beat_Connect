@@ -9,6 +9,7 @@ import axios from "axios";
 import { toastError, toastSuccess } from "@/utils/toastStyles";
 import { getUserData } from "./authSession";
 import { fetchBeats, fetchFeaturedBeats } from "../beats";
+import i18next from 'i18next';
 
 const initialState = {
   activeBeatCreateReview: null,
@@ -124,37 +125,43 @@ const reviewsSlice = createSlice({
       //--------------------
       //POST CLIENT REVIEW
       .addCase(postClientReview.fulfilled, (state, action) => {
-        toast.success("Review creada", toastSuccess);
+        let trad= i18next?.language == "en"? "Review created" : "Review creada"
+        toast.success(trad, toastSuccess);
       })
       .addCase(postClientReview.rejected, (state, action) => {
         toast.error(action.payload, toastError);
       })
       .addCase(postClientReview.pending, (state, action) => {
-        toast("Creando review...");
+        let trad= i18next?.language == "en"? "Creating review..." : "Creando review..."
+        toast(trad);
       })
 
       //--------------------
       //DELETE CLIENT REVIEW
       .addCase(deleteClientReview.fulfilled, (state, action) => {
-        toast.success("Review eliminada", toastSuccess);
+        let trad= i18next?.language == "en"? "Review deleted" : "Review eliminada"
+        toast.success(trad, toastSuccess);
       })
       .addCase(deleteClientReview.rejected, (state, action) => {
         toast.error(action.payload, toastError);
       })
       .addCase(deleteClientReview.pending, (state, action) => {
-        toast("Eliminando review...");
+        let trad= i18next?.language == "en"? "Deleting review..." : "Eliminando review..."
+        toast(trad);
       })
 
       //--------------------
       //EDIT CLIENT REVIEW
       .addCase(editClientReview.fulfilled, (state, action) => {
-        toast.success("Review editada", toastSuccess);
+        let trad= i18next?.language == "en"? "Review edited" : "Review editada"
+        toast.success(trad, toastSuccess);
       })
       .addCase(editClientReview.rejected, (state, action) => {
         toast.error(action.payload, toastError);
       })
       .addCase(editClientReview.pending, (state, action) => {
-        toast("Editando review...");
+        let trad= i18next?.language == "en"? "Editing review..." : "Editando review..."
+        toast(trad);
       });
   },
 });

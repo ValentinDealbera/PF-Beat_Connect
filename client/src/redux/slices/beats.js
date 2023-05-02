@@ -90,6 +90,8 @@ export const fetchBeats = createAsyncThunk(
         }
       );
 
+
+
       return {
         docs: response.data.docs,
         next: response.data.nextPage,
@@ -109,7 +111,9 @@ export const fetchFeaturedBeats = createAsyncThunk(
   "beats/fetchFeaturedBeats",
   async (page, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`${serverUrl}beats?relevance=desc`);
+      const response = await axios.get(
+        `${serverUrl}beats?relevance=desc&limit=5`
+      );
       return {
         docs: response.data.docs,
       };

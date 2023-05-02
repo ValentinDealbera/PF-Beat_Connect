@@ -1,4 +1,13 @@
+import { useRouter } from "next/router";
+
 export default function Input(props) {
+  const router = useRouter();
+  const className = `${
+    router.pathname.startsWith("/admin")
+      ? " dark:text-white   dark:placeholder:text-white border-slate-200 dark:border-none dark:bg-customDark-700"
+      : "placeholder:text-sm-light placeholder:color-neutral-gray-400   color-neutral-black-950"
+  }`;
+
   return (
     <label
       htmlFor={props.name}
@@ -14,11 +23,11 @@ export default function Input(props) {
         prefix={props.prefix}
         onChange={props.onChange}
         placeholder={props.placeholder}
-        className={`${props.className} text-sm-regular border-radius-estilo2 color-neutral-black-950 placeholder:text-sm-light placeholder:color-neutral-gray-400 border-slate-200 bg-white px-4 py-2`}
+        className={`${props.className} text-sm-regular border-radius-estilo2 px-4 py-2 ${className}`}
         style={{ borderWidth: "1px" }}
       />
       {props.error && (
-        <p className="gap-estilo4 text-sm-medium color-primary-red-500 ml-2 flex">
+        <p className="gap-estilo4 text-sm-medium color-primary-red-500 ml-2 flex dark:text-red-800">
           {props.error}
         </p>
       )}

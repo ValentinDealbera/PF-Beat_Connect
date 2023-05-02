@@ -24,7 +24,7 @@ export function validationEditPassword(form, fieldsToValidate) {
       case "newPassword":
         if (!regexPassword.test(form.newPassword))
           error.newPassword =
-            "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un caracter especial; ademas de  un mínimo de 8 caracteres";
+          "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un caracter especial; ademas de  un mínimo de 8 caracteres";
         // else if (form.oldPassword === form.newPassword) {
         //   error.newPassword =
         //     "Tu nueva contraseña debe ser distinta a la actual";

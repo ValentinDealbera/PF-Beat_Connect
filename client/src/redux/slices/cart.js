@@ -5,6 +5,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "sonner";
 import { toastError, toastSuccess, toastWarning } from "@/utils/toastStyles";
+import i18next from 'i18next';
 
 const initialState = {
   cart: [],
@@ -30,7 +31,8 @@ const cartSlice = createSlice({
       state.cart = state.cart.filter(
         (item) => item.beat._id !== action.payload.id
       );
-      toast.success("Se eliminó del carrito", toastSuccess);
+      let trad= i18next?.language == "en"? "Removed from cart" : "Se eliminó del carrito"
+      toast.success(trad, toastSuccess);
     },
   },
 });
@@ -43,7 +45,8 @@ export const addToCart = (obj) => async (dispatch, getState) => {
   const bougthBeats = getState().client.beats.bougthBeats;
   const beat = obj.beat;
   if (isInCart === true) {
-    toast.error("Ya esta en el carrito", toastWarning);
+    let trad= i18next?.language == "en"? "Beat obtained successfully" : "Ya está en el carrito"
+    toast.error(trad, toastWarning);
   } else {
     const id = getState().client.authSession.session.current._id;
 
@@ -54,15 +57,18 @@ export const addToCart = (obj) => async (dispatch, getState) => {
     const boughtBeat = Boolean(boughtBeat2);
 
     if (boughtBeat === true) {
-      toast.error("Ya compraste este beat", toastWarning);
+      let trad= i18next?.language == "en"? "You already bought this beat" : "Ya compraste este beat"
+      toast.error(trad, toastWarning);
       return;
     }
 
     if (id == obj.authorId) {
-      toast.error("No puedes comprar tus propios beats", toastError);
+      let trad= i18next?.language == "en"? "You can't buy your own beats" : "No puedes comprar tus propios beats"
+      toast.error(trad, toastError);
       return;
     }
-    toast.success("Se agregó al carrito", toastSuccess);
+    let trad= i18next?.language == "en"? "Already in cart" : "Se agregó al carrito"
+    toast.success(trad, toastSuccess);
     dispatch(setCart(obj));
   }
 };

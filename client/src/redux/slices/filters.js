@@ -11,6 +11,7 @@ import axios from "axios";
 import { sortArr } from "@/data/fakeDB";
 import { toastError } from "@/utils/toastStyles";
 import { toast } from "sonner";
+import i18next from 'i18next';
 
 const initialState = {
   searchFilter: "",
@@ -106,7 +107,8 @@ const filtersSlice = createSlice({
       })
       .addCase(fetchGenres.rejected, (state, action) => {
         state.genres = [];
-        toast.error("Error al cargar los géneros", toastError);
+        let trad= i18next?.language == "en"? "Error loading genres" : "Error al cargar los géneros"
+        toast.error(trad, toastError);
       })
       .addCase(fetchGenres.pending, (state, action) => {
         state.genres = [];

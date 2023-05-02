@@ -8,8 +8,11 @@ import {
 } from "@/components";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+
 
 export default function BeatCardFlex(props) {
+  const [t, i18n] = useTranslation("global");
   const [isDropDown, setIsDropdownOpen] = useState(false);
   const { beatsDisplayMode, generalActiveIndex } =
     useSelector((state) => state?.beats) || 0;
@@ -35,7 +38,7 @@ export default function BeatCardFlex(props) {
       {props.beats && props.beats <= 0 && (
         <div className="flex w-full items-end justify-center">
           <h1 className="mt-5 text-center text-2xl font-medium">
-            Hey, parece que no hay nada por aqui 🤯
+            {t("NoBeats")} 🤯
           </h1>
         </div>
       )}
@@ -51,7 +54,7 @@ export default function BeatCardFlex(props) {
                   manageView={handleDropdownOpen}
                   manageEditReview={manageEditReview}
                   manageCreateReview={manageCreateReview}
-                  width="min-w-[75vw] md:min-w-[40vw] lg:min-w-[25vw] xl:min-w-[auto] basis-full"
+                  width="min-w-[75vw] sm:min-w-[40vw] md:min-w-[40vw] lg:min-w-[25vw] xl:min-w-[auto] basis-full"
                   mode="flex"
                 />
               </>
@@ -77,16 +80,11 @@ export default function BeatCardFlex(props) {
         <>
           <div className="hidden sm:flex">
             <BeatRightSheet
-              width="w-[30vw]"
+               width="min-w-[100vw] xs:min-w-[90vw] sm:min-w-[450px] "
               setIsDropdownOpen={setVisibilityEditReview}
             >
               <EditReviewForm manageEditReview={manageEditReview} />
             </BeatRightSheet>
-          </div>
-          <div className="flex sm:hidden">
-            <BeatBottomSheet setIsDropdownOpen={setIsDropdownOpen}>
-              hey soy el sidebar
-            </BeatBottomSheet>
           </div>
         </>
       )}
@@ -94,16 +92,11 @@ export default function BeatCardFlex(props) {
         <>
           <div className="hidden sm:flex">
             <BeatRightSheet
-              width="w-[30vw]"
+               width="min-w-[100vw] xs:min-w-[90vw] sm:min-w-[450px] "
               setIsDropdownOpen={setVisibilityCreateReview}
             >
               <ReviewForm manageCreateReview={manageCreateReview} />
             </BeatRightSheet>
-          </div>
-          <div className="flex sm:hidden">
-            <BeatBottomSheet setIsDropdownOpen={setIsDropdownOpen}>
-              hey soy el sidebar
-            </BeatBottomSheet>
           </div>
         </>
       )}

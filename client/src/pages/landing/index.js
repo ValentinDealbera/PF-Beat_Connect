@@ -1,7 +1,9 @@
 import { Head, Main, Section, Hero, SimpleHeader } from "@/components";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
 export default function Landing() {
+  const [t, i18n] = useTranslation("global");
   return (
     <>
       <Head title="Landing Page" />
@@ -15,20 +17,31 @@ export default function Landing() {
           <div className="padding-estilo2">
             <div>
               <h1 className="mb-2 text-titulo1-regular color-neutral-white lg:w-2/3 xl:w-1/2">
-                Explora los mejores beats, encuentra nuevos artistas,{""}
+                  {t("landing.t1")}{""}
                 <span className=" text-titulo1-bold color-neutral-white">
-                  descubre BeatConnect
+                    {t("landing.t2")}
                 </span>
               </h1>
               <p className="text-base-light color-neutral-white mb-5">
-                Explora los mejores beats, encuentra nuevos artistas, descubre
-                BeatConnect
+                  {t("landing.t3")}
               </p>
               <Link href="/">
               <button className="background-primary-red-700 color-neutral-white border-radius-estilo1 text-base-semibold w-max px-8 py-4">
-                Ingresar ahora
+                {t("landing.t4")}
               </button>
                 </Link>
+                <button
+                  onClick={() => i18n.changeLanguage("es")}
+                  className="color-primary-red-500"
+                >
+                 Español
+                </button>
+                <button
+                  onClick={() => i18n.changeLanguage("en")}
+                  className="color-primary-red-500"
+                >
+                English
+                </button>
             </div>
           </div>
         </Hero>

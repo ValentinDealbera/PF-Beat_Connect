@@ -9,8 +9,10 @@ import {
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { editClientReview } from "@/redux/slices/client/reviews";
+import { useTranslation } from "react-i18next";
 
 export default function EditReviewForm(props) {
+  const [t, i18n] = useTranslation("global");
   const currentReview = useSelector(
     (state) => state?.client?.reviews?.activeEditingReview
   );
@@ -69,13 +71,13 @@ export default function EditReviewForm(props) {
 
   return (
     <>
-      <div className="flex h-full w-full flex-col items-center justify-center gap-7 overflow-y-hidden px-14 pb-4  ">
+     <div className="flex h-full flex-col items-center justify-center gap-7 px-4 xs:px-8 sm:px-14 sm:py-10 overflow-y-hidden  ">
         <div className="flex w-full flex-col gap-3 overflow-y-hidden">
           <div className="flex flex-col items-center justify-center gap-4">
             <h4 className="text-titulo3-regular text-center">
-              Modifiquemos tu{" "}
+                {t("editReview.t1")}{" "}
               <span className="text-titulo3-semibold text-red-700">
-                opinión
+                  {t("editReview.t2")}
               </span>{" "}
             </h4>
           </div>
@@ -104,8 +106,8 @@ export default function EditReviewForm(props) {
                 <FormColumn className="w-full">
                   <Input
                     name={"title"}
-                    label={"Titulo"}
-                    placeholder={"Titulo"}
+                    label={t("editReview.t3")}
+                    placeholder={t("editReview.t3")}
                     type={"text"}
                     onChange={handleInputChange}
                     className="w-full"
@@ -113,8 +115,8 @@ export default function EditReviewForm(props) {
                   />
                   <TextArea
                     name={"comment"}
-                    label={"Comentario"}
-                    placeholder={"Comentario"}
+                    label={t("editReview.t4")}
+                    placeholder={t("editReview.t4")}
                     type={"text"}
                     onChange={handleInputChange}
                     className=" w-full h-24"
@@ -126,7 +128,7 @@ export default function EditReviewForm(props) {
                 type="submit"
                 className="text-base-semibold mt-2  w-full rounded-full bg-red-700 py-2 text-white"
               >
-                Guardar Review
+                  {t("editReview.t5")}
               </button>
             </FormContainer>
           </form>

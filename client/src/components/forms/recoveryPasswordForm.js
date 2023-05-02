@@ -4,8 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { passwordRecovery } from "@/redux/slices/client/authSession";
 import { useRouter } from "next/router";
 import { validationRecoverPassword } from "@/components/validation/client/recoverPassword";
+import { useTranslation } from "react-i18next";
 
 export default function RecoveryPasswordForm(props) {
+  const [t, i18n] = useTranslation("global");
   const router = useRouter();
   const dispatch = useDispatch();
   const formRef = useRef(null);
@@ -38,10 +40,12 @@ export default function RecoveryPasswordForm(props) {
       const formErrors = validationRecoverPassword(form, "*");
       if (Object.keys(formErrors).length === 0) {
         console.log("DESPACHADO", {});
+
         dispatch(
           passwordRecovery({ newPassword: form.newPassword, email: userEmail })
         );
         formRef.current.reset();
+
         // router.push("/auth");
       } else {
         setErrors(formErrors);
@@ -67,7 +71,7 @@ export default function RecoveryPasswordForm(props) {
             <Input
               id="newPassword"
               name="newPassword"
-              label="Nueva Contraseña"
+              label={t("recover.t6")}
               type="password"
               onChange={handleInput}
               error={error.newPassword}
@@ -77,7 +81,7 @@ export default function RecoveryPasswordForm(props) {
             <Input
               id="repeatNewPassword"
               name="repeatNewPassword"
-              label="Repite Nueva Contraseña"
+              label={t("recover.t7")}
               type="password"
               onChange={handleInput}
               error={error.repeatNewPassword}
@@ -87,7 +91,19 @@ export default function RecoveryPasswordForm(props) {
             type="submit"
             className="text-base-semibold mt-2  w-full rounded-full bg-red-700 py-2 text-white"
           >
-            Cambiar Contraseña
+              {t("recover.t8")}
+          </button>
+          <button
+            onClick={() => i18n.changeLanguage("es")}
+            className="color-primary-red-500"
+          >
+            Español
+          </button>
+          <button
+            onClick={() => i18n.changeLanguage("en")}
+            className="color-primary-red-500"
+          >
+            English
           </button>
         </div>
       </FormContainer>

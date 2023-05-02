@@ -1,5 +1,26 @@
 import { manageBecomeSeller } from "../components/masters/becomeSeller";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
+
+export const navPublicMobile = [
+  {
+    name: "navPublic.t1",
+    url: "/",
+    visible: true,
+    //accion vacia
+    action: () => {},
+  },
+  {
+    name: "navPublic.t2",
+    url: "/about",
+    visible: true,
+    action: () => {},
+  },
+  {
+    name: "navPublic.t3",
+    url: "/beats",
+    visible: true,
+  },
+];
 
 export const navPublic = [
   {
@@ -21,25 +42,24 @@ export const navPublic = [
     name: "navPublic.t4",
     url: "/beats/cart",
     visible: false,
-    colorMode: "light",
   },
 ];
 
 export const navHelp = [
   {
-    name: "Inicio",
+    name: "navHelp.t1",
     url: "/help",
     colorMode: "light",
     visibility: true,
   },
   {
-    name: "Política de privacidad",
+    name: "navHelp.t2",
     url: "/help/privacy",
     colorMode: "light",
     visibility: true,
   },
   {
-    name: "Términos y condiciones",
+    name: "navHelp.t3",
     url: "/help/terms",
     colorMode: "light",
     visibility: true,
@@ -51,6 +71,7 @@ export const navClient = [
     name: "Perfil",
     url: "/client",
     colorMode: "light",
+    visibility: true,
   },
   {
     name: "Inbox",
@@ -60,22 +81,26 @@ export const navClient = [
   {
     name: "Vende tus beats",
     url: "",
-    onClick: () => manageBecomeSeller()
+    onClick: () => manageBecomeSeller(),
+    visibility: true,
   },
   {
     name: "Configuracion",
     url: "/client/settings",
     colorMode: "light",
+    visibility: true,
   },
   {
     name: "Facturacion",
     url: "/client/billing",
     colorMode: "light",
+    visibility: true,
   },
   {
     name: "Logout",
     url: "/auth/logout",
     colorMode: "light",
+    visibility: true,
   },
 ];
 
@@ -98,11 +123,31 @@ export const faqs = [
   },
 ];
 
+export const faqsAdmin = [
+  {
+    title: "faqsAdmin.t1",
+    content: "faqsAdmin.c1",
+  },
+  {
+    title: "faqsAdmin.t2",
+    content: "faqsAdmin.c2",
+  },
+  {
+    title: "faqsAdmin.t3",
+    content: "faqsAdmin.c3",
+  },
+  {
+    title: "faqsAdmin.t4",
+    content: "faqsAdmin.c4",
+  },
+];
+
 export const tecnologias = [
   {
     id: 1,
     title: "NextJS",
     image: "/icon/tecnologias/next-js.svg",
+
     description: "tecnologias.t1",
   },
   {
@@ -133,6 +178,7 @@ export const tecnologias = [
     id: 8,
     title: "TailwindCSS",
     image: "/icon/tecnologias/tailwindCSS.svg",
+
     description: "tecnologias.t6",
   },
   {
@@ -163,42 +209,190 @@ export const tecnologias = [
     id: 14,
     title: "Mercado Pago",
     image: "/icon/tecnologias/mercadopago.png",
+
     description: "tecnologias.t11",
   },
   {
     id: 15,
     title: "Auth0",
     image: "/icon/tecnologias/auth0.svg",
+
     description: "tecnologias.t12",
   },
   {
     id: 16,
     title: "Firebase",
     image: "/icon/tecnologias/firebase.svg",
+
     description: "tecnologias.t13",
   },
   {
     id: 17,
     title: "Render",
     image: "/icon/tecnologias/render.svg",
+
     description: "tecnologias.t14",
   },
   {
     id: 18,
     title: "Vercel",
     image: "/icon/tecnologias/vercel.svg",
+
     description: "tecnologias.t15",
   },
   {
     id: 19,
     title: "Trello",
     image: "/icon/tecnologias/trello.svg",
+
     description: "tecnologias.t16",
-    },
+  },
+
   {
     id: 20,
     title: "Git + GitHub",
     image: "/icon/tecnologias/github.svg",
+
     description: "tecnologias.t17",
-  }
+  },
+];
+
+export const nosotros = [
+  {
+    name: "Lucas Regner",
+    image: "/images/nosotros/lucas2.png", //crear carpeta e importar imagenes propias
+    //description: "",
+    redes: {
+      //importar fotos de las redes como svg
+      linkedin: "/icon/tecnologias/linkedin.svg",
+      github: "/icon/tecnologias/github2.svg",
+      gmail: "/icon/tecnologias/gmail.svg",
+    },
+    enlaces: {
+      linkedin: "https://www.linkedin.com/in/lucas-regner/",
+      github: "https://github.com/LucasRegner1",
+      gmail: "mailto:lucasregner.dev@gmail.com",
+    },
+  },
+
+  {
+    name: "Carla Frías",
+    image: "/images/nosotros/carla2.png", //crear carpeta e importar imagenes propias
+    //description: "",
+    redes: {
+      //importar fotos de las redes como svg
+      linkedin: "/icon/tecnologias/linkedin.svg",
+      github: "/icon/tecnologias/github2.svg",
+      gmail: "/icon/tecnologias/gmail.svg",
+    },
+    enlaces: {
+      linkedin: "https://www.linkedin.com/in/friascarla/",
+      github: "https://github.com/CarlaFrias",
+      gmail: "mailto:carlajimenafrias@gmail.com",
+    },
+  },
+
+  {
+    name: "Micaela Savournin",
+    image: "/images/nosotros/mica2.png", //crear carpeta e importar imagenes propias
+    //description: "",
+    redes: {
+      //importar fotos de las redes como svg
+      linkedin: "/icon/tecnologias/linkedin.svg",
+      github: "/icon/tecnologias/github2.svg",
+      gmail: "/icon/tecnologias/gmail.svg",
+    },
+    enlaces: {
+      linkedin: "http://linkedin.com/in/micaela-savournin",
+      github: "https://github.com/Micasavournin ",
+      gmail: "mailto:micaasavoo@gmail.com",
+    },
+  },
+
+  {
+    name: "Fabian Pacheco",
+    image: "/images/nosotros/fabian.png", //crear carpeta e importar imagenes propias
+    //description: "",
+    redes: {
+      //importar fotos de las redes como svg
+      linkedin: "/icon/tecnologias/linkedin.svg",
+      github: "/icon/tecnologias/github2.svg",
+      gmail: "/icon/tecnologias/gmail.svg",
+    },
+    enlaces: {
+      linkedin:
+        "https://www.linkedin.com/in/fabian-gerardo-pacheco-ramirez-6a4898237",
+      github: "https://github.com/fabgpr",
+      gmail: "mailto:fabiangpachecor@gmail.com",
+    },
+  },
+
+  {
+    name: "Valentin Dealbera",
+    image: "/images/nosotros/valen3.png", //crear carpeta e importar imagenes propias
+    //description: "",
+    redes: {
+      //importar fotos de las redes como svg
+      linkedin: "/icon/tecnologias/linkedin.svg",
+      github: "/icon/tecnologias/github2.svg",
+      gmail: "/icon/tecnologias/gmail.svg",
+    },
+    enlaces: {
+      linkedin: "https://www.linkedin.com/in/valentin-dealbera-b30561262/",
+      github: "https://github.com/ValentinDealbera",
+      gmail: "mailto:valentindealbera01@gmail.com",
+    },
+  },
+
+  {
+    name: "Tadeo Massó",
+    image: "/images/nosotros/tadeo.png", //crear carpeta e importar imagenes propias
+    //description: "",
+    redes: {
+      //importar fotos de las redes como svg
+      linkedin: "/icon/tecnologias/linkedin.svg",
+      github: "/icon/tecnologias/github2.svg",
+      gmail: "/icon/tecnologias/gmail.svg",
+    },
+    enlaces: {
+      linkedin: "https://www.linkedin.com/in/tadeo-mass%C3%B3-612045269/",
+      github: "https://github.com/TadeoMasso",
+      gmail: "mailto:massotadeo@gmail.com",
+    },
+  },
+
+  {
+    name: "Leonardo Pischetz",
+    image: "/images/nosotros/leo2.png", //crear carpeta e importar imagenes propias
+    //description: "",
+    redes: {
+      //importar fotos de las redes como svg
+      linkedin: "/icon/tecnologias/linkedin.svg",
+      github: "/icon/tecnologias/github2.svg",
+      gmail: "/icon/tecnologias/gmail.svg",
+    },
+    enlaces: {
+      linkedin:
+        "https://www.linkedin.com/in/leonardo-iv%C3%A1n-pischetz-865054216",
+      github: "https://github.com/leopischetz",
+      gmail: "mailto:leonardo.pischetz@gmail.com",
+    },
+  },
+
+  {
+    name: "Thomas Barenghi",
+    image: "/images/nosotros/thomas.png", //crear carpeta e importar imagenes propias
+    //description: "",
+    redes: {
+      //importar fotos de las redes como svg
+      linkedin: "/icon/tecnologias/linkedin.svg",
+      github: "/icon/tecnologias/github2.svg",
+      gmail: "/icon/tecnologias/gmail.svg",
+    },
+    enlaces: {
+      linkedin: "https://www.linkedin.com/in/thomasbarenghi/",
+      github: "https://github.com/thomasbarenghi",
+      gmail: "mailto:thomasbarenghi@gmail.com",
+    },
+  },
 ];

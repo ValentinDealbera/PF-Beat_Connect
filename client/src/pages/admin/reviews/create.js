@@ -9,7 +9,8 @@ import {
   SwitchForm,
   TextArea,
   AdminCreateUserForm,
-  AdminCreateReviewForm
+  AdminCreateReviewForm,
+  Head,
 } from "@/components";
 
 import {
@@ -22,6 +23,7 @@ import {
 import { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { fetchGenres } from "@/redux/slices/filters";
+import { useTranslation } from "react-i18next";
 
 export default function SellerDashboardOverview() {
   const dispatch = useDispatch();
@@ -29,6 +31,7 @@ export default function SellerDashboardOverview() {
   const validateMode = "review";
   const [fieldsToValidate, setFieldsToValidate] = useState([]);
   const [error, setErrors] = useState({});
+  const [t] = useTranslation("global");
 
   const [form, setForm] = useState({
     createdBy: "",
@@ -110,11 +113,12 @@ export default function SellerDashboardOverview() {
 
   return (
     <>
+      <Head title="Crear rev" />
       <main>
         <SellerDashboardLayout
           topBarMode="action"
-          topBarMessage="Crear review"
-          topBarButtonLabel="Guardar cambios"
+          topBarMessage={t("dashboardNav.createReview")}
+          topBarButtonLabel={t("adminBeatsCreate.t1")}
           onClick={handleExternalSubmit}
         >
           <IslandDashboard className="flex flex-col gap-5 xl:gap-8 ">

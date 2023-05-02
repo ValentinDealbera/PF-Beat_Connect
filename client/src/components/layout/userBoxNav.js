@@ -10,8 +10,10 @@ import {
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
 export default function UserBoxNav({ children, id }) {
+  const [t, i18n] = useTranslation("global");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const client = useSelector(
@@ -25,6 +27,33 @@ export default function UserBoxNav({ children, id }) {
     setIsDropdownOpen(state);
   };
 
+  const handleAction = () => {
+    if (window.innerWidth < 1024) {
+      setIsDropdownOpen(!isDropdownOpen);
+    }
+  };
+
+  useEffect(() => {
+    const pageClickEvent = (e) => {
+      // If the active element exists and is clicked outside of
+      if (
+        dropdownRef.current !== null &&
+        !dropdownRef.current.contains(e.target)
+      ) {
+        setIsDropdownOpen(!isDropdownOpen);
+      }
+    };
+
+    // If the item is active (ie open) then listen for clicks
+    if (isDropdownOpen) {
+      window.addEventListener("click", pageClickEvent);
+    }
+
+    return () => {
+      window.removeEventListener("click", pageClickEvent);
+    };
+  }, [isDropdownOpen]);
+
   return (
     <>
       <div className=" flex flex-row items-center justify-center gap-4 align-middle">
@@ -37,6 +66,7 @@ export default function UserBoxNav({ children, id }) {
             className="relative"
             onMouseEnter={() => handleDropdown(true)}
             onMouseLeave={() => handleDropdown(false)}
+            onClick={() => handleAction()}
           >
             <div className="flex gap-2 rounded-full border bg-white pb-1 pl-1 pr-1 pt-1 lg:pr-4">
               <ClientImage client={client} height={35} width={35} />
@@ -53,7 +83,7 @@ export default function UserBoxNav({ children, id }) {
         ) : (
           <Link href="/auth">
             <div className="flex gap-2 rounded-full bg-red-700 pb-2 pl-4 pr-4 pt-2 text-sm font-semibold text-white">
-              <p>Iniciar sesión</p>
+              <p>{t("userBoxNav")}</p>
             </div>
           </Link>
         )}

@@ -1,7 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
 import { setActiveItemDetail } from "@/redux/slices/beats";
-import { useState } from "react";
-
+import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { useTranslation } from "react-i18next";
 import {
   deleteClientBeat,
   setActiveEditingBeat,
@@ -22,6 +24,8 @@ import {
   BeatTitle,
   manageEditBeat,
   MiniModalBox,
+  ModalPopUp,
+  BeatReviewPopup,
 } from "@/components";
 
 export default function BeatCard({
@@ -33,24 +37,49 @@ export default function BeatCard({
   manageEditReview,
   manageCreateReview,
 }) {
+  const [t, i18n] = useTranslation("global");
   const dispatch = useDispatch();
   const [visibilityReviewsModal, setVisibilityReviewsModal] = useState(false);
   const [visibilityOwnedModal, setVisibilityOwnedModal] = useState(false);
   const [visibilityFavoriteModal, setVisibilityFavoriteModal] = useState(false);
+  const [showSelect, setShowSelect] = useState(false);
+  const [isSelected, setIsSelected] = useState(false);
+  const [logged, setLogged] = useState(false);
   const { bougthBeats, favoriteBeats } = useSelector(
     (state) => state.client.beats
   );
+const [tapVisible, setTapVisible] = useState(false);
+  const [touchStartTime, setTouchStartTime] = useState(null);
+  const ref = useRef(null);
 
+  const { isLogged } = useSelector((state) => state.client.authSession.auth);
   const isFavorite = Boolean(
     favoriteBeats.find((favoriteBeat) => favoriteBeat._id === beat._id)
   );
-
   const userReviews = useSelector((state) => state.client.reviews.reviews);
   const { _id } = useSelector(
     (state) => state.client.authSession.session.current
   );
 
   const fromClient = _id === beat.userCreator._id;
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setVisibilityReviewsModal(false);
+        setVisibilityOwnedModal(false);
+        setTapVisible(false);
+      } else {
+        setVisibilityReviewsModal(true);
+        setVisibilityOwnedModal(true);
+        setTapVisible(true);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref, isSelected]);
 
   try {
     const reviewed = Boolean(
@@ -65,9 +94,11 @@ export default function BeatCard({
       bougthBeats.find((boughtBeat) => boughtBeat._id === beat._id)
     );
 
+    //--------------------Funciones de accion--------------------
     const ownedActions = {
       handleAction: async () => {
         await dispatch(setActiveItemDetail(beat));
+        console.log("VIEW BEAT - card", beat._id);
         manageView();
       },
       handleEdit: async () => {
@@ -75,6 +106,7 @@ export default function BeatCard({
         manageEditBeat();
       },
       handleDelete: () => {
+        console.log("DELETE BEAT - card", beat._id);
         dispatch(deleteClientBeat(beat._id));
       },
     };
@@ -82,27 +114,57 @@ export default function BeatCard({
     const reviewActions = {
       handleCreateReview: () => {
         dispatch(setActiveBeatCreateReview(beat));
+        console.log("creando");
         manageCreateReview();
       },
       handleEditReview: async () => {
         await dispatch(setActiveEditingReview(currentReview));
+        console.log("editando");
         manageEditReview();
       },
     };
 
     const favoriteActions = {
       handleAddFavorite: () => {
-        dispatch(postFavoriteBeat({favorite: beat._id}));
+        if (!isLogged) return setLogged(true);
+        dispatch(postFavoriteBeat({ favorite: beat._id }));
       },
       handleDeleteFavorite: () => {
-        dispatch(deleteFavoriteBeat({favorite: beat._id}));
+        dispatch(deleteFavoriteBeat({ favorite: beat._id }));
       },
     };
+
+    //--------------------Funciones de control de eventos--------------------
+
+    function handleTouchStart() {
+      setTouchStartTime(Date.now());
+    }
+    function handleTouchEnd() {
+      const touchEndTime = Date.now();
+      if (touchEndTime - touchStartTime < 200) {
+        if (isSelected === true) {
+          return;
+        }
+        setShowSelect(!showSelect);
+      }
+    }
+    function handleClick() {
+      if (window.innerWidth > 1023) {
+        ownedActions.handleAction();
+      }
+    }
+    function handleDoubleClick() {
+      if (window.innerWidth <= 1023) {
+        console.log("double click");
+        ownedActions.handleAction();
+      }
+    }
 
     return (
       <>
         <div
-          className="relative w-full"
+          ref={ref}
+          className="relative w-full "
           onMouseEnter={() => {
             setVisibilityReviewsModal(true);
             setVisibilityOwnedModal(true);
@@ -111,24 +173,28 @@ export default function BeatCard({
             setVisibilityReviewsModal(false);
             setVisibilityOwnedModal(false);
           }}
+          onClick={handleClick}
+          onDoubleClick={handleDoubleClick}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
         >
           <div
-            onClick={ownedActions.handleAction}
+            onClick={handleClick}
             className={mode === "grid" ? "w-full" : `${width}`}
           >
             <div
-              className={`background-neutral-white gap-estilo3 flex flex-col ${
+              className={`gap-estilo3 flex flex-col ${
                 variant === "public"
                   ? ""
                   : "border-radius-estilo1 px-2 pb-5 pt-2 "
               }`}
             >
-              <BeatImage beat={beat} height={"auto"} width={"auto"} />
+              <BeatImage beat={beat} height={"auto"} width={"auto"} tapVisible={tapVisible} />
               <div className={`${variant === "public" ? "" : "px-2"}`}>
                 {boughtBeat ? (
                   <>
                     <span className="color-primary-red-700 font-semibold">
-                      COMPRADO
+                      {t("beatCar.purchased")}
                     </span>
                     <BeatBPM beat={beat} />
                   </>
@@ -144,6 +210,8 @@ export default function BeatCard({
             </div>
           </div>
           <Modals
+            setLogged={setLogged}
+            logged={logged}
             fromClient={fromClient}
             visibilityOwnedModal={visibilityOwnedModal}
             visibilityReviewsModal={visibilityReviewsModal}
@@ -167,6 +235,8 @@ export default function BeatCard({
 }
 
 function Modals({
+  setLogged,
+  logged,
   fromClient,
   visibilityOwnedModal,
   visibilityReviewsModal,
@@ -180,13 +250,14 @@ function Modals({
   handleAddFavorite,
   handleDeleteFavorite,
 }) {
+  const [t, i18n] = useTranslation("global");
   const fromClientBtns = [
     {
-      text: "Editar",
+      text: "beatCar.edit",
       action: handleEdit,
     },
     {
-      text: "Borrar",
+      text: "beatCar.delete",
       action: handleDelete,
     },
   ];
@@ -198,11 +269,40 @@ function Modals({
           <MiniModalBox className="right-1 top-1  ">
             <div className="flex flex-col gap-1">
               {fromClientBtns.map((btn, index) => (
-                <Button key={index} text={btn.text} action={btn.action} />
+                <Button key={index} text={t(btn.text)} action={btn.action} />
               ))}
             </div>
           </MiniModalBox>
         </div>
+      )}
+
+      {logged && (
+        <ModalPopUp>
+          <div className="relative flex max-h-full w-12 flex-col justify-center overflow-hidden rounded-3xl bg-white p-10 xl:w-[40%] ">
+            <Image
+              src="/icon/cross.svg"
+              width={15}
+              height={15}
+              onClick={() => setLogged(false)}
+              alt="close"
+              className="absolute right-4 top-4 cursor-pointer"
+            />
+            <div className="flex w-full flex-col items-center justify-center">
+              <h1 className="pb-3 text-lg font-bold text-red-700">
+                {t("beatCar.modalPopUp1")}
+              </h1>
+              <h2>{t("beatCar.modalPopUp2")}</h2>
+              <p>{t("beatCar.modalPopUp3")}</p>
+              <p className="pb-2">{t("beatCar.modalPopUp4")}</p>
+              <p className="mb-4">{t("beatCar.modalPopUp5")}</p>
+              <Link href="/auth">
+                <div className="flex gap-2 rounded-full bg-red-700 pb-2 pl-4 pr-4 pt-2 text-base font-semibold text-white">
+                  <p>{t("beatCar.modalPopUp6")}</p>
+                </div>
+              </Link>
+            </div>
+          </div>
+        </ModalPopUp>
       )}
 
       {!fromClient && visibilityReviewsModal && boughtBeat && (
@@ -210,10 +310,16 @@ function Modals({
           <MiniModalBox className="right-1 top-1">
             <div className="flex flex-col">
               {boughtBeat && !reviewed && !fromClient && (
-                <Button text={"Crear review"} action={handleCreateReview} />
+                <Button
+                  text={t("beatCar.createReview")}
+                  action={handleCreateReview}
+                />
               )}
               {boughtBeat && reviewed && !fromClient && (
-                <Button text={"Editar review"} action={handleEditReview} />
+                <Button
+                  text={t("beatCar.editReview")}
+                  action={handleEditReview}
+                />
               )}
             </div>
           </MiniModalBox>

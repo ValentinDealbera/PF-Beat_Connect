@@ -9,8 +9,10 @@ import Link from "next/link";
 import { setCurrentClient, jsonLogin } from "@/redux/slices/client/authSession";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
+import { useTranslation } from "react-i18next";
 
 export default function Login() {
+  const [t, i18n] = useTranslation("global");
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -43,42 +45,42 @@ export default function Login() {
       <SimpleHeader />
       <AuthLayout>
         <h1 className="text-titulo3-regular mb-6">
-          Hey, bienvenido{" "}
-          <span className="text-titulo3-semibold">de nuevo</span>
+          {t("authIndex.t1")}{" "}
+          <span className="text-titulo3-semibold">{t("authIndex.t2")}</span>
         </h1>
         <form onSubmit={handleLogin} className="flex w-full flex-col gap-4">
           <Input
             type="email"
             name="email"
-            label="Correo electrónico"
-            placeholder="Correo electrónico"
+            label={t("authIndex.label")}
+            placeholder={t("authIndex.placeholder")}
             className="w-full"
           />
           <Input
             type="password"
             name="password"
-            label="Contraseña"
-            placeholder="Contraseña"
+            label={t("authIndex.labelPassword")}
+            placeholder={t("authIndex.placeholderPassword")}
           />
           <p className=" w-full text-center font-light">
-            ¿No recuerdas tu contraseña?{" "}
+            {t("authIndex.t3")}{" "}
             <Link href="/auth/recover" className="font-medium text-red-700">
-              Recuperar
+              {t("authIndex.t4")}
             </Link>
           </p>
           <button
             type="submit"
             className="text-base-semibold mt-2  w-full rounded-full bg-red-700 py-2 text-white"
           >
-            Ingresar
+            {t("authIndex.t5")}
           </button>
         </form>
         <hr className="my-6 w-full" />
         <GoogleButton />
         <p className="mt-6 w-full text-center font-light">
-          ¿No tienes una cuenta?{" "}
+            {t("authIndex.t6")}{" "}
           <Link href="/auth/register" className="font-medium text-red-700">
-            Regístrate
+            {t("authIndex.t7")}
           </Link>
         </p>
       </AuthLayout>

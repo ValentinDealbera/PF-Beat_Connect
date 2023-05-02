@@ -14,8 +14,10 @@ import { useSelector } from "react-redux";
 
 import Image from "next/image";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function BeatReviewPopup({ modal, handleModalReview }) {
+  const [t] = useTranslation("global");
   //const [modal, setModal] = useState(false);
 
   const currentBeatReview = useSelector(
@@ -33,7 +35,7 @@ const averageRating = rating.reduce((a, b) => a + b, 0) / rating.length;
     <>
       {modal && (
         <ModalPopUp>
-          <div className="relative flex max-h-full w-full flex-col justify-center gap-4 overflow-hidden rounded-3xl bg-white p-10 xl:w-[100%] ">
+          <div className="relative flex max-h-full w-full flex-col justify-center gap-4 overflow-hidden rounded-3xl bg-white py-10 px-4 xs:px-8 sm:p-10 xl:w-[100%] ">
             <Image
               src="/icon/cross.svg"
               width={15}
@@ -47,7 +49,7 @@ const averageRating = rating.reduce((a, b) => a + b, 0) / rating.length;
                 {currentBeatReview.name}{" "}
               </h1>
               <p className="text-base-regular">
-                {averageRating} Estrellas | {currentBeatReview.review.length} Reviews
+                {averageRating} {t("clientReview")} | {currentBeatReview.review.length} Reviews
               </p>
             </div>
             

@@ -15,19 +15,21 @@ import {
 import { forwardRef, useImperativeHandle } from "react";
 import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { adminPostUser, adminEditUser } from "@/redux/slices/admin";
+import { adminPostUser, adminEditUser } from "@/redux/slices/admin/users";
 import { useRouter } from "next/router";
+import { useTranslation } from "react-i18next";
 
 const AdminCreateUserForm = forwardRef((props, ref) => {
+  const [t] = useTranslation("global");
   const router = useRouter();
   const dispatch = useDispatch();
   const formRef = useRef(null);
   const validateMode = "user";
   const [fieldsToValidate, setFieldsToValidate] = useState([]);
   const [error, setErrors] = useState({});
-  const defaultValues =
-    useSelector((state) => state.admin.currentEditUser) || {};
   const mode = props.mode;
+  const defaultValues = mode === "create"?{}:
+    useSelector((state) => state.admin.users.currentEdtingUser);  
   const [softD, setSoftD] = useState(defaultValues.softDelete);
   const [sellerState, setSellerState] = useState(defaultValues.isSeller);
   const [adminState, setAdminState] = useState(defaultValues.superAdmin);
@@ -61,7 +63,7 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
   };
 
   const onSubmit = async (e) => {
-    console.log("onSubmit", e, validateMode);
+    console.log("onSubmit", mode, validateMode);
     const actionToDispatch = mode === "edit" ? adminEditUser : adminPostUser;
     try {
       await handleSubmit({
@@ -119,7 +121,7 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
     arrayButtons: [
       {
         text: "Yes",
-        active: !softD,
+        active: softD,
         handleAction: () => {
           setForm({
             ...form,
@@ -129,7 +131,7 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
       },
       {
         text: "No",
-        active: softD,
+        active: !softD,
         handleAction: () => {
           setForm({
             ...form,
@@ -146,7 +148,7 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
     arrayButtons: [
       {
         text: "Yes",
-        active: !sellerState,
+        active: sellerState,
         handleAction: () => {
           setForm({
             ...form,
@@ -156,7 +158,7 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
       },
       {
         text: "No",
-        active: sellerState,
+        active: !sellerState,
         handleAction: () => {
           setForm({
             ...form,
@@ -173,7 +175,7 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
     arrayButtons: [
       {
         text: "Yes",
-        active: !adminState,
+        active: adminState,
         handleAction: () => {
           setForm({
             ...form,
@@ -183,7 +185,7 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
       },
       {
         text: "No",
-        active: adminState,
+        active: !adminState,
         handleAction: () => {
           setForm({
             ...form,
@@ -204,8 +206,8 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
             <Input
               id="firstName"
               name="firstName"
-              label="Primer nombre"
-              placeholder="Primer nombre:"
+              label={t("register.t2")}
+              placeholder={t("register.t2")}
               defaultValue={mode === "edit" ? defaultValues.firstName : ""}
               type="text"
               onChange={handleInput}
@@ -214,8 +216,8 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
             <Input
               name="lastName"
               id="lastName"
-              label="Apellido"
-              placeholder="Apellido:"
+              label={t("register.t3")}
+              placeholder={t("register.t3")}
               defaultValue={mode === "edit" ? defaultValues.lastName : ""}
               type="text"
               onChange={handleInput}
@@ -224,8 +226,8 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
             <Input
               name="username"
               id="username"
-              label="UserName"
-              placeholder="UserName:"
+              label={t("register.t6")}
+              placeholder={t("register.t6")}
               defaultValue={mode === "edit" ? defaultValues.username : ""}
               type="text"
               onChange={handleInput}
@@ -234,19 +236,48 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
             <Input
               id="bio"
               name="bio"
-              label="Bio"
-              placeholder="Bio:"
+              label={t("register.t11")}
+              placeholder={t("register.t11")}
               defaultValue={mode === "edit" ? defaultValues.bio : ""}
               type="text"
               onChange={handleInput}
               error={error.bio}
             />
+             <div className="flex justify-start items-start gap-4 w-full">
+              <SwitchForm
+                label={t("register.t14")}
+                name="soft"
+                nameInput="soft"
+                // defaultValue={mode === "edit" ? defaultValues.softDelete : ""}
+                onChange={handleInput}
+                arrayButtons={arraySoftDelete.arrayButtons}
+                error={error.soft}
+              />
+              <SwitchForm
+                label={t("register.t15")}
+                name="seller"
+                nameInput="seller"
+                // defaultValue={mode === "edit" ? defaultValues.IsSeller : ""}
+                onChange={handleInput}
+                arrayButtons={arraySeller.arrayButtons}
+                error={error.seller}
+              />
+              <SwitchForm
+                label="Super Admin"
+                name="admin"
+                nameInput="admin"
+                // defaultValue={mode === "edit" ? defaultValues.superAdmin : ""}
+                onChange={handleInput}
+                arrayButtons={arrayAdmin.arrayButtons}
+                error={error.admin}
+              />
+            </div>
           </FormColumn>
           <FormColumn className="w-full">
             <Input
               name="password"
-              label="Password"
-              placeholder="password:"
+              label={t("register.t7")}
+              placeholder={t("register.t7")}
               defaultValue={mode === "edit" ? null : ""}
               type="password"
               onChange={handleInput}
@@ -255,7 +286,7 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
             <Input
               name="email"
               label="Email"
-              placeholder="Email:"
+              placeholder="Email"
               defaultValue={mode === "edit" ? defaultValues.email : ""}
               type="email"
               onChange={handleInput}
@@ -263,50 +294,21 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
             />
             <Input
               name="backImage"
-              label="Foto de Portada"
-              placeholder="Foto de Portada:"
+              label={t("register.t12")}
+              placeholder={t("register.t12")}
               type="file"
               onChange={handleInput}
               error={error.backImage}
             />
             <Input
               name="image"
-              label="Imagen de Perfil"
-              placeholder="Imagen de Perfil:"
+              label={t("register.t13")}
+              placeholder={t("register.t13")}
               type="file"
               onChange={handleInput}
               error={error.image}
             />
           </FormColumn>
-        </FormRow>
-        <FormRow>
-          <SwitchForm
-            label="Banneado"
-            name="soft"
-            nameInput="soft"
-            // defaultValue={mode === "edit" ? defaultValues.softDelete : ""}
-            onChange={handleInput}
-            arrayButtons={arraySoftDelete.arrayButtons}
-            error={error.soft}
-          />
-          <SwitchForm
-            label="Vendedor"
-            name="seller"
-            nameInput="seller"
-            // defaultValue={mode === "edit" ? defaultValues.IsSeller : ""}
-            onChange={handleInput}
-            arrayButtons={arraySeller.arrayButtons}
-            error={error.seller}
-          />
-          <SwitchForm
-            label="Super Admin"
-            name="admin"
-            nameInput="admin"
-            // defaultValue={mode === "edit" ? defaultValues.superAdmin : ""}
-            onChange={handleInput}
-            arrayButtons={arrayAdmin.arrayButtons}
-            error={error.admin}
-          />
         </FormRow>
       </FormContainer>
     </form>

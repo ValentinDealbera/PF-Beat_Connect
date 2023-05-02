@@ -4,6 +4,7 @@ import {
   FaqsGrid,
   DynamicTable,
   ModalTables,
+  Head,
 } from "@/components";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -11,26 +12,26 @@ import { useSelector } from "react-redux";
 import {
   adminGetReviews,
   adminDeleteReview,
-  setCurrentEditReview,
-} from "@/redux/slices/admin";
+  setCurrentEditingReview,
+} from "@/redux/slices/admin/reviews";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function SellerDashboardOverview() {
-  const { reviews } = useSelector((state) => state.admin);
-  const reviewsData = reviews;
+  const [t] = useTranslation("global");
   const dispatch = useDispatch();
-
   const router = useRouter();
+  const { reviews } = useSelector((state) => state.admin.reviews);
+  const reviewsData = reviews;
+  
   const [reviewToDelete, setReviewToDelete] = useState(null);
+
   const headers = [
     "Beat",
-    "Titulo",
-    "Rating",
-    "Status",
-    "Creador",
-    "Editar",
-    "Eliminar",
+    "Review",
+    t("adminCreateReview.t1"),
+    t("dashboardNav.actions"),
   ];
 
   useEffect(() => {
@@ -44,55 +45,66 @@ export default function SellerDashboardOverview() {
 
   const handleEdit = async (data) => {
     console.log("handleEdit", data);
-    await dispatch(setCurrentEditReview(data));
+    await dispatch(setCurrentEditingReview(data));
     router.push(`/admin/reviews/${data._id}`);
   };
 
+  const [creatorVar, setCreatorVar] = useState("");
+  const [actionsVar, setActionsVar] = useState("");
+  useEffect(() => {
+    setCreatorVar(t("adminCreateReview.t1").toLocaleLowerCase());
+    setActionsVar(t("dashboardNav.actions").toLocaleLowerCase());
+  }, [t("adminCreateReview.t1"), t("dashboardNav.actions")]);
+
   const rows = reviewsData.map((item) => {
     return {
-      titulo: item.title,
       // id: item._id,
-      rating: item.rating,
-      status: item.softDelete ? "Banned" : "Ok",
-      creador: item.createdBy.username,
+      review: (<div>
+         <p className="text-sm-light">{item.title}</p>
+        <p className="text-sm-light">{item.rating} {t("clientReview")}</p>
+      </div>),
+      [creatorVar]: item.createdBy.username,
       beat: (
-        <div className="flex w-2/5 items-center gap-4">
+        <div className="flex items-center gap-4 ">
           <Image
             src={item.beat.image}
-            width={50}
-            height={50}
-            className="aspect-square rounded-full object-cover"
+            width={70}
+            height={70}
+            className="aspect-square rounded-xl object-cover"
           />
-          <h3 className="text-base-medium">{item.beat.name}</h3>
+          <div className="flex flex-col">
+            <h3 className="text-base-medium">{item.beat.name}</h3>
+          </div>
         </div>
       ),
-      editar: (
-        <button
-          onClick={() => handleEdit(item)}
-          className="background-neutral-gray-400 hover:background-neutral-gray-700 color-neutral-white 
-            text-sm-semibold border-radius-estilo2 px-4 py-2"
-        >
-          Edit
-        </button>
-      ),
-      eliminar: (
-        <button
-          onClick={() => setReviewToDelete(item)}
-          className="background-primary-red-500 hover:background-primary-red-700 color-neutral-white 
-            text-sm-semibold border-radius-estilo2 px-4 py-2"
-        >
-          Eliminar
-        </button>
+      [actionsVar]: (
+        <div className="flex w-max gap-4" key={item._id}>
+          <button
+            onClick={() => handleEdit(item)}
+            className=" hover:background-neutral-gray-700 text-sm-semibold 
+            border-radius-estilo2 text-black dark:text-white"
+          >
+            {t("dashboardNav.edit")}
+          </button>
+          <button
+            onClick={() => setReviewToDelete(item)}
+            className=" hover:background-primary-red-700 text-sm-semibold 
+            border-radius-estilo2 text-red-700 "
+          >
+            {t("dashboardNav.delete")}
+          </button>
+        </div>
       ),
     };
   });
   return (
     <>
+      <Head title="Reviews" />
       <main>
         <SellerDashboardLayout
           topBarMode="action"
-          topBarMessage="Reviews de la pagina"
-          topBarButtonLabel="Crear review"
+          topBarMessage={t("dashboardNav.title4")}
+          topBarButtonLabel={t("dashboardNav.createReview")}
           onClick={() => {
             router.push("/admin/reviews/create");
           }}
