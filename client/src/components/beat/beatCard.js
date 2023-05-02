@@ -278,7 +278,7 @@ function Modals({
 
       {logged && (
         <ModalPopUp>
-          <div className="relative flex max-h-full w-12 flex-col justify-center overflow-hidden rounded-3xl bg-white p-10 xl:w-[40%] ">
+          <div className="relative flex max-h-full  flex-col justify-center overflow-hidden rounded-3xl bg-white px-6 pb-6 pt-10 md:p-7 lg:p-10 w-max ">
             <Image
               src="/icon/cross.svg"
               width={15}

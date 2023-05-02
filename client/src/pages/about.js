@@ -59,14 +59,14 @@ export default function About() {
                         {nosotros.name}
                       </h3>
                     </div>
-                    <div className="flex flex-row justify-center gap-2  ">
+                    <div className="flex flex-row justify-center gap-2 lg:gap-2  ">
                       {Object.entries(nosotros.redes).map(([red, icono]) => (
                         <a
                           className="align-middle"
                           href={nosotros.enlaces[red]}
                           key={red}
                         >
-                          <div className="relative h-[22px] max-h-[22px] w-auto min-w-[22px] ">
+                          <div className="relative lg:h-[22px] lg:max-h-[22px] w-auto lg:min-w-[22px] h-[28px] max-h-[28px] min-w-[28px] ">
                           <Image
                             class=""
                           layout="fill"

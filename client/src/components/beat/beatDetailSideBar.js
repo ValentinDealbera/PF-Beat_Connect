@@ -16,6 +16,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export default function BeatDetailSideBar() {
+  const dispatch = useDispatch();
   const [t, i18n] = useTranslation("global");
 
   const { bougthBeats } = useSelector((state) => state.client.beats);
@@ -135,7 +136,7 @@ function BeatDataBox({ beat }) {
   );
 }
 
-function BeatDetailBox({ msg1, msg2, beat, handleModalReview, hasReview }) {
+function BeatDetailBox({ msg1, msg2, beat, handleModalReview, type, hasReview }) {
   const [t, i18n] = useTranslation("global");
   const dispatch = useDispatch();
 
@@ -144,15 +145,16 @@ function BeatDetailBox({ msg1, msg2, beat, handleModalReview, hasReview }) {
     <div className="h-auto">
       <p className="pb-1 text-base font-medium text-black">{msg1}</p>
       <p className=" mb-1 text-sm font-semibold text-red-700">{msg2}</p>
-      {hasReview && (
+      {hasReview && type !== "free" ? (
         <button
           className=" text-sm font-semibold text-red-700"
           onClick={handleModalReview}
         >
           {t("beatDetailSideBar.t4")}
         </button>
-      )}
-      {/* {type === "free" ? (
+      ) :
+      (
+   
         <a
           className=" text-sm font-semibold text-red-700"
           download={beat.name}
@@ -160,15 +162,7 @@ function BeatDetailBox({ msg1, msg2, beat, handleModalReview, hasReview }) {
         >
           {t("beatDetailSideBar.t2")}
         </a>
-      ) : type === 'buyed' ? (
-        <a
-          className=" text-sm font-semibold text-red-700"
-          download={beat.name}
-          href={beat.audioWAV}
-        >{t("beatDetailSideBar.t2")}</a>
-      ) : (
-        <AddToCart beat={beat} posAction={() => externalManageDropdown()} />
-      )} */}
+      )}
     </div>
   );
 }
