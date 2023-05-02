@@ -38,7 +38,7 @@ export default function About() {
           subClassName="padding-x-estilo2  bg-white color-white gap-2 flex-col flex"
           className="bg-white"
         >
-          <div className="gap-estilo1 flex max-w-[100vw] flex-1 flex-shrink flex-grow grid-cols-1 overflow-scroll overflow-x-scroll pb-24 md:grid-cols-4 lg:grid lg:flex-none lg:flex-shrink-0 lg:flex-grow-0 lg:gap-y-14 lg:overflow-x-hidden">
+          <div className="gap-estilo1 flex max-w-[100vw] flex-1 flex-shrink flex-grow grid-cols-1 overflow-scroll overflow-y-hidden overflow-x-scroll pb-24 md:grid-cols-4 lg:grid lg:flex-none lg:flex-shrink-0 lg:flex-grow-0 lg:gap-y-14 lg:overflow-x-hidden">
             {nosotros.map((nosotros, index) => (
               <div
                 className="gap-estilo4 flex min-w-[75vw] flex-col sm:min-w-[40vw] md:min-w-[40vw] lg:min-w-full"
