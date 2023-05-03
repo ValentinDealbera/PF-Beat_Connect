@@ -42,6 +42,8 @@ export default function SellerDashboardNav() {
     },
   ];
 
+  const currentLanguage = i18n.language;
+
   return (
     <>
       <div className="gap-estilo2 flex flex-col">
@@ -56,20 +58,30 @@ export default function SellerDashboardNav() {
           ))}
         </div>
         <br />
-        <div className="flex justify-center gap-4 flex-direction: column" >
-          <button
-            onClick={() => i18n.changeLanguage("es")}
-            className="background-primary-red-700 color-neutral-white border-radius-estilo1 text-base-semibold w-max px-3 py-2"
-          >
-            Español
-          </button>
-          <button
-            onClick={() => i18n.changeLanguage("en")}
-            className="background-primary-red-700 color-neutral-white border-radius-estilo1 text-base-semibold w-max px-3 py-2"
-          >
-            English
-          </button>
+        <div className="gap-estilo4 flex flex-col">
+          <h3 className="text-subtitulo-semibold color-neutral-white">
+            {t("footerNav.idioma")}
+          </h3>
+
+          <div className="flex flex-col gap-4 md:flex-row lg:gap-2">
+            <button
+              onClick={() => i18n.changeLanguage("es")}
+              className={`text-white  ${
+                currentLanguage === "es" ? "font-bold underline" : "font-light"
+              }`}
+            >
+              Español
+            </button>
+            <button
+              onClick={() => i18n.changeLanguage("en")}
+              className={`text-white  ${
+                currentLanguage === "en" ? "font-bold underline" : "font-light"
+              }`}
+            >
+              English
+            </button>
           </div>
+        </div>
       </div>
     </>
   );

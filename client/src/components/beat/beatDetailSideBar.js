@@ -31,13 +31,13 @@ export default function BeatDetailSideBar() {
 
   const dynamicBeatDetailBox = [
     {
-      msg1: "Free License, MP3",
+      msg1: i18n.language === "en" ? "Free License, MP3" : "Licencia Gratuita, MP3",
       msg2: "$0.00",
       beat: currentBeat.audioMP3,
       type: "free",
     },
     {
-      msg1: "Standart License, WAV",
+      msg1: i18n.language === "en" ? "Standart License, WAV" : "Licencia Estándar, WAV",
       msg2: `$${currentBeat.priceAmount}`,
       beat: currentBeat.audioWAV,
       type: buyed ? "buyed" : "paid",

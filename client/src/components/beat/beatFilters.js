@@ -174,7 +174,7 @@ export default function BeatFilters() {
 
   const dynamicFilterBtns = [
     {
-      label: "Generos",
+      label:  i18n.language === "en" ? "Genres" : "Géneros",
       handleClick: () => setChildFilterIndex(1),
     },
     // {
@@ -182,7 +182,7 @@ export default function BeatFilters() {
     //   handleClick: () => setChildFilterIndex(2),
     // },
     {
-      label: "Precio",
+      label: i18n.language === "en" ? "Price" : "Precio",
       handleClick: () => setChildFilterIndex(2),
     },
     {
@@ -231,13 +231,13 @@ export default function BeatFilters() {
           <div className="flex flex-row justify-start gap-2 sm:hidden">
             <div className="flex flex-row items-center gap-1">
               <Image src="/icon/filter.svg" width={20} height={20} />
-              <button onClick={handleDropDownFilter}>Filters</button>
+              <button onClick={handleDropDownFilter}>{t("beatShopSection.filters")}</button>
             </div>
             {dropDownFilter && (
               <>
                 <BeatBottomSheetFilteringWithHeader
                   setIsDropdownOpen={setDropDownFilter}
-                  title="Filters"
+                  title= {i18n.language === "en" ? "Filters" : "Filtros"}
                   handleBack={() => setChildFilterIndex(0)}
                   reset={() => {
                     setBeatGenre([]);
@@ -253,7 +253,7 @@ export default function BeatFilters() {
                   )}
                   {childFilterIndex === 1 && (
                     <CheckboxGroup
-                      label="Generos"
+                      label= {i18n.language === "en" ? "Genres" : "Generos"}
                       values={generos}
                       seleccionados={beatGenre}
                       setSeleccionados={setBeatGenre}
@@ -269,7 +269,7 @@ export default function BeatFilters() {
               )} */}
                   {childFilterIndex === 2 && (
                     <MinMax
-                      label="Precio"
+                      label= {i18n.language === "en" ? "Price" : "Precio"}
                       seleccionados={prices}
                       setSeleccionados={setPrices}
                     />
