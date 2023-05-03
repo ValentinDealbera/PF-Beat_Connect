@@ -6,7 +6,7 @@ export default function SimpleHeader({ mode }) {
   const currentLanguage = i18n.language;
   return (
     <>
-      <header className="fixed z-30  flex w-full flex-row justify-between  py-8">
+      <header className="fixed z-30  flex w-full flex-row justify-center  py-8">
         <div className="padding-x-estilo2 flex items-center  justify-between">
           <Logo mode={mode} />
           <div className="flex flex-row gap-4 md:flex-row lg:gap-2">

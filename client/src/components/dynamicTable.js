@@ -152,7 +152,7 @@ export default function DynamicTable({ headers, rows }) {
           sx={{
 
             "& .MuiTableCell-root": {              
-              overflow: "hidden",    
+             width: "100%", 
             },
 
           }}
@@ -161,7 +161,13 @@ export default function DynamicTable({ headers, rows }) {
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
           ).map((row) => (
-            <TableRow key={row.name}>
+            <TableRow key={row.name}
+            sx={{
+              "& .MuiTableCell-root": {
+                minWidth: "max-content !important",
+            } 
+            }}
+            >
               {headers.map((header) => (
                 <TableCellStyled key={`${row.id}-${header}`} >
                   {row[header.toLowerCase()]}
