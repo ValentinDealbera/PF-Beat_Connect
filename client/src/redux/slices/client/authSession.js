@@ -392,7 +392,8 @@ const authSession = createSlice({
 
         if(action.payload.session.softDelete == true){
           state.auth.isLogged = false;
-          toast.error("Fuiste baneado", toastError);
+          let trad= i18next?.language == "en"? "Your account is suspended, please contact support." :"Tu cuenta está suspendida, comunícate con soporte";
+          toast.error(trad, toastError);
           return;
         }
 

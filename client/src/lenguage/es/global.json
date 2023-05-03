@@ -58,14 +58,18 @@
     "c4": "Para registrarte como proveedor, debes completar el formulario de registro. Una vez registrado, podrás crear y publicar tu catálogo de instrumentales."
   },
   "faqsAdmin": {
-    "t1": "¿Cómo puedo encontrar el beat adecuado para mi proyecto musical?",
-    "c1": "En nuestra plataforma, puedes explorar los catálogos de los productores de música registrados y escuchar muestras de audio de cada beat.",
-    "t2": "¿Cómo puedo realizar el pago de manera segura?",
-    "c2": "Ofrecemos un proceso de pago seguro y eficiente a través de Mercado Pago. Una vez que hayas elegido el beat que deseas comprar, podrás realizar el pago de manera segura con diferentes métodos de pago.",
-    "t3": "¿Cómo recibiré el archivo del beat después de realizar el pago?",
-    "c3": "Una vez que hayas realizado el pago, recibirás el archivo del beat en tu correo electrónico. Asegúrate de proporcionar una dirección de correo electrónico válida durante el proceso de pago.",
-    "t4": "¿Cómo puedo registrarme como proveedor en la plataforma?",
-    "c4": "Para registrarte como proveedor, debes completar el formulario de registro. Una vez registrado, podrás crear y publicar tu catálogo de instrumentales."
+    "t1": "Cuales son las herramientas que tengo como administrador  para realizar correctamente mi trabajo?",
+    "c1": "Modificar beats, usuarios o reviews: esto puede incluir cambios en la descripción de un beat, la corrección de información incorrecta sobre un usuario o la eliminación de una revisión falsa.Relacion directa con la base de datos del bot: lo que te permite monitorear las preguntas/reportes que han hecho los usuarios ",
+    "d1": "Relacion directa con la base de datos del bot: lo que te permite monitorear las preguntas/reportes que han hecho los usuarios ",
+    "e1": "Creacion de usuarios, reviews y beats: esto puede ser útil si deseas agregar contenido adicional al sitio o si necesitas crear una cuenta de usuario para un nuevo vendedor en el sitio.",
+    "t2": "¿Cuáles son las políticas y procedimientos clave que debo conocer como administrador?",
+    "c2": "Política de privacidad: Describe cómo se recopila, utiliza, comparte y almacena la información de los usuarios. Es importante garantizar que se cumpla con esta política y que los usuarios estén informados sobre cómo se maneja su información.",
+    "d2": "Términos de uso: establecen las reglas para el uso de la plataforma, incluyendo los derechos y responsabilidades de los usuarios. Es importante que los usuarios acepten los términos de uso antes de utilizar la plataforma.",
+    "e2": "Política de seguridad: esta política describe cómo se protege la plataforma y la información de los usuarios contra posibles amenazas de seguridad.",
+    "t3": "¿Cómo puedo agregar un nuevo usuario al sitio?",
+    "c3": "Para agregar un nuevo usuario al sitio, haga clic en Usuarios. Complete el formulario de Crear Usuario con los detalles del usuario y haga clic en Guardar Cambios.",
+    "t4": "¿Cómo puedo agregar un nuevo beat para un usuario ya existente?",
+    "c4": "Para agregar un beat, haga clic en Beats. Complete el formulario de Crear Beat con los detalles del beat y del usuario creador y haga clic en Guardar Cambios."
   },
   "about": {
     "t1": "Conozcámonos",
@@ -192,7 +196,6 @@
     "form13": "Ingresa un beat de alta calidad (WAV, OGG)",
     "form14": "Crear publicacion",
     "form15": "Guardar publicacion"
-
   },
   "buyerGeneralNav": {
     "profile": "Perfil",
@@ -425,6 +428,7 @@
     "t2": "Usuarios",
     "t3": "Ordenes",
     "t4": "Usuario",
+    "t5": "Reportes",
     "status": "Status",
     "actions": "Acciones",
     "status1": "Baneado",
@@ -488,8 +492,7 @@
     "t1": "Debes comprar un beat para darle una review! ",
     "t2": "Compra uno ahora!"
   },
-
-  "validationCreateBeat" : {
+  "validationCreateBeat": {
     "t1": "El nombre de tu beat debe tener entre uno y 50 caracteres.",
     "t2": "El precio de tu beat debe ser mayor a 1.",
     "t3": "El tamaño de la imagen es demasiado grande. El tamaño máximo permitido es de 10 MB.",
@@ -501,11 +504,9 @@
     "t9": "Debes seleccionar un género",
     "t10": "Debes subir un Beat",
     "t11": "Debes subir un archivo wav o ogg"
-    },
-  
+  },
   "bot": "Soporte en línea / Reclamos",
-
-  "editBeat" : {
+  "editBeat": {
     "t1": "Editemos tu",
     "t2": "Haz los ajustes que creas necesarios",
     "t3": "Nombre del beat",
@@ -515,22 +516,32 @@
     "t7": "El tamaño del audio es demasiado grande. El tamaño máximo permitido es de 150 MB.",
     "t8": "Tu beat debe tener entre 20 y 350 bpm.",
     "t9": "Debes seleccionar un género"
-    },
-
-    "validationCreateUser" : {
-      "t1": "",
-      "t2": "",
-      "t3": "",
-      "t4": "",
-      "t5": "",
-      "t6": "",
-      "t7": "",
-      "t8": "",
-      "t9": ""
-      }, 
-
-      "hamburguer" : {
-        "t1": "Centro de ayuda",
-        "t2": "Volver atras"
-        }
+  },
+  "validationCreateUser": {
+    "t1": "Tu nombre de usuario debe tener entre uno y 50 caracteres.",
+    "t2": "Tu nombre debe tener entre uno y 50 caracteres.",
+    "t3": "Tu biografía debe tener entre uno y 50 caracteres.",
+    "t4": "El tamaño de la imagen es demasiado grande. El tamaño máximo permitido es de 10 MB.",
+    "t5": "El tamaño de la imagen de fondo es demasiado grande. El tamaño máximo permitido es de 10 MB.",
+    "t6": "Debes subir un archivo jpg o png",
+    "t7": "El apellido debe tener entre uno y 50 caracteres.",
+    "t8": "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.",
+    "t9": "Por favor ingresa una dirección de correo electrónico válida."
+  },
+  "validationCreateReview": {
+    "t1": "Debes ingresar un ID",
+    "t2": "Debes ingresar una calificación",
+    "t3": "Debes seleccionar un número entre uno y cinco",
+    "t4": "Debes ingresar un comentario",
+    "t5": "Debes ingresar un título",
+    "t6": "Debes ingresar un beat"
+  },
+  "hamburguer": {
+    "t1": "Centro de ayuda",
+    "t2": "Volver atras"
+  },
+  "adminHeaderBar": {
+    "t1": "Hola Admin, bienvenido",
+    "t2": "Ir al panel de control"
+  }
 }
