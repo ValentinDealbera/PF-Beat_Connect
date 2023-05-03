@@ -19,7 +19,12 @@ export default function FaqsItem({ faq }) {
         />
         <h3 className="text-subtitulo-medium">{t(faq.title)}</h3>
       </div>
-      <p className="text-base-light">{t(faq.content)}</p>
+      <p className="text-base-light">{t(faq.content1)}</p>
+      <br></br>
+      <p className="text-base-light">{t(faq.content2)}</p>
+      <br></br>
+      <p className="text-base-light">{t(faq.content3)}</p>
     </div>
+    
   );
 }
