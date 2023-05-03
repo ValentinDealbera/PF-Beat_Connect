@@ -26,7 +26,7 @@ export default function BeatShopSection() {
         mode="beats"
         isLoading={isLoading}
       />
-      {pages.current === 1 && pages.next !== null && (<div className="mt-4 flex justify-center gap-4">
+      {(<div className="mt-4 flex justify-center gap-4">
         <button
           onClick={() => dispatch(setCurrentPage({ page: pages.current - 1 }))}
           disabled={pages.current === 1}
