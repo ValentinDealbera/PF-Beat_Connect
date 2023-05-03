@@ -69,7 +69,6 @@ export { default as BeatsSpecialSection } from "./beat/beatsSpecialSection";
 export { default as BeatCardGrid } from "./beat/beatCardGrid";
 export { default as BeatsShopSection } from "./beat/beatShopSection";
 export { default as BeatFilters } from "./beat/beatFilters";
-export { default as BeatFilters } from "./beat/beatFilters";
 export { default as BeatCard } from "./beat/beatCard";
 export { default as NewBeatCardGrid } from "./beat/newBeatCardGrid";
 export { default as BeatShopSectionForClient } from "./beat/beatShopSectionForClient";
