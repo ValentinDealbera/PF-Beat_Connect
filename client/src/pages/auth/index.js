@@ -10,11 +10,26 @@ import { setCurrentClient, jsonLogin } from "@/redux/slices/client/authSession";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
+import { ValidateAuth } from "@/components/validation/validateAuth";
+import { useState } from "react";
 
 export default function Login() {
   const [t, i18n] = useTranslation("global");
   const dispatch = useDispatch();
   const router = useRouter();
+  const [error, setErrors] = useState({});
+
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+    const data = {
+      email: name === "email" ? value : "",
+      password: name === "password" ? value : "",
+    };
+    const validationErrors = ValidateAuth(data);
+    setErrors({ ...error, [name]: validationErrors[name] });
+  };
+
+  console.log("el error", error);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -24,7 +39,11 @@ export default function Login() {
         password: e.target.password.value,
       };
 
-      dispatch(jsonLogin(data));
+      if (!error.email && !error.password) {
+        dispatch(jsonLogin(data));
+      } else {
+        console.log("hay un error", error);
+      }
     } catch (error) {
       toast.error("Ocurrio un error, recarga la pagina", {
         style: {
@@ -35,10 +54,10 @@ export default function Login() {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // router.push("/client");
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   // router.push("/client");
+  // };
   return (
     <>
       <Head title="Ingresar" />
@@ -55,12 +74,16 @@ export default function Login() {
             label={t("authIndex.label")}
             placeholder={t("authIndex.placeholder")}
             className="w-full"
+            error={error.email}
+            onChange={handleInput}
           />
           <Input
             type="password"
             name="password"
             label={t("authIndex.labelPassword")}
             placeholder={t("authIndex.placeholderPassword")}
+            error={error.password}
+            onChange={handleInput}
           />
           <p className=" w-full text-center font-light">
             {t("authIndex.t3")}{" "}
@@ -78,7 +101,7 @@ export default function Login() {
         <hr className="my-6 w-full" />
         <GoogleButton />
         <p className="mt-6 w-full text-center font-light">
-            {t("authIndex.t6")}{" "}
+          {t("authIndex.t6")}{" "}
           <Link href="/auth/register" className="font-medium text-red-700">
             {t("authIndex.t7")}
           </Link>
