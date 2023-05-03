@@ -181,7 +181,7 @@ export const tecnologias = [
   {
     id: 8,
     title: "TailwindCSS",
-    image: "/icon/tecnologias/tailwindCSS.svg",
+    image: "/icon/tecnologias/tailwindcss.svg",
 
     description: "tecnologias.t6",
   },
