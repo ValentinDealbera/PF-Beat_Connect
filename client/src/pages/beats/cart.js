@@ -141,7 +141,7 @@ export default function Carrito() {
         >
           <div
             style={{
-              backgroundImage: "url(/images/cartbg.png)",
+              backgroundImage: "url(/images/cartbg.webp)",
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
               backgroundPosition: "center",
