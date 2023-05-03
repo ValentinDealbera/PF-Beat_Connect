@@ -79,7 +79,7 @@ const filtersSlice = createSlice({
     //SET BPM FILTER
     setBpmFilter(state, action) {
       state.BpmFilter = action.payload;
-      console.log("BPM FILTER", state.BpmFilter);
+ 
     },
 
     //--------------------

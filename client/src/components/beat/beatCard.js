@@ -98,7 +98,6 @@ const [tapVisible, setTapVisible] = useState(false);
     const ownedActions = {
       handleAction: async () => {
         await dispatch(setActiveItemDetail(beat));
-        console.log("VIEW BEAT - card", beat._id);
         manageView();
       },
       handleEdit: async () => {
@@ -106,7 +105,6 @@ const [tapVisible, setTapVisible] = useState(false);
         manageEditBeat();
       },
       handleDelete: () => {
-        console.log("DELETE BEAT - card", beat._id);
         dispatch(deleteClientBeat(beat._id));
       },
     };
@@ -114,12 +112,10 @@ const [tapVisible, setTapVisible] = useState(false);
     const reviewActions = {
       handleCreateReview: () => {
         dispatch(setActiveBeatCreateReview(beat));
-        console.log("creando");
         manageCreateReview();
       },
       handleEditReview: async () => {
         await dispatch(setActiveEditingReview(currentReview));
-        console.log("editando");
         manageEditReview();
       },
     };
@@ -155,7 +151,6 @@ const [tapVisible, setTapVisible] = useState(false);
     }
     function handleDoubleClick() {
       if (window.innerWidth <= 1023) {
-        console.log("double click");
         ownedActions.handleAction();
       }
     }

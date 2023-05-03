@@ -18,15 +18,10 @@ export function createUserSession(user) {
 }
 
 export const getUserData = async ({ clientId }) => {
-  console.log(
-    "Obteniendo datos del usuario",
-    clientId,
-    serverUrl,
-    `${serverUrl}user/${clientId}`
-  );
+
   try {
     const { data: response } = await axios.get(`${serverUrl}user/${clientId}`);
-    console.log("respuesta g:", response.data);
+
     const session = createUserSession(response);
 
     return session;

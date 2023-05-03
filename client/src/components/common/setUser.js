@@ -13,11 +13,7 @@ export default function SetUser (id, name, onChange){
         value: user._id
       }));
 
-      useEffect(() => {
-    //  dispatch(adminGetUsersForms());        
-      }, []);
-
-      console.log("usuarios", options);     
+      
 
   return (
     <Autocomplete

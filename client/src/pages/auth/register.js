@@ -27,7 +27,7 @@ export default function Login() {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log(form);
+
     try {
       await dispatch(jsonRegister(form));
     setTimeout(() => {

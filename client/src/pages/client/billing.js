@@ -19,7 +19,7 @@ export default function BuyerProfile() {
   const activeIndex = useSelector((state) => state.profile.settingsActiveIndex);
   const beats = useSelector((state) => state.client.orders.orders);
 const state = useSelector((state) => state.client);
-console.log("STATE", state.orders.orders);
+
   //obtenemos los beats
   const headers = ["Beat", t("billing.t2"), t("billing.t3"), t("billing.t4")];
 //revisamoa que beats tenga una propieadad de beat y si no la tiene lo borramos
@@ -37,7 +37,7 @@ const [fechaVar, setFechaVar] = useState("");
 
 
   const rows = beatsFiltered.map((item) => {
- console.log("ITEM", item);
+
     return {
 
       beat: (

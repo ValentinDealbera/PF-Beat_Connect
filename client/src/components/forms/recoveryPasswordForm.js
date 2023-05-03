@@ -39,7 +39,7 @@ export default function RecoveryPasswordForm(props) {
     try {
       const formErrors = validationRecoverPassword(form, "*");
       if (Object.keys(formErrors).length === 0) {
-        console.log("DESPACHADO", {});
+
 
         dispatch(
           passwordRecovery({ newPassword: form.newPassword, email: userEmail })
@@ -49,7 +49,7 @@ export default function RecoveryPasswordForm(props) {
         // router.push("/auth");
       } else {
         setErrors(formErrors);
-        console.log("form Error", formErrors);
+   
         throw new Error("Form Error");
       }
     } catch (error) {
@@ -58,9 +58,9 @@ export default function RecoveryPasswordForm(props) {
   };
 
   useEffect(() => {
-    console.log("form", form);
+ 
     setErrors(validationRecoverPassword(form, fieldsToValidate, validateMode));
-    console.log("error", error);
+
   }, [form, fieldsToValidate]);
 
   return (

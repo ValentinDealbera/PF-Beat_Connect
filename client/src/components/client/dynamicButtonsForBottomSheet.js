@@ -1,7 +1,6 @@
 import Image from "next/image";
 
 export default function DynamicButtonsForBottomSheet(props) {
-    console.log("ppp", props);
     return (
       <>
         <div className="flex flex-col gap-4">

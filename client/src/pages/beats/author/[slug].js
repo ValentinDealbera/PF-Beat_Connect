@@ -14,7 +14,7 @@ export default function AuthorProfile() {
   }, [slug]);
 
   const { currentAuthor, currentAuthorBeats, loadingcurrentAuthor } = useSelector((state) => state.beats);
-  console.log("currentAuthor", currentAuthor);
+
 
   return (
     <>

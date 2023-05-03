@@ -39,9 +39,6 @@ const AdminCreateReviewForm = forwardRef((props, ref) => {
   const [softD, setSoftD] = useState(defaultValues.softDelete);
   const [t] = useTranslation("global");
 
-  console.log("defaultValues", defaultValues);
-  console.log("DEFAULT BEATS", defaultBeats);
-
   const [form, setForm] = useState({
     createdBy: `${mode === "edit" ? defaultValues.createdBy._id : ""}`,
     rating: `${mode === "edit" ? defaultValues.rating : ""}`,
@@ -51,8 +48,6 @@ const AdminCreateReviewForm = forwardRef((props, ref) => {
     id: `${mode === "edit" ? defaultValues._id : ""}`,
     // softDelete: `${mode === "edit" ? defaultValues.softDelete : ""}`,
   });
-
-  console.log("data para el form", form);
 
   const options = defaultUsers.map((user) => ({
     label: user.username,
@@ -76,7 +71,6 @@ const AdminCreateReviewForm = forwardRef((props, ref) => {
   };
 
   const onSubmit = async (e) => {
-    console.log("onSubmit", e, validateMode);
     const actionToDispatch =
       mode === "edit" ? adminEditReview : adminPostReview;
     try {

@@ -76,11 +76,11 @@ export default function EditBeat() {
     e.preventDefault();
     const formErrors = ValidationCreateBeat(form, "*", "edit");
     if (Object.keys(formErrors).length === 0) {
-      console.log("form", form);
+ 
       await dispatch(editClientBeat(form));
       setIsDropdownOpen(false);
     } else {
-      console.log("formErrors", formErrors);
+  
       setErrors(formErrors);
     }
     e.target.reset();

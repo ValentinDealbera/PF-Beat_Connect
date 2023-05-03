@@ -27,7 +27,7 @@ const initialState = {
 export const postClientBeat = createAsyncThunk(
   "client/postClientBeat",
   async (data, { rejectWithValue, dispatch, getState }) => {
-    console.log("data", data);
+
     const id = getState().client.authSession.session.current._id;
     try {
       const response = await axios.post(`${serverUrl}beats`, data, {
@@ -36,7 +36,7 @@ export const postClientBeat = createAsyncThunk(
           userid: id,
         },
       });
-      console.log(data);
+
 
       await dispatch(getUserData());
       await dispatch(fetchBeats({}));
@@ -54,7 +54,7 @@ export const deleteClientBeat = createAsyncThunk(
   "client/deleteClientBeat",
   async (data, { rejectWithValue, dispatch, getState }) => {
     const id = getState().client.authSession.session.current._id;
-    console.log("DELETE BEAT data", data);
+ 
     alert("borramos", data);
     try {
       const response = await axios.delete(`${serverUrl}beats/${data}`, {
@@ -63,7 +63,7 @@ export const deleteClientBeat = createAsyncThunk(
         },
       });
 
-      console.log("DELETE BEAT", data,  response.data);
+    
       await dispatch(getUserData());
       await dispatch(fetchBeats({}));
 
@@ -80,7 +80,7 @@ export const deleteClientBeat = createAsyncThunk(
 export const editClientBeat = createAsyncThunk(
   "client/editClientBeat",
   async (data, { rejectWithValue, dispatch, getState }) => {
-    console.log("data 555", data);
+   
     const id = getState().client.authSession.session.current._id;
     const activeEditingBeat = getState().client.beats.activeEditingBeat;
 
@@ -90,7 +90,7 @@ export const editClientBeat = createAsyncThunk(
     });
 
     try {
-      console.log("data", data, activeEditingBeat._id, id);
+     
       const response = await axios.put(
         `${serverUrl}beats/${activeEditingBeat._id}`,
         formData,
@@ -149,14 +149,14 @@ export const postFavoriteBeat = createAsyncThunk(
 export const deleteFavoriteBeat = createAsyncThunk(
   "client/deleteFavoriteBeat",
   async (data, { rejectWithValue, dispatch, getState }) => {
-    console.log("data", data);
+
     const id = getState().client.authSession.session.current._id;
     const formData = new FormData();
 
     Object.keys(data).forEach((key) => {
       formData.append(key, data[key]);
     });
-    console.log("DELETE FAVORITE BEAT", formData);
+ 
     try {
       const response = await axios.put(`${serverUrl}user/${id}`, formData, {
         headers: {
@@ -185,7 +185,7 @@ const clientBeats = createSlice({
     //--------------------
     //SET BOUGHT BEATS
     setBougthBeats(state, action) {
-      console.log("action.payload setBoughtBeats", action.payload);
+
       state.bougthBeats = action.payload;
     },
     //--------------------

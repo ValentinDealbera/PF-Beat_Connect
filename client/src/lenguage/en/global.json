@@ -106,7 +106,7 @@
     "t4": "Cart"
   },
   "navHelp": {
-    "t1": "Home",
+    "t1": "FAQs",
     "t2": "Privacy Policy",
     "t3": "Terms and Conditions"
   },
@@ -114,7 +114,7 @@
     "t1": "Profile",
     "t2": "Inbox",
     "t3": "Sell your beats",
-    "t4": "Release a beat",
+    "t4": "Post a beat",
     "t5": "Settings",
     "t6": "Billing",
     "t7": "Logout"
@@ -216,7 +216,7 @@
     "t5": "Last name",
     "t6": "Bio",
     "t7": "Cover image",
-    "tosave": "Tosave"
+    "tosave": "Save"
   },
   "beats": {
     "t1": "Find that dream",
