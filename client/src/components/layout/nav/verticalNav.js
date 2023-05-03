@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 
 export default function VerticalNav(props) {
   const [t, i18n] = useTranslation("global");
-  console.log(props.navItems);
   return (
     <div className={props.className}>
       <div className="flex flex-col gap-4 ">

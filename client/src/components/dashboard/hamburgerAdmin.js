@@ -9,7 +9,6 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function HamburgerAdmin({ options, manageHamburguer }) {
   const [t, i18n] = useTranslation("global");
-  console.log(options);
   return (
     <>
       <AnimatePresence>

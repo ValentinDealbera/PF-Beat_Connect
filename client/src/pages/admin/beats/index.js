@@ -25,7 +25,6 @@ export default function SellerDashboardOverview() {
   const dispatch = useDispatch();
   const router = useRouter();
   const state = useSelector((state) => state.admin);
-  console.log("STATE", state);
   const beatData = useSelector((state) => state.admin.beats.beats) || [];
 
   // const page = useSelector((state) => state.admin.currentBeatPage);

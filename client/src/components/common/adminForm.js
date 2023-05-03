@@ -19,12 +19,10 @@ export default function AdminForm(props) {
   const [prevBeatData, setPrevBeatData] = useState(form);
 
   useEffect(() => {
-    console.log("useEffect");
     setErrors(ValidationEditUsers(form, fieldsToValidate));
   }, [form, fieldsToValidate]);
 
   const handleInputChange = (e) => {
-    console.log("change", e.target.name);
 
     if (e.target.type === "file") {
       setForm({
@@ -46,7 +44,6 @@ export default function AdminForm(props) {
     const formErrors = ValidationCreateBeat(form, "*");
     if (Object.keys(formErrors).length === 0) {
       //await dispatch(postClientBeat(form));
-      console.log("form ok", form);
     } else {
       setErrors(formErrors);
     }

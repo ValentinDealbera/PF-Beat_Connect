@@ -37,7 +37,7 @@ export default function NewBeatCardGrid(props) {
   const manageCreateReview = () => {
     setVisibilityCreateReview(!visibilityCreateReview);
   };
-  console.log("props.isLoading", props.isLoading);
+ 
   return (
     <>
       {props.isLoading && <Loader />}

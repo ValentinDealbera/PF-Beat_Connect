@@ -2,7 +2,7 @@ import { serverUrl } from "@/data/config";
 import axios from "axios";
 
 export function createUserSession(user) {
-  const { firstName, lastName, bio, _id, email, username, image, backImage } =
+  const { firstName, lastName, bio, _id, email, username, image, backImage, softDelete } =
     user;
 
   return {
@@ -14,19 +14,15 @@ export function createUserSession(user) {
     email,
     userName: username,
     backImage,
+    softDelete
   };
 }
 
 export const getUserData = async ({ clientId }) => {
-  console.log(
-    "Obteniendo datos del usuario",
-    clientId,
-    serverUrl,
-    `${serverUrl}user/${clientId}`
-  );
+
   try {
     const { data: response } = await axios.get(`${serverUrl}user/${clientId}`);
-    console.log("respuesta g:", response.data);
+
     const session = createUserSession(response);
 
     return session;

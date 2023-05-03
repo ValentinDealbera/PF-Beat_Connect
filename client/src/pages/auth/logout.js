@@ -16,15 +16,15 @@ export default function Logout() {
   const logOutJson = async () => {
     dispatch(resetReducer());
     // resetPersist()
-    console.log("borrando...");
+ 
     await resetPersist();
-    console.log("borrado");
+
   };
 
   useEffect(() => {
     const logOut = async () => {
       await logOutJson();
-      console.log("seguimos");
+     
 
       if (loginMethod === "google") {
         router.push(`${serverUrl}google/logout`);
@@ -42,7 +42,7 @@ export default function Logout() {
     }
 
 
-    console.log("loginMethod", loginMethod);
+   
   }, []);
 
   return (

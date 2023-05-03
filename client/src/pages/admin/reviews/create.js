@@ -42,8 +42,6 @@ export default function SellerDashboardOverview() {
     softDelete: false,
   });
 
-  console.log("data para el form", form);
-
 
   const handleInput = (e) => {
     handleInputChange(
@@ -65,7 +63,6 @@ export default function SellerDashboardOverview() {
   }, [form, fieldsToValidate]);
 
   const onSubmit = (e) => {
-    console.log("onSubmit", e, validateMode);
     handleSubmit({
       form: form,
       //  dispatch: dispatch,

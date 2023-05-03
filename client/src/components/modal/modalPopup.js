@@ -1,5 +1,4 @@
 export default function ModalPopUp(props) {
-    console.log("pp",props)
   return (
     <>
       <div

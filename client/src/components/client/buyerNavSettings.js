@@ -9,7 +9,7 @@ export default function BuyerNavSettings() {
   const loginMethod = useSelector((state) => state.client.authSession.auth.loginMethod);
   const activeIndex = useSelector((state) => state.profile.settingsActiveIndex);
   const dispatch = useDispatch();
-  console.log("loginMethod", loginMethod);
+
   const buyerGeneralNav = [
     {
       title: "buyerGeneralNav.profile",

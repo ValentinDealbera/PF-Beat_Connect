@@ -23,12 +23,6 @@ export default function ReviewCardGrid(props) {
   const [isDropDown, setIsDropdownOpen] = useState(false);
   const reviews = useSelector((state) => state.client.reviews.reviews);
 
-  console.log(reviews);
-
-  useEffect(() => {
-    console.log("reviews cambio", reviews);
-  }, [reviews]);
-
   const manageEditReview = () => {
     setIsDropdownOpen(!isDropDown);
   };

@@ -82,8 +82,9 @@ const [tapVisible, setTapVisible] = useState(false);
   }, [ref, isSelected]);
 
   try {
+    //tambien verificamos soft delete
     const reviewed = Boolean(
-      userReviews.find((review) => review.beat._id === beat._id)
+      userReviews.find((review) => review.beat._id === beat._id && review.softDelete)
     );
 
     const currentReview = userReviews.find(
@@ -98,7 +99,6 @@ const [tapVisible, setTapVisible] = useState(false);
     const ownedActions = {
       handleAction: async () => {
         await dispatch(setActiveItemDetail(beat));
-        console.log("VIEW BEAT - card", beat._id);
         manageView();
       },
       handleEdit: async () => {
@@ -106,7 +106,6 @@ const [tapVisible, setTapVisible] = useState(false);
         manageEditBeat();
       },
       handleDelete: () => {
-        console.log("DELETE BEAT - card", beat._id);
         dispatch(deleteClientBeat(beat._id));
       },
     };
@@ -114,12 +113,10 @@ const [tapVisible, setTapVisible] = useState(false);
     const reviewActions = {
       handleCreateReview: () => {
         dispatch(setActiveBeatCreateReview(beat));
-        console.log("creando");
         manageCreateReview();
       },
       handleEditReview: async () => {
         await dispatch(setActiveEditingReview(currentReview));
-        console.log("editando");
         manageEditReview();
       },
     };
@@ -155,7 +152,6 @@ const [tapVisible, setTapVisible] = useState(false);
     }
     function handleDoubleClick() {
       if (window.innerWidth <= 1023) {
-        console.log("double click");
         ownedActions.handleAction();
       }
     }
@@ -278,7 +274,7 @@ function Modals({
 
       {logged && (
         <ModalPopUp>
-          <div className="relative flex max-h-full w-12 flex-col justify-center overflow-hidden rounded-3xl bg-white p-10 xl:w-[40%] ">
+          <div className="relative flex max-h-full  flex-col justify-center overflow-hidden rounded-3xl bg-white px-6 pb-6 pt-10 md:p-7 lg:p-10 w-max ">
             <Image
               src="/icon/cross.svg"
               width={15}

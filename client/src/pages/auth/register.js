@@ -50,13 +50,14 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(form);
+
 
     const validationErrors = ValidateRegister(form, "*");
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
+
 
     try {
       await dispatch(jsonRegister(form));

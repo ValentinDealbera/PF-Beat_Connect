@@ -41,7 +41,6 @@ export default function ReviewForm(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formFields);
     await dispatch(postClientReview(formFields));
     props.manageCreateReview();
   };

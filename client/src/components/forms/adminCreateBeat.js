@@ -37,7 +37,6 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
   const genres = useSelector((state) => state.filters.genres);
   const [softD, setSoftD] = useState(defaultValues.softDelete);
 
-   console.log("defaultValues", defaultValues);
 
   const [form, setForm] = useState({
     name: `${mode === "edit" ? defaultValues.name : ""}`,
@@ -59,9 +58,6 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
     value: user._id,
   }));
 
-  console.log("Data para el form", form);
-  // console.log("USERCREATOR", defaultValues.userCreator)
-
   const handleInput = (e) => {
     handleInputChange(
       e,
@@ -74,7 +70,6 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
   };
 
   const onSubmit = async (e) => {
-    console.log("onSubmit", e, validateMode);
     const actionToDispatch = mode === "edit" ? adminEditBeat : adminPostBeat;
     try {
       await handleSubmit({
@@ -94,7 +89,6 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
 
   useEffect(() => {
     dispatch(fetchGenres());
-    console.log("genres", genres);
   }, []);
 
   useEffect(() => {

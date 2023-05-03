@@ -72,7 +72,7 @@ export default function Home() {
           //  style={{ minHeight: "15vh" }}
         >
           <div className="padding-estilo2  gap-estilo3 mt-6 flex h-full w-full flex-col items-start justify-between align-middle md:flex-row md:items-center">
-            <div className="flex w-full flex-col justify-center gap-2">
+            <div className="flex w-full flex-col justify-center gap-3">
               <div id="text-box">
                 <h1 className="text-titulo1-regular text-white">
                   {t("home.t1")}

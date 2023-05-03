@@ -30,7 +30,6 @@ export default function Master(props) {
   const getTheme= async () => {
     const prefersDarkMode = await darkmode();
     const mode = prefersDarkMode ? "dark" : "light";
-    console.log("mode", mode);
     dispatch(setTheme(mode));
   };
 
@@ -39,7 +38,7 @@ useEffect(() => {
 }, [window.matchMedia('(prefers-color-scheme: dark)').matches]);
 
   useEffect(() => {
-    console.log("fetch master");
+   
     if (router.pathname.startsWith("/client")) return;
     else if (router.pathname.startsWith("/beats/author")) return;
     else if (router.pathname === "/beats") return;

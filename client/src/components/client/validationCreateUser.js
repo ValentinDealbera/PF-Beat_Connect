@@ -43,7 +43,6 @@ export function ValidationCreateUser(form, fieldsToValidate) {
         break;
 
       case "image":
-        console.log("soy image", form.image.name);
         if (form.image) {
           if (form.image.size > MAX_FILE_SIZE) {
             error.image =
@@ -56,7 +55,6 @@ export function ValidationCreateUser(form, fieldsToValidate) {
         break;
 
       case "backImage":
-        console.log("soy backImage", form.backImage.name);
         if (form.backImage) {
           if (form.backImage.size > MAX_FILE_SIZE) {
             error.backImage =

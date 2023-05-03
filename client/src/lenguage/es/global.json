@@ -106,7 +106,7 @@
     "t4": "Carrito"
   },
   "navHelp": {
-    "t1": "Inicio",
+    "t1": "FAQs",
     "t2": "Política de privacidad",
     "t3": "Términos y condiciones"
   },
@@ -137,8 +137,8 @@
     "continueGoogle": "Continuar con Google"
   },
   "landing": {
-    "t1": "Explora los mejores beats, encuentra nuevos artistas,",
-    "t2": "Descubre BeatConnect.",
+    "t1": "Explora los mejores beats, encuentra nuevos artistas, ",
+    "t2": "descubre BeatConnect.",
     "t3": "Sumérgete en el mundo de la música con BeatConnect, donde podrás descubrir los mejores beats, explorar nuevos artistas y desatar tu creatividad.",
     "t4": "Ingresar ahora"
   },

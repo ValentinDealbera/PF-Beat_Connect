@@ -16,11 +16,9 @@ export const adminGetReviews = createAsyncThunk(
   "client/adminGetReviews",
   async (data, { rejectWithValue, dispatch }) => {
     try {
-      console.log("procesando");
       const response = await axios.get(`${serverUrl}review`);
-      // console.log("cargandolol");
+      
       // return { reviewResponse: response.data.docs };
-      console.log("response review", response);
       const reviewResponse = response.data;
       return { reviewResponse };
     } catch (error) {
@@ -47,7 +45,7 @@ export const adminDeleteReview = createAsyncThunk(
   "client/adminDeleteReview",
   async (data, { rejectWithValue, dispatch }) => {
     try {
-      console.log("data", data);
+    
       const response = await axios.delete(`${serverUrl}admin/review/${data}`, {
         headers: {
           admintoken: tokenAdmin,
@@ -120,7 +118,7 @@ const adminReviewsSlice = createSlice({
       //--------------------
       //GET ADMIN REVIEWS
       .addCase(adminGetReviews.fulfilled, (state, action) => {
-        console.log("action.payload ok review", action.payload);
+  
         // state.reviews = action.payload.reviewResponse;
         state.reviews = Array.isArray(action.payload.reviewResponse)
           ? action.payload.reviewResponse
@@ -128,7 +126,7 @@ const adminReviewsSlice = createSlice({
       })
 
       .addCase(adminGetReviews.rejected, (state, action) => {
-        console.log("action.payload error", action.payload);
+
         toast.error(action.payload, {
           style: {
             background: "#FFF0F0",
@@ -137,12 +135,12 @@ const adminReviewsSlice = createSlice({
         });
       })
       .addCase(adminGetReviews.pending, (state, action) => {
-        console.log("action.payload pending");
+   
       })
       //--------------------
       //DELETE ADMIN REVIEWS
       .addCase(adminDeleteReview.fulfilled, (state, action) => {
-        console.log("action.payload ok", action.payload);
+
         let trad= i18next?.language == "en"? "Review deleted successfully" : "Review borrada correctamente"
         toast.success(trad, {
           style: {
@@ -152,7 +150,7 @@ const adminReviewsSlice = createSlice({
         });
       })
       .addCase(adminDeleteReview.rejected, (state, action) => {
-        console.log("action.payload error", action.payload);
+      
         toast.error(action.payload, {
           style: {
             background: "#FFF0F0",
@@ -161,14 +159,14 @@ const adminReviewsSlice = createSlice({
         });
       })
       .addCase(adminDeleteReview.pending, (state, action) => {
-        console.log("action.payload pending");
+ 
         let trad= i18next?.language == "en"? "Deleting review..." : "Borrando review..."
         toast(trad);
       })
       //--------------------
       //EDIT ADMIN REVIEW
       .addCase(adminEditReview.fulfilled, (state, action) => {
-        console.log("action.payload ok", action.payload);
+   
         let trad= i18next?.language == "en"? "Review edited successfully" : "Review editada correctamente"
         toast.success(trad, {
           style: {
@@ -179,7 +177,7 @@ const adminReviewsSlice = createSlice({
       })
 
       .addCase(adminEditReview.rejected, (state, action) => {
-        console.log("action.payload error", action.payload);
+   
         toast.error(action.payload, {
           style: {
             background: "#FFF0F0",
@@ -189,7 +187,7 @@ const adminReviewsSlice = createSlice({
         throw new Error(action.payload);
       })
       .addCase(adminEditReview.pending, (state, action) => {
-        console.log("action.payload pending");
+    
         let trad= i18next?.language == "en"? "Editing review..." : "Editando review..."
         toast(trad);
       })
@@ -197,7 +195,7 @@ const adminReviewsSlice = createSlice({
       //POST ADMIN REVIEW
 
       .addCase(adminPostReview.fulfilled, (state, action) => {
-        console.log("action.payload ok", action.payload);
+       
         let trad= i18next?.language == "en"? "Review created successfully" : "Review creada correctamente"
         toast.success(trad, {
           style: {
@@ -207,7 +205,7 @@ const adminReviewsSlice = createSlice({
         });
       })
       .addCase(adminPostReview.rejected, (state, action) => {
-        console.log("action.payload error", action.payload);
+
         toast.error(action.payload, {
           style: {
             background: "#FFF0F0",
@@ -217,7 +215,7 @@ const adminReviewsSlice = createSlice({
         throw new Error(action.payload);
       })
       .addCase(adminPostReview.pending, (state, action) => {
-        console.log("action.payload pending");
+  
         let trad= i18next?.language == "en"? "Creating review..." : "Creando review..."
         toast(trad);
       })
