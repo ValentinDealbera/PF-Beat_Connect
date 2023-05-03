@@ -195,7 +195,6 @@
     "form13": "Ingresa un beat de alta calidad (WAV, OGG)",
     "form14": "Crear publicacion",
     "form15": "Guardar publicacion"
-
   },
   "buyerGeneralNav": {
     "profile": "Perfil",
@@ -482,8 +481,7 @@
     "t1": "Debes comprar un beat para darle una review! ",
     "t2": "Compra uno ahora!"
   },
-
-  "validationCreateBeat" : {
+  "validationCreateBeat": {
     "t1": "El nombre de tu beat debe tener entre uno y 50 caracteres.",
     "t2": "El precio de tu beat debe ser mayor a 1.",
     "t3": "El tamaño de la imagen es demasiado grande. El tamaño máximo permitido es de 10 MB.",
@@ -495,11 +493,9 @@
     "t9": "Debes seleccionar un género",
     "t10": "Debes subir un Beat",
     "t11": "Debes subir un archivo wav o ogg"
-    },
-  
+  },
   "bot": "Soporte en línea / Reclamos",
-
-  "editBeat" : {
+  "editBeat": {
     "t1": "Editemos tu",
     "t2": "Haz los ajustes que creas necesarios",
     "t3": "Nombre del beat",
@@ -509,31 +505,32 @@
     "t7": "El tamaño del audio es demasiado grande. El tamaño máximo permitido es de 150 MB.",
     "t8": "Tu beat debe tener entre 20 y 350 bpm.",
     "t9": "Debes seleccionar un género"
-    },
-
-    "validationCreateUser": {
-      "t1": "Tu nombre de usuario debe tener entre uno y 50 caracteres.",
-      "t2": "Tu nombre debe tener entre uno y 50 caracteres.",
-      "t3": "Tu biografía debe tener entre uno y 50 caracteres.",
-      "t4": "El tamaño de la imagen es demasiado grande. El tamaño máximo permitido es de 10 MB.",
-      "t5": "El tamaño de la imagen de fondo es demasiado grande. El tamaño máximo permitido es de 10 MB.",
-      "t6": "Debes subir un archivo jpg o png",
-      "t7": "El apellido debe tener entre uno y 50 caracteres.",
-      "t8": "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.",
-      "t9": "Por favor ingresa una dirección de correo electrónico válida."
-      },
-
-      "validationCreateReview": {
-        "t1": "Debes ingresar un ID",
-        "t2": "Debes ingresar una calificación",
-        "t3": "Debes seleccionar un número entre uno y cinco",
-        "t4": "Debes ingresar un comentario",
-        "t5": "Debes ingresar un título",
-        "t6": "Debes ingresar un beat"
-        },
-
-      "hamburguer" : {
-        "t1": "Centro de ayuda",
-        "t2": "Volver atras"
-        }
+  },
+  "validationCreateUser": {
+    "t1": "Tu nombre de usuario debe tener entre uno y 50 caracteres.",
+    "t2": "Tu nombre debe tener entre uno y 50 caracteres.",
+    "t3": "Tu biografía debe tener entre uno y 50 caracteres.",
+    "t4": "El tamaño de la imagen es demasiado grande. El tamaño máximo permitido es de 10 MB.",
+    "t5": "El tamaño de la imagen de fondo es demasiado grande. El tamaño máximo permitido es de 10 MB.",
+    "t6": "Debes subir un archivo jpg o png",
+    "t7": "El apellido debe tener entre uno y 50 caracteres.",
+    "t8": "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.",
+    "t9": "Por favor ingresa una dirección de correo electrónico válida."
+  },
+  "validationCreateReview": {
+    "t1": "Debes ingresar un ID",
+    "t2": "Debes ingresar una calificación",
+    "t3": "Debes seleccionar un número entre uno y cinco",
+    "t4": "Debes ingresar un comentario",
+    "t5": "Debes ingresar un título",
+    "t6": "Debes ingresar un beat"
+  },
+  "hamburguer": {
+    "t1": "Centro de ayuda",
+    "t2": "Volver atras"
+  },
+  "adminHeaderBar": {
+    "t1": "Hola Admin, bienvenido",
+    "t2": "Ir al panel de control"
+  }
 }
