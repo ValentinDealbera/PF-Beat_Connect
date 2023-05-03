@@ -1,4 +1,6 @@
 import { toast } from "sonner";
+import i18next from 'i18next';
+
 
 export const selectFilteredBeats = (state) => {
   const {
@@ -75,7 +77,8 @@ export const selectFilteredBeats = (state) => {
     return beatFilters;
   } catch (error) {
     console.log(error);
-    toast.error("Ocurrio un error, recarga la pagina", {
+    let trad= i18next?.language == "en"? "An error occurred, please reload the page." :"Ocurrio un error, recarga la pagina";
+    toast.error(trad, {
       style: {
         background: "#FFF0F0",
         color: "#E60000",
