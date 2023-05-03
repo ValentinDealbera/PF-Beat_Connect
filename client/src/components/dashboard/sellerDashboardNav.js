@@ -56,6 +56,8 @@ export default function SellerDashboardNav() {
           ))}
         </div>
         <br />
+        <br />
+        <br />
         <div className="flex justify-center gap-4 flex-direction: column" >
           <button
             onClick={() => i18n.changeLanguage("es")}

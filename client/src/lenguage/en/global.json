@@ -58,15 +58,19 @@
     "c4": "To register as a provider, you need to fill out the registration form. Once registered, you will be able to create and publish your catalog of instrumentals."
   },
   "faqsAdmin": {
-    "t1": "How can I find the appropriate beat for my music project?",
-    "c1": "In our platform, you can explore the catalogs of registered music producers and listen to audio samples of each beat.",
-    "t2": "How can I make a secure payment?",
-    "c2": "We offer a secure and efficient payment process through Mercado Pago. Once you have chosen the beat you wish to purchase, you can securely make the payment with different payment methods.",
-    "t3": "How will I receive the beat file after making the payment?",
-    "c3": "Once you have made the payment, you will receive the beat file in your email. Make sure to provide a valid email address during the payment process.",
-    "t4": "How can I register as a provider on the platform?",
-    "c4": "To register as a provider, you need to fill out the registration form. Once registered, you will be able to create and publish your catalog of instrumentals."
-  },
+    "t1": "What are the tools available to me as an administrator to perform my job effectively?",
+    "c1": "Modify beats, users, or reviews: This may include changes to the description of a beat, correction of incorrect information about a user, or removal of a false review. Direct connection to the bot's database: This allows you to monitor the questions/reports made by users.",
+    "d1": "Direct connection to the bot's database: This allows you to monitor the questions/reports made by users.",
+    "e1": "Creation of users, reviews, and beats: This can be useful if you want to add additional content to the site or if you need to create a user account for a new vendor on the site.",
+    "t2": "What are the key policies and procedures I should be aware of as an administrator?",
+    "c2": "Privacy Policy: Describes how user information is collected, used, shared, and stored. It is important to ensure compliance with this policy and that users are informed about how their information is handled.",
+    "d2": "Terms of Use: Establish the rules for using the platform, including user rights and responsibilities. It is important for users to accept the terms of use before using the platform.",
+    "e2": "Security Policy: This policy describes how the platform and user information are protected against potential security threats.",
+    "t3": "How can I add a new user to the site?",
+    "c3": "To add a new user to the site, click on Users. Fill out the Create User form with the user's details and click Save Changes.",
+    "t4": "How can I add a new beat for an existing user?",
+    "c4": "To add a beat, click on Beats. Fill out the Create Beat form with the details of the beat and the creating user, and click Save Changes."
+    },
   "about": {
     "t1": "Let's get to",
     "t2": "know each other a little more",
@@ -505,16 +509,25 @@
     }, 
 
     "validationCreateUser" : {
-      "t1": "",
-      "t2": "",
-      "t3": "",
-      "t4": "",
-      "t5": "",
-      "t6": "",
-      "t7": "",
-      "t8": "",
-      "t9": ""
-      },
+      "t1": "Your user name must have between one and 50 characters.",
+      "t2": "Your firstname must have between one and 50 characters.",
+      "t3": "Your bio phrase must have between one and 50 characters.",
+      "t4": "The size of the image is too large. Maximum allowed size is 10 MB.",
+      "t5": "The size of the backImage is too large. Maximum allowed size is 10 MB.",
+      "t6": "You must upload a jpg or png file",
+      "t7": "The last name must have between one and 50 characters.",
+      "t8": "The password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
+      "t9": "Please enter a valid email address."
+      }, 
+
+      "validationCreateReview": {
+        "t1": "You must enter a id",
+        "t2": "You must enter a rating",
+        "t3": "You must select a number between one and five",
+        "t4": "You must enter a comment",
+        "t5": "You must enter a title",
+        "t6": "You must enter a beat"
+        },
 
       "hamburguer": {
         "t1": "Help Center",
