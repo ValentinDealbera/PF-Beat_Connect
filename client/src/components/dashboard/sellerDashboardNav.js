@@ -40,6 +40,11 @@ export default function SellerDashboardNav() {
       link: "/admin/orders",
       icon: "/icon/dashboard/orders.svg",
     },
+    {
+      title: "dashboardNav.t5",
+      link: "https://docs.google.com/spreadsheets/d/1Kmwc2nt_oiQWiaD7guh62nA_T6a9HNUMXQb6souPSm8/edit?usp=share_link",
+      icon: "/icon/dashboard/orders.svg",
+    },
   ];
 
   return (
