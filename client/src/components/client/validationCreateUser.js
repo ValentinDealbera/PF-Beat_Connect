@@ -20,7 +20,7 @@ export function ValidationCreateUser(form, fieldsToValidate) {
           !form.username
         )
           error.username =
-            "The name of your beat must have between one and 50 characters.";
+            "Your user name must have between one and 50 characters.";
 
         break;
 
@@ -31,7 +31,7 @@ export function ValidationCreateUser(form, fieldsToValidate) {
           !form.firstName
         )
           error.firstName =
-            "The name of your beat must have between one and 50 characters.";
+            "Your firstname must have between one and 50 characters.";
 
         break;
 
