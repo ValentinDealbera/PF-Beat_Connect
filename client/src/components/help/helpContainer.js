@@ -7,7 +7,7 @@ export default function HelpContainer({ children, helpTitle, helpParagraph }) {
     <>
       <Hero
         style={{ minHeight: "45vh" }}
-        image="/images/test2.jpg"
+        image="/images/test2.webp"
         className="items-center justify-center align-middle"
       >
         <div className="padding-x-estilo3 flex flex-row items-center gap-3 align-middle">
