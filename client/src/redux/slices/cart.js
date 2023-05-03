@@ -68,7 +68,7 @@ export const addToCart = (obj) => async (dispatch, getState) => {
       return;
     }
     let trad= i18next?.language == "en"? "Already in cart" : "Se agregó al carrito"
-    toast.success(trad, toastSuccess);
+    toast.success(trad, toastWarning);
     dispatch(setCart(obj));
   }
 };
