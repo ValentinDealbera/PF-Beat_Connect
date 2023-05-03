@@ -57,13 +57,12 @@ export default function EditClientForm(props) {
     try {
       const formErrors = validationEditUser(form, "*");
       if (Object.keys(formErrors).length === 0) {
-        console.log("DESPACHADO", form);
         await dispatch(editClient(form));
         formRef.current.reset();
         router.push("/client");
       } else {
         setErrors(formErrors);
-        console.log("form Error", formErrors);
+  
         throw new Error("Form Error");
       }
     } catch (error) {
@@ -79,7 +78,7 @@ export default function EditClientForm(props) {
     setErrors(validationEditUser(form, fieldsToValidate, validateMode));
   }, [form, fieldsToValidate]);
 
-  console.log("Errores", error);
+
 
   return (
     <form onSubmit={onSubmit} ref={formRef}>

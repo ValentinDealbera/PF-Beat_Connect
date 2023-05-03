@@ -4,7 +4,6 @@ export default function SoftDeleteSwitch(props) {
   const [state, setState] = useState(props.state);
   const isInactive = state === "inactived";
 
-  console.log("switch", state);
 
   const handleOnButtonClick = (e) => {
     e.preventDefault();

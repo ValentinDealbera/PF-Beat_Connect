@@ -4,8 +4,6 @@ import { useDispatch } from "react-redux";
 import { convertInSeller } from "@/redux/slices/client";
 
 export const testFn = () => {
-  console.log("manageBecomeSeller");
-  console.log(BecomeSeller);
   BecomeSeller.Pepito();
 };
 

@@ -46,13 +46,13 @@ export default function EditPasswordForm(props) {
     try {
       const formErrors = validationEditPassword(form, "*");
       if (Object.keys(formErrors).length === 0) {
-        console.log("DESPACHADO", form);
+
         await dispatch(changePassword(form));
         formRef.current.reset();
         router.push("/client");
       } else {
         setErrors(formErrors);
-        console.log("form Error", formErrors);
+  
         throw new Error("Form Error");
       }
     } catch (error) {
@@ -61,9 +61,9 @@ export default function EditPasswordForm(props) {
   };
 
   useEffect(() => {
-    console.log("form", form);
+  
     setErrors(validationEditPassword(form, fieldsToValidate, validateMode));
-    console.log("error", error);
+    
   }, [form, fieldsToValidate]);
 
   return (

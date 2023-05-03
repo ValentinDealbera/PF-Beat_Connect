@@ -104,8 +104,7 @@ export default function Carrito() {
   };
 
   const handlePayment = () => {
-    console.log("pagar");
-    console.log(toPay);
+
     if (!isLogged) {
       return alert("Debes iniciar sesion para poder comprar");
     }
@@ -118,7 +117,6 @@ export default function Carrito() {
         },
       })
       .then((res) => {
-        console.log(res.data);
         router.push(res.data);
       })
       .catch((err) => {
@@ -143,7 +141,7 @@ export default function Carrito() {
         >
           <div
             style={{
-              backgroundImage: "url(/images/cartbg.png)",
+              backgroundImage: "url(/images/cartbg.webp)",
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
               backgroundPosition: "center",

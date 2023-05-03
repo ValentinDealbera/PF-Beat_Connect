@@ -50,10 +50,11 @@ export default function SellerDashboardHeader() {
           <Logo mode={"light"} />
           <ReactSVG
             src="/icon/hamburguer.svg"
-            className="dashboard-item__icon flex cursor-pointer fill-current text-white dark:text-white lg:hidden"
+            className="dashboard-item__icon flex cursor-pointer fill-current text-white dark:text-white xl:hidden"
             onClick={() => setHamburguerVisible(!hamburguerVisible)}
           />
         </div>
+        
       </header>
       {hamburguerVisible && (
         <HamburgerAdmin

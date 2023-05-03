@@ -38,7 +38,6 @@ export default function Login() {
       if (!error.email) {
         dispatch(recoverPassword(data));
       } else {
-        console.log("hay un error", error);
       }
     } catch (error) {
       console.log(error);

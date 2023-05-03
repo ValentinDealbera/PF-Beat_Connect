@@ -63,7 +63,7 @@ export const adminEditUser = createAsyncThunk(
 export const adminDeleteUser = createAsyncThunk(
   "users/adminDeleteUser",
   async (data, { rejectWithValue, dispatch }) => {
-    console.log("adminDeleteUser", data);
+  
     try {
       const response = await axios.delete(
         `${serverUrl}admin/user/${data._id}`,
@@ -73,7 +73,7 @@ export const adminDeleteUser = createAsyncThunk(
           },
         }
       );
-      console.log("response", response);
+   
       await dispatch(adminGetUsers());
       return { userResponse: response.data };
     } catch (error) {
@@ -89,9 +89,9 @@ export const adminGetUsers = createAsyncThunk(
   "users/adminGetUsers",
   async (data, { rejectWithValue, dispatch }) => {
     try {
-      console.log("procesando");
+  
       const response = await axios.get(`${serverUrl}user`);
-      console.log("response user", response);
+
       return { userResponse: response.data };
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -120,7 +120,7 @@ const adminUsersSlice = createSlice({
   initialState,
   reducers: {
     setCurrentEditingUser(state, action) {
-      console.log("action users", action.payload);
+     
       state.currentEdtingUser = action.payload;
     },
   },
@@ -171,7 +171,7 @@ const adminUsersSlice = createSlice({
       //--------------------
       //GET ADMIN BEATS
       .addCase(adminGetUsers.fulfilled, (state, action) => {
-        console.log("action", action.payload.userResponse);
+   
         state.users = action.payload.userResponse;
         //toast.success("Beats obtenidos correctamente", toastSuccess);
       })

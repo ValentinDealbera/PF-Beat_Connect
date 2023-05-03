@@ -82,7 +82,6 @@ export default function PostBeat() {
     e.preventDefault();
     const formErrors = ValidationCreateBeat(form, "*");
     if (Object.keys(formErrors).length === 0) {
-      console.log(form);
       await dispatch(postClientBeat(form));
       setIsDropdownOpen(false);
     } else {

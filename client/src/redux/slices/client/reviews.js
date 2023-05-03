@@ -46,7 +46,7 @@ export const postClientReview = createAsyncThunk(
 export const deleteClientReview = createAsyncThunk(
   "client/deleteClientReview",
   async (data, { rejectWithValue, dispatch, getState }) => {
-    console.log("DATA", data);
+   
     const id = getState().client.authSession.session.current._id;
     try {
       const response = await axios.delete(`${serverUrl}review/${data}`, {
@@ -73,7 +73,7 @@ export const editClientReview = createAsyncThunk(
   async (data, { rejectWithValue, dispatch, getState }) => {
     const id = getState().client.authSession.session.current._id;
     const reviewId = getState().client.reviews.activeEditingReview._id;
-    console.log("Enviado", id, data.createdBy);
+   
     try {
       const response = await axios.put(
         `${serverUrl}review/${reviewId}`,
@@ -103,14 +103,14 @@ const reviewsSlice = createSlice({
     //--------------------
     //SET ACTIVE EDITING REVIEW
     setActiveEditingReview(state, action) {
-      console.log("ACTION", action.payload);
+
       state.activeEditingReview = action.payload;
     },
 
     //--------------------
     //SET OWN REVIEWS
     setOwnedReviews(state, action) {
-      console.log("setOwnedReviews rrr", action.payload);
+
       state.reviews = action.payload;
     },
 

@@ -12,7 +12,7 @@ export default function About() {
         <ScrollToTop />
         <Hero
           style={{ minHeight: "45vh" }}
-          image="/images/test1.jpg"
+          image="/images/test1.webp"
           className="items-center justify-center align-middle"
         >
           <div className="padding-estilo2 mt-6 flex h-full flex-row items-center justify-center align-middle">
@@ -38,19 +38,19 @@ export default function About() {
           subClassName="padding-x-estilo2  bg-white color-white gap-2 flex-col flex"
           className="bg-white"
         >
-          <div className="gap-estilo1 flex max-w-[100vw] flex-1 flex-shrink flex-grow grid-cols-1 overflow-scroll overflow-y-hidden overflow-x-scroll pb-24 md:grid-cols-4 lg:grid lg:flex-none lg:flex-shrink-0 lg:flex-grow-0 lg:gap-y-14 lg:overflow-x-hidden">
+          <div className="gap-6 flex max-w-[100vw] flex-1 flex-shrink flex-grow grid-cols-1 overflow-scroll overflow-y-hidden overflow-x-scroll pb-24 md:grid-cols-4 lg:grid lg:flex-none lg:flex-shrink-0 lg:flex-grow-0 lg:gap-14 lg:overflow-x-hidden">
             {nosotros.map((nosotros, index) => (
               <div
                 className="gap-estilo4 flex min-w-[75vw] flex-col sm:min-w-[40vw] md:min-w-[40vw] lg:min-w-full"
                 key={index}
               >
-                <div className=" flex flex-col items-center justify-start gap-2  align-middle ">
+                <div className=" flex flex-col items-center justify-start gap-4  align-middle ">
                   <div className="relative aspect-square h-full w-full">
                     <Image
                       src={nosotros.image}
                       alt={nosotros.name}
                       layout="fill"
-                      className="aspect-square rounded-xl object-cover"
+                      className="aspect-square rounded-full object-cover"
                     />
                   </div>
                   <div className="flex flex-col justify-center gap-2  ">
@@ -59,19 +59,23 @@ export default function About() {
                         {nosotros.name}
                       </h3>
                     </div>
-                    <div className="flex flex-row justify-center  ">
+                    <div className="flex flex-row justify-center gap-2 lg:gap-2  ">
                       {Object.entries(nosotros.redes).map(([red, icono]) => (
                         <a
                           className="align-middle"
                           href={nosotros.enlaces[red]}
                           key={red}
                         >
-                          <img
-                            class="mx-2 my-auto block"
+                          <div className="relative lg:h-[22px] lg:max-h-[22px] w-auto lg:min-w-[22px] h-[28px] max-h-[28px] min-w-[28px] ">
+                          <Image
+                            class=""
+                          layout="fill"
                             src={icono}
                             alt={red}
                           />
+                          </div>
                         </a>
+                        
                       ))}
                     </div>
                   </div>

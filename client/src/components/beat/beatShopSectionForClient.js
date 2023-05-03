@@ -40,7 +40,6 @@ export default function BeatShopSectionForClient(props) {
   const isLoading = useSelector(
     (state) => state.client.authSession.actionStatus.getUserDataLoading
   );
-  console.log("isLoadingxxx", isLoading);
   return (
     <Section subClassName="padding-x-estilo2 padding-y-estilo2 gap-8 flex flex-col">
       <BuyerNavGeneral />

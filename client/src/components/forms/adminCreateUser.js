@@ -34,8 +34,6 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
   const [sellerState, setSellerState] = useState(defaultValues.isSeller);
   const [adminState, setAdminState] = useState(defaultValues.superAdmin);
 
-  console.log("defaultValues", defaultValues);
-
   const [form, setForm] = useState({
     username: `${mode === "edit" ? defaultValues.username : ""}`,
     firstName: `${mode === "edit" ? defaultValues.firstName : ""}`,
@@ -63,7 +61,6 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
   };
 
   const onSubmit = async (e) => {
-    console.log("onSubmit", mode, validateMode);
     const actionToDispatch = mode === "edit" ? adminEditUser : adminPostUser;
     try {
       await handleSubmit({
@@ -196,7 +193,6 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
     ],
   };
 
-  console.log("El FORM", form);
 
   return (
     <form ref={formRef} onSubmit={onSubmit}>

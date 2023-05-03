@@ -56,7 +56,6 @@ export const jsonLogin = createAsyncThunk(
     try {
       const { data: userResponse } = await axios.post(`${serverUrl}auth`, data);
       const session = createUserSession(userResponse.user);
-      console.log("userResponse yy", userResponse);
       const auth = {
         isLogged: true,
         loginMethod: "json",
@@ -143,7 +142,6 @@ export const editClient = createAsyncThunk(
     });
 
     try {
-      console.log("prev", formData, clientId);
       const response = await axios.put(
         `${serverUrl}user/${clientId}`,
         formData,
@@ -203,7 +201,7 @@ export const changePassword = createAsyncThunk(
 export const getUserData = createAsyncThunk(
   "authSession/getUserData",
   async (data, { rejectWithValue, getState, dispatch }) => {
-    console.log("GET USER DATA");
+  
     const clientId = data
       ? data
       : getState().client.authSession.session.current._id;
@@ -213,23 +211,28 @@ export const getUserData = createAsyncThunk(
         `${serverUrl}user/${clientId}`
       );
 
-      const bougthBeats = response.bougthBeats;
-      const ownedBeats = response.createdBeats;
-      const ownedReviews = response.userReviews;
+      //si tiene softDelete, no lo muestro
+      //filtramos las reviews que no tengan softDelete
+      const bougthBeats = response.bougthBeats.filter( beat => !beat.softDelete).map( beat => {
+        const reviewsFiltradas = beat.review.filter( review => !review.softDelete);
+        return {...beat, review: reviewsFiltradas}
+      });
+
+      const ownedBeats = response.createdBeats.filter( beat => !beat.softDelete).map( beat => {
+        const reviewsFiltradas = beat.review.filter( review => !review.softDelete);
+        return {...beat, review: reviewsFiltradas}
+      });
+
+      const ownedReviews = response.userReviews.filter( review => !review.softDelete);
       const orders = response.userOrders;
 
-      const favoriteBeats = response.userFavorites;
+      const favoriteBeats = response.userFavorites.filter( beat => !beat.softDelete).map( beat => {
+        const reviewsFiltradas = beat.review.filter( review => !review.softDelete);
+        return {...beat, review: reviewsFiltradas}
+      });
 
-      console.log(
-        "bougthBeats",
-        bougthBeats,
-        "ownedBeats",
-        ownedBeats,
-        clientId,
-        response
-      );
 
-      console.log("setOwnedReviews", ownedReviews);
+
       await dispatch(setBougthBeats(bougthBeats));
       await dispatch(setOwnedBeats(ownedBeats));
       await dispatch(setOwnedReviews(ownedReviews));
@@ -243,7 +246,7 @@ export const getUserData = createAsyncThunk(
       };
 
       const session = createUserSession(response);
-      console.log("response", response);
+ 
       return { auth, session };
     } catch (error) {
       console.log("ERROR getUserData", error);
@@ -267,6 +270,7 @@ const authSession = createSlice({
     //--------------------
     //SET GOOGLE SUCCESSFUL
     setGoogleSuccessful(state, action) {
+      console.log("setGoogleSuccessful", action.payload);
       state.auth.isLogged = true;
       state.auth.tokenValid = true;
       state.auth.google.googleSessionID = action.payload.googleSessionID;
@@ -279,13 +283,14 @@ const authSession = createSlice({
     //--------------------
     //RESET REDUCER
     resetReducer(state, action) {
-      state = initialState;
+      state.auth = initialState.auth;
+      state.session = initialState.session;
     },
 
     //--------------------
     //SET THEME
     setTheme(state, action) {
-      console.log("setTheme", action.payload);
+
       state.theme = action.payload;
     },
   },
@@ -302,7 +307,7 @@ const authSession = createSlice({
           ...state.session.current,
           ...action.payload.session,
         };
-        console.log(i18next.language)
+     
         // if(i18next.language == "en"){ 
         //   toast.success("Logged in successfully", toastSuccess);
         // }
@@ -313,7 +318,7 @@ const authSession = createSlice({
         toast.success(trad, toastSuccess);
       })
       .addCase(jsonLogin.rejected, (state, action) => {
-        console.log("jsonLogin.rejected", action);
+    
         toast.error(action.payload, toastError);
       })
 
@@ -360,7 +365,7 @@ const authSession = createSlice({
         toast.success(trad, toastSuccess);
       })
       .addCase(editClient.rejected, (state, action) => {
-        console.log("editClient.rejected", action.payload);
+  
         toast.error(action.payload, toastError);
       })
 
@@ -380,21 +385,29 @@ const authSession = createSlice({
       //--------------------
       //GET USER DATA
       .addCase(getUserData.pending, (state, action) => {
-        console.log("getUserData.pending");
+   
         state.actionStatus.getUserDataLoading = true;
       })
       .addCase(getUserData.fulfilled, (state, action) => {
+
+        if(action.payload.session.softDelete == true){
+          state.auth.isLogged = false;
+          let trad= i18next?.language == "en"? "Your account is suspended, please contact support." :"Tu cuenta está suspendida, comunícate con soporte";
+          toast.error(trad, toastError);
+          return;
+        }
+
         state.session.current = {
           ...state.session.current,
           ...action.payload.session,
         };
         state.auth = { ...state.auth, ...action.payload.auth };
-        console.log("action.payload", action.payload);
+   
         state.actionStatus.getUserDataLoading = false;
       })
       .addCase(getUserData.rejected, (state, action) => {
         toast.error(action.payload, toastError);
-        console.log("getUserData.rejected", action.error);
+  
       })
 
       //--------------------

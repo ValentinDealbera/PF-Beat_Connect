@@ -11,7 +11,7 @@ export const handleInputChange = (
   form,
   setForm
 ) => {
-  console.log("change", setForm, form);
+
 
   if (e.target.type === "file") {
     setForm({
@@ -29,13 +29,11 @@ export const handleInputChange = (
 };
 
 export const handleSelectChange = (e, setSelected, setForm, prevForm) => {
-  console.log("handleSelectChange", e);
   setSelected(e);
   setForm({ ...prevForm, genre: e });
 };
 
 export const validateForm = (form, fieldsToValidate, validateMode, mode) => {
-  console.log("validateForm", validateMode, mode);
   const errors =
     validateMode === "beat"
       ? ValidationCreateBeat(form, fieldsToValidate, mode)
@@ -48,7 +46,7 @@ export const validateForm = (form, fieldsToValidate, validateMode, mode) => {
 };
 
 export const handleSubmit = async (props) => {
-  console.log("handleSubmit", props);
+
   //e.preventDefault();
   const formErrors =
     props.validateMode === "beat"
@@ -59,15 +57,14 @@ export const handleSubmit = async (props) => {
       ? ValidationCreateUser(props.form, "*")
       : null;
 
-  console.log("formErrors", props.validateMode);
+
   if (Object.keys(formErrors).length === 0) {
-    console.log("DESPACHADO");
+   
     await props.dispatch(props.actionToDispatch(props.form));
     
     props.formRef.reset();
   } else {
     props.setErrors(formErrors);
-    console.log("form Error", formErrors, props.validateMode);
     throw new Error("Form Error");
   }
 };

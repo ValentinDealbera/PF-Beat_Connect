@@ -90,10 +90,20 @@ export const fetchBeats = createAsyncThunk(
         }
       );
 
+      //si tiene soft delete, no se muestra
+      const beats = response.data.docs.filter((beat) => !beat.softDelete);
+      //si las reviews tienen soft delete, no se muestran las reviews pero si el beat
+      const beatsConReviewsFiltradas = beats.map((beat) => {
+        const reviewsFiltradas = beat.review.filter(
+          (review) => !review.softDelete
+        );
+        return { ...beat, review: reviewsFiltradas };
+      });
 
+      console.log("beats", beats);
 
       return {
-        docs: response.data.docs,
+        docs: beatsConReviewsFiltradas,
         next: response.data.nextPage,
         prev: response.data.prevPage,
         current: response.data.page,
@@ -114,8 +124,16 @@ export const fetchFeaturedBeats = createAsyncThunk(
       const response = await axios.get(
         `${serverUrl}beats?relevance=desc&limit=5`
       );
+
+      const beats = response.data.docs.filter((beat) => !beat.softDelete);
+      const beatsConReviewsFiltradas = beats.map((beat) => {
+        const reviewsFiltradas = beat.review.filter(
+          (review) => !review.softDelete
+        );
+        return { ...beat, review: reviewsFiltradas };
+      });
       return {
-        docs: response.data.docs,
+        docs: beatsConReviewsFiltradas,
       };
     } catch (err) {
       return rejectWithValue(err.response.data.message);

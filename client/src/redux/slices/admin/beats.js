@@ -65,7 +65,6 @@ export const adminEditBeat = createAsyncThunk(
 export const adminDeleteBeat = createAsyncThunk(
   "beats/adminDeleteBeat",
   async (data, { rejectWithValue, dispatch }) => {
-    console.log("adminDeleteBeat", data);
     try {
       const response = await axios.delete(
         `${serverUrl}admin/beat/${data._id}`,
@@ -75,7 +74,6 @@ export const adminDeleteBeat = createAsyncThunk(
           },
         }
       );
-      console.log("response", response);
       await dispatch(adminGetBeats());
       return { userResponse: response.data };
     } catch (error) {
@@ -91,9 +89,7 @@ export const adminGetBeats = createAsyncThunk(
   "beats/adminGetBeats",
   async (data, { rejectWithValue, dispatch }) => {
     try {
-      console.log("procesando");
       const response = await axios.get(`${serverUrl}beats?limit=999999`);
-      console.log("response", response);
       return { beatResponse: response.data.docs };
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -174,7 +170,6 @@ const adminBeatsSlice = createSlice({
       //--------------------
       //GET ADMIN BEATS
       .addCase(adminGetBeats.fulfilled, (state, action) => {
-        console.log("action", action.payload.beatResponse);
         state.beats = action.payload.beatResponse;
         //toast.success("Beats obtenidos correctamente", toastSuccess);
       })

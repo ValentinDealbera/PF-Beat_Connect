@@ -28,7 +28,6 @@ export default function SellerDashboardOverview() {
   const allUsers = useSelector((state) => state.admin.users.users);
   const usersData = users;
 
-  console.log("usersData", usersData);
 
   useEffect(() => {
     dispatch(adminGetUsers());
@@ -40,7 +39,6 @@ export default function SellerDashboardOverview() {
   };
 
   const handleEdit = async (data) => {
-    console.log("handleEdit", data);
     await dispatch(setCurrentEditingUser(data));
     router.push(`/admin/users/${data._id}`);
   };

@@ -19,7 +19,7 @@ export default function BeatBottomSheetFilteringWithHeader(props) {
           >
             {props.title}
           </button>
-          <button onClick={props.reset}>Reset</button>
+          <button onClick={props.reset}></button>
         </div>
         {props.children}
       </div>

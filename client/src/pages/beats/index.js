@@ -37,7 +37,7 @@ export default function Beats() {
       <Head title={"Beats"} description={"Head from beats"} />
       <Main mode="transparent">
         <Hero
-          image="/images/yannis-papanastasopoulos-yWF2LLan-_o-unsplash(1).jpg"
+          image="/images/yannis-papanastasopoulos-yWF2LLan-_o-unsplash(1).webp"
           className="background-primary-red-700 min-h-[350px] items-center justify-center align-middle md:min-h-[45vh]"
           //  style={{ minHeight: "15vh" }}
         >
@@ -78,7 +78,7 @@ export default function Beats() {
             <div
               style={{
                 backgroundImage:
-                  "url(/images/glenn-van-de-wiel-ySfXlAqg8QQ-unsplash.jpg)",
+                  "url(/images/glenn-van-de-wiel-ySfXlAqg8QQ-unsplash.webp)",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}

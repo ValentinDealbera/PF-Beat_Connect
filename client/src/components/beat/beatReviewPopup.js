@@ -24,11 +24,11 @@ export default function BeatReviewPopup({ modal, handleModalReview }) {
     (state) => state.beats.activeItemDetail
   );
 
-  console.log(currentBeatReview);
 
   //sacamos promedio de rating
 const rating = currentBeatReview.review.map((review) => review.rating);
-const averageRating = rating.reduce((a, b) => a + b, 0) / rating.length;
+const averageRating = (rating.reduce((a, b) => a + b, 0) / rating.length).toFixed(1);
+
 
 
   return (

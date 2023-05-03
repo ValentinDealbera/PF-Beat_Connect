@@ -4,7 +4,7 @@ export default function IslandDashboard(props) {
     const router = useRouter();
     const className = `${
         router.pathname.startsWith("/admin")
-          ? "dark:text-gray-300 dark:bg-customDark-900"
+          ? "dark:text-gray-300 dark:bg-customDark-900 bg-white"
           : "background-neutral-white"
       }`;
     return(

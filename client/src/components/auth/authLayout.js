@@ -11,7 +11,7 @@ export default function AuthLayout(props) {
             className="h-[300px] w-full bg-red-950 sm:h-full "
             style={{
               backgroundImage:
-                "url(/images/glenn-van-de-wiel-ySfXlAqg8QQ-unsplash.jpg)",
+                "url(/images/glenn-van-de-wiel-ySfXlAqg8QQ-unsplash.webp)",
               backgroundSize: "cover",
               backgroundPosition: "center",
               minHeight: "20vh",

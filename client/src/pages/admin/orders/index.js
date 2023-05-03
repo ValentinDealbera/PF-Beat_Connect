@@ -45,7 +45,6 @@ export default function SellerDashboardOverview() {
   };
 
   const handleEdit = async (data) => {
-    console.log("handleEdit", data);
     await dispatch(setCurrentEditingOrder(data));
     router.push(`/admin/reviews/${data._id}`);
   };
@@ -66,7 +65,6 @@ export default function SellerDashboardOverview() {
   }, [t("adminCreateUser.t1"), t("adminCreateUser.t2"), t("adminCreateUser.t3"), t("adminCreateUser.t4"),t("adminCreateUser.t5")]);
 
   const rows = beatsFiltered.map((item) => {
-    console.log("ITEM", item);
     return {
       beat: (
         <div className="flex items-center gap-4 ">

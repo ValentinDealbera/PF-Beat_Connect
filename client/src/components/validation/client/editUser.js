@@ -42,7 +42,6 @@ export function validationEditUser(form, fieldsToValidate) {
 
       // Validar tamaño de imagen
       case "image":
-        console.log("soy image", form.image.name);
         if (form.image) {
           if (form.image.size > MAX_FILE_SIZE) {
             error.image =
@@ -55,7 +54,6 @@ export function validationEditUser(form, fieldsToValidate) {
         break;
 
       case "backImage":
-        console.log("soy backImage", form.backImage.name);
         if (form.backImage) {
           if (form.backImage.size > MAX_FILE_SIZE) {
             error.backImage =

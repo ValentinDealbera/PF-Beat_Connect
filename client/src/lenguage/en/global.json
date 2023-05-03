@@ -58,14 +58,18 @@
     "c4": "To register as a provider, you need to fill out the registration form. Once registered, you will be able to create and publish your catalog of instrumentals."
   },
   "faqsAdmin": {
-    "t1": "How can I find the appropriate beat for my music project?",
-    "c1": "In our platform, you can explore the catalogs of registered music producers and listen to audio samples of each beat.",
-    "t2": "How can I make a secure payment?",
-    "c2": "We offer a secure and efficient payment process through Mercado Pago. Once you have chosen the beat you wish to purchase, you can securely make the payment with different payment methods.",
-    "t3": "How will I receive the beat file after making the payment?",
-    "c3": "Once you have made the payment, you will receive the beat file in your email. Make sure to provide a valid email address during the payment process.",
-    "t4": "How can I register as a provider on the platform?",
-    "c4": "To register as a provider, you need to fill out the registration form. Once registered, you will be able to create and publish your catalog of instrumentals."
+    "t1": "What are the tools available to me as an administrator to perform my job effectively?",
+    "c1": "Modify beats, users, or reviews: This may include changes to the description of a beat, correction of incorrect information about a user, or removal of a false review. Direct connection to the bot's database: This allows you to monitor the questions/reports made by users.",
+    "d1": "Direct connection to the bot's database: This allows you to monitor the questions/reports made by users.",
+    "e1": "Creation of users, reviews, and beats: This can be useful if you want to add additional content to the site or if you need to create a user account for a new vendor on the site.",
+    "t2": "What are the key policies and procedures I should be aware of as an administrator?",
+    "c2": "Privacy Policy: Describes how user information is collected, used, shared, and stored. It is important to ensure compliance with this policy and that users are informed about how their information is handled.",
+    "d2": "Terms of Use: Establish the rules for using the platform, including user rights and responsibilities. It is important for users to accept the terms of use before using the platform.",
+    "e2": "Security Policy: This policy describes how the platform and user information are protected against potential security threats.",
+    "t3": "How can I add a new user to the site?",
+    "c3": "To add a new user to the site, click on Users. Fill out the Create User form with the user's details and click Save Changes.",
+    "t4": "How can I add a new beat for an existing user?",
+    "c4": "To add a beat, click on Beats. Fill out the Create Beat form with the details of the beat and the creating user, and click Save Changes."
   },
   "about": {
     "t1": "Let's get to",
@@ -94,8 +98,8 @@
     "t11": "Mercado Pago is an online payment platform that allows users to make payments using credit cards, debit cards, cash, and bank transfers.",
     "t12": "Auth0 is an authentication and authorization platform that allows developers to add authentication and authorization to their web, mobile, and desktop applications.",
     "t13": "Firebase is a mobile and web application development platform that offers database, storage, authentication, analytics, messaging, and more services.",
-    "t14": "Render is a web hosting platform that allows developers to deploy web applications and REST APIs in the cloud.",
-    "t15": "Vercel es a web application hosting platform that allows developers to deploy web applications and REST APIs in the cloud.",
+    "t14": "Render.com is a cloud platform that offers application rendering and deployment services. It enables developers and designers to easily run and scale web applications, back-end services, and rendering jobs in the cloud, without the need to manage the underlying infrastructure.",
+    "t15": "Vercel is a cloud platform that allows developers to quickly and easily build, deploy and scale web applications. It provides a continuous development and deployment environment for JavaScript-based projects, allowing developers to focus on writing code instead of worrying about the underlying infrastructure.",
     "t16": "Trello is a project management tool that allows teams to organize their projects on boards.",
     "t17": "Git is an open-source distributed version control system that allows developers to collaborate on software projects. GitHub is a source code hosting and version control platform that uses Git."
   },
@@ -106,7 +110,7 @@
     "t4": "Cart"
   },
   "navHelp": {
-    "t1": "Home",
+    "t1": "FAQs",
     "t2": "Privacy Policy",
     "t3": "Terms and Conditions"
   },
@@ -114,7 +118,7 @@
     "t1": "Profile",
     "t2": "Inbox",
     "t3": "Sell your beats",
-    "t4": "Release a beat",
+    "t4": "Post a beat",
     "t5": "Settings",
     "t6": "Billing",
     "t7": "Logout"
@@ -137,15 +141,16 @@
     "continueGoogle": "Continue with Google"
   },
   "landing": {
-    "t1": "Explore the best beats, discover new artists,",
-    "t2": "Discover BeatConnect",
+    "t1": "Explore the best beats, discover new artists, ",
+    "t2": "discover BeatConnect",
     "t3": "Immerse yourself in the world of music with BeatConnect, where you can discover the best beats, explore new artists, and unleash your creativity.",
     "t4": "Sign in now"
   },
   "footerNav": {
     "general": "General",
     "help": "Help",
-    "account": "Account"
+    "account": "Account",
+    "idioma":  "Language"
   },
   "generalItems": {
     "t1": "Home",
@@ -153,7 +158,7 @@
     "t3": "Beats"
   },
   "helpItems": {
-    "t1": "Home",
+    "t1": "FAQs",
     "t2": "Privacy Policy",
     "t3": "Terms and Conditions"
   },
@@ -189,7 +194,8 @@
     "form11": "No files selected",
     "form12": "Upload your beat",
     "form13": "Upload a high-quality beat (WAV, OGG)",
-    "form14": "Create post"
+    "form14": "Create post",
+    "form15": "Save publication"
   },
   "buyerGeneralNav": {
     "profile": "Profile",
@@ -215,7 +221,7 @@
     "t5": "Last name",
     "t6": "Bio",
     "t7": "Cover image",
-    "tosave": "Tosave"
+    "tosave": "Save"
   },
   "beats": {
     "t1": "Find that dream",
@@ -231,14 +237,18 @@
     "t2": "Next",
     "filterName1": "Genres",
     "filterName2": "Price",
-    "sortBy": "Sort By"
+    "sortBy": "Sort By",
+    "filters": "Filters"
   },
   "search": "What are you looking for?",
   "billing": {
     "t1": "Billing",
     "t2": "Amount",
     "t3": "Operation",
-    "t4": "Date"
+    "t4": "Date",
+    "empty": "You have no activity",
+    "compra": "Purchase",
+    "venta": "Sale"
   },
   "sliceAuthSession": {
     "t1": "Logged in successfully",
@@ -352,7 +362,9 @@
     "t1": "Prices and Licenses",
     "t2": "Download",
     "t3": "Add to Cart",
-    "t4": "See reviews"
+    "t4": "See reviews",
+    "free": "Free License, MP3",
+    "paid": "Standart License, WAV"
   },
   "beatCar": {
     "edit": "Edit",
@@ -365,7 +377,8 @@
     "modalPopUp3": "Join our growing community of musicians and",
     "modalPopUp4": "urban music producers.",
     "modalPopUp5": "Start discovering your favorite beats right now!",
-    "modalPopUp6": "Log in here!"
+    "modalPopUp6": "Log in here!",
+    "tap": "Double tap for more details"
   },
   "editReview": {
     "t1": "Let's modify your",
@@ -413,6 +426,7 @@
     "t2": "Users",
     "t3": "Orders",
     "t4": "User",
+    "t5": "Reports",
     "status": "Status",
     "actions": "Actions",
     "status1": "Banned",
@@ -476,7 +490,7 @@
     "t1": "You must purchase a beat to leave a review! ",
     "t2": "Buy one now!"
   },
-  "validationCreateBeat" : {
+  "validationCreateBeat": {
     "t1": "The name of your beat must have between one and 50 characters.",
     "t2": "The price of your beat must be greater than 1.",
     "t3": "The size of the image is too large. Maximum allowed size is 10 MB.",
@@ -485,12 +499,47 @@
     "t6": "You must upload a mp3 or wav file",
     "t7": "The size of the audio is too large. Maximum allowed size is 150 MB.",
     "t8": "Your beat must have between 20 and 350 bpm.",
-    "t9": "You must select a genre"
+    "t9": "You must select a genre",
+    "t10": "You must upload a Beat",
+    "t11": "You must upload a wav or ogg file"
   },
-   "bot": "Online support / Reports"
+  "bot": "Online support / Reports",
+  "editBeat": {
+    "t1": "Let's edit your",
+    "t2": "Make the adjustments that you consider necessary",
+    "t3": "",
+    "t4": "Debes subir un archivo jpg o png",
+    "t5": "El tamaño del audio es demasiado grande. El tamaño máximo permitido es de 10 MB.",
+    "t6": "Debes subir un archivo mp3 o wav",
+    "t7": "El tamaño del audio es demasiado grande. El tamaño máximo permitido es de 150 MB.",
+    "t8": "Tu beat debe tener entre 20 y 350 bpm.",
+    "t9": "Debes seleccionar un género"
+  },
+  "validationCreateUser": {
+    "t1": "Your user name must have between one and 50 characters.",
+    "t2": "Your firstname must have between one and 50 characters.",
+    "t3": "Your bio phrase must have between one and 50 characters.",
+    "t4": "The size of the image is too large. Maximum allowed size is 10 MB.",
+    "t5": "The size of the backImage is too large. Maximum allowed size is 10 MB.",
+    "t6": "You must upload a jpg or png file",
+    "t7": "The last name must have between one and 50 characters.",
+    "t8": "The password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
+    "t9": "Please enter a valid email address."
+  },
+  "validationCreateReview": {
+    "t1": "You must enter a id",
+    "t2": "You must enter a rating",
+    "t3": "You must select a number between one and five",
+    "t4": "You must enter a comment",
+    "t5": "You must enter a title",
+    "t6": "You must enter a beat"
+  },
+  "hamburguer": {
+    "t1": "Help Center",
+    "t2": "Go back"
+  },
+  "adminHeaderBar": {
+    "t1": "Hello Admin, welcome",
+    "t2": "Go to the dashboard"
+  }
 }
-
-
-  
-
-

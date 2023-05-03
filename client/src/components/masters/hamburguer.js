@@ -5,21 +5,27 @@ import NavModalItem from "../layout/nav/navModalItem";
 import VerticalNav from "../layout/nav/verticalNav";
 import { navHelp,navClient } from "@/data/data";
 import { UserBoxNav } from "@/components";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Hamburger({ options, manageHamburguer, userMenu }) {
   const [dropDown, setDropDown] = useState(false);
   const [pageIndex, setPageIndex] = useState(0);
-  const [t, i18n] = useTranslation("global");
+  const [t] = useTranslation("global");
   return (
     <>
-      <div
+    <AnimatePresence>
+      <motion.div
         className="fixed top-0 z-[100] h-screen w-screen "
         style={{
           background: "#000000b3",
           backdropFilter: "blur(10px)",
           top: 0,
         }}
-      >
+        initial={{ x: "100%" }}
+        animate={{ x: 0 }}
+        exit={{ x: "100%" }}
+        transition={{ duration: 0.6 }}
+       >
         <div className=" absolute left-0 top-0 z-40 flex w-screen items-center justify-between px-4 xs:px-8 py-6 ">
           <UserBoxNav id={"userBoxNavUnique"}>
           <VerticalNav navItems={userMenu} title={"Centro de ayuda"} />
@@ -57,7 +63,7 @@ export default function Hamburger({ options, manageHamburguer, userMenu }) {
                   className="text-titulo1-medium text-white"
                   onClick={() => setPageIndex(1)}
                 >
-                  Centro de ayuda
+                  {t("hamburguer.t1")}
                 </h1>
               </div>
             </div>
@@ -68,7 +74,7 @@ export default function Hamburger({ options, manageHamburguer, userMenu }) {
                 className="text-base-medium mb-4 cursor-pointer text-white"
                 onClick={() => setPageIndex(0)}
               >
-                Volver atras
+                {t("hamburguer.t2")}
               </p>
               <div className="flex flex-col gap-4 ">
                 {pageIndex === 1 &&
@@ -89,7 +95,8 @@ export default function Hamburger({ options, manageHamburguer, userMenu }) {
             </div>
           )}
         </div>
-      </div>
+      </motion.div>
+      </AnimatePresence>
     </>
   );
 }

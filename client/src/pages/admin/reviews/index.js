@@ -44,7 +44,6 @@ export default function SellerDashboardOverview() {
   };
 
   const handleEdit = async (data) => {
-    console.log("handleEdit", data);
     await dispatch(setCurrentEditingReview(data));
     router.push(`/admin/reviews/${data._id}`);
   };
