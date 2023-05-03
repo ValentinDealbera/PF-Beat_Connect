@@ -98,8 +98,8 @@
     "t11": "Mercado Pago es una plataforma de pagos online que permite a los usuarios realizar pagos a través de tarjetas de crédito, débito, efectivo y transferencias bancarias.",
     "t12": "Auth0 es una plataforma de autenticación y autorización que permite a los desarrolladores agregar autenticación y autorización a sus aplicaciones web, móviles y de escritorio.",
     "t13": "Firebase es una plataforma de desarrollo de aplicaciones móviles y web que ofrece servicios de base de datos, almacenamiento, autenticación, análisis, mensajería y más.",
-    "t14": "Render es una plataforma de alojamiento de aplicaciones web que permite a los desarrolladores desplegar aplicaciones web y API REST en la nube. ",
-    "t15": "Vercel es una plataforma de alojamiento de aplicaciones web que permite a los desarrolladores desplegar aplicaciones web y API REST en la nube. ",
+    "t14": "Render.com es una plataforma en la nube que ofrece servicios de renderizado y despliegue de aplicaciones. Permite a los desarrolladores y diseñadores ejecutar y escalar fácilmente aplicaciones web, servicios backend y trabajos de renderizado en la nube, sin la necesidad de administrar la infraestructura subyacente.",
+    "t15": "Vercel es una plataforma en la nube que permite a los desarrolladores construir, implementar y escalar aplicaciones web de forma rápida y sencilla. Proporciona un entorno de desarrollo y despliegue continuo para proyectos basados en JavaScript, permitiendo a los desarrolladores centrarse en la escritura de código en lugar de preocuparse por la infraestructura subyacente.",
     "t16": "Trello es una herramienta de gestión de proyectos que permite a los equipos de trabajo organizar sus proyectos en tableros. ",
     "t17": "Git es un sistema de control de versiones distribuido de código abierto que permite a los desarrolladores colaborar en proyectos de software. GitHub es una plataforma de alojamiento de código fuente y control de versiones que utiliza Git."
   },
@@ -149,7 +149,8 @@
   "footerNav": {
     "general": "General",
     "help": "Ayuda",
-    "account": "Cuenta"
+    "account": "Cuenta",
+    "idioma": "Idioma"
   },
   "generalItems": {
     "t1": "Inicio",
@@ -236,14 +237,20 @@
     "t2": "Siguiente",
     "filterName1": "Generos",
     "filterName2": "Precio",
-    "sortBy": "Ordenar por:"
+    "sortBy": "Ordenar por:",
+    "filters": "Filtros"
+
   },
   "search": "¿Que estas buscando?",
   "billing": {
     "t1": "Facturación",
     "t2": "Monto",
     "t3": "Operación",
-    "t4": "Fecha"
+    "t4": "Fecha",
+    "empty": "No tienes movimientos",
+    "compra": "Compra",
+    "venta": "Venta"
+
   },
   "sliceAuthSession": {
     "t1": "Se logueó correctamente",
@@ -357,7 +364,9 @@
     "t1": "Precios y licencias",
     "t2": "Descargar",
     "t3": "Añadir al carrito",
-    "t4": "Ver reviews"
+    "t4": "Ver reviews",
+    "free": "Licencia gratuita, MP3",
+    "paid": "Licencia Estándar, WAV"
   },
   "beatCar": {
     "edit": "Editar",
@@ -370,7 +379,8 @@
     "modalPopUp3": "Únete a nuestra comunidad en crecimiento de músicos y productores de la música urbana.",
     "modalPopUp4": "",
     "modalPopUp5": "¡Empieza a descubrir tus beats favoritos ahora mismo!",
-    "modalPopUp6": "Inicia sesión ahora"
+    "modalPopUp6": "Inicia sesión ahora",
+    "tap": "Doble tap para más detalles"
   },
   "editReview": {
     "t1": "Modifiquemos tu",

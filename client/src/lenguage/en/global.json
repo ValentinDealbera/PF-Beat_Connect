@@ -98,8 +98,8 @@
     "t11": "Mercado Pago is an online payment platform that allows users to make payments using credit cards, debit cards, cash, and bank transfers.",
     "t12": "Auth0 is an authentication and authorization platform that allows developers to add authentication and authorization to their web, mobile, and desktop applications.",
     "t13": "Firebase is a mobile and web application development platform that offers database, storage, authentication, analytics, messaging, and more services.",
-    "t14": "Render is a web hosting platform that allows developers to deploy web applications and REST APIs in the cloud.",
-    "t15": "Vercel es a web application hosting platform that allows developers to deploy web applications and REST APIs in the cloud.",
+    "t14": "Render.com is a cloud platform that offers application rendering and deployment services. It enables developers and designers to easily run and scale web applications, back-end services, and rendering jobs in the cloud, without the need to manage the underlying infrastructure.",
+    "t15": "Vercel is a cloud platform that allows developers to quickly and easily build, deploy and scale web applications. It provides a continuous development and deployment environment for JavaScript-based projects, allowing developers to focus on writing code instead of worrying about the underlying infrastructure.",
     "t16": "Trello is a project management tool that allows teams to organize their projects on boards.",
     "t17": "Git is an open-source distributed version control system that allows developers to collaborate on software projects. GitHub is a source code hosting and version control platform that uses Git."
   },
@@ -149,7 +149,8 @@
   "footerNav": {
     "general": "General",
     "help": "Help",
-    "account": "Account"
+    "account": "Account",
+    "idioma":  "Language"
   },
   "generalItems": {
     "t1": "Home",
@@ -236,14 +237,18 @@
     "t2": "Next",
     "filterName1": "Genres",
     "filterName2": "Price",
-    "sortBy": "Sort By"
+    "sortBy": "Sort By",
+    "filters": "Filters"
   },
   "search": "What are you looking for?",
   "billing": {
     "t1": "Billing",
     "t2": "Amount",
     "t3": "Operation",
-    "t4": "Date"
+    "t4": "Date",
+    "empty": "You have no activity",
+    "compra": "Purchase",
+    "venta": "Sale"
   },
   "sliceAuthSession": {
     "t1": "Logged in successfully",
@@ -357,7 +362,9 @@
     "t1": "Prices and Licenses",
     "t2": "Download",
     "t3": "Add to Cart",
-    "t4": "See reviews"
+    "t4": "See reviews",
+    "free": "Free License, MP3",
+    "paid": "Standart License, WAV"
   },
   "beatCar": {
     "edit": "Edit",
@@ -370,7 +377,8 @@
     "modalPopUp3": "Join our growing community of musicians and",
     "modalPopUp4": "urban music producers.",
     "modalPopUp5": "Start discovering your favorite beats right now!",
-    "modalPopUp6": "Log in here!"
+    "modalPopUp6": "Log in here!",
+    "tap": "Double tap for more details"
   },
   "editReview": {
     "t1": "Let's modify your",

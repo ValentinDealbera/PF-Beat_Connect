@@ -57,7 +57,7 @@ const [fechaVar, setFechaVar] = useState("");
         </div>
       ),
       [montoVar]: <p className="text-sm-medium">${item.beat.priceAmount}</p>,
-      [operacionVar]: <p className="text-sm-medium">{item.operationType} </p>,
+      [operacionVar]: <p className="text-sm-medium">{ item.operationType === "Compra" ? t("billing.compra") : t("billing.venta") }</p>,
       [fechaVar]: <p className="text-sm-medium">{item.date}</p>,
     };
   });
@@ -68,7 +68,10 @@ const [fechaVar, setFechaVar] = useState("");
       <Main mode="transparent">
         <SettingsHero title={t("billing.t1")} />
         <Section subClassName="padding-x-estilo2 padding-y-estilo2 gap-estilo2 flex flex-col">
-          <DynamicTableLight headers={headers} rows={rows} />
+          {
+            rows.length > 0 ? ( <DynamicTableLight headers={headers} rows={rows} /> ) : ( <p className="text-base-medium">{t("billing.empty")} </p> )
+          }
+         
         </Section>
       </Main>
     </>

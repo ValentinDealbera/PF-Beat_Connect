@@ -4,18 +4,20 @@ import { ReactSVG } from "react-svg";
 import { useRouter } from "next/router";
 
 export default function FaqsItem({ faq }) {
+
+
+
   const router = useRouter();
   const [t, i18n] = useTranslation("global");
+  const className =  router.pathname.startsWith("/admin") ? "text-black dark:text-white" : "text-black"
   return (
     <div className="faq-item gap-estilo4 flex flex-col">
       <div className="gap-estilo4 flex flex-row  items-center">
         <ReactSVG
-          src={
-            router.pathname.startsWith("/help")
-              ? "/icon/dashboard/faq-dark.svg"
-              : "/icon/dashboard/faq-icon.svg"
-          }
-          className="dashboard-item__icon h-[24px] w-[24px] fill-current text-black dark:text-dark"
+          src="/icon/dashboard/faq-dark.svg"
+
+          
+          className={` h-[24px] w-[24px] fill-current ${className}`}
         />
         <h3 className="text-subtitulo-medium">{t(faq.title)}</h3>
       </div>

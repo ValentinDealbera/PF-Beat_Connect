@@ -43,9 +43,11 @@ export default function SellerDashboardNav() {
     {
       title: "dashboardNav.t5",
       link: "https://docs.google.com/spreadsheets/d/1Kmwc2nt_oiQWiaD7guh62nA_T6a9HNUMXQb6souPSm8/edit?usp=share_link",
-      icon: "/icon/dashboard/orders.svg",
+      icon: "/icon/dashboard/megafono.svg",
     },
   ];
+
+  const currentLanguage = i18n.language;
 
   return (
     <>
@@ -61,22 +63,30 @@ export default function SellerDashboardNav() {
           ))}
         </div>
         <br />
-        <br />
-        <br />
-        <div className="flex justify-center gap-4 flex-direction: column" >
-          <button
-            onClick={() => i18n.changeLanguage("es")}
-            className="background-primary-red-700 color-neutral-white border-radius-estilo1 text-base-semibold w-max px-3 py-2"
-          >
-            Español
-          </button>
-          <button
-            onClick={() => i18n.changeLanguage("en")}
-            className="background-primary-red-700 color-neutral-white border-radius-estilo1 text-base-semibold w-max px-3 py-2"
-          >
-            English
-          </button>
+        <div className="gap-estilo4 flex flex-col">
+          <h3 className="text-subtitulo-semibold color-neutral-white">
+            {t("footerNav.idioma")}
+          </h3>
+
+          <div className="flex flex-col gap-4 md:flex-row lg:gap-2">
+            <button
+              onClick={() => i18n.changeLanguage("es")}
+              className={`text-white  ${
+                currentLanguage === "es" ? "font-bold underline" : "font-light"
+              }`}
+            >
+              Español
+            </button>
+            <button
+              onClick={() => i18n.changeLanguage("en")}
+              className={`text-white  ${
+                currentLanguage === "en" ? "font-bold underline" : "font-light"
+              }`}
+            >
+              English
+            </button>
           </div>
+        </div>
       </div>
     </>
   );
