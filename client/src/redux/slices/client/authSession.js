@@ -257,6 +257,7 @@ const authSession = createSlice({
     //--------------------
     //SET GOOGLE SUCCESSFUL
     setGoogleSuccessful(state, action) {
+      console.log("setGoogleSuccessful", action.payload);
       state.auth.isLogged = true;
       state.auth.tokenValid = true;
       state.auth.google.googleSessionID = action.payload.googleSessionID;
@@ -269,7 +270,8 @@ const authSession = createSlice({
     //--------------------
     //RESET REDUCER
     resetReducer(state, action) {
-      state = initialState;
+      state.auth = initialState.auth;
+      state.session = initialState.session;
     },
 
     //--------------------
@@ -374,6 +376,13 @@ const authSession = createSlice({
         state.actionStatus.getUserDataLoading = true;
       })
       .addCase(getUserData.fulfilled, (state, action) => {
+
+        if(action.payload.session.softDelete == true){
+          state.auth.isLogged = false;
+          toast.error("Fuiste baneado", toastError);
+          return;
+        }
+
         state.session.current = {
           ...state.session.current,
           ...action.payload.session,

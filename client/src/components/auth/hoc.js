@@ -25,7 +25,7 @@ export default function HOC(props) {
     (state) => state?.client.authSession.session.current
   );
 
-  const hocIsWorking = false;
+  const hocIsWorking = true;
   const experimentalIsClient = isLogged;
   const experimentalIsAdmin = isAdmin;
 
@@ -44,7 +44,14 @@ export default function HOC(props) {
       });
 
       if (clientId && clientId !== undefined) {
-        await dispatch(getUserData(clientId));
+       const session = await dispatch(getUserData(clientId));
+console.log("session", session.payload.session.softDelete);
+       if(session.payload.session.softDelete === true){
+          dispatch(resetReducer());
+          router.push("/");
+          return;
+        }
+
         dispatch(
           setGoogleSuccessful({
             isLogged: true,
