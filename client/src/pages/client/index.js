@@ -9,11 +9,17 @@ import {
 } from "@/components";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getUserData } from "@/redux/slices/client/authSession";
 
 export default function BuyerProfile() {
+  const dispatch = useDispatch();
   const currentUser = useSelector(
     (state) => state.client.authSession.session.current
   );
+
+  useEffect(() => {
+    dispatch(getUserData(currentUser._id));
+  }, []);
 
   return (
     <>

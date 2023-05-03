@@ -152,9 +152,9 @@ function BeatDetailBox({ msg1, msg2, beat, handleModalReview, type, hasReview })
         >
           {t("beatDetailSideBar.t4")}
         </button>
-      ) :
+      ) 
+      : type === "free" ? ( 
       (
-   
         <a
           className=" text-sm font-semibold text-red-700"
           download={beat.name}
@@ -162,6 +162,9 @@ function BeatDetailBox({ msg1, msg2, beat, handleModalReview, type, hasReview })
         >
           {t("beatDetailSideBar.t2")}
         </a>
+      )
+      ) : (
+        <></>
       )}
     </div>
   );

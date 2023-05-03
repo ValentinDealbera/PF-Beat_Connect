@@ -211,12 +211,25 @@ export const getUserData = createAsyncThunk(
         `${serverUrl}user/${clientId}`
       );
 
-      const bougthBeats = response.bougthBeats;
-      const ownedBeats = response.createdBeats;
-      const ownedReviews = response.userReviews;
+      //si tiene softDelete, no lo muestro
+      //filtramos las reviews que no tengan softDelete
+      const bougthBeats = response.bougthBeats.filter( beat => !beat.softDelete).map( beat => {
+        const reviewsFiltradas = beat.review.filter( review => !review.softDelete);
+        return {...beat, review: reviewsFiltradas}
+      });
+
+      const ownedBeats = response.createdBeats.filter( beat => !beat.softDelete).map( beat => {
+        const reviewsFiltradas = beat.review.filter( review => !review.softDelete);
+        return {...beat, review: reviewsFiltradas}
+      });
+
+      const ownedReviews = response.userReviews.filter( review => !review.softDelete);
       const orders = response.userOrders;
 
-      const favoriteBeats = response.userFavorites;
+      const favoriteBeats = response.userFavorites.filter( beat => !beat.softDelete).map( beat => {
+        const reviewsFiltradas = beat.review.filter( review => !review.softDelete);
+        return {...beat, review: reviewsFiltradas}
+      });
 
 
 

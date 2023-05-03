@@ -82,8 +82,9 @@ const [tapVisible, setTapVisible] = useState(false);
   }, [ref, isSelected]);
 
   try {
+    //tambien verificamos soft delete
     const reviewed = Boolean(
-      userReviews.find((review) => review.beat._id === beat._id)
+      userReviews.find((review) => review.beat._id === beat._id && review.softDelete)
     );
 
     const currentReview = userReviews.find(
