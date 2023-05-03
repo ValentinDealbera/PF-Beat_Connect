@@ -70,7 +70,7 @@
     "c3": "To add a new user to the site, click on Users. Fill out the Create User form with the user's details and click Save Changes.",
     "t4": "How can I add a new beat for an existing user?",
     "c4": "To add a beat, click on Beats. Fill out the Create Beat form with the details of the beat and the creating user, and click Save Changes."
-    },
+  },
   "about": {
     "t1": "Let's get to",
     "t2": "know each other a little more",
@@ -482,7 +482,7 @@
     "t1": "You must purchase a beat to leave a review! ",
     "t2": "Buy one now!"
   },
-  "validationCreateBeat" : {
+  "validationCreateBeat": {
     "t1": "The name of your beat must have between one and 50 characters.",
     "t2": "The price of your beat must be greater than 1.",
     "t3": "The size of the image is too large. Maximum allowed size is 10 MB.",
@@ -492,12 +492,11 @@
     "t7": "The size of the audio is too large. Maximum allowed size is 150 MB.",
     "t8": "Your beat must have between 20 and 350 bpm.",
     "t9": "You must select a genre",
-    "t10" : "You must upload a Beat",
-    "t11" : "You must upload a wav or ogg file"
+    "t10": "You must upload a Beat",
+    "t11": "You must upload a wav or ogg file"
   },
-   "bot": "Online support / Reports",
-
-   "editBeat" : {
+  "bot": "Online support / Reports",
+  "editBeat": {
     "t1": "Let's edit your",
     "t2": "Make the adjustments that you consider necessary",
     "t3": "",
@@ -507,36 +506,32 @@
     "t7": "El tamaño del audio es demasiado grande. El tamaño máximo permitido es de 150 MB.",
     "t8": "Tu beat debe tener entre 20 y 350 bpm.",
     "t9": "Debes seleccionar un género"
-    }, 
-
-    "validationCreateUser" : {
-      "t1": "Your user name must have between one and 50 characters.",
-      "t2": "Your firstname must have between one and 50 characters.",
-      "t3": "Your bio phrase must have between one and 50 characters.",
-      "t4": "The size of the image is too large. Maximum allowed size is 10 MB.",
-      "t5": "The size of the backImage is too large. Maximum allowed size is 10 MB.",
-      "t6": "You must upload a jpg or png file",
-      "t7": "The last name must have between one and 50 characters.",
-      "t8": "The password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
-      "t9": "Please enter a valid email address."
-      }, 
-
-      "validationCreateReview": {
-        "t1": "You must enter a id",
-        "t2": "You must enter a rating",
-        "t3": "You must select a number between one and five",
-        "t4": "You must enter a comment",
-        "t5": "You must enter a title",
-        "t6": "You must enter a beat"
-        },
-
-      "hamburguer": {
-        "t1": "Help Center",
-        "t2": "Go back"
-        }
+  },
+  "validationCreateUser": {
+    "t1": "Your user name must have between one and 50 characters.",
+    "t2": "Your firstname must have between one and 50 characters.",
+    "t3": "Your bio phrase must have between one and 50 characters.",
+    "t4": "The size of the image is too large. Maximum allowed size is 10 MB.",
+    "t5": "The size of the backImage is too large. Maximum allowed size is 10 MB.",
+    "t6": "You must upload a jpg or png file",
+    "t7": "The last name must have between one and 50 characters.",
+    "t8": "The password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
+    "t9": "Please enter a valid email address."
+  },
+  "validationCreateReview": {
+    "t1": "You must enter a id",
+    "t2": "You must enter a rating",
+    "t3": "You must select a number between one and five",
+    "t4": "You must enter a comment",
+    "t5": "You must enter a title",
+    "t6": "You must enter a beat"
+  },
+  "hamburguer": {
+    "t1": "Help Center",
+    "t2": "Go back"
+  },
+  "adminHeaderBar": {
+    "t1": "Hello Admin, welcome",
+    "t2": "Go to the dashboard"
+  }
 }
-
-
-  
-
-
