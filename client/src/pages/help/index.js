@@ -34,7 +34,7 @@ export default function HelpOverview() {
             <h1 className="text-titulo3-semibold text-red-700 ">
             {t("helpCenterIndex.t1")}
             </h1>
-            <FaqsGrid />   
+            <FaqsGrid mode="help" />   
             <div
               className="flex w-full justify-center"
               onClick={() => setModal(true)}
