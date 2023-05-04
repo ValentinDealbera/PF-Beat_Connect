@@ -107,19 +107,19 @@ export const navClient = [
 export const faqs = [
   {
     title: "faqs.t1",
-    content: "faqs.c1",
+    content1: "faqs.c1",
   },
   {
     title: "faqs.t2",
-    content: "faqs.c2",
+    content1: "faqs.c2",
   },
   {
     title: "faqs.t3",
-    content: "faqs.c3",
+    content1: "faqs.c3",
   },
   {
     title: "faqs.t4",
-    content: "faqs.c4",
+    content1: "faqs.c4",
   },
 ];
 
@@ -181,7 +181,7 @@ export const tecnologias = [
   {
     id: 8,
     title: "TailwindCSS",
-    image: "/icon/tecnologias/tailwindCSS.svg",
+    image: "/icon/tecnologias/tailwindcss.svg",
 
     description: "tecnologias.t6",
   },

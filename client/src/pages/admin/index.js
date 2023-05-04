@@ -20,7 +20,7 @@ export default function SellerDashboardOverview() {
             <h1 className="text-subtitulo-semibold dark:text-white ">
                 {t("admin.t2")}
             </h1>
-            <FaqsGrid />
+            <FaqsGrid mode ="admin"/>
           </IslandDashboard>
         </SellerDashboardLayout> 
       </main>

@@ -67,7 +67,7 @@ export default function Home() {
       <Head title={"Home"} description={"Head from home"} />
       <Main mode="transparent">
         <Hero
-          image="/images/jurre-houtkamp-XAyE243LdN4-unsplash.webp"
+          image="/images/jurre-houtkamp-xaye243ldn4-unsplash.webp"
           className="background-primary-red-700 min-h-[85vh] items-center justify-center align-middle md:min-h-[65vh] "
           //  style={{ minHeight: "15vh" }}
         >
