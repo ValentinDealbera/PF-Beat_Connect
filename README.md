@@ -16,3 +16,10 @@ BeatConnect is a marketplace for buying and selling musical instruments that use
 - [@Micasavournin](https://github.com/Micasavournin)
 
 
+## Deployment
+
+Link
+
+```bash
+https://pf-beat-connect-psi.vercel.app/
+```
