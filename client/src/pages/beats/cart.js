@@ -104,24 +104,24 @@ export default function Carrito() {
   };
 
   const handlePayment = () => {
+return alert("Las compras estan desactivadas");
+// if (!isLogged) {
+//   return alert("Debes iniciar sesion para poder comprar");
+// }
 
-    if (!isLogged) {
-      return alert("Debes iniciar sesion para poder comprar");
-    }
-
-    axios
-      .post(`${serverUrl}cart/pay`, toPay, {
-        headers: {
-          "Content-Type": "application/json",
-          userid: user,
-        },
-      })
-      .then((res) => {
-        router.push(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+// axios
+//   .post(`${serverUrl}cart/pay`, toPay, {
+//     headers: {
+//       "Content-Type": "application/json",
+//       userid: user,
+//     },
+//   })
+//   .then((res) => {
+//     router.push(res.data);
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
   };
 
   let className;
