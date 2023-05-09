@@ -114,6 +114,7 @@ export const recoverPassword = createAsyncThunk(
 export const convertInSeller = createAsyncThunk(
   "authSession/convertInSeller",
   async (data, { rejectWithValue, getState }) => {
+    return alert("Caracteristica desactivada")
     const clientId = getState().client.authSession.session.current._id;
     const send = { seller: "VENDEDOR", mpcode: data.mpcode };
 
