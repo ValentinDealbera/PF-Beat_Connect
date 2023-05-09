@@ -25,20 +25,22 @@ export default function BecomeSeller() {
 
   BecomeSeller.handleOpenDropdown = handleOpenDropdown;
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!terms) {
-      toast.error(t("becomeSeller.error1"), toastError);
-      return;
-    }
-    try {
-      const data = await axios.get(`${serverUrl}cart/toseller`);
-      router.push(data.data.link);
-    } catch (error) {
-      toast.error(t("becomeSeller.error2"), toastError);
-      console.log(error);
-    }
-  };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  alert("Caracteristica desactivada");
+  // if (!terms) {
+  //   toast.error(t("becomeSeller.error1"), toastError);
+  //   return;
+  // }
+  // try {
+  //   const data = await axios.get(`${serverUrl}cart/toseller`);
+  //   router.push(data.data.link);
+  // } catch (error) {
+  //   toast.error(t("becomeSeller.error2"), toastError);
+  //   console.log(error);
+  // }
+};
 
   return (
     <>
