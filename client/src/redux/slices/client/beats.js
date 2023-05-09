@@ -27,7 +27,7 @@ const initialState = {
 export const postClientBeat = createAsyncThunk(
   "client/postClientBeat",
   async (data, { rejectWithValue, dispatch, getState }) => {
-
+return alert("Caracteristica desactivada")
     const id = getState().client.authSession.session.current._id;
     try {
       const response = await axios.post(`${serverUrl}beats`, data, {
