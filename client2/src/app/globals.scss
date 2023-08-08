@@ -1,0 +1,512 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*********************************************************************************************/
+/* Fuente */
+@layer base {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+li,
+span,
+div,
+input,
+button,
+textarea,
+select,
+label,
+option,
+small,
+strong,
+b,
+i,
+em,
+u,
+ul,
+ol,
+dl,
+dt,
+dd,
+blockquote,
+pre,
+code,
+hr,
+table,
+td,
+form,
+fieldset,
+legend,
+address,
+img,
+figure,
+figcaption,
+header,
+footer,
+nav,
+section,
+article,
+main,
+video,
+audio,
+iframe,
+object,
+canvas,
+details,
+summary,
+menu,
+menuitem,
+summary {
+  //word-break: break-word;
+  font-family: "Outfit", sans-serif;
+}
+
+}
+
+/*********************************************************************************************/
+/* Textos */
+
+//Titulo 1
+@layer base {
+  .text-titulo1-bold {
+    @apply text-4xl font-bold;
+    line-height: 115%;
+  }
+
+  .text-titulo1-semibold {
+    @apply text-4xl font-semibold;
+    line-height: 115%;
+  }
+
+  .text-titulo1-medium {
+    @apply text-4xl font-medium;
+    line-height: 115%;
+  }
+
+  .text-titulo1-regular {
+    @apply text-4xl font-normal;
+    line-height: 115%;
+  }
+
+  //Titulo 2
+.text-titulo2-semibold {
+    @apply text-3xl font-semibold;
+    line-height: 125%;
+  }
+
+  .text-titulo2-medium {
+    @apply text-3xl font-medium;
+    line-height: 125%;
+  }
+
+  .text-titulo2-regular {
+    @apply text-3xl font-normal;
+    line-height: 125%;
+  }
+
+  //Titulo 3
+  .text-titulo3-semibold {
+    @apply text-2xl font-semibold;
+    line-height: 135%;
+  }
+
+  .text-titulo3-medium {
+    @apply text-2xl font-medium;
+    line-height: 135%;
+  }
+
+  .text-titulo3-regular {
+    @apply text-2xl font-normal;
+    line-height: 135%;
+  }
+
+  //Subtitulo
+  .text-subtitulo-semibold {
+    @apply text-xl font-semibold;
+    line-height: 135%;
+  }
+
+  .text-subtitulo-medium {
+    @apply text-xl font-medium;
+    line-height: 135%;
+  }
+
+  .text-subtitulo-regular {
+    @apply text-xl font-normal;
+    line-height: 135%;
+  }
+
+  .text-subtitulo-light {
+    @apply text-xl font-light;
+    line-height: 135%;
+  }
+
+  //Body Base
+  .text-base-semibold {
+    @apply text-base font-semibold;
+    line-height: 155%;
+  }
+
+  .text-base-medium {
+    @apply text-base font-medium;
+    line-height: 155%;
+  }
+
+  .text-base-light {
+    @apply text-base font-light;
+    line-height: 155%;
+  }
+
+  //Body Small
+  .text-sm-semibold {
+    @apply text-sm font-semibold;
+    line-height: 145%;
+  }
+
+  .text-sm-medium {
+    @apply text-sm font-medium;
+    line-height: 145%;
+  }
+
+  .text-sm-regular {
+    @apply text-sm font-normal;
+    line-height: 145%;
+  }
+
+  .text-sm-light {
+    @apply text-sm font-light;
+    line-height: 145%;
+  }
+
+  //Body Extra Small
+  .text-xs-semibold {
+    @apply text-xs font-semibold;
+    line-height: 145%;
+  }
+
+  .text-xs-medium {
+    @apply text-xs font-medium;
+    line-height: 145%;
+  }
+
+  .text-xs-light {
+    @apply text-xs font-light;
+    line-height: 145%;
+  }
+}
+
+/*********************************************************************************************/
+/* Padding */
+
+//Padding Estilo 1
+@layer base {
+  .padding-x-estilo1 {
+    @apply w-full px-8 2xl:container sm:px-10 md:px-14 lg:px-16 xl:px-24 2xl:px-32;
+  }
+
+  .padding-y-estilo1 {
+    @apply py-20;
+  }
+
+  .padding-estilo1 {
+    @extend .padding-x-estilo1;
+    @extend .padding-y-estilo1;
+  }
+}
+
+//Padding Estilo 2
+@layer base {
+  .padding-x-estilo2 {
+    @apply w-full px-4  xs:px-8 2xl:container sm:px-10 md:px-14 lg:px-20 xl:px-24;
+  }
+
+  .padding-y-estilo2 {
+    @apply py-16
+  }
+
+  .padding-estilo2 {
+    @extend .padding-x-estilo2;
+    @extend .padding-y-estilo2;
+  }
+}
+
+//Padding Estilo 3
+@layer base {
+  .padding-x-estilo3 {
+    @apply w-full px-8 2xl:container sm:px-10 md:px-14 lg:px-20 xl:px-24;
+  }
+
+  .padding-y-estilo3 {
+    @apply py-10;
+  }
+
+  .padding-estilo3 {
+    @extend .padding-x-estilo3;
+    @extend .padding-y-estilo3;
+  }
+}
+
+//Dashboard Estilo 1
+@layer base {
+  .padding-x-dashboard-estilo1 {
+    @apply px-4 sm:px-8 xl:px-14;
+  }
+}
+
+//Island Estilo 1
+@layer base {
+  .padding-island-estilo1 {
+    @apply p-8 sm:p-10;
+  }
+}
+
+//Island Estilo 2
+@layer base {
+
+.padding-x-island-estilo2 {
+    @apply px-8 sm:px-10;
+  }
+
+  .padding-y-island-estilo2 {
+    @apply py-8 sm:py-10;
+  }
+
+  .padding-island-estilo2 {
+    @extend .padding-x-island-estilo2;
+  }
+}
+
+/*********************************************************************************************/
+/* Gap */
+
+//Gap Estilo 1
+@layer base {
+  .gap-estilo1 {
+    @apply gap-5 xl:gap-10;
+  }
+}
+
+@layer base {
+  .gap-estilo2 {
+    @apply gap-4 lg:gap-6;
+  }
+}
+
+@layer base {
+  .gap-estilo3 {
+    @apply gap-4;
+  }
+}
+
+@layer base {
+  .gap-estilo4 {
+    @apply gap-2;
+  }
+}
+
+@layer base {
+  .gap-estilo5 {
+    @apply gap-8;
+  }
+}
+
+/*********************************************************************************************/
+/* Border Radius */
+
+//Border Radius Estilo 1
+@layer base {
+  .border-radius-estilo1 {
+    @apply rounded-3xl;
+  }
+}
+
+//Border Radius Estilo 2
+@layer base {
+  .border-radius-estilo2 {
+    @apply rounded-xl;
+  }
+}
+
+//Border Radius Estilo 3
+@layer base {
+  .border-radius-full {
+    @apply rounded-full;
+  }
+}
+
+/*********************************************************************************************/
+/* Colors */
+
+//Primary
+@layer base {
+  .color-primary-red {
+    &-700 {
+      @apply text-red-700;
+    }
+
+    &-500 {
+      @apply text-red-500;
+    }
+
+    &-100 {
+      @apply text-red-100;
+    }
+  }
+}
+
+//Neutral
+@layer base {
+  .color-neutral {
+    &-black-950 {
+      @apply text-neutral-950;
+    }
+
+    &-black-900 {
+      @apply text-neutral-900;
+    }
+
+    &-gray-700 {
+      @apply text-gray-700;
+    }
+
+    &-gray-400 {
+      @apply text-gray-400;
+    }
+
+    &-slate-200 {
+      @apply text-slate-200;
+    }
+
+    &-slate-100 {
+      @apply text-slate-100;
+    }
+
+    &-white {
+      @apply text-white;
+    }
+  }
+}
+
+/*********************************************************************************************/
+/* Background Colors */
+
+//Primary
+@layer base {
+  .background-primary-red {
+    &-700 {
+      @apply bg-red-700;
+    }
+
+    &-500 {
+      @apply bg-red-500;
+    }
+
+    &-100 {
+      @apply bg-red-100;
+    }
+  }
+}
+
+//Neutral
+@layer base {
+  .background-neutral {
+    &-black-950 {
+      @apply bg-neutral-950;
+    }
+
+    &-black-900 {
+      @apply bg-neutral-900;
+    }
+
+    &-gray-700 {
+      @apply bg-gray-700;
+    }
+
+    &-gray-400 {
+      @apply bg-gray-400;
+    }
+
+    &-slate-200 {
+      @apply bg-slate-200;
+    }
+
+    &-slate-100 {
+      @apply bg-slate-100;
+    }
+
+    &-white {
+      @apply bg-white;
+    }
+  }
+}
+
+/*********************************************************************************************/
+/* Utility Colors */
+
+@layer base {
+  .check-blue {
+    @apply bg-blue-700
+  }
+}
+
+
+input[type="checkbox"] {
+  appearance: none;
+  background-color: #fff;
+  margin: 0;
+  font: inherit;
+  color: currentColor;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid currentColor;
+  border-color: #000;
+  border-radius: 30%;
+  transform: translateY(-0.075em);
+  display: grid;
+  place-content: center;
+}
+
+// input[type="checkbox"] {
+//   /* Add if not using autoprefixer */
+//   -webkit-appearance: none;
+//   /* Remove most all native input styles */
+//   appearance: none;
+//   /* For iOS < 15 */
+//   background-color: var(--form-background);
+//   /* Not removed via appearance */
+//   margin: 0;
+
+//   font: inherit;
+//   color: currentColor;
+//   width: 1.15em;
+//   height: 1.15em;
+//   border: 0.15em solid currentColor;
+//   border-radius: 0.15em;
+//   transform: translateY(-0.075em);
+
+//   display: grid;
+//   place-content: center;
+// }
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  transform: scale(0);
+  transform-origin: bottom left;
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(black);
+  /* Windows High Contrast Mode */
+  background-color:#000;
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
