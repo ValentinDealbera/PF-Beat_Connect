@@ -1,11 +1,15 @@
 import axios from "axios";
 import { serverUrl } from "@/data/config";
 
-export const axiosPutter = async (url: string, data: any, cType: any) => {
-  const { data: res } = await axios.put(serverUrl + url, data, {
-    headers: {
-      "Content-Type": cType,
-    },
+type axiosPutter = {
+  url: any;
+  body: any;
+  headers?: any;
+};
+
+export const axiosPutter = async ({ url, body, headers }: axiosPutter) => {
+  const { data: res } = await axios.put(serverUrl + url, body, {
+    headers: headers || {},
   });
 
   return res;
@@ -14,10 +18,14 @@ export const axiosPutter = async (url: string, data: any, cType: any) => {
 type axiosPoster = {
   url: any;
   body?: any;
+  headers?: any;
 };
-export const axiosPoster = async ({ url, body }: axiosPoster) => {
+export const axiosPoster = async ({ url, body, headers }: axiosPoster) => {
   console.log("axiosPoster body", body);
-  const { data: res } = await axios.post(serverUrl + url, body || {});
+  const { data: res } = await axios.post(serverUrl + url, body || {}, {
+    headers: headers || {},
+  });
+  
 
   return res;
 };

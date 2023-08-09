@@ -7,29 +7,27 @@
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { serverUrl } from "@/data/config";
-import axios from "axios";
-
-import { data } from "autoprefixer";
-import { throttle } from "lodash";
-import createAbortController from "@/utils/abortController";
+import { RootState } from "@/redux/store/store";
+import {
+  axiosGetter,
+  axiosPutter,
+  axiosDeleter,
+  axiosPoster,
+} from "@/utils/requests";
+import { BeatsClass, ReviewsClass, UserClass } from "@/types";
 
 const initialState = {
-  //LOADING
   loadingBeats: false,
-  //BEATS
-  publicItems: [],
-  activeItems: [],
-  featuredItems: [],
+  publicItems: [] as BeatsClass[],
+  activeItems: [] as BeatsClass[],
+  featuredItems: [] as BeatsClass[],
   activeItemDetail: null,
   generalActiveIndex: 0,
-  //REVIEWS
-  activeReviewDetail: [],
+  activeReviewDetail: [] as ReviewsClass[],
   reviewFetchStatus: false,
-  //AUTHOR
-  currentAuthor: {},
-  currentAuthorBeats: [],
+  currentAuthor: {} as UserClass,
+  currentAuthorBeats: [] as BeatsClass[],
   loadingcurrentAuthor: false,
-  //PAGINATION
   pageIndex: 1,
   pages: {
     next: null,
@@ -57,7 +55,7 @@ export const fetchBeats = createAsyncThunk(
       rating,
       genre,
       searchFilter,
-    },
+    }: any,
     { rejectWithValue }
   ) => {
     try {
@@ -81,21 +79,19 @@ export const fetchBeats = createAsyncThunk(
         }
       });
 
-      const response = await axios.get(
-        `${serverUrl}beats?page=${page}${queryString.substr(1)}`,
-        {
-          headers: {
-            genre,
-          },
-        }
-      );
+      const response = await axiosGetter({
+        url: `beats?page=${page}${queryString}`,
+        headers: {
+          genre,
+        },
+      });
 
       //si tiene soft delete, no se muestra
-      const beats = response.data.docs.filter((beat) => !beat.softDelete);
+      const beats = response.data.docs.filter((beat: any) => !beat.softDelete);
       //si las reviews tienen soft delete, no se muestran las reviews pero si el beat
-      const beatsConReviewsFiltradas = beats.map((beat) => {
+      const beatsConReviewsFiltradas = beats.map((beat: any) => {
         const reviewsFiltradas = beat.review.filter(
-          (review) => !review.softDelete
+          (review: any) => !review.softDelete
         );
         return { ...beat, review: reviewsFiltradas };
       });
@@ -104,13 +100,14 @@ export const fetchBeats = createAsyncThunk(
 
       return {
         docs: beatsConReviewsFiltradas,
-        next: response.data.nextPage,
-        prev: response.data.prevPage,
-        current: response.data.page,
-        limit: response.data.totalPages,
+        next: response.nextPage,
+        prev: response.prevPage,
+        current: response.page,
+        limit: response.totalPages,
       };
     } catch (err) {
-      return rejectWithValue(err.response.data.message);
+      console.error("fetchFeaturedBeats", err);
+      throw err;
     }
   }
 );
@@ -121,14 +118,14 @@ export const fetchFeaturedBeats = createAsyncThunk(
   "beats/fetchFeaturedBeats",
   async (page, { rejectWithValue }) => {
     try {
-      const response = await axios.get(
-        `${serverUrl}beats?relevance=desc&limit=5`
-      );
+      const response = await axiosGetter({
+        url: `beats?relevance=desc&limit=5`,
+      });
 
-      const beats = response.data.docs.filter((beat) => !beat.softDelete);
-      const beatsConReviewsFiltradas = beats.map((beat) => {
+      const beats = response.data.docs.filter((beat: any) => !beat.softDelete);
+      const beatsConReviewsFiltradas = beats.map((beat: any) => {
         const reviewsFiltradas = beat.review.filter(
-          (review) => !review.softDelete
+          (review: any) => !review.softDelete
         );
         return { ...beat, review: reviewsFiltradas };
       });
@@ -136,8 +133,8 @@ export const fetchFeaturedBeats = createAsyncThunk(
         docs: beatsConReviewsFiltradas,
       };
     } catch (err) {
-      console.log(err);
-      return rejectWithValue(err.response.data.message);
+      console.error("fetchFeaturedBeats", err);
+      throw err;
     }
   }
 );
@@ -148,7 +145,10 @@ export const fetchCurrentAuthor = createAsyncThunk(
   "beats/fetchCurrentAuthor",
   async (id, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`${serverUrl}user/${id}`);
+      const response = await axiosGetter({
+        url: `user/${id}`,
+      });
+
       const currentAuthorBeats = response.data.createdBeats;
       const currentAuthor = {
         firstName: response.data.firstName,
@@ -161,7 +161,7 @@ export const fetchCurrentAuthor = createAsyncThunk(
       };
       return { beats: currentAuthorBeats, currentAuthor };
     } catch (err) {
-      return rejectWithValue(err.response.data.message);
+      throw err;
     }
   }
 );
@@ -172,15 +172,6 @@ const beatsSlice = createSlice({
   name: "beats",
   initialState,
   reducers: {
-    //--------------------
-    //SET BEATS DISPLAY MODE
-    setBeatsDisplayMode(state, action) {
-      state.beatsDisplayMode = action.payload;
-      if (action.payload === 0 || action.payload === 1) {
-        state.activeItems = state.publicItems;
-      }
-    },
-
     //--------------------
     //SET ACTIVE ITEM DETAIL
     setActiveItemDetail(state, action) {
@@ -217,7 +208,6 @@ const beatsSlice = createSlice({
           state.activeItems = [];
           return;
         }
-        state.publicBeatsFetchStatus = true;
         state.publicItems = action.payload.docs || [];
         state.activeItems = action.payload.docs || [];
         state.pages.next = action.payload.next;
@@ -233,13 +223,11 @@ const beatsSlice = createSlice({
       //--------------------
       //Extra reducers para el perfil del autor 3
       .addCase(fetchCurrentAuthor.pending, (state, action) => {
-        state.authorFetchStatus = false;
         state.loadingcurrentAuthor = true;
       })
       .addCase(fetchCurrentAuthor.fulfilled, (state, action) => {
-        state.currentAuthor = action.payload.currentAuthor;
+        state.currentAuthor = action.payload.currentAuthor as any;
         state.currentAuthorBeats = action.payload.beats;
-        state.beatsDisplayMode = 3;
         state.loadingcurrentAuthor = false;
       })
       .addCase(fetchCurrentAuthor.rejected, (state, action) => {
@@ -260,14 +248,7 @@ const beatsSlice = createSlice({
   },
 });
 
-export const {
-  setBeats,
-  setActiveItemDetail,
-  setBeatsDisplayMode,
-  setGeneralActiveIndex,
-  setCurrentAuthorBeats,
-  setActiveItemsForProfile,
-  setCurrentPage,
-} = beatsSlice.actions;
+export const { setActiveItemDetail, setGeneralActiveIndex, setCurrentPage } =
+  beatsSlice.actions;
 
 export default beatsSlice.reducer;

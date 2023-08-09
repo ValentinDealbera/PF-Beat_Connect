@@ -1,12 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { serverUrl } from "@/data/config";
 import { toast } from "sonner";
-import axios from "axios";
-import { toastError, toastSuccess } from "@/utils/toastStyles";
 import { getUserData } from "./authSession";
-import { fetchBeats } from "../beats";
 import { resetCart } from "../cart";
-import i18next from 'i18next';
+import i18next from "i18next";
+import { axiosPoster } from "@/utils/requests";
+import { RootState } from "@/redux/store/store";
 
 const initialState = {
   orders: [],
@@ -16,10 +14,13 @@ const initialState = {
 //POST CLIENT ORDER
 export const postClientOrder = createAsyncThunk(
   "client/postClientOrder",
-  async (data, { rejectWithValue, dispatch, getState }) => {
-    const id = getState().client.authSession.session.current._id;
+  async (data, { dispatch, getState }) => {
+    const state = getState() as RootState;
+    const id = state.client.authSession.session.current.id;
     try {
-      const response = await axios.post(`${serverUrl}orders`, data, {
+      await axiosPoster({
+        url: `orders`,
+        body: data,
         headers: {
           userid: id,
         },
@@ -27,11 +28,10 @@ export const postClientOrder = createAsyncThunk(
 
       await dispatch(getUserData(id));
       await dispatch(resetCart());
-     // await dispatch(fetchBeats({}));
       return;
     } catch (error) {
-      console.log("ERROR xx", error);
-      return rejectWithValue(error.response.data.message);
+      console.error("postClientOrder error", error);
+      throw error;
     }
   }
 );
@@ -53,14 +53,15 @@ const ordersSlice = createSlice({
       //--------------------
       //POST CLIENT ORDER
       .addCase(postClientOrder.fulfilled, (state, action) => {
-        let trad= i18next?.language == "en"? "Order loaded" : "Orden cargada"
-        toast.success(trad, toastSuccess);
+        let trad = i18next?.language == "en" ? "Order loaded" : "Orden cargada";
+        toast.success(trad);
       })
       .addCase(postClientOrder.rejected, (state, action) => {
-        toast.error(action.payload, toastError);
+        toast.error("action.payload");
       })
       .addCase(postClientOrder.pending, (state, action) => {
-        let trad= i18next?.language == "en"? "Loading order..." : "Cargando orden..."
+        let trad =
+          i18next?.language == "en" ? "Loading order..." : "Cargando orden...";
         toast(trad);
       });
   },

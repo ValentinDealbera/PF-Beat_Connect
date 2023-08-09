@@ -1,14 +1,56 @@
+import { BeatsClass, ReviewsClass } from "@/types";
+
+type UserProps = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  username: string;
+  bio: string;
+  backImage: string;
+  image: string;
+  softDelete: boolean;
+  isSeller: boolean;
+  superAdmin: boolean;
+};
+
 export class UserClass {
   id: string;
   firstName: string;
   lastName: string;
   email: string;
+  username: string;
+  bio: string;
+  backImage: string;
+  image: string;
+  softDelete: boolean;
+  isSeller: boolean;
+  superAdmin: boolean;
 
-  constructor(id: string, firstName: string, lastName: string, email: string) {
+  constructor({
+    id,
+    firstName,
+    lastName,
+    email,
+    username,
+    bio,
+    backImage,
+    image,
+    softDelete,
+    isSeller,
+    superAdmin,
+  }: UserProps) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
+    this.username = username;
+    this.bio = bio;
+    this.backImage = backImage;
+    this.image = image;
+    this.softDelete = softDelete;
+    this.isSeller = isSeller;
+    this.superAdmin = superAdmin;
   }
 
   getId(): string {
@@ -31,12 +73,27 @@ export class UserClass {
     return this.lastName;
   }
 
+  static deserializeList(input: any[]): UserClass[] {
+    let list: UserClass[] = [];
+    for (let i = 0; i < input.length; i++) {
+      list.push(this.deserialize(input[i]));
+    }
+    return list;
+  }
+
   static deserialize(input: any): UserClass {
-    return new UserClass(
-      input.id,
-      input.firstName,
-      input.lastName,
-      input.email,
-    );
+    return new UserClass({
+      id: input.id,
+      firstName: input.firstName,
+      lastName: input.lastName,
+      email: input.email,
+      username: input.username,
+      bio: input.bio,
+      backImage: input.backImage,
+      image: input.image,
+      softDelete: input.softDelete,
+      isSeller: input.isSeller,
+      superAdmin: input.superAdmin,
+    });
   }
 }

@@ -1,13 +1,18 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { serverUrl } from "@/data/config";
 import { toast } from "sonner";
-import axios from "axios";
 import { createUserSession } from "@/utils/userSession";
-import { toastError, toastSuccess } from "@/utils/toastStyles";
 import { setBougthBeats, setOwnedBeats, setFavoriteBeats } from "./beats";
 import { setOwnedReviews } from "./reviews";
 import { setOrders } from "./orders";
 import i18next from "i18next";
+import { RootState } from "@/redux/store/store";
+import {
+  axiosGetter,
+  axiosPutter,
+  axiosDeleter,
+  axiosPoster,
+} from "@/utils/requests";
+import { BeatsClass, ReviewsClass, UserClass } from "@/types";
 
 const initialState = {
   auth: {
@@ -24,30 +29,21 @@ const initialState = {
     },
   },
   session: {
-    current: {
-      firstName: "",
-      lastName: "",
-      bio: "",
-      profilePicture: "",
-      _id: "",
-      email: "",
-      userName: "",
-      backImage: "",
-    },
+    current: {} as UserClass,
   },
-  actionStatus: {
-    getUserDataLoading: false,
-  },
-  theme: "light",
 };
 
 //------------------ ASYNC THUNKS ------------------//
 //JSON LOGIN
 export const jsonLogin = createAsyncThunk(
   "authSession/jsonLogin",
-  async (data, { rejectWithValue, dispatch }) => {
+  async (data, { dispatch }) => {
     try {
-      const { data: userResponse } = await axios.post(`${serverUrl}auth`, data);
+      const userResponse = await axiosPoster({
+        url: `auth`,
+        body: data,
+      });
+
       const session = createUserSession(userResponse.user);
       const auth = {
         isLogged: true,
@@ -62,8 +58,8 @@ export const jsonLogin = createAsyncThunk(
       dispatch(getUserData(userResponse.user._id));
       return { auth, session };
     } catch (error) {
-      console.log("ERROR", error);
-      return rejectWithValue(error.response.data.message);
+      console.error("jsonLogin error", error);
+      throw error;
     }
   }
 );
@@ -72,15 +68,16 @@ export const jsonLogin = createAsyncThunk(
 //JSON REGISTER
 export const jsonRegister = createAsyncThunk(
   "authSession/registerClientUser",
-  async (data, { rejectWithValue }) => {
+  async (data) => {
     try {
-      const { data: response } = await axios.post(
-        `${serverUrl}auth/register`,
-        data
-      );
+      const response = await axiosPoster({
+        url: `auth/register`,
+        body: data,
+      });
       return response;
     } catch (error) {
-      return rejectWithValue(error.response.data.message);
+      console.error("jsonRegister error", error);
+      throw error;
     }
   }
 );
@@ -89,15 +86,16 @@ export const jsonRegister = createAsyncThunk(
 //RECOVER PASSWORD
 export const recoverPassword = createAsyncThunk(
   "authSession/recoverPassword",
-  async (data, { rejectWithValue }) => {
+  async (data) => {
     try {
-      const { data: response } = await axios.post(
-        `${serverUrl}mail/password`,
-        data
-      );
+      const response = await axiosPoster({
+        url: `mail/password`,
+        body: data,
+      });
       return response;
     } catch (error) {
-      return rejectWithValue(error.response.data.message);
+      console.error("recoverPassword error", error);
+      throw error;
     }
   }
 );
@@ -106,20 +104,23 @@ export const recoverPassword = createAsyncThunk(
 //CONVERT IN SELLER
 export const convertInSeller = createAsyncThunk(
   "authSession/convertInSeller",
-  async (data, { rejectWithValue, getState }) => {
-    return alert("Caracteristica desactivada");
-    const clientId = getState().client.authSession.session.current._id;
+  async (data: any, { rejectWithValue, getState }) => {
+    const state = getState() as RootState;
+    const clientId = state.client.authSession.session.current.id;
     const send = { seller: "VENDEDOR", mpcode: data.mpcode };
 
     try {
-      const { data: response } = await axios.put(
-        `${serverUrl}user/${clientId}`,
-        send,
-        { headers: { userid: clientId } }
-      );
+      const response = await axiosPutter({
+        url: `user/${clientId}`,
+        body: send,
+        headers: {
+          userid: clientId,
+        },
+      });
       return response;
     } catch (error) {
-      return rejectWithValue(error.response.data.message);
+      console.error("convertInSeller error", error);
+      throw error;
     }
   }
 );
@@ -128,29 +129,30 @@ export const convertInSeller = createAsyncThunk(
 //EDIT CLIENT
 export const editClient = createAsyncThunk(
   "authSession/editClient",
-  async (data, { rejectWithValue, getState }) => {
-    const clientId = getState().client.authSession.session.current._id;
+  async (data: any, { rejectWithValue, getState }) => {
+    const state = getState() as RootState;
+    const clientId = state.client.authSession.session.current.id;
     const formData = new FormData();
+
     Object.keys(data).forEach((key) => {
       formData.append(key, data[key]);
     });
 
     try {
-      const response = await axios.put(
-        `${serverUrl}user/${clientId}`,
-        formData,
-        {
-          headers: {
-            userid: clientId,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const response = await axiosPutter({
+        url: `user/${clientId}`,
+        body: formData,
+        headers: {
+          userid: clientId,
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       const userResponse = createUserSession(response.data);
       return { userResponse };
     } catch (error) {
-      return rejectWithValue(error.response.data.message);
+      console.error("editClient error", error);
+      throw error;
     }
   }
 );
@@ -161,10 +163,13 @@ export const passwordRecovery = createAsyncThunk(
   "authSession/passwordRecovery",
   async (data, { rejectWithValue }) => {
     try {
-      await axios.put(`${serverUrl}recover/password`, data);
+      await axiosPutter({
+        url: `recover/password`,
+        body: data,
+      });
     } catch (error) {
-      console.log("ERROR passwordRecovery", error);
-      return rejectWithValue(error.response.data.message);
+      console.error("passwordRecovery error", error);
+      throw error;
     }
   }
 );
@@ -173,19 +178,24 @@ export const passwordRecovery = createAsyncThunk(
 //CHANGE PASSWORD
 export const changePassword = createAsyncThunk(
   "authSession/changePassword",
-  async (data, { rejectWithValue, getState }) => {
-    const clientId = getState().client.authSession.session.current._id;
+  async (data: any, { rejectWithValue, getState }) => {
+    const state = getState() as RootState;
+    const clientId = state.client.authSession.session.current.id;
     const formData = new FormData();
     Object.keys(data).forEach((key) => {
       formData.append(key, data[key]);
     });
     try {
-      await axios.put(`${serverUrl}user/${clientId}`, formData, {
-        headers: { userid: clientId },
+      await axiosPutter({
+        url: `user/${clientId}`,
+        body: formData,
+        headers: {
+          userid: clientId,
+        },
       });
     } catch (error) {
-      console.log("ERROR changePassword", error);
-      return rejectWithValue(error.response.data.message);
+      console.error("changePassword error", error);
+      throw error;
     }
   }
 );
@@ -194,21 +204,18 @@ export const changePassword = createAsyncThunk(
 //GET USER DATA
 export const getUserData = createAsyncThunk(
   "authSession/getUserData",
-  async (data, { rejectWithValue, getState, dispatch }) => {
-    const clientId = data
-      ? data
-      : getState().client.authSession.session.current._id;
+  async (data: string, { rejectWithValue, getState, dispatch }) => {
+    const state = getState() as RootState;
+    const clientId = data ? data : state.client.authSession.session.current.id;
 
     try {
-      const { data: response } = await axios.get(
-        `${serverUrl}user/${clientId}`
-      );
+      const response = await axiosGetter({
+        url: `user/${clientId}`,
+      });
 
-      //si tiene softDelete, no lo muestro
-      //filtramos las reviews que no tengan softDelete
       const bougthBeats = response.bougthBeats
-        .filter((beat) => !beat.softDelete)
-        .map((beat) => {
+        .filter((beat: BeatsClass) => !beat.softDelete)
+        .map((beat: BeatsClass) => {
           const reviewsFiltradas = beat.review.filter(
             (review) => !review.softDelete
           );
@@ -216,8 +223,8 @@ export const getUserData = createAsyncThunk(
         });
 
       const ownedBeats = response.createdBeats
-        .filter((beat) => !beat.softDelete)
-        .map((beat) => {
+        .filter((beat: BeatsClass) => !beat.softDelete)
+        .map((beat: BeatsClass) => {
           const reviewsFiltradas = beat.review.filter(
             (review) => !review.softDelete
           );
@@ -225,13 +232,13 @@ export const getUserData = createAsyncThunk(
         });
 
       const ownedReviews = response.userReviews.filter(
-        (review) => !review.softDelete
+        (review: ReviewsClass) => !review.softDelete
       );
       const orders = response.userOrders;
 
       const favoriteBeats = response.userFavorites
-        .filter((beat) => !beat.softDelete)
-        .map((beat) => {
+        .filter((beat: BeatsClass) => !beat.softDelete)
+        .map((beat: BeatsClass) => {
           const reviewsFiltradas = beat.review.filter(
             (review) => !review.softDelete
           );
@@ -254,8 +261,8 @@ export const getUserData = createAsyncThunk(
 
       return { auth, session };
     } catch (error) {
-      console.log("ERROR getUserData", error);
-      return rejectWithValue(error.response.data.message);
+      console.error("getUserData error", error);
+      throw error;
     }
   }
 );
@@ -294,7 +301,7 @@ const authSession = createSlice({
     //--------------------
     //SET THEME
     setTheme(state, action) {
-      state.theme = action.payload;
+      //   state.theme = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -321,10 +328,10 @@ const authSession = createSlice({
           i18next?.language == "en"
             ? "Logged in successfully"
             : "Se logueo correctamente";
-        toast.success(trad, toastSuccess);
+        toast.success(trad);
       })
       .addCase(jsonLogin.rejected, (state, action) => {
-        toast.error(action.payload, toastError);
+        toast.error("action.payload");
       })
 
       //--------------------
@@ -337,10 +344,10 @@ const authSession = createSlice({
           i18next?.language == "en"
             ? "Registered successfully"
             : "Se registró correctamente";
-        toast.success(trad, toastSuccess);
+        toast.success(trad);
       })
       .addCase(jsonRegister.rejected, (state, action) => {
-        toast.error(action.payload, toastError);
+        toast.error("action.payload");
       })
 
       //--------------------
@@ -358,10 +365,10 @@ const authSession = createSlice({
           i18next?.language == "en"
             ? "Became a seller"
             : "Se convirtió en vendedor";
-        toast.success(trad, toastSuccess);
+        toast.success(trad);
       })
       .addCase(convertInSeller.rejected, (state, action) => {
-        toast.error(action.payload, toastError);
+        toast.error("action.payload");
       })
 
       //--------------------
@@ -380,10 +387,10 @@ const authSession = createSlice({
           i18next?.language == "en"
             ? "Edited successfully"
             : "Se editó correctamente";
-        toast.success(trad, toastSuccess);
+        toast.success(trad);
       })
       .addCase(editClient.rejected, (state, action) => {
-        toast.error(action.payload, toastError);
+        toast.error("action.payload");
       })
 
       /***************** PASSWORD RECOVERY ******************/
@@ -395,16 +402,16 @@ const authSession = createSlice({
           i18next?.language == "en"
             ? "Your password has been changed successfully"
             : "Tu contraseña se cambio correctamente";
-        toast.success(trad, toastSuccess);
+        toast.success(trad);
       })
       .addCase(passwordRecovery.rejected, (state, action) => {
-        toast.error(action.payload, toastError);
+        toast.error("action.payload");
       })
 
       //--------------------
       //GET USER DATA
       .addCase(getUserData.pending, (state, action) => {
-        state.actionStatus.getUserDataLoading = true;
+        // state.actionStatus.getUserDataLoading = true;
       })
       .addCase(getUserData.fulfilled, (state, action) => {
         if (action.payload.session.softDelete == true) {
@@ -413,7 +420,7 @@ const authSession = createSlice({
             i18next?.language == "en"
               ? "Your account is suspended, please contact support."
               : "Tu cuenta está suspendida, comunícate con soporte";
-          toast.error(trad, toastError);
+          toast.error(trad);
           return;
         }
 
@@ -423,10 +430,10 @@ const authSession = createSlice({
         };
         state.auth = { ...state.auth, ...action.payload.auth };
 
-        state.actionStatus.getUserDataLoading = false;
+        //   state.actionStatus.getUserDataLoading = false;
       })
       .addCase(getUserData.rejected, (state, action) => {
-        toast.error(action.payload, toastError);
+        toast.error("action.payload");
       })
 
       //--------------------
@@ -441,10 +448,10 @@ const authSession = createSlice({
       .addCase(recoverPassword.fulfilled, (state, action) => {
         let trad =
           i18next?.language == "en" ? "Email sent" : "Se envió el email";
-        toast.success(trad, toastSuccess);
+        toast.success(trad);
       })
       .addCase(recoverPassword.rejected, (state, action) => {
-        toast.error(action.payload, toastError);
+        toast.error("action.payload");
       })
 
       //--------------------
@@ -461,10 +468,10 @@ const authSession = createSlice({
           i18next?.language == "en"
             ? "Password changed"
             : "Se cambió la contraseña";
-        toast.success(trad, toastSuccess);
+        toast.success(trad);
       })
       .addCase(changePassword.rejected, (state, action) => {
-        toast.error(action.payload, toastError);
+        toast.error("action.payload");
       });
   },
 });

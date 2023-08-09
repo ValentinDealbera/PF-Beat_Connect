@@ -3,18 +3,18 @@
 /* 2) DELETE CLIENT REVIEW: Se elimina un review de la base de datos. */
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { serverUrl } from "@/data/config";
 import { toast } from "sonner";
-import axios from "axios";
-import { toastError, toastSuccess } from "@/utils/toastStyles";
 import { getUserData } from "./authSession";
 import { fetchBeats, fetchFeaturedBeats } from "../beats";
-import i18next from 'i18next';
+import i18next from "i18next";
+import { axiosDeleter, axiosPoster, axiosPutter } from "@/utils/requests";
+import { RootState } from "@/redux/store/store";
+import { ReviewsClass } from "@/types";
 
 const initialState = {
-  activeBeatCreateReview: null,
-  activeEditingReview: null,
-  reviews: [],
+  activeBeatCreateReview: {} as ReviewsClass,
+  activeEditingReview: {} as ReviewsClass,
+  reviews: [] as ReviewsClass[],
 };
 
 //------------------ ASYNC THUNKS ------------------//
@@ -22,21 +22,24 @@ const initialState = {
 export const postClientReview = createAsyncThunk(
   "client/postClientReview",
   async (data, { rejectWithValue, dispatch, getState }) => {
-    const id = getState().client.authSession.session.current._id;
+    const state = getState() as RootState;
+    const id = state.client.authSession.session.current.id;
     try {
-      const response = await axios.post(`${serverUrl}review`, data, {
+      await axiosPoster({
+        url: `review`,
+        body: data,
         headers: {
           userid: id,
         },
       });
 
       await dispatch(getUserData(id));
-      await dispatch(fetchBeats({}));
+      await dispatch(fetchBeats());
       await dispatch(fetchFeaturedBeats());
       return;
     } catch (error) {
-      console.log("ERROR xx", error);
-      return rejectWithValue(error.response.data.message);
+      console.log("postClientReview error", error);
+      throw error;
     }
   }
 );
@@ -46,22 +49,23 @@ export const postClientReview = createAsyncThunk(
 export const deleteClientReview = createAsyncThunk(
   "client/deleteClientReview",
   async (data, { rejectWithValue, dispatch, getState }) => {
-   
-    const id = getState().client.authSession.session.current._id;
+    const state = getState() as RootState;
+    const id = state.client.authSession.session.current.id;
     try {
-      const response = await axios.delete(`${serverUrl}review/${data}`, {
+      const response = await axiosDeleter({
+        url: `review/${data}`,
         headers: {
           userid: id,
         },
       });
 
-      await dispatch(getUserData());
-      await dispatch(fetchBeats({}));
+      await dispatch(getUserData(id));
+      await dispatch(fetchBeats());
 
-      return response.data;
+      return response;
     } catch (error) {
-      console.log("ERROR xx", error);
-      return rejectWithValue(error.response.data.message);
+      console.log("deleteClientReview error", error);
+      throw error;
     }
   }
 );
@@ -71,25 +75,25 @@ export const deleteClientReview = createAsyncThunk(
 export const editClientReview = createAsyncThunk(
   "client/editClientReview",
   async (data, { rejectWithValue, dispatch, getState }) => {
-    const id = getState().client.authSession.session.current._id;
-    const reviewId = getState().client.reviews.activeEditingReview._id;
-   
+    const state = getState() as RootState;
+    const id = state.client.authSession.session.current.id;
+    const reviewId = state.client.reviews.activeEditingReview.id;
+
     try {
-      const response = await axios.put(
-        `${serverUrl}review/${reviewId}`,
-        data,
-        {
-          headers: {
-            userid: id,
-          },
-        }
-      );
-      await dispatch(getUserData());
-      await dispatch(fetchBeats({}));
-      return response.data;
+      const response = await axiosPutter({
+        url: `review/${reviewId}`,
+        body: data,
+        headers: {
+          userid: id,
+        },
+      });
+
+      await dispatch(getUserData(id));
+      await dispatch(fetchBeats());
+      return response;
     } catch (error) {
-      console.log("ERROR xx", error);
-      return rejectWithValue(error.response.data.message);
+      console.log("editClientReview error", error);
+      throw error;
     }
   }
 );
@@ -103,14 +107,12 @@ const reviewsSlice = createSlice({
     //--------------------
     //SET ACTIVE EDITING REVIEW
     setActiveEditingReview(state, action) {
-
       state.activeEditingReview = action.payload;
     },
 
     //--------------------
     //SET OWN REVIEWS
     setOwnedReviews(state, action) {
-
       state.reviews = action.payload;
     },
 
@@ -125,47 +127,63 @@ const reviewsSlice = createSlice({
       //--------------------
       //POST CLIENT REVIEW
       .addCase(postClientReview.fulfilled, (state, action) => {
-        let trad= i18next?.language == "en"? "Review created" : "Review creada"
-        toast.success(trad, toastSuccess);
+        let trad =
+          i18next?.language == "en" ? "Review created" : "Review creada";
+        toast.success(trad);
       })
       .addCase(postClientReview.rejected, (state, action) => {
-        toast.error(action.payload, toastError);
+        toast.error("action.payload");
       })
       .addCase(postClientReview.pending, (state, action) => {
-        let trad= i18next?.language == "en"? "Creating review..." : "Creando review..."
+        let trad =
+          i18next?.language == "en"
+            ? "Creating review..."
+            : "Creando review...";
         toast(trad);
       })
 
       //--------------------
       //DELETE CLIENT REVIEW
       .addCase(deleteClientReview.fulfilled, (state, action) => {
-        let trad= i18next?.language == "en"? "Review deleted" : "Review eliminada"
-        toast.success(trad, toastSuccess);
+        let trad =
+          i18next?.language == "en" ? "Review deleted" : "Review eliminada";
+        toast.success(trad);
       })
       .addCase(deleteClientReview.rejected, (state, action) => {
-        toast.error(action.payload, toastError);
+        toast.error("action.payload");
       })
       .addCase(deleteClientReview.pending, (state, action) => {
-        let trad= i18next?.language == "en"? "Deleting review..." : "Eliminando review..."
+        let trad =
+          i18next?.language == "en"
+            ? "Deleting review..."
+            : "Eliminando review...";
         toast(trad);
       })
 
       //--------------------
       //EDIT CLIENT REVIEW
       .addCase(editClientReview.fulfilled, (state, action) => {
-        let trad= i18next?.language == "en"? "Review edited" : "Review editada"
-        toast.success(trad, toastSuccess);
+        let trad =
+          i18next?.language == "en" ? "Review edited" : "Review editada";
+        toast.success(trad);
       })
       .addCase(editClientReview.rejected, (state, action) => {
-        toast.error(action.payload, toastError);
+        toast.error("action.payload");
       })
       .addCase(editClientReview.pending, (state, action) => {
-        let trad= i18next?.language == "en"? "Editing review..." : "Editando review..."
+        let trad =
+          i18next?.language == "en"
+            ? "Editing review..."
+            : "Editando review...";
         toast(trad);
       });
   },
 });
 
-export const { setActiveEditingReview, setOwnedReviews, setActiveBeatCreateReview } = reviewsSlice.actions;
+export const {
+  setActiveEditingReview,
+  setOwnedReviews,
+  setActiveBeatCreateReview,
+} = reviewsSlice.actions;
 
 export default reviewsSlice.reducer;
