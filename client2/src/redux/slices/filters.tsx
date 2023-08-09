@@ -1,22 +1,13 @@
-/*FUNCION DE FILTERS:*/
-/* 1) SET SEARCH FILTER: */
-/* 2) SET GENRES FILTER: */
-/* 3) SET PRICE FILTER: */
-/* 4) SET BPM FILTER: */
-/* 5) SET SORTER: */
-
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { serverUrl } from "@/data/config";
 import axios from "axios";
-import { sortArr } from "@/data/fakeDB";
-import { toastError } from "@/utils/toastStyles";
 import { toast } from "sonner";
-import i18next from 'i18next';
+import i18next from "i18next";
 
 const initialState = {
   searchFilter: "",
-  genres: [],
-  genresFilter: [],
+  genres: [] as any[],
+  genresFilter: [] as any[],
   priceFilter: {
     min: 0,
     max: 0,
@@ -26,7 +17,7 @@ const initialState = {
     max: 0,
   },
   sorter: "default",
-  sorterValues: sortArr,
+  sorterValues: [],
 };
 
 //------------------ ASYNC THUNKS ------------------//
@@ -37,7 +28,7 @@ export const fetchGenres = createAsyncThunk(
     try {
       const { data: genresResponse } = await axios.get(`${serverUrl}genre`);
       return genresResponse;
-    } catch (error) {
+    } catch (error: any) {
       console.log("ERROR", error);
       return rejectWithValue(error.response.data.message);
     }
@@ -45,20 +36,14 @@ export const fetchGenres = createAsyncThunk(
 );
 
 //------------------ SLICE ------------------//
-
 const filtersSlice = createSlice({
   name: "filters",
   initialState,
   reducers: {
-    //--------------------
-    //SET SEARCH FILTER
     setSearchFilter(state, action) {
       state.searchFilter = action.payload;
     },
-
-    //--------------------
-    //SET GENRES FILTER
-    setGenresFilter(state, action) {
+    setGenresFilter(state, action: PayloadAction<any>) {
       const isSelected = state.genresFilter.includes(action.payload);
       if (isSelected) {
         state.genresFilter = state.genresFilter.filter(
@@ -68,38 +53,23 @@ const filtersSlice = createSlice({
       }
       state.genresFilter = action.payload;
     },
-
-    //--------------------
-    //SET PRICE FILTER
     setPriceFilter(state, action) {
       state.priceFilter = action.payload;
     },
-
-    //--------------------
-    //SET BPM FILTER
     setBpmFilter(state, action) {
       state.BpmFilter = action.payload;
- 
     },
-
-    //--------------------
-    //SET SORTER
     setSorter(state, action) {
       state.sorter = action.payload;
     },
-
-    //--------------------
-    //RESTORE FILTERS
     restoreFilters(state, action) {
       state = initialState;
     },
   },
   extraReducers: (builder) => {
     builder
-      //--------------------
-      //FETCH GENRES
-      .addCase(fetchGenres.fulfilled, (state, action) => {
-        const formatedGenres = action.payload.map((genre) => ({
+      .addCase(fetchGenres.fulfilled, (state, action: PayloadAction<any>) => {
+        const formatedGenres = action.payload.map((genre: any) => ({
           label: genre.name,
           value: genre._id,
         }));
@@ -107,8 +77,11 @@ const filtersSlice = createSlice({
       })
       .addCase(fetchGenres.rejected, (state, action) => {
         state.genres = [];
-        let trad= i18next?.language == "en"? "Error loading genres" : "Error al cargar los géneros"
-        toast.error(trad, toastError);
+        let trad =
+          i18next?.language == "en"
+            ? "Error loading genres"
+            : "Error al cargar los géneros";
+        toast.error(trad);
       })
       .addCase(fetchGenres.pending, (state, action) => {
         state.genres = [];

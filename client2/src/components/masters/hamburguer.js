@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import { useState } from "react";
-import NavModalItem from "../layout/nav/navModalItem";
-import VerticalNav from "../layout/nav/verticalNav";
+import NavModalItem from "../layout/nav/modalItem";
+
 import { navHelp,navClient } from "@/data/data";
 import { UserBoxNav } from "@/components";
 import { motion, AnimatePresence } from "framer-motion";
@@ -28,7 +28,7 @@ export default function Hamburger({ options, manageHamburguer, userMenu }) {
        >
         <div className=" absolute left-0 top-0 z-40 flex w-screen items-center justify-between px-4 xs:px-8 py-6 ">
           <UserBoxNav id={"userBoxNavUnique"}>
-          <VerticalNav navItems={userMenu} title={"Centro de ayuda"} />
+          {/* <VerticalNav navItems={userMenu} title={"Centro de ayuda"} /> */}
           </UserBoxNav>
           <img
             onClick={() => {

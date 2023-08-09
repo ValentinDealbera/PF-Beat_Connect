@@ -11,11 +11,12 @@ export default function ModalOnHover({
   setSeleccionados,
   children,
   labelClass,
-  id,
+
   iconStatus,
   label,
   values,
 }) {
+  const id = "modalOnHover";
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const [hoverTimeout, setHoverTimeout] = useState(null);
@@ -53,7 +54,7 @@ export default function ModalOnHover({
 
 
   return (
-    <div ref={dropdownRef} type="button" id={id} className="">
+    <div ref={dropdownRef} type="button"  className="">
       <ArrowLabel
         label={label}
         iconStatus={iconStatus}

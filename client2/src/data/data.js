@@ -49,20 +49,17 @@ export const navHelp = [
   {
     name: "navHelp.t1",
     url: "/help",
-    colorMode: "light",
-    visibility: true,
+    visible: true,
   },
   {
     name: "navHelp.t2",
     url: "/help/privacy",
-    colorMode: "light",
-    visibility: true,
+    visible: true,
   },
   {
     name: "navHelp.t3",
     url: "/help/terms",
-    colorMode: "light",
-    visibility: true,
+    visible: true,
   },
 ];
 
@@ -70,37 +67,33 @@ export const navClient = [
   {
     name: "Perfil",
     url: "/client",
-    colorMode: "light",
-    visibility: true,
+    visible: true,
   },
   {
     name: "Inbox",
     url: "/client/inbox",
-    colorMode: "light",
+    visible: true,
   },
   {
     name: "Vende tus beats",
     url: "",
-    onClick: () => manageBecomeSeller(),
-    visibility: true,
+    // onClick: () => manageBecomeSeller(),
+    visible: true,
   },
   {
     name: "Configuracion",
     url: "/client/settings",
-    colorMode: "light",
-    visibility: true,
+    visible: true,
   },
   {
     name: "Facturacion",
     url: "/client/billing",
-    colorMode: "light",
-    visibility: true,
+    visible: true,
   },
   {
     name: "Logout",
     url: "/auth/logout",
-    colorMode: "light",
-    visibility: true,
+    visible: true,
   },
 ];
 
@@ -278,7 +271,7 @@ export const nosotros = [
       gmail: "mailto:valentindealbera01@gmail.com",
     },
   },
-  
+
   {
     name: "Micaela Savournin",
     image: "/images/nosotros/mica2.png", //crear carpeta e importar imagenes propias
@@ -393,12 +386,4 @@ export const nosotros = [
       gmail: "mailto:fabiangpachecor@gmail.com",
     },
   },
-
-
-
-
-
- 
-
-
 ];

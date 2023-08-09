@@ -3,8 +3,8 @@
 export { default as Head } from "./masters/head";
 export { default as Master } from "./masters/master";
 export { default as Main } from "./masters/main";
-export { default as Header } from "./masters/header";
-export { default as Footer } from "./masters/footer";
+export { default as Header } from "./layout/header";
+export { default as Footer } from "./layout/footer";
 export { default as Section } from "./masters/section";
 export { default as Hero } from "./masters/hero";
 
@@ -42,7 +42,6 @@ export { default as Hamburger } from "./masters/hamburguer";
 export { default as LandBot } from "./common/landBot";
 export { default as ChatbotWindow } from "./common/chatBotWindow";
 
-
 //Modal
 export { default as ModalMinMax } from "./modal/modalMinMax";
 export { default as BeatBottomSheetFilteringWithHeader } from "./beat/beatBottomSheetFilteringWithHeader";
@@ -58,7 +57,6 @@ export { default as AuthLayout } from "./auth/authLayout";
 export { default as HOC } from "./auth/hoc";
 
 //Help
-export { default as HelpContainer } from "./help/helpContainer";
 export { default as FaqsGrid } from "./help/faqsGrid";
 export { default as FaqsItem } from "./help/faqItem";
 
@@ -85,7 +83,7 @@ export { default as BeatAudio } from "./beat/beatDataComponents/beatAudio";
 export { default as AddToCart } from "./beat/beatDataComponents/addToCart";
 
 //Client
-export { default as UserBoxNav } from "./layout/userBoxNav";
+export { default as UserBoxNav } from "./layout/userMenu";
 export { default as ClientReview } from "./client/clientReviews";
 export { default as BuyerNavGeneral } from "./client/buyerNavGeneral";
 
@@ -106,11 +104,10 @@ export { default as DashboardItem } from "./dashboard/dashboardItem";
 export { default as ClientDashboardEdit } from "./dashboard/clientDashboardEdit";
 
 //Layout
-export { default as Nav } from "./layout/nav/nav";
+export { default as Nav } from "./layout/nav";
 export { default as Search } from "./layout/search";
 export { default as ModalOnHover } from "./layout/modalOnHover";
-export { default as NavModalItem } from "./layout/nav/navModalItem";
-export { default as VerticalNav } from "./layout/nav/verticalNav";
+export { default as NavModalItem } from "./layout/nav/modalItem";
 
 //Tables
 export { default as DynamicTable } from "./dynamicTable";
@@ -144,8 +141,6 @@ export { default as DynamicTableLight } from "./dynamicTableLight";
 
 export { default as HamburgerAdmin } from "./dashboard/hamburgerAdmin";
 
-
-
 //Shop
 export { default as BeatsGrid } from "./shop/beatsGrid";
 export { default as MultiBoldText } from "./shop/multiBoldText";
@@ -155,3 +150,10 @@ export { default as ReviewsGrid } from "./shop/paginateBeats";
 //Settings
 export { default as NavSettings } from "./settings/navSettings";
 export { default as HeroSettings } from "./settings/heroSettings";
+
+//Layout
+export { default as LanguageChanger } from "./layout/languageChanger";
+
+//nav
+export { default as NavigationModal } from "./layout/nav/navigationModal";
+

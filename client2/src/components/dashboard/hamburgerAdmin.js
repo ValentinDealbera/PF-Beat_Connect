@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import { useState } from "react";
-import NavModalItem from "../layout/nav/navModalItem";
-import VerticalNav from "../layout/nav/verticalNav";
+import NavModalItem from "../layout/nav/modalItem";
+//import VerticalNav from "../layout/nav/verticalNav";
 import { navHelp, navClient } from "@/data/data";
 import { UserBoxNav } from "@/components";
 import { motion, AnimatePresence } from "framer-motion";
