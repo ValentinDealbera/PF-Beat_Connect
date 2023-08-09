@@ -15,7 +15,7 @@ export default function HeroSection() {
       subClassName="padding-x-estilo2 flex h-full w-full flex-col !justify-end pb-8"
     >
       <ProfileCard
-        profilePhoto={currentUser.profilePicture}
+        profilePhoto={currentUser.image}
         profileName={`${currentUser.firstName}${" "}${currentUser.lastName}`}
         profileMessage={currentUser.bio}
       />

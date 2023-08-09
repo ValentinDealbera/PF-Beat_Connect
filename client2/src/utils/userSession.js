@@ -9,7 +9,7 @@ export function createUserSession(user) {
     firstName,
     lastName,
     bio,
-    profilePicture: image,
+     image,
     _id,
     email,
     userName: username,

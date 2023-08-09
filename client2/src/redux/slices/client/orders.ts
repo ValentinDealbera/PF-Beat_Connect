@@ -10,8 +10,6 @@ const initialState = {
   orders: [],
 };
 
-//------------------ ASYNC THUNKS ------------------//
-//POST CLIENT ORDER
 export const postClientOrder = createAsyncThunk(
   "client/postClientOrder",
   async (data, { dispatch, getState }) => {
@@ -50,19 +48,12 @@ const ordersSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      //--------------------
-      //POST CLIENT ORDER
-      .addCase(postClientOrder.fulfilled, (state, action) => {
+      .addCase(postClientOrder.fulfilled, () => {
         let trad = i18next?.language == "en" ? "Order loaded" : "Orden cargada";
         toast.success(trad);
       })
-      .addCase(postClientOrder.rejected, (state, action) => {
+      .addCase(postClientOrder.rejected, () => {
         toast.error("action.payload");
-      })
-      .addCase(postClientOrder.pending, (state, action) => {
-        let trad =
-          i18next?.language == "en" ? "Loading order..." : "Cargando orden...";
-        toast(trad);
       });
   },
 });

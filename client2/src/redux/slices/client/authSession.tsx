@@ -5,14 +5,17 @@ import { setBougthBeats, setOwnedBeats, setFavoriteBeats } from "./beats";
 import { setOwnedReviews } from "./reviews";
 import { setOrders } from "./orders";
 import i18next from "i18next";
-import { RootState } from "@/redux/store/store";
+import { axiosPutter, axiosPoster } from "@/utils/requests";
+import { UserClass } from "@/types";
 import {
-  axiosGetter,
-  axiosPutter,
-  axiosDeleter,
-  axiosPoster,
-} from "@/utils/requests";
-import { BeatsClass, ReviewsClass, UserClass } from "@/types";
+  createFormData,
+  createSellerData,
+  fetchUserData,
+  getUserIdFromState,
+  processUserData,
+  updatePassword,
+  updateUserData,
+} from "@/utils/state";
 
 const initialState = {
   auth: {
@@ -101,22 +104,13 @@ export const recoverPassword = createAsyncThunk(
 );
 
 //--------------------
-//CONVERT IN SELLER
 export const convertInSeller = createAsyncThunk(
   "authSession/convertInSeller",
-  async (data: any, { rejectWithValue, getState }) => {
-    const state = getState() as RootState;
-    const clientId = state.client.authSession.session.current.id;
-    const send = { seller: "VENDEDOR", mpcode: data.mpcode };
-
+  async (data: { mpcode: string }, { rejectWithValue, getState }) => {
     try {
-      const response = await axiosPutter({
-        url: `user/${clientId}`,
-        body: send,
-        headers: {
-          userid: clientId,
-        },
-      });
+      const clientId = getUserIdFromState(getState());
+      const send = createSellerData(data);
+      const response = await updateUserData(clientId, send);
       return response;
     } catch (error) {
       console.error("convertInSeller error", error);
@@ -130,24 +124,10 @@ export const convertInSeller = createAsyncThunk(
 export const editClient = createAsyncThunk(
   "authSession/editClient",
   async (data: any, { rejectWithValue, getState }) => {
-    const state = getState() as RootState;
-    const clientId = state.client.authSession.session.current.id;
-    const formData = new FormData();
-
-    Object.keys(data).forEach((key) => {
-      formData.append(key, data[key]);
-    });
-
     try {
-      const response = await axiosPutter({
-        url: `user/${clientId}`,
-        body: formData,
-        headers: {
-          userid: clientId,
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
+      const clientId = getUserIdFromState(getState());
+      const formData = createFormData(data);
+      const response = await updateUserData(clientId, formData);
       const userResponse = createUserSession(response.data);
       return { userResponse };
     } catch (error) {
@@ -161,7 +141,7 @@ export const editClient = createAsyncThunk(
 //PASSWORD RECOVERY
 export const passwordRecovery = createAsyncThunk(
   "authSession/passwordRecovery",
-  async (data, { rejectWithValue }) => {
+  async (data) => {
     try {
       await axiosPutter({
         url: `recover/password`,
@@ -179,20 +159,10 @@ export const passwordRecovery = createAsyncThunk(
 export const changePassword = createAsyncThunk(
   "authSession/changePassword",
   async (data: any, { rejectWithValue, getState }) => {
-    const state = getState() as RootState;
-    const clientId = state.client.authSession.session.current.id;
-    const formData = new FormData();
-    Object.keys(data).forEach((key) => {
-      formData.append(key, data[key]);
-    });
     try {
-      await axiosPutter({
-        url: `user/${clientId}`,
-        body: formData,
-        headers: {
-          userid: clientId,
-        },
-      });
+      const clientId = getUserIdFromState(getState());
+      const formData = createFormData(data);
+      await updatePassword(clientId, formData);
     } catch (error) {
       console.error("changePassword error", error);
       throw error;
@@ -205,60 +175,23 @@ export const changePassword = createAsyncThunk(
 export const getUserData = createAsyncThunk(
   "authSession/getUserData",
   async (data: string, { rejectWithValue, getState, dispatch }) => {
-    const state = getState() as RootState;
-    const clientId = data ? data : state.client.authSession.session.current.id;
-
+    const clientId = data ? data : getUserIdFromState(getState());
     try {
-      const response = await axiosGetter({
-        url: `user/${clientId}`,
-      });
-
-      const bougthBeats = response.bougthBeats
-        .filter((beat: BeatsClass) => !beat.softDelete)
-        .map((beat: BeatsClass) => {
-          const reviewsFiltradas = beat.review.filter(
-            (review) => !review.softDelete
-          );
-          return { ...beat, review: reviewsFiltradas };
-        });
-
-      const ownedBeats = response.createdBeats
-        .filter((beat: BeatsClass) => !beat.softDelete)
-        .map((beat: BeatsClass) => {
-          const reviewsFiltradas = beat.review.filter(
-            (review) => !review.softDelete
-          );
-          return { ...beat, review: reviewsFiltradas };
-        });
-
-      const ownedReviews = response.userReviews.filter(
-        (review: ReviewsClass) => !review.softDelete
-      );
-      const orders = response.userOrders;
-
-      const favoriteBeats = response.userFavorites
-        .filter((beat: BeatsClass) => !beat.softDelete)
-        .map((beat: BeatsClass) => {
-          const reviewsFiltradas = beat.review.filter(
-            (review) => !review.softDelete
-          );
-          return { ...beat, review: reviewsFiltradas };
-        });
-
+      const response = await fetchUserData(clientId);
+      const {
+        bougthBeats,
+        ownedBeats,
+        ownedReviews,
+        orders,
+        favoriteBeats,
+        auth,
+      } = processUserData(response);
       await dispatch(setBougthBeats(bougthBeats));
       await dispatch(setOwnedBeats(ownedBeats));
       await dispatch(setOwnedReviews(ownedReviews));
       await dispatch(setOrders(orders));
-
       await dispatch(setFavoriteBeats(favoriteBeats));
-
-      const auth = {
-        isSeller: response.isSeller,
-        isAdmin: response.superAdmin,
-      };
-
       const session = createUserSession(response);
-
       return { auth, session };
     } catch (error) {
       console.error("getUserData error", error);
@@ -272,58 +205,31 @@ const authSession = createSlice({
   name: "authSession",
   initialState,
   reducers: {
-    //--------------------
-    //SET LOGIN METHOD
     setLoginMethod(state, action) {
       state.auth.loginMethod = action.payload;
     },
-
-    //--------------------
-    //SET GOOGLE SUCCESSFUL
     setGoogleSuccessful(state, action) {
       console.log("setGoogleSuccessful", action.payload);
       state.auth.isLogged = true;
       state.auth.tokenValid = true;
       state.auth.google.googleSessionID = action.payload.googleSessionID;
-      // state.session.current = {
-      //   ...state.session.current,
-      //   ...action.payload.session,
-      // };
     },
-
-    //--------------------
-    //RESET REDUCER
     resetReducer(state, action) {
       state.auth = initialState.auth;
       state.session = initialState.session;
     },
-
-    //--------------------
-    //SET THEME
     setTheme(state, action) {
       //   state.theme = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder
-      //--------------------
-      //JSON LOGIN
-      .addCase(jsonLogin.pending, (state, action) => {
-        return;
-      })
       .addCase(jsonLogin.fulfilled, (state, action) => {
         state.auth = { ...state.auth, ...action.payload.auth };
         state.session.current = {
           ...state.session.current,
           ...action.payload.session,
         };
-
-        // if(i18next.language == "en"){
-        //   toast.success("Logged in successfully", toastSuccess);
-        // }
-        // else {
-        //   toast.success("Se logueo correctamente", toastSuccess);
-        // }
         let trad =
           i18next?.language == "en"
             ? "Logged in successfully"
@@ -332,12 +238,6 @@ const authSession = createSlice({
       })
       .addCase(jsonLogin.rejected, (state, action) => {
         toast.error("action.payload");
-      })
-
-      //--------------------
-      //JSON REGISTER
-      .addCase(jsonRegister.pending, (state, action) => {
-        return;
       })
       .addCase(jsonRegister.fulfilled, (state, action) => {
         let trad =
@@ -349,9 +249,6 @@ const authSession = createSlice({
       .addCase(jsonRegister.rejected, (state, action) => {
         toast.error("action.payload");
       })
-
-      //--------------------
-      //CONVERT IN SELLER
       .addCase(convertInSeller.pending, (state, action) => {
         let trad =
           i18next?.language == "en"
@@ -370,9 +267,6 @@ const authSession = createSlice({
       .addCase(convertInSeller.rejected, (state, action) => {
         toast.error("action.payload");
       })
-
-      //--------------------
-      //EDIT CLIENT
       .addCase(editClient.pending, (state, action) => {
         let trad =
           i18next?.language == "en" ? "Editing..." : "Se está editando...";
@@ -392,8 +286,6 @@ const authSession = createSlice({
       .addCase(editClient.rejected, (state, action) => {
         toast.error("action.payload");
       })
-
-      /***************** PASSWORD RECOVERY ******************/
       .addCase(passwordRecovery.pending, (state, action) => {
         return;
       })
@@ -407,9 +299,6 @@ const authSession = createSlice({
       .addCase(passwordRecovery.rejected, (state, action) => {
         toast.error("action.payload");
       })
-
-      //--------------------
-      //GET USER DATA
       .addCase(getUserData.pending, (state, action) => {
         // state.actionStatus.getUserDataLoading = true;
       })
@@ -423,7 +312,6 @@ const authSession = createSlice({
           toast.error(trad);
           return;
         }
-
         state.session.current = {
           ...state.session.current,
           ...action.payload.session,

@@ -1,15 +1,13 @@
 //Masters
 "use client";
-export { default as Head } from "./masters/head";
 export { default as Master } from "./masters/master";
 export { default as Main } from "./masters/main";
 export { default as Header } from "./layout/header";
 export { default as Footer } from "./layout/footer";
-export { default as Section } from "./masters/section";
+export { default as Section } from "./layout/section";
 export { default as Hero } from "./masters/hero";
 
 export { default as SimpleHeader } from "./masters/simpleHeader";
-export { default as ScrollToTop } from "./masters/scrollToTop";
 export { default as BecomeSeller } from "./masters/becomeSeller";
 export { default as PostBeat } from "./client/postBeat";
 export { managePostBeat } from "./client/postBeat";
@@ -27,7 +25,6 @@ export { default as MultiSelect } from "./common/multiSelect";
 export { default as Select } from "./common/select";
 export { default as TextArea } from "./common/textArea";
 export { default as Switch } from "./common/switch";
-export { default as Button } from "./common/button";
 export { default as Input } from "./common/input";
 export { default as CheckboxGroup } from "./common/checkboxGroup";
 export { default as ArrowLabel } from "./common/arrowLabel";
@@ -35,7 +32,7 @@ export { default as MinMax } from "./common/minMax";
 export { default as SoftDeleteSwitch } from "./common/softDeleteSwitch";
 export { default as SwitchForm } from "./common/switchForm";
 export { default as FormAdmin } from "./common/adminForm"; //creado pero sin colocar (SoftDelete, SwitchForm)
-export { default as ValidationEditUsers } from "./common/validationEditUsers";
+export { default as ValidationEditUsers } from "./validation/validationEditUsers";
 export { default as ReviewForm } from "./common/reviewForm";
 export { default as SetUser } from "./common/setUser";
 export { default as Hamburger } from "./masters/hamburguer";
@@ -52,9 +49,7 @@ export { default as ModalPopUp } from "./modal/modalPopup";
 export { default as ModalTables } from "./modal/modalTables";
 
 //Auth
-export { default as GoogleButton } from "./auth/googleButton";
-export { default as AuthLayout } from "./auth/authLayout";
-export { default as HOC } from "./auth/hoc";
+export { default as GoogleButton } from "./layout/googleButton";
 
 //Help
 export { default as FaqsGrid } from "./help/faqsGrid";
@@ -85,13 +80,11 @@ export { default as AddToCart } from "./beat/beatDataComponents/addToCart";
 //Client
 export { default as UserBoxNav } from "./layout/userMenu";
 export { default as ClientReview } from "./client/clientReviews";
-export { default as BuyerNavGeneral } from "./client/buyerNavGeneral";
+export { default as ClientBeatsIndexer } from "./client/clientBeatsIndexer";
 
-export { default as BuyerProfileLayout } from "./client/buyerProfileLayout";
 export { default as ProfileCard } from "./client/profileCard";
-export { default as FormCreateBeat } from "./client/formCreateBeat";
+export { default as FormCreateBeat } from "./form/formCreateBeat";
 //clientDataComponents
-export { default as ClientImage } from "./client/clientDataComponents/clientImage";
 
 //Dashboard
 export { default as SellerDashboardLayout } from "./dashboard/sellerDashboardLayout";
@@ -133,7 +126,6 @@ export { default as EditReviewForm } from "./masters/editReview";
 
 export { default as AdminMaster } from "./masters/adminMaster";
 export { default as AdminHeaderBar } from "./masters/adminHeaderBar";
-export { default as ImageCache } from "./common/imageCache";
 export { default as DynamicTableLight } from "./dynamicTableLight";
 
 //export { default as BeatImage } from "./beat/beatImage";
@@ -148,7 +140,7 @@ export { default as PaginateBeats } from "./shop/paginateBeats";
 export { default as ReviewsGrid } from "./shop/paginateBeats";
 
 //Settings
-export { default as NavSettings } from "./settings/navSettings";
+export { default as ClientSettingsIndexer } from "./settings/clientSettingsIndexer";
 export { default as HeroSettings } from "./settings/heroSettings";
 
 //Layout
@@ -156,4 +148,3 @@ export { default as LanguageChanger } from "./layout/languageChanger";
 
 //nav
 export { default as NavigationModal } from "./layout/nav/navigationModal";
-

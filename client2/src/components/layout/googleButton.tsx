@@ -1,19 +1,17 @@
 import Image from "next/image";
-import Link from "next/link";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch } from "@/redux/hooks";
 import { setLoginMethod } from "@/redux/slices/client/authSession";
 import { useRouter } from "next/navigation";
 import { serverUrl } from "@/data/config";
 import { useTranslation } from "react-i18next";
 
 export default function GoogleButton() {
-  const [t, i18n] = useTranslation("global");
-  const dispatch = useDispatch();
+  const [t] = useTranslation("global");
+  const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const handleLogin = async() => {
-   await dispatch(setLoginMethod("google"));
+  const handleLogin = async () => {
+    await dispatch(setLoginMethod("google"));
     router.push(`${serverUrl}google`);
   };
 

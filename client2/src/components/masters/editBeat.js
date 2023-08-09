@@ -2,7 +2,7 @@ import { BeatRightSheet, Input, Select } from "@/components";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { editClientBeat } from "@/redux/slices/client/beats";
-import { ValidationCreateBeat } from "../client/validationCreateBeat";
+import { ValidationCreateBeat } from "../validation/validationCreateBeat";
 import { fetchGenres } from "@/redux/slices/filters";
 import { useTranslation } from "react-i18next";
 

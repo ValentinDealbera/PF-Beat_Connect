@@ -2,10 +2,7 @@
 import { ReactNode, useEffect } from "react";
 import { usePathname, useParams, useRouter } from "next/navigation";
 import { useAppDispatch } from "@/redux/hooks";
-import {
-  getCharacters,
-  getCharacterById,
-} from "@/redux/slices/client/characters";
+import { fetchBeats } from "@/redux/slices/beats";
 type Props = {
   children: ReactNode;
 };
@@ -17,16 +14,20 @@ export default function Querier({ children }: Props) {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (pathname === "/") {
-      dispatch(getCharacters());
-    }
+    dispatch(fetchBeats({}));
+  }, []);
 
-    console.log("pathname", pathname, params.gameId, router);
+  // useEffect(() => {
+  //   if (pathname === "/") {
+  //     dispatch(getCharacters());
+  //   }
 
-    if (params?.characterId) {
-      dispatch(getCharacterById(params?.characterId.toString()));
-    }
-  }, [pathname]);
+  //   console.log("pathname", pathname, params.gameId, router);
+
+  //   if (params?.characterId) {
+  //     dispatch(getCharacterById(params?.characterId.toString()));
+  //   }
+  // }, [pathname]);
 
   return <div>{children}</div>;
 }

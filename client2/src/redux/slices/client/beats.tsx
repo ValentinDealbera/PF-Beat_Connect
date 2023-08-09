@@ -5,20 +5,22 @@
 /* 4) SET ACTIVE EDITING BEAT: Se setea el beat que se esta editando. */
 /* 5) SET BOUGTH BEATS: Se setean los beats comprados. */
 /* 6) SET OWNED BEATS: Se setean los beats creados. */
-
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { toast } from "sonner";
 import { getUserData } from "./authSession";
 import { fetchBeats, fetchFeaturedBeats } from "../beats";
 import i18next from "i18next";
 import { BeatsClass } from "@/types";
-import { RootState } from "@/redux/store/store";
 import {
-  axiosPoster,
-  axiosDeleter,
-  axiosGetter,
-  axiosPutter,
-} from "@/utils/requests";
+  createFormData,
+  getActiveEditingBeat,
+  getUserIdFromState,
+  updateClientBeat,
+  uploadClientBeat,
+} from "@/utils/state";
+import { deleteClientBeatRequest } from "@/utils/state/deleteClientBeatRequest";
+import { addFavoriteBeat } from "@/utils/state/addFavoriteBeat";
+import { removeFavoriteBeat } from "@/utils/state/removeFavoriteBeat";
 
 const initialState = {
   activeEditingBeat: {} as BeatsClass,
@@ -32,20 +34,11 @@ const initialState = {
 export const postClientBeat = createAsyncThunk(
   "client/postClientBeat",
   async (data: BeatsClass, { dispatch, getState }) => {
-    const state = getState() as RootState;
-    const id = state?.client?.authSession?.session?.current?.id;
     try {
-      const response = await axiosPoster({
-        url: `beats`,
-        body: data,
-        headers: {
-          "Content-Type": "multipart/form-data",
-          userid: id,
-        },
-      });
-
+      const id = getUserIdFromState(getState());
+      const response = await uploadClientBeat(data, id);
       await dispatch(getUserData(id));
-      await dispatch(fetchBeats());
+      await dispatch(fetchBeats({}));
       return response;
     } catch (error) {
       console.error("postClientBeat Error", error);
@@ -53,26 +46,17 @@ export const postClientBeat = createAsyncThunk(
     }
   }
 );
-
 //--------------------
 //DELETE CLIENT BEAT
 export const deleteClientBeat = createAsyncThunk(
   "client/deleteClientBeat",
-  async (data: string, { dispatch, getState }) => {
-    const state = getState() as RootState;
-    const id = state?.client?.authSession?.session?.current?.id;
+  async (beatId: string, { dispatch, getState }) => {
     try {
-      const response = await axiosDeleter({
-        url: `beats/${data}`,
-        headers: {
-          userid: id,
-        },
-      });
-
-      await dispatch(getUserData(id));
-      await dispatch(fetchBeats());
-
-      return response.data;
+      const userId = getUserIdFromState(getState());
+      const response = await deleteClientBeatRequest(beatId, userId);
+      await dispatch(getUserData(userId));
+      await dispatch(fetchBeats({}));
+      return response;
     } catch (error) {
       console.error("deleteClientBeat error", error);
       throw error;
@@ -85,29 +69,18 @@ export const deleteClientBeat = createAsyncThunk(
 export const editClientBeat = createAsyncThunk(
   "client/editClientBeat",
   async (data: BeatsClass, { rejectWithValue, dispatch, getState }) => {
-    const state = getState() as RootState;
-    const id = state.client.authSession.session.current.id;
-    const activeEditingBeatId = state?.client?.beats?.activeEditingBeat?.id;
-
-    const formData = new FormData();
-    Object.keys(data).forEach((key) => {
-      formData.append(key, data[key]);
-    });
-
     try {
-      const response = await axiosPutter({
-        url: `beats/${activeEditingBeatId}`,
-        body: formData,
-        headers: {
-          userid: id,
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      await dispatch(getUserData(id));
-      await dispatch(fetchBeats());
+      const userId = getUserIdFromState(getState());
+      const { activeEditingBeatId } = getActiveEditingBeat(getState());
+      const formData = createFormData(data);
+      const response = await updateClientBeat(
+        formData,
+        activeEditingBeatId,
+        userId
+      );
+      await dispatch(getUserData(userId));
+      await dispatch(fetchBeats({}));
       await dispatch(fetchFeaturedBeats());
-
       return response;
     } catch (error) {
       console.error("editClientBeat error", error);
@@ -120,27 +93,15 @@ export const editClientBeat = createAsyncThunk(
 //POST FAVORITE BEAT
 export const postFavoriteBeat = createAsyncThunk(
   "client/postFavoriteBeat",
-  async (data: BeatsClass, { rejectWithValue, dispatch, getState }) => {
-    const state = getState() as RootState;
-    const id = state?.client?.authSession?.session?.current?.id;
-    const formData = new FormData();
-
-    Object.keys(data).forEach((key) => {
-      formData.append(key, data[key]);
-    });
-
+  async (beatId: string, { dispatch, getState }) => {
     try {
-      const response = await axiosPutter({
-        url: `user/${id}`,
-        body: formData,
-        headers: {
-          userid: id,
-        },
-      });
+      const userId = getUserIdFromState(getState());
+      const formData = createFormData({ beatId });
+      const response = await addFavoriteBeat(formData, userId);
+      // Delay to ensure the updated data is fetched
       setTimeout(async () => {
-        await dispatch(getUserData(id));
+        await dispatch(getUserData(userId));
       }, 200);
-
       return response;
     } catch (error) {
       console.error("postFavoriteBeat error", error);
@@ -153,29 +114,16 @@ export const postFavoriteBeat = createAsyncThunk(
 //DELETE FAVORITE BEAT
 export const deleteFavoriteBeat = createAsyncThunk(
   "client/deleteFavoriteBeat",
-  async (data: any, { rejectWithValue, dispatch, getState }) => {
-    const state = getState() as RootState;
-    const id = state.client.authSession.session.current.id;
-    const formData = new FormData();
-
-    Object.keys(data).forEach((key) => {
-      formData.append(key, data[key]);
-    });
-
+  async (beatId: string, { rejectWithValue, dispatch, getState }) => {
     try {
-      const response = await axiosPutter({
-        url: `user/${id}`,
-        body: formData,
-        headers: {
-          userid: id,
-        },
-      });
-
+      const userId = getUserIdFromState(getState());
+      const formData = createFormData({ beatId });
+      const response = await removeFavoriteBeat(formData, userId);
+      // Delay to ensure the updated data is fetched
       setTimeout(async () => {
-        await dispatch(getUserData(id));
+        await dispatch(getUserData(userId));
       }, 200);
-
-      return response.data;
+      return response;
     } catch (error) {
       console.error("deleteFavoriteBeat error", error);
       throw error;
@@ -204,8 +152,6 @@ const clientBeats = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      //--------------------
-      //DELETE CLIENT BEAT
       .addCase(postClientBeat.pending, (state, action) => {
         let trad =
           i18next?.language == "en"
@@ -223,16 +169,6 @@ const clientBeats = createSlice({
       .addCase(postClientBeat.rejected, (state, action) => {
         toast("action.payload");
       })
-
-      //--------------------
-      //DELETE CLIENT BEAT
-      .addCase(deleteClientBeat.pending, (state, action) => {
-        let trad =
-          i18next?.language == "en"
-            ? "Deleting beat, please wait for confirmation..."
-            : "Borrando beat, espera la confirmación...";
-        toast(trad);
-      })
       .addCase(deleteClientBeat.fulfilled, (state, action) => {
         let trad =
           i18next?.language == "en"
@@ -244,8 +180,6 @@ const clientBeats = createSlice({
         toast("action.payload");
       })
 
-      //--------------------
-      //EDIT CLIENT BEAT
       .addCase(editClientBeat.pending, (state, action) => {
         let trad =
           i18next?.language == "en"
@@ -263,16 +197,6 @@ const clientBeats = createSlice({
       .addCase(editClientBeat.rejected, (state, action) => {
         toast.error("action.payload");
       })
-
-      //--------------------
-      //POST FAVORITE BEAT
-      .addCase(postFavoriteBeat.pending, (state, action) => {
-        let trad =
-          i18next?.language == "en"
-            ? "Adding to favorites, please wait for confirmation..."
-            : "Añadiendo a favoritos, espera la confirmación...";
-        toast(trad);
-      })
       .addCase(postFavoriteBeat.fulfilled, (state, action) => {
         let trad =
           i18next?.language == "en"
@@ -282,16 +206,6 @@ const clientBeats = createSlice({
       })
       .addCase(postFavoriteBeat.rejected, (state, action) => {
         toast.error("action.payload");
-      })
-
-      //--------------------
-      //DELETE FAVORITE BEAT
-      .addCase(deleteFavoriteBeat.pending, (state, action) => {
-        let trad =
-          i18next?.language == "en"
-            ? "Removing from favorites, please wait for confirmation..."
-            : "Borrando de favoritos, espera la confirmación...";
-        toast(trad);
       })
       .addCase(deleteFavoriteBeat.fulfilled, (state, action) => {
         let trad =

@@ -16,12 +16,6 @@ export default function Logo() {
           alt="logo"
           className="absolute top-0 left-0 w-full h-full fill-current text-black dark:text-white"
         />
-        {/* <Image
-          src="/icon/logo-white.svg"
-          alt="logo"
-          layout="fill"
-          objectFit="contain"
-        /> */}
       </div>
     </Link>
   );

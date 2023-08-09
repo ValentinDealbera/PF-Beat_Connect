@@ -1,5 +1,5 @@
 "use client";
-import { NavSettings, Section, HeroSettings } from "@/components";
+import { ClientSettingsIndexer, Section, HeroSettings } from "@/components";
 import { usePathname } from "next/navigation";
 
 type Props = {
@@ -19,7 +19,7 @@ export default function SettingsTemplate({ children, title, aceptedPath }: Props
     <>
       <HeroSettings title={title} />
       <Section subClassName="padding-x-estilo2 padding-y-estilo2 gap-estilo2 flex flex-col">
-        {pathname === "/cl/settings" && <NavSettings />}
+        {pathname === "/cl/settings" && <ClientSettingsIndexer />}
         {children}
       </Section>
     </>
