@@ -1,15 +1,18 @@
 import Link from "next/link";
 import Image from "next/image";
-import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { BeatsClass } from "@/types";
 
-export default function AuthorName({ beat }) {
+type AuthorNameProps = {
+  beat: BeatsClass;
+};
+
+export default function AuthorName({ beat }: AuthorNameProps) {
   const userFullName = `${beat.userCreator.firstName} ${beat.userCreator.lastName}`;
 
   return (
     <div className="flex flex-row items-center gap-1">
       <Link
-        href={`/beats/author/${beat.userCreator?._id}`}
+        href={`/beats/author/${beat.userCreator?.id}`}
         onClick={(e) => e.stopPropagation()}
       >
         <span className="font-light">{userFullName}</span>

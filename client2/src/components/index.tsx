@@ -60,22 +60,17 @@ export { default as BeatBottomSheet } from "./beat/beatBottomSheet";
 export { default as BeatRightSheet } from "./beat/beatRightSheet";
 export { default as BeatDetailSideBar } from "./beat/beatDetailSideBar";
 export { default as BeatsSpecialSection } from "./shop/beatsSpecialSection";
-export { default as BeatCardGrid } from "./beat/beatCardGrid";
 export { default as BeatFilters } from "./shop/beatFilters";
 export { default as BeatCard } from "./shop/beatCard";
-export { default as NewBeatCardGrid } from "./beat/newBeatCardGrid";
-export { default as BeatShopSectionForClient } from "./beat/beatShopSectionForClient";
-export { default as BeatsRelatedSection } from "./beat/beatRelatedSection";
-export { default as BeatCardFlex } from "./beat/beatCardFlex";
 
 //beatDataComponents
-export { default as AuthorName } from "./beat/beatDataComponents/authorName";
-export { default as BeatPrice } from "./beat/beatDataComponents/beatPrice";
-export { default as BeatTitle } from "./beat/beatDataComponents/beatTitle";
-export { default as BeatImage } from "./beat/beatDataComponents/beatImage";
-export { default as BeatBPM } from "./beat/beatDataComponents/BeatBPM";
-export { default as BeatAudio } from "./beat/beatDataComponents/beatAudio";
-export { default as AddToCart } from "./beat/beatDataComponents/addToCart";
+export { default as AuthorName } from "./beat/beatCardComponents/authorName";
+export { default as BeatPrice } from "./beat/beatCardComponents/beatPrice";
+export { default as BeatTitle } from "./beat/beatCardComponents/beatTitle";
+export { default as BeatImage } from "./beat/beatCardComponents/beatImage";
+export { default as BeatBPM } from "./beat/beatCardComponents/BeatBPM";
+export { default as BeatAudio } from "./beat/beatCardComponents/beatAudio";
+export { default as AddToCart } from "./beat/beatCardComponents/addToCart";
 
 //Client
 export { default as UserBoxNav } from "./layout/userMenu";

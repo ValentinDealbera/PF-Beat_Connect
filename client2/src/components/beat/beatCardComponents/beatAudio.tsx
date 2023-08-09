@@ -1,6 +1,10 @@
-import Image from "next/image";
+import { BeatsClass } from "@/types";
 
-export default function BeatAudio({ beat }) {
+type BeatAudioProps = {
+  beat: BeatsClass;
+};
+
+export default function BeatAudio({ beat }: BeatAudioProps) {
   try {
     return (
       <audio controls className="mt-2 w-full rounded-full  bg-white">

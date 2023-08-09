@@ -1,6 +1,6 @@
-import { ValidationCreateBeat } from "@/components/client/validationCreateBeat";
-import { ValidationCreateReview } from "@/components/client/validationCreateReview";
-import { ValidationCreateUser } from "@/components/client/validationCreateUser";
+import { ValidationCreateBeat } from "@/components";
+import { ValidationCreateReview } from "@/components";
+import { ValidationCreateUser } from "@/components";
 import { useMemo } from "react";
 import { debounce } from "lodash";
 

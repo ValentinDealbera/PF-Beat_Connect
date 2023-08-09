@@ -4,7 +4,7 @@ import ReviewsGrid from "@/components/shop/reviewsGrid";
 import { useAppSelector } from "@/redux/hooks";
 
 export default function BeatsSection() {
-  const index = 0;
+  const index = useAppSelector((state) => state?.beats?.generalActiveIndex);
   const { bougthBeats, ownedBeats, favoriteBeats } = useAppSelector(
     (state) => state?.client?.beats
   );
