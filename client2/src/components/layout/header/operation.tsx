@@ -34,21 +34,12 @@ export const navBuilder = ({
       },
     },
     {
-      name: "navClient.t2",
-      url: "/client/inbox",
-      colorMode: "light",
-      visibility: false,
-      onClick: () => {
-        setHamburguerVisible(false);
-      },
-    },
-    {
       name: t("navClient.t3"),
       url: "",
       // onClick: () => {manageBecomeSeller(), setHamburguerVisible(false)},
       //visibility: !isSeller,
 
-      visibility: false,
+      visibility: true,
     },
     {
       name: t("navClient.t4"),
@@ -57,7 +48,7 @@ export const navBuilder = ({
         managePostBeat(), setHamburguerVisible(false);
       },
       // visibility: isSeller,
-      visibility: false,
+      visibility: true,
     },
     {
       name: t("navClient.t5"),

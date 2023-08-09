@@ -1,7 +1,7 @@
 import { BeatsClass, ReviewsClass } from "@/types";
 
 type UserProps = {
-  id: string;
+  _id: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -15,7 +15,7 @@ type UserProps = {
 };
 
 export class UserClass {
-  id: string;
+  _id: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -28,7 +28,7 @@ export class UserClass {
   superAdmin: boolean;
 
   constructor({
-    id,
+    _id,
     firstName,
     lastName,
     email,
@@ -40,7 +40,7 @@ export class UserClass {
     isSeller,
     superAdmin,
   }: UserProps) {
-    this.id = id;
+    this._id = _id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
@@ -54,7 +54,7 @@ export class UserClass {
   }
 
   getId(): string {
-    return this.id;
+    return this._id;
   }
 
   getFullName(): string {
@@ -83,7 +83,7 @@ export class UserClass {
 
   static deserialize(input: any): UserClass {
     return new UserClass({
-      id: input.id,
+      _id: input.id,
       firstName: input.firstName,
       lastName: input.lastName,
       email: input.email,

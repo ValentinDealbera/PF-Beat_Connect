@@ -4,8 +4,8 @@ import { useTranslation } from "react-i18next";
 
 type BeatImageProps = {
   beat: BeatsClass;
-  height: number;
-  width: number;
+  height: number | string;
+  width: number | string;
   tapVisible?: boolean;
 };
 

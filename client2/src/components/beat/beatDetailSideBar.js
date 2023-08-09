@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
-import { externalManageDropdown } from "@/components/beat/newBeatCardGrid";
+//import { externalManageDropdown } from "@/components/beat/newBeatCardGrid";
 import { addToCart } from "@/redux/slices/cart";
 import {
   BeatImage,
@@ -95,8 +95,8 @@ export default function BeatDetailSideBar() {
             <button
               className="background-primary-red-700 color-neutral-white mt-2 rounded-full px-5 py-3 text-sm font-semibold"
               onClick={() => {
-                dispatch(addToCart({ authorId: authorId, beat: currentBeat })),
-                  externalManageDropdown();
+                dispatch(addToCart({ authorId: authorId, beat: currentBeat }))
+       
               }}
             >
               {t("beatDetailSideBar.t3")}

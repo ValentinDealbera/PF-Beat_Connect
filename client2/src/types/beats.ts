@@ -1,7 +1,7 @@
 import { GenreClass, UserClass, ReviewsClass } from "@/types";
 
 type BeatsProps = {
-  id: string;
+  _id: string;
   audioMP3: string;
   audioWAV: string;
   relevance: number;
@@ -16,7 +16,7 @@ type BeatsProps = {
 };
 
 export class BeatsClass {
-  id: string;
+  _id: string;
   audioMP3: string;
   audioWAV: string;
   relevance: number;
@@ -30,7 +30,7 @@ export class BeatsClass {
   userCreator: UserClass;
 
   constructor({
-    id,
+    _id,
     audioMP3,
     audioWAV,
     relevance,
@@ -43,7 +43,7 @@ export class BeatsClass {
     softDelete,
     userCreator,
   }: BeatsProps) {
-    this.id = id;
+    this._id = _id;
     this.audioMP3 = audioMP3;
     this.audioWAV = audioWAV;
     this.relevance = relevance;
@@ -59,7 +59,7 @@ export class BeatsClass {
 
   static deserialize(input: any): BeatsClass {
     return new BeatsClass({
-      id: input.id,
+      _id: input.id,
       audioMP3: input.audioMP3,
       audioWAV: input.audioWAV,
       relevance: input.relevance,

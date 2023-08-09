@@ -2,9 +2,7 @@
 "use client";
 export { default as Master } from "./masters/master";
 export { default as Main } from "./masters/main";
-export { default as Header } from "./layout/header";
-export { default as Footer } from "./layout/footer";
-export { default as Section } from "./layout/section";
+
 export { default as Hero } from "./masters/hero";
 
 export { default as SimpleHeader } from "./masters/simpleHeader";
@@ -49,31 +47,20 @@ export { default as ModalPopUp } from "./modal/modalPopup";
 export { default as ModalTables } from "./modal/modalTables";
 
 //Auth
-export { default as GoogleButton } from "./layout/googleButton";
 
-//Help
-export { default as FaqsGrid } from "./help/faqsGrid";
-export { default as FaqsItem } from "./help/faqItem";
+
+
 
 //Beats
 export { default as BeatBottomSheet } from "./beat/beatBottomSheet";
 export { default as BeatRightSheet } from "./beat/beatRightSheet";
 export { default as BeatDetailSideBar } from "./beat/beatDetailSideBar";
-export { default as BeatsSpecialSection } from "./shop/beatsSpecialSection";
-export { default as BeatFilters } from "./shop/beatFilters";
-export { default as BeatCard } from "./shop/beatCard";
 
-//beatDataComponents
-export { default as AuthorName } from "./beat/beatCardComponents/authorName";
-export { default as BeatPrice } from "./beat/beatCardComponents/beatPrice";
-export { default as BeatTitle } from "./beat/beatCardComponents/beatTitle";
-export { default as BeatImage } from "./beat/beatCardComponents/beatImage";
-export { default as BeatBPM } from "./beat/beatCardComponents/BeatBPM";
-export { default as BeatAudio } from "./beat/beatCardComponents/beatAudio";
-export { default as AddToCart } from "./beat/beatCardComponents/addToCart";
+
+
 
 //Client
-export { default as UserBoxNav } from "./layout/userMenu";
+
 export { default as ClientReview } from "./client/clientReviews";
 export { default as ClientBeatsIndexer } from "./client/clientBeatsIndexer";
 
@@ -92,10 +79,10 @@ export { default as DashboardItem } from "./dashboard/dashboardItem";
 export { default as ClientDashboardEdit } from "./dashboard/clientDashboardEdit";
 
 //Layout
-export { default as Nav } from "./layout/nav";
+
 export { default as Search } from "./layout/search";
 export { default as ModalOnHover } from "./layout/modalOnHover";
-export { default as NavModalItem } from "./layout/nav/modalItem";
+
 
 //Tables
 export { default as DynamicTable } from "./dynamicTable";
@@ -114,7 +101,6 @@ export { default as AdminCreateReviewForm } from "./forms/adminCreateReview";
 export { default as AdminCreateBeatForm } from "./forms/adminCreateBeat";
 export { default as EditClientForm } from "./forms/editClientForm";
 export { default as EditPasswordForm } from "./forms/editPasswordForm";
-export { default as ReviewCardGrid } from "./client/reviewCardGrid";
 export { default as RecoveryPasswordForm } from "./forms/recoveryPasswordForm";
 export { default as BeatReviewPopup } from "./beat/beatReviewPopup";
 export { default as EditReviewForm } from "./masters/editReview";
@@ -128,11 +114,29 @@ export { default as DynamicTableLight } from "./dynamicTableLight";
 
 export { default as HamburgerAdmin } from "./dashboard/hamburgerAdmin";
 
+//------------------ NUEVO ------------------//
+
+//Help
+export { default as FaqsGrid } from "./help/faqsGrid";
+export { default as FaqsItem } from "./help/faqItem";
+
+//BeatCardComponents
+export { default as AuthorName } from "./beat/beatCardComponents/authorName";
+export { default as BeatPrice } from "./beat/beatCardComponents/beatPrice";
+export { default as BeatTitle } from "./beat/beatCardComponents/beatTitle";
+export { default as BeatImage } from "./beat/beatCardComponents/beatImage";
+export { default as BeatBPM } from "./beat/beatCardComponents/BeatBPM";
+export { default as BeatAudio } from "./beat/beatCardComponents/beatAudio";
+export { default as AddToCart } from "./beat/beatCardComponents/addToCart";
+
 //Shop
 export { default as BeatsGrid } from "./shop/beatsGrid";
 export { default as MultiBoldText } from "./shop/multiBoldText";
 export { default as PaginateBeats } from "./shop/paginateBeats";
 export { default as ReviewsGrid } from "./shop/paginateBeats";
+export { default as BeatsSpecialSection } from "./shop/beatsSpecialSection";
+export { default as BeatFilters } from "./shop/beatFilters";
+export { default as BeatCard } from "./shop/beatCard";
 
 //Settings
 export { default as ClientSettingsIndexer } from "./settings/clientSettingsIndexer";
@@ -140,6 +144,13 @@ export { default as HeroSettings } from "./settings/heroSettings";
 
 //Layout
 export { default as LanguageChanger } from "./layout/languageChanger";
+export { default as GoogleButton } from "./layout/googleButton";
+export { default as Header } from "./layout/header";
+export { default as Footer } from "./layout/footer";
+export { default as Section } from "./layout/section";
+export { default as UserBoxNav } from "./layout/userMenu";
 
 //nav
 export { default as NavigationModal } from "./layout/nav/navigationModal";
+export { default as Nav } from "./layout/nav";
+export { default as NavModalItem } from "./layout/nav/modalItem";
