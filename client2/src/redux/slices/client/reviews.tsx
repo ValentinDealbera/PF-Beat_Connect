@@ -48,7 +48,7 @@ export const postClientReview = createAsyncThunk(
 //DELETE CLIENT REVIEW
 export const deleteClientReview = createAsyncThunk(
   "client/deleteClientReview",
-  async (data, { rejectWithValue, dispatch, getState }) => {
+  async (data:string, { rejectWithValue, dispatch, getState }) => {
     const state = getState() as RootState;
     const id = state.client.authSession.session.current.id;
     try {

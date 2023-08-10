@@ -1,9 +1,8 @@
 //Masters
 "use client";
-export { default as Master } from "./masters/master";
-export { default as Main } from "./masters/main";
 
-export { default as Hero } from "./masters/hero";
+
+export { default as Hero } from "./common/hero";
 
 export { default as SimpleHeader } from "./masters/simpleHeader";
 export { default as BecomeSeller } from "./masters/becomeSeller";
@@ -14,35 +13,31 @@ export { manageEditBeat } from "./masters/editBeat";
 export { default as Loader } from "./masters/loader";
 
 //MiniCart
-export { default as MiniCart } from "./miniCart/miniCart";
-export { default as MiniCartItem } from "./miniCart/miniCartItem";
+export { default as MiniCart } from "./layout/miniCart/miniCart";
+export { default as MiniCartItem } from "./layout/miniCart/miniCartItem";
 
 //Common
 export { default as Logo } from "./common/logo";
 export { default as MultiSelect } from "./common/multiSelect";
 export { default as Select } from "./common/select";
 export { default as TextArea } from "./common/textArea";
-export { default as Switch } from "./common/switch";
 export { default as Input } from "./common/input";
 export { default as CheckboxGroup } from "./common/checkboxGroup";
 export { default as ArrowLabel } from "./common/arrowLabel";
 export { default as MinMax } from "./common/minMax";
-export { default as SoftDeleteSwitch } from "./common/softDeleteSwitch";
 export { default as SwitchForm } from "./common/switchForm";
-export { default as FormAdmin } from "./common/adminForm"; //creado pero sin colocar (SoftDelete, SwitchForm)
+export { default as FormAdmin } from "./forms/adminForm"; //creado pero sin colocar (SoftDelete, SwitchForm)
 export { default as ValidationEditUsers } from "./validation/validationEditUsers";
-export { default as ReviewForm } from "./common/reviewForm";
-export { default as SetUser } from "./common/setUser";
+export { default as ReviewForm } from "./forms/reviewForm";
 export { default as Hamburger } from "./masters/hamburguer";
-export { default as LandBot } from "./common/landBot";
-export { default as ChatbotWindow } from "./common/chatBotWindow";
+export { default as LandBot } from "./layout/landBot";
+export { default as ChatbotWindow } from "./layout/landBot/chatBotWindow";
 
 //Modal
 export { default as ModalMinMax } from "./modal/modalMinMax";
-export { default as BeatBottomSheetFilteringWithHeader } from "./beat/beatBottomSheetFilteringWithHeader";
+export { default as BeatBottomSheetFilteringWithHeader } from "./client/beat/beatBottomSheetFilteringWithHeader";
 export { default as DynamicButtonsForBottomSheet } from "./client/dynamicButtonsForBottomSheet";
 export { default as MiniModalBox } from "./modal/miniModalBox";
-export { default as ModalBoxForNav } from "./modal/modalBoxForNav";
 export { default as ModalPopUp } from "./modal/modalPopup";
 export { default as ModalTables } from "./modal/modalTables";
 
@@ -52,20 +47,20 @@ export { default as ModalTables } from "./modal/modalTables";
 
 
 //Beats
-export { default as BeatBottomSheet } from "./beat/beatBottomSheet";
-export { default as BeatRightSheet } from "./beat/beatRightSheet";
-export { default as BeatDetailSideBar } from "./beat/beatDetailSideBar";
+export { default as BeatBottomSheet } from "./modal/bottomSheet";
+export { default as BeatRightSheet } from "./modal/rightSheet";
+export { default as BeatDetailSideBar } from "./client/beat/beatDetailSideBar";
 
 
 
 
 //Client
 
-export { default as ClientReview } from "./client/clientReviews";
+export { default as ClientReview } from "./client/review";
 export { default as ClientBeatsIndexer } from "./client/clientBeatsIndexer";
 
 export { default as ProfileCard } from "./client/profileCard";
-export { default as FormCreateBeat } from "./form/formCreateBeat";
+export { default as FormCreateBeat } from "./forms/formCreateBeat";
 //clientDataComponents
 
 //Dashboard
@@ -80,12 +75,11 @@ export { default as ClientDashboardEdit } from "./dashboard/clientDashboardEdit"
 
 //Layout
 
-export { default as Search } from "./layout/search";
-export { default as ModalOnHover } from "./layout/modalOnHover";
+export { default as Search } from "./common/search";
 
 
 //Tables
-export { default as DynamicTable } from "./dynamicTable";
+export { default as DynamicTable } from "./dynamicTable/dynamicTable";
 
 //Funciones de los componentes
 
@@ -102,12 +96,12 @@ export { default as AdminCreateBeatForm } from "./forms/adminCreateBeat";
 export { default as EditClientForm } from "./forms/editClientForm";
 export { default as EditPasswordForm } from "./forms/editPasswordForm";
 export { default as RecoveryPasswordForm } from "./forms/recoveryPasswordForm";
-export { default as BeatReviewPopup } from "./beat/beatReviewPopup";
+export { default as BeatReviewPopup } from "./client/beatReviewPopup";
 export { default as EditReviewForm } from "./masters/editReview";
 
 export { default as AdminMaster } from "./masters/adminMaster";
 export { default as AdminHeaderBar } from "./masters/adminHeaderBar";
-export { default as DynamicTableLight } from "./dynamicTableLight";
+export { default as DynamicTableLight } from "./dynamicTable/dynamicTableLight";
 
 //export { default as BeatImage } from "./beat/beatImage";
 //export { default as Checkbox } from "./common/checkbox";
@@ -121,13 +115,13 @@ export { default as FaqsGrid } from "./help/faqsGrid";
 export { default as FaqsItem } from "./help/faqItem";
 
 //BeatCardComponents
-export { default as AuthorName } from "./beat/beatCardComponents/authorName";
-export { default as BeatPrice } from "./beat/beatCardComponents/beatPrice";
-export { default as BeatTitle } from "./beat/beatCardComponents/beatTitle";
-export { default as BeatImage } from "./beat/beatCardComponents/beatImage";
-export { default as BeatBPM } from "./beat/beatCardComponents/BeatBPM";
-export { default as BeatAudio } from "./beat/beatCardComponents/beatAudio";
-export { default as AddToCart } from "./beat/beatCardComponents/addToCart";
+export { default as AuthorName } from "./client/beat/beatCardComponents/authorName";
+export { default as BeatPrice } from "./client/beat/beatCardComponents/beatPrice";
+export { default as BeatTitle } from "./client/beat/beatCardComponents/beatTitle";
+export { default as BeatImage } from "./client/beat/beatCardComponents/beatImage";
+export { default as BeatBPM } from "./client/beat/beatCardComponents/BeatBPM";
+export { default as BeatAudio } from "./client/beat/beatCardComponents/beatAudio";
+export { default as AddToCart } from "./client/beat/beatCardComponents/addToCart";
 
 //Shop
 export { default as BeatsGrid } from "./shop/beatsGrid";

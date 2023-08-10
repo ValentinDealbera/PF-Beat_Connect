@@ -1,7 +1,7 @@
 import { UserClass, BeatsClass } from "@/types";
 
 type ReviewsProps = {
-    id: string;
+    _id: string;
     rating: number;
     title: string;
     comment: string;
@@ -13,7 +13,7 @@ type ReviewsProps = {
 
 
 export class ReviewsClass {
-  id: string;
+  _id: string;
   rating: number;
   title: string;
   comment: string;
@@ -23,7 +23,7 @@ export class ReviewsClass {
   beat: BeatsClass;
 
   constructor({
-    id,
+    _id,
     rating,
     title,
     comment,
@@ -32,7 +32,7 @@ export class ReviewsClass {
     createdBy,
     beat,
   }: ReviewsProps) {
-    this.id = id;
+    this._id = _id;
     this.rating = rating;
     this.title = title;
     this.comment = comment;
@@ -44,7 +44,7 @@ export class ReviewsClass {
 
   static deserialize(input: any): ReviewsClass {
     return new ReviewsClass({
-      id: input.id,
+      _id: input.id,
       rating: input.rating,
       title: input.title,
       comment: input.comment,
