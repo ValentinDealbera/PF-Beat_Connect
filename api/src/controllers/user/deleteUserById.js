@@ -17,36 +17,21 @@ module.exports = async (req, res) => {
       return res
         .status(400)
         .json({ message: "No puedes eliminar otro usuario!" });
-    try {
-      // Elimina review creada x el usuario
-      await ReviewModel.deleteMany({ createdBy: id });
 
-      // Todos los beats creados por el usuario
-      const userBeats = await beatModel.find({ userCreator: id });
-      // Elimino todos los beats del usuario
-      await beatModel.deleteMany({ userCreator: id });
-
-      // Elimino review asociadas con los beats del usuario.
-      await ReviewModel.deleteMany({
-        beat: { $in: userBeats.map((beat) => beat._id) },
-      });
-
-      // Eliminar todas las ordenes asociadas al usuario
-      await OrderModel.deleteMany({
-        buyer: id,
-      });
-      await OrderModel.deleteMany({
-        seller: id,
-      });
-
-      // Elimino el usuario
-      await UserModel.findByIdAndDelete(id);
-
-      res.json({ message: "Usuario eliminado con éxito." });
-    } catch (error) {
-      console.error(error);
-      res.json({ error: error.message }).status(500);
-    }
+    const userBeats = await beatModel.find({ userCreator: id });
+    await ReviewModel.deleteMany({ createdBy: id });
+    await beatModel.deleteMany({ userCreator: id });
+    await ReviewModel.deleteMany({
+      beat: { $in: userBeats.map((beat) => beat._id) },
+    });
+    await OrderModel.deleteMany({
+      buyer: id,
+    });
+    await OrderModel.deleteMany({
+      seller: id,
+    });
+    await UserModel.findByIdAndDelete(id);
+    res.json({ message: "Usuario eliminado con éxito." });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

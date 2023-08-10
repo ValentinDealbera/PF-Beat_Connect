@@ -4,7 +4,7 @@ type InputProps = {
   label: string;
   labelClass?: string;
   name: string;
-  value: string;
+  value?: string;
   defaultValue?: string;
   type?: string;
   step?: string;
@@ -15,6 +15,7 @@ type InputProps = {
   id?: string;
   min?: string;
   max?: string;
+  className?: string;
 };
 
 export default function Input({
@@ -32,9 +33,10 @@ export default function Input({
   id,
   min,
   max,
+  className,
 }: InputProps) {
   const pathname = usePathname();
-  const className = `${
+  const extraClassName = `${
     pathname.startsWith("/admin")
       ? " dark:text-white   dark:placeholder:text-white border-slate-200 dark:border-none dark:bg-customDark-700"
       : "placeholder:text-sm-light placeholder:color-neutral-gray-400   color-neutral-black-950"
@@ -58,7 +60,7 @@ export default function Input({
         max={max}
         onChange={onChange}
         placeholder={placeholder}
-        className={`${className} text-sm-regular border-radius-estilo2 px-4 py-2 ${className}`}
+        className={`${extraClassName} ${className} text-sm-regular border-radius-estilo2 px-4 py-2`}
         style={{ borderWidth: "1px" }}
       />
       {error && (

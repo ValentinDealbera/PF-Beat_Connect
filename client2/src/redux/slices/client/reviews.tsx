@@ -21,9 +21,9 @@ const initialState = {
 //POST CLIENT REVIEW
 export const postClientReview = createAsyncThunk(
   "client/postClientReview",
-  async (data, { rejectWithValue, dispatch, getState }) => {
+  async (data:any, { rejectWithValue, dispatch, getState }) => {
     const state = getState() as RootState;
-    const id = state.client.authSession.session.current.id;
+    const id = state.client.authSession.session.current._id;
     try {
       await axiosPoster({
         url: `review`,
@@ -34,7 +34,7 @@ export const postClientReview = createAsyncThunk(
       });
 
       await dispatch(getUserData(id));
-      await dispatch(fetchBeats());
+      await dispatch(fetchBeats({}));
       await dispatch(fetchFeaturedBeats());
       return;
     } catch (error) {
@@ -74,7 +74,7 @@ export const deleteClientReview = createAsyncThunk(
 //EDIT CLIENT REVIEW
 export const editClientReview = createAsyncThunk(
   "client/editClientReview",
-  async (data, { rejectWithValue, dispatch, getState }) => {
+  async (data:any, { rejectWithValue, dispatch, getState }) => {
     const state = getState() as RootState;
     const id = state.client.authSession.session.current.id;
     const reviewId = state.client.reviews.activeEditingReview.id;

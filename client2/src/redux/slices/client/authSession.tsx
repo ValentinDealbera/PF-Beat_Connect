@@ -108,7 +108,7 @@ export const convertInSeller = createAsyncThunk(
   "authSession/convertInSeller",
   async (data: { mpcode: string }, { rejectWithValue, getState }) => {
     try {
-      const clientId = getUserIdFromState(getState());
+      const clientId = getUserIdFromState(getState);
       const send = createSellerData(data);
       const response = await updateUserData(clientId, send);
       return response;
@@ -125,7 +125,7 @@ export const editClient = createAsyncThunk(
   "authSession/editClient",
   async (data: any, { rejectWithValue, getState }) => {
     try {
-      const clientId = getUserIdFromState(getState());
+      const clientId = getUserIdFromState(getState);
       const formData = createFormData(data);
       const response = await updateUserData(clientId, formData);
       const userResponse = createUserSession(response.data);
@@ -160,7 +160,7 @@ export const changePassword = createAsyncThunk(
   "authSession/changePassword",
   async (data: any, { rejectWithValue, getState }) => {
     try {
-      const clientId = getUserIdFromState(getState());
+      const clientId = getUserIdFromState(getState);
       const formData = createFormData(data);
       await updatePassword(clientId, formData);
     } catch (error) {
@@ -175,7 +175,7 @@ export const changePassword = createAsyncThunk(
 export const getUserData = createAsyncThunk(
   "authSession/getUserData",
   async (data: string, { rejectWithValue, getState, dispatch }) => {
-    const clientId = data ? data : getUserIdFromState(getState());
+    const clientId = data ? data : getUserIdFromState(getState);
     try {
       const response = await fetchUserData(clientId);
       const {

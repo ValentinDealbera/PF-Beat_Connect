@@ -1,10 +1,7 @@
 const UserModel = require("../../models/nosql/user");
 
 module.exports = async (req, res) => {
-  try {
-  } catch (error) {}
   const { id } = req.params;
-  console.log("id", id);
   try {
     const allUserId = await UserModel.findById(id)
       .populate({

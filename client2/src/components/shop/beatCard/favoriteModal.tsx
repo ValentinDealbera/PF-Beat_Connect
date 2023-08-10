@@ -28,14 +28,13 @@ export default function FavoriteModal({
 
   const handleAddFavorite = () => {
     if (!isLogged) return setLogged(true);
-    dispatch(postFavoriteBeat(beat._id));
+    dispatch(postFavoriteBeat(beat));
   };
 
   const handleDeleteFavorite = () => {
-    dispatch(deleteFavoriteBeat(beat._id));
+    dispatch(deleteFavoriteBeat(beat));
   };
 
-  console.log("FavoriteModal: ", visibilityReviewEditBag, fromClient, beat._id);
   return (
     <>
       <h1 className="text-2xl">FavoriteModal: {visibilityReviewEditBag} </h1>

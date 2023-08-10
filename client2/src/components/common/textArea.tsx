@@ -3,11 +3,12 @@ import { usePathname } from "next/navigation";
 type Props = {
   label: string;
   name: string;
-  value: string;
+  value?: string;
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   placeholder: string;
   error?: string;
   defaultValue?: string;
+  className?: string;
 };
 
 export default function TextArea({
@@ -18,9 +19,10 @@ export default function TextArea({
   placeholder,
   error,
   defaultValue,
+  className,
 }: Props) {
   const pathname = usePathname();
-  const className = `${
+  const extraClassName = `${
     pathname.startsWith("/admin")
       ? " dark:text-white   dark:placeholder:text-white border-slate-200 dark:border-none dark:bg-customDark-700"
       : "placeholder:text-sm-light placeholder:color-neutral-gray-400   color-neutral-black-950"
@@ -38,7 +40,7 @@ export default function TextArea({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className={`${className} text-sm-regular border-radius-estilo2 px-4 py-2 ${className}`}
+        className={`${className} text-sm-regular border-radius-estilo2 px-4 py-2 ${extraClassName}`}
         style={{ borderWidth: "1px" }}
       />
       {error && (

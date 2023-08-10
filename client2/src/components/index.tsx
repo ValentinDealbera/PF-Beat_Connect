@@ -27,7 +27,7 @@ export { default as MinMax } from "./common/minMax";
 export { default as SwitchForm } from "./common/switchForm";
 export { default as FormAdmin } from "./forms/adminForm"; //creado pero sin colocar (SoftDelete, SwitchForm)
 export { default as ValidationEditUsers } from "./validation/validationEditUsers";
-export { default as ReviewForm } from "./forms/reviewForm";
+export { default as ReviewForm } from "./client/review/forms/createReview";
 export { default as Hamburger } from "./masters/hamburguer";
 export { default as LandBot } from "./layout/landBot";
 export { default as ChatbotWindow } from "./layout/landBot/chatBotWindow";
@@ -89,7 +89,7 @@ export { default as EditClientForm } from "./forms/editClientForm";
 export { default as EditPasswordForm } from "./forms/editPasswordForm";
 export { default as RecoveryPasswordForm } from "./forms/recoveryPasswordForm";
 export { default as BeatReviewPopup } from "./client/beatReviewPopup";
-export { default as EditReviewForm } from "./masters/editReview";
+export { default as EditReviewForm } from "./client/review/forms/editReview";
 
 export { default as AdminMaster } from "./masters/adminMaster";
 export { default as AdminHeaderBar } from "./masters/adminHeaderBar";

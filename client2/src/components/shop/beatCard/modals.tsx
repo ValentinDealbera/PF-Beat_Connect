@@ -23,11 +23,12 @@ export default function Modals({
   setVisibilityEditReview,
   setVisibilityEditBeat,
 }: ModalsProps) {
-  const [logged, setLogged] = useState(false);
 
+const {isLogged} = useAppSelector(state => state.client.authSession.auth)
   const { _id: userId } = useAppSelector(
     (state) => state.client.authSession.session.current,
   );
+  const [logged, setLogged] = useState(false);
 
   const fromClient = userId === beat.userCreator._id;
 
@@ -74,7 +75,7 @@ export default function Modals({
         visibilityReviewEditBag={visibilityReviewEditBag}
         isFavorite={isFavorite}
         setLogged={setLogged}
-        isLogged={logged}
+        isLogged={isLogged}
         beat={beat}
       />
     </>

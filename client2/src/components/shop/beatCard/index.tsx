@@ -11,6 +11,7 @@ type BeatCardProps = {
   setVisibilityCreateReview: (visibility: boolean) => void;
   setVisibilityEditReview: (visibility: boolean) => void;
   setVisibilityViewBeat: (visibility: boolean) => void;
+  setVisibilityEditBeat: (visibility: boolean) => void;
 };
 
 export default function BeatCard({
@@ -20,6 +21,7 @@ export default function BeatCard({
   setVisibilityCreateReview,
   setVisibilityEditReview,
   setVisibilityViewBeat,
+  setVisibilityEditBeat,
 }: BeatCardProps) {
   const dispatch = useAppDispatch();
   const ref = useRef(null);
@@ -35,7 +37,7 @@ export default function BeatCard({
     <div
       ref={ref}
       className="relative w-full "
-      onClick={handleAction}
+      onClick={(e:any) => {e.stopPropagation(); handleAction()} }
       onMouseEnter={() => {
         setVisibilityReviewEditBag(true);
         setVisibilityOwnedBag(true);
@@ -69,7 +71,7 @@ export default function BeatCard({
         visibilityReviewEditBag={visibilityReviewEditBag}
         setVisibilityCreateReview={setVisibilityCreateReview}
         setVisibilityEditReview={setVisibilityEditReview}
-        setVisibilityEditBeat={setVisibilityViewBeat}
+        setVisibilityEditBeat={setVisibilityEditBeat}
       />
     </div>
   );

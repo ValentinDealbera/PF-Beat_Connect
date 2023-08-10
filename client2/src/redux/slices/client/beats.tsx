@@ -35,7 +35,7 @@ export const postClientBeat = createAsyncThunk(
   "client/postClientBeat",
   async (data: BeatsClass, { dispatch, getState }) => {
     try {
-      const id = getUserIdFromState(getState());
+      const id = getUserIdFromState(getState);
       const response = await uploadClientBeat(data, id);
       await dispatch(getUserData(id));
       await dispatch(fetchBeats({}));
@@ -44,7 +44,7 @@ export const postClientBeat = createAsyncThunk(
       console.error("postClientBeat Error", error);
       throw error;
     }
-  },
+  }
 );
 //--------------------
 //DELETE CLIENT BEAT
@@ -52,7 +52,7 @@ export const deleteClientBeat = createAsyncThunk(
   "client/deleteClientBeat",
   async (beatId: string, { dispatch, getState }) => {
     try {
-      const userId = getUserIdFromState(getState());
+      const userId = getUserIdFromState(getState);
       const response = await deleteClientBeatRequest(beatId, userId);
       await dispatch(getUserData(userId));
       await dispatch(fetchBeats({}));
@@ -61,7 +61,7 @@ export const deleteClientBeat = createAsyncThunk(
       console.error("deleteClientBeat error", error);
       throw error;
     }
-  },
+  }
 );
 
 //--------------------
@@ -70,13 +70,13 @@ export const editClientBeat = createAsyncThunk(
   "client/editClientBeat",
   async (data: BeatsClass, { rejectWithValue, dispatch, getState }) => {
     try {
-      const userId = getUserIdFromState(getState());
+      const userId = getUserIdFromState(getState);
       const { activeEditingBeatId } = getActiveEditingBeat(getState());
       const formData = createFormData(data);
       const response = await updateClientBeat(
         formData,
         activeEditingBeatId,
-        userId,
+        userId
       );
       await dispatch(getUserData(userId));
       await dispatch(fetchBeats({}));
@@ -86,49 +86,43 @@ export const editClientBeat = createAsyncThunk(
       console.error("editClientBeat error", error);
       throw error;
     }
-  },
+  }
 );
 
 //--------------------
 //POST FAVORITE BEAT
 export const postFavoriteBeat = createAsyncThunk(
   "client/postFavoriteBeat",
-  async (beatId: string, { dispatch, getState }) => {
+  async (beat: BeatsClass, { dispatch, getState }) => {
     try {
-      const userId = getUserIdFromState(getState());
+      const beatId = beat._id;
+      const userId = getUserIdFromState(getState);
       const formData = createFormData({ beatId });
-      const response = await addFavoriteBeat(formData, userId);
-      // Delay to ensure the updated data is fetched
-      setTimeout(async () => {
-        await dispatch(getUserData(userId));
-      }, 200);
-      return response;
+      await addFavoriteBeat(formData, userId);
+      return beat;
     } catch (error) {
       console.error("postFavoriteBeat error", error);
       throw error;
     }
-  },
+  }
 );
 
 //--------------------
 //DELETE FAVORITE BEAT
 export const deleteFavoriteBeat = createAsyncThunk(
   "client/deleteFavoriteBeat",
-  async (beatId: string, { rejectWithValue, dispatch, getState }) => {
+  async (beat: BeatsClass, { getState }) => {
     try {
-      const userId = getUserIdFromState(getState());
+      const userId = getUserIdFromState(getState);
+      const beatId = beat._id;
       const formData = createFormData({ beatId });
-      const response = await removeFavoriteBeat(formData, userId);
-      // Delay to ensure the updated data is fetched
-      setTimeout(async () => {
-        await dispatch(getUserData(userId));
-      }, 200);
-      return response;
+      await removeFavoriteBeat(formData, userId);
+      return beat;
     } catch (error) {
       console.error("deleteFavoriteBeat error", error);
       throw error;
     }
-  },
+  }
 );
 
 //------------------ SLICE ------------------//
@@ -197,23 +191,23 @@ const clientBeats = createSlice({
       .addCase(editClientBeat.rejected, (state, action) => {
         toast.error("action.payload");
       })
-      .addCase(postFavoriteBeat.fulfilled, (state, action) => {
-        let trad =
-          i18next?.language == "en"
-            ? "Beat added to favorites successfully"
-            : "Beat añadido a favoritos correctamente";
-        toast.success(trad);
-      })
+      .addCase(
+        postFavoriteBeat.fulfilled,
+        (state, action: PayloadAction<BeatsClass>) => {
+          state.favoriteBeats.push(action.payload);
+        }
+      )
       .addCase(postFavoriteBeat.rejected, (state, action) => {
         toast.error("action.payload");
       })
-      .addCase(deleteFavoriteBeat.fulfilled, (state, action) => {
-        let trad =
-          i18next?.language == "en"
-            ? "Beat removed from favorites successfully"
-            : "Beat borrado de favoritos correctamente";
-        toast.success(trad);
-      })
+      .addCase(
+        deleteFavoriteBeat.fulfilled,
+        (state, action: PayloadAction<BeatsClass>) => {
+          state.favoriteBeats = state.favoriteBeats.filter(
+            (beat) => beat._id !== action.payload._id
+          );
+        }
+      )
       .addCase(deleteFavoriteBeat.rejected, (state, action) => {
         toast.error("deleteFavoriteBeat error");
       });

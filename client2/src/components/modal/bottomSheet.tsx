@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 type Props = {
   children: React.ReactNode;
-  setIsDropdownOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsDropdownOpen: (arg: boolean) => void;
 };
 
 export default function BeatBottomSheet({

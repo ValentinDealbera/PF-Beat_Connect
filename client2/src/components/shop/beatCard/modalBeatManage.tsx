@@ -2,7 +2,6 @@ import { MiniModalBox } from "@/components";
 import Button from "./button";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch } from "@/redux/hooks";
-import { setActiveItemDetail } from "@/redux/slices/beats";
 import {
   deleteClientBeat,
   setActiveEditingBeat,
@@ -44,8 +43,6 @@ export default function ModalBeatManage({
       action: handleDelete,
     },
   ];
-
-  console.log("ModalBeatManage: ", visibilityOwnedModal, fromClient, beat._id);
 
   return (
     <>

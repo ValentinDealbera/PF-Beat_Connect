@@ -1,69 +1,40 @@
 import {
-  Input,
-  FormContainer,
   FormColumn,
+  FormContainer,
   FormRow,
+  Input,
   TextArea,
 } from "@/components";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { postClientReview } from "@/redux/slices/client/reviews";
+import { ReviewsClass } from "@/types";
 import { useTranslation } from "react-i18next";
 
-export default function ReviewForm(props) {
+type FormProps = {
+  handleInputChange: (e: any) => void;
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  currentReview?: ReviewsClass;
+  setRatingValue: (value: number) => void;
+  ratingValue: number;
+  title: string;
+  hasDefaultValues: boolean;
+};
+
+export default function Form({
+  handleInputChange,
+  handleSubmit,
+  currentReview,
+  setRatingValue,
+  ratingValue,
+  title,
+  hasDefaultValues
+}: FormProps) {
   const [t] = useTranslation("global");
-  const currentBeat = useSelector(
-    (state) => state?.client?.reviews?.activeBeatCreateReview,
-  );
-
-  const currentUserId = useSelector(
-    (state) => state?.client?.authSession?.session?.current?._id,
-  );
-
-  const dispatch = useDispatch();
   const rating = [1, 2, 3, 4, 5];
-
-  const [ratingValue, setRatingValue] = useState(0);
-  const [formFields, setFormFields] = useState({
-    title: "",
-    comment: "",
-    rating: ratingValue ?? 0,
-    createdBy: currentUserId ?? "",
-    beat: currentBeat._id ?? "",
-  });
-
-  const handleInputChange = (event) => {
-    setFormFields({
-      ...formFields,
-      [event.target.name]: event.target.value,
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await dispatch(postClientReview(formFields));
-    props.manageCreateReview();
-  };
-
-  useEffect(() => {
-    setFormFields({
-      ...formFields,
-      createdBy: currentUserId,
-      beat: currentBeat._id,
-      rating: ratingValue,
-    });
-  }, [ratingValue, currentUserId, currentBeat]);
 
   return (
     <div className="flex h-full flex-col items-center justify-center gap-7 px-4 xs:px-8 sm:px-14 sm:py-10 overflow-y-hidden  ">
       <div className="flex w-full flex-col gap-3 overflow-y-hidden">
         <div className="flex flex-col items-center justify-center gap-4">
-          <h4 className="text-titulo3-regular text-center">
-            {t("reviewForm.t1")}{" "}
-            <span className="text-titulo3-semibold text-red-700">
-              {t("reviewForm.t2")}
-            </span>{" "}
-          </h4>
+          <h4 className="text-titulo3-regular text-center">{t(title)}</h4>
         </div>
         <div className=" flex place-content-center gap-2">
           {rating.map((item) => (
@@ -90,19 +61,20 @@ export default function ReviewForm(props) {
               <FormColumn className="w-full">
                 <Input
                   name={"title"}
-                  label={t("reviewForm.t4")}
-                  placeholder={t("reviewForm.t4")}
+                  label={t("editReview.t3")}
+                  placeholder={t("editReview.t3")}
                   type={"text"}
                   onChange={handleInputChange}
                   className="w-full"
+                  defaultValue={hasDefaultValues ? currentReview?.title : ""}
                 />
                 <TextArea
                   name={"comment"}
-                  label={t("reviewForm.t5")}
-                  placeholder={t("reviewForm.t5")}
-                  type={"text"}
+                  label={t("editReview.t4")}
+                  placeholder={t("editReview.t4")}
                   onChange={handleInputChange}
-                  className="h-24 w-full"
+                  className=" w-full h-24"
+                  defaultValue={hasDefaultValues ? currentReview?.comment : ""}
                 />
               </FormColumn>
             </FormRow>
@@ -110,7 +82,7 @@ export default function ReviewForm(props) {
               type="submit"
               className="text-base-semibold mt-2  w-full rounded-full bg-red-700 py-2 text-white"
             >
-              {t("reviewForm.t3")}
+              {t("editReview.t5")}
             </button>
           </FormContainer>
         </form>
@@ -118,5 +90,3 @@ export default function ReviewForm(props) {
     </div>
   );
 }
-//rating, title, comment, createdBy, beat
-//step para el rating 0.1
