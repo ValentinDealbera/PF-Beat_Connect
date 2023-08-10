@@ -28,8 +28,10 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
   const [fieldsToValidate, setFieldsToValidate] = useState([]);
   const [error, setErrors] = useState({});
   const mode = props.mode;
-  const defaultValues = mode === "create"?{}:
-    useSelector((state) => state.admin.users.currentEdtingUser);  
+  const defaultValues =
+    mode === "create"
+      ? {}
+      : useSelector((state) => state.admin.users.currentEdtingUser);
   const [softD, setSoftD] = useState(defaultValues.softDelete);
   const [sellerState, setSellerState] = useState(defaultValues.isSeller);
   const [adminState, setAdminState] = useState(defaultValues.superAdmin);
@@ -56,7 +58,7 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
       setFieldsToValidate,
       form,
       setForm,
-      validateMode
+      validateMode,
     );
   };
 
@@ -193,7 +195,6 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
     ],
   };
 
-
   return (
     <form ref={formRef} onSubmit={onSubmit}>
       <FormContainer>
@@ -239,7 +240,7 @@ const AdminCreateUserForm = forwardRef((props, ref) => {
               onChange={handleInput}
               error={error.bio}
             />
-             <div className="flex justify-start items-start gap-4 w-full">
+            <div className="flex justify-start items-start gap-4 w-full">
               <SwitchForm
                 label={t("register.t14")}
                 name="soft"

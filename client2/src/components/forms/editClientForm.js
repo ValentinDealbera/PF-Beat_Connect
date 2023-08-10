@@ -24,7 +24,7 @@ export default function EditClientForm(props) {
   const defaultValues =
     useSelector((state) => state.client.authSession.session.current) || {};
   const id = useSelector(
-    (state) => state.client.authSession.session.current._id
+    (state) => state.client.authSession.session.current._id,
   );
 
   const mode = props.mode;
@@ -47,7 +47,7 @@ export default function EditClientForm(props) {
       setFieldsToValidate,
       form,
       setForm,
-      validateMode
+      validateMode,
     );
   };
 
@@ -62,7 +62,7 @@ export default function EditClientForm(props) {
         router.push("/client");
       } else {
         setErrors(formErrors);
-  
+
         throw new Error("Form Error");
       }
     } catch (error) {
@@ -77,8 +77,6 @@ export default function EditClientForm(props) {
   useEffect(() => {
     setErrors(validationEditUser(form, fieldsToValidate, validateMode));
   }, [form, fieldsToValidate]);
-
-
 
   return (
     <form onSubmit={onSubmit} ref={formRef}>

@@ -13,8 +13,3 @@ export { updateUserData } from "./updateUserData";
 export { updatePassword } from "./updatePassword";
 export { fetchUserData } from "./fetchUserData";
 export { processUserData } from "./processUserData";
-
-
-
-
-

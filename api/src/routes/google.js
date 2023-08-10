@@ -22,7 +22,7 @@ router.use(
       maxAge: 24 * 60 * 60 * 1000,
     },
     store: store,
-  })
+  }),
 );
 
 router.use(passport.initialize());
@@ -48,7 +48,7 @@ router.get("/", (req, res) => {
 
 router.get(
   "/auth/google",
-  passport.authenticate("google", { scope: ["email", "profile"] })
+  passport.authenticate("google", { scope: ["email", "profile"] }),
 );
 
 router.get(
@@ -56,7 +56,7 @@ router.get(
   passport.authenticate("google", {
     successRedirect: "/api/google/protected",
     failureRedirect: "/api/google/auth/google/failure",
-  })
+  }),
 );
 
 router.get("/protected", isLoggedIn, (req, res) => {

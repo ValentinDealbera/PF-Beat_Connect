@@ -35,7 +35,7 @@ module.exports = async (req, res) => {
 
     // check if the beat is already in the cart
     const beatInCartIndex = cart.beats.findIndex(
-      (item) => item.beat.toString() === beatId
+      (item) => item.beat.toString() === beatId,
     );
 
     if (beatInCartIndex === -1) {

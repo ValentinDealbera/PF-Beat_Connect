@@ -32,7 +32,7 @@ export default function ModalReviewEdit({
   const userReviews = useAppSelector((state) => state.client.reviews.reviews);
 
   const currentReview = userReviews.find(
-    (review) => review.beat._id === beat._id
+    (review) => review.beat._id === beat._id,
   );
 
   const handleCreateReview = () => {
@@ -42,7 +42,7 @@ export default function ModalReviewEdit({
 
   const handleEditReview = async () => {
     await dispatch(setActiveEditingReview(currentReview));
-    setVisibilityEditReview(true)
+    setVisibilityEditReview(true);
   };
 
   return (

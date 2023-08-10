@@ -89,7 +89,7 @@ module.exports = async (req, res) => {
         console.log("Procesando imagen");
         const imageStorageRef = ref(
           storage,
-          `users/${user.username}/image/${user.username}`
+          `users/${user.username}/image/${user.username}`,
         );
 
         const imageMetadata = {
@@ -98,14 +98,14 @@ module.exports = async (req, res) => {
 
         const imageBuffer = fs.readFileSync(req.files.image.tempFilePath);
         const resizedImageBuffer = await sharp(imageBuffer)
-        .resize({ width: 400, height: 400 }) // Ajusta las dimensiones según tus requisitos
-        .webp({ quality: 80 }) // Ajusta la calidad WebP según tus necesidades
+          .resize({ width: 400, height: 400 }) // Ajusta las dimensiones según tus requisitos
+          .webp({ quality: 80 }) // Ajusta la calidad WebP según tus necesidades
           .toBuffer();
 
         const imageSnapshot = await uploadBytesResumable(
           imageStorageRef,
           resizedImageBuffer,
-          imageMetadata
+          imageMetadata,
         );
         const downloadImageURL = await getDownloadURL(imageSnapshot.ref);
         user.image = downloadImageURL ? downloadImageURL : user.image;
@@ -115,7 +115,7 @@ module.exports = async (req, res) => {
         const imageData = fs.readFileSync(backImage.tempFilePath);
         const imageStorageRef = ref(
           storage,
-          `users/${user.username}/backImage/${user.username}`
+          `users/${user.username}/backImage/${user.username}`,
         );
 
         const imageMetadata = {
@@ -131,7 +131,7 @@ module.exports = async (req, res) => {
         const imageSnapshot = await uploadBytesResumable(
           imageStorageRef,
           resizedImageBuffer,
-          imageMetadata
+          imageMetadata,
         );
         const downloadBackImageURL = await getDownloadURL(imageSnapshot.ref);
         user.backImage = downloadBackImageURL;

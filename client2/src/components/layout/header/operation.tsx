@@ -1,14 +1,14 @@
 export const headerStyles = {
-    default: {
-      background: "#00000000",
-      top: 0,
-    },
-    alternative: {
-      background: "#000000b3",
-      backdropFilter: "blur(3px)",
-      top: 0,
-    },
-  };
+  default: {
+    background: "#00000000",
+    top: 0,
+  },
+  alternative: {
+    background: "#000000b3",
+    backdropFilter: "blur(3px)",
+    top: 0,
+  },
+};
 
 type NavBuilderProps = {
   t: any;

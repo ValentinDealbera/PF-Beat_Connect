@@ -6,67 +6,66 @@
 /*********************************************************************************************/
 /* Fuente */
 @layer base {
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-a,
-li,
-span,
-div,
-input,
-button,
-textarea,
-select,
-label,
-option,
-small,
-strong,
-b,
-i,
-em,
-u,
-ul,
-ol,
-dl,
-dt,
-dd,
-blockquote,
-pre,
-code,
-hr,
-table,
-td,
-form,
-fieldset,
-legend,
-address,
-img,
-figure,
-figcaption,
-header,
-footer,
-nav,
-section,
-article,
-main,
-video,
-audio,
-iframe,
-object,
-canvas,
-details,
-summary,
-menu,
-menuitem,
-summary {
-  //word-break: break-word;
-  font-family: "Outfit", sans-serif;
-}
-
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  a,
+  li,
+  span,
+  div,
+  input,
+  button,
+  textarea,
+  select,
+  label,
+  option,
+  small,
+  strong,
+  b,
+  i,
+  em,
+  u,
+  ul,
+  ol,
+  dl,
+  dt,
+  dd,
+  blockquote,
+  pre,
+  code,
+  hr,
+  table,
+  td,
+  form,
+  fieldset,
+  legend,
+  address,
+  img,
+  figure,
+  figcaption,
+  header,
+  footer,
+  nav,
+  section,
+  article,
+  main,
+  video,
+  audio,
+  iframe,
+  object,
+  canvas,
+  details,
+  summary,
+  menu,
+  menuitem,
+  summary {
+    //word-break: break-word;
+    font-family: "Outfit", sans-serif;
+  }
 }
 
 /*********************************************************************************************/
@@ -95,7 +94,7 @@ summary {
   }
 
   //Titulo 2
-.text-titulo2-semibold {
+  .text-titulo2-semibold {
     @apply text-3xl font-semibold;
     line-height: 125%;
   }
@@ -227,7 +226,7 @@ summary {
   }
 
   .padding-y-estilo2 {
-    @apply py-16
+    @apply py-16;
   }
 
   .padding-estilo2 {
@@ -268,8 +267,7 @@ summary {
 
 //Island Estilo 2
 @layer base {
-
-.padding-x-island-estilo2 {
+  .padding-x-island-estilo2 {
     @apply px-8 sm:px-10;
   }
 
@@ -451,10 +449,9 @@ summary {
 
 @layer base {
   .check-blue {
-    @apply bg-blue-700
+    @apply bg-blue-700;
   }
 }
-
 
 input[type="checkbox"] {
   appearance: none;
@@ -504,7 +501,7 @@ input[type="checkbox"]::before {
   transition: 120ms transform ease-in-out;
   box-shadow: inset 1em 1em var(black);
   /* Windows High Contrast Mode */
-  background-color:#000;
+  background-color: #000;
 }
 
 input[type="checkbox"]:checked::before {

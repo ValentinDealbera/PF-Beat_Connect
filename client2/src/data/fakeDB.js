@@ -6,7 +6,6 @@
 // import foto6 from "../../public/images/robert-stump-FAJbNf2J6cY-unsplash.jpg";
 // import foto7 from "../../public/images/zulmaury-saavedra - Keh6vLM7w0-unsplash.jpg";
 
-
 // const genres = [
 //   { name: "HIP-HOP", id: 1 },
 //   { name: "POP", id: 2 },
@@ -225,77 +224,77 @@
 //     name: "BZR Session 55",
 //     BPM: 120,
 //     priceAmount: 29.99,
-//     userCreator: 4,  
+//     userCreator: 4,
 //     genre: "COUNTRY",
 //     image: foto7,
 //     audioMP3: "https://firebasestorage.googleapis.com/v0/b/beatconnect-62691.appspot.com/o/beats%2FFashion%20%2FaudioMP3%2Ffashion-upbeat-electronica-117535.mp3%20-%202023-4-15%2021%3A7%3A50?alt=media&token=fcd12de7-5933-4bf0-ab4e-14677ee3ff25",
-//     softDelete: false    
+//     softDelete: false
 //   },
 //   {
 //     id: 2,
 //     name: "BZR Session 55",
 //     BPM: 20,
 //     priceAmount: 9.99,
-//     userCreator: 3,  
+//     userCreator: 3,
 //     genre: "COUNTRY",
 //     image: foto7,
 //     audioMP3: "https://firebasestorage.googleapis.com/v0/b/beatconnect-62691.appspot.com/o/beats%2FFashion%20%2FaudioMP3%2Ffashion-upbeat-electronica-117535.mp3%20-%202023-4-15%2021%3A7%3A50?alt=media&token=fcd12de7-5933-4bf0-ab4e-14677ee3ff25",
-//     softDelete: false    
+//     softDelete: false
 //   },
 //   {
 //     id: 1,
 //     name: "BZR Session 55",
 //     BPM: 120,
 //     priceAmount: 29.99,
-//     userCreator: 4,  
+//     userCreator: 4,
 //     genre: "COUNTRY",
 //     image: foto7,
 //     audioMP3: "https://firebasestorage.googleapis.com/v0/b/beatconnect-62691.appspot.com/o/beats%2FFashion%20%2FaudioMP3%2Ffashion-upbeat-electronica-117535.mp3%20-%202023-4-15%2021%3A7%3A50?alt=media&token=fcd12de7-5933-4bf0-ab4e-14677ee3ff25",
-//     softDelete: false    
+//     softDelete: false
 //   },
 //   {
 //     id: 1,
 //     name: "BZR Session 55",
 //     BPM: 120,
 //     priceAmount: 29.99,
-//     userCreator: 4,  
+//     userCreator: 4,
 //     genre: "COUNTRY",
 //     image: foto7,
 //     audioMP3: "https://firebasestorage.googleapis.com/v0/b/beatconnect-62691.appspot.com/o/beats%2FFashion%20%2FaudioMP3%2Ffashion-upbeat-electronica-117535.mp3%20-%202023-4-15%2021%3A7%3A50?alt=media&token=fcd12de7-5933-4bf0-ab4e-14677ee3ff25",
-//     softDelete: false    
+//     softDelete: false
 //   },
 //   {
 //     id: 1,
 //     name: "BZR Session 55",
 //     BPM: 120,
 //     priceAmount: 29.99,
-//     userCreator: 4,  
+//     userCreator: 4,
 //     genre: "COUNTRY",
 //     image: foto7,
 //     audioMP3: "https://firebasestorage.googleapis.com/v0/b/beatconnect-62691.appspot.com/o/beats%2FFashion%20%2FaudioMP3%2Ffashion-upbeat-electronica-117535.mp3%20-%202023-4-15%2021%3A7%3A50?alt=media&token=fcd12de7-5933-4bf0-ab4e-14677ee3ff25",
-//     softDelete: false    
+//     softDelete: false
 //   },
 //   {
 //     id: 1,
 //     name: "BZR Session 55",
 //     BPM: 120,
 //     priceAmount: 29.99,
-//     userCreator: 4,  
+//     userCreator: 4,
 //     genre: "COUNTRY",
 //     image: foto7,
 //     audioMP3: "https://firebasestorage.googleapis.com/v0/b/beatconnect-62691.appspot.com/o/beats%2FFashion%20%2FaudioMP3%2Ffashion-upbeat-electronica-117535.mp3%20-%202023-4-15%2021%3A7%3A50?alt=media&token=fcd12de7-5933-4bf0-ab4e-14677ee3ff25",
-//     softDelete: true    
+//     softDelete: true
 //   },
 //   {
 //     id: 1,
 //     name: "BZR Session 55",
 //     BPM: 120,
 //     priceAmount: 29.99,
-//     userCreator: 4,  
+//     userCreator: 4,
 //     genre: "COUNTRY",
 //     image: foto7,
 //     audioMP3: "https://firebasestorage.googleapis.com/v0/b/beatconnect-62691.appspot.com/o/beats%2FFashion%20%2FaudioMP3%2Ffashion-upbeat-electronica-117535.mp3%20-%202023-4-15%2021%3A7%3A50?alt=media&token=fcd12de7-5933-4bf0-ab4e-14677ee3ff25",
-//     softDelete: false    
+//     softDelete: false
 //   },
 // ];
 
@@ -320,11 +319,11 @@
 //       name: "BZR Session 55",
 //       BPM: 120,
 //       priceAmount: 29.99,
-//       userCreator: 4,  
+//       userCreator: 4,
 //       genre: "COUNTRY",
 //       image: foto7,
 //       audioMP3: "https://firebasestorage.googleapis.com/v0/b/beatconnect-62691.appspot.com/o/beats%2FFashion%20%2FaudioMP3%2Ffashion-upbeat-electronica-117535.mp3%20-%202023-4-15%2021%3A7%3A50?alt=media&token=fcd12de7-5933-4bf0-ab4e-14677ee3ff25",
-//       softDelete: false    
+//       softDelete: false
 //     }
 //   },
 //   {
@@ -347,11 +346,11 @@
 //       name: "BZR Session 55",
 //       BPM: 120,
 //       priceAmount: 29.99,
-//       userCreator: 4,  
+//       userCreator: 4,
 //       genre: "COUNTRY",
 //       image: foto7,
 //       audioMP3: "https://firebasestorage.googleapis.com/v0/b/beatconnect-62691.appspot.com/o/beats%2FFashion%20%2FaudioMP3%2Ffashion-upbeat-electronica-117535.mp3%20-%202023-4-15%2021%3A7%3A50?alt=media&token=fcd12de7-5933-4bf0-ab4e-14677ee3ff25",
-//       softDelete: false    
+//       softDelete: false
 //     }
 //   },
 //   {
@@ -374,11 +373,11 @@
 //       name: "BZR Session 55",
 //       BPM: 120,
 //       priceAmount: 29.99,
-//       userCreator: 4,  
+//       userCreator: 4,
 //       genre: "COUNTRY",
 //       image: foto7,
 //       audioMP3: "https://firebasestorage.googleapis.com/v0/b/beatconnect-62691.appspot.com/o/beats%2FFashion%20%2FaudioMP3%2Ffashion-upbeat-electronica-117535.mp3%20-%202023-4-15%2021%3A7%3A50?alt=media&token=fcd12de7-5933-4bf0-ab4e-14677ee3ff25",
-//       softDelete: false    
+//       softDelete: false
 //     }
 //   }
 // ]

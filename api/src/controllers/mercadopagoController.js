@@ -1,5 +1,6 @@
 require("dotenv").config();
-const { PROD_ACCESS_TOKEN, TEST_ACCESS_TOKEN, BACKEND_URL, FRONTEND_URL } = process.env;
+const { PROD_ACCESS_TOKEN, TEST_ACCESS_TOKEN, BACKEND_URL, FRONTEND_URL } =
+  process.env;
 const mercadopago = require("mercadopago");
 const Beats = require("../models/nosql/beats");
 const userModel = require("../models/nosql/user");
@@ -14,38 +15,38 @@ const {
   ALL_NOT_OK,
 } = require("../controllers/status");
 
-
 module.exports = async (req, res) => {
   const { cart, buyer, seller } = req.body;
-  const sellerUser = await userModel.findById(seller)
+  const sellerUser = await userModel.findById(seller);
   mercadopago.configure({
-    access_token:
-      sellerUser.accessToken,
+    access_token: sellerUser.accessToken,
   });
 
-  if(!cart || !buyer || !seller) return res.status(BAD_REQUEST).json({message: "Faltan datos"})
+  if (!cart || !buyer || !seller)
+    return res.status(BAD_REQUEST).json({ message: "Faltan datos" });
 
   const beatPercentage = (beatArr, n) => {
-    let aux = 0
-    beatArr.forEach(e=>{
-      aux = aux + ((e.priceAmount * n) / 100)
-    })
+    let aux = 0;
+    beatArr.forEach((e) => {
+      aux = aux + (e.priceAmount * n) / 100;
+    });
     console.log(aux);
-    return aux
-  }
+    return aux;
+  };
 
   try {
     console.log("id buyer:", buyer);
-    const userBuyer = await userModel.findById(buyer)
+    const userBuyer = await userModel.findById(buyer);
     console.log(userBuyer);
     const beatsToCheckout = await Beats.find({ _id: { $in: cart } });
     let preference = {
       items: beatsToCheckout.map((beat) => {
         return {
-        title: beat.name,
-        unit_price: beat.priceAmount,
-        quantity: 1,
-      }}),
+          title: beat.name,
+          unit_price: beat.priceAmount,
+          quantity: 1,
+        };
+      }),
       // items: [{
       //   title: 'asd',
       //   unit_price: 5,
@@ -61,7 +62,7 @@ module.exports = async (req, res) => {
         name: userBuyer.firstName,
         surname: userBuyer.lastName,
         email: userBuyer.email,
-        },
+      },
     };
 
     const response = await mercadopago.preferences.create(preference);

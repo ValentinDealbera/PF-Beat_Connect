@@ -28,7 +28,7 @@ module.exports = async (req, res) => {
         const deletedReview = await reviewSchema.findByIdAndDelete(id);
         const beat = await beatModel.findById(deletedReview.beat);
         const beatIndex = beat.review.findIndex(
-          (beat) => beat._id === deletedReview._id
+          (beat) => beat._id === deletedReview._id,
         );
         const deletedReviewInBeat = beat.review.splice(beatIndex, 1);
         await beat.save();

@@ -10,10 +10,7 @@ export default function AboutSection() {
 
   return (
     <Section subClassName="padding-x-estilo2 padding-y-estilo1 gap-2 flex-col flex">
-      <MultiBoldText
-        startText={aboutTitle}
-        endText={aboutTitle2}
-      />
+      <MultiBoldText startText={aboutTitle} endText={aboutTitle2} />
       <p className="text-base-light">{aboutText}</p>
     </Section>
   );

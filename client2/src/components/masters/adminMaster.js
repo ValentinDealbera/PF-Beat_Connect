@@ -8,7 +8,7 @@ export default function AdminMaster(props) {
 
   const delayedAdminGetBeats = useMemo(
     () => debounce((value) => dispatch(adminGetData(value)), 500),
-    [dispatch]
+    [dispatch],
   );
 
   useEffect(() => {

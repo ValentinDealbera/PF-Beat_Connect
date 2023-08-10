@@ -3,7 +3,7 @@ import { serverUrl } from "@/data/config";
 import { toast } from "sonner";
 import axios from "axios";
 import { toastError, toastSuccess } from "@/utils/toastStyles";
-import i18next from 'i18next';
+import i18next from "i18next";
 const tokenAdmin = process.env.NEXT_PUBLIC_TOKEN_ADMIN;
 const initialState = {
   reviews: [],
@@ -17,14 +17,14 @@ export const adminGetReviews = createAsyncThunk(
   async (data, { rejectWithValue, dispatch }) => {
     try {
       const response = await axios.get(`${serverUrl}review`);
-      
+
       // return { reviewResponse: response.data.docs };
       const reviewResponse = response.data;
       return { reviewResponse };
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
-  }
+  },
 );
 
 //GET ADMIN REVIEW
@@ -37,7 +37,7 @@ export const adminGetReview = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
-  }
+  },
 );
 
 //DELETE ADMIN REVIEW
@@ -45,7 +45,6 @@ export const adminDeleteReview = createAsyncThunk(
   "client/adminDeleteReview",
   async (data, { rejectWithValue, dispatch }) => {
     try {
-    
       const response = await axios.delete(`${serverUrl}admin/review/${data}`, {
         headers: {
           admintoken: tokenAdmin,
@@ -56,7 +55,7 @@ export const adminDeleteReview = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error);
     }
-  }
+  },
 );
 
 //POST ADMIN REVIEW
@@ -78,7 +77,7 @@ export const adminPostReview = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
-  }
+  },
 );
 //EDIT ADMIN REVIEW
 export const adminEditReview = createAsyncThunk(
@@ -93,7 +92,7 @@ export const adminEditReview = createAsyncThunk(
             admintoken: tokenAdmin,
             "Content-Type": "multipart/form-data",
           },
-        }
+        },
       );
       await dispatch(adminGetReviews());
       return { reviewResponse: response.data };
@@ -102,7 +101,7 @@ export const adminEditReview = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
-  }
+  },
 );
 const adminReviewsSlice = createSlice({
   name: "adminReviews",
@@ -118,7 +117,6 @@ const adminReviewsSlice = createSlice({
       //--------------------
       //GET ADMIN REVIEWS
       .addCase(adminGetReviews.fulfilled, (state, action) => {
-  
         // state.reviews = action.payload.reviewResponse;
         state.reviews = Array.isArray(action.payload.reviewResponse)
           ? action.payload.reviewResponse
@@ -126,7 +124,6 @@ const adminReviewsSlice = createSlice({
       })
 
       .addCase(adminGetReviews.rejected, (state, action) => {
-
         toast.error(action.payload, {
           style: {
             background: "#FFF0F0",
@@ -134,14 +131,14 @@ const adminReviewsSlice = createSlice({
           },
         });
       })
-      .addCase(adminGetReviews.pending, (state, action) => {
-   
-      })
+      .addCase(adminGetReviews.pending, (state, action) => {})
       //--------------------
       //DELETE ADMIN REVIEWS
       .addCase(adminDeleteReview.fulfilled, (state, action) => {
-
-        let trad= i18next?.language == "en"? "Review deleted successfully" : "Review borrada correctamente"
+        let trad =
+          i18next?.language == "en"
+            ? "Review deleted successfully"
+            : "Review borrada correctamente";
         toast.success(trad, {
           style: {
             background: "#F0FFF0",
@@ -150,7 +147,6 @@ const adminReviewsSlice = createSlice({
         });
       })
       .addCase(adminDeleteReview.rejected, (state, action) => {
-      
         toast.error(action.payload, {
           style: {
             background: "#FFF0F0",
@@ -159,15 +155,19 @@ const adminReviewsSlice = createSlice({
         });
       })
       .addCase(adminDeleteReview.pending, (state, action) => {
- 
-        let trad= i18next?.language == "en"? "Deleting review..." : "Borrando review..."
+        let trad =
+          i18next?.language == "en"
+            ? "Deleting review..."
+            : "Borrando review...";
         toast(trad);
       })
       //--------------------
       //EDIT ADMIN REVIEW
       .addCase(adminEditReview.fulfilled, (state, action) => {
-   
-        let trad= i18next?.language == "en"? "Review edited successfully" : "Review editada correctamente"
+        let trad =
+          i18next?.language == "en"
+            ? "Review edited successfully"
+            : "Review editada correctamente";
         toast.success(trad, {
           style: {
             background: "#F0FFF0",
@@ -177,7 +177,6 @@ const adminReviewsSlice = createSlice({
       })
 
       .addCase(adminEditReview.rejected, (state, action) => {
-   
         toast.error(action.payload, {
           style: {
             background: "#FFF0F0",
@@ -187,16 +186,20 @@ const adminReviewsSlice = createSlice({
         throw new Error(action.payload);
       })
       .addCase(adminEditReview.pending, (state, action) => {
-    
-        let trad= i18next?.language == "en"? "Editing review..." : "Editando review..."
+        let trad =
+          i18next?.language == "en"
+            ? "Editing review..."
+            : "Editando review...";
         toast(trad);
       })
       //--------------------
       //POST ADMIN REVIEW
 
       .addCase(adminPostReview.fulfilled, (state, action) => {
-       
-        let trad= i18next?.language == "en"? "Review created successfully" : "Review creada correctamente"
+        let trad =
+          i18next?.language == "en"
+            ? "Review created successfully"
+            : "Review creada correctamente";
         toast.success(trad, {
           style: {
             background: "#F0FFF0",
@@ -205,7 +208,6 @@ const adminReviewsSlice = createSlice({
         });
       })
       .addCase(adminPostReview.rejected, (state, action) => {
-
         toast.error(action.payload, {
           style: {
             background: "#FFF0F0",
@@ -215,14 +217,19 @@ const adminReviewsSlice = createSlice({
         throw new Error(action.payload);
       })
       .addCase(adminPostReview.pending, (state, action) => {
-  
-        let trad= i18next?.language == "en"? "Creating review..." : "Creando review..."
+        let trad =
+          i18next?.language == "en"
+            ? "Creating review..."
+            : "Creando review...";
         toast(trad);
       })
       //--------------------
       //GET ADMIN REVIEW
       .addCase(adminGetReview.fulfilled, (state, action) => {
-        let trad= i18next?.language == "en"? "Beat obtained successfully" : "Beat obtenido correctamente"
+        let trad =
+          i18next?.language == "en"
+            ? "Beat obtained successfully"
+            : "Beat obtenido correctamente";
         toast.success(trad, toastSuccess);
         state.setCurrentEditingReview = action.payload.reviewResponse;
       })
@@ -230,7 +237,8 @@ const adminReviewsSlice = createSlice({
         toast.error(action.payload, toastError);
       })
       .addCase(adminGetReview.pending, (state, action) => {
-        let trad= i18next?.language == "en"? "Loading beat..." : "Cargando beat..."
+        let trad =
+          i18next?.language == "en" ? "Loading beat..." : "Cargando beat...";
         toast(trad);
       });
   },

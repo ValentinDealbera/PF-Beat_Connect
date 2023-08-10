@@ -4,7 +4,7 @@ import { useAppSelector } from "@/redux/hooks";
 
 export default function HeroSection() {
   const currentUser = useAppSelector(
-    (state) => state?.client?.authSession?.session?.current
+    (state) => state?.client?.authSession?.session?.current,
   );
   return (
     <Hero

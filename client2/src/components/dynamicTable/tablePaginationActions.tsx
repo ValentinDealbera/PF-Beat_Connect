@@ -14,11 +14,13 @@ type TablePaginationActionsProps = {
   rowsPerPage: number;
   onPageChange: (
     event: React.MouseEvent<HTMLButtonElement>,
-    newPage: number
+    newPage: number,
   ) => void;
 };
 
-export default function TablePaginationActions(props: TablePaginationActionsProps) {
+export default function TablePaginationActions(
+  props: TablePaginationActionsProps,
+) {
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
 

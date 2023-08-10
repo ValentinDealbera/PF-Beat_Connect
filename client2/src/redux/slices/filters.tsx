@@ -32,7 +32,7 @@ export const fetchGenres = createAsyncThunk(
       console.log("ERROR", error);
       return rejectWithValue(error.response.data.message);
     }
-  }
+  },
 );
 
 //------------------ SLICE ------------------//
@@ -47,7 +47,7 @@ const filtersSlice = createSlice({
       const isSelected = state.genresFilter.includes(action.payload);
       if (isSelected) {
         state.genresFilter = state.genresFilter.filter(
-          (genre) => genre !== action.payload
+          (genre) => genre !== action.payload,
         );
         return;
       }

@@ -1,4 +1,4 @@
-import i18next from 'i18next';
+import i18next from "i18next";
 
 export function ValidationCreateReview(form, fieldsToValidate) {
   let error = {};
@@ -11,13 +11,13 @@ export function ValidationCreateReview(form, fieldsToValidate) {
   fieldsToValidate.forEach((field) => {
     switch (field) {
       case "createdBy":
-        if (!form.createdBy || form.createdBy === ""){
+        if (!form.createdBy || form.createdBy === "") {
           if (i18next?.language == "en") {
             error.createdBy = "You must enter a id";
           } else {
             error.createdBy = "Debes ingresar un ID";
           }
-        };
+        }
         break;
 
       case "rating":
@@ -27,14 +27,14 @@ export function ValidationCreateReview(form, fieldsToValidate) {
           } else {
             error.rating = "Debes ingresar una calificación";
           }
-        };
+        }
         if (form.rating > 5) {
           if (i18next?.language == "en") {
             error.rating = "You must select a number between one and five";
           } else {
             error.rating = "Debes seleccionar un número entre uno y cinco";
           }
-        };
+        }
         break;
 
       case "comment":
@@ -44,7 +44,7 @@ export function ValidationCreateReview(form, fieldsToValidate) {
           } else {
             error.comment = "Debes ingresar un comentario";
           }
-        };
+        }
         break;
 
       case "title":
@@ -54,7 +54,7 @@ export function ValidationCreateReview(form, fieldsToValidate) {
           } else {
             error.title = "Debes ingresar un título";
           }
-        };
+        }
         break;
 
       case "beat":
@@ -64,7 +64,7 @@ export function ValidationCreateReview(form, fieldsToValidate) {
           } else {
             error.beat = "Debes ingresar un beat";
           }
-        };
+        }
         break;
 
       default:

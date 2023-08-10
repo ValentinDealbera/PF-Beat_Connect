@@ -31,7 +31,7 @@ export const postClientOrder = createAsyncThunk(
       console.error("postClientOrder error", error);
       throw error;
     }
-  }
+  },
 );
 
 //-------------------- SLICE -------------------//

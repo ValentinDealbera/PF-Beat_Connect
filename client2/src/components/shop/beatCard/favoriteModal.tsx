@@ -38,7 +38,7 @@ export default function FavoriteModal({
   console.log("FavoriteModal: ", visibilityReviewEditBag, fromClient, beat._id);
   return (
     <>
-    <h1 className="text-2xl">FavoriteModal: {visibilityReviewEditBag} </h1>
+      <h1 className="text-2xl">FavoriteModal: {visibilityReviewEditBag} </h1>
       {!fromClient && visibilityReviewEditBag && (
         <MiniModalBox className="left-1 top-1">
           {!isFavorite && !fromClient && (

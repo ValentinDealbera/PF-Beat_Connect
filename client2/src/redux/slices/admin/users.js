@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { serverUrl } from "@/data/config";
 import { toast } from "sonner";
 import axios from "axios";
-import i18next from 'i18next';
+import i18next from "i18next";
 import { toastError, toastSuccess } from "@/utils/toastStyles";
 const tokenAdmin = process.env.NEXT_PUBLIC_TOKEN_ADMIN;
 const initialState = {
@@ -31,7 +31,7 @@ export const adminPostUser = createAsyncThunk(
       console.log("Error de post", error);
       return rejectWithValue(error.response.data.message);
     }
-  }
+  },
 );
 
 //--------------------
@@ -48,14 +48,14 @@ export const adminEditUser = createAsyncThunk(
             admintoken: tokenAdmin,
             "Content-Type": "multipart/form-data",
           },
-        }
+        },
       );
       await dispatch(adminGetUsers());
       return { userResponse: response.data };
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
-  }
+  },
 );
 
 //--------------------
@@ -63,7 +63,6 @@ export const adminEditUser = createAsyncThunk(
 export const adminDeleteUser = createAsyncThunk(
   "users/adminDeleteUser",
   async (data, { rejectWithValue, dispatch }) => {
-  
     try {
       const response = await axios.delete(
         `${serverUrl}admin/user/${data._id}`,
@@ -71,16 +70,16 @@ export const adminDeleteUser = createAsyncThunk(
           headers: {
             admintoken: tokenAdmin,
           },
-        }
+        },
       );
-   
+
       await dispatch(adminGetUsers());
       return { userResponse: response.data };
     } catch (error) {
       console.log("error", error);
       return rejectWithValue(error);
     }
-  }
+  },
 );
 
 //--------------------
@@ -89,14 +88,13 @@ export const adminGetUsers = createAsyncThunk(
   "users/adminGetUsers",
   async (data, { rejectWithValue, dispatch }) => {
     try {
-  
       const response = await axios.get(`${serverUrl}user`);
 
       return { userResponse: response.data };
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
-  }
+  },
 );
 
 //--------------------
@@ -110,7 +108,7 @@ export const adminGetUser = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
-  }
+  },
 );
 
 //------------------ SLICE ------------------//
@@ -120,7 +118,6 @@ const adminUsersSlice = createSlice({
   initialState,
   reducers: {
     setCurrentEditingUser(state, action) {
-     
       state.currentEdtingUser = action.payload;
     },
   },
@@ -129,14 +126,18 @@ const adminUsersSlice = createSlice({
       //--------------------
       //POST ADMIN USER
       .addCase(adminPostUser.fulfilled, (state, action) => {
-        let trad= i18next?.language == "en"? "User created successfully" : "Usuario creado correctamente"
-        toast.success(trad, toastSuccess);;
+        let trad =
+          i18next?.language == "en"
+            ? "User created successfully"
+            : "Usuario creado correctamente";
+        toast.success(trad, toastSuccess);
       })
       .addCase(adminPostUser.rejected, (state, action) => {
         toast.error(action.payload, toastError);
       })
       .addCase(adminPostUser.pending, (state, action) => {
-        let trad= i18next?.language == "en"? "Creating user..." : "Creando usuario..."
+        let trad =
+          i18next?.language == "en" ? "Creating user..." : "Creando usuario...";
         toast(trad);
       })
 
@@ -146,32 +147,41 @@ const adminUsersSlice = createSlice({
         toast.error(action.payload, toastError);
       })
       .addCase(adminEditUser.fulfilled, (state, action) => {
-        let trad= i18next?.language == "en"? "User edited successfully" : "Usuario editado correctamente"
+        let trad =
+          i18next?.language == "en"
+            ? "User edited successfully"
+            : "Usuario editado correctamente";
         toast.success(trad, toastSuccess);
       })
       .addCase(adminEditUser.pending, (state, action) => {
-        let trad= i18next?.language == "en"? "Editing user..." : "Editando usuario..."
+        let trad =
+          i18next?.language == "en" ? "Editing user..." : "Editando usuario...";
         toast(trad);
       })
 
       //--------------------
       //DELETE ADMIN USER
       .addCase(adminDeleteUser.fulfilled, (state, action) => {
-        let trad= i18next?.language == "en"? "User deleted successfully" : "Usuario borrado correctamente"
+        let trad =
+          i18next?.language == "en"
+            ? "User deleted successfully"
+            : "Usuario borrado correctamente";
         toast.success(trad, toastSuccess);
       })
       .addCase(adminDeleteUser.rejected, (state, action) => {
         toast.error(action.payload, toastError);
       })
       .addCase(adminDeleteUser.pending, (state, action) => {
-        let trad= i18next?.language == "en"? "Deleting user..." : "Borrando usuario..."
+        let trad =
+          i18next?.language == "en"
+            ? "Deleting user..."
+            : "Borrando usuario...";
         toast(trad);
       })
 
       //--------------------
       //GET ADMIN BEATS
       .addCase(adminGetUsers.fulfilled, (state, action) => {
-   
         state.users = action.payload.userResponse;
         //toast.success("Beats obtenidos correctamente", toastSuccess);
       })

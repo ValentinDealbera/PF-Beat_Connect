@@ -25,8 +25,6 @@ export default function ModalBeatManage({
   const [t] = useTranslation("global");
   const dispatch = useAppDispatch();
 
-
-
   const handleEdit = async () => {
     await dispatch(setActiveEditingBeat(beat));
     setVisibilityEditBeat(true);

@@ -27,7 +27,7 @@ export default function NewBeatCardGrid({ beats }: BeatsGridProps) {
             />
           ))}
       </div>
-{/* Agregar modales correspondientes */}
+      {/* Agregar modales correspondientes */}
     </>
   );
 }

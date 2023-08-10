@@ -9,7 +9,7 @@ type IndexerItemProps = {
 
 const IndexerItem = ({ item, index }: IndexerItemProps) => {
   const activeIndex = useAppSelector(
-    (state) => state.profile.settingsActiveIndex
+    (state) => state.profile.settingsActiveIndex,
   );
   const [t] = useTranslation("global");
   const dispatch = useAppDispatch();
@@ -32,7 +32,7 @@ const IndexerItem = ({ item, index }: IndexerItemProps) => {
 
 export default function ClientSettingsIndexer() {
   const loginMethod = useAppSelector(
-    (state) => state.client.authSession.auth.loginMethod
+    (state) => state.client.authSession.auth.loginMethod,
   );
 
   const buyerGeneralNav = [

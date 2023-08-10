@@ -9,10 +9,8 @@ export default function RootLayout(props: any) {
       <head></head>
       <body className="">
         <Provider>
-          <Querier> 
-          {props.children}
-          </Querier>
-          </Provider>
+          <Querier>{props.children}</Querier>
+        </Provider>
       </body>
     </html>
   );

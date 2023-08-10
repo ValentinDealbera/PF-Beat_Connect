@@ -13,11 +13,11 @@ import { useTranslation } from "react-i18next";
 export default function ReviewForm(props) {
   const [t] = useTranslation("global");
   const currentBeat = useSelector(
-    (state) => state?.client?.reviews?.activeBeatCreateReview
+    (state) => state?.client?.reviews?.activeBeatCreateReview,
   );
 
   const currentUserId = useSelector(
-    (state) => state?.client?.authSession?.session?.current?._id
+    (state) => state?.client?.authSession?.session?.current?._id,
   );
 
   const dispatch = useDispatch();
@@ -59,8 +59,10 @@ export default function ReviewForm(props) {
       <div className="flex w-full flex-col gap-3 overflow-y-hidden">
         <div className="flex flex-col items-center justify-center gap-4">
           <h4 className="text-titulo3-regular text-center">
-              {t("reviewForm.t1")}{" "}
-            <span className="text-titulo3-semibold text-red-700">{t("reviewForm.t2")}</span>{" "}
+            {t("reviewForm.t1")}{" "}
+            <span className="text-titulo3-semibold text-red-700">
+              {t("reviewForm.t2")}
+            </span>{" "}
           </h4>
         </div>
         <div className=" flex place-content-center gap-2">

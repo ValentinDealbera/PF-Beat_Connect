@@ -17,7 +17,7 @@ export default function RecoveryPasswordForm(props) {
   const userEmail = router.query.email;
 
   const id = useSelector(
-    (state) => state.client.authSession.session.current._id
+    (state) => state.client.authSession.session.current._id,
   );
 
   const [form, setForm] = useState({
@@ -39,17 +39,15 @@ export default function RecoveryPasswordForm(props) {
     try {
       const formErrors = validationRecoverPassword(form, "*");
       if (Object.keys(formErrors).length === 0) {
-
-
         dispatch(
-          passwordRecovery({ newPassword: form.newPassword, email: userEmail })
+          passwordRecovery({ newPassword: form.newPassword, email: userEmail }),
         );
         formRef.current.reset();
 
         // router.push("/auth");
       } else {
         setErrors(formErrors);
-   
+
         throw new Error("Form Error");
       }
     } catch (error) {
@@ -58,9 +56,7 @@ export default function RecoveryPasswordForm(props) {
   };
 
   useEffect(() => {
- 
     setErrors(validationRecoverPassword(form, fieldsToValidate, validateMode));
-
   }, [form, fieldsToValidate]);
 
   return (
@@ -91,21 +87,21 @@ export default function RecoveryPasswordForm(props) {
             type="submit"
             className="text-base-semibold mt-2  w-full rounded-full bg-red-700 py-2 text-white"
           >
-              {t("recover.t8")}
+            {t("recover.t8")}
           </button>
           <div className="flex justify-center gap-4">
-          <button
-            onClick={() => i18n.changeLanguage("es")}
-            className="background-primary-red-700 color-neutral-white border-radius-estilo1 text-base-semibold w-max px-3 py-2"
-          >
-            Español
-          </button>
-          <button
-            onClick={() => i18n.changeLanguage("en")}
-            className="background-primary-red-700 color-neutral-white border-radius-estilo1 text-base-semibold w-max px-3 py-2"
-          >
-            English
-          </button>
+            <button
+              onClick={() => i18n.changeLanguage("es")}
+              className="background-primary-red-700 color-neutral-white border-radius-estilo1 text-base-semibold w-max px-3 py-2"
+            >
+              Español
+            </button>
+            <button
+              onClick={() => i18n.changeLanguage("en")}
+              className="background-primary-red-700 color-neutral-white border-radius-estilo1 text-base-semibold w-max px-3 py-2"
+            >
+              English
+            </button>
           </div>
         </div>
       </FormContainer>

@@ -26,29 +26,29 @@ export default function Modals({
   const [logged, setLogged] = useState(false);
 
   const { _id: userId } = useAppSelector(
-    (state) => state.client.authSession.session.current
+    (state) => state.client.authSession.session.current,
   );
 
   const fromClient = userId === beat.userCreator._id;
 
   const userReviews = useAppSelector((state) => state.client.reviews.reviews);
   const { favoriteBeats, bougthBeats } = useAppSelector(
-    (state) => state.client.beats
+    (state) => state.client.beats,
   );
 
   const reviewed = Boolean(
     userReviews.find(
       (review: ReviewsClass) =>
-        review.beat._id === beat._id && review.softDelete
-    )
+        review.beat._id === beat._id && review.softDelete,
+    ),
   );
 
   const boughtBeat = Boolean(
-    bougthBeats.find((boughtBeat) => boughtBeat._id === beat._id)
+    bougthBeats.find((boughtBeat) => boughtBeat._id === beat._id),
   );
 
   const isFavorite = Boolean(
-    favoriteBeats.find((favoriteBeat) => favoriteBeat._id === beat._id)
+    favoriteBeats.find((favoriteBeat) => favoriteBeat._id === beat._id),
   );
 
   return (

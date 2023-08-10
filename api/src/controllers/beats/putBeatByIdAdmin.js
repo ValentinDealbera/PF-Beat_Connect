@@ -18,7 +18,7 @@ module.exports = async (req, res) => {
     const image = req.files ? req.files.image : null;
     const { name, priceAmount, review, softDelete, genre, relevance, bpm } =
       req.body;
-      console.log('---------------',req.body);
+    console.log("---------------", req.body);
     const updatedBeat = await beatModel.findById(id);
     if (!updatedBeat) return res.status(400).json({ error: "Beat not Found" });
     if (name) updatedBeat.name = name;
@@ -27,12 +27,12 @@ module.exports = async (req, res) => {
     if (softDelete)
       updatedBeat.softDelete = softDelete === "true" ? true : false;
     if (genre) updatedBeat.genre = genre;
-    if (bpm) updatedBeat.BPM = Number(bpm)
+    if (bpm) updatedBeat.BPM = Number(bpm);
     if (image) {
       const imageData = fs.readFileSync(image.tempFilePath);
       const imageStorageRef = ref(
         storage,
-        `beats/${updatedBeat.name}/image/${updatedBeat.name}`
+        `beats/${updatedBeat.name}/image/${updatedBeat.name}`,
       );
 
       const imageMetadata = {
@@ -41,14 +41,14 @@ module.exports = async (req, res) => {
 
       const imageBuffer = fs.readFileSync(req.files.image.tempFilePath);
       const resizedImageBuffer = await sharp(imageBuffer)
-      .resize({ width: 400, height: 400 }) // Ajusta las dimensiones según tus requisitos
-      .webp({ quality: 80 }) // Ajusta la calidad WebP según tus necesidades
+        .resize({ width: 400, height: 400 }) // Ajusta las dimensiones según tus requisitos
+        .webp({ quality: 80 }) // Ajusta la calidad WebP según tus necesidades
         .toBuffer();
-      
+
       const imageSnapshot = await uploadBytesResumable(
         imageStorageRef,
         resizedImageBuffer,
-        imageMetadata
+        imageMetadata,
       );
       const downloadImageURL = await getDownloadURL(imageSnapshot.ref);
       updatedBeat.image = downloadImageURL;

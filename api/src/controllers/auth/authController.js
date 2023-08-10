@@ -12,8 +12,8 @@ const login = async (req, res) => {
   if (!email || !password) {
     return res.status(400).json({ message: "Faltan credenciales" });
   }
-//pasamos el email a minusculas
-let emailCase = email.toLowerCase();
+  //pasamos el email a minusculas
+  let emailCase = email.toLowerCase();
   try {
     // Buscar al usuario por su email
     const user = await userModel.findOne({ email: emailCase });
@@ -26,7 +26,7 @@ let emailCase = email.toLowerCase();
     // Comparar la contraseña ingresada con la almacenada en la base de datos
     const passwordIsValid = await bcrypt.compare(
       password.trim(),
-      user.password.trim()
+      user.password.trim(),
     );
 
     // Si la contraseña no coincide, devolver un error

@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
 
     const passwordIsEqual = await bcrypt.compare(
       newPassword.trim(),
-      user.password.trim()
+      user.password.trim(),
     );
 
     if (passwordIsEqual) {

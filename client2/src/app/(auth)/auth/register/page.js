@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import {
   Input,
   SimpleHeader,
@@ -52,13 +52,11 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-
     const validationErrors = ValidateRegister(form, "*");
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
-
 
     try {
       await dispatch(jsonRegister(form));
@@ -72,86 +70,85 @@ export default function Login() {
 
   return (
     <>
-        <h1 className="text-titulo3-regular mb-6">
-          {t("register.t1")}{" "}
-          <span className="text-titulo3-semibold">BeatConnect</span>
-        </h1>
-        <form className="flex w-full flex-col gap-4" onSubmit={handleSubmit}>
-          {step === 1 && (
-            <div id="step1" className="flex w-full flex-col gap-4">
-              <Input
-                type="text"
-                name="firstName"
-                label={t("register.t2")}
-                placeholder={t("register.t2")}
-                className="w-full"
-                onChange={handleChange}
-                error={error.firstName ? error.firstName : ""}
-              />
-              <Input
-                type="text"
-                name="lastName"
-                label={t("register.t3")}
-                placeholder={t("register.t3")}
-                className="w-full"
-                onChange={handleChange}
-                error={error.lastName ? error.lastName : ""}
-              />
-              <button
-                type="button"
-                className="text-base-semibold mt-2  w-full rounded-full bg-red-700 py-2 text-white"
-                onClick={onClick}
-              >
-                {t("register.t4")}
-              </button>
-            </div>
-          )}
-          {step === 2 && (
-            <div id="step2" className="flex w-full flex-col gap-4">
-              <Input
-                type="email"
-                name="email"
-                label={t("register.t5")}
-                placeholder={t("register.t5")}
-                className="w-full"
-                onChange={handleChange}
-                error={error.email}
-              />
-              <Input
-                type="text"
-                name="username"
-                label={t("register.t6")}
-                placeholder={t("register.t6")}
-                className="w-full"
-                onChange={handleChange}
-                error={error.username}
-              />
-              <Input
-                type="password"
-                name="password"
-                label={t("register.t7")}
-                placeholder={t("register.t7")}
-                onChange={handleChange}
-                error={error.password}
-              />
-              <button
-                type="submit"
-                className="text-base-semibold mt-2  w-full rounded-full bg-red-700 py-2 text-white"
-              >
-                {t("register.t8")}
-              </button>
-            </div>
-          )}
-        </form>
-        <hr className="my-6 w-full" />
-        <GoogleButton />
-        <p className="mt-6 w-full text-center font-light">
-          {t("register.t9")}{" "}
-          <Link href="/auth" className="font-medium text-red-700">
-            {t("register.t10")}
-          </Link>
-        </p>
-
+      <h1 className="text-titulo3-regular mb-6">
+        {t("register.t1")}{" "}
+        <span className="text-titulo3-semibold">BeatConnect</span>
+      </h1>
+      <form className="flex w-full flex-col gap-4" onSubmit={handleSubmit}>
+        {step === 1 && (
+          <div id="step1" className="flex w-full flex-col gap-4">
+            <Input
+              type="text"
+              name="firstName"
+              label={t("register.t2")}
+              placeholder={t("register.t2")}
+              className="w-full"
+              onChange={handleChange}
+              error={error.firstName ? error.firstName : ""}
+            />
+            <Input
+              type="text"
+              name="lastName"
+              label={t("register.t3")}
+              placeholder={t("register.t3")}
+              className="w-full"
+              onChange={handleChange}
+              error={error.lastName ? error.lastName : ""}
+            />
+            <button
+              type="button"
+              className="text-base-semibold mt-2  w-full rounded-full bg-red-700 py-2 text-white"
+              onClick={onClick}
+            >
+              {t("register.t4")}
+            </button>
+          </div>
+        )}
+        {step === 2 && (
+          <div id="step2" className="flex w-full flex-col gap-4">
+            <Input
+              type="email"
+              name="email"
+              label={t("register.t5")}
+              placeholder={t("register.t5")}
+              className="w-full"
+              onChange={handleChange}
+              error={error.email}
+            />
+            <Input
+              type="text"
+              name="username"
+              label={t("register.t6")}
+              placeholder={t("register.t6")}
+              className="w-full"
+              onChange={handleChange}
+              error={error.username}
+            />
+            <Input
+              type="password"
+              name="password"
+              label={t("register.t7")}
+              placeholder={t("register.t7")}
+              onChange={handleChange}
+              error={error.password}
+            />
+            <button
+              type="submit"
+              className="text-base-semibold mt-2  w-full rounded-full bg-red-700 py-2 text-white"
+            >
+              {t("register.t8")}
+            </button>
+          </div>
+        )}
+      </form>
+      <hr className="my-6 w-full" />
+      <GoogleButton />
+      <p className="mt-6 w-full text-center font-light">
+        {t("register.t9")}{" "}
+        <Link href="/auth" className="font-medium text-red-700">
+          {t("register.t10")}
+        </Link>
+      </p>
     </>
   );
 }

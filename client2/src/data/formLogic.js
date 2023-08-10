@@ -9,10 +9,8 @@ export const handleInputChange = (
   fieldsToValidate,
   setFieldsToValidate,
   form,
-  setForm
+  setForm,
 ) => {
-
-
   if (e.target.type === "file") {
     setForm({
       ...form,
@@ -46,7 +44,6 @@ export const validateForm = (form, fieldsToValidate, validateMode, mode) => {
 };
 
 export const handleSubmit = async (props) => {
-
   //e.preventDefault();
   const formErrors =
     props.validateMode === "beat"
@@ -57,11 +54,9 @@ export const handleSubmit = async (props) => {
       ? ValidationCreateUser(props.form, "*")
       : null;
 
-
   if (Object.keys(formErrors).length === 0) {
-   
     await props.dispatch(props.actionToDispatch(props.form));
-    
+
     props.formRef.reset();
   } else {
     props.setErrors(formErrors);

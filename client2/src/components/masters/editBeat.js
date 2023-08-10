@@ -14,7 +14,7 @@ export default function EditBeat() {
   const [t] = useTranslation("global");
   const dispatch = useDispatch();
   const activeEditingBeat = useSelector(
-    (state) => state.client.beats.activeEditingBeat
+    (state) => state.client.beats.activeEditingBeat,
   );
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [fieldsToValidate, setFieldsToValidate] = useState([]);
@@ -23,7 +23,7 @@ export default function EditBeat() {
 
   const genres = useSelector((state) => state.filters.genres);
   const { _id } = useSelector(
-    (state) => state.client.authSession.session.current
+    (state) => state.client.authSession.session.current,
   );
 
   const [form, setForm] = useState({
@@ -76,11 +76,9 @@ export default function EditBeat() {
     e.preventDefault();
     const formErrors = ValidationCreateBeat(form, "*", "edit");
     if (Object.keys(formErrors).length === 0) {
- 
       await dispatch(editClientBeat(form));
       setIsDropdownOpen(false);
     } else {
-  
       setErrors(formErrors);
     }
     e.target.reset();
@@ -104,12 +102,15 @@ export default function EditBeat() {
   return (
     <>
       {isDropdownOpen && (
-          <BeatRightSheet width="min-w-[100vw] xs:min-w-[90vw] sm:min-w-[450px] " setIsDropdownOpen={setIsDropdownOpen}>
-         <div className="flex h-full flex-col items-center justify-center gap-7 px-4 xs:px-8 sm:px-14 sm:py-10 overflow-y-hidden  ">
+        <BeatRightSheet
+          width="min-w-[100vw] xs:min-w-[90vw] sm:min-w-[450px] "
+          setIsDropdownOpen={setIsDropdownOpen}
+        >
+          <div className="flex h-full flex-col items-center justify-center gap-7 px-4 xs:px-8 sm:px-14 sm:py-10 overflow-y-hidden  ">
             <div className="flex w-full flex-col gap-5 overflow-y-hidden">
               <div className="flex flex-col items-center justify-center gap-0">
                 <h4 className="text-titulo3-regular text-center">
-                    {t("editBeat.t1")}{" "}
+                  {t("editBeat.t1")}{" "}
                   <span className="text-titulo3-semibold text-red-700">
                     beat
                   </span>{" "}
@@ -184,7 +185,7 @@ export default function EditBeat() {
                   type="submit"
                   className="text-base-semibold mt-2  w-full rounded-full bg-red-700 py-2 text-white"
                 >
-                    {t("postBeat.form15")}
+                  {t("postBeat.form15")}
                 </button>
               </form>
             </div>

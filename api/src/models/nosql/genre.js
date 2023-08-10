@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-
 const GenreSchema = new mongoose.Schema({
   id: {
     type: mongoose.Types.ObjectId,

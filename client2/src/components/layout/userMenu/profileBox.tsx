@@ -1,4 +1,4 @@
-import {  Nav, NavigationModal } from "@/components";
+import { Nav, NavigationModal } from "@/components";
 import { navClient } from "@/data/data";
 import { useAppSelector } from "@/redux/hooks";
 import Image from "next/image";
@@ -9,7 +9,7 @@ export default function ProfileBox() {
   const [t] = useTranslation("global");
   const [visible, setVisible] = useState<boolean>(false);
   const client = useAppSelector(
-    (state) => state.client.authSession.session.current
+    (state) => state.client.authSession.session.current,
   );
 
   return (

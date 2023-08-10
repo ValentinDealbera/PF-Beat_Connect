@@ -12,31 +12,26 @@ export default function SellerDashboardHeader() {
       title: "dashboardNav.t1",
       url: "/admin/",
       icon: "/icon/dashboard/overview.svg",
-
     },
     {
       title: "Beats",
       url: "/admin/beats",
       icon: "/icon/dashboard/musical-black.svg",
-
     },
     {
       title: "dashboardNav.t2",
       url: "/admin/users",
       icon: "/icon/dashboard/user-black.svg",
-
     },
     {
       title: "Reviews",
       url: "/admin/reviews",
       icon: "/icon/dashboard/reviews.svg",
-
     },
     {
       title: "dashboardNav.t3",
       url: "/admin/orders",
       icon: "/icon/dashboard/orders.svg",
-   
     },
   ];
   return (
@@ -54,7 +49,6 @@ export default function SellerDashboardHeader() {
             onClick={() => setHamburguerVisible(!hamburguerVisible)}
           />
         </div>
-        
       </header>
       {hamburguerVisible && (
         <HamburgerAdmin

@@ -30,13 +30,20 @@ module.exports = async (req, res) => {
   const audioWAVData = fs.readFileSync(req.files.audioWAV.tempFilePath);
   try {
     const dateTime = giveCurrentDateTime();
-    if (!comprobacion && audioMP3Data && genre && creator && audioWAVData && req.body.bpm) {
+    if (
+      !comprobacion &&
+      audioMP3Data &&
+      genre &&
+      creator &&
+      audioWAVData &&
+      req.body.bpm
+    ) {
       //-------------------------------------audio WAV
       const audioWAVStorageRef = ref(
         storage,
         `beats/${req.body.name}/audioWAV/${
           req.files.audioWAV.name + " - " + dateTime
-        }`
+        }`,
       );
 
       const audioWAVMetadata = {
@@ -46,7 +53,7 @@ module.exports = async (req, res) => {
       const audioWAVSnapshot = await uploadBytesResumable(
         audioWAVStorageRef,
         audioWAVData,
-        audioWAVMetadata
+        audioWAVMetadata,
       );
 
       const downloadaudioWAVURL = await getDownloadURL(audioWAVSnapshot.ref);
@@ -55,7 +62,7 @@ module.exports = async (req, res) => {
         storage,
         `beats/${req.body.name}/audioMP3/${
           req.files.audioMP3.name + " - " + dateTime
-        }`
+        }`,
       );
 
       const audioMetadata = {
@@ -65,7 +72,7 @@ module.exports = async (req, res) => {
       const audioSnapshot = await uploadBytesResumable(
         audioStorageRef,
         audioMP3Data,
-        audioMetadata
+        audioMetadata,
       );
 
       const downloadAudioURL = await getDownloadURL(audioSnapshot.ref);
@@ -77,7 +84,7 @@ module.exports = async (req, res) => {
           storage,
           `beats/${req.body.name}/image/${
             req.files.image.name + " - " + dateTime
-          }`
+          }`,
         );
 
         const imageMetadata = {
@@ -86,14 +93,14 @@ module.exports = async (req, res) => {
 
         const imageBuffer = fs.readFileSync(req.files.image.tempFilePath);
         const resizedImageBuffer = await sharp(imageBuffer)
-        .resize({ width: 400, height: 400 }) // Ajusta las dimensiones según tus requisitos
-        .webp({ quality: 80 }) // Ajusta la calidad WebP según tus necesidades
+          .resize({ width: 400, height: 400 }) // Ajusta las dimensiones según tus requisitos
+          .webp({ quality: 80 }) // Ajusta la calidad WebP según tus necesidades
           .toBuffer();
 
         const imageSnapshot = await uploadBytesResumable(
           imageStorageRef,
           resizedImageBuffer,
-          imageMetadata
+          imageMetadata,
         );
         downloadImageURL = await getDownloadURL(imageSnapshot.ref);
       }

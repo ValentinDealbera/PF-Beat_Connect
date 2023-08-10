@@ -21,15 +21,14 @@ export default function BeatReviewPopup({ modal, handleModalReview }) {
   //const [modal, setModal] = useState(false);
 
   const currentBeatReview = useSelector(
-    (state) => state.beats.activeItemDetail
+    (state) => state.beats.activeItemDetail,
   );
 
-
   //sacamos promedio de rating
-const rating = currentBeatReview.review.map((review) => review.rating);
-const averageRating = (rating.reduce((a, b) => a + b, 0) / rating.length).toFixed(1);
-
-
+  const rating = currentBeatReview.review.map((review) => review.rating);
+  const averageRating = (
+    rating.reduce((a, b) => a + b, 0) / rating.length
+  ).toFixed(1);
 
   return (
     <>
@@ -49,10 +48,11 @@ const averageRating = (rating.reduce((a, b) => a + b, 0) / rating.length).toFixe
                 {currentBeatReview.name}{" "}
               </h1>
               <p className="text-base-regular">
-                {averageRating} {t("clientReview")} | {currentBeatReview.review.length} Reviews
+                {averageRating} {t("clientReview")} |{" "}
+                {currentBeatReview.review.length} Reviews
               </p>
             </div>
-            
+
             <div className="grid w-full grid-cols-1 overflow-y-scroll gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
               <>
                 {currentBeatReview.review.map((review) => (

@@ -16,7 +16,7 @@ type TableBodyProps = {
   emptyRows: number;
   handleChangePage: (
     event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
+    newPage: number,
   ) => void;
   handleChangeRowsPerPage: any;
   TableCellStyledHead: any;

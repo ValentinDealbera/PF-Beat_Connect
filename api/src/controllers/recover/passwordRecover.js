@@ -13,12 +13,10 @@ module.exports = async (req, res) => {
       return res.status(404).json({ message: "El usuario no fue encontrado" });
     }
     if (user.googleId.length > 1) {
-      return res
-        .status(404)
-        .json({
-          message:
-            "Tu cuenta fue creada con Google, pruebe a iniciar sesion con Google",
-        });
+      return res.status(404).json({
+        message:
+          "Tu cuenta fue creada con Google, pruebe a iniciar sesion con Google",
+      });
     }
     axios.post(BACKEND_URL + "api/mail/password", { email: email });
   } catch (error) {

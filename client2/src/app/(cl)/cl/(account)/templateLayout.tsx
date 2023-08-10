@@ -8,7 +8,11 @@ type Props = {
   aceptedPath: string;
 };
 
-export default function SettingsTemplate({ children, title, aceptedPath }: Props) {
+export default function SettingsTemplate({
+  children,
+  title,
+  aceptedPath,
+}: Props) {
   const pathname = usePathname();
 
   if (pathname !== aceptedPath) {

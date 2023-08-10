@@ -31,7 +31,7 @@ function Checkbox({ value, seleccionados, setSeleccionados }) {
           e.target.checked
             ? setSeleccionados([...seleccionados, value])
             : setSeleccionados(
-                seleccionados.filter((v) => v.value !== value.value)
+                seleccionados.filter((v) => v.value !== value.value),
               )
         }
       />

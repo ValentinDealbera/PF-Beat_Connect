@@ -5,7 +5,7 @@ export const rowsBuilder = (
   t: any,
   montoVar: any,
   operacionVar: any,
-  fechaVar: any
+  fechaVar: any,
 ) => {
   return beatsFiltered.map((item: any) => {
     return {

@@ -1,4 +1,4 @@
-import i18next from 'i18next';
+import i18next from "i18next";
 
 export function ValidationCreateUser(form, fieldsToValidate) {
   let error = {};
@@ -20,13 +20,15 @@ export function ValidationCreateUser(form, fieldsToValidate) {
           form.username.length < 1 ||
           form.username.length > 50 ||
           !form.username
-        ){
+        ) {
           if (i18next?.language == "en") {
-            error.username = "Your username must have between one and 50 characters.";
+            error.username =
+              "Your username must have between one and 50 characters.";
           } else {
-            error.username = "Tu nombre de usuario debe tener entre uno y 50 caracteres.";
+            error.username =
+              "Tu nombre de usuario debe tener entre uno y 50 caracteres.";
           }
-        };
+        }
         break;
 
       case "firstName":
@@ -34,62 +36,67 @@ export function ValidationCreateUser(form, fieldsToValidate) {
           form.firstName.length < 1 ||
           form.firstName.length > 50 ||
           !form.firstName
-        ){
+        ) {
           if (i18next?.language == "en") {
-            error.firstName = "Your firstname must have between one and 50 characters.";
+            error.firstName =
+              "Your firstname must have between one and 50 characters.";
           } else {
             error.firstName = "Tu nombre debe tener entre uno y 50 caracteres.";
           }
-        };
+        }
         break;
 
       case "bio":
-        if (form.bio && (form.bio.length < 1 || form.bio.length > 50))
-        {
+        if (form.bio && (form.bio.length < 1 || form.bio.length > 50)) {
           if (i18next?.language == "en") {
-            error.bio = "Your bio phrase must have between one and 50 characters.";
+            error.bio =
+              "Your bio phrase must have between one and 50 characters.";
           } else {
             error.bio = "Tu biografía debe tener entre uno y 50 caracteres.";
           }
-        };
+        }
         break;
 
       case "image":
         if (form.image) {
           if (form.image.size > MAX_FILE_SIZE) {
             if (i18next?.language == "en") {
-              error.image = "The size of the image is too large. Maximum allowed size is 10 MB.";
+              error.image =
+                "The size of the image is too large. Maximum allowed size is 10 MB.";
             } else {
-              error.image = "El tamaño de la imagen es demasiado grande. El tamaño máximo permitido es de 10 MB.";
+              error.image =
+                "El tamaño de la imagen es demasiado grande. El tamaño máximo permitido es de 10 MB.";
             }
-          };
+          }
           if (!regexImage.test(form.image.name)) {
             if (i18next?.language == "en") {
               error.image = "You must upload a jpg or png file";
             } else {
               error.image = "Debes subir un archivo jpg o png";
             }
-          };
-        };
+          }
+        }
         break;
 
       case "backImage":
         if (form.backImage) {
           if (form.backImage.size > MAX_FILE_SIZE) {
             if (i18next?.language == "en") {
-              error.backImage = "The size of the backImage is too large. Maximum allowed size is 10 MB.";
+              error.backImage =
+                "The size of the backImage is too large. Maximum allowed size is 10 MB.";
             } else {
-              error.backImage = "El tamaño de la imagen de fondo es demasiado grande. El tamaño máximo permitido es de 10 MB.";
+              error.backImage =
+                "El tamaño de la imagen de fondo es demasiado grande. El tamaño máximo permitido es de 10 MB.";
             }
-          };
+          }
           if (!regexImage.test(form.backImage.name)) {
             if (i18next?.language == "en") {
               error.backImage = "You must upload a jpg or png file";
             } else {
               error.backImage = "Debes subir un archivo jpg o png";
             }
-          };
-        };
+          }
+        }
         break;
 
       case "lastName":
@@ -99,33 +106,36 @@ export function ValidationCreateUser(form, fieldsToValidate) {
           !form.lastName
         ) {
           if (i18next?.language == "en") {
-            error.lastName = "The last name must have between one and 50 characters.";
+            error.lastName =
+              "The last name must have between one and 50 characters.";
           } else {
-            error.lastName = "El apellido debe tener entre uno y 50 caracteres.";
+            error.lastName =
+              "El apellido debe tener entre uno y 50 caracteres.";
           }
-        };
+        }
         break;
 
       case "password":
-        if (form.password && !regexPassword.test(form.password))
-        {
+        if (form.password && !regexPassword.test(form.password)) {
           if (i18next?.language == "en") {
-            error.password = "The password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.";
+            error.password =
+              "The password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.";
           } else {
-            error.password = "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.";
+            error.password =
+              "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.";
           }
-        };
+        }
         break;
 
       case "email":
-        if (!regexEmail.test(form.email))
-        {
+        if (!regexEmail.test(form.email)) {
           if (i18next?.language == "en") {
             error.email = "Please enter a valid email address.";
           } else {
-            error.email = "Por favor ingresa una dirección de correo electrónico válida.";
+            error.email =
+              "Por favor ingresa una dirección de correo electrónico válida.";
           }
-        };
+        }
         break;
 
       default:

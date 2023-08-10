@@ -1,7 +1,6 @@
 //Masters
 "use client";
 
-
 export { default as Hero } from "./common/hero";
 
 export { default as SimpleHeader } from "./masters/simpleHeader";
@@ -43,16 +42,10 @@ export { default as ModalTables } from "./modal/modalTables";
 
 //Auth
 
-
-
-
 //Beats
 export { default as BeatBottomSheet } from "./modal/bottomSheet";
 export { default as BeatRightSheet } from "./modal/rightSheet";
 export { default as BeatDetailSideBar } from "./client/beat/beatDetailSideBar";
-
-
-
 
 //Client
 
@@ -76,7 +69,6 @@ export { default as ClientDashboardEdit } from "./dashboard/clientDashboardEdit"
 //Layout
 
 export { default as Search } from "./common/search";
-
 
 //Tables
 export { default as DynamicTable } from "./dynamicTable/dynamicTable";

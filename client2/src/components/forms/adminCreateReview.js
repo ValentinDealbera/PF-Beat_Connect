@@ -66,7 +66,7 @@ const AdminCreateReviewForm = forwardRef((props, ref) => {
       setFieldsToValidate,
       form,
       setForm,
-      validateMode
+      validateMode,
     );
   };
 
@@ -154,7 +154,7 @@ const AdminCreateReviewForm = forwardRef((props, ref) => {
                 className="text-sm-medium flex min-w-0 flex-col gap-1"
               >
                 {" "}
-                  {t("adminCreateReviewForm.t1")}
+                {t("adminCreateReviewForm.t1")}
                 <Autocomplete
                   id="createdBy"
                   name="createdBy"
@@ -203,15 +203,17 @@ const AdminCreateReviewForm = forwardRef((props, ref) => {
               error={error.rating}
               defaultValue={mode === "edit" ? defaultValues.rating : ""}
             />
-            { mode === "edit" && <SwitchForm
-              label={t("adminCreateReviewForm.t4")}
-              name="softDelete"
-              nameInput="softDelete"
-              // defaultValue={mode === "edit" ? defaultValues.softDelete : ""}
-              onChange={handleInput}
-              arrayButtons={arraySoftDelete.arrayButtons}
-              error={error.softDelete}
-            />}
+            {mode === "edit" && (
+              <SwitchForm
+                label={t("adminCreateReviewForm.t4")}
+                name="softDelete"
+                nameInput="softDelete"
+                // defaultValue={mode === "edit" ? defaultValues.softDelete : ""}
+                onChange={handleInput}
+                arrayButtons={arraySoftDelete.arrayButtons}
+                error={error.softDelete}
+              />
+            )}
           </FormColumn>
           <FormColumn className="w-full">
             {mode === "create" && (

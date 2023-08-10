@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
@@ -11,21 +11,19 @@ export default function Logout() {
   const router = useRouter();
 
   const loginMethod = useSelector(
-    (state) => state.client.authSession.auth.loginMethod
+    (state) => state.client.authSession.auth.loginMethod,
   );
 
   const logOutJson = async () => {
     dispatch(resetReducer());
     // resetPersist()
- 
-    await resetPersist();
 
+    await resetPersist();
   };
 
   useEffect(() => {
     const logOut = async () => {
       await logOutJson();
-     
 
       if (loginMethod === "google") {
         router.push(`${serverUrl}google/logout`);
@@ -37,18 +35,10 @@ export default function Logout() {
 
     if (loginMethod !== "") {
       logOut();
-    }
-    else {
+    } else {
       router.push("/");
     }
-
-
-   
   }, []);
 
-  return (
-    <>
-
-    </>
-  ); // Opcionalmente puedes retornar algún contenido o null si no necesitas mostrar nada en este componente
+  return <></>; // Opcionalmente puedes retornar algún contenido o null si no necesitas mostrar nada en este componente
 }

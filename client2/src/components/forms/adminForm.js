@@ -23,7 +23,6 @@ export default function AdminForm(props) {
   }, [form, fieldsToValidate]);
 
   const handleInputChange = (e) => {
-
     if (e.target.type === "file") {
       setForm({
         ...form,

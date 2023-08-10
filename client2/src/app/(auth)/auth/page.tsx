@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Input, GoogleButton } from "@/components";
 import Link from "next/link";
 import { jsonLogin } from "@/redux/slices/client/authSession";
@@ -20,7 +20,7 @@ export default function Login() {
       password: name === "password" ? value : "",
     };
     const validationErrors = ValidateAuth(data);
-   // setErrors({ ...error, [name]: validationErrors[name] });
+    // setErrors({ ...error, [name]: validationErrors[name] });
   };
 
   const handleLogin = (e: any) => {

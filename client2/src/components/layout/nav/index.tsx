@@ -49,7 +49,7 @@ export default function Nav({
                   currentMode={currentMode}
                   pathname={pathname}
                 />
-              )
+              ),
           )}
           {withModal && (
             <NavModalItem

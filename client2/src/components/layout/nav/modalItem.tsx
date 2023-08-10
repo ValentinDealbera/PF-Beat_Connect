@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {NavigationModal} from "@/components";
+import { NavigationModal } from "@/components";
 
 type NavModalItemProps = {
   label: string;

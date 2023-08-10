@@ -25,7 +25,7 @@ export const adminGetData = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
-  }
+  },
 );
 
 //------------------ SLICE ------------------//

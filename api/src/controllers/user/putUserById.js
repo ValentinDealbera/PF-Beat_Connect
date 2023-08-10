@@ -98,7 +98,7 @@ module.exports = async (req, res) => {
         } else {
           console.log("Borramos el fav", favorite);
           user.userFavorites = user.userFavorites.filter(
-            (e) => e._id.toString() !== favorite
+            (e) => e._id.toString() !== favorite,
           );
           // const index = user.userFavorites.findIndex((e) => (e = favorite));
           // user.userFavorites = user.userFavorites.slice(index, index);
@@ -120,7 +120,7 @@ module.exports = async (req, res) => {
         const imageData = fs.readFileSync(image.tempFilePath);
         const imageStorageRef = ref(
           storage,
-          `users/${user.username}/image/${user.username}`
+          `users/${user.username}/image/${user.username}`,
         );
 
         const imageMetadata = {
@@ -129,14 +129,14 @@ module.exports = async (req, res) => {
 
         const imageBuffer = fs.readFileSync(req.files.image.tempFilePath);
         const resizedImageBuffer = await sharp(imageBuffer)
-        .resize({ width: 400, height: 400 }) // Ajusta las dimensiones según tus requisitos
-        .webp({ quality: 80 }) // Ajusta la calidad WebP según tus necesidades
+          .resize({ width: 400, height: 400 }) // Ajusta las dimensiones según tus requisitos
+          .webp({ quality: 80 }) // Ajusta la calidad WebP según tus necesidades
           .toBuffer();
 
         const imageSnapshot = await uploadBytesResumable(
           imageStorageRef,
           resizedImageBuffer,
-          imageMetadata
+          imageMetadata,
         );
         const downloadImageURL = await getDownloadURL(imageSnapshot.ref);
         user.image = downloadImageURL;
@@ -145,7 +145,7 @@ module.exports = async (req, res) => {
         const imageData = fs.readFileSync(backImage.tempFilePath);
         const imageStorageRef = ref(
           storage,
-          `users/${user.username}/backImage/${user.username}`
+          `users/${user.username}/backImage/${user.username}`,
         );
 
         const imageMetadata = {
@@ -161,7 +161,7 @@ module.exports = async (req, res) => {
         const imageSnapshot2 = await uploadBytesResumable(
           imageStorageRef,
           resizedImageBuffer,
-          imageMetadata
+          imageMetadata,
         );
         const downloadBackImageURL = await getDownloadURL(imageSnapshot2.ref);
         user.backImage = downloadBackImageURL;
@@ -180,7 +180,7 @@ module.exports = async (req, res) => {
           };
           const access_token = await axios.post(
             `https://api.mercadopago.com/oauth/token`,
-            body
+            body,
           );
           if (userId) {
             userId.accessToken = access_token.data.access_token;

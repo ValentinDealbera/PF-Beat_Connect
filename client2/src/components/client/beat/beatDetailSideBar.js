@@ -26,18 +26,22 @@ export default function BeatDetailSideBar() {
   const hasReview = currentBeat.review.length > 0 ? true : false;
 
   const buyed = Boolean(
-    bougthBeats.find((beat) => beat._id === currentBeat._id)
+    bougthBeats.find((beat) => beat._id === currentBeat._id),
   );
 
   const dynamicBeatDetailBox = [
     {
-      msg1: i18n.language === "en" ? "Free License, MP3" : "Licencia Gratuita, MP3",
+      msg1:
+        i18n.language === "en" ? "Free License, MP3" : "Licencia Gratuita, MP3",
       msg2: "$0.00",
       beat: currentBeat.audioMP3,
       type: "free",
     },
     {
-      msg1: i18n.language === "en" ? "Standart License, WAV" : "Licencia Estándar, WAV",
+      msg1:
+        i18n.language === "en"
+          ? "Standart License, WAV"
+          : "Licencia Estándar, WAV",
       msg2: `$${currentBeat.priceAmount}`,
       beat: currentBeat.audioWAV,
       type: buyed ? "buyed" : "paid",
@@ -95,15 +99,14 @@ export default function BeatDetailSideBar() {
             <button
               className="background-primary-red-700 color-neutral-white mt-2 rounded-full px-5 py-3 text-sm font-semibold"
               onClick={() => {
-                dispatch(addToCart({ authorId: authorId, beat: currentBeat }))
-       
+                dispatch(addToCart({ authorId: authorId, beat: currentBeat }));
               }}
             >
               {t("beatDetailSideBar.t3")}
             </button>
           ) : (
             <a
-            className="background-primary-red-700 color-neutral-white mt-2 rounded-full px-5 py-3 text-sm font-semibold text-center"
+              className="background-primary-red-700 color-neutral-white mt-2 rounded-full px-5 py-3 text-sm font-semibold text-center"
               download={currentBeat.name}
               href={currentBeat.audioWAV}
             >
@@ -136,7 +139,14 @@ function BeatDataBox({ beat }) {
   );
 }
 
-function BeatDetailBox({ msg1, msg2, beat, handleModalReview, type, hasReview }) {
+function BeatDetailBox({
+  msg1,
+  msg2,
+  beat,
+  handleModalReview,
+  type,
+  hasReview,
+}) {
   const [t, i18n] = useTranslation("global");
   const dispatch = useDispatch();
 
@@ -152,9 +162,7 @@ function BeatDetailBox({ msg1, msg2, beat, handleModalReview, type, hasReview })
         >
           {t("beatDetailSideBar.t4")}
         </button>
-      ) 
-      : type === "free" ? ( 
-      (
+      ) : type === "free" ? (
         <a
           className=" text-sm font-semibold text-red-700"
           download={beat.name}
@@ -162,7 +170,6 @@ function BeatDetailBox({ msg1, msg2, beat, handleModalReview, type, hasReview })
         >
           {t("beatDetailSideBar.t2")}
         </a>
-      )
       ) : (
         <></>
       )}

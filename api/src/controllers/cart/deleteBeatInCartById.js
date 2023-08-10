@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
 
     // Eliminar el beat en específico del carrito
     const beatToDelete = cart.beats.find(
-      (beat) => beat._id.toString() === beatId
+      (beat) => beat._id.toString() === beatId,
     );
     if (!beatToDelete) {
       return res
@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
         .json({ mensaje: "El beat no existe en este carrito" });
     }
     const updatedBeats = cart.beats.filter(
-      (beat) => beat._id.toString() !== beatId
+      (beat) => beat._id.toString() !== beatId,
     );
     cart.beats = updatedBeats;
     await cart.save();

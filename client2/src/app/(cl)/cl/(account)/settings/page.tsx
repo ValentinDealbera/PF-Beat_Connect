@@ -2,8 +2,8 @@ import { EditClientForm, EditPasswordForm } from "@/components";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Next.js',
-}
+  title: "Next.js",
+};
 
 export default function BuyerProfile() {
   const activeIndex = 0;

@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
 
     const user = await userModel.findById(deletedBeat.userCreator);
     const beatIndex = user.createdBeats.findIndex(
-      (beat) => beat._id === deletedBeat._id
+      (beat) => beat._id === deletedBeat._id,
     );
     const deletedBeatInUser = user.createdBeats.splice(beatIndex, 1);
     await user.save();

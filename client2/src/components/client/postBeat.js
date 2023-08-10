@@ -21,7 +21,7 @@ export default function PostBeat() {
 
   const genres = useSelector((state) => state.filters.genres);
   const { _id } = useSelector(
-    (state) => state.client.authSession.session.current
+    (state) => state.client.authSession.session.current,
   );
   //const { _id } = client;
 
@@ -93,18 +93,21 @@ export default function PostBeat() {
   return (
     <>
       {isDropdownOpen && (
-       <BeatRightSheet width="min-w-[100vw] xs:min-w-[90vw] sm:min-w-[450px] " setIsDropdownOpen={setIsDropdownOpen}>
-            <div className="flex h-full flex-col items-center justify-center gap-7 px-4 xs:px-8 sm:px-14 sm:py-10 overflow-y-hidden  ">
+        <BeatRightSheet
+          width="min-w-[100vw] xs:min-w-[90vw] sm:min-w-[450px] "
+          setIsDropdownOpen={setIsDropdownOpen}
+        >
+          <div className="flex h-full flex-col items-center justify-center gap-7 px-4 xs:px-8 sm:px-14 sm:py-10 overflow-y-hidden  ">
             <div className="flex w-full flex-col gap-5 overflow-y-hidden">
               <div className="flex flex-col items-center justify-center gap-0">
                 <h4 className="text-titulo3-regular text-center">
-                    {t("postBeat.t1")}{" "}
+                  {t("postBeat.t1")}{" "}
                   <span className="text-titulo3-semibold text-red-700">
                     {t("postBeat.t2")}
                   </span>{" "}
                 </h4>
                 <p className="text-base-light text-center">
-                    {t("postBeat.t3")}
+                  {t("postBeat.t3")}
                 </p>
               </div>
               <form
@@ -190,7 +193,7 @@ export default function PostBeat() {
                   type="submit"
                   className="text-base-semibold mt-2  w-full rounded-full bg-red-700 py-2 text-white"
                 >
-                    {t("postBeat.form14")}
+                  {t("postBeat.form14")}
                 </button>
               </form>
             </div>

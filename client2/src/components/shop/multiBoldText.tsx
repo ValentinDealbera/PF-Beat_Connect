@@ -15,9 +15,7 @@ const MultiBoldText = ({
   return (
     <h1 className={textClass}>
       {startText}{" "}
-      <span className={`text-titulo1-semibold ${endClassName}`}>
-        {endText}
-      </span>
+      <span className={`text-titulo1-semibold ${endClassName}`}>{endText}</span>
     </h1>
   );
 };

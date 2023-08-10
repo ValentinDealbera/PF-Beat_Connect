@@ -41,14 +41,14 @@ export const postClientReview = createAsyncThunk(
       console.log("postClientReview error", error);
       throw error;
     }
-  }
+  },
 );
 
 //--------------------
 //DELETE CLIENT REVIEW
 export const deleteClientReview = createAsyncThunk(
   "client/deleteClientReview",
-  async (data:string, { rejectWithValue, dispatch, getState }) => {
+  async (data: string, { rejectWithValue, dispatch, getState }) => {
     const state = getState() as RootState;
     const id = state.client.authSession.session.current.id;
     try {
@@ -67,7 +67,7 @@ export const deleteClientReview = createAsyncThunk(
       console.log("deleteClientReview error", error);
       throw error;
     }
-  }
+  },
 );
 
 //--------------------
@@ -95,7 +95,7 @@ export const editClientReview = createAsyncThunk(
       console.log("editClientReview error", error);
       throw error;
     }
-  }
+  },
 );
 
 //-------------------- SLICE -------------------//

@@ -44,7 +44,7 @@ export const postClientBeat = createAsyncThunk(
       console.error("postClientBeat Error", error);
       throw error;
     }
-  }
+  },
 );
 //--------------------
 //DELETE CLIENT BEAT
@@ -61,7 +61,7 @@ export const deleteClientBeat = createAsyncThunk(
       console.error("deleteClientBeat error", error);
       throw error;
     }
-  }
+  },
 );
 
 //--------------------
@@ -76,7 +76,7 @@ export const editClientBeat = createAsyncThunk(
       const response = await updateClientBeat(
         formData,
         activeEditingBeatId,
-        userId
+        userId,
       );
       await dispatch(getUserData(userId));
       await dispatch(fetchBeats({}));
@@ -86,7 +86,7 @@ export const editClientBeat = createAsyncThunk(
       console.error("editClientBeat error", error);
       throw error;
     }
-  }
+  },
 );
 
 //--------------------
@@ -107,7 +107,7 @@ export const postFavoriteBeat = createAsyncThunk(
       console.error("postFavoriteBeat error", error);
       throw error;
     }
-  }
+  },
 );
 
 //--------------------
@@ -128,7 +128,7 @@ export const deleteFavoriteBeat = createAsyncThunk(
       console.error("deleteFavoriteBeat error", error);
       throw error;
     }
-  }
+  },
 );
 
 //------------------ SLICE ------------------//

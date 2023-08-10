@@ -66,7 +66,7 @@ module.exports = async (req, res) => {
       //-------------------------------------audio WAV
       const audioWAVStorageRef = ref(
         storage,
-        `beats/${req.body.name}/audioWAV/${req.body.name}.wav`
+        `beats/${req.body.name}/audioWAV/${req.body.name}.wav`,
       );
 
       const audioWAVMetadata = {
@@ -76,14 +76,14 @@ module.exports = async (req, res) => {
       const audioWAVSnapshot = await uploadBytesResumable(
         audioWAVStorageRef,
         audioWAVData,
-        audioWAVMetadata
+        audioWAVMetadata,
       );
 
       const downloadaudioWAVURL = await getDownloadURL(audioWAVSnapshot.ref);
       //-------------------------------------audio MP3
       const audioStorageRef = ref(
         storage,
-        `beats/${req.body.name}/audioMP3/${req.body.name}.mp3`
+        `beats/${req.body.name}/audioMP3/${req.body.name}.mp3`,
       );
 
       const audioMetadata = {
@@ -93,7 +93,7 @@ module.exports = async (req, res) => {
       const audioSnapshot = await uploadBytesResumable(
         audioStorageRef,
         audioMP3Data,
-        audioMetadata
+        audioMetadata,
       );
 
       const downloadAudioURL = await getDownloadURL(audioSnapshot.ref);
@@ -103,7 +103,7 @@ module.exports = async (req, res) => {
         const imageData = fs.readFileSync(req.files.image.tempFilePath);
         const imageStorageRef = ref(
           storage,
-          `beats/${req.body.name}/image/${req.body.name}`
+          `beats/${req.body.name}/image/${req.body.name}`,
         );
 
         const imageMetadata = {
@@ -125,7 +125,7 @@ module.exports = async (req, res) => {
         const imageSnapshot = await uploadBytesResumable(
           imageStorageRef,
           resizedImageBuffer,
-          imageMetadata
+          imageMetadata,
         );
 
         downloadImageURL = await getDownloadURL(imageSnapshot.ref);

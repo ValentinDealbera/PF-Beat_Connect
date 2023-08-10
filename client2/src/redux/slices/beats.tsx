@@ -53,7 +53,7 @@ export const fetchBeats = createAsyncThunk(
       console.error("fetchBeats", err);
       throw err;
     }
-  }
+  },
 );
 
 export const fetchFeaturedBeats = createAsyncThunk(
@@ -69,7 +69,7 @@ export const fetchFeaturedBeats = createAsyncThunk(
       console.error("fetchFeaturedBeats", err);
       throw err;
     }
-  }
+  },
 );
 
 export const fetchCurrentAuthor = createAsyncThunk(
@@ -95,7 +95,7 @@ export const fetchCurrentAuthor = createAsyncThunk(
         firstName,
         lastName,
         id: idR,
-         image,
+        image,
         username,
         bio,
         backImage,
@@ -104,7 +104,7 @@ export const fetchCurrentAuthor = createAsyncThunk(
     } catch (err) {
       throw err;
     }
-  }
+  },
 );
 
 //-------------------- SLICE -------------------//

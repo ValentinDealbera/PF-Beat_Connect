@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import axios from "axios";
 import { toastError, toastSuccess } from "@/utils/toastStyles";
 const tokenAdmin = process.env.NEXT_PUBLIC_TOKEN_ADMIN;
-import i18next from 'i18next';
+import i18next from "i18next";
 
 const initialState = {
   orders: [],
@@ -22,7 +22,7 @@ export const adminGetOrders = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
-  }
+  },
 );
 
 //GET ADMIN ORDER
@@ -35,7 +35,7 @@ export const adminGetOrder = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
-  }
+  },
 );
 
 //DELETE ADMIN ORDER
@@ -53,7 +53,7 @@ export const adminDeleteOrder = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error);
     }
-  }
+  },
 );
 
 //POST ADMIN ORDER
@@ -71,7 +71,7 @@ export const adminPostOrder = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error);
     }
-  }
+  },
 );
 
 //------------------ SLICE ------------------//
@@ -110,29 +110,38 @@ const ordersSlice = createSlice({
 
       //DELETE ADMIN ORDER
       .addCase(adminDeleteOrder.pending, (state, action) => {
-        let trad= i18next?.language == "en"? "Deleting order..." : "Borrando Orden..."
+        let trad =
+          i18next?.language == "en" ? "Deleting order..." : "Borrando Orden...";
         toast(trad);
       })
       .addCase(adminDeleteOrder.fulfilled, (state, action) => {
-        let trad= i18next?.language == "en"? "Order deleted" : "Orden Borrada"
+        let trad =
+          i18next?.language == "en" ? "Order deleted" : "Orden Borrada";
         toast.success(trad, toastSuccess);
       })
       .addCase(adminDeleteOrder.rejected, (state, action) => {
-        let trad= i18next?.language == "en"? "Error deleting order" :"Error al borrar orden"
+        let trad =
+          i18next?.language == "en"
+            ? "Error deleting order"
+            : "Error al borrar orden";
         toast.error(trad, toastError);
       })
 
       //POST ADMIN ORDER
       .addCase(adminPostOrder.pending, (state, action) => {
-        let trad= i18next?.language == "en"? "Creating order..." :"Creando Orden..."
+        let trad =
+          i18next?.language == "en" ? "Creating order..." : "Creando Orden...";
         toast(trad);
       })
       .addCase(adminPostOrder.fulfilled, (state, action) => {
-        let trad= i18next?.language == "en"? "Order created" :"Orden Creada"
+        let trad = i18next?.language == "en" ? "Order created" : "Orden Creada";
         toast.success(trad, toastSuccess);
       })
       .addCase(adminPostOrder.rejected, (state, action) => {
-        let trad= i18next?.language == "en"? "Error creating order" :"Error al crear orden"
+        let trad =
+          i18next?.language == "en"
+            ? "Error creating order"
+            : "Error al crear orden";
         toast.success(trad, toastError);
       });
   },

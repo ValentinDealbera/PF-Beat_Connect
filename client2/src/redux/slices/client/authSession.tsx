@@ -64,7 +64,7 @@ export const jsonLogin = createAsyncThunk(
       console.error("jsonLogin error", error);
       throw error;
     }
-  }
+  },
 );
 
 //--------------------
@@ -82,7 +82,7 @@ export const jsonRegister = createAsyncThunk(
       console.error("jsonRegister error", error);
       throw error;
     }
-  }
+  },
 );
 
 //--------------------
@@ -100,7 +100,7 @@ export const recoverPassword = createAsyncThunk(
       console.error("recoverPassword error", error);
       throw error;
     }
-  }
+  },
 );
 
 //--------------------
@@ -116,7 +116,7 @@ export const convertInSeller = createAsyncThunk(
       console.error("convertInSeller error", error);
       throw error;
     }
-  }
+  },
 );
 
 //--------------------
@@ -134,7 +134,7 @@ export const editClient = createAsyncThunk(
       console.error("editClient error", error);
       throw error;
     }
-  }
+  },
 );
 
 //--------------------
@@ -151,7 +151,7 @@ export const passwordRecovery = createAsyncThunk(
       console.error("passwordRecovery error", error);
       throw error;
     }
-  }
+  },
 );
 
 //--------------------
@@ -167,7 +167,7 @@ export const changePassword = createAsyncThunk(
       console.error("changePassword error", error);
       throw error;
     }
-  }
+  },
 );
 
 //--------------------
@@ -197,7 +197,7 @@ export const getUserData = createAsyncThunk(
       console.error("getUserData error", error);
       throw error;
     }
-  }
+  },
 );
 
 //------------------ SLICE ------------------//

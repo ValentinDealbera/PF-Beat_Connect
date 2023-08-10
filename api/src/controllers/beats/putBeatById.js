@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
 
     const { name, priceAmount, review, softDelete, genre, relevance, bpm } =
       req.body;
-      console.log(req.body);
+    console.log(req.body);
     const updatedBeat = await beatModel.findById(id).populate("userCreator");
     const userAux = await userModel.findById(userid);
     if (!updatedBeat)
@@ -31,7 +31,7 @@ module.exports = async (req, res) => {
       return res.status(400).json({
         message: "No puedes modificar un beat que no sea de tu autoria",
       });
-    if (bpm) updatedBeat.BPM = Number(bpm)
+    if (bpm) updatedBeat.BPM = Number(bpm);
     if (name) updatedBeat.name = name;
     if (priceAmount) updatedBeat.priceAmount = Number(priceAmount);
     if (review) updatedBeat.review = [...updatedBeat.review, review];
@@ -42,7 +42,7 @@ module.exports = async (req, res) => {
       const imageData = fs.readFileSync(image.tempFilePath);
       const imageStorageRef = ref(
         storage,
-        `beats/${updatedBeat.name}/image/${updatedBeat.name}`
+        `beats/${updatedBeat.name}/image/${updatedBeat.name}`,
       );
 
       const imageMetadata = {
@@ -51,14 +51,14 @@ module.exports = async (req, res) => {
 
       const imageBuffer = fs.readFileSync(req.files.image.tempFilePath);
       const resizedImageBuffer = await sharp(imageBuffer)
-      .resize({ width: 400, height: 400 }) // Ajusta las dimensiones según tus requisitos
-      .webp({ quality: 80 }) // Ajusta la calidad WebP según tus necesidades
+        .resize({ width: 400, height: 400 }) // Ajusta las dimensiones según tus requisitos
+        .webp({ quality: 80 }) // Ajusta la calidad WebP según tus necesidades
         .toBuffer();
-      
+
       const imageSnapshot = await uploadBytesResumable(
         imageStorageRef,
         resizedImageBuffer,
-        imageMetadata
+        imageMetadata,
       );
       const downloadImageURL = await getDownloadURL(imageSnapshot.ref);
       updatedBeat.image = downloadImageURL;

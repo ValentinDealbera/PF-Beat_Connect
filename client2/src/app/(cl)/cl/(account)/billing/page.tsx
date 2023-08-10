@@ -32,7 +32,7 @@ export default function BuyerProfile() {
     t,
     montoVar,
     operacionVar,
-    fechaVar
+    fechaVar,
   ) as any;
 
   return (

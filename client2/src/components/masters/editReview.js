@@ -14,7 +14,7 @@ import { useTranslation } from "react-i18next";
 export default function EditReviewForm(props) {
   const [t, i18n] = useTranslation("global");
   const currentReview = useSelector(
-    (state) => state?.client?.reviews?.activeEditingReview
+    (state) => state?.client?.reviews?.activeEditingReview,
   );
 
   const [formFields, setFormFields] = useState({
@@ -71,13 +71,13 @@ export default function EditReviewForm(props) {
 
   return (
     <>
-     <div className="flex h-full flex-col items-center justify-center gap-7 px-4 xs:px-8 sm:px-14 sm:py-10 overflow-y-hidden  ">
+      <div className="flex h-full flex-col items-center justify-center gap-7 px-4 xs:px-8 sm:px-14 sm:py-10 overflow-y-hidden  ">
         <div className="flex w-full flex-col gap-3 overflow-y-hidden">
           <div className="flex flex-col items-center justify-center gap-4">
             <h4 className="text-titulo3-regular text-center">
-                {t("editReview.t1")}{" "}
+              {t("editReview.t1")}{" "}
               <span className="text-titulo3-semibold text-red-700">
-                  {t("editReview.t2")}
+                {t("editReview.t2")}
               </span>{" "}
             </h4>
           </div>
@@ -128,7 +128,7 @@ export default function EditReviewForm(props) {
                 type="submit"
                 className="text-base-semibold mt-2  w-full rounded-full bg-red-700 py-2 text-white"
               >
-                  {t("editReview.t5")}
+                {t("editReview.t5")}
               </button>
             </FormContainer>
           </form>

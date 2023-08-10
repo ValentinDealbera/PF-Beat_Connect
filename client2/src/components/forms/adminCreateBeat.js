@@ -37,7 +37,6 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
   const genres = useSelector((state) => state.filters.genres);
   const [softD, setSoftD] = useState(defaultValues.softDelete);
 
-
   const [form, setForm] = useState({
     name: `${mode === "edit" ? defaultValues.name : ""}`,
     priceAmount: `${mode === "edit" ? defaultValues.priceAmount : ""}`,
@@ -65,7 +64,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
       setFieldsToValidate,
       form,
       setForm,
-      validateMode
+      validateMode,
     );
   };
 
@@ -214,9 +213,8 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
                   renderInput={(params) => (
                     <TextField
                       {...params}
-                     // variant="filled"
-                     size="small"
-          
+                      // variant="filled"
+                      size="small"
                       C
                       className="border-radius-estilo2 bg-white px-4 py-2 text-sm placeholder:text-sm dark:bg-customDark-700 dark:text-black"
                     />
@@ -239,7 +237,7 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
               error={error.bpm}
             />
             <label className="text-sm-medium flex min-w-0 flex-col gap-1">
-                {t("adminBeatsCreate.f5")}
+              {t("adminBeatsCreate.f5")}
               <select
                 name="genre"
                 id="genre"
@@ -267,24 +265,24 @@ const AdminCreateBeatForm = forwardRef((props, ref) => {
             </label>
             {mode == "create" && (
               <>
-              <Input
-                name="audioMP3"
-                label="Audio MP3"
-                placeholder="Audio MP3:"
-                defaultValue={mode === "edit" ? defaultValues.audioMP3 : ""}
-                type="file"
-                onChange={handleInput}
-                error={error.audioMP3}
-              />
-              <Input
-                name="audioWAV"
-                label="Audio WAV"
-                placeholder="Audio WAV:"
-                defaultValue={mode === "edit" ? defaultValues.audioWAV : ""}
-                type="file"
-                onChange={handleInput}
-                error={error.audioWAV}
-              />
+                <Input
+                  name="audioMP3"
+                  label="Audio MP3"
+                  placeholder="Audio MP3:"
+                  defaultValue={mode === "edit" ? defaultValues.audioMP3 : ""}
+                  type="file"
+                  onChange={handleInput}
+                  error={error.audioMP3}
+                />
+                <Input
+                  name="audioWAV"
+                  label="Audio WAV"
+                  placeholder="Audio WAV:"
+                  defaultValue={mode === "edit" ? defaultValues.audioWAV : ""}
+                  type="file"
+                  onChange={handleInput}
+                  error={error.audioWAV}
+                />
               </>
             )}
             {mode === "edit" && (

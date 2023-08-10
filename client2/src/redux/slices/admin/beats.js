@@ -3,8 +3,7 @@ import { serverUrl } from "@/data/config";
 import { toast } from "sonner";
 import axios from "axios";
 import { toastError, toastSuccess } from "@/utils/toastStyles";
-import i18next from 'i18next';
-
+import i18next from "i18next";
 
 const tokenAdmin = process.env.NEXT_PUBLIC_TOKEN_ADMIN;
 const initialState = {
@@ -33,7 +32,7 @@ export const adminPostBeat = createAsyncThunk(
       console.log("Error de post", error);
       return rejectWithValue(error.response.data.message);
     }
-  }
+  },
 );
 
 //--------------------
@@ -50,14 +49,14 @@ export const adminEditBeat = createAsyncThunk(
             admintoken: tokenAdmin,
             "Content-Type": "multipart/form-data",
           },
-        }
+        },
       );
       await dispatch(adminGetBeats());
       return { beatResponse: response.data };
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
-  }
+  },
 );
 
 //--------------------
@@ -72,7 +71,7 @@ export const adminDeleteBeat = createAsyncThunk(
           headers: {
             admintoken: tokenAdmin,
           },
-        }
+        },
       );
       await dispatch(adminGetBeats());
       return { userResponse: response.data };
@@ -80,7 +79,7 @@ export const adminDeleteBeat = createAsyncThunk(
       console.log("error", error);
       return rejectWithValue(error.response.data.message);
     }
-  }
+  },
 );
 
 //--------------------
@@ -94,7 +93,7 @@ export const adminGetBeats = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
-  }
+  },
 );
 
 //--------------------
@@ -108,7 +107,7 @@ export const adminGetBeat = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error.response.data.message);
     }
-  }
+  },
 );
 
 //------------------ SLICE ------------------//
@@ -122,20 +121,22 @@ const adminBeatsSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-
-    
     builder
       //--------------------
       //POST ADMIN BEAT
       .addCase(adminPostBeat.fulfilled, (state, action) => {
-        let trad= i18next?.language == "en"? "Beat created successfully" :"Beat creado correctamente"
+        let trad =
+          i18next?.language == "en"
+            ? "Beat created successfully"
+            : "Beat creado correctamente";
         toast.success(trad, toastSuccess);
       })
       .addCase(adminPostBeat.rejected, (state, action) => {
         toast.error(action.payload, toastError);
       })
       .addCase(adminPostBeat.pending, (state, action) => {
-        let trad= i18next?.language == "en"? "Creating beat..." :"Creando beat..."
+        let trad =
+          i18next?.language == "en" ? "Creating beat..." : "Creando beat...";
         toast(trad);
       })
 
@@ -145,25 +146,33 @@ const adminBeatsSlice = createSlice({
         toast.error(action.payload, toastError);
       })
       .addCase(adminEditBeat.fulfilled, (state, action) => {
-        let trad= i18next?.language == "en"? "Beat edited successfully" :"Beat editado correctamente"
+        let trad =
+          i18next?.language == "en"
+            ? "Beat edited successfully"
+            : "Beat editado correctamente";
         toast.success(trad, toastSuccess);
       })
       .addCase(adminEditBeat.pending, (state, action) => {
-        let trad= i18next?.language == "en"? "Editing beat..." : "Editando beat..."
+        let trad =
+          i18next?.language == "en" ? "Editing beat..." : "Editando beat...";
         toast(trad);
       })
 
       //--------------------
       //DELETE ADMIN BEAT
       .addCase(adminDeleteBeat.fulfilled, (state, action) => {
-        let trad= i18next?.language == "en"? "Beat deleted successfully" :"Beat eliminado correctamente"
+        let trad =
+          i18next?.language == "en"
+            ? "Beat deleted successfully"
+            : "Beat eliminado correctamente";
         toast.success(trad, toastSuccess);
       })
       .addCase(adminDeleteBeat.rejected, (state, action) => {
         toast.error(action.payload, toastError);
       })
       .addCase(adminDeleteBeat.pending, (state, action) => {
-        let trad= i18next?.language == "en"? "Deleting beat..." : "Eliminando beat..."
+        let trad =
+          i18next?.language == "en" ? "Deleting beat..." : "Eliminando beat...";
         toast(trad);
       })
 
@@ -177,22 +186,26 @@ const adminBeatsSlice = createSlice({
         toast.error(action.payload, toastError);
       })
       .addCase(adminGetBeats.pending, (state, action) => {
-       // toast("Cargando beat...");
+        // toast("Cargando beat...");
       })
 
       //--------------------
       //GET ADMIN BEAT
       .addCase(adminGetBeat.fulfilled, (state, action) => {
-        let trad= i18next?.language == "en"? "Beat retrieved successfully" :"Beat obtenido correctamente"
+        let trad =
+          i18next?.language == "en"
+            ? "Beat retrieved successfully"
+            : "Beat obtenido correctamente";
         toast.success(trad, toastSuccess);
-        
+
         state.currentEdtingBeat = action.payload.beatResponse;
       })
       .addCase(adminGetBeat.rejected, (state, action) => {
         toast.error(action.payload, toastError);
       })
       .addCase(adminGetBeat.pending, (state, action) => {
-        let trad= i18next?.language == "en"? "Loading beat..." : "Cargando beat..."
+        let trad =
+          i18next?.language == "en" ? "Loading beat..." : "Cargando beat...";
         toast(trad);
       });
   },

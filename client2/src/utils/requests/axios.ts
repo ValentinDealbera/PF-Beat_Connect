@@ -25,7 +25,6 @@ export const axiosPoster = async ({ url, body, headers }: axiosPoster) => {
   const { data: res } = await axios.post(serverUrl + url, body || {}, {
     headers: headers || {},
   });
-  
 
   return res;
 };

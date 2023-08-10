@@ -2,24 +2,32 @@ import { serverUrl } from "@/data/config";
 import axios from "axios";
 
 export function createUserSession(user) {
-  const { firstName, lastName, bio, _id, email, username, image, backImage, softDelete } =
-    user;
+  const {
+    firstName,
+    lastName,
+    bio,
+    _id,
+    email,
+    username,
+    image,
+    backImage,
+    softDelete,
+  } = user;
 
   return {
     firstName,
     lastName,
     bio,
-     image,
+    image,
     _id,
     email,
     userName: username,
     backImage,
-    softDelete
+    softDelete,
   };
 }
 
 export const getUserData = async ({ clientId }) => {
-
   try {
     const { data: response } = await axios.get(`${serverUrl}user/${clientId}`);
 

@@ -8,7 +8,6 @@ import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 
-
 export const manageBecomeSeller = () => {
   BecomeSeller.handleOpenDropdown();
 };
@@ -25,36 +24,41 @@ export default function BecomeSeller() {
 
   BecomeSeller.handleOpenDropdown = handleOpenDropdown;
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  alert("Caracteristica desactivada");
-  // if (!terms) {
-  //   toast.error(t("becomeSeller.error1"), toastError);
-  //   return;
-  // }
-  // try {
-  //   const data = await axios.get(`${serverUrl}cart/toseller`);
-  //   router.push(data.data.link);
-  // } catch (error) {
-  //   toast.error(t("becomeSeller.error2"), toastError);
-  //   console.log(error);
-  // }
-};
+    alert("Caracteristica desactivada");
+    // if (!terms) {
+    //   toast.error(t("becomeSeller.error1"), toastError);
+    //   return;
+    // }
+    // try {
+    //   const data = await axios.get(`${serverUrl}cart/toseller`);
+    //   router.push(data.data.link);
+    // } catch (error) {
+    //   toast.error(t("becomeSeller.error2"), toastError);
+    //   console.log(error);
+    // }
+  };
 
   return (
     <>
       {isDropdownOpen && (
-        <BeatRightSheet width="min-w-[100vw] xs:min-w-[90vw] sm:min-w-[450px] " setIsDropdownOpen={setIsDropdownOpen}>
+        <BeatRightSheet
+          width="min-w-[100vw] xs:min-w-[90vw] sm:min-w-[450px] "
+          setIsDropdownOpen={setIsDropdownOpen}
+        >
           <div className="flex h-full flex-col items-center justify-center gap-7 px-4 xs:px-8 sm:px-14 sm:py-10  ">
             <div className="flex flex-col items-center justify-center gap-2">
               <h4 className="text-titulo2-regular text-center">
-                  {t("becomeSeller.t1")}{" "}
+                {t("becomeSeller.t1")}{" "}
                 <span className="text-titulo2-semibold text-red-700">
                   BeatConnect
                 </span>{" "}
-                  {t("becomeSeller.t2")}{" "}
-                <span className="text-titulo2-semibold">{t("becomeSeller.t3")}</span>
+                {t("becomeSeller.t2")}{" "}
+                <span className="text-titulo2-semibold">
+                  {t("becomeSeller.t3")}
+                </span>
               </h4>
               <p className="text-base-light text-center">
                 {t("becomeSeller.t4")}
@@ -73,10 +77,14 @@ const handleSubmit = async (e) => {
                     value="ok"
                     onChange={() => setTerms(!terms)}
                   />
-                  <Link href={'help/terms'}>
-                  <label for="terms" onClick={()=>handleOpenDropdown()} className="text-base-light hover:cursor-pointer">
+                  <Link href={"help/terms"}>
+                    <label
+                      for="terms"
+                      onClick={() => handleOpenDropdown()}
+                      className="text-base-light hover:cursor-pointer"
+                    >
                       {t("becomeSeller.t5")}
-                  </label>
+                    </label>
                   </Link>
                 </div>
               </div>
@@ -84,7 +92,7 @@ const handleSubmit = async (e) => {
                 type="submit"
                 className="text-base-semibold mt-2  w-full rounded-full bg-red-700 py-2 text-white"
               >
-                  {t("becomeSeller.t6")}
+                {t("becomeSeller.t6")}
               </button>
             </form>
           </div>

@@ -2,7 +2,7 @@ import { Input, Button } from "@/components";
 //import { postClientBeat } from "@/redux/slices/client";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import {ValidationCreateBeat} from "../validation/validationCreateBeat";
+import { ValidationCreateBeat } from "../validation/validationCreateBeat";
 
 export default function FormCreateBeat() {
   // Estados de error y de adquisición de la información.
@@ -46,17 +46,13 @@ export default function FormCreateBeat() {
       ValidationCreateBeat({
         ...createData,
         [event.target.name]: event.target.value,
-      })
+      }),
     );
   };
-
-
 
   // Transformamos la data a JSON
 
   const createDataJson = JSON.stringify(createData);
-
-
 
   // Función de submit del botón del formulario, no deja enviar la info si existe un error.
   // Por el momento le falta la función de Posteo, así que al darle click con la info correcta no hace nada.
@@ -67,7 +63,7 @@ export default function FormCreateBeat() {
     if (Object.values(error).some((error) => error)) {
       alert("Debe llenar todos los campos correctamente");
     } else {
-     // await dispatch(postClientBeat(formData));
+      // await dispatch(postClientBeat(formData));
     }
   };
 

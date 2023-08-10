@@ -30,7 +30,7 @@ module.exports = async (req, res) => {
       const imageData = fs.readFileSync(image.tempFilePath);
       const imageStorageRef = ref(
         storage,
-        `beats/${updatedBeat.name}/image/${updatedBeat.name}`
+        `beats/${updatedBeat.name}/image/${updatedBeat.name}`,
       );
 
       const imageMetadata = {
@@ -39,14 +39,14 @@ module.exports = async (req, res) => {
 
       const imageBuffer = fs.readFileSync(req.files.image.tempFilePath);
       const resizedImageBuffer = await sharp(imageBuffer)
-      .resize({ width: 400, height: 400 }) // Ajusta las dimensiones según tus requisitos
-      .webp({ quality: 80 }) // Ajusta la calidad WebP según tus necesidades
+        .resize({ width: 400, height: 400 }) // Ajusta las dimensiones según tus requisitos
+        .webp({ quality: 80 }) // Ajusta la calidad WebP según tus necesidades
         .toBuffer();
 
       const imageSnapshot = await uploadBytesResumable(
         imageStorageRef,
         resizedImageBuffer,
-        imageMetadata
+        imageMetadata,
       );
       const downloadImageURL = await getDownloadURL(imageSnapshot.ref);
       updatedBeat.image = downloadImageURL;
