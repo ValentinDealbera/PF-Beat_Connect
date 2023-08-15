@@ -6,9 +6,7 @@ export { default as Hero } from "./common/hero";
 export { default as SimpleHeader } from "./masters/simpleHeader";
 export { default as BecomeSeller } from "./forms/becomeSeller";
 export { default as PostBeat } from "./client/beat/forms/postBeat";
-export { managePostBeat } from "./client/beat/forms/postBeat";
 export { default as EditBeat } from "./client/beat/forms/editBeat";
-export { manageEditBeat } from "./client/beat/forms/editBeat";
 export { default as Loader } from "./masters/loader";
 
 //MiniCart
@@ -27,6 +25,9 @@ export { default as MinMax } from "./common/minMax";
 export { default as SwitchForm } from "./common/switchForm";
 export { default as FormAdmin } from "./forms/adminForm"; //creado pero sin colocar (SoftDelete, SwitchForm)
 export { default as ValidationEditUsers } from "./validation/validationEditUsers";
+export { ValidationCreateBeat } from "./validation/validationCreateBeat";
+export { ValidationCreateReview } from "./validation/validationCreateReview";
+export { ValidationCreateUser } from "./validation/validationCreateUser";
 export { default as ReviewForm } from "./client/review/forms/createReview";
 export { default as Hamburger } from "./masters/hamburguer";
 export { default as LandBot } from "./layout/landBot";
@@ -57,13 +58,13 @@ export { default as FormCreateBeat } from "./client/beat/forms/formCreateBeat";
 //clientDataComponents
 
 //Dashboard
-export { default as SellerDashboardLayout } from "./dashboard/sellerDashboardLayout";
-export { default as SellerDashboardNav } from "./dashboard/sellerDashboardNav";
-export { default as SellerDashboardSidebar } from "./dashboard/sellerDashboardSidebar";
-export { default as SellerDashboardTopBar } from "./dashboard/sellerDashboardTopBar";
-export { default as IslandDashboard } from "./dashboard/islandDashboard";
-export { default as SellerDashboardHeader } from "./dashboard/sellerDashboardHeader";
-export { default as DashboardItem } from "./dashboard/dashboardItem";
+export { default as SellerDashboardLayout } from "./dashboard/layout/sellerDashboardLayout";
+export { default as SellerDashboardNav } from "./dashboard/layout/sellerDashboardNav";
+export { default as SellerDashboardSidebar } from "./dashboard/layout/sellerDashboardSidebar";
+export { default as SellerDashboardTopBar } from "./dashboard/layout/sellerDashboardTopBar";
+export { default as IslandDashboard } from "./dashboard/layout/islandDashboard";
+export { default as SellerDashboardHeader } from "./dashboard/layout/sellerDashboardHeader";
+export { default as DashboardItem } from "./dashboard/layout/dashboardItem";
 export { default as ClientDashboardEdit } from "./dashboard/clientDashboardEdit";
 
 //Layout
@@ -75,16 +76,14 @@ export { default as DynamicTable } from "./dynamicTable/dynamicTable";
 
 //Funciones de los componentes
 
-export { manageBecomeSeller } from "./forms/becomeSeller";
-
 //Forms
 
 export { default as FormColumn } from "./form/formColumn";
 export { default as FormContainer } from "./form/formContainer";
 export { default as FormRow } from "./form/formRow";
-export { default as AdminCreateUserForm } from "./forms/adminCreateUser";
+export { default as AdminCreateUserForm } from "./dashboard/forms/adminCreateUser";
 export { default as AdminCreateReviewForm } from "./forms/adminCreateReview";
-export { default as AdminCreateBeatForm } from "./forms/adminCreateBeat";
+export { default as AdminCreateBeatForm } from "./dashboard/forms/adminCreateBeat";
 export { default as EditClientForm } from "./forms/editClientForm";
 export { default as EditPasswordForm } from "./forms/editPasswordForm";
 export { default as RecoveryPasswordForm } from "./forms/recoveryPasswordForm";
@@ -98,7 +97,7 @@ export { default as DynamicTableLight } from "./dynamicTable/dynamicTableLight";
 //export { default as BeatImage } from "./beat/beatImage";
 //export { default as Checkbox } from "./common/checkbox";
 
-export { default as HamburgerAdmin } from "./dashboard/hamburgerAdmin";
+export { default as HamburgerAdmin } from "./dashboard/layout/hamburgerAdmin";
 
 //------------------ NUEVO ------------------//
 

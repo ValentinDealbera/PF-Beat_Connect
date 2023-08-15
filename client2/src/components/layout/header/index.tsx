@@ -2,7 +2,6 @@ import {
   Logo,
   Nav,
   UserBoxNav,
-  managePostBeat,
   Hamburger,
   PostBeat,
   BecomeSeller,
@@ -46,9 +45,7 @@ export default function Header() {
 
   const navClient = navBuilder({
     t,
-    managePostBeat,
     setHamburguerVisible,
-    setEditBeatVisible,
     setPostBeatVisible,
     setBecomeSellerVisible,
     router,

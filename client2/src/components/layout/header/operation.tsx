@@ -12,22 +12,18 @@ export const headerStyles = {
 
 type NavBuilderProps = {
   t: any;
-  managePostBeat: any;
   setHamburguerVisible: any;
   router: any;
   setBecomeSellerVisible: (arg0: boolean) => void;
   setPostBeatVisible: (arg0: boolean) => void;
-  setEditBeatVisible: (arg0: boolean) => void;
 };
 
 export const navBuilder = ({
   t,
-  managePostBeat,
   setHamburguerVisible,
   router,
   setBecomeSellerVisible,
   setPostBeatVisible,
-  setEditBeatVisible,
 }: NavBuilderProps) => {
   return [
     {

@@ -34,6 +34,7 @@ const initialState = {
   session: {
     current: {} as UserClass,
   },
+  theme: ""
 };
 
 //------------------ ASYNC THUNKS ------------------//
@@ -219,7 +220,7 @@ const authSession = createSlice({
       state.session = initialState.session;
     },
     setTheme(state, action) {
-      //   state.theme = action.payload;
+      state.theme = action.payload;
     },
   },
   extraReducers: (builder) => {
