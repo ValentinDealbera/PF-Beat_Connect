@@ -37,7 +37,6 @@ export default function FavoriteModal({
 
   return (
     <>
-      <h1 className="text-2xl">FavoriteModal: {visibilityReviewEditBag} </h1>
       {!fromClient && visibilityReviewEditBag && (
         <MiniModalBox className="left-1 top-1">
           {!isFavorite && !fromClient && (

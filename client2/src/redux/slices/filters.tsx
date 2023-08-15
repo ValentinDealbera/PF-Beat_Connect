@@ -4,6 +4,16 @@ import axios from "axios";
 import { toast } from "sonner";
 import i18next from "i18next";
 
+const sortArr = [
+  { value: "default", label: "Default"},
+  { value: "Price-AS", label: "Price ↑" },
+  { value: "Price-DES", label: "Price ↓" },
+  { value: "BPM-AS", label: "BPM ↑" },
+  { value: "BPM-DES", label: "BPM ↓" },
+  { value: "A-Z", label: "A-Z" },
+  { value: "Z-A", label: "Z-A" },
+];
+
 const initialState = {
   searchFilter: "",
   genres: [] as any[],
@@ -17,7 +27,7 @@ const initialState = {
     max: 0,
   },
   sorter: "default",
-  sorterValues: [],
+  sorterValues: sortArr as any[],
 };
 
 //------------------ ASYNC THUNKS ------------------//
@@ -51,6 +61,7 @@ const filtersSlice = createSlice({
         );
         return;
       }
+      console.log("setGenresFilter action.payload", action.payload);
       state.genresFilter = action.payload;
     },
     setPriceFilter(state, action) {

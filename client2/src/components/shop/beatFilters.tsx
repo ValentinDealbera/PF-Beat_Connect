@@ -8,8 +8,8 @@ import {
 } from "@/components";
 import { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
-import { useDispatch, useSelector } from "react-redux";
-import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/redux/hooks";
+import { useRouter, usePathname } from "next/navigation";
 import {
   setGenresFilter,
   fetchGenres,
@@ -25,7 +25,7 @@ import { useAppSelector } from "@/redux/hooks";
 
 export default function BeatFilters() {
   const [t, i18n] = useTranslation("global");
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [beatGenre, setBeatGenre] = useState([]);
   const [prices, setPrices] = useState({ min: 0, max: 0 });
   const [BPM, setBPM] = useState({ min: 0, max: 0 });
@@ -34,17 +34,134 @@ export default function BeatFilters() {
   const [childFilterIndex, setChildFilterIndex] = useState(0);
   const currentPage = useAppSelector((state) => state.beats.pageIndex);
   const { genres, genresFilter: genre } = useAppSelector(
-    (state) => state.filters,
+    (state) => state.filters
   );
 
   const { sorter, sorterValues } = useAppSelector((state) => state?.filters);
+  const pathname = usePathname();
 
   const [mode, setMode] = useState(0);
 
+  useEffect(() => {
+    if (pathname === "/beats") setMode(0);
+    else if (pathname === "/beats/author/[slug]") setMode(0);
+    else setMode(1);
+  }, [pathname]);
+
   const sortArr = sorterValues;
+
+  //Primer pedido
+
+  //Sorter
+  useEffect(() => {
+    dispatch(setSorter(sort));
+  }, [sort]);
+
+  //Filtro Precio
+  useEffect(() => {
+    dispatch(setPriceFilter(prices));
+  }, [prices, dispatch]);
+
+  //Filtro BPM
+  useEffect(() => {
+    dispatch(setBpmFilter(BPM));
+  }, [BPM.min, dispatch]);
+
+  let sortValue = {} as any;
+
+  if (sort === "default") {
+    sortValue;
+  } else if (sort === "Price-AS") {
+    sortValue.priceAmount = "asc";
+  } else if (sort === "Price-DES") {
+    sortValue.priceAmount = "desc";
+  } else if (sort === "BPM-AS") {
+    sortValue.BPM = "asc";
+  } else if (sort === "BPM-DES") {
+    sortValue.BPM = "desc";
+  } else if (sort === "A-Z") {
+    sortValue.name = "asc";
+  } else if (sort === "Z-A") {
+    sortValue.name = "desc";
+  }
+
+  const delayedFetchGenres = useMemo(() => {
+    return debounce(() => {
+      dispatch(fetchGenres());
+    }, 300); // ajusta el tiempo de espera según sea necesario
+  }, [dispatch]);
+
+  useEffect(() => {
+    const cancelDebounce = () => {
+      delayedFetchGenres.cancel();
+    };
+
+    delayedFetchGenres();
+
+    return cancelDebounce;
+  }, [delayedFetchGenres]);
+
+  const filters = useMemo(
+    () => [prices, BPM, sort, currentPage, genre],
+    [prices, BPM, sort, currentPage, genre]
+  );
+
+  const delayedDispatch = debounce(() => {
+    console.log("dispatching");
+    dispatch(
+      fetchBeats({
+        minPrice: prices.min,
+        maxPrice: prices.max,
+        minBPM: BPM.min,
+        maxBPM: BPM.max,
+        page: currentPage,
+        genre,
+        ...sortValue,
+      })
+    );
+  }, 500); // ajusta el tiempo de espera según sea necesario
+
+  useEffect(() => {
+    delayedDispatch();
+    return delayedDispatch.cancel; // cancelar el debounce cuando se desmonte el componente
+  }, filters);
+
+  // useEffect(() => {
+  //   delayedDispatch();
+  // }, [
+  //   filterObj,
+  //   dispatch,
+  //   prices.min,
+  //   prices.max,
+  //   BPM.min,
+  //   BPM.max,
+  //   sort,
+  //   currentPage.page,
+  //   genre,
+  // ]);
+
+  // useEffect(() => {
+  //   const maxPrice = beats.reduce((acc, beat) => {
+  //     return beat.priceAmount > acc ? beat.priceAmount : acc;
+  //   }, 0);
+  //   setPrices({ min: 0, max: maxPrice });
+
+  //   const maxBPM = beats.reduce((acc, beat) => {
+  //     return beat.BPM > acc ? beat.BPM : acc;
+  //   }, 0);
+
+  //   setBPM({ min: 0, max: maxBPM });
+  // }, [beats]);
+
   const generos = genres;
 
   useEffect(() => {}, [mode]);
+
+  useEffect(() => {
+    console.log(beatGenre);
+
+    dispatch(setGenresFilter(beatGenre.map((e: any) => e.value)));
+  }, [beatGenre]);
 
   const handleDropDownFilter = () => {
     setDropDownFilter(!dropDownFilter);
@@ -99,7 +216,20 @@ export default function BeatFilters() {
                 >
                   {childFilterIndex === 0 && (
                     <DynamicButtonsForBottomSheet
-                      dynamicFilterBtns={["Genres", "Price", "BPM"]}
+                      dynamicFilterBtns={[
+                        {
+                          label: i18n.language === "en" ? "Genres" : "Generos",
+                          handleClick: () => setChildFilterIndex(1),
+                        },
+                        {
+                          label: i18n.language === "en" ? "Price" : "Precio",
+                          handleClick: () => setChildFilterIndex(2),
+                        },
+                        {
+                          label: "BPM",
+                          handleClick: () => setChildFilterIndex(3),
+                        },
+                      ]}
                     />
                   )}
                   {childFilterIndex === 1 && (

@@ -1,8 +1,15 @@
 import { useRef, useState } from "react";
-import { BeatImage, AuthorName, BeatTitle } from "@/components";
+import {
+  BeatImage,
+  AuthorName,
+  BeatTitle,
+  BeatBPM,
+  BeatPrice,
+} from "@/components";
 import Modals from "./modals";
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setActiveItemDetail } from "@/redux/slices/beats";
+import { useTranslation } from "react-i18next";
 
 type BeatCardProps = {
   beat: any;
@@ -25,8 +32,19 @@ export default function BeatCard({
 }: BeatCardProps) {
   const dispatch = useAppDispatch();
   const ref = useRef(null);
+  const [t] = useTranslation("global");
   const [visibilityReviewEditBag, setVisibilityReviewEditBag] = useState(false);
   const [visibilityOwnedBag, setVisibilityOwnedBag] = useState(false);
+  const { sorter, sorterValues } = useAppSelector((state) => state?.filters);
+  const { bougthBeats, favoriteBeats } = useAppSelector(
+    (state) => state.client.beats
+  );
+
+  const boughtBeat = Boolean(
+    bougthBeats.find((boughtBeat) => boughtBeat._id === beat._id)
+  );
+
+  const sortArr = sorterValues;
 
   const handleAction = async () => {
     await dispatch(setActiveItemDetail(beat));
@@ -37,7 +55,10 @@ export default function BeatCard({
     <div
       ref={ref}
       className="relative w-full "
-      onClick={(e:any) => {e.stopPropagation(); handleAction()} }
+      onClick={(e: any) => {
+        e.stopPropagation();
+        handleAction();
+      }}
       onMouseEnter={() => {
         setVisibilityReviewEditBag(true);
         setVisibilityOwnedBag(true);
@@ -60,6 +81,19 @@ export default function BeatCard({
             tapVisible={false}
           />
           <div className={`${variant === "public" ? "" : "px-2"}`}>
+            {boughtBeat ? (
+              <>
+                <span className="color-primary-red-700 font-semibold">
+                  {t("beatCar.purchased")}
+                </span>
+                <BeatBPM beat={beat} />
+              </>
+            ) : (
+              <>
+                <BeatPrice beat={beat} />
+                <BeatBPM beat={beat} />
+              </>
+            )}
             <BeatTitle beat={beat} />
             <AuthorName beat={beat} />
           </div>

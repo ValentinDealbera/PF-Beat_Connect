@@ -2,7 +2,7 @@ type CheckboxGroupProps = {
   label: string;
   values: { value: string; label: string }[];
   seleccionados: { value: string; label: string }[];
-  setSeleccionados: (seleccionados: { value: string; label: string }[]) => void;
+  setSeleccionados: any;
 };
 
 export default function CheckboxGroup({

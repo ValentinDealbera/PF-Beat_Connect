@@ -129,7 +129,7 @@ export const editClient = createAsyncThunk(
       const clientId = getUserIdFromState(getState);
       const formData = createFormData(data);
       const response = await updateUserData(clientId, formData);
-      const userResponse = createUserSession(response.data);
+      const userResponse = createUserSession(response);
       return { userResponse };
     } catch (error) {
       console.error("editClient error", error);

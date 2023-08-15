@@ -71,7 +71,7 @@ export const editClientBeat = createAsyncThunk(
   async (data: any, { rejectWithValue, dispatch, getState }) => {
     try {
       const userId = getUserIdFromState(getState);
-      const { activeEditingBeatId } = getActiveEditingBeat(getState());
+      const { activeEditingBeatId } = getActiveEditingBeat(getState);
       const formData = createFormData(data);
       const response = await updateClientBeat(
         formData,

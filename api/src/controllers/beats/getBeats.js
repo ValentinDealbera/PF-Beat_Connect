@@ -7,8 +7,9 @@ module.exports = async (req, res) => {
   const page = req.query.page || 1;
   const limit = req.query.limit || 15;
   const { name, priceAmount, BPM, relevance, searchFilter } = req.query;
-  const genres = req.headers.genre ? req.headers.genre.split(",") : [""];
-
+  //separamos por % y arammo un array de generos
+  const genres = req.query.genre ? req.query.genre.split(",") : null;
+console.log("genres", genres)
   let sortBy;
   if (name) {
     sortBy = { name };

@@ -53,7 +53,7 @@ export const fetchBeats = createAsyncThunk(
       console.error("fetchBeats", err);
       throw err;
     }
-  },
+  }
 );
 
 export const fetchFeaturedBeats = createAsyncThunk(
@@ -69,12 +69,12 @@ export const fetchFeaturedBeats = createAsyncThunk(
       console.error("fetchFeaturedBeats", err);
       throw err;
     }
-  },
+  }
 );
 
 export const fetchCurrentAuthor = createAsyncThunk(
   "beats/fetchCurrentAuthor",
-  async (id) => {
+  async (id: string) => {
     try {
       const response = await axiosGetter({
         url: `user/${id}`,
@@ -88,9 +88,8 @@ export const fetchCurrentAuthor = createAsyncThunk(
         username,
         bio,
         backImage,
-        createdBeats,
-      } = response.createdBeats;
-
+      } = response;
+      console.log("response.createdBeats", response.createdBeats);
       const currentAuthor = {
         firstName,
         lastName,
@@ -100,11 +99,11 @@ export const fetchCurrentAuthor = createAsyncThunk(
         bio,
         backImage,
       };
-      return { beats: createdBeats, currentAuthor };
+      return { beats: response.createdBeats, currentAuthor };
     } catch (err) {
       throw err;
     }
-  },
+  }
 );
 
 //-------------------- SLICE -------------------//
@@ -116,7 +115,9 @@ const beatsSlice = createSlice({
       state.activeItemDetail = action.payload;
     },
     setCurrentPage(state, action: PayloadAction<number>) {
+      console.log("setCurrentPage action.payload", action.payload);
       state.pageIndex = action.payload;
+      state.pages.current = action.payload;
     },
     setGeneralActiveIndex(state, action: PayloadAction<number>) {
       state.generalActiveIndex = action.payload;
@@ -150,6 +151,7 @@ const beatsSlice = createSlice({
       })
       .addCase(fetchCurrentAuthor.fulfilled, (state, action) => {
         const { beats, currentAuthor } = action.payload;
+        console.log("fetchCurrentAuthor", action.payload);
         state.currentAuthor = currentAuthor as any;
         state.currentAuthorBeats = beats;
         state.loadingcurrentAuthor = false;

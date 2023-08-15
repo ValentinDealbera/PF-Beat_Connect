@@ -6,7 +6,7 @@ export default function PromoSection() {
   const [t] = useTranslation("global");
   return (
     <Section
-      subClassName=" bg-neutral-100 color-white gap-2 flex "
+      subClassName="flex min-w-full flex-col-reverse  2xl:container lg:flex-row 2xl:pr-24 bg-neutral-100 color-white gap-2 flex "
       className=" bg-neutral-100 flex min-w-full flex-col-reverse  2xl:container lg:flex-row 2xl:pr-24"
     >
       <div className="padding-x-estilo2  py-16 lg:padding-y-estilo1 flex lg:h-full w-full flex-col justify-center gap-2 lg:w-1/2 ">

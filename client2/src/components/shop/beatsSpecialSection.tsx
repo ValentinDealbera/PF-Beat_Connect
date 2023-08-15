@@ -1,4 +1,4 @@
-import { Section, BeatCardFlex, BeatsGrid } from "@/components";
+import { Section, BeatsGrid } from "@/components";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { fetchFeaturedBeats } from "@/redux/slices/beats";
@@ -20,7 +20,7 @@ export default function BeatsSpecialSection({
 
   return (
     <Section subClassName="padding-x-estilo2 padding-y-estilo2 gap-8 flex flex-col">
-      <h1 className="text-titulo2-regular">{title}</h1>
+      <h1 className="text-titulo2-medium">{title}</h1>
       <BeatsGrid beats={featuredBeats} />
     </Section>
   );

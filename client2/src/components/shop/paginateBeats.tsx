@@ -17,7 +17,7 @@ export default function PaginateBeats() {
   return (
     <div className="mt-4 flex justify-center gap-4">
       <button
-        onClick={() => dispatch(setCurrentPage({ page: pages.current - 1 }))}
+        onClick={() => dispatch(setCurrentPage(pages.current - 1))}
         disabled={pages.current === 1}
         className={pages.current === 1 ? "text-black" : " text-red-800"}
       >
@@ -27,7 +27,7 @@ export default function PaginateBeats() {
         {visiblePages.map((page) => (
           <button
             key={page}
-            onClick={() => dispatch(setCurrentPage({ page: page }))}
+            onClick={() => dispatch(setCurrentPage(page))}
             disabled={pages.current === page}
             className={`${
               pages.current === page
@@ -41,7 +41,7 @@ export default function PaginateBeats() {
       </div>
       <button
         onClick={() => {
-          dispatch(setCurrentPage({ page: pages.current + 1 }));
+          dispatch(setCurrentPage(pages.current + 1));
         }}
         disabled={pages.current === visiblePages[visiblePages.length - 1]}
         className={

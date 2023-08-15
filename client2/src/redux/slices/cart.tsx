@@ -5,7 +5,7 @@ import i18next from "i18next";
 import { RootState } from "../store/store";
 
 const initialState = {
-  cart: [],
+  cart: [] as any,
 };
 
 export const addToCart = createAsyncThunk(

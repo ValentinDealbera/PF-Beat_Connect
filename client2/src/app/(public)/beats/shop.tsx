@@ -7,7 +7,7 @@ export default function ShopSection() {
   return (
     <>
       <Section subClassName="padding-x-estilo2 padding-y-estilo2 gap-8 flex flex-col">
-        {/* <BeatFilters /> */}
+        <BeatFilters />
         <BeatsGrid beats={beats} />
         <PaginateBeats />
       </Section>
