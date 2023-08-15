@@ -25,7 +25,7 @@ export const adminGetReviews = createAsyncThunk(
     } catch (error) {
       throw error;
     }
-  }
+  },
 );
 
 //GET ADMIN REVIEW
@@ -38,7 +38,7 @@ export const adminGetReview = createAsyncThunk(
     } catch (error) {
       throw error;
     }
-  }
+  },
 );
 
 //DELETE ADMIN REVIEW
@@ -56,7 +56,7 @@ export const adminDeleteReview = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error);
     }
-  }
+  },
 );
 
 //POST ADMIN REVIEW
@@ -78,7 +78,7 @@ export const adminPostReview = createAsyncThunk(
     } catch (error) {
       throw error;
     }
-  }
+  },
 );
 //EDIT ADMIN REVIEW
 export const adminEditReview = createAsyncThunk(
@@ -93,7 +93,7 @@ export const adminEditReview = createAsyncThunk(
             admintoken: tokenAdmin,
             "Content-Type": "multipart/form-data",
           },
-        }
+        },
       );
       await dispatch(adminGetReviews());
       return { reviewResponse: response.data };
@@ -102,7 +102,7 @@ export const adminEditReview = createAsyncThunk(
     } catch (error) {
       throw error;
     }
-  }
+  },
 );
 const adminReviewsSlice = createSlice({
   name: "adminReviews",

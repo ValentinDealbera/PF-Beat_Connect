@@ -32,7 +32,7 @@ export const adminPostUser = createAsyncThunk(
       console.log("Error de post", error);
       throw error;
     }
-  }
+  },
 );
 
 //--------------------
@@ -49,14 +49,14 @@ export const adminEditUser = createAsyncThunk(
             admintoken: tokenAdmin,
             "Content-Type": "multipart/form-data",
           },
-        }
+        },
       );
       await dispatch(adminGetUsers());
       return { userResponse: response.data };
     } catch (error) {
       throw error;
     }
-  }
+  },
 );
 
 //--------------------
@@ -71,7 +71,7 @@ export const adminDeleteUser = createAsyncThunk(
           headers: {
             admintoken: tokenAdmin,
           },
-        }
+        },
       );
 
       await dispatch(adminGetUsers());
@@ -80,7 +80,7 @@ export const adminDeleteUser = createAsyncThunk(
       console.log("error", error);
       return rejectWithValue(error);
     }
-  }
+  },
 );
 
 //--------------------
@@ -95,7 +95,7 @@ export const adminGetUsers = createAsyncThunk(
     } catch (error) {
       throw error;
     }
-  }
+  },
 );
 
 //--------------------
@@ -109,7 +109,7 @@ export const adminGetUser = createAsyncThunk(
     } catch (error) {
       throw error;
     }
-  }
+  },
 );
 
 //------------------ SLICE ------------------//

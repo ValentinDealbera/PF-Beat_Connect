@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import {
   Section,
   IslandDashboard,
@@ -16,7 +16,7 @@ export default function Carrito() {
   const dispatch = useAppDispatch();
   const cartItems = useAppSelector((state) => state?.cart.cart) || ([] as any);
   const user = useAppSelector(
-    (state) => state.client.authSession.session.current._id
+    (state) => state.client.authSession.session.current._id,
   );
 
   const precio_por_autor = [] as any;
@@ -31,7 +31,7 @@ export default function Carrito() {
     const price = item.beat.priceAmount;
     const image = item.beat.userCreator.image;
     const index = precio_por_autor.findIndex(
-      (obj: any) => obj.authorId === authorId
+      (obj: any) => obj.authorId === authorId,
     );
     if (index === -1) {
       precio_por_autor.push({ authorId, author, price, image });
@@ -187,7 +187,7 @@ export default function Carrito() {
                     $
                     {cartItems.reduce(
                       (acc: any, item: any) => acc + item.beat.priceAmount,
-                      0
+                      0,
                     )}
                   </span>
                 </div>
@@ -201,7 +201,7 @@ export default function Carrito() {
                     $
                     {cartItems.reduce(
                       (acc: any, item: any) => acc + item.beat.priceAmount,
-                      0
+                      0,
                     )}
                   </span>
                 </div>

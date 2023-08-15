@@ -33,7 +33,7 @@ export const adminPostBeat = createAsyncThunk(
       console.log("Error de post", error);
       throw error;
     }
-  }
+  },
 );
 
 //--------------------
@@ -50,14 +50,14 @@ export const adminEditBeat = createAsyncThunk(
             admintoken: tokenAdmin,
             "Content-Type": "multipart/form-data",
           },
-        }
+        },
       );
       await dispatch(adminGetBeats());
       return { beatResponse: response.data };
     } catch (error) {
       throw error;
     }
-  }
+  },
 );
 
 //--------------------
@@ -72,7 +72,7 @@ export const adminDeleteBeat = createAsyncThunk(
           headers: {
             admintoken: tokenAdmin,
           },
-        }
+        },
       );
       await dispatch(adminGetBeats());
       return { userResponse: response.data };
@@ -80,7 +80,7 @@ export const adminDeleteBeat = createAsyncThunk(
       console.log("error", error);
       throw error;
     }
-  }
+  },
 );
 
 //--------------------
@@ -94,7 +94,7 @@ export const adminGetBeats = createAsyncThunk(
     } catch (error) {
       throw error;
     }
-  }
+  },
 );
 
 //--------------------
@@ -108,7 +108,7 @@ export const adminGetBeat = createAsyncThunk(
     } catch (error) {
       throw error;
     }
-  }
+  },
 );
 
 //------------------ SLICE ------------------//

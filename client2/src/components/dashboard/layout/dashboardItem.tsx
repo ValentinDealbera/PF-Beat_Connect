@@ -7,7 +7,11 @@ type DashboardItemProps = {
   icon: string;
 };
 
-export default function DashboardItem({ title, link, icon }:DashboardItemProps) {
+export default function DashboardItem({
+  title,
+  link,
+  icon,
+}: DashboardItemProps) {
   return (
     <Link href={link}>
       <div className="gap-estilo4 flex flex-row">

@@ -12,7 +12,7 @@ export default function AdminUserCreate() {
   const childRef = useRef<any>(null);
 
   const handleExternalSubmit = () => {
-    childRef?.current?.submit()  
+    childRef?.current?.submit();
   };
 
   return (

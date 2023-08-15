@@ -228,7 +228,9 @@ const AdminCreateBeatForm = forwardRef((props: Props, ref) => {
               name="bpm"
               label="BPM"
               placeholder="BPM"
-              defaultValue={mode === "edit" ? defaultValues?.BPM?.toString() : ""}
+              defaultValue={
+                mode === "edit" ? defaultValues?.BPM?.toString() : ""
+              }
               type="number"
               onChange={handleInput}
               error={error.bpm}
@@ -251,7 +253,8 @@ const AdminCreateBeatForm = forwardRef((props: Props, ref) => {
                   <option
                     value={genre.value}
                     selected={
-                      mode === "edit" && genre.value === defaultValues?.genre?._id
+                      mode === "edit" &&
+                      genre.value === defaultValues?.genre?._id
                     }
                   >
                     {genre.label}

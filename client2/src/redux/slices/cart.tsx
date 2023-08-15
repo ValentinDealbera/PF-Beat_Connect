@@ -15,7 +15,7 @@ export const addToCart = createAsyncThunk(
       const state2 = getState() as RootState;
       const state = state2;
       const isInCart = state.cart.cart.some(
-        (item: any) => item.beat._id === obj.beat._id
+        (item: any) => item.beat._id === obj.beat._id,
       );
       const bougthBeats = state.client.beats.bougthBeats;
       const beat = obj.beat;
@@ -29,7 +29,7 @@ export const addToCart = createAsyncThunk(
         const id = state.client.authSession.session.current._id;
 
         const boughtBeat2 = bougthBeats.find(
-          (boughtBeat: any) => boughtBeat._id === beat._id
+          (boughtBeat: any) => boughtBeat._id === beat._id,
         );
 
         const boughtBeat = Boolean(boughtBeat2);
@@ -63,7 +63,7 @@ export const addToCart = createAsyncThunk(
       console.error("fetchFeaturedBeats", err);
       throw err;
     }
-  }
+  },
 );
 
 //------------------ SLICE ------------------//
@@ -83,7 +83,7 @@ const cartSlice = createSlice({
     //DELETE FROM CART
     deleteFromCart(state: any, action) {
       state.cart = state.cart.filter(
-        (item: any) => item.beat._id !== action.payload.id
+        (item: any) => item.beat._id !== action.payload.id,
       );
       let trad =
         i18next?.language == "en"

@@ -41,7 +41,7 @@ export const adminGetOrder = createAsyncThunk(
 //DELETE ADMIN ORDER
 export const adminDeleteOrder = createAsyncThunk(
   "client/adminDeleteOrder",
-  async (data:any, { rejectWithValue, dispatch }) => {
+  async (data: any, { rejectWithValue, dispatch }) => {
     try {
       const response = await axios.delete(`${serverUrl}admin/order/${data}`, {
         headers: {

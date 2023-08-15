@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 type PostBeatProps = {
   visible: boolean;
   setVisible: (visible: boolean) => void;
-}
+};
 
 export default function PostBeat({ visible, setVisible }: PostBeatProps) {
   const [t] = useTranslation("global");
@@ -19,7 +19,7 @@ export default function PostBeat({ visible, setVisible }: PostBeatProps) {
   const [error, setErrors] = useState({}) as any;
   const genres = useAppSelector((state) => state?.filters?.genres);
   const { _id } = useAppSelector(
-    (state) => state?.client?.authSession?.session?.current
+    (state) => state?.client?.authSession?.session?.current,
   );
 
   const [form, setForm] = useState({

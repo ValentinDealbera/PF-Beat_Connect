@@ -34,7 +34,7 @@ const initialState = {
   session: {
     current: {} as UserClass,
   },
-  theme: ""
+  theme: "",
 };
 
 //------------------ ASYNC THUNKS ------------------//

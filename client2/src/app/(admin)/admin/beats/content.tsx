@@ -27,7 +27,7 @@ export default function SellerDashboardOverview() {
   const [beatToDelete, setBeatToDelete] = useState(null) as any;
   const delayedAdminGetBeats = useMemo(
     () => debounce(() => dispatch(adminGetBeats()), 500),
-    [dispatch]
+    [dispatch],
   );
 
   useEffect(() => {

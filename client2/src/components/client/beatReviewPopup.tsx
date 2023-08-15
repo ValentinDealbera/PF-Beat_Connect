@@ -12,7 +12,7 @@ export default function BeatReviewPopup({ modal, handleModalReview }: Props) {
   const [t] = useTranslation("global");
 
   const currentBeatReview = useAppSelector(
-    (state) => state.beats.activeItemDetail
+    (state) => state.beats.activeItemDetail,
   );
 
   const rating = currentBeatReview.review.map((review) => review.rating);

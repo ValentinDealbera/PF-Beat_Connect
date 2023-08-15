@@ -25,7 +25,7 @@ export default function Form({
   setRatingValue,
   ratingValue,
   title,
-  hasDefaultValues
+  hasDefaultValues,
 }: FormProps) {
   const [t] = useTranslation("global");
   const rating = [1, 2, 3, 4, 5];

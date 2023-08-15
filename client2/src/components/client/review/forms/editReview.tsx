@@ -10,7 +10,7 @@ type Props = {
 export default function EditReviewForm({ manageEditReview }: Props) {
   const dispatch = useAppDispatch();
   const currentReview = useAppSelector(
-    (state) => state?.client?.reviews?.activeEditingReview
+    (state) => state?.client?.reviews?.activeEditingReview,
   );
 
   const [formFields, setFormFields] = useState({

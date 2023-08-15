@@ -12,11 +12,11 @@ export default function ReviewForm({ manageCreateReview }: Props) {
   const [ratingValue, setRatingValue] = useState(0);
 
   const currentBeat = useAppSelector(
-    (state) => state?.client?.reviews?.activeBeatCreateReview
+    (state) => state?.client?.reviews?.activeBeatCreateReview,
   );
 
   const currentUserId = useAppSelector(
-    (state) => state?.client?.authSession?.session?.current?._id
+    (state) => state?.client?.authSession?.session?.current?._id,
   );
 
   const [formFields, setFormFields] = useState({

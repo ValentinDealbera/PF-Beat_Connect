@@ -19,7 +19,7 @@ export const adminGetData = createAsyncThunk(
     } catch (error) {
       throw error;
     }
-  }
+  },
 );
 
 const adminUsersSlice = createSlice({

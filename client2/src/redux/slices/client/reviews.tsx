@@ -21,7 +21,7 @@ const initialState = {
 //POST CLIENT REVIEW
 export const postClientReview = createAsyncThunk(
   "client/postClientReview",
-  async (data:any, { rejectWithValue, dispatch, getState }) => {
+  async (data: any, { rejectWithValue, dispatch, getState }) => {
     const state = getState() as RootState;
     const id = state.client.authSession.session.current._id;
     try {
@@ -74,7 +74,7 @@ export const deleteClientReview = createAsyncThunk(
 //EDIT CLIENT REVIEW
 export const editClientReview = createAsyncThunk(
   "client/editClientReview",
-  async (data:any, { rejectWithValue, dispatch, getState }) => {
+  async (data: any, { rejectWithValue, dispatch, getState }) => {
     const state = getState() as RootState;
     const id = state.client.authSession.session.current.id;
     const reviewId = state.client.reviews.activeEditingReview.id;

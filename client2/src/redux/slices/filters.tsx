@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import i18next from "i18next";
 
 const sortArr = [
-  { value: "default", label: "Default"},
+  { value: "default", label: "Default" },
   { value: "Price-AS", label: "Price ↑" },
   { value: "Price-DES", label: "Price ↓" },
   { value: "BPM-AS", label: "BPM ↑" },

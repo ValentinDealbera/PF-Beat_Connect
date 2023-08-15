@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 type Props = {
-  navClient:any;
+  navClient: any;
 };
 
 export default function ProfileBox({ navClient }: Props) {

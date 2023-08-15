@@ -34,7 +34,7 @@ export default function BeatFilters() {
   const [childFilterIndex, setChildFilterIndex] = useState(0);
   const currentPage = useAppSelector((state) => state.beats.pageIndex);
   const { genres, genresFilter: genre } = useAppSelector(
-    (state) => state.filters
+    (state) => state.filters,
   );
 
   const { sorter, sorterValues } = useAppSelector((state) => state?.filters);
@@ -103,7 +103,7 @@ export default function BeatFilters() {
 
   const filters = useMemo(
     () => [prices, BPM, sort, currentPage, genre],
-    [prices, BPM, sort, currentPage, genre]
+    [prices, BPM, sort, currentPage, genre],
   );
 
   const delayedDispatch = debounce(() => {
@@ -117,7 +117,7 @@ export default function BeatFilters() {
         page: currentPage,
         genre,
         ...sortValue,
-      })
+      }),
     );
   }, 500); // ajusta el tiempo de espera según sea necesario
 

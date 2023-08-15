@@ -23,8 +23,7 @@ export default function Modals({
   setVisibilityEditReview,
   setVisibilityEditBeat,
 }: ModalsProps) {
-
-const {isLogged} = useAppSelector(state => state.client.authSession.auth)
+  const { isLogged } = useAppSelector((state) => state.client.authSession.auth);
   const { _id: userId } = useAppSelector(
     (state) => state.client.authSession.session.current,
   );

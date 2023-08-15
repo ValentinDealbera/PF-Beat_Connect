@@ -39,7 +39,7 @@ export default function FormCreateBeat() {
       ValidationCreateBeat({
         ...createData,
         [event.target.name]: event.target.value,
-      })
+      }),
     );
   };
 

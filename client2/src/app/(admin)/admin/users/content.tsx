@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import {
   SellerDashboardLayout,
   IslandDashboard,
@@ -26,7 +26,6 @@ export default function SellerDashboardOverview() {
   const allUsers = useAppSelector((state) => state.admin.users.users);
   const usersData = users;
 
-
   useEffect(() => {
     dispatch(adminGetUsers());
   }, []);
@@ -36,12 +35,16 @@ export default function SellerDashboardOverview() {
     setElementToDelete(null);
   };
 
-  const handleEdit = async (data:any) => {
+  const handleEdit = async (data: any) => {
     await dispatch(setCurrentEditingUser(data));
     router.push(`/admin/users/${data._id}`);
   };
 
-  const headers = [t("dashboardNav.t4"), t("dashboardNav.status"), t("dashboardNav.actions")];
+  const headers = [
+    t("dashboardNav.t4"),
+    t("dashboardNav.status"),
+    t("dashboardNav.actions"),
+  ];
 
   const [userVar, setUserVar] = useState("");
   const [statusVar, setStatusVar] = useState("");
@@ -50,7 +53,11 @@ export default function SellerDashboardOverview() {
     setUserVar(t("dashboardNav.t4").toLocaleLowerCase());
     setStatusVar(t("dashboardNav.status").toLocaleLowerCase());
     setActionsVar(t("dashboardNav.actions").toLocaleLowerCase());
-  }, [t("dashboardNav.t4"), t("dashboardNav.status"), t("dashboardNav.actions")]);
+  }, [
+    t("dashboardNav.t4"),
+    t("dashboardNav.status"),
+    t("dashboardNav.actions"),
+  ]);
 
   const rows = usersData.map((item) => {
     return {
@@ -65,16 +72,18 @@ export default function SellerDashboardOverview() {
           />
 
           <div className="flex flex-col">
-          <h3 className="text-base-medium overflow-ellipsis dark:text-white">
-            {item.username}
-          </h3>
-            <p className="text-sm-light dark:text-white">
-              {item.email}
-            </p>
+            <h3 className="text-base-medium overflow-ellipsis dark:text-white">
+              {item.username}
+            </h3>
+            <p className="text-sm-light dark:text-white">{item.email}</p>
           </div>
         </div>
       ),
-      [statusVar]:  (<p className="text-sm-light dark:text-white">{item.softDelete ? "Baneado" : "Activo"}</p>),
+      [statusVar]: (
+        <p className="text-sm-light dark:text-white">
+          {item.softDelete ? "Baneado" : "Activo"}
+        </p>
+      ),
       [actionsVar]: (
         <div className="flex w-max gap-4" key={item._id}>
           <button

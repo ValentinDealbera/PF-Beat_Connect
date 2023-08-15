@@ -37,11 +37,11 @@ export default function BeatCard({
   const [visibilityOwnedBag, setVisibilityOwnedBag] = useState(false);
   const { sorter, sorterValues } = useAppSelector((state) => state?.filters);
   const { bougthBeats, favoriteBeats } = useAppSelector(
-    (state) => state.client.beats
+    (state) => state.client.beats,
   );
 
   const boughtBeat = Boolean(
-    bougthBeats.find((boughtBeat) => boughtBeat._id === beat._id)
+    bougthBeats.find((boughtBeat) => boughtBeat._id === beat._id),
   );
 
   const sortArr = sorterValues;

@@ -15,7 +15,7 @@ export default function EditBeat({ visible, setVisible }: EditBeatProps) {
   const [t] = useTranslation("global");
   const dispatch = useAppDispatch();
   const activeEditingBeat = useAppSelector(
-    (state) => state?.client?.beats?.activeEditingBeat
+    (state) => state?.client?.beats?.activeEditingBeat,
   );
 
   const [fieldsToValidate, setFieldsToValidate] = useState([]) as any;
@@ -24,7 +24,7 @@ export default function EditBeat({ visible, setVisible }: EditBeatProps) {
 
   const genres = useAppSelector((state) => state.filters.genres);
   const { _id } = useAppSelector(
-    (state) => state.client.authSession.session.current
+    (state) => state.client.authSession.session.current,
   );
 
   const [form, setForm] = useState({
