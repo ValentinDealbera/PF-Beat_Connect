@@ -5,7 +5,11 @@ import Image from "next/image";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-export default function ProfileBox() {
+type Props = {
+  navClient:any;
+};
+
+export default function ProfileBox({ navClient }: Props) {
   const [t] = useTranslation("global");
   const [visible, setVisible] = useState<boolean>(false);
   const client = useAppSelector(

@@ -1,13 +1,12 @@
-import { Input, Button } from "@/components";
-//import { postClientBeat } from "@/redux/slices/client";
+import { Input } from "@/components";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { ValidationCreateBeat } from "../validation/validationCreateBeat";
+import { useAppDispatch } from "@/redux/hooks";
+import { ValidationCreateBeat } from "../../../validation/validationCreateBeat";
+import { postClientBeat } from "@/redux/slices/client/beats";
 
 export default function FormCreateBeat() {
-  // Estados de error y de adquisición de la información.
-
-  const [error, setError] = useState({});
+  const dispatch = useAppDispatch();
+  const [error, setError] = useState({}) as any;
   const [createData, setCreateData] = useState({
     name: "",
     priceAmount: "",
@@ -18,14 +17,8 @@ export default function FormCreateBeat() {
     audioMP3: {},
   });
 
-  // HandleInput que setea los estados de error y de Datos adquiridos - Los tipo "number" los parsea a number,
-  // porque llegan como string.
-  const dispatch = useDispatch();
-
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: any) => {
     if (event.target.type === "file") {
-      //       setFile(e.target.files[0]);
-      // setFileName(e.target.files[0].name);
       setCreateData({
         ...createData,
         [event.target.name]: event.target.files[0],
@@ -46,24 +39,17 @@ export default function FormCreateBeat() {
       ValidationCreateBeat({
         ...createData,
         [event.target.name]: event.target.value,
-      }),
+      })
     );
   };
 
-  // Transformamos la data a JSON
-
-  const createDataJson = JSON.stringify(createData);
-
-  // Función de submit del botón del formulario, no deja enviar la info si existe un error.
-  // Por el momento le falta la función de Posteo, así que al darle click con la info correcta no hace nada.
-
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     if (Object.values(error).some((error) => error)) {
       alert("Debe llenar todos los campos correctamente");
     } else {
-      // await dispatch(postClientBeat(formData));
+      await dispatch(postClientBeat(formData));
     }
   };
 
@@ -138,20 +124,3 @@ export default function FormCreateBeat() {
     </div>
   );
 }
-
-// name (debe recibir un nuevo nombre)
-// priceAmount (un numero)
-// genre (el id del genero asignado)
-// userCreator (el id del usuario creador)
-// bpm (un numero de velocidad del beat)
-
-// archivos
-// audioMP3 (un archivo de audio de baja calidad)
-// image (opcional)(un archivo de imagen de portada para el beat, preferiblemente jpg o png)
-// audioWAV (no disponible momentaneamente) (archivo de audio de alta calidad)
-
-// type={props.type}
-//         name={props.name}
-//         value={props.value}
-//         onChange={props.onChange}
-//         placeholder={props.placeholder}

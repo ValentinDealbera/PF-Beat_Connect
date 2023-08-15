@@ -9,7 +9,7 @@ type UserBoxNavProps = {
   title?: string;
 };
 
-export default function UserBoxNav({ className }: UserBoxNavProps) {
+export default function UserBoxNav({ className, navData }: UserBoxNavProps) {
   const { isLogged } = useSelector((state) => state.client.authSession.auth);
 
   return (
@@ -18,7 +18,7 @@ export default function UserBoxNav({ className }: UserBoxNavProps) {
         className={`flex flex-row items-center justify-center gap-4 align-middle ${className}`}
       >
         <MiniCart />
-        {isLogged ? <ProfileBox /> : <LoginButton />}
+        {isLogged ? <ProfileBox navClient={navData} /> : <LoginButton />}
       </div>
     </>
   );

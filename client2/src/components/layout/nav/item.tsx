@@ -16,7 +16,7 @@ export default function NavItem({ item, currentMode, pathname }: NavItemProps) {
   }`;
 
   return (
-    <Link href={item.url} className={itemStyles}>
+    <Link href={item.url} className={itemStyles} onClick={item.onClick}>
       {t(item.name)}
     </Link>
   );

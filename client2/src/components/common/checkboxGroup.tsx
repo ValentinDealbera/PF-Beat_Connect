@@ -1,9 +1,16 @@
+type CheckboxGroupProps = {
+  label: string;
+  values: { value: string; label: string }[];
+  seleccionados: { value: string; label: string }[];
+  setSeleccionados: (seleccionados: { value: string; label: string }[]) => void;
+};
+
 export default function CheckboxGroup({
   label,
   values,
   seleccionados,
   setSeleccionados,
-}) {
+}: CheckboxGroupProps) {
   return (
     <div className="flex flex-col gap-2">
       <label className="text-base-semibold">{label}</label>
@@ -20,7 +27,12 @@ export default function CheckboxGroup({
   );
 }
 
-function Checkbox({ value, seleccionados, setSeleccionados }) {
+type CheckboxProps = {
+  value: { value: string; label: string };
+  seleccionados: { value: string; label: string }[];
+  setSeleccionados: (seleccionados: { value: string; label: string }[]) => void;
+};
+function Checkbox({ value, seleccionados, setSeleccionados }: CheckboxProps) {
   return (
     <div className="flex gap-2 items-center">
       <input
@@ -31,7 +43,7 @@ function Checkbox({ value, seleccionados, setSeleccionados }) {
           e.target.checked
             ? setSeleccionados([...seleccionados, value])
             : setSeleccionados(
-                seleccionados.filter((v) => v.value !== value.value),
+                seleccionados.filter((v) => v.value !== value.value)
               )
         }
       />

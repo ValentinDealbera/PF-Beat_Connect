@@ -33,7 +33,7 @@ const initialState = {
 //POST CLIENT BEAT
 export const postClientBeat = createAsyncThunk(
   "client/postClientBeat",
-  async (data: BeatsClass, { dispatch, getState }) => {
+  async (data: any, { dispatch, getState }) => {
     try {
       const id = getUserIdFromState(getState);
       const response = await uploadClientBeat(data, id);
@@ -68,7 +68,7 @@ export const deleteClientBeat = createAsyncThunk(
 //EDIT CLIENT BEAT
 export const editClientBeat = createAsyncThunk(
   "client/editClientBeat",
-  async (data: BeatsClass, { rejectWithValue, dispatch, getState }) => {
+  async (data: any, { rejectWithValue, dispatch, getState }) => {
     try {
       const userId = getUserIdFromState(getState);
       const { activeEditingBeatId } = getActiveEditingBeat(getState());

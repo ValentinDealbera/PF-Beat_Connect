@@ -1,33 +1,29 @@
-import Image from "next/image";
-import { useSelector, useDispatch } from "react-redux";
-//import { externalManageDropdown } from "@/components/beat/newBeatCardGrid";
+import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { addToCart } from "@/redux/slices/cart";
-import {
-  BeatImage,
-  AuthorName,
-  BeatPrice,
-  BeatBPM,
-  BeatTitle,
-  BeatAudio,
-  AddToCart,
-  BeatReviewPopup,
-} from "@/components";
+import { BeatAudio, BeatReviewPopup } from "@/components";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import BeatDetailBox from "./beatDetailBox";
+import BeatDataBox from "./beatDataBox";
 
 export default function BeatDetailSideBar() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [t, i18n] = useTranslation("global");
-
-  const { bougthBeats } = useSelector((state) => state.client.beats);
-
-  const currentBeat = useSelector((state) => state.beats.activeItemDetail);
-
-  const hasReview = currentBeat.review.length > 0 ? true : false;
-
+  const [showModalReview, setShowModalReview] = useState(false);
+  const { bougthBeats } = useAppSelector((state) => state.client.beats);
+  const currentBeat = useAppSelector((state) => state.beats.activeItemDetail);
+  const hasReview = currentBeat?.review?.length > 0 ? true : false;
   const buyed = Boolean(
-    bougthBeats.find((beat) => beat._id === currentBeat._id),
+    bougthBeats.find((beat) => beat._id === currentBeat._id)
   );
+
+  const authorId = currentBeat.userCreator._id
+    ? currentBeat.userCreator._id
+    : currentBeat.userCreator;
+
+  const handleModalReview = () => {
+    setShowModalReview(!showModalReview);
+  };
 
   const dynamicBeatDetailBox = [
     {
@@ -47,26 +43,6 @@ export default function BeatDetailSideBar() {
       type: buyed ? "buyed" : "paid",
     },
   ];
-  const authorId = currentBeat.userCreator._id
-    ? currentBeat.userCreator._id
-    : currentBeat.userCreator;
-
-  // const dynamicBeatDetailBox = [
-  //   {
-  //     msg1: "Free License, MP3",
-  //     msg2: "$0.00",
-  //     beat: currentBeat,
-  //   },
-  //   {
-  //     msg1: "Standart License, WAV",
-  //     msg2: "$10.00",
-  //     beat: currentBeat,
-  //   },
-  // ];
-  const [showModalReview, setShowModalReview] = useState(false);
-  const handleModalReview = () => {
-    setShowModalReview(!showModalReview);
-  };
 
   return (
     <>
@@ -120,59 +96,5 @@ export default function BeatDetailSideBar() {
         handleModalReview={handleModalReview}
       />
     </>
-  );
-}
-
-function BeatDataBox({ beat }) {
-  return (
-    <div className="gap-estilo3 flex w-[286px] flex-row bg-white">
-      <BeatImage beat={beat} height={80} width={80} />
-      <div className="flex flex-col justify-center">
-        <BeatTitle beat={beat} />
-        <AuthorName beat={beat} />
-        <div className="pt-0">
-          <BeatPrice beat={beat} />
-          <BeatBPM beat={beat} />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function BeatDetailBox({
-  msg1,
-  msg2,
-  beat,
-  handleModalReview,
-  type,
-  hasReview,
-}) {
-  const [t, i18n] = useTranslation("global");
-  const dispatch = useDispatch();
-
-  //que el boton pueda descargar el beat
-  return (
-    <div className="h-auto">
-      <p className="pb-1 text-base font-medium text-black">{msg1}</p>
-      <p className=" mb-1 text-sm font-semibold text-red-700">{msg2}</p>
-      {hasReview && type !== "free" ? (
-        <button
-          className=" text-sm font-semibold text-red-700"
-          onClick={handleModalReview}
-        >
-          {t("beatDetailSideBar.t4")}
-        </button>
-      ) : type === "free" ? (
-        <a
-          className=" text-sm font-semibold text-red-700"
-          download={beat.name}
-          href={beat.audioMP3}
-        >
-          {t("beatDetailSideBar.t2")}
-        </a>
-      ) : (
-        <></>
-      )}
-    </div>
   );
 }

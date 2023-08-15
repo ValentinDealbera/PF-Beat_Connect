@@ -1,30 +1,21 @@
 import { BeatRightSheet } from "@/components";
 import { useState } from "react";
-import { serverUrl } from "@/data/config";
-import { toast } from "sonner";
-import axios from "axios";
-import { toastError, toastSuccess } from "@/utils/toastStyles";
-import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 
-export const manageBecomeSeller = () => {
-  BecomeSeller.handleOpenDropdown();
+type BecomeSellerProps = {
+  visible: boolean;
+  setVisible: (visible: boolean) => void;
 };
 
-export default function BecomeSeller() {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+export default function BecomeSeller({
+  visible,
+  setVisible,
+}: BecomeSellerProps) {
   const [terms, setTerms] = useState(false);
-  const router = useRouter();
-  const [t, i18n] = useTranslation("global");
+  const [t] = useTranslation("global");
 
-  const handleOpenDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
-
-  BecomeSeller.handleOpenDropdown = handleOpenDropdown;
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     alert("Caracteristica desactivada");
@@ -43,10 +34,10 @@ export default function BecomeSeller() {
 
   return (
     <>
-      {isDropdownOpen && (
+      {visible && (
         <BeatRightSheet
           width="min-w-[100vw] xs:min-w-[90vw] sm:min-w-[450px] "
-          setIsDropdownOpen={setIsDropdownOpen}
+          setIsDropdownOpen={setVisible}
         >
           <div className="flex h-full flex-col items-center justify-center gap-7 px-4 xs:px-8 sm:px-14 sm:py-10  ">
             <div className="flex flex-col items-center justify-center gap-2">
@@ -79,8 +70,7 @@ export default function BecomeSeller() {
                   />
                   <Link href={"help/terms"}>
                     <label
-                      for="terms"
-                      onClick={() => handleOpenDropdown()}
+                      onClick={() => setVisible(!visible)}
                       className="text-base-light hover:cursor-pointer"
                     >
                       {t("becomeSeller.t5")}

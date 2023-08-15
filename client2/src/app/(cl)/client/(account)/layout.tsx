@@ -7,10 +7,13 @@ type Props = {
 export default function SettingsLayout({ children }: Props) {
   return (
     <>
-      <Template title="Facturacion de la cuenta" aceptedPath="/cl/billing">
+      <Template title="Facturacion de la cuenta" aceptedPath="/client/billing">
         {children}
       </Template>
-      <Template title="Configuracion de la cuenta" aceptedPath="/cl/settings">
+      <Template
+        title="Configuracion de la cuenta"
+        aceptedPath="/client/settings"
+      >
         {children}
       </Template>
     </>

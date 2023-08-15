@@ -1,4 +1,18 @@
-export default function SwitchForm({ nameInput, label, arrayButtons }) {
+type SwitchFormProps = {
+  nameInput: string;
+  label: string;
+  arrayButtons: Array<{
+    handleAction: () => void;
+    active: boolean;
+    text: string;
+  }>;
+};
+
+export default function SwitchForm({
+  nameInput,
+  label,
+  arrayButtons,
+}: SwitchFormProps) {
   return (
     <label
       htmlFor={nameInput}
@@ -20,7 +34,13 @@ export default function SwitchForm({ nameInput, label, arrayButtons }) {
   );
 }
 
-function SwitchButton({ handleAction, active, text }) {
+type SwitchButtonProps = {
+  handleAction: () => void;
+  active: boolean;
+  text: string;
+};
+
+function SwitchButton({ handleAction, active, text }: SwitchButtonProps) {
   return (
     <button
       onClick={handleAction}

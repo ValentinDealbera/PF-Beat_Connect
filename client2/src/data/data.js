@@ -1,4 +1,4 @@
-import { manageBecomeSeller } from "../components/masters/becomeSeller";
+import { manageBecomeSeller } from "../components/forms/becomeSeller";
 import { useTranslation } from "react-i18next";
 
 export const navPublicMobile = [

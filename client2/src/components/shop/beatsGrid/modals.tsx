@@ -4,6 +4,7 @@ import {
   BeatRightSheet,
   EditReviewForm,
   ReviewForm,
+  EditBeat,
 } from "@/components";
 
 type Props = {
@@ -65,7 +66,10 @@ export default function Modals({
           width="min-w-[100vw] xs:min-w-[90vw] sm:min-w-[450px] "
           setIsDropdownOpen={setVisibilityEditBeat}
         >
-          <>Hola</>
+          <EditBeat
+            visible={visibilityEditBeat}
+            setVisible={setVisibilityEditBeat}
+          />
         </BeatRightSheet>
       )}
     </>

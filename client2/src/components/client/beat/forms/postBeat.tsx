@@ -1,29 +1,25 @@
 import { BeatRightSheet, Input, Select } from "@/components";
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { editClientBeat } from "@/redux/slices/client/beats";
-import { ValidationCreateBeat } from "../validation/validationCreateBeat";
+import { useAppSelector, useAppDispatch } from "@/redux/hooks";
+import { postClientBeat } from "@/redux/slices/client/beats";
+import { ValidationCreateBeat } from "../../../validation/validationCreateBeat";
 import { fetchGenres } from "@/redux/slices/filters";
 import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
 
-export const manageEditBeat = () => {
-  EditBeat.handleOpenDropdown();
-};
+type PostBeatProps = {
+  visible: boolean;
+  setVisible: (visible: boolean) => void;
+}
 
-export default function EditBeat() {
+export default function PostBeat({ visible, setVisible }: PostBeatProps) {
   const [t] = useTranslation("global");
-  const dispatch = useDispatch();
-  const activeEditingBeat = useSelector(
-    (state) => state.client.beats.activeEditingBeat,
-  );
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [fieldsToValidate, setFieldsToValidate] = useState([]);
+  const dispatch = useAppDispatch();
+  const [fieldsToValidate, setFieldsToValidate] = useState([]) as any;
   const [selected, setSelected] = useState("");
-  const [error, setErrors] = useState({});
-
-  const genres = useSelector((state) => state.filters.genres);
-  const { _id } = useSelector(
-    (state) => state.client.authSession.session.current,
+  const [error, setErrors] = useState({}) as any;
+  const genres = useAppSelector((state) => state?.filters?.genres);
+  const { _id } = useAppSelector(
+    (state) => state?.client?.authSession?.session?.current
   );
 
   const [form, setForm] = useState({
@@ -34,16 +30,19 @@ export default function EditBeat() {
     bpm: "",
     image: {},
     audioMP3: {},
+    audioWAV: {},
     _id: _id,
   });
 
   const handleOpenDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
+    setVisible(!visible);
   };
 
-  EditBeat.handleOpenDropdown = handleOpenDropdown;
+  useEffect(() => {
+    setForm((prevForm) => ({ ...prevForm, userCreator: _id, _id: _id }));
+  }, [_id]);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: any) => {
     if (e.target.type === "file") {
       setForm({
         ...form,
@@ -59,7 +58,7 @@ export default function EditBeat() {
     }
   };
 
-  const handleSelectChange = (e) => {
+  const handleSelectChange = (e: any) => {
     setSelected(e);
     setForm((prevForm) => ({ ...prevForm, genre: e }));
   };
@@ -72,51 +71,36 @@ export default function EditBeat() {
     setErrors(ValidationCreateBeat(form, fieldsToValidate));
   }, [form, fieldsToValidate]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const formErrors = ValidationCreateBeat(form, "*", "edit");
+    const formErrors = ValidationCreateBeat(form, "*");
     if (Object.keys(formErrors).length === 0) {
-      await dispatch(editClientBeat(form));
-      setIsDropdownOpen(false);
+      await dispatch(postClientBeat(form));
+      setVisible(false);
     } else {
       setErrors(formErrors);
     }
     e.target.reset();
   };
 
-  useEffect(() => {
-    if (!activeEditingBeat) return;
-
-    setSelected(activeEditingBeat.genre?._id ?? "");
-
-    setForm({
-      name: activeEditingBeat.name,
-      priceAmount: activeEditingBeat.priceAmount,
-      genre: activeEditingBeat.genre?._id ?? "",
-      userCreator: _id,
-      _id: _id,
-      BPM: activeEditingBeat.BPM,
-    });
-  }, [activeEditingBeat]);
-
   return (
     <>
-      {isDropdownOpen && (
+      {visible && (
         <BeatRightSheet
           width="min-w-[100vw] xs:min-w-[90vw] sm:min-w-[450px] "
-          setIsDropdownOpen={setIsDropdownOpen}
+          setIsDropdownOpen={setVisible}
         >
           <div className="flex h-full flex-col items-center justify-center gap-7 px-4 xs:px-8 sm:px-14 sm:py-10 overflow-y-hidden  ">
             <div className="flex w-full flex-col gap-5 overflow-y-hidden">
               <div className="flex flex-col items-center justify-center gap-0">
                 <h4 className="text-titulo3-regular text-center">
-                  {t("editBeat.t1")}{" "}
+                  {t("postBeat.t1")}{" "}
                   <span className="text-titulo3-semibold text-red-700">
-                    beat
+                    {t("postBeat.t2")}
                   </span>{" "}
                 </h4>
                 <p className="text-base-light text-center">
-                  {t("editBeat.t2")}
+                  {t("postBeat.t3")}
                 </p>
               </div>
               <form
@@ -133,7 +117,6 @@ export default function EditBeat() {
                     className="w-full"
                     placeholder={t("postBeat.form2")}
                     labelClass="w-full"
-                    defaultValue={activeEditingBeat.name}
                   />
                   <Input
                     name={"priceAmount"}
@@ -145,29 +128,24 @@ export default function EditBeat() {
                     placeholder={t("postBeat.form4")}
                     className="w-full"
                     labelClass="w-full"
-                    defaultValue={activeEditingBeat.priceAmount}
                   />
-
                   <Select
                     label={t("postBeat.form5")}
                     valores={genres}
                     setSeleccionados={handleSelectChange}
                     value={selected}
-                    seleccionados={selected}
                     error={error.genre}
-                    className="flex w-full flex-col gap-2"
                     labelClass="w-full text-sm-regular text-sm-medium"
                   />
                   <Input
                     name={"bpm"}
-                    label={"BPMs"}
+                    label={t("postBeat.form7")}
                     placeholder={"BPMs"}
                     type={"number"}
                     onChange={handleInputChange}
                     error={error.bpm}
                     className="w-full"
                     labelClass="w-full"
-                    defaultValue={activeEditingBeat.BPM}
                   />
 
                   <Input
@@ -180,12 +158,32 @@ export default function EditBeat() {
                     className="w-full"
                     labelClass="w-full"
                   />
+                  <Input
+                    name={"audioMP3"}
+                    label={t("postBeat.form12")}
+                    placeholder={"Upload your Beat"}
+                    type={"file"}
+                    onChange={handleInputChange}
+                    error={error.audioMP3}
+                    className="w-full"
+                    labelClass="w-full"
+                  />
+                  <Input
+                    name={"audioWAV"}
+                    label={t("postBeat.form13")}
+                    placeholder={"Upload your Beat"}
+                    type={"file"}
+                    onChange={handleInputChange}
+                    error={error.audioWAV}
+                    className="w-full"
+                    labelClass="w-full"
+                  />
                 </div>
                 <button
                   type="submit"
                   className="text-base-semibold mt-2  w-full rounded-full bg-red-700 py-2 text-white"
                 >
-                  {t("postBeat.form15")}
+                  {t("postBeat.form14")}
                 </button>
               </form>
             </div>

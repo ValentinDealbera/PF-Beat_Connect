@@ -15,6 +15,9 @@ type NavBuilderProps = {
   managePostBeat: any;
   setHamburguerVisible: any;
   router: any;
+  setBecomeSellerVisible: (arg0: boolean) => void;
+  setPostBeatVisible: (arg0: boolean) => void;
+  setEditBeatVisible: (arg0: boolean) => void;
 };
 
 export const navBuilder = ({
@@ -22,13 +25,16 @@ export const navBuilder = ({
   managePostBeat,
   setHamburguerVisible,
   router,
+  setBecomeSellerVisible,
+  setPostBeatVisible,
+  setEditBeatVisible,
 }: NavBuilderProps) => {
   return [
     {
       name: t("navClient.t1"),
       url: "/client",
       colorMode: "light",
-      visibility: true,
+      visible: true,
       onClick: () => {
         setHamburguerVisible(false), router.push("/client");
       },
@@ -36,25 +42,23 @@ export const navBuilder = ({
     {
       name: t("navClient.t3"),
       url: "",
-      // onClick: () => {manageBecomeSeller(), setHamburguerVisible(false)},
-      //visibility: !isSeller,
+      onClick: () => setBecomeSellerVisible(true),
+      //visible: !isSeller,
 
-      visibility: true,
+      visible: true,
     },
     {
       name: t("navClient.t4"),
       url: "",
-      onClick: () => {
-        managePostBeat(), setHamburguerVisible(false);
-      },
-      // visibility: isSeller,
-      visibility: true,
+      onClick: () => setPostBeatVisible(true),
+      // visible: isSeller,
+      visible: true,
     },
     {
       name: t("navClient.t5"),
       url: "/client/settings",
       colorMode: "light",
-      visibility: true,
+      visible: true,
       onClick: () => {
         setHamburguerVisible(false), router.push("/client/settings");
       },
@@ -63,7 +67,7 @@ export const navBuilder = ({
       name: t("navClient.t6"),
       url: "/client/billing",
       colorMode: "light",
-      visibility: true,
+      visible: true,
       onClick: () => {
         setHamburguerVisible(false), router.push("/client/billing");
       },
@@ -72,7 +76,7 @@ export const navBuilder = ({
       name: t("navClient.t7"),
       url: "/auth/logout",
       colorMode: "light",
-      visibility: true,
+      visible: true,
       onClick: () => {
         setHamburguerVisible(false), router.push("/auth/logout");
       },

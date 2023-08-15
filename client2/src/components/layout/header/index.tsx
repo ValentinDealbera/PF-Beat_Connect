@@ -1,4 +1,13 @@
-import { Logo, Nav, UserBoxNav, managePostBeat, Hamburger } from "@/components";
+import {
+  Logo,
+  Nav,
+  UserBoxNav,
+  managePostBeat,
+  Hamburger,
+  PostBeat,
+  BecomeSeller,
+  EditBeat,
+} from "@/components";
 import { ReactSVG } from "react-svg";
 import { useRouter } from "next/navigation";
 import { navPublicMobile } from "@/data/data";
@@ -31,10 +40,17 @@ export default function Header() {
   const [hamburguerVisible, setHamburguerVisible] = useState(false);
   const [headerClass, setHeaderClass] = useState<any>({});
 
+  const [postBeatVisible, setPostBeatVisible] = useState(false);
+  const [editBeatVisible, setEditBeatVisible] = useState(false);
+  const [becomeSellerVisible, setBecomeSellerVisible] = useState(false);
+
   const navClient = navBuilder({
     t,
     managePostBeat,
     setHamburguerVisible,
+    setEditBeatVisible,
+    setPostBeatVisible,
+    setBecomeSellerVisible,
     router,
   });
 
@@ -53,9 +69,12 @@ export default function Header() {
 
   return (
     <>
-      {/* <BecomeSeller /> */}
-      {/* <PostBeat />
-      <EditBeat /> */}
+      <BecomeSeller
+        visible={becomeSellerVisible}
+        setVisible={setBecomeSellerVisible}
+      />
+      <PostBeat visible={postBeatVisible} setVisible={setPostBeatVisible} />
+      <EditBeat visible={editBeatVisible} setVisible={setEditBeatVisible} />
       <header
         className="fixed z-30 flex  w-full  flex-row justify-center py-8"
         style={headerClass}

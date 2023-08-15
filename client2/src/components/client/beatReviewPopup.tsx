@@ -1,30 +1,20 @@
-import {
-  Main,
-  HelpContainer,
-  Head,
-  FaqsGrid,
-  ModalPopUp,
-  Input,
-  TextArea,
-  ClientReview,
-  ReviewCardGrid,
-} from "@/components";
-
-import { useSelector } from "react-redux";
-
+import { ModalPopUp, ClientReview } from "@/components";
+import { useAppSelector } from "@/redux/hooks";
 import Image from "next/image";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-export default function BeatReviewPopup({ modal, handleModalReview }) {
-  const [t] = useTranslation("global");
-  //const [modal, setModal] = useState(false);
+type Props = {
+  modal: boolean;
+  handleModalReview: () => void;
+};
 
-  const currentBeatReview = useSelector(
-    (state) => state.beats.activeItemDetail,
+export default function BeatReviewPopup({ modal, handleModalReview }: Props) {
+  const [t] = useTranslation("global");
+
+  const currentBeatReview = useAppSelector(
+    (state) => state.beats.activeItemDetail
   );
 
-  //sacamos promedio de rating
   const rating = currentBeatReview.review.map((review) => review.rating);
   const averageRating = (
     rating.reduce((a, b) => a + b, 0) / rating.length
@@ -52,21 +42,14 @@ export default function BeatReviewPopup({ modal, handleModalReview }) {
                 {currentBeatReview.review.length} Reviews
               </p>
             </div>
-
             <div className="grid w-full grid-cols-1 overflow-y-scroll gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
-              <>
-                {currentBeatReview.review.map((review) => (
-                  <>
-                    <ClientReview
-                      currentMode="showcase"
-                      title={review.title}
-                      comment={review.comment}
-                      username={`${review.createdBy.firstName} ${review.createdBy.lastName}`}
-                      review={review}
-                    />
-                  </>
-                ))}
-              </>
+              {currentBeatReview.review.map((review) => (
+                <ClientReview
+                  currentMode="showcase"
+                  manageEditReview={handleModalReview}
+                  review={review}
+                />
+              ))}
             </div>
           </div>
         </ModalPopUp>

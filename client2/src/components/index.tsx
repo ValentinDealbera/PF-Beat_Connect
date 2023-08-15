@@ -4,11 +4,11 @@
 export { default as Hero } from "./common/hero";
 
 export { default as SimpleHeader } from "./masters/simpleHeader";
-export { default as BecomeSeller } from "./masters/becomeSeller";
-export { default as PostBeat } from "./client/postBeat";
-export { managePostBeat } from "./client/postBeat";
-export { default as EditBeat } from "./masters/editBeat";
-export { manageEditBeat } from "./masters/editBeat";
+export { default as BecomeSeller } from "./forms/becomeSeller";
+export { default as PostBeat } from "./client/beat/forms/postBeat";
+export { managePostBeat } from "./client/beat/forms/postBeat";
+export { default as EditBeat } from "./client/beat/forms/editBeat";
+export { manageEditBeat } from "./client/beat/forms/editBeat";
 export { default as Loader } from "./masters/loader";
 
 //MiniCart
@@ -53,7 +53,7 @@ export { default as ClientReview } from "./client/review";
 export { default as ClientBeatsIndexer } from "./client/clientBeatsIndexer";
 
 export { default as ProfileCard } from "./client/profileCard";
-export { default as FormCreateBeat } from "./forms/formCreateBeat";
+export { default as FormCreateBeat } from "./client/beat/forms/formCreateBeat";
 //clientDataComponents
 
 //Dashboard
@@ -75,7 +75,7 @@ export { default as DynamicTable } from "./dynamicTable/dynamicTable";
 
 //Funciones de los componentes
 
-export { manageBecomeSeller } from "./masters/becomeSeller";
+export { manageBecomeSeller } from "./forms/becomeSeller";
 
 //Forms
 

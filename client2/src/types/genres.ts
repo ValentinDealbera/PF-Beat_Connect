@@ -1,13 +1,13 @@
 export class GenreClass {
-  id: string;
+  _id: string;
   name: string;
 
   constructor(id: string, name: string) {
-    this.id = id;
+    this._id = id;
     this.name = name;
   }
 
   static deserialize(input: any): GenreClass {
-    return new GenreClass(input.id, input.name);
+    return new GenreClass(input._id, input.name);
   }
 }

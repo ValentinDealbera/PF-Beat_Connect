@@ -19,7 +19,7 @@ const initialState = {
   publicItems: [] as BeatsClass[],
   activeItems: [] as BeatsClass[],
   featuredItems: [] as BeatsClass[],
-  activeItemDetail: null,
+  activeItemDetail: {} as BeatsClass,
   generalActiveIndex: 0,
   activeReviewDetail: [] as ReviewsClass[],
   reviewFetchStatus: false,
