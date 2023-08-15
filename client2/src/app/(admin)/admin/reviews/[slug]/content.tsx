@@ -1,17 +1,16 @@
+"use client";
 import {
     SellerDashboardLayout,
     IslandDashboard,
-    FaqsGrid,
     AdminCreateReviewForm,
   } from "@/components";
   import { useTranslation } from "react-i18next";
-
-  import { useState, useEffect, useRef } from "react";
+  import { useRef } from "react";
   
   export default function SellerDashboardOverview() {
 
     const [t] = useTranslation("global");
-    const childRef = useRef(null);
+    const childRef = useRef<any>();
 
     const handleExternalSubmit = () => {
       childRef.current.submit();

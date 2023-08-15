@@ -5,7 +5,6 @@ import {
   Input,
   SwitchForm,
   TextArea,
-  Head,
 } from "@/components";
 
 import {
@@ -16,37 +15,41 @@ import {
 
 import { forwardRef, useImperativeHandle } from "react";
 import { useState, useRef, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { adminEditReview, adminPostReview } from "@/redux/slices/admin/reviews";
 import { adminGetBeats } from "@/redux/slices/admin/beats";
 import { adminGetUsers } from "@/redux/slices/admin/users";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { Autocomplete, TextField } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
-const AdminCreateReviewForm = forwardRef((props, ref) => {
+type Props = {
+  mode: string;
+};
+
+const AdminCreateReviewForm = forwardRef((props: Props, ref) => {
   const router = useRouter();
-  const dispatch = useDispatch();
-  const formRef = useRef(null);
+  const dispatch = useAppDispatch();
+  const formRef = useRef<any>();
   const validateMode = "review";
-  const [fieldsToValidate, setFieldsToValidate] = useState([]);
-  const [error, setErrors] = useState({});
+  const [fieldsToValidate, setFieldsToValidate] = useState([]) as any;
+  const [error, setErrors] = useState({}) as any;
   const defaultValues =
-    useSelector((state) => state.admin.reviews.currentEditingReview) || {};
+  useAppSelector((state) => state.admin.reviews.currentEditingReview) || {};
   const mode = props.mode;
-  const defaultUsers = useSelector((state) => state.admin.users.users);
-  const defaultBeats = useSelector((state) => state.admin.beats.beats);
+  const defaultUsers = useAppSelector((state) => state.admin.users.users);
+  const defaultBeats = useAppSelector((state) => state.admin.beats.beats);
   const [softD, setSoftD] = useState(defaultValues.softDelete);
   const [t] = useTranslation("global");
 
   const [form, setForm] = useState({
-    createdBy: `${mode === "edit" ? defaultValues.createdBy._id : ""}`,
+    createdBy: `${mode === "edit" ? defaultValues?.createdBy?._id : ""}`,
     rating: `${mode === "edit" ? defaultValues.rating : ""}`,
-    beat: `${mode === "edit" ? defaultValues.beat._id : ""}`,
+    beat: `${mode === "edit" ? defaultValues?.beat?._id : ""}`,
     comment: `${mode === "edit" ? defaultValues.comment : ""}`,
     title: `${mode === "edit" ? defaultValues.title : ""}`,
     id: `${mode === "edit" ? defaultValues._id : ""}`,
-    // softDelete: `${mode === "edit" ? defaultValues.softDelete : ""}`,
+ softDelete: `${mode === "edit" ? defaultValues.softDelete : ""}`,
   });
 
   const options = defaultUsers.map((user) => ({
@@ -59,18 +62,17 @@ const AdminCreateReviewForm = forwardRef((props, ref) => {
     value: beat._id,
   }));
 
-  const handleInput = (e) => {
+  const handleInput = (e:any) => {
     handleInputChange(
       e,
       fieldsToValidate,
       setFieldsToValidate,
       form,
       setForm,
-      validateMode,
     );
   };
 
-  const onSubmit = async (e) => {
+  const onSubmit = async () => {
     const actionToDispatch =
       mode === "edit" ? adminEditReview : adminPostReview;
     try {
@@ -157,7 +159,7 @@ const AdminCreateReviewForm = forwardRef((props, ref) => {
                 {t("adminCreateReviewForm.t1")}
                 <Autocomplete
                   id="createdBy"
-                  name="createdBy"
+              //    name="createdBy"
                   options={options}
                   getOptionLabel={(option) => option.label}
                   onChange={(event, newValue) => {
@@ -201,17 +203,17 @@ const AdminCreateReviewForm = forwardRef((props, ref) => {
               label="Rating"
               onChange={handleInput}
               error={error.rating}
-              defaultValue={mode === "edit" ? defaultValues.rating : ""}
+              defaultValue={mode === "edit" ? defaultValues?.rating?.toString() : ""}
             />
             {mode === "edit" && (
               <SwitchForm
                 label={t("adminCreateReviewForm.t4")}
-                name="softDelete"
+             //   name="softDelete"
                 nameInput="softDelete"
                 // defaultValue={mode === "edit" ? defaultValues.softDelete : ""}
-                onChange={handleInput}
+              //  onChange={handleInput}
                 arrayButtons={arraySoftDelete.arrayButtons}
-                error={error.softDelete}
+              //  error={error.softDelete}
               />
             )}
           </FormColumn>
@@ -225,7 +227,7 @@ const AdminCreateReviewForm = forwardRef((props, ref) => {
                 Beat
                 <Autocomplete
                   id="beat"
-                  name="beat"
+                 // name="beat"
                   options={optionsBeats}
                   getOptionLabel={(option) => option.label}
                   onChange={(event, newValue) => {
@@ -251,7 +253,7 @@ const AdminCreateReviewForm = forwardRef((props, ref) => {
               </label>
             )}
             <TextArea
-              id="comment"
+            //  id="comment"
               name="comment"
               placeholder={t("adminCreateReviewForm.t5")}
               label={t("adminCreateReviewForm.t5")}

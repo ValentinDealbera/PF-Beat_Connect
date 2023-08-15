@@ -1,36 +1,27 @@
+"use client";
 import {
   SellerDashboardLayout,
   IslandDashboard,
-  FormContainer,
-  FormColumn,
-  FormRow,
-  Input,
-  Select,
-  SwitchForm,
-  TextArea,
-  AdminCreateUserForm,
   AdminCreateReviewForm,
-  Head,
 } from "@/components";
 
 import {
-  handleSelectChange,
   handleInputChange,
   handleSubmit,
   validateForm,
 } from "@/data/formLogic";
 
 import { useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "@/redux/hooks";
 import { fetchGenres } from "@/redux/slices/filters";
 import { useTranslation } from "react-i18next";
 
 export default function SellerDashboardOverview() {
-  const dispatch = useDispatch();
-  const formRef = useRef(null);
+  const dispatch = useAppDispatch();
+  const formRef = useRef<any>();
   const validateMode = "review";
-  const [fieldsToValidate, setFieldsToValidate] = useState([]);
-  const [error, setErrors] = useState({});
+  const [fieldsToValidate, setFieldsToValidate] = useState([]) as any;
+  const [error, setErrors] = useState({}) as any;
   const [t] = useTranslation("global");
 
   const [form, setForm] = useState({
@@ -42,16 +33,8 @@ export default function SellerDashboardOverview() {
     softDelete: false,
   });
 
-
-  const handleInput = (e) => {
-    handleInputChange(
-      e,
-      fieldsToValidate,
-      setFieldsToValidate,
-      form,
-      setForm,
-      validateMode
-    );
+  const handleInput = (e: any) => {
+    handleInputChange(e, fieldsToValidate, setFieldsToValidate, form, setForm);
   };
 
   useEffect(() => {
@@ -62,7 +45,7 @@ export default function SellerDashboardOverview() {
     setErrors(validateForm(form, fieldsToValidate, validateMode));
   }, [form, fieldsToValidate]);
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: any) => {
     handleSubmit({
       form: form,
       //  dispatch: dispatch,
@@ -100,29 +83,25 @@ export default function SellerDashboardOverview() {
       },
     ],
   };
-//----------------------------
-  const childRef = useRef(null);
+  //----------------------------
+  const childRef = useRef<any>();
 
   const handleExternalSubmit = () => {
-    childRef.current.submit();
+    childRef?.current?.submit();
   };
 
-
   return (
-    <>
-      <Head title="Crear rev" />
-      <main>
-        <SellerDashboardLayout
-          topBarMode="action"
-          topBarMessage={t("dashboardNav.createReview")}
-          topBarButtonLabel={t("adminBeatsCreate.t1")}
-          onClick={handleExternalSubmit}
-        >
-          <IslandDashboard className="flex flex-col gap-5 xl:gap-8 ">
+    <main>
+      <SellerDashboardLayout
+        topBarMode="action"
+        topBarMessage={t("dashboardNav.createReview")}
+        topBarButtonLabel={t("adminBeatsCreate.t1")}
+        onClick={handleExternalSubmit}
+      >
+        <IslandDashboard className="flex flex-col gap-5 xl:gap-8 ">
           <AdminCreateReviewForm mode="create" ref={childRef} />
-          </IslandDashboard>
-        </SellerDashboardLayout>
-      </main>
-    </>
+        </IslandDashboard>
+      </SellerDashboardLayout>
+    </main>
   );
 }

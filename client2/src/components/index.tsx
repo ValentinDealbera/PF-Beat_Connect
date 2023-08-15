@@ -82,7 +82,7 @@ export { default as FormColumn } from "./form/formColumn";
 export { default as FormContainer } from "./form/formContainer";
 export { default as FormRow } from "./form/formRow";
 export { default as AdminCreateUserForm } from "./dashboard/forms/adminCreateUser";
-export { default as AdminCreateReviewForm } from "./forms/adminCreateReview";
+export { default as AdminCreateReviewForm } from "./dashboard/forms/adminCreateReview";
 export { default as AdminCreateBeatForm } from "./dashboard/forms/adminCreateBeat";
 export { default as EditClientForm } from "./forms/editClientForm";
 export { default as EditPasswordForm } from "./forms/editPasswordForm";
