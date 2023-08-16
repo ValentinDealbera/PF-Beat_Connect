@@ -21,7 +21,7 @@ export default function AdminHeaderBar() {
 
   return (
     <>
-      <div className="bg-black w-full flex justify-center">
+      <div className="bg-black w-full flex justify-center ">
         <div className="padding-x-estilo2 flex h-10 items-center justify-between bg-black">
           <p className="text-sm-light text-white">{t("adminHeaderBar.t1")}</p>
           <button

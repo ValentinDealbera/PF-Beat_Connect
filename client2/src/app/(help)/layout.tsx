@@ -8,7 +8,6 @@ type Props = {
 export default function HelpLayout({ children }: Props) {
   return (
     <>
-      <AdminHeaderBar />
       <Header />
       <main>
         <Template

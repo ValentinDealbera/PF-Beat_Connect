@@ -5,5 +5,5 @@ type BeatBPMProps = {
 };
 
 export default function BeatBPM({ beat }: BeatBPMProps) {
-  return <span className="font-light">{` | ${beat.BPM}BPM`}</span>;
+  return <span className="font-light">{` | ${beat?.BPM}BPM`}</span>;
 }

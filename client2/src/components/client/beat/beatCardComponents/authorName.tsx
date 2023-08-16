@@ -7,12 +7,12 @@ type AuthorNameProps = {
 };
 
 export default function AuthorName({ beat }: AuthorNameProps) {
-  const userFullName = `${beat.userCreator.firstName} ${beat.userCreator.lastName}`;
+  const userFullName = `${beat?.userCreator?.firstName} ${beat?.userCreator?.lastName}`;
 
   return (
     <div className="flex flex-row items-center gap-1">
       <Link
-        href={`/beats/author/${beat.userCreator?._id}`}
+        href={`/beats/author/${beat?.userCreator?._id}`}
         onClick={(e) => e.stopPropagation()}
       >
         <span className="font-light">{userFullName}</span>

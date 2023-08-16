@@ -24,7 +24,7 @@ export default function EditBeat({ visible, setVisible }: EditBeatProps) {
 
   const genres = useAppSelector((state) => state.filters.genres);
   const { _id } = useAppSelector(
-    (state) => state.client.authSession.session.current,
+    (state) => state?.client?.authSession?.session?.current,
   );
 
   const [form, setForm] = useState({
@@ -42,16 +42,16 @@ export default function EditBeat({ visible, setVisible }: EditBeatProps) {
     if (e.target.type === "file") {
       setForm({
         ...form,
-        [e.target.name]: e.target.files[0],
+        [e.target.name]: e?.target?.files[0],
       });
     } else {
       setForm((prevForm: any) => ({
         ...prevForm,
-        [e.target.name]: e.target.value,
+        [e.target.name]: e?.target?.value,
       }));
     }
 
-    const { name } = e.target;
+    const { name } = e?.target;
     if (!fieldsToValidate.includes(name)) {
       setFieldsToValidate([...fieldsToValidate, name]);
     }

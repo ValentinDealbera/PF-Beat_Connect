@@ -57,6 +57,7 @@ export default function Modals({
         fromClient={fromClient}
         visibilityOwnedModal={visibilityOwnedBag}
         beat={beat}
+        isLogged={isLogged}
         setVisibilityEditBeat={setVisibilityEditBeat}
       />
       <ModalLogin logged={logged} setLogged={setLogged} />
@@ -66,6 +67,7 @@ export default function Modals({
         boughtBeat={boughtBeat}
         reviewed={reviewed}
         beat={beat}
+        isLogged={isLogged}
         setVisibilityCreateReview={setVisibilityCreateReview}
         setVisibilityEditReview={setVisibilityEditReview}
       />

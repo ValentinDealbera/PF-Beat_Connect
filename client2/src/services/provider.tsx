@@ -7,6 +7,7 @@ import global_es from "../lenguage/es/global.json";
 import global_en from "../lenguage/en/global.json";
 import { I18nextProvider } from "react-i18next";
 import i18next from "i18next";
+import SecurityHOC from "./securityHoc";
 
 interface Props {
   children: React.ReactNode;
@@ -33,7 +34,6 @@ export default function AppProvider({ children }: Props) {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <I18nextProvider i18n={i18next}>
-            {/* <RedirectProvider> */}
             <Toaster
               richColors
               position="bottom-left"
@@ -41,8 +41,9 @@ export default function AppProvider({ children }: Props) {
                 className: "max-w-[85vw] xs:max-w-none z-50 ",
               }}
             />
+            <SecurityHOC >
             {children}
-            {/* </RedirectProvider> */}
+            </SecurityHOC>
           </I18nextProvider>
         </PersistGate>
       </Provider>

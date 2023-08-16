@@ -6,6 +6,7 @@ import {
   PostBeat,
   BecomeSeller,
   EditBeat,
+  AdminHeaderBar,
 } from "@/components";
 import { ReactSVG } from "react-svg";
 import { useRouter } from "next/navigation";
@@ -72,12 +73,11 @@ export default function Header() {
       />
       <PostBeat visible={postBeatVisible} setVisible={setPostBeatVisible} />
       <EditBeat visible={editBeatVisible} setVisible={setEditBeatVisible} />
-      <header
-        className="fixed z-30 flex  w-full  flex-row justify-center py-8"
-        style={headerClass}
-      >
+      <header className="fixed z-30 flex  w-full  flex-col" style={headerClass}>
+        <AdminHeaderBar />
+
         <div
-          className={`padding-x-estilo2 relative  flex items-center justify-between align-middle`}
+          className={`padding-x-estilo2 relative py-8 flex items-center justify-between align-middle`}
         >
           <Logo />
           <HamburguerIcon

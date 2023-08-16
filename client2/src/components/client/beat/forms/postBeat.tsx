@@ -34,10 +34,6 @@ export default function PostBeat({ visible, setVisible }: PostBeatProps) {
     _id: _id,
   });
 
-  const handleOpenDropdown = () => {
-    setVisible(!visible);
-  };
-
   useEffect(() => {
     setForm((prevForm) => ({ ...prevForm, userCreator: _id, _id: _id }));
   }, [_id]);

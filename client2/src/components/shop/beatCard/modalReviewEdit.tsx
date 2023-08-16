@@ -16,6 +16,7 @@ type ModalReviewEditProps = {
   beat: BeatsClass;
   setVisibilityCreateReview: (visibility: boolean) => void;
   setVisibilityEditReview: (visibility: boolean) => void;
+  isLogged: boolean;
 };
 
 export default function ModalReviewEdit({
@@ -26,6 +27,7 @@ export default function ModalReviewEdit({
   beat,
   setVisibilityCreateReview,
   setVisibilityEditReview,
+  isLogged,
 }: ModalReviewEditProps) {
   const [t] = useTranslation("global");
   const dispatch = useAppDispatch();
@@ -47,7 +49,7 @@ export default function ModalReviewEdit({
 
   return (
     <>
-      {!fromClient && visibilityReviewEditBag && boughtBeat && (
+      {!fromClient && visibilityReviewEditBag && boughtBeat && isLogged && (
         <div>
           <MiniModalBox className="right-1 top-1">
             <div className="flex flex-col">

@@ -40,17 +40,17 @@ const AdminCreateBeatForm = forwardRef((props: Props, ref) => {
   const [softD, setSoftD] = useState(defaultValues.softDelete);
 
   const [form, setForm] = useState({
-    name: `${mode === "edit" ? defaultValues.name : ""}`,
-    priceAmount: `${mode === "edit" ? defaultValues.priceAmount : ""}`,
+    name: `${mode === "edit" ? defaultValues?.name : ""}`,
+    priceAmount: `${mode === "edit" ? defaultValues?.priceAmount : ""}`,
     genre: `${mode === "edit" ? defaultValues?.genre?._id : ""}`,
-    image: `${mode === "edit" ? defaultValues.image : ""}`,
-    audioMP3: `${mode === "edit" ? defaultValues.audioMP3 : ""}`,
-    audioWAV: `${mode === "edit" ? defaultValues.audioWAV : ""}`,
+    image: `${mode === "edit" ? defaultValues?.image : ""}`,
+    audioMP3: `${mode === "edit" ? defaultValues?.audioMP3 : ""}`,
+    audioWAV: `${mode === "edit" ? defaultValues?.audioWAV : ""}`,
     userCreator: `${mode === "edit" ? defaultValues?.userCreator?._id : ""}`,
-    bpm: `${mode === "edit" ? defaultValues.BPM : ""}`,
-    id: `${mode === "edit" ? defaultValues._id : ""}`,
-    softDelete: `${mode === "edit" ? defaultValues.softDelete : ""}`,
-    relevance: `${mode === "edit" ? defaultValues.relevance : ""}`,
+    bpm: `${mode === "edit" ? defaultValues?.BPM : ""}`,
+    id: `${mode === "edit" ? defaultValues?._id : ""}`,
+    softDelete: `${mode === "edit" ? defaultValues?.softDelete : ""}`,
+    relevance: `${mode === "edit" ? defaultValues?.relevance : ""}`,
   });
 
   const defaultUsers = useAppSelector((state) => state.admin.users.users);
@@ -72,7 +72,7 @@ const AdminCreateBeatForm = forwardRef((props: Props, ref) => {
         dispatch: dispatch,
         setErrors: setErrors,
         validateMode: validateMode,
-        formRef: formRef.current,
+        formRef: formRef?.current,
         mode: mode,
       });
       router.push("/admin/beats");

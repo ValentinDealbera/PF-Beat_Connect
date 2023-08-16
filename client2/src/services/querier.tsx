@@ -12,7 +12,7 @@ export default function Querier({ children }: Props) {
   const params = useParams();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const currentPage = useAppSelector((state) => state.beats.pages.current);
+  const currentPage = useAppSelector((state) => state?.beats?.pages?.current);
   useEffect(() => {
     dispatch(fetchBeats({}));
   }, []);

@@ -7,7 +7,6 @@ type Props = {
 export default function PublicLayout({ children }: Props) {
   return (
     <>
-      <AdminHeaderBar />
       <Header />
       <main>{children}</main>
       <Footer mode={"dark"} />

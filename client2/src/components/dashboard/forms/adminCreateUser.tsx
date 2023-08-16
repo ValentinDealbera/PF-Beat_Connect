@@ -36,24 +36,24 @@ const AdminCreateUserForm = forwardRef((props: Props, ref) => {
   const defaultValues =
     mode === "create"
       ? ({} as any)
-      : useAppSelector((state) => state.admin.users.currentEdtingUser);
+      : useAppSelector((state) => state?.admin?.users?.currentEdtingUser);
   const [softD, setSoftD] = useState(defaultValues?.softDelete) as any;
-  const [sellerState, setSellerState] = useState(defaultValues.isSeller);
-  const [adminState, setAdminState] = useState(defaultValues.superAdmin);
+  const [sellerState, setSellerState] = useState(defaultValues?.isSeller);
+  const [adminState, setAdminState] = useState(defaultValues?.superAdmin);
 
   const [form, setForm] = useState({
-    username: `${mode === "edit" ? defaultValues.username : ""}`,
-    firstName: `${mode === "edit" ? defaultValues.firstName : ""}`,
-    lastName: `${mode === "edit" ? defaultValues.lastName : ""}`,
+    username: `${mode === "edit" ? defaultValues?.username : ""}`,
+    firstName: `${mode === "edit" ? defaultValues?.firstName : ""}`,
+    lastName: `${mode === "edit" ? defaultValues?.lastName : ""}`,
     image: "",
-    email: `${mode === "edit" ? defaultValues.email : ""}`,
+    email: `${mode === "edit" ? defaultValues?.email : ""}`,
     password: "",
-    id: `${mode === "edit" ? defaultValues._id : ""}`,
-    bio: `${mode === "edit" ? defaultValues.bio : ""}`,
+    id: `${mode === "edit" ? defaultValues?._id : ""}`,
+    bio: `${mode === "edit" ? defaultValues?.bio : ""}`,
     backImage: "",
-    seller: `${mode === "edit" ? defaultValues.isSeller : ""}`,
-    admin: `${mode === "edit" ? defaultValues.superAdmin : ""}`,
-    soft: `${mode === "edit" ? defaultValues.softDelete : ""}`,
+    seller: `${mode === "edit" ? defaultValues?.isSeller : ""}`,
+    admin: `${mode === "edit" ? defaultValues?.superAdmin : ""}`,
+    soft: `${mode === "edit" ? defaultValues?.softDelete : ""}`,
   });
 
   const handleInput = (e: any) => {

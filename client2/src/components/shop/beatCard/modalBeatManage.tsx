@@ -13,6 +13,7 @@ type ModalBeatManageProps = {
   visibilityOwnedModal: boolean;
   beat: BeatsClass;
   setVisibilityEditBeat: (visibility: boolean) => void;
+  isLogged?: boolean;
 };
 
 export default function ModalBeatManage({
@@ -20,6 +21,7 @@ export default function ModalBeatManage({
   visibilityOwnedModal,
   beat,
   setVisibilityEditBeat,
+  isLogged,
 }: ModalBeatManageProps) {
   const [t] = useTranslation("global");
   const dispatch = useAppDispatch();
@@ -46,7 +48,7 @@ export default function ModalBeatManage({
 
   return (
     <>
-      {fromClient && visibilityOwnedModal && (
+      {fromClient && visibilityOwnedModal &&  isLogged && (
         <div>
           <MiniModalBox className="right-1 top-1  ">
             <div className="flex flex-col gap-1">

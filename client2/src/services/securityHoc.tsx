@@ -1,142 +1,141 @@
-// "use client";
-// import { ReactNode, useEffect, useMemo } from "react";
-// import { useAppSelector, useAppDispatch } from "@/redux/hooks";
-// import { debounce } from "lodash";
-// import { useRouter, usePathname, useSearchParams } from "next/navigation";
-// import {
-//   setAuth,
-//   setSession,
-//   logout,
-//   verifySession as verifySessionX,
-// } from "@/redux/slices/client/authSession";
-// import { AuthClass, UserClass } from "@/types";
+"use client";
+import axios from "axios";
+import { useEffect } from "react";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { useAppSelector, useAppDispatch } from "@/redux/hooks";
+import {
+  setGoogleSuccessful,
+  resetReducer,
+} from "@/redux/slices/client/authSession";
+import { serverUrl } from "@/data/config";
+import { getUserData } from "@/redux/slices/client/authSession";
 
-// type Props = {
-//   children: ReactNode;
-// };
+type Props = {
+  children: React.ReactNode;
+};
 
-// const SecurityHOC: React.FC<Props> = ({ children }) => {
-//   const dispatch = useAppDispatch();
-//   const router = useRouter();
-//   const pathname = usePathname();
-//   const searchParams = useSearchParams();
-//   console.log("searchParams", searchParams);
-//   const {
-//     session: { current: sSession },
-//     auth: sAuth,
-//   } = useAppSelector((state) => state.authSession);
+export default function HOC({ children }: Props) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const params = useSearchParams();
+  const dispatch = useAppDispatch();
+  const {
+    loginMethod,
+    isAdmin,
+    isLogged,
+    tokenValid,
+    google: { googleSessionID },
+    json: { token },
+  } = useAppSelector((state) => state?.client?.authSession?.auth);
 
-//   const loginMethodQy = searchParams.get("loginMethod") ?? "";
-//   const userIdQy = searchParams.get("id") ?? "";
-//   const statusQy = searchParams.get("status") ?? "";
-//   const sessionQy = searchParams.get("session") ?? "";
+  const { _id } = useAppSelector(
+    (state) => state?.client?.authSession?.session?.current
+  );
 
-//   const session = UserClass.deserialize(sSession);
-//   const auth = AuthClass.deserialize(sAuth);
-//   const userId = session?.getId() || (userIdQy ?? "");
-//   const SessionID = auth?.getSessionId() || (sessionQy ?? "");
+  const hocIsWorking = true;
+  const experimentalIsClient = isLogged;
+  const experimentalIsAdmin = isAdmin;
 
-//   const verifySession = async (data: AuthClass) => {
-//     try {
-//       if (data.isLogged && userId) {
-//         const verifData = await dispatch(verifySessionX(SessionID));
-//         if (verifData.meta.requestStatus === "fulfilled") {
-//           console.log("Sesión válida");
-//           await setSessionFn();
-//           return true;
-//         } else {
-//           console.log("Sesión no válida");
-//           return false;
-//         }
-//       } else {
-//         console.log("Debes iniciar sesión primero");
-//       }
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   };
+  const GoogleSessionID = params.get("session") ?? googleSessionID;
+  const clientId = params.get("id") ?? _id;
+  // const clientId = _id && _id !== "" ? _id : params.id;
 
-//   const setSessionFn = async () => {
-//     await dispatch(setSession(userId as string));
-//   };
+  //--------------------
+  //HOC GOOGLE AUTH
+  const googleAuth = async (headers: any) => {
+    try {
+      await axios.get(`${serverUrl}google/verify`, {
+        headers,
+      });
 
-//   const setAuthFn = async () => {
-//     const authObj = new AuthClass(
-//       statusQy === "ok" ? true : false,
-//       loginMethodQy as string,
-//       sessionQy as string,
-//     );
-//     await dispatch(setAuth(authObj));
-//     return authObj;
-//   };
+      if (clientId && clientId !== undefined) {
+        const session = (await dispatch(getUserData(clientId))) as any;
+        console.log("session", session?.payload?.session?.softDelete);
+        if (session?.payload?.session?.softDelete === true) {
+          dispatch(resetReducer());
+          router.push("/");
+          return;
+        }
 
-//   const systemHoc = async () => {
-//     if (auth?.getIsLogged()) {
-//       const sessionOk = await verifySession(auth);
-//       if (!sessionOk) {
-//         await dispatch(logout());
-//       }
-//     } else if (
-//       !auth?.isLogged &&
-//       loginMethodQy &&
-//       userIdQy &&
-//       statusQy &&
-//       sessionQy
-//     ) {
-//       const authData = await setAuthFn();
-//       const sessionOk = await verifySession(authData);
-//       if (!sessionOk) {
-//         if (!sessionOk) {
-//           await dispatch(logout());
-//         }
-//       }
-//     } else {
-//       console.log("No hay datos de autenticación");
-//     }
-//   };
+        dispatch(
+          setGoogleSuccessful({
+            isLogged: true,
+            tokenValid: true,
+            googleSessionID: headers.session,
+            //   session: userData,
+          })
+        );
+      }
+    } catch (error) {
+      console.log("Error al iniciar con google", error);
+      dispatch(resetReducer());
+      router.push("/");
+    }
+  };
 
-//   const delayedSystemStart = useMemo(
-//     () => debounce(() => systemHoc(), 500),
-//     [
-//       pathname,
-//       userId,
-//       //  auth?.getIsLogged() === true,
-//       loginMethodQy,
-//       userIdQy,
-//       statusQy,
-//       searchParams,
-//       session?.getId(),
-//     ],
-//   );
+  useEffect(() => {
+    console.log(
+      "GoogleSessionID",
+      GoogleSessionID,
+      loginMethod,
+      clientId,
+      params
+    );
+    if (loginMethod === "google" && GoogleSessionID) {
+      const headers = { session: GoogleSessionID };
+      googleAuth(headers);
+    }
+  }, [GoogleSessionID, loginMethod, clientId]);
 
-//   useEffect(() => {
-//     const cancelDebounce = () => {
-//       delayedSystemStart.cancel();
-//     };
-//     delayedSystemStart();
-//     return cancelDebounce;
-//   }, [delayedSystemStart]);
+  //--------------------
+  //HOC JSON AUTH
+  const jsonAuth = async (headers: any) => {
+    try {
+      await axios.get(`${serverUrl}auth/me`, {
+        headers,
+      });
+    } catch (error) {
+      console.log("Error:", error);
+      dispatch(resetReducer());
+      router.push("/");
+      return;
+    }
+  };
 
-//   useEffect(() => {
-//     console.log("pathname", pathname);
-//     //Si estamos en la página de login y estamos logueados, redirigimos a la página de inicio
-//     if (
-//       (pathname === "/auth" || pathname === "/auth/register") &&
-//       auth?.getIsLogged()
-//     ) {
-//       router.push("/");
-//     }
-//   }, [pathname, auth?.getIsLogged(), router]);
+  useEffect(() => {
+    if (loginMethod === "json" && token) {
+      const headers = { Authorization: `Bearer ${token}` };
+      jsonAuth(headers);
+    }
+  }, []);
 
-//   // Rutas protegidas
-//   //   console.log(auth?.getIsLogged(), userId, auth);
-//   //   if (!auth?.getIsLogged() || auth?.getIsLogged() == undefined || !userId) {
-//   //     return null;
-//   //   } else {
-//   //     return <main>{children}</main>;
-//   //   }
+  if (!hocIsWorking) {
+    return <>{children}</>;
+  }
 
-//   return <main>{children}</main>;
-// };
-
-// export default SecurityHOC;
+  if (pathname.startsWith("/client")) {
+    if (experimentalIsClient === false || tokenValid === false) {
+      router.push("/");
+      return <></>;
+    } else {
+      return <>{children}</>;
+    }
+  } else if (pathname.startsWith("/admin")) {
+    if (experimentalIsAdmin === false || tokenValid === false) {
+      router.push("/");
+    } else {
+      return <>{children}</>;
+    }
+  } else if (pathname.startsWith("/auth")) {
+    if (pathname === "/auth/logout") {
+      return <>{children}</>;
+    }
+    if (isLogged === true) {
+      router.push("/");
+    } else {
+      return <>{children}</>;
+    }
+  } else {
+    return <>{children}</>;
+  }
+}

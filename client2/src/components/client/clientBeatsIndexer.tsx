@@ -23,7 +23,7 @@ type IndexerItemProps = {
 };
 
 const IndexerItem = ({ item, index }: IndexerItemProps) => {
-  const activeIndex = useAppSelector((state) => state.beats.generalActiveIndex);
+  const activeIndex = useAppSelector((state) => state?.beats?.generalActiveIndex);
   const [t] = useTranslation("global");
   const dispatch = useAppDispatch();
   const textStyles =

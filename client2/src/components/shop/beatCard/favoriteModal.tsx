@@ -39,7 +39,7 @@ export default function FavoriteModal({
     <>
       {!fromClient && visibilityReviewEditBag && (
         <MiniModalBox className="left-1 top-1">
-          {!isFavorite && !fromClient && (
+          {((!isFavorite && !fromClient) || !isLogged) && (
             <Button
               icon="/icon/corazon.svg"
               alt="heart"
@@ -47,7 +47,7 @@ export default function FavoriteModal({
               action={handleAddFavorite}
             />
           )}
-          {isFavorite && !fromClient && (
+          {isFavorite && !fromClient && isLogged && (
             <Button
               icon="/icon/corazon-lleno.svg"
               alt="heart"

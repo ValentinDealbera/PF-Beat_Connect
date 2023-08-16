@@ -175,7 +175,7 @@ export const changePassword = createAsyncThunk(
 //GET USER DATA
 export const getUserData = createAsyncThunk(
   "authSession/getUserData",
-  async (data: string, { rejectWithValue, getState, dispatch }) => {
+  async (data: any, { rejectWithValue, getState, dispatch }) => {
     const clientId = data ? data : getUserIdFromState(getState);
     try {
       const response = await fetchUserData(clientId);

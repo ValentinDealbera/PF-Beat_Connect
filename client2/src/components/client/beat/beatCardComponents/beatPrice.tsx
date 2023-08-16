@@ -6,6 +6,6 @@ type BeatPriceProps = {
 
 export default function BeatPrice({ beat }: BeatPriceProps) {
   return (
-    <span className="color-primary-red-700 font-semibold">{`$${beat.priceAmount}`}</span>
+    <span className="color-primary-red-700 font-semibold">{`$${beat?.priceAmount}`}</span>
   );
 }

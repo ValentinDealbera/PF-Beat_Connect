@@ -12,12 +12,12 @@ export default function BeatReviewPopup({ modal, handleModalReview }: Props) {
   const [t] = useTranslation("global");
 
   const currentBeatReview = useAppSelector(
-    (state) => state.beats.activeItemDetail,
+    (state) => state?.beats?.activeItemDetail,
   );
 
-  const rating = currentBeatReview.review.map((review) => review.rating);
+  const rating = currentBeatReview?.review?.map((review) => review?.rating);
   const averageRating = (
-    rating.reduce((a, b) => a + b, 0) / rating.length
+    rating?.reduce((a, b) => a + b, 0) / rating?.length
   ).toFixed(1);
 
   return (

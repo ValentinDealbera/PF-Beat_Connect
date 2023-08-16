@@ -23,8 +23,8 @@ const BeatImage = ({
       style={{ height: height, width: width }}
     >
       <Image
-        src={beat.image}
-        alt={beat.name}
+        src={beat?.image}
+        alt={beat?.name}
         layout="fill"
         className="rounded-xl object-cover"
       />

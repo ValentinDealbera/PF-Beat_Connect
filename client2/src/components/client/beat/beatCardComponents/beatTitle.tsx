@@ -5,5 +5,5 @@ type BeatTitleProps = {
 };
 
 export default function BeatTitle({ beat }: BeatTitleProps) {
-  return <h1 className="font-bold">{`${beat.name}`}</h1>;
+  return <h1 className="font-bold">{`${beat?.name}`}</h1>;
 }

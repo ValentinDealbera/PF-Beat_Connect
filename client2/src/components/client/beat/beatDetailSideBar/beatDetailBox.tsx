@@ -1,4 +1,3 @@
-import { useAppDispatch } from "@/redux/hooks";
 import { useTranslation } from "react-i18next";
 
 type BeatDetailBoxProps = {
@@ -19,7 +18,6 @@ export default function BeatDetailBox({
   hasReview,
 }: BeatDetailBoxProps) {
   const [t] = useTranslation("global");
-  const dispatch = useAppDispatch();
 
   //que el boton pueda descargar el beat
   return (
@@ -36,8 +34,8 @@ export default function BeatDetailBox({
       ) : type === "free" ? (
         <a
           className=" text-sm font-semibold text-red-700"
-          download={beat.name}
-          href={beat.audioMP3}
+          download={beat?.name}
+          href={beat?.audioMP3}
         >
           {t("beatDetailSideBar.t2")}
         </a>

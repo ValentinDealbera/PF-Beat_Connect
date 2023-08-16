@@ -6,13 +6,11 @@ import {
   SwitchForm,
   TextArea,
 } from "@/components";
-
 import {
   handleInputChange,
   handleSubmit,
   validateForm,
 } from "@/data/formLogic";
-
 import { forwardRef, useImperativeHandle } from "react";
 import { useState, useRef, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
@@ -35,21 +33,22 @@ const AdminCreateReviewForm = forwardRef((props: Props, ref) => {
   const [fieldsToValidate, setFieldsToValidate] = useState([]) as any;
   const [error, setErrors] = useState({}) as any;
   const defaultValues =
-    useAppSelector((state) => state.admin.reviews.currentEditingReview) || {};
+    useAppSelector((state) => state?.admin?.reviews?.currentEditingReview) ||
+    {};
   const mode = props.mode;
-  const defaultUsers = useAppSelector((state) => state.admin.users.users);
-  const defaultBeats = useAppSelector((state) => state.admin.beats.beats);
+  const defaultUsers = useAppSelector((state) => state?.admin?.users?.users);
+  const defaultBeats = useAppSelector((state) => state?.admin?.beats?.beats);
   const [softD, setSoftD] = useState(defaultValues.softDelete);
   const [t] = useTranslation("global");
 
   const [form, setForm] = useState({
     createdBy: `${mode === "edit" ? defaultValues?.createdBy?._id : ""}`,
-    rating: `${mode === "edit" ? defaultValues.rating : ""}`,
+    rating: `${mode === "edit" ? defaultValues?.rating : ""}`,
     beat: `${mode === "edit" ? defaultValues?.beat?._id : ""}`,
-    comment: `${mode === "edit" ? defaultValues.comment : ""}`,
-    title: `${mode === "edit" ? defaultValues.title : ""}`,
-    id: `${mode === "edit" ? defaultValues._id : ""}`,
-    softDelete: `${mode === "edit" ? defaultValues.softDelete : ""}`,
+    comment: `${mode === "edit" ? defaultValues?.comment : ""}`,
+    title: `${mode === "edit" ? defaultValues?.title : ""}`,
+    id: `${mode === "edit" ? defaultValues?._id : ""}`,
+    softDelete: `${mode === "edit" ? defaultValues?.softDelete : ""}`,
   });
 
   const options = defaultUsers.map((user) => ({
