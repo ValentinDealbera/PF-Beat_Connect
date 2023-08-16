@@ -55,7 +55,7 @@ export default function ReviewForm({ manageCreateReview }: Props) {
       handleInputChange={handleInputChange}
       ratingValue={ratingValue}
       setRatingValue={setRatingValue}
-      title="editReview.t1"
+      title="beatCar.createReview"
       hasDefaultValues={false}
     />
   );

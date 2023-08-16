@@ -23,7 +23,7 @@ export default function SettingsTemplate({
     <>
       <HeroSettings title={title} />
       <Section subClassName="padding-x-estilo2 padding-y-estilo2 gap-estilo2 flex flex-col">
-        {pathname === "/cl/settings" && <ClientSettingsIndexer />}
+        {pathname === "/client/settings" && <ClientSettingsIndexer />}
         {children}
       </Section>
     </>

@@ -41,14 +41,14 @@ export const navBuilder = ({
       onClick: () => setBecomeSellerVisible(true),
       //visible: !isSeller,
 
-      visible: true,
+      visible: false,
     },
     {
       name: t("navClient.t4"),
       url: "",
       onClick: () => setPostBeatVisible(true),
-      // visible: isSeller,
-      visible: true,
+       visible: false,
+    //  visible: true,
     },
     {
       name: t("navClient.t5"),
