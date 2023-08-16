@@ -11,7 +11,7 @@ export default function Logout() {
   const router = useRouter();
 
   const loginMethod = useAppSelector(
-    (state) => state.client.authSession.auth.loginMethod
+    (state) => state.client.authSession.auth.loginMethod,
   );
 
   const logOutJson = async () => {

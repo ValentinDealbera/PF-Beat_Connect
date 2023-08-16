@@ -47,8 +47,8 @@ export const navBuilder = ({
       name: t("navClient.t4"),
       url: "",
       onClick: () => setPostBeatVisible(true),
-       visible: false,
-    //  visible: true,
+      visible: false,
+      //  visible: true,
     },
     {
       name: t("navClient.t5"),

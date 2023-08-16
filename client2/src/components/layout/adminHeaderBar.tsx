@@ -7,7 +7,7 @@ export default function AdminHeaderBar() {
   const pathname = usePathname();
   const router = useRouter();
   const { isLogged, isAdmin } = useAppSelector(
-    (state) => state.client.authSession.auth
+    (state) => state.client.authSession.auth,
   );
 
   if (

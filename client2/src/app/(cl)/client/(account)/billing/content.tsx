@@ -5,7 +5,6 @@ import { useAppSelector } from "@/redux/hooks";
 import { useEffect, useState } from "react";
 import { rowsBuilder } from "./operation";
 
-
 export default function Content() {
   const [t] = useTranslation("global");
   const [montoVar, setMontoVar] = useState("");

@@ -41,7 +41,7 @@ const initialState = {
 //JSON LOGIN
 export const jsonLogin = createAsyncThunk(
   "authSession/jsonLogin",
-  async (data:any, { dispatch }) => {
+  async (data: any, { dispatch }) => {
     try {
       const userResponse = await axiosPoster({
         url: `auth`,
@@ -72,7 +72,7 @@ export const jsonLogin = createAsyncThunk(
 //JSON REGISTER
 export const jsonRegister = createAsyncThunk(
   "authSession/registerClientUser",
-  async (data:any) => {
+  async (data: any) => {
     try {
       const response = await axiosPoster({
         url: `auth/register`,
@@ -90,7 +90,7 @@ export const jsonRegister = createAsyncThunk(
 //RECOVER PASSWORD
 export const recoverPassword = createAsyncThunk(
   "authSession/recoverPassword",
-  async (data:any) => {
+  async (data: any) => {
     try {
       const response = await axiosPoster({
         url: `mail/password`,
@@ -142,7 +142,7 @@ export const editClient = createAsyncThunk(
 //PASSWORD RECOVERY
 export const passwordRecovery = createAsyncThunk(
   "authSession/passwordRecovery",
-  async (data:any) => {
+  async (data: any) => {
     try {
       await axiosPutter({
         url: `recover/password`,

@@ -16,7 +16,7 @@ export default function RecoveryPasswordForm() {
   const userEmail = router.query.email;
 
   const id = useAppSelector(
-    (state) => state.client.authSession.session.current._id
+    (state) => state.client.authSession.session.current._id,
   );
 
   const [form, setForm] = useState({
@@ -39,7 +39,7 @@ export default function RecoveryPasswordForm() {
       const formErrors = validationRecoverPassword(form, "*");
       if (Object.keys(formErrors).length === 0) {
         dispatch(
-          passwordRecovery({ newPassword: form.newPassword, email: userEmail })
+          passwordRecovery({ newPassword: form.newPassword, email: userEmail }),
         );
         formRef.current.reset();
 

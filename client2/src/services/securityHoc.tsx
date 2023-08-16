@@ -29,7 +29,7 @@ export default function HOC({ children }: Props) {
   } = useAppSelector((state) => state?.client?.authSession?.auth);
 
   const { _id } = useAppSelector(
-    (state) => state?.client?.authSession?.session?.current
+    (state) => state?.client?.authSession?.session?.current,
   );
 
   const hocIsWorking = true;
@@ -63,7 +63,7 @@ export default function HOC({ children }: Props) {
             tokenValid: true,
             googleSessionID: headers.session,
             //   session: userData,
-          })
+          }),
         );
       }
     } catch (error) {
@@ -79,7 +79,7 @@ export default function HOC({ children }: Props) {
       GoogleSessionID,
       loginMethod,
       clientId,
-      params
+      params,
     );
     if (loginMethod === "google" && GoogleSessionID) {
       const headers = { session: GoogleSessionID };

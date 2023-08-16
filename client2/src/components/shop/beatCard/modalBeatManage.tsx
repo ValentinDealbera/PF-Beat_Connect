@@ -48,7 +48,7 @@ export default function ModalBeatManage({
 
   return (
     <>
-      {fromClient && visibilityOwnedModal &&  isLogged && (
+      {fromClient && visibilityOwnedModal && isLogged && (
         <div>
           <MiniModalBox className="right-1 top-1  ">
             <div className="flex flex-col gap-1">

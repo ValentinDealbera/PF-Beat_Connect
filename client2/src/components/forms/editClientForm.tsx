@@ -22,7 +22,7 @@ export default function EditClientForm({ mode: modeP }: Props) {
   const defaultValues =
     useAppSelector((state) => state.client.authSession.session.current) || {};
   const id = useAppSelector(
-    (state) => state.client.authSession.session.current._id
+    (state) => state.client.authSession.session.current._id,
   );
 
   const mode = modeP;

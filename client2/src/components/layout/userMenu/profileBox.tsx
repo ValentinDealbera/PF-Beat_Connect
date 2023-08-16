@@ -13,7 +13,7 @@ export default function ProfileBox({ navClient }: Props) {
   const [t] = useTranslation("global");
   const [visible, setVisible] = useState<boolean>(false);
   const client = useAppSelector(
-    (state) => state.client.authSession.session.current
+    (state) => state.client.authSession.session.current,
   );
 
   const handleAction = () => {

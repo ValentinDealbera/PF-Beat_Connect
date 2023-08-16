@@ -41,9 +41,7 @@ export default function AppProvider({ children }: Props) {
                 className: "max-w-[85vw] xs:max-w-none z-50 ",
               }}
             />
-            <SecurityHOC >
-            {children}
-            </SecurityHOC>
+            <SecurityHOC>{children}</SecurityHOC>
           </I18nextProvider>
         </PersistGate>
       </Provider>

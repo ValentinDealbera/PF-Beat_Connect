@@ -14,7 +14,7 @@ export default function BeatDetailSideBar() {
   const currentBeat = useAppSelector((state) => state?.beats?.activeItemDetail);
   const hasReview = currentBeat?.review?.length > 0 ? true : false;
   const buyed = Boolean(
-    bougthBeats.find((beat) => beat?._id === currentBeat?._id)
+    bougthBeats.find((beat) => beat?._id === currentBeat?._id),
   );
 
   const authorId = currentBeat?.userCreator?._id
