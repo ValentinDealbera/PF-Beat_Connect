@@ -80,8 +80,8 @@
     "t6": "Nuestra plataforma cuenta con una lista de productores de música registrados, quienes han creado y publicado sus catálogos de instrumentales. Los usuarios pueden explorar los catálogos de los productores y escuchar muestras de audio de cada beat para decidir cuál es el más adecuado para sus necesidades. También contamos con un proceso de pago seguro y eficiente que permite a los usuarios comprar y descargar el beat en su correo electrónico. Si eres un productor de música, ¡también puedes registrarte en nuestra plataforma y crear y publicar tu catálogo de instrumentales! Mostrar tus muestras de audio y descripciones detalladas de cada beat, recibir solicitudes de beats personalizados, y comunicarte con los usuarios para discutir detalles adicionales.",
     "t7": "Tecnologías",
     "t8": "utilizadas",
-    "title1": "Sobre los",
-    "title2": "creadores",
+    "title1": "Sobre los creadores y",
+    "title2": "BeatConnect",
     "title3": "y"
   },
   "tecnologias": {
@@ -239,7 +239,6 @@
     "filterName2": "Precio",
     "sortBy": "Ordenar por:",
     "filters": "Filtros"
-
   },
   "search": "¿Que estas buscando?",
   "billing": {
@@ -250,7 +249,6 @@
     "empty": "No tienes movimientos",
     "compra": "Compra",
     "venta": "Venta"
-
   },
   "sliceAuthSession": {
     "t1": "Se logueó correctamente",
@@ -383,7 +381,7 @@
     "tap": "Doble tap para más detalles"
   },
   "editReview": {
-    "t1": "Modifiquemos tu",
+    "t1": "Modifiquemos tu opinión",
     "t2": "opinión",
     "t3": "Titulo",
     "t4": "Comentario",
