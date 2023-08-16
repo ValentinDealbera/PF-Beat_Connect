@@ -23,13 +23,12 @@ export { default as CheckboxGroup } from "./common/checkboxGroup";
 export { default as ArrowLabel } from "./common/arrowLabel";
 export { default as MinMax } from "./common/minMax";
 export { default as SwitchForm } from "./common/switchForm";
-export { default as FormAdmin } from "./forms/adminForm"; //creado pero sin colocar (SoftDelete, SwitchForm)
 export { default as ValidationEditUsers } from "./validation/validationEditUsers";
 export { ValidationCreateBeat } from "./validation/validationCreateBeat";
 export { ValidationCreateReview } from "./validation/validationCreateReview";
 export { ValidationCreateUser } from "./validation/validationCreateUser";
 export { default as ReviewForm } from "./client/review/forms/createReview";
-export { default as Hamburger } from "./masters/hamburguer";
+export { default as Hamburger } from "./layout/hamburguer";
 export { default as LandBot } from "./layout/landBot";
 export { default as ChatbotWindow } from "./layout/landBot/chatBotWindow";
 
@@ -91,7 +90,7 @@ export { default as BeatReviewPopup } from "./client/beatReviewPopup";
 export { default as EditReviewForm } from "./client/review/forms/editReview";
 
 export { default as AdminMaster } from "./masters/adminMaster";
-export { default as AdminHeaderBar } from "./masters/adminHeaderBar";
+export { default as AdminHeaderBar } from "./layout/adminHeaderBar";
 export { default as DynamicTableLight } from "./dynamicTable/dynamicTableLight";
 
 //export { default as BeatImage } from "./beat/beatImage";

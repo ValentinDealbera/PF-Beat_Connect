@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   BeatImage,
   AuthorName,
@@ -31,25 +31,53 @@ export default function BeatCard({
   setVisibilityEditBeat,
 }: BeatCardProps) {
   const dispatch = useAppDispatch();
-  const ref = useRef(null);
   const [t] = useTranslation("global");
   const [visibilityReviewEditBag, setVisibilityReviewEditBag] = useState(false);
   const [visibilityOwnedBag, setVisibilityOwnedBag] = useState(false);
+  const [tapVisible, setTapVisible] = useState(false);
   const { sorter, sorterValues } = useAppSelector((state) => state?.filters);
   const { bougthBeats, favoriteBeats } = useAppSelector(
-    (state) => state.client.beats,
+    (state) => state.client.beats
   );
-
+  const ref = useRef<any>(null);
   const boughtBeat = Boolean(
-    bougthBeats.find((boughtBeat) => boughtBeat._id === beat._id),
+    bougthBeats.find((boughtBeat) => boughtBeat._id === beat._id)
   );
 
   const sortArr = sorterValues;
 
-  const handleAction = async () => {
-    await dispatch(setActiveItemDetail(beat));
-    setVisibilityViewBeat(true);
+  const handleClick = async () => {
+    if (window.innerWidth > 1023) {
+      await dispatch(setActiveItemDetail(beat));
+      setVisibilityViewBeat(true);
+    }
   };
+
+  const handleDoubleClick = async () => {
+    if (window.innerWidth <= 1023) {
+      await dispatch(setActiveItemDetail(beat));
+      setVisibilityViewBeat(true);
+    }
+  };
+
+  function handleClickOutside(event: any) {
+    if (ref.current && !ref.current.contains(event.target)) {
+      setVisibilityReviewEditBag(false);
+      setVisibilityOwnedBag(false);
+      setTapVisible(false);
+    } else {
+      setVisibilityReviewEditBag(true);
+      setVisibilityOwnedBag(true);
+      setTapVisible(true);
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
 
   return (
     <div
@@ -57,7 +85,11 @@ export default function BeatCard({
       className="relative w-full "
       onClick={(e: any) => {
         e.stopPropagation();
-        handleAction();
+        handleClick();
+      }}
+      onDoubleClick={(e: any) => {
+        e.stopPropagation();
+        handleDoubleClick();
       }}
       onMouseEnter={() => {
         setVisibilityReviewEditBag(true);
@@ -78,7 +110,7 @@ export default function BeatCard({
             beat={beat}
             height={"auto"}
             width={"auto"}
-            tapVisible={false}
+            tapVisible={tapVisible}
           />
           <div className={`${variant === "public" ? "" : "px-2"}`}>
             {boughtBeat ? (

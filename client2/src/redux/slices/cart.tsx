@@ -71,7 +71,7 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    resetCart(state, action) {
+    resetCart(state) {
       state.cart = [];
     },
     //--------------------

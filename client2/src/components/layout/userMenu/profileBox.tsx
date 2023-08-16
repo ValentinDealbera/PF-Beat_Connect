@@ -13,14 +13,21 @@ export default function ProfileBox({ navClient }: Props) {
   const [t] = useTranslation("global");
   const [visible, setVisible] = useState<boolean>(false);
   const client = useAppSelector(
-    (state) => state.client.authSession.session.current,
+    (state) => state.client.authSession.session.current
   );
+
+  const handleAction = () => {
+    if (window.innerWidth < 1024) {
+      setVisible(!visible);
+    }
+  };
 
   return (
     <div
       className="relative"
       onMouseLeave={() => setVisible(false)}
       onMouseEnter={() => setVisible(true)}
+      onClick={() => handleAction()}
     >
       <div className="flex gap-2 rounded-full border items-center bg-white pb-1 pl-1 pr-1 pt-1 lg:pr-4">
         <Image

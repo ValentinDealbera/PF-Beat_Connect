@@ -1,14 +1,18 @@
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "@/redux/hooks";
 import { adminGetData } from "@/redux/slices/admin/adminSession";
 import { useEffect, useMemo } from "react";
 import { debounce } from "lodash";
 
-export default function AdminMaster(props) {
-  const dispatch = useDispatch();
+type Props = {
+  children: React.ReactNode;
+};
+
+export default function AdminMaster({ children }: Props) {
+  const dispatch = useAppDispatch();
 
   const delayedAdminGetBeats = useMemo(
-    () => debounce((value) => dispatch(adminGetData(value)), 500),
-    [dispatch],
+    () => debounce(() => dispatch(adminGetData()), 500),
+    [dispatch]
   );
 
   useEffect(() => {
@@ -21,5 +25,5 @@ export default function AdminMaster(props) {
     return cancelDebounce;
   }, []);
 
-  return <>{props.children}</>;
+  return <>{children}</>;
 }

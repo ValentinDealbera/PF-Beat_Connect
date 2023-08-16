@@ -6,7 +6,7 @@ import { Metadata } from "next";
 import { useEffect, useState } from "react";
 import { rowsBuilder } from "./operation";
 
-export const metadataSettings: Metadata = {
+export const metadata: Metadata = {
   title: "Settings",
   description: "Settings",
 };

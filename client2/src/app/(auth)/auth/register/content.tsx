@@ -1,40 +1,32 @@
 "use client";
-import {
-  Input,
-  SimpleHeader,
-  Head,
-  GoogleButton,
-  AuthLayout,
-} from "@/components";
+import { Input, GoogleButton } from "@/components";
 import Link from "next/link";
-import { toast } from "sonner";
-
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { jsonRegister } from "@/redux/slices/client/authSession";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "@/redux/hooks";
 import { useTranslation } from "react-i18next";
 import { ValidateRegister } from "@/components/validation/client/validateRegister";
 
 export default function Login() {
-  const [t, i18n] = useTranslation("global");
+  const [t] = useTranslation("global");
   const [step, setStep] = useState(1);
-  const [form, setForm] = useState({});
-  const [error, setErrors] = useState({});
+  const [form, setForm] = useState({}) as any;
+  const [error, setErrors] = useState({}) as any;
   const router = useRouter();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const validationErrors = ValidateRegister(form, "*");
+    const validationErrors = ValidateRegister(form, "*") as any;
     setErrors(validationErrors);
   }, [form]);
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     setForm({ ...form, [e.target.name]: e.target.value || "" });
   };
 
   const onClick = () => {
-    const validationErrors = ValidateRegister(form, "*");
+    const validationErrors = ValidateRegister(form, "*") as any;
     setErrors(validationErrors);
     if (
       form.firstName &&
@@ -46,10 +38,7 @@ export default function Login() {
     }
   };
 
-  console.log("soy el form", form);
-  console.log("soy el error", error);
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     const validationErrors = ValidateRegister(form, "*");

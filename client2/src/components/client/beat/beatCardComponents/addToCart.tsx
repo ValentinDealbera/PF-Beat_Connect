@@ -11,7 +11,7 @@ type Props = {
 export default function AddToCart({ beat, posAction }: Props) {
   const [t] = useTranslation("global");
   const dispatch = useAppDispatch();
-  const authorId = beat.userCreator.id ? beat.userCreator.id : beat.userCreator;
+  const authorId = beat.userCreator._id ? beat.userCreator._id : beat.userCreator;
 
   const handleAddToCart = async () => {
     await dispatch(addToCart({ authorId: authorId, beat: beat }));

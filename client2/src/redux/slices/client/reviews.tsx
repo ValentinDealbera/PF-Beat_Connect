@@ -50,7 +50,7 @@ export const deleteClientReview = createAsyncThunk(
   "client/deleteClientReview",
   async (data: string, { rejectWithValue, dispatch, getState }) => {
     const state = getState() as RootState;
-    const id = state.client.authSession.session.current.id;
+    const id = state.client.authSession.session.current._id;
     try {
       const response = await axiosDeleter({
         url: `review/${data}`,
@@ -60,7 +60,7 @@ export const deleteClientReview = createAsyncThunk(
       });
 
       await dispatch(getUserData(id));
-      await dispatch(fetchBeats());
+      await dispatch(fetchBeats({}));
 
       return response;
     } catch (error) {
@@ -76,8 +76,8 @@ export const editClientReview = createAsyncThunk(
   "client/editClientReview",
   async (data: any, { rejectWithValue, dispatch, getState }) => {
     const state = getState() as RootState;
-    const id = state.client.authSession.session.current.id;
-    const reviewId = state.client.reviews.activeEditingReview.id;
+    const id = state.client.authSession.session.current._id;
+    const reviewId = state.client.reviews.activeEditingReview._id;
 
     try {
       const response = await axiosPutter({
@@ -89,7 +89,7 @@ export const editClientReview = createAsyncThunk(
       });
 
       await dispatch(getUserData(id));
-      await dispatch(fetchBeats());
+      await dispatch(fetchBeats({}));
       return response;
     } catch (error) {
       console.log("editClientReview error", error);

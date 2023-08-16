@@ -30,11 +30,7 @@ export default function ReviewsGrid() {
 
   const renderReviews = reviews.map((review: any) => (
     <ClientReview
-      key={review.id}
       currentMode=""
-      title={review.title}
-      comment={review.comment}
-      username={`${review.createdBy.firstName} ${review.createdBy.lastName}`}
       review={review}
       manageEditReview={manageEditReview}
     />

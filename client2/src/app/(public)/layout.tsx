@@ -1,4 +1,4 @@
-import { Footer, Header } from "@/components";
+import { AdminHeaderBar, Footer, Header } from "@/components";
 
 type Props = {
   children: React.ReactNode;
@@ -7,6 +7,7 @@ type Props = {
 export default function PublicLayout({ children }: Props) {
   return (
     <>
+      <AdminHeaderBar />
       <Header />
       <main>{children}</main>
       <Footer mode={"dark"} />

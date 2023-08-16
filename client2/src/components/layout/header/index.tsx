@@ -114,7 +114,9 @@ export default function Header() {
         <Hamburger
           options={navPublicMobile}
           userMenu={navClient}
-          manageHamburguer={setHamburguerVisible}
+          setHamburguerVisible={setHamburguerVisible}
+          setBecomeSellerVisible={setBecomeSellerVisible}
+          setPostBeatVisible={setPostBeatVisible}
         />
       )}
     </>

@@ -1,23 +1,22 @@
 import { FormColumn, FormContainer, Input } from "@/components";
 import { useState, useRef, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { passwordRecovery } from "@/redux/slices/client/authSession";
 import { useRouter } from "next/router";
 import { validationRecoverPassword } from "@/components/validation/client/recoverPassword";
 import { useTranslation } from "react-i18next";
 
-export default function RecoveryPasswordForm(props) {
+export default function RecoveryPasswordForm() {
   const [t, i18n] = useTranslation("global");
   const router = useRouter();
-  const dispatch = useDispatch();
-  const formRef = useRef(null);
-  const validateMode = "user";
-  const [fieldsToValidate, setFieldsToValidate] = useState([]);
-  const [error, setErrors] = useState({});
+  const dispatch = useAppDispatch();
+  const formRef = useRef<any>(null);
+  const [fieldsToValidate, setFieldsToValidate] = useState([]) as any;
+  const [error, setErrors] = useState({}) as any;
   const userEmail = router.query.email;
 
-  const id = useSelector(
-    (state) => state.client.authSession.session.current._id,
+  const id = useAppSelector(
+    (state) => state.client.authSession.session.current._id
   );
 
   const [form, setForm] = useState({
@@ -25,7 +24,7 @@ export default function RecoveryPasswordForm(props) {
     repeatNewPassword: "",
   });
 
-  const handleInput = (e) => {
+  const handleInput = (e: any) => {
     setForm((prevForm) => ({ ...prevForm, [e.target.name]: e.target.value }));
     const { name } = e.target;
     if (!fieldsToValidate.includes(name)) {
@@ -33,14 +32,14 @@ export default function RecoveryPasswordForm(props) {
     }
   };
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: any) => {
     e.preventDefault();
 
     try {
       const formErrors = validationRecoverPassword(form, "*");
       if (Object.keys(formErrors).length === 0) {
         dispatch(
-          passwordRecovery({ newPassword: form.newPassword, email: userEmail }),
+          passwordRecovery({ newPassword: form.newPassword, email: userEmail })
         );
         formRef.current.reset();
 
@@ -56,7 +55,7 @@ export default function RecoveryPasswordForm(props) {
   };
 
   useEffect(() => {
-    setErrors(validationRecoverPassword(form, fieldsToValidate, validateMode));
+    setErrors(validationRecoverPassword(form, fieldsToValidate));
   }, [form, fieldsToValidate]);
 
   return (

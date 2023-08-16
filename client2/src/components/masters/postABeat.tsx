@@ -1,26 +1,13 @@
 import { BeatRightSheet, Input } from "@/components";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { convertInSeller } from "@/redux/slices/client";
-
-export const testFn = () => {
-  BecomeSeller.Pepito();
-};
 
 export default function BecomeSeller() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const Pepito = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
-
-  BecomeSeller.Pepito = Pepito;
-
-  const dispatch = useDispatch();
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    await dispatch(convertInSeller());
+    return alert("Caracteristica desactivada");
+    // await dispatch(convertInSeller());
     e.target.reset();
     setIsDropdownOpen(false);
   };
@@ -61,7 +48,7 @@ export default function BecomeSeller() {
                 />
                 <div className="flex w-full flex-row items-center justify-start gap-2">
                   <input type="checkbox" id="terms" name="terms" value="ok" />
-                  <label for="terms" className="text-base-light">
+                  <label className="text-base-light">
                     Acepto los términos y condiciones
                   </label>
                 </div>

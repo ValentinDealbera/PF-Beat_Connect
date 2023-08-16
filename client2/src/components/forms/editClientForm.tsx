@@ -1,36 +1,34 @@
 import { FormColumn, FormContainer, FormRow, Input } from "@/components";
-import {
-  handleInputChange,
-  handleSubmit,
-  validateForm,
-} from "@/data/formLogic";
+import { handleInputChange } from "@/data/formLogic";
 import { useState, useRef, useEffect, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { editClient } from "@/redux/slices/client/authSession";
 import { useRouter } from "next/navigation";
 import { validationEditUser } from "@/components/validation/client/editUser";
 import { useTranslation } from "react-i18next";
-import i18n from "i18next";
 
-export default function EditClientForm(props) {
-  const [t, i18n] = useTranslation("global");
+type Props = {
+  mode: string;
+};
+
+export default function EditClientForm({ mode: modeP }: Props) {
+  const [t] = useTranslation("global");
   const router = useRouter();
-  const dispatch = useDispatch();
-  const formRef = useRef(null);
-  const validateMode = "user";
-  const [fieldsToValidate, setFieldsToValidate] = useState([]);
-  const [error, setErrors] = useState({});
+  const dispatch = useAppDispatch();
+  const formRef = useRef<any>(null);
+  const [fieldsToValidate, setFieldsToValidate] = useState([]) as any;
+  const [error, setErrors] = useState({}) as any;
 
   const defaultValues =
-    useSelector((state) => state.client.authSession.session.current) || {};
-  const id = useSelector(
-    (state) => state.client.authSession.session.current._id,
+    useAppSelector((state) => state.client.authSession.session.current) || {};
+  const id = useAppSelector(
+    (state) => state.client.authSession.session.current._id
   );
 
-  const mode = props.mode;
+  const mode = modeP;
 
   const [form, setForm] = useState({
-    username: `${mode === "edit" ? defaultValues.userName : ""}`,
+    username: `${mode === "edit" ? defaultValues.username : ""}`,
     firstName: `${mode === "edit" ? defaultValues.firstName : ""}`,
     lastName: `${mode === "edit" ? defaultValues.lastName : ""}`,
     image: "",
@@ -40,18 +38,12 @@ export default function EditClientForm(props) {
     bio: `${mode === "edit" ? defaultValues.bio : ""}`,
     backImage: "",
   });
-  const handleInput = (e) => {
-    handleInputChange(
-      e,
-      fieldsToValidate,
-      setFieldsToValidate,
-      form,
-      setForm,
-      validateMode,
-    );
+
+  const handleInput = (e: any) => {
+    handleInputChange(e, fieldsToValidate, setFieldsToValidate, form, setForm);
   };
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: any) => {
     e.preventDefault();
 
     try {
@@ -75,7 +67,7 @@ export default function EditClientForm(props) {
   // }, [form, fieldsToValidate]);
 
   useEffect(() => {
-    setErrors(validationEditUser(form, fieldsToValidate, validateMode));
+    setErrors(validationEditUser(form, fieldsToValidate));
   }, [form, fieldsToValidate]);
 
   return (
@@ -124,7 +116,7 @@ export default function EditClientForm(props) {
               name={"username"}
               label={t("settingsClient.t3")}
               placeholder={t("settingsClient.t3")}
-              defaultValue={mode === "edit" ? defaultValues.userName : ""}
+              defaultValue={mode === "edit" ? defaultValues.username : ""}
               type={"text"}
               onChange={handleInput}
               error={error.username}

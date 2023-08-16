@@ -1,17 +1,18 @@
-import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
+import { usePathname, useRouter } from "next/navigation";
+import { useAppSelector } from "@/redux/hooks";
 import { useTranslation } from "react-i18next";
 
 export default function AdminHeaderBar() {
   const [t] = useTranslation("global");
+  const pathname = usePathname();
   const router = useRouter();
-  const { isLogged, isAdmin } = useSelector(
-    (state) => state.client.authSession.auth,
+  const { isLogged, isAdmin } = useAppSelector(
+    (state) => state.client.authSession.auth
   );
 
   if (
-    router.pathname.startsWith("/admin") ||
-    router.pathname.startsWith("/auth") ||
+    pathname.startsWith("/admin") ||
+    pathname.startsWith("/auth") ||
     !isAdmin ||
     !isLogged
   ) {

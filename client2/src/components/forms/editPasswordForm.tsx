@@ -1,38 +1,25 @@
 import { FormColumn, FormContainer, FormRow, Input } from "@/components";
-import {
-  handleInputChange,
-  handleSubmit,
-  validateForm,
-} from "@/data/formLogic";
 import { useState, useRef, useEffect, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch } from "@/redux/hooks";
 import { changePassword } from "@/redux/slices/client/authSession";
 import { useRouter } from "next/navigation";
 import { validationEditPassword } from "@/components/validation/client/editPassword";
 import { useTranslation } from "react-i18next";
 
-export default function EditPasswordForm(props) {
-  const [t, i18n] = useTranslation("global");
+export default function EditPasswordForm() {
+  const [t] = useTranslation("global");
   const router = useRouter();
-  const dispatch = useDispatch();
-  const formRef = useRef(null);
+  const dispatch = useAppDispatch();
+  const formRef = useRef<any>(null);
   const validateMode = "user";
-  const [fieldsToValidate, setFieldsToValidate] = useState([]);
-  const [error, setErrors] = useState({});
-
-  // const defaultValues =
-  //   useSelector((state) => state.client.authSession.session.current) || {};
-  // const id = useSelector(
-  //   (state) => state.client.authSession.session.current._id
-  // );
-
-  // const mode = props.mode;
+  const [fieldsToValidate, setFieldsToValidate] = useState([]) as any;
+  const [error, setErrors] = useState({}) as any;
 
   const [form, setForm] = useState({
     oldPassword: "",
     newPassword: "",
   });
-  const handleInput = (e) => {
+  const handleInput = (e: any) => {
     setForm((prevForm) => ({ ...prevForm, [e.target.name]: e.target.value }));
     const { name } = e.target;
     if (!fieldsToValidate.includes(name)) {
@@ -40,7 +27,7 @@ export default function EditPasswordForm(props) {
     }
   };
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: any) => {
     e.preventDefault();
 
     try {
@@ -60,7 +47,7 @@ export default function EditPasswordForm(props) {
   };
 
   useEffect(() => {
-    setErrors(validationEditPassword(form, fieldsToValidate, validateMode));
+    setErrors(validationEditPassword(form, fieldsToValidate));
   }, [form, fieldsToValidate]);
 
   return (

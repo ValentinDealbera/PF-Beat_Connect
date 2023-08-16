@@ -1,16 +1,39 @@
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import { useState } from "react";
-import NavModalItem from "../layout/nav/modalItem";
-
-import { navHelp, navClient } from "@/data/data";
+import { navHelp } from "@/data/data";
 import { UserBoxNav } from "@/components";
 import { motion, AnimatePresence } from "framer-motion";
+import { navBuilder } from "./header/operation";
+import { useRouter } from "next/navigation";
 
-export default function Hamburger({ options, manageHamburguer, userMenu }) {
-  const [dropDown, setDropDown] = useState(false);
+type Props = {
+  options: Array<any>;
+  setHamburguerVisible: (value: boolean) => void;
+  setPostBeatVisible: (value: boolean) => void;
+  setBecomeSellerVisible: (value: boolean) => void;
+  userMenu: Array<any>;
+};
+
+export default function Hamburger({
+  options,
+  setHamburguerVisible,
+  userMenu,
+  setPostBeatVisible,
+  setBecomeSellerVisible,
+}: Props) {
+  const router = useRouter();
   const [pageIndex, setPageIndex] = useState(0);
   const [t] = useTranslation("global");
+
+  const navClient = navBuilder({
+    t,
+    setHamburguerVisible,
+    setPostBeatVisible,
+    setBecomeSellerVisible,
+    router,
+  });
+
   return (
     <>
       <AnimatePresence>
@@ -27,12 +50,11 @@ export default function Hamburger({ options, manageHamburguer, userMenu }) {
           transition={{ duration: 0.6 }}
         >
           <div className=" absolute left-0 top-0 z-40 flex w-screen items-center justify-between px-4 xs:px-8 py-6 ">
-            <UserBoxNav id={"userBoxNavUnique"}>
-              {/* <VerticalNav navItems={userMenu} title={"Centro de ayuda"} /> */}
-            </UserBoxNav>
+            <UserBoxNav navData={navClient} title={"Centro de ayuda"} />
+
             <img
               onClick={() => {
-                manageHamburguer(false);
+                setHamburguerVisible(false);
                 setPageIndex(0);
               }}
               className=" z-40 h-6 w-6 cursor-pointer "
@@ -48,7 +70,7 @@ export default function Hamburger({ options, manageHamburguer, userMenu }) {
                   <Link
                     href={item.url}
                     key={index}
-                    onClick={() => manageHamburguer(false)}
+                    onClick={() => setHamburguerVisible(false)}
                   >
                     <div className="cursor-pointer">
                       <h1 className="text-titulo1-medium text-white">
@@ -82,7 +104,7 @@ export default function Hamburger({ options, manageHamburguer, userMenu }) {
                       <Link
                         href={item.url}
                         key={index}
-                        onClick={() => manageHamburguer(false)}
+                        onClick={() => setHamburguerVisible(false)}
                       >
                         <div className="cursor-pointer">
                           <h1 className="text-titulo1-medium text-white">

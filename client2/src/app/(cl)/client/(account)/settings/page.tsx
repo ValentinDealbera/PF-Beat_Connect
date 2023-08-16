@@ -13,7 +13,7 @@ export default function BuyerProfile() {
       {activeIndex === 0 ? (
         <EditClientForm mode="edit" />
       ) : (
-        <EditPasswordForm mode="edit" />
+        <EditPasswordForm  />
       )}
     </>
   );

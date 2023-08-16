@@ -1,24 +1,22 @@
 "use client";
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useRouter } from "next/navigation";
 import { resetReducer } from "@/redux/slices/client/authSession";
-import { resetPersist } from "@/redux/store/store";
+
 import { serverUrl } from "@/data/config";
 
 export default function Logout() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const loginMethod = useSelector(
-    (state) => state.client.authSession.auth.loginMethod,
+  const loginMethod = useAppSelector(
+    (state) => state.client.authSession.auth.loginMethod
   );
 
   const logOutJson = async () => {
     dispatch(resetReducer());
     // resetPersist()
-
-    await resetPersist();
   };
 
   useEffect(() => {

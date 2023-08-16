@@ -1,4 +1,4 @@
-import { Footer, Header } from "@/components";
+import { AdminHeaderBar, Footer, Header } from "@/components";
 import Template from "./templateLayout";
 
 type Props = {
@@ -8,6 +8,7 @@ type Props = {
 export default function HelpLayout({ children }: Props) {
   return (
     <>
+      <AdminHeaderBar />
       <Header />
       <main>
         <Template

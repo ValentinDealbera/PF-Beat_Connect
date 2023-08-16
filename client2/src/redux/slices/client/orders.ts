@@ -14,7 +14,7 @@ export const postClientOrder = createAsyncThunk(
   "client/postClientOrder",
   async (data, { dispatch, getState }) => {
     const state = getState() as RootState;
-    const id = state.client.authSession.session.current.id;
+    const id = state.client.authSession.session.current._id;
     try {
       await axiosPoster({
         url: `orders`,
