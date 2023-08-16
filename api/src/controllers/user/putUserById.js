@@ -42,7 +42,7 @@ module.exports = async (req, res) => {
       req.body.oldPassword,
       req.body.newPassword,
       passwordIsValid,
-      res
+      res,
     );
 
     if (favorite) {
@@ -50,7 +50,7 @@ module.exports = async (req, res) => {
         user.userFavorites = [...user.userFavorites, favorite];
       } else {
         user.userFavorites = user.userFavorites.filter(
-          (e) => e._id.toString() !== favorite
+          (e) => e._id.toString() !== favorite,
         );
       }
     }
@@ -69,7 +69,7 @@ module.exports = async (req, res) => {
         image,
         `users/${user.username}/image/${user.username}`,
         400,
-        400
+        400,
       );
     }
 
@@ -79,7 +79,7 @@ module.exports = async (req, res) => {
         backImage,
         `users/${user.username}/backImage/${user.username}`,
         1500,
-        800
+        800,
       );
     }
 
@@ -117,7 +117,7 @@ async function uploadAndResizeImage(storage, image, path, width, height) {
   const imageSnapshot = await uploadBytesResumable(
     imageStorageRef,
     resizedImageBuffer,
-    imageMetadata
+    imageMetadata,
   );
   return getDownloadURL(imageSnapshot.ref);
 }
@@ -162,7 +162,7 @@ function validatePasswordChange(
   oldPassword,
   newPassword,
   passwordIsValid,
-  res
+  res,
 ) {
   if (oldPassword && newPassword && !passwordIsValid) {
     return res.status(400).json({
@@ -187,7 +187,7 @@ async function integrateAsSeller(userId, code) {
 
     const response = await axios.post(
       `https://api.mercadopago.com/oauth/token`,
-      body
+      body,
     );
 
     if (response.data && response.data.access_token) {

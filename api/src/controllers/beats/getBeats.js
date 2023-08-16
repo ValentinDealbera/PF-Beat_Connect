@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
   const { name, priceAmount, BPM, relevance, searchFilter } = req.query;
   //separamos por % y arammo un array de generos
   const genres = req.query.genre ? req.query.genre.split(",") : null;
-console.log("genres", genres)
+  console.log("genres", genres);
   let sortBy;
   if (name) {
     sortBy = { name };

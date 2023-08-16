@@ -4,24 +4,20 @@ const authMiddleware = async (req, res, next) => {
   const authHeader = req.headers.authorization;
   console.log("authHeader:", authHeader);
   if (!authHeader) {
-    return res
-      .status(401)
-      .json({
-        error: "Falta token de autenticación",
-        receivedToken: null,
-        expectedToken: null,
-      });
+    return res.status(401).json({
+      error: "Falta token de autenticación",
+      receivedToken: null,
+      expectedToken: null,
+    });
   }
 
   const token = authHeader.split(" ")[1];
   if (!token) {
-    return res
-      .status(401)
-      .json({
-        error: "Falta token de autenticación",
-        receivedToken: null,
-        expectedToken: null,
-      });
+    return res.status(401).json({
+      error: "Falta token de autenticación",
+      receivedToken: null,
+      expectedToken: null,
+    });
   }
 
   try {
