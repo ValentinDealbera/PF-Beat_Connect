@@ -1,0 +1,13 @@
+{
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit"
+    }, 
+    "eslint.autoFixOnSave": true ,
+    "eslint.workingDirectories": [
+        "client",
+        "api"
+    ],
+    "prettier.configPath": "",
+    "editor.formatOnSave": true
+  }
+  
