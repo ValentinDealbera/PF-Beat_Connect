@@ -1,3 +1,4 @@
+'use client'
 import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -10,7 +11,7 @@ interface Props {
   manageHamburguer: (value: boolean) => void
 }
 
-export default function HamburgerAdmin({ options, manageHamburguer }: Props) {
+const HamburgerAdmin = ({ options, manageHamburguer }: Props) => {
   const [t] = useTranslation('global')
   return (
     <AnimatePresence>
@@ -58,3 +59,5 @@ export default function HamburgerAdmin({ options, manageHamburguer }: Props) {
     </AnimatePresence>
   )
 }
+
+export default HamburgerAdmin

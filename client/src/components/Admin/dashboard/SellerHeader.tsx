@@ -1,8 +1,9 @@
+'use client'
 import { Logo, HamburgerAdmin } from '@/components'
 import { useState } from 'react'
 import { ReactSVG } from 'react-svg'
 
-export default function SellerDashboardHeader() {
+const SellerDashboardHeader = () => {
   const [hamburguerVisible, setHamburguerVisible] = useState(false)
 
   const dashboardNav = [
@@ -54,3 +55,5 @@ export default function SellerDashboardHeader() {
     </>
   )
 }
+
+export default SellerDashboardHeader

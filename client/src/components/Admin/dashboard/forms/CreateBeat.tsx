@@ -1,5 +1,7 @@
+'use client'
+'use client'
 import { FormColumn, FormContainer, FormRow, Input, SwitchForm } from '@/components'
-import { handleInputChange, handleSubmit, validateForm } from '@/data/formLogic'
+import { handleInputChange, handleSubmit, validateForm } from '@/utils/formLogic.utils'
 import { fetchGenres } from '@/redux/slices/filters'
 import { Autocomplete, TextField } from '@mui/material'
 import { forwardRef, useImperativeHandle, useState, useRef, useEffect } from 'react'
@@ -225,13 +227,17 @@ const AdminCreateBeatForm = forwardRef((props: Props, ref) => {
                   {t('adminBeatsCreate.f6')}
                 </option>
                 {genres.map((genre) => (
-                  <option value={genre.value} selected={mode === 'edit' && genre.value === defaultValues?.genre?._id}>
+                  <option
+                    value={genre.value}
+                    selected={mode === 'edit' && genre.value === defaultValues?.genre?._id}
+                    key={genre.value}
+                  >
                     {genre.label}
                   </option>
                 ))}
               </select>
             </label>
-            {mode == 'create' && (
+            {mode === 'create' && (
               <>
                 <Input
                   name='audioMP3'

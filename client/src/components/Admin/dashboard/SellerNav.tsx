@@ -1,8 +1,9 @@
+'use client'
 import { DashboardItem } from '@/components'
 import { useAppSelector } from '@/redux/hooks'
 import { useTranslation } from 'react-i18next'
 
-export default function SellerDashboardNav() {
+const SellerDashboardNav = () => {
   const theme = useAppSelector((state) => state.client.authSession.theme)
   const [t, i18n] = useTranslation('global')
 
@@ -53,7 +54,7 @@ export default function SellerDashboardNav() {
         {/* <Search colorMode={"red"} sizeMode={"small"} className={"w-full"} /> */}
         <div className='flex flex-col  gap-6'>
           {dashboardNav.map((item) => (
-            <NavItems itemTitle={t(item.title)} itemLink={item.link} itemIcon={item.icon} />
+            <NavItems itemTitle={t(item.title)} itemLink={item.link} itemIcon={item.icon} key={item.title} />
           ))}
         </div>
         <br />
@@ -80,16 +81,16 @@ export default function SellerDashboardNav() {
   )
 }
 
+export default SellerDashboardNav
+
 interface NavItemsProps {
   itemTitle: string
   itemLink: string
   itemIcon: string
 }
 
-function NavItems({ itemTitle, itemLink, itemIcon }: NavItemsProps) {
-  return (
-    <div className='flex flex-col '>
-      <DashboardItem title={itemTitle} link={itemLink} icon={itemIcon} />
-    </div>
-  )
-}
+const NavItems = ({ itemTitle, itemLink, itemIcon }: NavItemsProps) => (
+  <div className='flex flex-col '>
+    <DashboardItem title={itemTitle} link={itemLink} icon={itemIcon} />
+  </div>
+)

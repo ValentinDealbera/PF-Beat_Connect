@@ -2,7 +2,7 @@
 import TableCell from '@mui/material/TableCell'
 import TablePagination from '@mui/material/TablePagination'
 import { styled } from '@mui/system'
-import TableBodyFn from './XBody'
+import TableBodyFn from './Body'
 import { type SetStateAction, useState } from 'react'
 
 const TableCellStyledHead = styled(TableCell)({

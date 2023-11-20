@@ -1,3 +1,4 @@
+'use client'
 import { usePathname } from 'next/navigation'
 
 interface Props {
@@ -6,7 +7,7 @@ interface Props {
   className?: string
 }
 
-export default function IslandDashboard({ children, style, className }: Props) {
+const IslandDashboard = ({ children, style, className }: Props) => {
   const pathname = usePathname()
   const className2 = `${
     pathname.startsWith('/admin') ? 'dark:text-gray-300 dark:bg-customDark-900 bg-white' : 'background-neutral-white'
@@ -24,3 +25,5 @@ export default function IslandDashboard({ children, style, className }: Props) {
     </>
   )
 }
+
+export default IslandDashboard

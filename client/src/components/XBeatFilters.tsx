@@ -1,3 +1,4 @@
+'use client'
 import {
   MultiSelect,
   ModalMinMax,
@@ -6,16 +7,16 @@ import {
   CheckboxGroup,
   MinMax
 } from '@/components'
-import { useState, useEffect, useMemo, useRef } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import Image from 'next/image'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
-import { useRouter, usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { setGenresFilter, fetchGenres, setPriceFilter, setBpmFilter, setSorter } from '@/redux/slices/filters'
 import { fetchBeats } from '@/redux/slices/beats'
 import { debounce } from 'lodash'
 import { useTranslation } from 'react-i18next'
 
-export default function BeatFilters() {
+const BeatFilters = () => {
   const [t, i18n] = useTranslation('global')
   const dispatch = useAppDispatch()
   const [beatGenre, setBeatGenre] = useState([])
@@ -60,7 +61,7 @@ export default function BeatFilters() {
   const sortValue = {} as any
 
   if (sort === 'default') {
-    sortValue
+    sortValue.name = ''
   } else if (sort === 'Price-AS') {
     sortValue.priceAmount = 'asc'
   } else if (sort === 'Price-DES') {
@@ -268,19 +269,23 @@ interface SelectProps {
   labelClass?: string
 }
 
-function Select({ valores, setSeleccionados, value, label, labelClass }: SelectProps) {
-  return (
-    <div>
-      <label className={labelClass}>{label}</label>
-      <select
-        onChange={(e) => {
-          setSeleccionados(e.target.value)
-        }}
-        value={value}
-        className='rounded-xl border-slate-200 bg-white px-4 py-0 text-black placeholder:text-gray-400'
-      >
-        {valores?.map((valor) => <option value={valor.value}>{valor.label}</option>)}
-      </select>
-    </div>
-  )
-}
+const Select = ({ valores, setSeleccionados, value, label, labelClass }: SelectProps) => (
+  <div>
+    <label className={labelClass}>{label}</label>
+    <select
+      onChange={(e) => {
+        setSeleccionados(e.target.value)
+      }}
+      value={value}
+      className='rounded-xl border-slate-200 bg-white px-4 py-0 text-black placeholder:text-gray-400'
+    >
+      {valores?.map((valor) => (
+        <option key={valor.value} value={valor.value}>
+          {valor.label}
+        </option>
+      ))}
+    </select>
+  </div>
+)
+
+export default BeatFilters

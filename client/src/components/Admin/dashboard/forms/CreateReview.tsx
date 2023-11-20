@@ -1,5 +1,6 @@
+'use client'
 import { FormColumn, FormContainer, FormRow, Input, SwitchForm, TextArea } from '@/components'
-import { handleInputChange, handleSubmit, validateForm } from '@/data/formLogic'
+import { handleInputChange, handleSubmit, validateForm } from '@/utils/formLogic.utils'
 import { forwardRef, useImperativeHandle, useState, useRef, useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { adminEditReview, adminPostReview } from '@/redux/slices/admin/reviews'

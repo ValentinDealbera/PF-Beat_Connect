@@ -1,8 +1,9 @@
+'use client'
 import { usePathname, useRouter } from 'next/navigation'
 import { useAppSelector } from '@/redux/hooks'
 import { useTranslation } from 'react-i18next'
 
-export default function AdminHeaderBar() {
+const AdminHeaderBar = () => {
   const [t] = useTranslation('global')
   const pathname = usePathname()
   const router = useRouter()
@@ -30,3 +31,5 @@ export default function AdminHeaderBar() {
     </>
   )
 }
+
+export default AdminHeaderBar

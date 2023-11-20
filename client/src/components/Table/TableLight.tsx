@@ -1,7 +1,7 @@
 'use client'
 import TableCell from '@mui/material/TableCell'
 import TablePagination from '@mui/material/TablePagination'
-import TableBodyFn from './XBody'
+import TableBodyFn from './Body'
 import { styled } from '@mui/system'
 import { type SetStateAction, useState } from 'react'
 
