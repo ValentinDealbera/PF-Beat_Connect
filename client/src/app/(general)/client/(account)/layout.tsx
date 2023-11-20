@@ -1,4 +1,4 @@
-import Template from './templateLayout'
+import Template from './SettingsTemplate'
 
 interface Props {
   children: React.ReactNode
