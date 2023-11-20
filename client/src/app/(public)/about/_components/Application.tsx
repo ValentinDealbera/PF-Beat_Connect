@@ -2,7 +2,7 @@
 import { Section, MultiBoldText } from '@/components'
 import { useTranslation } from 'react-i18next'
 
-export default function AboutAppSection() {
+const Application = () => {
   const [t] = useTranslation('global')
   return (
     <Section
@@ -14,3 +14,5 @@ export default function AboutAppSection() {
     </Section>
   )
 }
+
+export default Application

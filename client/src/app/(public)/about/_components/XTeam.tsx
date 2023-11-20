@@ -1,4 +1,3 @@
-'use client'
 import { Section } from '@/components'
 import Image from 'next/image'
 import { nosotros } from '@/data/data'
@@ -6,6 +5,7 @@ import { nosotros } from '@/data/data'
 interface TeamMemberProps {
   member: (typeof nosotros)[0]
 }
+
 const TeamMember = ({ member }: TeamMemberProps) => (
   <div className='gap-estilo4 flex min-w-[75vw] flex-col sm:min-w-[40vw] md:min-w-[40vw] lg:min-w-full'>
     <div className='flex flex-col items-center justify-start gap-4 align-middle'>
@@ -36,14 +36,14 @@ const TeamMember = ({ member }: TeamMemberProps) => (
   </div>
 )
 
-export default function TeamSection() {
-  return (
-    <Section subClassName='padding-x-estilo2 bg-white color-white gap-2 flex-col flex' className='bg-white'>
-      <div className='gap-6 flex max-w-[100vw] flex-1 flex-shrink flex-grow grid-cols-1 overflow-scroll overflow-y-hidden overflow-x-scroll pb-24 md:grid-cols-4 lg:grid lg:flex-none lg:flex-shrink-0 lg:flex-grow-0 lg:gap-14 lg:overflow-x-hidden'>
-        {nosotros.map((member, index) => (
-          <TeamMember member={member} key={index} />
-        ))}
-      </div>
-    </Section>
-  )
-}
+const Team = () => (
+  <Section subClassName='padding-x-estilo2 bg-white color-white gap-2 flex-col flex' className='bg-white'>
+    <div className='gap-6 flex max-w-[100vw] flex-1 flex-shrink flex-grow grid-cols-1 overflow-scroll overflow-y-hidden overflow-x-scroll pb-24 md:grid-cols-4 lg:grid lg:flex-none lg:flex-shrink-0 lg:flex-grow-0 lg:gap-14 lg:overflow-x-hidden'>
+      {nosotros.map((member, index) => (
+        <TeamMember member={member} key={index} />
+      ))}
+    </div>
+  </Section>
+)
+
+export default Team

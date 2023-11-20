@@ -1,10 +1,10 @@
-import HeroSection from './hero'
+import HeroSection from './_components/XHero'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'BeatConnect'
 }
 
-export default function Landing() {
-  return <HeroSection />
-}
+const Landing = () => <HeroSection />
+
+export default Landing

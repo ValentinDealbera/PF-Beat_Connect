@@ -11,7 +11,6 @@ const buttonStyles = 'background-primary-red-700 color-neutral-white w-max round
 const HeroText = () => {
   const [t] = useTranslation('global')
   const router = useRouter()
-
   const title1 = t('home.t1')
   const title2 = t('home.t2')
   const description = t('home.t3')
@@ -38,7 +37,7 @@ const HeroText = () => {
   )
 }
 
-export default function Content() {
+const Content = () => {
   const [t] = useTranslation('global')
   const beatsTitle = `Beats ${t('home.t5')}`
 
@@ -53,3 +52,5 @@ export default function Content() {
     </>
   )
 }
+
+export default Content

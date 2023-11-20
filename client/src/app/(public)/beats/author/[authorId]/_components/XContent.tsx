@@ -4,7 +4,13 @@ import { useEffect } from 'react'
 import { fetchCurrentAuthor } from '@/redux/slices/beats'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 
-export default function AuthorProfile({ params }: { params: { authorId: string } }) {
+interface Props {
+  params: {
+    authorId: string
+  }
+}
+
+const AuthorProfile = ({ params }: Props) => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -30,3 +36,5 @@ export default function AuthorProfile({ params }: { params: { authorId: string }
     </>
   )
 }
+
+export default AuthorProfile

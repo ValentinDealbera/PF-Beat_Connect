@@ -2,7 +2,7 @@
 import { Hero, MultiBoldText } from '@/components'
 import { useTranslation } from 'react-i18next'
 
-export default function HeroAbout() {
+const HeroSection = () => {
   const [t] = useTranslation('global')
   return (
     <Hero
@@ -17,3 +17,5 @@ export default function HeroAbout() {
     </Hero>
   )
 }
+
+export default HeroSection

@@ -1,22 +1,22 @@
-import Hero from './hero'
-import AboutSection from './about'
-import TeamSection from './team'
-import TechSection from './tech'
-import AboutAppSection from './aboutApp'
+import Hero from './_components/XHero'
+import AboutSection from './_components/General'
+import TeamSection from './_components/XTeam'
+import TechSection from './_components/Technologies'
+import AboutAppSection from './_components/Application'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'About | BeatConnect'
 }
 
-export default function About() {
-  return (
-    <>
-      <Hero />
-      <AboutSection />
-      <TeamSection />
-      <AboutAppSection />
-      <TechSection />
-    </>
-  )
-}
+const About = () => (
+  <>
+    <Hero />
+    <AboutSection />
+    <TeamSection />
+    <AboutAppSection />
+    <TechSection />
+  </>
+)
+
+export default About

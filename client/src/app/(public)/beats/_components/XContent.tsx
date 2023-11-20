@@ -1,11 +1,11 @@
 'use client'
 import { BeatsSpecialSection } from '@/components'
-import HeroSection from './hero'
-import ShopSection from './shop'
-import PromoSection from './promoSection'
+import HeroSection from './XHero'
+import ShopSection from './XShop'
+import PromoSection from './Promo'
 import { useTranslation } from 'react-i18next'
 
-export default function Beats() {
+const Beats = () => {
   const [t] = useTranslation('global')
   return (
     <>
@@ -16,3 +16,5 @@ export default function Beats() {
     </>
   )
 }
+
+export default Beats

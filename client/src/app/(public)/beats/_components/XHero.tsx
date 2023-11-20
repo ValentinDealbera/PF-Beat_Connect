@@ -2,7 +2,7 @@
 import { Hero } from '@/components'
 import { useTranslation } from 'react-i18next'
 
-export default function HeroSection() {
+const HeroSection = () => {
   const [t] = useTranslation('global')
   return (
     <Hero
@@ -18,3 +18,5 @@ export default function HeroSection() {
     </Hero>
   )
 }
+
+export default HeroSection

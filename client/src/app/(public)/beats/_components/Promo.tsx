@@ -2,7 +2,7 @@
 import { MultiBoldText, Section } from '@/components'
 import { useTranslation } from 'react-i18next'
 
-export default function PromoSection() {
+const Promo = () => {
   const [t] = useTranslation('global')
   return (
     <Section
@@ -24,3 +24,5 @@ export default function PromoSection() {
     </Section>
   )
 }
+
+export default Promo

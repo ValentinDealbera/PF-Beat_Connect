@@ -24,7 +24,7 @@ const TechCard = ({ tecnologia }: TechCardProps) => {
   )
 }
 
-export default function TechSection() {
+const Technologies = () => {
   const [t] = useTranslation('global')
   const heroStyles = 'padding-x-estilo2 padding-y-estilo1 flex flex-col gap-12 items-center '
   const gridStyles = 'lg:gap-estilo1 grid grid-cols-1 gap-10 md:grid-cols-2'
@@ -40,3 +40,5 @@ export default function TechSection() {
     </Section>
   )
 }
+
+export default Technologies

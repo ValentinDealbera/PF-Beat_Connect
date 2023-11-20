@@ -1,10 +1,16 @@
-import Content from './content'
+import Content from './_components/XContent'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Author | BeatConnect'
+  title: 'Autor | BeatConnect'
 }
 
-export default function Page({ params }: { params: { authorId: string } }) {
-  return <Content params={params} />
+interface Props {
+  params: {
+    authorId: string
+  }
 }
+
+const Author = ({ params }: Props) => <Content params={params} />
+
+export default Author

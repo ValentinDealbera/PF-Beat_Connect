@@ -6,13 +6,13 @@ import Image from 'next/image'
 import { useTranslation } from 'react-i18next'
 import { useState, useEffect } from 'react'
 
-export default function Carrito() {
+const Cart = () => {
   const [t] = useTranslation('global')
   const dispatch = useAppDispatch()
   const cartItems = useAppSelector((state) => state?.cart.cart) || ([] as any)
-  const user = useAppSelector((state) => state.client.authSession.session.current._id)
+  // const user = useAppSelector((state) => state.client.authSession.session.current._id)
 
-  const precio_por_autor = [] as any
+  const priceByAuthor = [] as any
 
   cartItems.forEach((item: any) => {
     const authorId = item.beat.userCreator._id ? item.beat.userCreator._id : item.beat.userCreator
@@ -21,11 +21,11 @@ export default function Carrito() {
       : item.beat.userCreator
     const price = item.beat.priceAmount
     const image = item.beat.userCreator.image
-    const index = precio_por_autor.findIndex((obj: any) => obj.authorId === authorId)
+    const index = priceByAuthor.findIndex((obj: any) => obj.authorId === authorId)
     if (index === -1) {
-      precio_por_autor.push({ authorId, author, price, image })
+      priceByAuthor.push({ authorId, author, price, image })
     } else {
-      precio_por_autor[index].price += price
+      priceByAuthor[index].price += price
     }
   })
 
@@ -59,16 +59,16 @@ export default function Carrito() {
     )
   }))
 
-  const idsOfSellers = precio_por_autor.map((item: any) => item.authorId)
-  const idsOfBuyer = user
+  // const idsOfSellers = priceByAuthor.map((item: any) => item.authorId)
+  // const idsOfBuyer = user
 
-  const cartIds = cartItems.map((item: any) => item.beat._id)
+  // const cartIds = cartItems.map((item: any) => item.beat._id)
 
-  const toPay = {
-    cart: cartIds,
-    seller: idsOfSellers[0],
-    buyer: idsOfBuyer
-  }
+  // const toPay = {
+  //   cart: cartIds,
+  //   seller: idsOfSellers[0],
+  //   buyer: idsOfBuyer
+  // }
 
   const handlePayment = () => {
     alert('Las compras estan desactivadas')
@@ -131,9 +131,9 @@ export default function Carrito() {
               style={{ boxShadow: '0px 0px 15px 2px rgba(0, 0, 0, 0.08)' }}
             >
               <h2 className='text-subtitulo-medium'>{t('cartHeaders.t4')}</h2>
-              <div id='precio_por_autor' className='flex flex-col gap-4'>
-                {precio_por_autor.map((item: any) => (
-                  <div>
+              <div id='priceByAuthor' className='flex flex-col gap-4'>
+                {priceByAuthor.map((item: any) => (
+                  <div key={item.authorId}>
                     <div className='flex items-center justify-between gap-4'>
                       <div className='flex items-center gap-1'>
                         <Image src={item.image} width={50} height={50} className='rounded-full' alt='user' />
@@ -174,3 +174,5 @@ export default function Carrito() {
     </>
   )
 }
+
+export default Cart

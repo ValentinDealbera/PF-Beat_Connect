@@ -2,7 +2,7 @@
 import { BeatsGrid, BeatFilters, PaginateBeats, Section } from '@/components'
 import { useAppSelector } from '@/redux/hooks'
 
-export default function ShopSection() {
+const Shop = () => {
   const beats = useAppSelector((state) => state?.beats?.publicItems) || []
   return (
     <>
@@ -14,3 +14,5 @@ export default function ShopSection() {
     </>
   )
 }
+
+export default Shop

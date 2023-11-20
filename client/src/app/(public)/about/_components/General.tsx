@@ -2,7 +2,7 @@
 import { Section, MultiBoldText } from '@/components'
 import { useTranslation } from 'react-i18next'
 
-export default function AboutSection() {
+const General = () => {
   const [t] = useTranslation('global')
   const aboutTitle = t('about.t1')
   const aboutTitle2 = t('about.t2')
@@ -15,3 +15,5 @@ export default function AboutSection() {
     </Section>
   )
 }
+
+export default General

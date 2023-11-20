@@ -1,10 +1,10 @@
-import Content from './content'
+import Content from './_components/XContent'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Cart | BeatConnect'
+  title: 'Carrito | BeatConnect'
 }
 
-export default function Page() {
-  return <Content />
-}
+const Cart = () => <Content />
+
+export default Cart
