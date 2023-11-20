@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { useRouter } from 'next/navigation'
 import { resetReducer } from '@/redux/slices/client/authSession'
-import { serverUrl } from '@/data/config'
+import { serverUrl } from '@/utils/config.const'
 
 const Content = () => {
   const dispatch = useAppDispatch()

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit'
-import { serverUrl } from '@/data/config'
+import { serverUrl } from '@/utils/config.const'
 import axios from 'axios'
 import { toast } from 'sonner'
 import i18next from 'i18next'
@@ -47,10 +47,10 @@ const filtersSlice = createSlice({
   name: 'filters',
   initialState,
   reducers: {
-    setSearchFilter(state, action) {
+    setSearchFilter: (state, action) => {
       state.searchFilter = action.payload
     },
-    setGenresFilter(state, action: PayloadAction<any>) {
+    setGenresFilter: (state, action: PayloadAction<any>) => {
       const isSelected = state.genresFilter.includes(action.payload)
       if (isSelected) {
         state.genresFilter = state.genresFilter.filter((genre) => genre !== action.payload)
@@ -59,16 +59,16 @@ const filtersSlice = createSlice({
       console.log('setGenresFilter action.payload', action.payload)
       state.genresFilter = action.payload
     },
-    setPriceFilter(state, action) {
+    setPriceFilter: (state, action) => {
       state.priceFilter = action.payload
     },
-    setBpmFilter(state, action) {
+    setBpmFilter: (state, action) => {
       state.BpmFilter = action.payload
     },
-    setSorter(state, action) {
+    setSorter: (state, action) => {
       state.sorter = action.payload
     },
-    restoreFilters(state, action) {
+    restoreFilters: (state, action) => {
       state = initialState
     }
   },
@@ -83,7 +83,7 @@ const filtersSlice = createSlice({
       })
       .addCase(fetchGenres.rejected, (state, action) => {
         state.genres = []
-        const trad = i18next?.language == 'en' ? 'Error loading genres' : 'Error al cargar los géneros'
+        const trad = i18next?.language === 'en' ? 'Error loading genres' : 'Error al cargar los géneros'
         toast.error(trad)
       })
       .addCase(fetchGenres.pending, (state, action) => {

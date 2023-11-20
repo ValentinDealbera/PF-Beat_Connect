@@ -3,7 +3,7 @@ import { toast } from 'sonner'
 import { getUserData } from './authSession'
 import { resetCart } from '../cart'
 import i18next from 'i18next'
-import { axiosPoster } from '@/utils/requests'
+import { axiosPoster } from '@/services/axios.service'
 import { type RootState } from '@/redux/store/store'
 
 const initialState = {
@@ -23,7 +23,7 @@ export const postClientOrder = createAsyncThunk('client/postClientOrder', async 
     })
 
     await dispatch(getUserData(id))
-    await dispatch(resetCart())
+    dispatch(resetCart())
   } catch (error) {
     console.error('postClientOrder error', error)
     throw error
@@ -38,14 +38,14 @@ const ordersSlice = createSlice({
   reducers: {
     // --------------------
     // SET ORDERS
-    setOrders(state, action) {
+    setOrders: (state, action) => {
       state.orders = action.payload
     }
   },
   extraReducers: (builder) => {
     builder
       .addCase(postClientOrder.fulfilled, () => {
-        const trad = i18next?.language == 'en' ? 'Order loaded' : 'Orden cargada'
+        const trad = i18next?.language === 'en' ? 'Order loaded' : 'Orden cargada'
         toast.success(trad)
       })
       .addCase(postClientOrder.rejected, () => {

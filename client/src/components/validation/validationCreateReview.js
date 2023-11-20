@@ -1,10 +1,10 @@
+'use client'
 import i18next from 'i18next'
 
-export function ValidationCreateReview(form, fieldsToValidate) {
+export const ValidationCreateReview = (form, fieldsToValidate) => {
   const error = {}
 
   if (fieldsToValidate === '*') {
-    // pasamos de object a array
     fieldsToValidate = Object.keys(form)
   }
 
@@ -12,7 +12,7 @@ export function ValidationCreateReview(form, fieldsToValidate) {
     switch (field) {
       case 'createdBy':
         if (!form.createdBy || form.createdBy === '') {
-          if (i18next?.language == 'en') {
+          if (i18next?.language === 'en') {
             error.createdBy = 'You must enter a id'
           } else {
             error.createdBy = 'Debes ingresar un ID'
@@ -22,14 +22,14 @@ export function ValidationCreateReview(form, fieldsToValidate) {
 
       case 'rating':
         if (!form.rating || form.rating === '') {
-          if (i18next?.language == 'en') {
+          if (i18next?.language === 'en') {
             error.rating = 'You must enter a rating'
           } else {
             error.rating = 'Debes ingresar una calificación'
           }
         }
         if (form.rating > 5) {
-          if (i18next?.language == 'en') {
+          if (i18next?.language === 'en') {
             error.rating = 'You must select a number between one and five'
           } else {
             error.rating = 'Debes seleccionar un número entre uno y cinco'
@@ -39,7 +39,7 @@ export function ValidationCreateReview(form, fieldsToValidate) {
 
       case 'comment':
         if (!form.comment || form.comment === '') {
-          if (i18next?.language == 'en') {
+          if (i18next?.language === 'en') {
             error.comment = 'You must enter a comment'
           } else {
             error.comment = 'Debes ingresar un comentario'
@@ -49,7 +49,7 @@ export function ValidationCreateReview(form, fieldsToValidate) {
 
       case 'title':
         if (!form.title || form.title === '') {
-          if (i18next?.language == 'en') {
+          if (i18next?.language === 'en') {
             error.title = 'You must enter a title'
           } else {
             error.title = 'Debes ingresar un título'
@@ -59,7 +59,7 @@ export function ValidationCreateReview(form, fieldsToValidate) {
 
       case 'beat':
         if (!form.beat || form.beat === '') {
-          if (i18next?.language == 'en') {
+          if (i18next?.language === 'en') {
             error.beat = 'You must enter a beat'
           } else {
             error.beat = 'Debes ingresar un beat'

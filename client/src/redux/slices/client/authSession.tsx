@@ -1,12 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { toast } from 'sonner'
-import { createUserSession } from '@/utils/userSession'
+import { createUserSession } from '@/utils/createUserSession.utils'
 import { setBougthBeats, setOwnedBeats, setFavoriteBeats } from './beats'
 import { setOwnedReviews } from './reviews'
 import { setOrders } from './orders'
 import i18next from 'i18next'
-import { axiosPutter, axiosPoster } from '@/utils/requests'
-import { type UserClass } from '@/types'
+import { axiosPutter, axiosPoster } from '@/services/axios.service'
 import {
   createFormData,
   createSellerData,
@@ -32,7 +31,7 @@ const initialState = {
     }
   },
   session: {
-    current: {} as UserClass
+    current: {} as any
   },
   theme: ''
 }
@@ -168,11 +167,11 @@ export const getUserData = createAsyncThunk(
     try {
       const response = await fetchUserData(clientId)
       const { bougthBeats, ownedBeats, ownedReviews, orders, favoriteBeats, auth } = processUserData(response)
-      await dispatch(setBougthBeats(bougthBeats))
-      await dispatch(setOwnedBeats(ownedBeats))
-      await dispatch(setOwnedReviews(ownedReviews))
-      await dispatch(setOrders(orders))
-      await dispatch(setFavoriteBeats(favoriteBeats))
+      dispatch(setBougthBeats(bougthBeats))
+      dispatch(setOwnedBeats(ownedBeats))
+      dispatch(setOwnedReviews(ownedReviews))
+      dispatch(setOrders(orders))
+      dispatch(setFavoriteBeats(favoriteBeats))
       const session = createUserSession(response)
       return { auth, session }
     } catch (error) {
@@ -212,33 +211,33 @@ const authSession = createSlice({
           ...state.session.current,
           ...action.payload.session
         }
-        const trad = i18next?.language == 'en' ? 'Logged in successfully' : 'Se logueo correctamente'
+        const trad = i18next?.language === 'en' ? 'Logged in successfully' : 'Se logueo correctamente'
         toast.success(trad)
       })
       .addCase(jsonLogin.rejected, (state, action) => {
         toast.error('action.payload')
       })
       .addCase(jsonRegister.fulfilled, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'Registered successfully' : 'Se registró correctamente'
+        const trad = i18next?.language === 'en' ? 'Registered successfully' : 'Se registró correctamente'
         toast.success(trad)
       })
       .addCase(jsonRegister.rejected, (state, action) => {
         toast.error('action.payload')
       })
       .addCase(convertInSeller.pending, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'Becoming a seller...' : 'Se está convirtiendo en vendedor...'
+        const trad = i18next?.language === 'en' ? 'Becoming a seller...' : 'Se está convirtiendo en vendedor...'
         toast(trad)
       })
       .addCase(convertInSeller.fulfilled, (state, action) => {
         state.auth.isSeller = true
-        const trad = i18next?.language == 'en' ? 'Became a seller' : 'Se convirtió en vendedor'
+        const trad = i18next?.language === 'en' ? 'Became a seller' : 'Se convirtió en vendedor'
         toast.success(trad)
       })
       .addCase(convertInSeller.rejected, (state, action) => {
         toast.error('action.payload')
       })
       .addCase(editClient.pending, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'Editing...' : 'Se está editando...'
+        const trad = i18next?.language === 'en' ? 'Editing...' : 'Se está editando...'
         toast(trad)
       })
       .addCase(editClient.fulfilled, (state, action) => {
@@ -246,7 +245,7 @@ const authSession = createSlice({
           ...state.session.current,
           ...action.payload.userResponse
         }
-        const trad = i18next?.language == 'en' ? 'Edited successfully' : 'Se editó correctamente'
+        const trad = i18next?.language === 'en' ? 'Edited successfully' : 'Se editó correctamente'
         toast.success(trad)
       })
       .addCase(editClient.rejected, (state, action) => {
@@ -255,7 +254,7 @@ const authSession = createSlice({
       .addCase(passwordRecovery.pending, (state, action) => {})
       .addCase(passwordRecovery.fulfilled, (state, action) => {
         const trad =
-          i18next?.language == 'en'
+          i18next?.language === 'en'
             ? 'Your password has been changed successfully'
             : 'Tu contraseña se cambio correctamente'
         toast.success(trad)
@@ -270,7 +269,7 @@ const authSession = createSlice({
         if (action.payload.session.softDelete) {
           state.auth.isLogged = false
           const trad =
-            i18next?.language == 'en'
+            i18next?.language === 'en'
               ? 'Your account is suspended, please contact support.'
               : 'Tu cuenta está suspendida, comunícate con soporte'
           toast.error(trad)
@@ -292,13 +291,13 @@ const authSession = createSlice({
       // RECOVER PASSWORD
       .addCase(recoverPassword.pending, (state, action) => {
         const trad =
-          i18next?.language == 'en'
+          i18next?.language === 'en'
             ? 'Sending you an email with recovery request...'
             : 'Te estamos enviando un email con la solicitud de recuperación...'
         toast(trad)
       })
       .addCase(recoverPassword.fulfilled, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'Email sent' : 'Se envió el email'
+        const trad = i18next?.language === 'en' ? 'Email sent' : 'Se envió el email'
         toast.success(trad)
       })
       .addCase(recoverPassword.rejected, (state, action) => {
@@ -308,11 +307,11 @@ const authSession = createSlice({
       // --------------------
       // CHANGE PASSWORD
       .addCase(changePassword.pending, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'Changing password...' : 'Se está cambiando la contraseña...'
+        const trad = i18next?.language === 'en' ? 'Changing password...' : 'Se está cambiando la contraseña...'
         toast(trad)
       })
       .addCase(changePassword.fulfilled, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'Password changed' : 'Se cambió la contraseña'
+        const trad = i18next?.language === 'en' ? 'Password changed' : 'Se cambió la contraseña'
         toast.success(trad)
       })
       .addCase(changePassword.rejected, (state, action) => {

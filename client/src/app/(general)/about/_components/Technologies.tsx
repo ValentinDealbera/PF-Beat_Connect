@@ -2,10 +2,10 @@
 import { Section, MultiBoldText } from '@/components'
 import Image from 'next/image'
 import { useTranslation } from 'react-i18next'
-import { tecnologias } from '@/data/data'
+import { technologies } from '../_lib/technologies.lib'
 
 interface TechCardProps {
-  tecnologia: (typeof tecnologias)[0]
+  tecnologia: (typeof technologies)[0]
 }
 
 const TechCard = ({ tecnologia }: TechCardProps) => {
@@ -33,7 +33,7 @@ const Technologies = () => {
     <Section subClassName={heroStyles}>
       <MultiBoldText startText={t('about.t7')} endText={t('about.t8')} className='text-center' />
       <div className={gridStyles}>
-        {tecnologias.map((tecnologia) => (
+        {technologies.map((tecnologia) => (
           <TechCard tecnologia={tecnologia} key={tecnologia.id} />
         ))}
       </div>

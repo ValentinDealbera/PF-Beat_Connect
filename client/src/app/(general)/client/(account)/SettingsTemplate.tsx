@@ -1,6 +1,8 @@
 'use client'
-import { ClientSettingsIndexer, Section, HeroSettings } from '@/components'
+import { Section } from '@/components'
 import { usePathname } from 'next/navigation'
+import HeroSettings from './_components/Hero'
+import ClientSettingsIndexer from './_components/Indexer'
 
 interface Props {
   children: React.ReactNode

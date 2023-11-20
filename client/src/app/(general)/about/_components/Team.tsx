@@ -1,9 +1,9 @@
 import { Section } from '@/components'
 import Image from 'next/image'
-import { nosotros } from '@/data/data'
+import { team } from '../_lib/team.lib'
 
 interface TeamMemberProps {
-  member: (typeof nosotros)[0]
+  member: (typeof team)[0]
 }
 
 const TeamMember = ({ member }: TeamMemberProps) => (
@@ -39,7 +39,7 @@ const TeamMember = ({ member }: TeamMemberProps) => (
 const Team = () => (
   <Section subClassName='padding-x-estilo2 bg-white color-white gap-2 flex-col flex' className='bg-white'>
     <div className='gap-6 flex max-w-[100vw] flex-1 flex-shrink flex-grow grid-cols-1 overflow-scroll overflow-y-hidden overflow-x-scroll pb-24 md:grid-cols-4 lg:grid lg:flex-none lg:flex-shrink-0 lg:flex-grow-0 lg:gap-14 lg:overflow-x-hidden'>
-      {nosotros.map((member, index) => (
+      {team.map((member, index) => (
         <TeamMember member={member} key={index} />
       ))}
     </div>

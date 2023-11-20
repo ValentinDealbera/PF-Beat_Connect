@@ -1,5 +1,5 @@
 import { type BeatsClass, type ReviewsClass } from '@/types'
-import { createUserSession } from '../userSession'
+import { createUserSession } from '../createUserSession.utils'
 
 export function processUserData(response: any) {
   const bougthBeats = processBeats(response.bougthBeats)

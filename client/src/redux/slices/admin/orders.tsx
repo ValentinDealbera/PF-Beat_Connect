@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { serverUrl } from '@/data/config'
+import { serverUrl } from '@/utils/config.const'
 import { toast } from 'sonner'
 import axios from 'axios'
-import { toastError, toastSuccess } from '@/utils/toastStyles'
+import { toastError, toastSuccess } from '@/utils/toastStyles.const'
 import i18next from 'i18next'
 const tokenAdmin = process.env.NEXT_PUBLIC_TOKEN_ADMIN
 
@@ -14,23 +14,18 @@ const initialState = {
 // ------------------ ASYNC THUNKS ------------------//
 // GET ADMIN ORDERS
 export const adminGetOrders = createAsyncThunk('client/adminGetOrders', async (_, { rejectWithValue, dispatch }) => {
-  try {
-    const response = await axios.get(`${serverUrl}orders`)
-    return { orderResponse: response.data }
-  } catch (error) {
-    throw error
-  }
+  const response = await axios.get(`${serverUrl}orders`)
+  return { orderResponse: response.data }
 })
 
 // GET ADMIN ORDER
-export const adminGetOrder = createAsyncThunk('client/adminGetOrder', async (data, { rejectWithValue, dispatch }) => {
-  try {
+export const adminGetOrder = createAsyncThunk(
+  'client/adminGetOrder',
+  async (data: any, { rejectWithValue, dispatch }) => {
     const response = await axios.get(`${serverUrl}orders/${data}`)
     return { orderResponse: response.data }
-  } catch (error) {
-    throw error
   }
-})
+)
 
 // DELETE ADMIN ORDER
 export const adminDeleteOrder = createAsyncThunk(
@@ -71,7 +66,7 @@ const ordersSlice = createSlice({
   name: 'orders',
   initialState,
   reducers: {
-    setCurrentEditingOrder(state, action) {
+    setCurrentEditingOrder: (state, action) => {
       state.currentEditingOrder = action.payload
     }
   },
@@ -93,29 +88,29 @@ const ordersSlice = createSlice({
 
       // DELETE ADMIN ORDER
       .addCase(adminDeleteOrder.pending, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'Deleting order...' : 'Borrando Orden...'
+        const trad = i18next?.language === 'en' ? 'Deleting order...' : 'Borrando Orden...'
         toast(trad)
       })
       .addCase(adminDeleteOrder.fulfilled, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'Order deleted' : 'Orden Borrada'
+        const trad = i18next?.language === 'en' ? 'Order deleted' : 'Orden Borrada'
         toast.success(trad, toastSuccess)
       })
       .addCase(adminDeleteOrder.rejected, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'Error deleting order' : 'Error al borrar orden'
+        const trad = i18next?.language === 'en' ? 'Error deleting order' : 'Error al borrar orden'
         toast.error(trad, toastError)
       })
 
       // POST ADMIN ORDER
       .addCase(adminPostOrder.pending, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'Creating order...' : 'Creando Orden...'
+        const trad = i18next?.language === 'en' ? 'Creating order...' : 'Creando Orden...'
         toast(trad)
       })
       .addCase(adminPostOrder.fulfilled, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'Order created' : 'Orden Creada'
+        const trad = i18next?.language === 'en' ? 'Order created' : 'Orden Creada'
         toast.success(trad, toastSuccess)
       })
       .addCase(adminPostOrder.rejected, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'Error creating order' : 'Error al crear orden'
+        const trad = i18next?.language === 'en' ? 'Error creating order' : 'Error al crear orden'
         toast.success(trad, toastError)
       })
   }

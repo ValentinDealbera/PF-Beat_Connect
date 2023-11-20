@@ -10,7 +10,7 @@ import { toast } from 'sonner'
 import { getUserData } from './authSession'
 import { fetchBeats, fetchFeaturedBeats } from '../beats'
 import i18next from 'i18next'
-import { type BeatsClass } from '@/types'
+import { type BeatsClass } from '@/interfaces'
 import {
   createFormData,
   getActiveEditingBeat,
@@ -23,7 +23,7 @@ import { addFavoriteBeat } from '@/utils/state/addFavoriteBeat'
 import { removeFavoriteBeat } from '@/utils/state/removeFavoriteBeat'
 
 const initialState = {
-  activeEditingBeat: {} as BeatsClass,
+  activeEditingBeat: {} as any,
   bougthBeats: [] as BeatsClass[],
   ownedBeats: [] as BeatsClass[],
   favoriteBeats: [] as BeatsClass[]
@@ -124,16 +124,16 @@ const clientBeats = createSlice({
   name: 'clientBeats',
   initialState,
   reducers: {
-    setBougthBeats(state, action: PayloadAction<BeatsClass[]>) {
+    setBougthBeats: (state, action: PayloadAction<BeatsClass[]>) => {
       state.bougthBeats = action.payload
     },
-    setOwnedBeats(state, action: PayloadAction<BeatsClass[]>) {
+    setOwnedBeats: (state, action: PayloadAction<BeatsClass[]>) => {
       state.ownedBeats = action.payload
     },
-    setFavoriteBeats(state, action: PayloadAction<BeatsClass[]>) {
+    setFavoriteBeats: (state, action: PayloadAction<BeatsClass[]>) => {
       state.favoriteBeats = action.payload ?? []
     },
-    setActiveEditingBeat(state, action: PayloadAction<BeatsClass>) {
+    setActiveEditingBeat: (state, action: PayloadAction<BeatsClass>) => {
       state.activeEditingBeat = action.payload
     }
   },
@@ -141,20 +141,20 @@ const clientBeats = createSlice({
     builder
       .addCase(postClientBeat.pending, (state, action) => {
         const trad =
-          i18next?.language == 'en'
+          i18next?.language === 'en'
             ? 'Uploading beat, please wait for confirmation...'
             : 'Subiendo beat, espera la confirmación...'
         toast(trad)
       })
       .addCase(postClientBeat.fulfilled, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'Beat uploaded successfully' : 'Beat subido correctamente'
+        const trad = i18next?.language === 'en' ? 'Beat uploaded successfully' : 'Beat subido correctamente'
         toast.success(trad)
       })
       .addCase(postClientBeat.rejected, (state, action) => {
         toast('action.payload')
       })
       .addCase(deleteClientBeat.fulfilled, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'Beat deleted successfully' : 'Beat borrado correctamente'
+        const trad = i18next?.language === 'en' ? 'Beat deleted successfully' : 'Beat borrado correctamente'
         toast.success(trad)
       })
       .addCase(deleteClientBeat.rejected, (state, action) => {
@@ -163,13 +163,13 @@ const clientBeats = createSlice({
 
       .addCase(editClientBeat.pending, (state, action) => {
         const trad =
-          i18next?.language == 'en'
+          i18next?.language === 'en'
             ? 'Editing beat, please wait for confirmation...'
             : 'Editando beat, espera la confirmación...'
         toast(trad)
       })
       .addCase(editClientBeat.fulfilled, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'Beat edited successfully' : 'Beat editado correctamente'
+        const trad = i18next?.language === 'en' ? 'Beat edited successfully' : 'Beat editado correctamente'
         toast.success(trad)
       })
       .addCase(editClientBeat.rejected, (state, action) => {

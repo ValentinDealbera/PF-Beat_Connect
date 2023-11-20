@@ -7,13 +7,13 @@ import { toast } from 'sonner'
 import { getUserData } from './authSession'
 import { fetchBeats, fetchFeaturedBeats } from '../beats'
 import i18next from 'i18next'
-import { axiosDeleter, axiosPoster, axiosPutter } from '@/utils/requests'
+import { axiosDeleter, axiosPoster, axiosPutter } from '@/services/axios.service'
 import { type RootState } from '@/redux/store/store'
-import { type ReviewsClass } from '@/types'
+import { type ReviewsClass } from '@/interfaces'
 
 const initialState = {
-  activeBeatCreateReview: {} as ReviewsClass,
-  activeEditingReview: {} as ReviewsClass,
+  activeBeatCreateReview: {} as any,
+  activeEditingReview: {} as any,
   reviews: [] as ReviewsClass[]
 }
 
@@ -105,19 +105,19 @@ const reviewsSlice = createSlice({
   reducers: {
     // --------------------
     // SET ACTIVE EDITING REVIEW
-    setActiveEditingReview(state, action) {
+    setActiveEditingReview: (state, action) => {
       state.activeEditingReview = action.payload
     },
 
     // --------------------
     // SET OWN REVIEWS
-    setOwnedReviews(state, action) {
+    setOwnedReviews: (state, action) => {
       state.reviews = action.payload
     },
 
     // --------------------
     // SET ACTIVE BEAT CREATE REVIEW
-    setActiveBeatCreateReview(state, action) {
+    setActiveBeatCreateReview: (state, action) => {
       state.activeBeatCreateReview = action.payload
     }
   },
@@ -126,42 +126,42 @@ const reviewsSlice = createSlice({
       // --------------------
       // POST CLIENT REVIEW
       .addCase(postClientReview.fulfilled, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'Review created' : 'Review creada'
+        const trad = i18next?.language === 'en' ? 'Review created' : 'Review creada'
         toast.success(trad)
       })
       .addCase(postClientReview.rejected, (state, action) => {
         toast.error('action.payload')
       })
       .addCase(postClientReview.pending, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'Creating review...' : 'Creando review...'
+        const trad = i18next?.language === 'en' ? 'Creating review...' : 'Creando review...'
         toast(trad)
       })
 
       // --------------------
       // DELETE CLIENT REVIEW
       .addCase(deleteClientReview.fulfilled, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'Review deleted' : 'Review eliminada'
+        const trad = i18next?.language === 'en' ? 'Review deleted' : 'Review eliminada'
         toast.success(trad)
       })
       .addCase(deleteClientReview.rejected, (state, action) => {
         toast.error('action.payload')
       })
       .addCase(deleteClientReview.pending, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'Deleting review...' : 'Eliminando review...'
+        const trad = i18next?.language === 'en' ? 'Deleting review...' : 'Eliminando review...'
         toast(trad)
       })
 
       // --------------------
       // EDIT CLIENT REVIEW
       .addCase(editClientReview.fulfilled, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'Review edited' : 'Review editada'
+        const trad = i18next?.language === 'en' ? 'Review edited' : 'Review editada'
         toast.success(trad)
       })
       .addCase(editClientReview.rejected, (state, action) => {
         toast.error('action.payload')
       })
       .addCase(editClientReview.pending, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'Editing review...' : 'Editando review...'
+        const trad = i18next?.language === 'en' ? 'Editing review...' : 'Editando review...'
         toast(trad)
       })
   }

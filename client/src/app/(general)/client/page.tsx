@@ -1,5 +1,5 @@
-import HeroSection from './_components/XHero'
-import BeatsSection from './_components/XBeats'
+import HeroSection from './_components/Hero'
+import BeatsSection from './_components/Beats'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {

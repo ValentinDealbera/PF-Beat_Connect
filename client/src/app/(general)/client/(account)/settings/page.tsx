@@ -1,4 +1,4 @@
-import Content from './_components/XContent'
+import Content from './_components/Content'
 
 const Settings = () => <Content />
 

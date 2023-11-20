@@ -1,13 +1,10 @@
-export default function ValidationEditUsers(form, fieldsToValidate) {
+const ValidationEditUsers = (form, fieldsToValidate) => {
   const MAX_FILE_SIZE = 10 * 1024 * 1024 // 10 MB
   const error = {}
-
   const regexImage = /\.jpg$|\.png$/i
-  const regexAudioMP3 = /\.mp3$|\.wav$/i
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
   if (fieldsToValidate === '*') {
-    // pasamos de object a array
     fieldsToValidate = Object.keys(form)
   }
 
@@ -49,12 +46,13 @@ export default function ValidationEditUsers(form, fieldsToValidate) {
         if (form.isSeller === undefined || form.isSeller === null || form.isSeller === '') {
           error.isSeller = 'You must select if you are a seller or not'
         }
-
+        break
       case 'softDelete':
         // debe ser true o false
         if (form.softDelete !== true || form.softDelete !== false) {
           error.softDelete = 'You must select if you want to delete the user or not'
         }
+        break
 
       default:
         break
@@ -63,3 +61,5 @@ export default function ValidationEditUsers(form, fieldsToValidate) {
 
   return error
 }
+
+export default ValidationEditUsers

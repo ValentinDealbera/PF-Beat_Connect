@@ -1,9 +1,3 @@
-/* FUNCION DE BEATS: */
-/* 1) FETCH BEATS: Se obtienen los beats de la base de datos. */
-/* 2) FETCH BEAT DETAIL: Se obtiene el detalle de un beat de la base de datos. */
-/* 3) PAGINADOR: Se obtienen los beats de la base de datos. */
-/* 4) FETCH AUTHOR: Se obtiene el detalle de un autor de la base de datos. */
-/* 5) FETCH AUTHOR BEATS: Se obtienen los beats de un autor de la base de datos. */
 import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit'
 import {
   buildQueryString,
@@ -11,19 +5,19 @@ import {
   filterSoftDeletedReviews,
   fetchFeaturedBeatsData
 } from '@/utils/state'
-import { axiosGetter } from '@/utils/requests'
-import { type BeatsClass, type ReviewsClass, type UserClass } from '@/types'
+import { axiosGetter } from '@/services/axios.service'
+import { type BeatsClass, type ReviewsClass } from '@/interfaces'
 
 const initialState = {
   loadingBeats: false,
   publicItems: [] as BeatsClass[],
   activeItems: [] as BeatsClass[],
   featuredItems: [] as BeatsClass[],
-  activeItemDetail: {} as BeatsClass,
+  activeItemDetail: {} as any,
   generalActiveIndex: 0,
   activeReviewDetail: [] as ReviewsClass[],
   reviewFetchStatus: false,
-  currentAuthor: {} as UserClass,
+  currentAuthor: {} as any,
   currentAuthorBeats: [] as BeatsClass[],
   loadingcurrentAuthor: false,
   pageIndex: 1,
@@ -67,26 +61,22 @@ export const fetchFeaturedBeats = createAsyncThunk('beats/fetchFeaturedBeats', a
 })
 
 export const fetchCurrentAuthor = createAsyncThunk('beats/fetchCurrentAuthor', async (id: string) => {
-  try {
-    const response = await axiosGetter({
-      url: `user/${id}`
-    })
+  const response = await axiosGetter({
+    url: `user/${id}`
+  })
 
-    const { firstName, lastName, id: idR, image, username, bio, backImage } = response
-    console.log('response.createdBeats', response.createdBeats)
-    const currentAuthor = {
-      firstName,
-      lastName,
-      id: idR,
-      image,
-      username,
-      bio,
-      backImage
-    }
-    return { beats: response.createdBeats, currentAuthor }
-  } catch (err) {
-    throw err
+  const { firstName, lastName, id: idR, image, username, bio, backImage } = response
+  console.log('response.createdBeats', response.createdBeats)
+  const currentAuthor = {
+    firstName,
+    lastName,
+    id: idR,
+    image,
+    username,
+    bio,
+    backImage
   }
+  return { beats: response.createdBeats, currentAuthor }
 })
 
 // -------------------- SLICE -------------------//
@@ -94,15 +84,15 @@ const beatsSlice = createSlice({
   name: 'beats',
   initialState,
   reducers: {
-    setActiveItemDetail(state, action) {
+    setActiveItemDetail: (state, action) => {
       state.activeItemDetail = action.payload
     },
-    setCurrentPage(state, action: PayloadAction<number>) {
+    setCurrentPage: (state, action: PayloadAction<number>) => {
       console.log('setCurrentPage action.payload', action.payload)
       state.pageIndex = action.payload
       state.pages.current = action.payload
     },
-    setGeneralActiveIndex(state, action: PayloadAction<number>) {
+    setGeneralActiveIndex: (state, action: PayloadAction<number>) => {
       state.generalActiveIndex = action.payload
     }
   },

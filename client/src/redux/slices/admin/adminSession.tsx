@@ -9,14 +9,10 @@ const initialState = {
 }
 
 export const adminGetData = createAsyncThunk('adminUsers/adminGetData', async (_, { dispatch }) => {
-  try {
-    await dispatch(adminGetUsers())
-    await dispatch(adminGetBeats())
-    await dispatch(adminGetReviews())
-    return { success: true }
-  } catch (error) {
-    throw error
-  }
+  await dispatch(adminGetUsers())
+  await dispatch(adminGetBeats())
+  await dispatch(adminGetReviews())
+  return { success: true }
 })
 
 const adminUsersSlice = createSlice({
@@ -30,7 +26,5 @@ const adminUsersSlice = createSlice({
       .addCase(adminGetData.pending, (state, action) => {})
   }
 })
-
-export const {} = adminUsersSlice.actions
 
 export default adminUsersSlice.reducer

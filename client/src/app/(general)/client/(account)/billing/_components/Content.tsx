@@ -3,7 +3,7 @@ import { Section, DynamicTableLight } from '@/components'
 import { useTranslation } from 'react-i18next'
 import { useAppSelector } from '@/redux/hooks'
 import { useEffect, useState } from 'react'
-import { rowsBuilder } from './XOperation'
+import { rowsBuilder } from './Operation'
 
 const Content = () => {
   const [t] = useTranslation('global')

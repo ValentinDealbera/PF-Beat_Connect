@@ -1,15 +1,15 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { serverUrl } from '@/data/config'
+import { serverUrl } from '@/utils/config.const'
 import { toast } from 'sonner'
 import axios from 'axios'
-import { toastError, toastSuccess } from '@/utils/toastStyles'
+import { toastSuccess } from '@/utils/toastStyles.const'
 import i18next from 'i18next'
-import { type BeatsClass } from '@/types'
+import { type BeatsClass } from '@/interfaces'
 
 const tokenAdmin = process.env.NEXT_PUBLIC_TOKEN_ADMIN
 const initialState = {
   beats: [] as BeatsClass[],
-  currentEdtingBeat: {} as BeatsClass
+  currentEdtingBeat: {} as any
 }
 
 // ------------------ ASYNC THUNKS ------------------//
@@ -41,18 +41,14 @@ export const adminPostBeat = createAsyncThunk(
 export const adminEditBeat = createAsyncThunk(
   'beats/adminEditBeat',
   async (data: any, { rejectWithValue, dispatch }) => {
-    try {
-      const response = await axios.put(`${serverUrl}admin/beat/${data.id}`, data, {
-        headers: {
-          admintoken: tokenAdmin,
-          'Content-Type': 'multipart/form-data'
-        }
-      })
-      await dispatch(adminGetBeats())
-      return { beatResponse: response.data }
-    } catch (error) {
-      throw error
-    }
+    const response = await axios.put(`${serverUrl}admin/beat/${data.id}`, data, {
+      headers: {
+        admintoken: tokenAdmin,
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+    await dispatch(adminGetBeats())
+    return { beatResponse: response.data }
   }
 )
 
@@ -79,23 +75,15 @@ export const adminDeleteBeat = createAsyncThunk(
 // --------------------
 // GET ADMIN BEATS
 export const adminGetBeats = createAsyncThunk('beats/adminGetBeats', async (_, { rejectWithValue, dispatch }) => {
-  try {
-    const response = await axios.get(`${serverUrl}beats?limit=999999`)
-    return { beatResponse: response.data.docs }
-  } catch (error) {
-    throw error
-  }
+  const response = await axios.get(`${serverUrl}beats?limit=999999`)
+  return { beatResponse: response.data.docs }
 })
 
 // --------------------
 // GET ADMIN BEAT
 export const adminGetBeat = createAsyncThunk('beats/adminGetBeat', async (data: any, { rejectWithValue, dispatch }) => {
-  try {
-    const response = await axios.get(`${serverUrl}beats/${data}`)
-    return { beatResponse: response.data }
-  } catch (error) {
-    throw error
-  }
+  const response = await axios.get(`${serverUrl}beats/${data}`)
+  return { beatResponse: response.data }
 })
 
 // ------------------ SLICE ------------------//
@@ -104,7 +92,7 @@ const adminBeatsSlice = createSlice({
   name: 'adminBeats',
   initialState,
   reducers: {
-    setCurrentEditingBeat(state, action) {
+    setCurrentEditingBeat: (state, action) => {
       state.currentEdtingBeat = action.payload
     }
   },
@@ -113,14 +101,14 @@ const adminBeatsSlice = createSlice({
       // --------------------
       // POST ADMIN BEAT
       .addCase(adminPostBeat.fulfilled, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'Beat created successfully' : 'Beat creado correctamente'
+        const trad = i18next?.language === 'en' ? 'Beat created successfully' : 'Beat creado correctamente'
         toast.success(trad, toastSuccess)
       })
       .addCase(adminPostBeat.rejected, (state, action) => {
         console.error('error', action.payload)
       })
       .addCase(adminPostBeat.pending, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'Creating beat...' : 'Creando beat...'
+        const trad = i18next?.language === 'en' ? 'Creating beat...' : 'Creando beat...'
         toast(trad)
       })
 
@@ -130,25 +118,25 @@ const adminBeatsSlice = createSlice({
         console.error('error', action.payload)
       })
       .addCase(adminEditBeat.fulfilled, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'Beat edited successfully' : 'Beat editado correctamente'
+        const trad = i18next?.language === 'en' ? 'Beat edited successfully' : 'Beat editado correctamente'
         toast.success(trad, toastSuccess)
       })
       .addCase(adminEditBeat.pending, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'Editing beat...' : 'Editando beat...'
+        const trad = i18next?.language === 'en' ? 'Editing beat...' : 'Editando beat...'
         toast(trad)
       })
 
       // --------------------
       // DELETE ADMIN BEAT
       .addCase(adminDeleteBeat.fulfilled, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'Beat deleted successfully' : 'Beat eliminado correctamente'
+        const trad = i18next?.language === 'en' ? 'Beat deleted successfully' : 'Beat eliminado correctamente'
         toast.success(trad, toastSuccess)
       })
       .addCase(adminDeleteBeat.rejected, (state, action) => {
         console.error('error', action.payload)
       })
       .addCase(adminDeleteBeat.pending, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'Deleting beat...' : 'Eliminando beat...'
+        const trad = i18next?.language === 'en' ? 'Deleting beat...' : 'Eliminando beat...'
         toast(trad)
       })
 
@@ -168,7 +156,7 @@ const adminBeatsSlice = createSlice({
       // --------------------
       // GET ADMIN BEAT
       .addCase(adminGetBeat.fulfilled, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'Beat retrieved successfully' : 'Beat obtenido correctamente'
+        const trad = i18next?.language === 'en' ? 'Beat retrieved successfully' : 'Beat obtenido correctamente'
         toast.success(trad, toastSuccess)
 
         state.currentEdtingBeat = action.payload.beatResponse
@@ -177,7 +165,7 @@ const adminBeatsSlice = createSlice({
         console.error('error', action.payload)
       })
       .addCase(adminGetBeat.pending, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'Loading beat...' : 'Cargando beat...'
+        const trad = i18next?.language === 'en' ? 'Loading beat...' : 'Cargando beat...'
         toast(trad)
       })
   }

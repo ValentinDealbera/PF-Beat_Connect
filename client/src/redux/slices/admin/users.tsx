@@ -1,15 +1,15 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { serverUrl } from '@/data/config'
+import { serverUrl } from '@/utils/config.const'
 import { toast } from 'sonner'
 import axios from 'axios'
 import i18next from 'i18next'
-import { toastSuccess } from '@/utils/toastStyles'
-import { type UserClass } from '@/types'
+import { toastSuccess } from '@/utils/toastStyles.const'
+import { type UserClass } from '@/interfaces'
 const tokenAdmin = process.env.NEXT_PUBLIC_TOKEN_ADMIN
 
 const initialState = {
   users: [] as UserClass[],
-  currentEdtingUser: {} as UserClass
+  currentEdtingUser: {} as any
 }
 
 // ------------------ ASYNC THUNKS ------------------//
@@ -40,18 +40,14 @@ export const adminPostUser = createAsyncThunk(
 export const adminEditUser = createAsyncThunk(
   'users/adminEditUser',
   async (data: any, { rejectWithValue, dispatch }) => {
-    try {
-      const response = await axios.put(`${serverUrl}admin/user/${data.id}`, data, {
-        headers: {
-          admintoken: tokenAdmin,
-          'Content-Type': 'multipart/form-data'
-        }
-      })
-      await dispatch(adminGetUsers())
-      return { userResponse: response.data }
-    } catch (error) {
-      throw error
-    }
+    const response = await axios.put(`${serverUrl}admin/user/${data.id}`, data, {
+      headers: {
+        admintoken: tokenAdmin,
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+    await dispatch(adminGetUsers())
+    return { userResponse: response.data }
   }
 )
 
@@ -79,24 +75,16 @@ export const adminDeleteUser = createAsyncThunk(
 // --------------------
 // GET ADMIN USERS
 export const adminGetUsers = createAsyncThunk('users/adminGetUsers', async (_, { rejectWithValue, dispatch }) => {
-  try {
-    const response = await axios.get(`${serverUrl}user`)
+  const response = await axios.get(`${serverUrl}user`)
 
-    return { userResponse: response.data }
-  } catch (error) {
-    throw error
-  }
+  return { userResponse: response.data }
 })
 
 // --------------------
 // GET ADMIN USER
 export const adminGetUser = createAsyncThunk('users/adminGetUser', async (data: any, { rejectWithValue, dispatch }) => {
-  try {
-    const response = await axios.get(`${serverUrl}user/${data}`)
-    return { userResponse: response.data }
-  } catch (error) {
-    throw error
-  }
+  const response = await axios.get(`${serverUrl}user/${data}`)
+  return { userResponse: response.data }
 })
 
 // ------------------ SLICE ------------------//
@@ -105,7 +93,7 @@ const adminUsersSlice = createSlice({
   name: 'adminUsers',
   initialState,
   reducers: {
-    setCurrentEditingUser(state, action) {
+    setCurrentEditingUser: (state, action) => {
       state.currentEdtingUser = action.payload
     }
   },
@@ -114,14 +102,14 @@ const adminUsersSlice = createSlice({
       // --------------------
       // POST ADMIN USER
       .addCase(adminPostUser.fulfilled, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'User created successfully' : 'Usuario creado correctamente'
+        const trad = i18next?.language === 'en' ? 'User created successfully' : 'Usuario creado correctamente'
         toast.success(trad, toastSuccess)
       })
       .addCase(adminPostUser.rejected, (state, action) => {
         console.error(action.payload)
       })
       .addCase(adminPostUser.pending, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'Creating user...' : 'Creando usuario...'
+        const trad = i18next?.language === 'en' ? 'Creating user...' : 'Creando usuario...'
         toast(trad)
       })
 
@@ -131,25 +119,25 @@ const adminUsersSlice = createSlice({
         console.error(action.payload)
       })
       .addCase(adminEditUser.fulfilled, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'User edited successfully' : 'Usuario editado correctamente'
+        const trad = i18next?.language === 'en' ? 'User edited successfully' : 'Usuario editado correctamente'
         toast.success(trad, toastSuccess)
       })
       .addCase(adminEditUser.pending, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'Editing user...' : 'Editando usuario...'
+        const trad = i18next?.language === 'en' ? 'Editing user...' : 'Editando usuario...'
         toast(trad)
       })
 
       // --------------------
       // DELETE ADMIN USER
       .addCase(adminDeleteUser.fulfilled, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'User deleted successfully' : 'Usuario borrado correctamente'
+        const trad = i18next?.language === 'en' ? 'User deleted successfully' : 'Usuario borrado correctamente'
         toast.success(trad, toastSuccess)
       })
       .addCase(adminDeleteUser.rejected, (state, action) => {
         console.error(action.payload)
       })
       .addCase(adminDeleteUser.pending, (state, action) => {
-        const trad = i18next?.language == 'en' ? 'Deleting user...' : 'Borrando usuario...'
+        const trad = i18next?.language === 'en' ? 'Deleting user...' : 'Borrando usuario...'
         toast(trad)
       })
 

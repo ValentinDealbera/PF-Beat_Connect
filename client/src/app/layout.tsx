@@ -1,6 +1,6 @@
 import './globals.scss'
-import Provider from '@/services/provider'
-import Querier from '@/services/querier'
+import Provider from '@/context/providers/redux.provider'
+import Querier from '@/services/querier.service'
 
 interface Props {
   children: React.ReactNode
