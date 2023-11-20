@@ -1,27 +1,24 @@
-import { Section, BeatsGrid } from "@/components";
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { fetchFeaturedBeats } from "@/redux/slices/beats";
+import { Section, BeatsGrid } from '@/components'
+import { useEffect } from 'react'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { fetchFeaturedBeats } from '@/redux/slices/beats'
 
-type BeatsSpecialSectionProps = {
-  title: string;
-};
+interface BeatsSpecialSectionProps {
+  title: string
+}
 
-export default function BeatsSpecialSection({
-  title,
-}: BeatsSpecialSectionProps) {
-  const featuredBeats =
-    useAppSelector((state) => state?.beats?.featuredItems) || [];
-  const dispatch = useAppDispatch();
+export default function BeatsSpecialSection({ title }: BeatsSpecialSectionProps) {
+  const featuredBeats = useAppSelector((state) => state?.beats?.featuredItems) || []
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(fetchFeaturedBeats());
-  }, []);
+    dispatch(fetchFeaturedBeats())
+  }, [])
 
   return (
-    <Section subClassName="padding-x-estilo2 padding-y-estilo2 gap-8 flex flex-col">
-      <h1 className="text-titulo2-medium">{title}</h1>
+    <Section subClassName='padding-x-estilo2 padding-y-estilo2 gap-8 flex flex-col'>
+      <h1 className='text-titulo2-medium'>{title}</h1>
       <BeatsGrid beats={featuredBeats} />
     </Section>
-  );
+  )
 }

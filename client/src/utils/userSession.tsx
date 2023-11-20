@@ -1,19 +1,9 @@
-import { serverUrl } from "@/data/config";
-import { UserClass } from "@/types";
-import axios from "axios";
+import { serverUrl } from '@/data/config'
+import { type UserClass } from '@/types'
+import axios from 'axios'
 
 export function createUserSession(user: UserClass) {
-  const {
-    firstName,
-    lastName,
-    bio,
-    _id,
-    email,
-    username,
-    image,
-    backImage,
-    softDelete,
-  } = user;
+  const { firstName, lastName, bio, _id, email, username, image, backImage, softDelete } = user
 
   return {
     firstName,
@@ -24,19 +14,18 @@ export function createUserSession(user: UserClass) {
     email,
     userName: username,
     backImage,
-    softDelete,
-  };
+    softDelete
+  }
 }
 
 export const getUserData = async ({ clientId }: any) => {
   try {
-    const { data: response } = await axios.get(`${serverUrl}user/${clientId}`);
+    const { data: response } = await axios.get(`${serverUrl}user/${clientId}`)
 
-    const session = createUserSession(response);
+    const session = createUserSession(response)
 
-    return session;
+    return session
   } catch (error) {
-    console.log("Error al obtener los datos del usuario", error);
-    return;
+    console.log('Error al obtener los datos del usuario', error)
   }
-};
+}

@@ -1,24 +1,24 @@
-import { usePathname } from "next/navigation";
-import { NavModalItem } from "@/components";
-import NavItem from "./item";
+import { usePathname } from 'next/navigation'
+import { NavModalItem } from '@/components'
+import NavItem from './item'
 
-type ItemProps = {
-  name: string;
-  url: string;
-  visible: boolean;
-};
+interface ItemProps {
+  name: string
+  url: string
+  visible: boolean
+}
 
-type NavProps = {
-  currentMode: "light" | "dark";
-  center: boolean;
-  items: ItemProps[];
-  horizontal: boolean;
-  withModal: boolean;
-  modalLabel?: string;
-  children?: any;
-  className?: string;
-  navClassName?: string;
-};
+interface NavProps {
+  currentMode: 'light' | 'dark'
+  center: boolean
+  items: ItemProps[]
+  horizontal: boolean
+  withModal: boolean
+  modalLabel?: string
+  children?: any
+  className?: string
+  navClassName?: string
+}
 
 export default function Nav({
   currentMode,
@@ -29,13 +29,11 @@ export default function Nav({
   withModal,
   className,
   horizontal,
-  navClassName,
+  navClassName
 }: NavProps) {
-  const pathname = usePathname();
-  const centerStyles = center
-    ? "absolute left-[50%]  w-max  translate-x-[-50%] "
-    : "";
-  const navOrientation = horizontal ? "flex-row" : "flex-col";
+  const pathname = usePathname()
+  const centerStyles = center ? 'absolute left-[50%]  w-max  translate-x-[-50%] ' : ''
+  const navOrientation = horizontal ? 'flex-row' : 'flex-col'
 
   return (
     <>
@@ -43,18 +41,12 @@ export default function Nav({
         <div className={`gap-6 ${navClassName} flex ${navOrientation}`}>
           {items?.map(
             (item: any) =>
-              item.visible === true && (
-                <NavItem
-                  item={item}
-                  currentMode={currentMode}
-                  pathname={pathname}
-                />
-              ),
+              item.visible === true && <NavItem item={item} currentMode={currentMode} pathname={pathname} />
           )}
           {withModal && (
             <NavModalItem
-              label={modalLabel ?? "nulled"}
-              labelClass={"text-base-light text-white"}
+              label={modalLabel ?? 'nulled'}
+              labelClass='text-base-light text-white'
               currentMode={currentMode}
             >
               {children}
@@ -63,5 +55,5 @@ export default function Nav({
         </div>
       </nav>
     </>
-  );
+  )
 }

@@ -1,9 +1,9 @@
-import AdminLayoutContent from "./content";
+import AdminLayoutContent from './content'
 
-type Props = {
-  children: React.ReactNode;
-};
+interface Props {
+  children: React.ReactNode
+}
 
 export default function AdminLayout({ children }: Props) {
-  return <AdminLayoutContent>{children}</AdminLayoutContent>;
+  return <AdminLayoutContent>{children}</AdminLayoutContent>
 }

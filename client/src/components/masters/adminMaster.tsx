@@ -1,29 +1,26 @@
-import { useAppDispatch } from "@/redux/hooks";
-import { adminGetData } from "@/redux/slices/admin/adminSession";
-import { useEffect, useMemo } from "react";
-import { debounce } from "lodash";
+import { useAppDispatch } from '@/redux/hooks'
+import { adminGetData } from '@/redux/slices/admin/adminSession'
+import { useEffect, useMemo } from 'react'
+import { debounce } from 'lodash'
 
-type Props = {
-  children: React.ReactNode;
-};
+interface Props {
+  children: React.ReactNode
+}
 
 export default function AdminMaster({ children }: Props) {
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
-  const delayedAdminGetBeats = useMemo(
-    () => debounce(() => dispatch(adminGetData()), 500),
-    [dispatch],
-  );
+  const delayedAdminGetBeats = useMemo(() => debounce(async () => await dispatch(adminGetData()), 500), [dispatch])
 
   useEffect(() => {
     const cancelDebounce = () => {
-      delayedAdminGetBeats.cancel();
-    };
+      delayedAdminGetBeats.cancel()
+    }
 
-    delayedAdminGetBeats();
+    delayedAdminGetBeats()
 
-    return cancelDebounce;
-  }, []);
+    return cancelDebounce
+  }, [])
 
-  return <>{children}</>;
+  return <>{children}</>
 }

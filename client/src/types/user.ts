@@ -1,31 +1,31 @@
-import { BeatsClass, ReviewsClass } from "@/types";
+import { BeatsClass, ReviewsClass } from '@/types'
 
-type UserProps = {
-  _id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  username: string;
-  bio: string;
-  backImage: string;
-  image: string;
-  softDelete: boolean;
-  isSeller: boolean;
-  superAdmin: boolean;
-};
+interface UserProps {
+  _id: string
+  firstName: string
+  lastName: string
+  email: string
+  username: string
+  bio: string
+  backImage: string
+  image: string
+  softDelete: boolean
+  isSeller: boolean
+  superAdmin: boolean
+}
 
 export class UserClass {
-  _id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  username: string;
-  bio: string;
-  backImage: string;
-  image: string;
-  softDelete: boolean;
-  isSeller: boolean;
-  superAdmin: boolean;
+  _id: string
+  firstName: string
+  lastName: string
+  email: string
+  username: string
+  bio: string
+  backImage: string
+  image: string
+  softDelete: boolean
+  isSeller: boolean
+  superAdmin: boolean
 
   constructor({
     _id,
@@ -38,47 +38,47 @@ export class UserClass {
     image,
     softDelete,
     isSeller,
-    superAdmin,
+    superAdmin
   }: UserProps) {
-    this._id = _id;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.email = email;
-    this.username = username;
-    this.bio = bio;
-    this.backImage = backImage;
-    this.image = image;
-    this.softDelete = softDelete;
-    this.isSeller = isSeller;
-    this.superAdmin = superAdmin;
+    this._id = _id
+    this.firstName = firstName
+    this.lastName = lastName
+    this.email = email
+    this.username = username
+    this.bio = bio
+    this.backImage = backImage
+    this.image = image
+    this.softDelete = softDelete
+    this.isSeller = isSeller
+    this.superAdmin = superAdmin
   }
 
   getId(): string {
-    return this._id;
+    return this._id
   }
 
   getFullName(): string {
-    return `${this.firstName} ${this.lastName}`;
+    return `${this.firstName} ${this.lastName}`
   }
 
   getEmail(): string {
-    return this.email;
+    return this.email
   }
 
   getFirstName(): string {
-    return this.firstName;
+    return this.firstName
   }
 
   getLastName(): string {
-    return this.lastName;
+    return this.lastName
   }
 
   static deserializeList(input: any[]): UserClass[] {
-    let list: UserClass[] = [];
+    const list: UserClass[] = []
     for (let i = 0; i < input.length; i++) {
-      list.push(this.deserialize(input[i]));
+      list.push(this.deserialize(input[i]))
     }
-    return list;
+    return list
   }
 
   static deserialize(input: any): UserClass {
@@ -93,7 +93,7 @@ export class UserClass {
       image: input.image,
       softDelete: input.softDelete,
       isSeller: input.isSeller,
-      superAdmin: input.superAdmin,
-    });
+      superAdmin: input.superAdmin
+    })
   }
 }

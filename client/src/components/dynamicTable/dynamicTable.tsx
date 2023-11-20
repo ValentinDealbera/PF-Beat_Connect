@@ -1,61 +1,60 @@
-import TableCell from "@mui/material/TableCell";
-import TablePagination from "@mui/material/TablePagination";
-import { styled } from "@mui/system";
-import TableBodyFn from "./body";
-import { SetStateAction, useState } from "react";
+import TableCell from '@mui/material/TableCell'
+import TablePagination from '@mui/material/TablePagination'
+import { styled } from '@mui/system'
+import TableBodyFn from './body'
+import { type SetStateAction, useState } from 'react'
 
 const TableCellStyledHead = styled(TableCell)({
-  paddingBottom: "10px",
-  paddingTop: "0px",
-  fontFamily: "Outfit, sans-serif",
-  color: "#ffffff", // Establecer el color en blanco para el modo oscuro
-  borderBottom: "1px solid #1B1F24",
-  "@media (prefers-color-scheme: light)": {
-    color: "#000000", // Establecer el color en negro para el modo claro
-    borderBottom: "1px solid #ccc",
-  },
-});
+  paddingBottom: '10px',
+  paddingTop: '0px',
+  fontFamily: 'Outfit, sans-serif',
+  color: '#ffffff', // Establecer el color en blanco para el modo oscuro
+  borderBottom: '1px solid #1B1F24',
+  '@media (prefers-color-scheme: light)': {
+    color: '#000000', // Establecer el color en negro para el modo claro
+    borderBottom: '1px solid #ccc'
+  }
+})
 
 const TableCellStyled = styled(TableCell)({
-  fontFamily: "Outfit, sans-serif",
-  color: "#ffffff", // Establecer el color en blanco para el modo oscuro
-  borderBottom: "1px solid #1B1F24",
-  "@media (prefers-color-scheme: light)": {
-    color: "#000000", // Establecer el color en negro para el modo claro
-    borderBottom: "1px solid #ccc",
-  },
-});
+  fontFamily: 'Outfit, sans-serif',
+  color: '#ffffff', // Establecer el color en blanco para el modo oscuro
+  borderBottom: '1px solid #1B1F24',
+  '@media (prefers-color-scheme: light)': {
+    color: '#000000', // Establecer el color en negro para el modo claro
+    borderBottom: '1px solid #ccc'
+  }
+})
 
 const TablePaginationStyled = styled(TablePagination)(({ theme }) => ({
-  color: theme.palette.mode === "dark" ? "#ffffff" : "inherit",
-  width: "100%",
-  borderBottom: "1px solid #1B1F24",
-  "@media (prefers-color-scheme: light)": {
-    color: "#000000", // Establecer el color en negro para el modo claro
-    borderBottom: "1px solid #ccc",
-  },
-}));
+  color: theme.palette.mode === 'dark' ? '#ffffff' : 'inherit',
+  width: '100%',
+  borderBottom: '1px solid #1B1F24',
+  '@media (prefers-color-scheme: light)': {
+    color: '#000000', // Establecer el color en negro para el modo claro
+    borderBottom: '1px solid #ccc'
+  }
+}))
 
-type Props = {
-  headers: any;
-  rows: any;
-};
+interface Props {
+  headers: any
+  rows: any
+}
 
 export default function DynamicTable({ headers, rows }: Props) {
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [page, setPage] = useState(0)
+  const [rowsPerPage, setRowsPerPage] = useState(5)
 
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0
 
   const handleChangePage = (event: any, newPage: SetStateAction<number>) => {
-    setPage(newPage);
-  };
+    setPage(newPage)
+  }
 
   const handleChangeRowsPerPage = (event: any) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
+    setRowsPerPage(parseInt(event.target.value, 10))
+    setPage(0)
+  }
 
   return (
     <TableBodyFn
@@ -70,5 +69,5 @@ export default function DynamicTable({ headers, rows }: Props) {
       TableCellStyled={TableCellStyled}
       TablePaginationStyled={TablePaginationStyled}
     />
-  );
+  )
 }

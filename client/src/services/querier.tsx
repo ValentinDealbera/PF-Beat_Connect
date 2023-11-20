@@ -1,25 +1,25 @@
-"use client";
-import { ReactNode, useEffect } from "react";
-import { usePathname, useParams, useRouter } from "next/navigation";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { fetchBeats } from "@/redux/slices/beats";
-type Props = {
-  children: ReactNode;
-};
+'use client'
+import { type ReactNode, useEffect } from 'react'
+import { usePathname, useParams, useRouter } from 'next/navigation'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { fetchBeats } from '@/redux/slices/beats'
+interface Props {
+  children: ReactNode
+}
 
 export default function Querier({ children }: Props) {
-  const pathname = usePathname();
-  const params = useParams();
-  const router = useRouter();
-  const dispatch = useAppDispatch();
-  const currentPage = useAppSelector((state) => state?.beats?.pages?.current);
+  const pathname = usePathname()
+  const params = useParams()
+  const router = useRouter()
+  const dispatch = useAppDispatch()
+  const currentPage = useAppSelector((state) => state?.beats?.pages?.current)
   useEffect(() => {
-    dispatch(fetchBeats({}));
-  }, []);
+    dispatch(fetchBeats({}))
+  }, [])
 
   useEffect(() => {
-    dispatch(fetchBeats({ page: currentPage }));
-  }, [currentPage]);
+    dispatch(fetchBeats({ page: currentPage }))
+  }, [currentPage])
 
   // useEffect(() => {
   //   if (pathname === "/") {
@@ -33,5 +33,5 @@ export default function Querier({ children }: Props) {
   //   }
   // }, [pathname]);
 
-  return <div>{children}</div>;
+  return <div>{children}</div>
 }

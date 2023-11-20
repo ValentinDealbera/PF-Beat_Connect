@@ -1,9 +1,9 @@
-import { BeatsClass } from "@/types";
+import { type BeatsClass } from '@/types'
 
-type BeatBPMProps = {
-  beat: BeatsClass;
-};
+interface BeatBPMProps {
+  beat: BeatsClass
+}
 
 export default function BeatBPM({ beat }: BeatBPMProps) {
-  return <span className="font-light">{` | ${beat?.BPM}BPM`}</span>;
+  return <span className='font-light'>{` | ${beat?.BPM}BPM`}</span>
 }

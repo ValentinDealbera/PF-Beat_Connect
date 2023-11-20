@@ -1,9 +1,9 @@
-import { BeatsClass } from "@/types";
+import { type BeatsClass } from '@/types'
 
-type BeatTitleProps = {
-  beat: BeatsClass;
-};
+interface BeatTitleProps {
+  beat: BeatsClass
+}
 
 export default function BeatTitle({ beat }: BeatTitleProps) {
-  return <h1 className="font-bold">{`${beat?.name}`}</h1>;
+  return <h1 className='font-bold'>{`${beat?.name}`}</h1>
 }

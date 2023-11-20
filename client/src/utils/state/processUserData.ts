@@ -1,19 +1,19 @@
-import { BeatsClass, ReviewsClass } from "@/types";
-import { createUserSession } from "../userSession";
+import { type BeatsClass, type ReviewsClass } from '@/types'
+import { createUserSession } from '../userSession'
 
 export function processUserData(response: any) {
-  const bougthBeats = processBeats(response.bougthBeats);
-  const ownedBeats = processBeats(response.createdBeats);
-  const ownedReviews = processReviews(response.userReviews);
-  const orders = response.userOrders;
-  const favoriteBeats = processBeats(response.userFavorites);
+  const bougthBeats = processBeats(response.bougthBeats)
+  const ownedBeats = processBeats(response.createdBeats)
+  const ownedReviews = processReviews(response.userReviews)
+  const orders = response.userOrders
+  const favoriteBeats = processBeats(response.userFavorites)
 
   const auth = {
     isSeller: response.isSeller,
-    isAdmin: response.superAdmin,
-  };
+    isAdmin: response.superAdmin
+  }
 
-  const session = createUserSession(response);
+  const session = createUserSession(response)
 
   return {
     auth,
@@ -22,8 +22,8 @@ export function processUserData(response: any) {
     ownedBeats,
     ownedReviews,
     orders,
-    favoriteBeats,
-  };
+    favoriteBeats
+  }
 }
 
 // Helper function to process beats
@@ -32,11 +32,11 @@ function processBeats(beats: BeatsClass[]) {
     .filter((beat: BeatsClass) => !beat.softDelete)
     .map((beat: BeatsClass) => ({
       ...beat,
-      review: processReviews(beat.review),
-    })) as BeatsClass[];
+      review: processReviews(beat.review)
+    })) as BeatsClass[]
 }
 
 // Helper function to process reviews
 function processReviews(reviews: ReviewsClass[]) {
-  return reviews.filter((review: ReviewsClass) => !review.softDelete);
+  return reviews.filter((review: ReviewsClass) => !review.softDelete)
 }

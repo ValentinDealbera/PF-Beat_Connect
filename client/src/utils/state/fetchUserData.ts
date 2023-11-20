@@ -1,7 +1,7 @@
-import { axiosGetter } from "../requests";
+import { axiosGetter } from '../requests'
 
 export async function fetchUserData(clientId: string) {
   return await axiosGetter({
-    url: `user/${clientId}`,
-  });
+    url: `user/${clientId}`
+  })
 }

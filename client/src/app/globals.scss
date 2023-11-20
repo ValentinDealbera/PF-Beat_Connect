@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -64,7 +64,7 @@
   menuitem,
   summary {
     //word-break: break-word;
-    font-family: "Outfit", sans-serif;
+    font-family: 'Outfit', sans-serif;
   }
 }
 
@@ -453,7 +453,7 @@
   }
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   appearance: none;
   background-color: #fff;
   margin: 0;
@@ -491,8 +491,8 @@ input[type="checkbox"] {
 //   place-content: center;
 // }
 
-input[type="checkbox"]::before {
-  content: "";
+input[type='checkbox']::before {
+  content: '';
   width: 0.65em;
   height: 0.65em;
   clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
@@ -504,6 +504,6 @@ input[type="checkbox"]::before {
   background-color: #000;
 }
 
-input[type="checkbox"]:checked::before {
+input[type='checkbox']:checked::before {
   transform: scale(1);
 }

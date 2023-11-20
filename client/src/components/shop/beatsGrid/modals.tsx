@@ -1,22 +1,15 @@
-import {
-  BeatBottomSheet,
-  BeatDetailSideBar,
-  BeatRightSheet,
-  EditReviewForm,
-  ReviewForm,
-  EditBeat,
-} from "@/components";
+import { BeatBottomSheet, BeatDetailSideBar, BeatRightSheet, EditReviewForm, ReviewForm, EditBeat } from '@/components'
 
-type Props = {
-  visibilityViewBeat: boolean;
-  setVisibilityViewBeat: (value: boolean) => void;
-  visibilityEditReview: boolean;
-  setVisibilityEditReview: (value: boolean) => void;
-  visibilityCreateReview: boolean;
-  setVisibilityCreateReview: (value: boolean) => void;
-  visibilityEditBeat: boolean;
-  setVisibilityEditBeat: (value: boolean) => void;
-};
+interface Props {
+  visibilityViewBeat: boolean
+  setVisibilityViewBeat: (value: boolean) => void
+  visibilityEditReview: boolean
+  setVisibilityEditReview: (value: boolean) => void
+  visibilityCreateReview: boolean
+  setVisibilityCreateReview: (value: boolean) => void
+  visibilityEditBeat: boolean
+  setVisibilityEditBeat: (value: boolean) => void
+}
 
 export default function Modals({
   visibilityViewBeat,
@@ -26,19 +19,19 @@ export default function Modals({
   visibilityCreateReview,
   setVisibilityCreateReview,
   setVisibilityEditBeat,
-  visibilityEditBeat,
+  visibilityEditBeat
 }: Props) {
-  //Manage deben ser false
+  // Manage deben ser false
   return (
     <>
       {visibilityViewBeat && (
         <>
-          <div className="hidden sm:flex">
+          <div className='hidden sm:flex'>
             <BeatRightSheet setIsDropdownOpen={setVisibilityViewBeat}>
               <BeatDetailSideBar />
             </BeatRightSheet>
           </div>
-          <div className="flex sm:hidden">
+          <div className='flex sm:hidden'>
             <BeatBottomSheet setIsDropdownOpen={setVisibilityViewBeat}>
               <BeatDetailSideBar />
             </BeatBottomSheet>
@@ -47,7 +40,7 @@ export default function Modals({
       )}
       {visibilityEditReview && (
         <BeatRightSheet
-          width="min-w-[100vw] xs:min-w-[90vw] sm:min-w-[450px] "
+          width='min-w-[100vw] xs:min-w-[90vw] sm:min-w-[450px] '
           setIsDropdownOpen={setVisibilityEditReview}
         >
           <EditReviewForm manageEditReview={setVisibilityEditReview} />
@@ -55,7 +48,7 @@ export default function Modals({
       )}
       {visibilityCreateReview && (
         <BeatRightSheet
-          width="min-w-[100vw] xs:min-w-[90vw] sm:min-w-[450px] "
+          width='min-w-[100vw] xs:min-w-[90vw] sm:min-w-[450px] '
           setIsDropdownOpen={setVisibilityCreateReview}
         >
           <ReviewForm manageCreateReview={setVisibilityCreateReview} />
@@ -63,15 +56,12 @@ export default function Modals({
       )}
       {visibilityEditBeat && (
         <BeatRightSheet
-          width="min-w-[100vw] xs:min-w-[90vw] sm:min-w-[450px] "
+          width='min-w-[100vw] xs:min-w-[90vw] sm:min-w-[450px] '
           setIsDropdownOpen={setVisibilityEditBeat}
         >
-          <EditBeat
-            visible={visibilityEditBeat}
-            setVisible={setVisibilityEditBeat}
-          />
+          <EditBeat visible={visibilityEditBeat} setVisible={setVisibilityEditBeat} />
         </BeatRightSheet>
       )}
     </>
-  );
+  )
 }

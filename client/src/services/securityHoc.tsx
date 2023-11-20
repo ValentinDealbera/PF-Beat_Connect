@@ -1,141 +1,128 @@
-"use client";
-import axios from "axios";
-import { useEffect } from "react";
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
-import { useAppSelector, useAppDispatch } from "@/redux/hooks";
-import {
-  setGoogleSuccessful,
-  resetReducer,
-} from "@/redux/slices/client/authSession";
-import { serverUrl } from "@/data/config";
-import { getUserData } from "@/redux/slices/client/authSession";
+'use client'
+import axios from 'axios'
+import { useEffect } from 'react'
+import { useRouter, usePathname, useSearchParams } from 'next/navigation'
+import { useAppSelector, useAppDispatch } from '@/redux/hooks'
+import { setGoogleSuccessful, resetReducer, getUserData } from '@/redux/slices/client/authSession'
+import { serverUrl } from '@/data/config'
 
-type Props = {
-  children: React.ReactNode;
-};
+interface Props {
+  children: React.ReactNode
+}
 
 export default function HOC({ children }: Props) {
-  const router = useRouter();
-  const pathname = usePathname();
-  const params = useSearchParams();
-  const dispatch = useAppDispatch();
+  const router = useRouter()
+  const pathname = usePathname()
+  const params = useSearchParams()
+  const dispatch = useAppDispatch()
   const {
     loginMethod,
     isAdmin,
     isLogged,
     tokenValid,
     google: { googleSessionID },
-    json: { token },
-  } = useAppSelector((state) => state?.client?.authSession?.auth);
+    json: { token }
+  } = useAppSelector((state) => state?.client?.authSession?.auth)
 
-  const { _id } = useAppSelector(
-    (state) => state?.client?.authSession?.session?.current,
-  );
+  const { _id } = useAppSelector((state) => state?.client?.authSession?.session?.current)
 
-  const hocIsWorking = true;
-  const experimentalIsClient = isLogged;
-  const experimentalIsAdmin = isAdmin;
+  const hocIsWorking = true
+  const experimentalIsClient = isLogged
+  const experimentalIsAdmin = isAdmin
 
-  const GoogleSessionID = params.get("session") ?? googleSessionID;
-  const clientId = params.get("id") ?? _id;
+  const GoogleSessionID = params.get('session') ?? googleSessionID
+  const clientId = params.get('id') ?? _id
   // const clientId = _id && _id !== "" ? _id : params.id;
 
-  //--------------------
-  //HOC GOOGLE AUTH
+  // --------------------
+  // HOC GOOGLE AUTH
   const googleAuth = async (headers: any) => {
     try {
       await axios.get(`${serverUrl}google/verify`, {
-        headers,
-      });
+        headers
+      })
 
       if (clientId && clientId !== undefined) {
-        const session = (await dispatch(getUserData(clientId))) as any;
-        console.log("session", session?.payload?.session?.softDelete);
+        const session = (await dispatch(getUserData(clientId))) as any
+        console.log('session', session?.payload?.session?.softDelete)
         if (session?.payload?.session?.softDelete === true) {
-          dispatch(resetReducer());
-          router.push("/");
-          return;
+          dispatch(resetReducer())
+          router.push('/')
+          return
         }
 
         dispatch(
           setGoogleSuccessful({
             isLogged: true,
             tokenValid: true,
-            googleSessionID: headers.session,
+            googleSessionID: headers.session
             //   session: userData,
-          }),
-        );
+          })
+        )
       }
     } catch (error) {
-      console.log("Error al iniciar con google", error);
-      dispatch(resetReducer());
-      router.push("/");
+      console.log('Error al iniciar con google', error)
+      dispatch(resetReducer())
+      router.push('/')
     }
-  };
+  }
 
   useEffect(() => {
-    console.log(
-      "GoogleSessionID",
-      GoogleSessionID,
-      loginMethod,
-      clientId,
-      params,
-    );
-    if (loginMethod === "google" && GoogleSessionID) {
-      const headers = { session: GoogleSessionID };
-      googleAuth(headers);
+    console.log('GoogleSessionID', GoogleSessionID, loginMethod, clientId, params)
+    if (loginMethod === 'google' && GoogleSessionID) {
+      const headers = { session: GoogleSessionID }
+      googleAuth(headers)
     }
-  }, [GoogleSessionID, loginMethod, clientId]);
+  }, [GoogleSessionID, loginMethod, clientId])
 
-  //--------------------
-  //HOC JSON AUTH
+  // --------------------
+  // HOC JSON AUTH
   const jsonAuth = async (headers: any) => {
     try {
       await axios.get(`${serverUrl}auth/me`, {
-        headers,
-      });
+        headers
+      })
     } catch (error) {
-      console.log("Error:", error);
-      dispatch(resetReducer());
-      router.push("/");
-      return;
+      console.log('Error:', error)
+      dispatch(resetReducer())
+      router.push('/')
     }
-  };
-
-  useEffect(() => {
-    if (loginMethod === "json" && token) {
-      const headers = { Authorization: `Bearer ${token}` };
-      jsonAuth(headers);
-    }
-  }, []);
-
-  if (!hocIsWorking) {
-    return <>{children}</>;
   }
 
-  if (pathname.startsWith("/client")) {
-    if (experimentalIsClient === false || tokenValid === false) {
-      router.push("/");
-      return <></>;
-    } else {
-      return <>{children}</>;
+  useEffect(() => {
+    if (loginMethod === 'json' && token) {
+      const headers = { Authorization: `Bearer ${token}` }
+      jsonAuth(headers)
     }
-  } else if (pathname.startsWith("/admin")) {
-    if (experimentalIsAdmin === false || tokenValid === false) {
-      router.push("/");
+  }, [])
+
+  if (!hocIsWorking) {
+    return <>{children}</>
+  }
+
+  if (pathname.startsWith('/client')) {
+    if (!experimentalIsClient || !tokenValid) {
+      router.push('/')
+      return <></>
     } else {
-      return <>{children}</>;
+      return <>{children}</>
     }
-  } else if (pathname.startsWith("/auth")) {
-    if (pathname === "/auth/logout") {
-      return <>{children}</>;
-    }
-    if (isLogged === true) {
-      router.push("/");
+  } else if (pathname.startsWith('/admin')) {
+    if (!experimentalIsAdmin || !tokenValid) {
+      router.push('/')
     } else {
-      return <>{children}</>;
+      return <>{children}</>
+    }
+  } else if (pathname.startsWith('/auth')) {
+    if (pathname === '/auth/logout') {
+      return <>{children}</>
+    }
+    if (isLogged) {
+      router.push('/')
+    } else {
+      return <>{children}</>
     }
   } else {
-    return <>{children}</>;
+    return <>{children}</>
   }
 }

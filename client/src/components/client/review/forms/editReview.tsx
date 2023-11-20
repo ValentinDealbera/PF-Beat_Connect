@@ -1,59 +1,57 @@
-import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { editClientReview } from "@/redux/slices/client/reviews";
-import Form from "./form";
+import { useEffect, useState } from 'react'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { editClientReview } from '@/redux/slices/client/reviews'
+import Form from './form'
 
-type Props = {
-  manageEditReview: (value: boolean) => void;
-};
+interface Props {
+  manageEditReview: (value: boolean) => void
+}
 
 export default function EditReviewForm({ manageEditReview }: Props) {
-  const dispatch = useAppDispatch();
-  const currentReview = useAppSelector(
-    (state) => state?.client?.reviews?.activeEditingReview,
-  );
+  const dispatch = useAppDispatch()
+  const currentReview = useAppSelector((state) => state?.client?.reviews?.activeEditingReview)
 
   const [formFields, setFormFields] = useState({
     title: currentReview.title,
     comment: currentReview.comment,
     rating: currentReview.rating,
     createdBy: currentReview?.createdBy?._id,
-    beat: currentReview?.beat?._id,
-  });
+    beat: currentReview?.beat?._id
+  })
 
-  const [ratingValue, setRatingValue] = useState(0);
+  const [ratingValue, setRatingValue] = useState(0)
 
   useEffect(() => {
-    setRatingValue(currentReview.rating);
+    setRatingValue(currentReview.rating)
     setFormFields({
       title: currentReview.title,
       comment: currentReview.comment,
       rating: currentReview.rating,
       createdBy: currentReview.createdBy._id,
-      beat: currentReview.beat._id,
-    });
-  }, [currentReview]);
+      beat: currentReview.beat._id
+    })
+  }, [currentReview])
 
   useEffect(() => {
     setFormFields({
       ...formFields,
-      rating: ratingValue,
-    });
-  }, [ratingValue]);
+      rating: ratingValue
+    })
+  }, [ratingValue])
 
   const handleInputChange = (event: any) => {
     setFormFields({
       ...formFields,
-      [event.target.name]: event.target.value,
-    });
-  };
+      [event.target.name]: event.target.value
+    })
+  }
 
   const handleSubmit = async (e: any) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    await dispatch(editClientReview(formFields));
-    manageEditReview(false);
-  };
+    await dispatch(editClientReview(formFields))
+    manageEditReview(false)
+  }
 
   return (
     <Form
@@ -62,8 +60,8 @@ export default function EditReviewForm({ manageEditReview }: Props) {
       ratingValue={ratingValue}
       setRatingValue={setRatingValue}
       currentReview={currentReview}
-      title="editReview.t1"
-      hasDefaultValues={true}
+      title='editReview.t1'
+      hasDefaultValues
     />
-  );
+  )
 }

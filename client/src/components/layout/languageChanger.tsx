@@ -1,43 +1,42 @@
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next'
 
 export default function LanguageChanger() {
-  const { t, i18n } = useTranslation("global");
-  const currentLanguage = i18n.language;
+  const { t, i18n } = useTranslation('global')
+  const currentLanguage = i18n.language
   const handleLanguageChange = (language: string) => {
-    i18n.changeLanguage(language);
-  };
+    i18n.changeLanguage(language)
+  }
 
   return (
-    <div className="flex flex-col justify-start items-start gap-4 md:flex-row lg:gap-2">
+    <div className='flex flex-col justify-start items-start gap-4 md:flex-row lg:gap-2'>
       <LanguageButton
-        onClick={() => handleLanguageChange("es")}
-        isActive={currentLanguage === "es"}
-        text={"Español"}
+        onClick={() => {
+          handleLanguageChange('es')
+        }}
+        isActive={currentLanguage === 'es'}
+        text='Español'
       />
       <LanguageButton
-        onClick={() => handleLanguageChange("en")}
-        isActive={currentLanguage === "en"}
-        text={"English"}
+        onClick={() => {
+          handleLanguageChange('en')
+        }}
+        isActive={currentLanguage === 'en'}
+        text='English'
       />
     </div>
-  );
+  )
 }
 
-type LanguageButtonProps = {
-  onClick: () => void;
-  isActive: boolean;
-  text: string;
-};
+interface LanguageButtonProps {
+  onClick: () => void
+  isActive: boolean
+  text: string
+}
 
 function LanguageButton({ onClick, isActive, text }: LanguageButtonProps) {
   return (
-    <button
-      onClick={onClick}
-      className={`text-white ${
-        isActive ? "font-bold underline" : "font-light"
-      }`}
-    >
+    <button onClick={onClick} className={`text-white ${isActive ? 'font-bold underline' : 'font-light'}`}>
       {text}
     </button>
-  );
+  )
 }

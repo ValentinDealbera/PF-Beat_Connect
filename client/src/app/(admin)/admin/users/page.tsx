@@ -1,10 +1,10 @@
-import Content from "./content";
-import { Metadata } from "next";
+import Content from './content'
+import { type Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: "Users | BeatConnect",
-};
+  title: 'Users | BeatConnect'
+}
 
 export default function Page() {
-  return <Content />;
+  return <Content />
 }

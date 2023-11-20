@@ -1,57 +1,54 @@
-import { MiniModalBox } from "@/components";
-import Button from "./button";
-import { useTranslation } from "react-i18next";
-import { useAppDispatch } from "@/redux/hooks";
-import {
-  deleteClientBeat,
-  setActiveEditingBeat,
-} from "@/redux/slices/client/beats";
-import { BeatsClass } from "@/types";
+import { MiniModalBox } from '@/components'
+import Button from './button'
+import { useTranslation } from 'react-i18next'
+import { useAppDispatch } from '@/redux/hooks'
+import { deleteClientBeat, setActiveEditingBeat } from '@/redux/slices/client/beats'
+import { type BeatsClass } from '@/types'
 
-type ModalBeatManageProps = {
-  fromClient: boolean;
-  visibilityOwnedModal: boolean;
-  beat: BeatsClass;
-  setVisibilityEditBeat: (visibility: boolean) => void;
-  isLogged?: boolean;
-};
+interface ModalBeatManageProps {
+  fromClient: boolean
+  visibilityOwnedModal: boolean
+  beat: BeatsClass
+  setVisibilityEditBeat: (visibility: boolean) => void
+  isLogged?: boolean
+}
 
 export default function ModalBeatManage({
   fromClient,
   visibilityOwnedModal,
   beat,
   setVisibilityEditBeat,
-  isLogged,
+  isLogged
 }: ModalBeatManageProps) {
-  const [t] = useTranslation("global");
-  const dispatch = useAppDispatch();
+  const [t] = useTranslation('global')
+  const dispatch = useAppDispatch()
 
   const handleEdit = async () => {
-    await dispatch(setActiveEditingBeat(beat));
-    setVisibilityEditBeat(true);
-  };
+    await dispatch(setActiveEditingBeat(beat))
+    setVisibilityEditBeat(true)
+  }
 
   const handleDelete = () => {
-    dispatch(deleteClientBeat(beat._id));
-  };
+    dispatch(deleteClientBeat(beat._id))
+  }
 
   const fromClientBtns = [
     {
-      text: "beatCar.edit",
-      action: handleEdit,
+      text: 'beatCar.edit',
+      action: handleEdit
     },
     {
-      text: "beatCar.delete",
-      action: handleDelete,
-    },
-  ];
+      text: 'beatCar.delete',
+      action: handleDelete
+    }
+  ]
 
   return (
     <>
       {fromClient && visibilityOwnedModal && isLogged && (
         <div>
-          <MiniModalBox className="right-1 top-1  ">
-            <div className="flex flex-col gap-1">
+          <MiniModalBox className='right-1 top-1  '>
+            <div className='flex flex-col gap-1'>
               {fromClientBtns.map((btn: any, index: number) => (
                 <Button key={index} text={t(btn.text)} action={btn.action} />
               ))}
@@ -60,5 +57,5 @@ export default function ModalBeatManage({
         </div>
       )}
     </>
-  );
+  )
 }

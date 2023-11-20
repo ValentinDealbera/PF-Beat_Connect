@@ -1,29 +1,25 @@
-import Link from "next/link";
-import Image from "next/image";
-import { BeatsClass } from "@/types";
+import Link from 'next/link'
+import Image from 'next/image'
+import { type BeatsClass } from '@/types'
 
-type AuthorNameProps = {
-  beat: BeatsClass;
-};
+interface AuthorNameProps {
+  beat: BeatsClass
+}
 
 export default function AuthorName({ beat }: AuthorNameProps) {
-  const userFullName = `${beat?.userCreator?.firstName} ${beat?.userCreator?.lastName}`;
+  const userFullName = `${beat?.userCreator?.firstName} ${beat?.userCreator?.lastName}`
 
   return (
-    <div className="flex flex-row items-center gap-1">
+    <div className='flex flex-row items-center gap-1'>
       <Link
         href={`/beats/author/${beat?.userCreator?._id}`}
-        onClick={(e) => e.stopPropagation()}
+        onClick={(e) => {
+          e.stopPropagation()
+        }}
       >
-        <span className="font-light">{userFullName}</span>
+        <span className='font-light'>{userFullName}</span>
       </Link>
-      <Image
-        className="inline"
-        width={14}
-        height={14}
-        src={"/icon/checked-blue.svg"}
-        alt="checked"
-      />
+      <Image className='inline' width={14} height={14} src='/icon/checked-blue.svg' alt='checked' />
     </div>
-  );
+  )
 }

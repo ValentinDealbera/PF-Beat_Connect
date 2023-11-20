@@ -1,20 +1,17 @@
-import { MiniModalBox } from "@/components";
-import Button from "./button";
-import {
-  deleteFavoriteBeat,
-  postFavoriteBeat,
-} from "@/redux/slices/client/beats";
-import { useAppDispatch } from "@/redux/hooks";
-import { BeatsClass } from "@/types";
+import { MiniModalBox } from '@/components'
+import Button from './button'
+import { deleteFavoriteBeat, postFavoriteBeat } from '@/redux/slices/client/beats'
+import { useAppDispatch } from '@/redux/hooks'
+import { type BeatsClass } from '@/types'
 
-type FavoriteModalProps = {
-  fromClient: boolean;
-  visibilityReviewEditBag: boolean;
-  isFavorite: boolean;
-  setLogged: (logged: boolean) => void;
-  isLogged: boolean;
-  beat: BeatsClass;
-};
+interface FavoriteModalProps {
+  fromClient: boolean
+  visibilityReviewEditBag: boolean
+  isFavorite: boolean
+  setLogged: (logged: boolean) => void
+  isLogged: boolean
+  beat: BeatsClass
+}
 
 export default function FavoriteModal({
   fromClient,
@@ -22,41 +19,34 @@ export default function FavoriteModal({
   isFavorite,
   setLogged,
   isLogged,
-  beat,
+  beat
 }: FavoriteModalProps) {
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
   const handleAddFavorite = () => {
-    if (!isLogged) return setLogged(true);
-    dispatch(postFavoriteBeat(beat));
-  };
+    if (!isLogged) {
+      setLogged(true)
+      return
+    }
+    dispatch(postFavoriteBeat(beat))
+  }
 
   const handleDeleteFavorite = () => {
-    dispatch(deleteFavoriteBeat(beat));
-  };
+    dispatch(deleteFavoriteBeat(beat))
+  }
 
   return (
     <>
       {!fromClient && visibilityReviewEditBag && (
-        <MiniModalBox className="left-1 top-1">
+        <MiniModalBox className='left-1 top-1'>
           {((!isFavorite && !fromClient) || !isLogged) && (
-            <Button
-              icon="/icon/corazon.svg"
-              alt="heart"
-              text={""}
-              action={handleAddFavorite}
-            />
+            <Button icon='/icon/corazon.svg' alt='heart' text='' action={handleAddFavorite} />
           )}
           {isFavorite && !fromClient && isLogged && (
-            <Button
-              icon="/icon/corazon-lleno.svg"
-              alt="heart"
-              text={""}
-              action={handleDeleteFavorite}
-            />
+            <Button icon='/icon/corazon-lleno.svg' alt='heart' text='' action={handleDeleteFavorite} />
           )}
         </MiniModalBox>
       )}
     </>
-  );
+  )
 }

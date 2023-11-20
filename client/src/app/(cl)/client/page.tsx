@@ -1,10 +1,10 @@
-import HeroSection from "./hero";
-import BeatsSection from "./beats";
-import type { Metadata } from "next";
+import HeroSection from './hero'
+import BeatsSection from './beats'
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: "Client | BeatConnect",
-};
+  title: 'Client | BeatConnect'
+}
 
 export default function BuyerProfile() {
   return (
@@ -12,5 +12,5 @@ export default function BuyerProfile() {
       <HeroSection />
       <BeatsSection />
     </>
-  );
+  )
 }

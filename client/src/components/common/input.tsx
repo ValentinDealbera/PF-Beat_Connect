@@ -1,22 +1,22 @@
-import { usePathname } from "next/navigation";
+import { usePathname } from 'next/navigation'
 
-type InputProps = {
-  label: string;
-  labelClass?: string;
-  name: string;
-  value?: string;
-  defaultValue?: string;
-  type?: string;
-  step?: string;
-  prefix?: string;
-  onChange?: (e: any) => void;
-  placeholder?: string;
-  error?: string;
-  id?: string;
-  min?: string;
-  max?: string;
-  className?: string;
-};
+interface InputProps {
+  label: string
+  labelClass?: string
+  name: string
+  value?: string
+  defaultValue?: string
+  type?: string
+  step?: string
+  prefix?: string
+  onChange?: (e: any) => void
+  placeholder?: string
+  error?: string
+  id?: string
+  min?: string
+  max?: string
+  className?: string
+}
 
 export default function Input({
   labelClass,
@@ -33,20 +33,17 @@ export default function Input({
   id,
   min,
   max,
-  className,
+  className
 }: InputProps) {
-  const pathname = usePathname();
+  const pathname = usePathname()
   const extraClassName = `${
-    pathname.startsWith("/admin")
-      ? " dark:text-white   dark:placeholder:text-white border-slate-200 dark:border-none dark:bg-customDark-700"
-      : "placeholder:text-sm-light placeholder:color-neutral-gray-400   color-neutral-black-950"
-  }`;
+    pathname.startsWith('/admin')
+      ? ' dark:text-white   dark:placeholder:text-white border-slate-200 dark:border-none dark:bg-customDark-700'
+      : 'placeholder:text-sm-light placeholder:color-neutral-gray-400   color-neutral-black-950'
+  }`
 
   return (
-    <label
-      htmlFor={name}
-      className={`text-sm-medium flex min-w-0 flex-col gap-1 ${labelClass}`}
-    >
+    <label htmlFor={name} className={`text-sm-medium flex min-w-0 flex-col gap-1 ${labelClass}`}>
       {label}
       <input
         defaultValue={defaultValue}
@@ -61,13 +58,9 @@ export default function Input({
         onChange={onChange}
         placeholder={placeholder}
         className={`${extraClassName} ${className} text-sm-regular border-radius-estilo2 px-4 py-2`}
-        style={{ borderWidth: "1px" }}
+        style={{ borderWidth: '1px' }}
       />
-      {error && (
-        <p className="gap-estilo4 text-sm-medium color-primary-red-500 ml-2 flex dark:text-red-800">
-          {error}
-        </p>
-      )}
+      {error && <p className='gap-estilo4 text-sm-medium color-primary-red-500 ml-2 flex dark:text-red-800'>{error}</p>}
     </label>
-  );
+  )
 }

@@ -1,38 +1,26 @@
-import { usePathname } from "next/navigation";
+import { usePathname } from 'next/navigation'
 
-type Props = {
-  label: string;
-  name: string;
-  value?: string;
-  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  placeholder: string;
-  error?: string;
-  defaultValue?: string;
-  className?: string;
-};
+interface Props {
+  label: string
+  name: string
+  value?: string
+  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
+  placeholder: string
+  error?: string
+  defaultValue?: string
+  className?: string
+}
 
-export default function TextArea({
-  label,
-  name,
-  value,
-  onChange,
-  placeholder,
-  error,
-  defaultValue,
-  className,
-}: Props) {
-  const pathname = usePathname();
+export default function TextArea({ label, name, value, onChange, placeholder, error, defaultValue, className }: Props) {
+  const pathname = usePathname()
   const extraClassName = `${
-    pathname.startsWith("/admin")
-      ? " dark:text-white   dark:placeholder:text-white border-slate-200 dark:border-none dark:bg-customDark-700"
-      : "placeholder:text-sm-light placeholder:color-neutral-gray-400   color-neutral-black-950"
-  }`;
+    pathname.startsWith('/admin')
+      ? ' dark:text-white   dark:placeholder:text-white border-slate-200 dark:border-none dark:bg-customDark-700'
+      : 'placeholder:text-sm-light placeholder:color-neutral-gray-400   color-neutral-black-950'
+  }`
 
   return (
-    <label
-      htmlFor={name}
-      className="gap-estilo4 text-sm-medium flex min-w-0 flex-col"
-    >
+    <label htmlFor={name} className='gap-estilo4 text-sm-medium flex min-w-0 flex-col'>
       {label}
       <textarea
         defaultValue={defaultValue}
@@ -41,13 +29,9 @@ export default function TextArea({
         onChange={onChange}
         placeholder={placeholder}
         className={`${className} text-sm-regular border-radius-estilo2 px-4 py-2 ${extraClassName}`}
-        style={{ borderWidth: "1px" }}
+        style={{ borderWidth: '1px' }}
       />
-      {error && (
-        <p className="gap-estilo4 text-sm-medium color-primary-red-500 ml-2 flex dark:text-red-800">
-          {error}
-        </p>
-      )}
+      {error && <p className='gap-estilo4 text-sm-medium color-primary-red-500 ml-2 flex dark:text-red-800'>{error}</p>}
     </label>
-  );
+  )
 }

@@ -1,266 +1,253 @@
-"use client";
-import {
-  FormColumn,
-  FormContainer,
-  FormRow,
-  Input,
-  SwitchForm,
-} from "@/components";
+'use client'
+import { FormColumn, FormContainer, FormRow, Input, SwitchForm } from '@/components'
 
-import {
-  handleInputChange,
-  handleSubmit,
-  validateForm,
-} from "@/data/formLogic";
+import { handleInputChange, handleSubmit, validateForm } from '@/data/formLogic'
 
-import { forwardRef, useImperativeHandle } from "react";
-import { useState, useRef, useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { adminPostUser, adminEditUser } from "@/redux/slices/admin/users";
-import { useRouter } from "next/navigation";
-import { useTranslation } from "react-i18next";
+import { forwardRef, useImperativeHandle, useState, useRef, useEffect } from 'react'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { adminPostUser, adminEditUser } from '@/redux/slices/admin/users'
+import { useRouter } from 'next/navigation'
+import { useTranslation } from 'react-i18next'
 
-type Props = {
-  mode: string;
-};
+interface Props {
+  mode: string
+}
 
 const AdminCreateUserForm = forwardRef((props: Props, ref) => {
-  const [t] = useTranslation("global");
-  const router = useRouter();
-  const dispatch = useAppDispatch();
-  const formRef = useRef(null);
-  const validateMode = "user";
-  const [fieldsToValidate, setFieldsToValidate] = useState([]) as any;
-  const [error, setErrors] = useState({}) as any;
-  const mode = props.mode;
+  const [t] = useTranslation('global')
+  const router = useRouter()
+  const dispatch = useAppDispatch()
+  const formRef = useRef(null)
+  const validateMode = 'user'
+  const [fieldsToValidate, setFieldsToValidate] = useState([]) as any
+  const [error, setErrors] = useState({}) as any
+  const mode = props.mode
   const defaultValues =
-    mode === "create"
-      ? ({} as any)
-      : useAppSelector((state) => state?.admin?.users?.currentEdtingUser);
-  const [softD, setSoftD] = useState(defaultValues?.softDelete) as any;
-  const [sellerState, setSellerState] = useState(defaultValues?.isSeller);
-  const [adminState, setAdminState] = useState(defaultValues?.superAdmin);
+    mode === 'create' ? ({} as any) : useAppSelector((state) => state?.admin?.users?.currentEdtingUser)
+  const [softD, setSoftD] = useState(defaultValues?.softDelete) as any
+  const [sellerState, setSellerState] = useState(defaultValues?.isSeller)
+  const [adminState, setAdminState] = useState(defaultValues?.superAdmin)
 
   const [form, setForm] = useState({
-    username: `${mode === "edit" ? defaultValues?.username : ""}`,
-    firstName: `${mode === "edit" ? defaultValues?.firstName : ""}`,
-    lastName: `${mode === "edit" ? defaultValues?.lastName : ""}`,
-    image: "",
-    email: `${mode === "edit" ? defaultValues?.email : ""}`,
-    password: "",
-    id: `${mode === "edit" ? defaultValues?._id : ""}`,
-    bio: `${mode === "edit" ? defaultValues?.bio : ""}`,
-    backImage: "",
-    seller: `${mode === "edit" ? defaultValues?.isSeller : ""}`,
-    admin: `${mode === "edit" ? defaultValues?.superAdmin : ""}`,
-    soft: `${mode === "edit" ? defaultValues?.softDelete : ""}`,
-  });
+    username: `${mode === 'edit' ? defaultValues?.username : ''}`,
+    firstName: `${mode === 'edit' ? defaultValues?.firstName : ''}`,
+    lastName: `${mode === 'edit' ? defaultValues?.lastName : ''}`,
+    image: '',
+    email: `${mode === 'edit' ? defaultValues?.email : ''}`,
+    password: '',
+    id: `${mode === 'edit' ? defaultValues?._id : ''}`,
+    bio: `${mode === 'edit' ? defaultValues?.bio : ''}`,
+    backImage: '',
+    seller: `${mode === 'edit' ? defaultValues?.isSeller : ''}`,
+    admin: `${mode === 'edit' ? defaultValues?.superAdmin : ''}`,
+    soft: `${mode === 'edit' ? defaultValues?.softDelete : ''}`
+  })
 
   const handleInput = (e: any) => {
-    handleInputChange(e, fieldsToValidate, setFieldsToValidate, form, setForm);
-  };
+    handleInputChange(e, fieldsToValidate, setFieldsToValidate, form, setForm)
+  }
 
   const onSubmit = async () => {
-    const actionToDispatch = mode === "edit" ? adminEditUser : adminPostUser;
+    const actionToDispatch = mode === 'edit' ? adminEditUser : adminPostUser
     try {
       await handleSubmit({
-        form: form,
-        actionToDispatch: actionToDispatch,
-        dispatch: dispatch,
-        setErrors: setErrors,
-        validateMode: validateMode,
-        formRef: formRef.current,
-      });
-      router.push("/admin/users");
+        form,
+        actionToDispatch,
+        dispatch,
+        setErrors,
+        validateMode,
+        formRef: formRef.current
+      })
+      router.push('/admin/users')
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
   useEffect(() => {
-    setErrors(validateForm(form, fieldsToValidate, validateMode));
-  }, [form, fieldsToValidate]);
+    setErrors(validateForm(form, fieldsToValidate, validateMode))
+  }, [form, fieldsToValidate])
 
   useImperativeHandle(ref, () => ({
     submit: () => {
       // formRef.current.submit();
-      onSubmit();
-    },
-  }));
+      onSubmit()
+    }
+  }))
 
   useEffect(() => {
     if (softD) {
-      setSoftD(false);
+      setSoftD(false)
     } else {
-      setSoftD(true);
+      setSoftD(true)
     }
-  }, [form.soft]);
+  }, [form.soft])
 
   useEffect(() => {
     if (sellerState) {
-      setSellerState(false);
+      setSellerState(false)
     } else {
-      setSellerState(true);
+      setSellerState(true)
     }
-  }, [form.seller]);
+  }, [form.seller])
 
   useEffect(() => {
     if (adminState) {
-      setAdminState(false);
+      setAdminState(false)
     } else {
-      setAdminState(true);
+      setAdminState(true)
     }
-  }, [form.admin]);
+  }, [form.admin])
 
   const arraySoftDelete = {
-    name: "soft",
-    label: "Soft Delete",
+    name: 'soft',
+    label: 'Soft Delete',
     arrayButtons: [
       {
-        text: "Yes",
+        text: 'Yes',
         active: softD,
         handleAction: () => {
           setForm({
             ...form,
-            soft: "DELETE",
-          });
-        },
+            soft: 'DELETE'
+          })
+        }
       },
       {
-        text: "No",
+        text: 'No',
         active: !softD,
         handleAction: () => {
           setForm({
             ...form,
-            soft: "DELETE",
-          });
-        },
-      },
-    ],
-  };
+            soft: 'DELETE'
+          })
+        }
+      }
+    ]
+  }
 
   const arraySeller = {
-    name: "seller",
-    label: "Is Seller",
+    name: 'seller',
+    label: 'Is Seller',
     arrayButtons: [
       {
-        text: "Yes",
+        text: 'Yes',
         active: sellerState,
         handleAction: () => {
           setForm({
             ...form,
-            seller: "VENDEDOR",
-          });
-        },
+            seller: 'VENDEDOR'
+          })
+        }
       },
       {
-        text: "No",
+        text: 'No',
         active: !sellerState,
         handleAction: () => {
           setForm({
             ...form,
-            seller: "VENDEDOR",
-          });
-        },
-      },
-    ],
-  };
+            seller: 'VENDEDOR'
+          })
+        }
+      }
+    ]
+  }
 
   const arrayAdmin = {
-    name: "admin",
-    label: "Is Admin",
+    name: 'admin',
+    label: 'Is Admin',
     arrayButtons: [
       {
-        text: "Yes",
+        text: 'Yes',
         active: adminState,
         handleAction: () => {
           setForm({
             ...form,
-            admin: "ADMIN",
-          });
-        },
+            admin: 'ADMIN'
+          })
+        }
       },
       {
-        text: "No",
+        text: 'No',
         active: !adminState,
         handleAction: () => {
           setForm({
             ...form,
-            admin: "ADMIN",
-          });
-        },
-      },
-    ],
-  };
+            admin: 'ADMIN'
+          })
+        }
+      }
+    ]
+  }
 
   return (
     <form ref={formRef} onSubmit={onSubmit}>
       <FormContainer>
         <FormRow>
-          <FormColumn className="w-full">
+          <FormColumn className='w-full'>
             <Input
-              id="firstName"
-              name="firstName"
-              label={t("register.t2")}
-              placeholder={t("register.t2")}
-              defaultValue={mode === "edit" ? defaultValues.firstName : ""}
-              type="text"
+              id='firstName'
+              name='firstName'
+              label={t('register.t2')}
+              placeholder={t('register.t2')}
+              defaultValue={mode === 'edit' ? defaultValues.firstName : ''}
+              type='text'
               onChange={handleInput}
               error={error.firstName}
             />
             <Input
-              name="lastName"
-              id="lastName"
-              label={t("register.t3")}
-              placeholder={t("register.t3")}
-              defaultValue={mode === "edit" ? defaultValues.lastName : ""}
-              type="text"
+              name='lastName'
+              id='lastName'
+              label={t('register.t3')}
+              placeholder={t('register.t3')}
+              defaultValue={mode === 'edit' ? defaultValues.lastName : ''}
+              type='text'
               onChange={handleInput}
               error={error.lastName}
             />
             <Input
-              name="username"
-              id="username"
-              label={t("register.t6")}
-              placeholder={t("register.t6")}
-              defaultValue={mode === "edit" ? defaultValues.username : ""}
-              type="text"
+              name='username'
+              id='username'
+              label={t('register.t6')}
+              placeholder={t('register.t6')}
+              defaultValue={mode === 'edit' ? defaultValues.username : ''}
+              type='text'
               onChange={handleInput}
               error={error.username}
             />
             <Input
-              id="bio"
-              name="bio"
-              label={t("register.t11")}
-              placeholder={t("register.t11")}
-              defaultValue={mode === "edit" ? defaultValues.bio : ""}
-              type="text"
+              id='bio'
+              name='bio'
+              label={t('register.t11')}
+              placeholder={t('register.t11')}
+              defaultValue={mode === 'edit' ? defaultValues.bio : ''}
+              type='text'
               onChange={handleInput}
               error={error.bio}
             />
-            <div className="flex justify-start items-start gap-4 w-full">
+            <div className='flex justify-start items-start gap-4 w-full'>
               <SwitchForm
-                label={t("register.t14")}
+                label={t('register.t14')}
                 //   name="soft"
-                nameInput="soft"
+                nameInput='soft'
                 // defaultValue={mode === "edit" ? defaultValues.softDelete : ""}
                 // onChange={handleInput}
                 arrayButtons={arraySoftDelete.arrayButtons}
-                //error={error.soft}
+                // error={error.soft}
               />
               <SwitchForm
-                label={t("register.t15")}
+                label={t('register.t15')}
                 //   name="seller"
-                nameInput="seller"
+                nameInput='seller'
                 // defaultValue={mode === "edit" ? defaultValues.IsSeller : ""}
                 //  onChange={handleInput}
                 arrayButtons={arraySeller.arrayButtons}
-                //error={error.seller}
+                // error={error.seller}
               />
               <SwitchForm
-                label="Super Admin"
+                label='Super Admin'
                 // name="admin"
-                nameInput="admin"
+                nameInput='admin'
                 // defaultValue={mode === "edit" ? defaultValues.superAdmin : ""}
                 //  onChange={handleInput}
                 arrayButtons={arrayAdmin.arrayButtons}
@@ -268,38 +255,38 @@ const AdminCreateUserForm = forwardRef((props: Props, ref) => {
               />
             </div>
           </FormColumn>
-          <FormColumn className="w-full">
+          <FormColumn className='w-full'>
             <Input
-              name="password"
-              label={t("register.t7")}
-              placeholder={t("register.t7")}
-              defaultValue={mode === "edit" ? "" : ""}
-              type="password"
+              name='password'
+              label={t('register.t7')}
+              placeholder={t('register.t7')}
+              defaultValue={mode === 'edit' ? '' : ''}
+              type='password'
               onChange={handleInput}
               error={error.password}
             />
             <Input
-              name="email"
-              label="Email"
-              placeholder="Email"
-              defaultValue={mode === "edit" ? defaultValues.email : ""}
-              type="email"
+              name='email'
+              label='Email'
+              placeholder='Email'
+              defaultValue={mode === 'edit' ? defaultValues.email : ''}
+              type='email'
               onChange={handleInput}
               error={error.email}
             />
             <Input
-              name="backImage"
-              label={t("register.t12")}
-              placeholder={t("register.t12")}
-              type="file"
+              name='backImage'
+              label={t('register.t12')}
+              placeholder={t('register.t12')}
+              type='file'
               onChange={handleInput}
               error={error.backImage}
             />
             <Input
-              name="image"
-              label={t("register.t13")}
-              placeholder={t("register.t13")}
-              type="file"
+              name='image'
+              label={t('register.t13')}
+              placeholder={t('register.t13')}
+              type='file'
               onChange={handleInput}
               error={error.image}
             />
@@ -307,6 +294,6 @@ const AdminCreateUserForm = forwardRef((props: Props, ref) => {
         </FormRow>
       </FormContainer>
     </form>
-  );
-});
-export default AdminCreateUserForm;
+  )
+})
+export default AdminCreateUserForm

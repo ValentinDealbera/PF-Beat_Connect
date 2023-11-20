@@ -1,17 +1,10 @@
-type MiniModalBoxProps = {
-  children: React.ReactNode;
-  className?: string;
-};
+interface MiniModalBoxProps {
+  children: React.ReactNode
+  className?: string
+}
 
-export default function MiniModalBox({
-  children,
-  className,
-}: MiniModalBoxProps) {
+export default function MiniModalBox({ children, className }: MiniModalBoxProps) {
   return (
-    <div
-      className={`absolute flex flex-col gap-2 p-5 bg-white rounded-xl shadow-2xl ${className} `}
-    >
-      {children}
-    </div>
-  );
+    <div className={`absolute flex flex-col gap-2 p-5 bg-white rounded-xl shadow-2xl ${className} `}>{children}</div>
+  )
 }

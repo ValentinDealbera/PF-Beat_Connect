@@ -1,15 +1,15 @@
-"use client";
-import { Footer } from "@/components";
+'use client'
+import { Footer } from '@/components'
 
-type Props = {
-  children: React.ReactNode;
-};
+interface Props {
+  children: React.ReactNode
+}
 
 export default function AdminLayoutContent({ children }: Props) {
   return (
     <>
       <main>{children}</main>
-      <Footer mode={"dark"} />
+      <Footer mode='dark' />
     </>
-  );
+  )
 }
